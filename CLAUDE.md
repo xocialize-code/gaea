@@ -34,6 +34,10 @@ process of its own.
 | `../gaea-plugin-kit` ([xocialize/gaea-plugin-kit](https://github.com/xocialize/gaea-plugin-kit)) | GaeaPluginKit: the GPP worker over MLXServeEngine, the manifest generator, and `gaea-plugin-check` (a tiny host) |
 | `../gaea-plugin-demo` ([xocialize/gaea-plugin-demo](https://github.com/xocialize/gaea-plugin-demo)) | The demo plugin and the template every plugin starts from: bundle layout, signing, check, notarize, release CI |
 | [Spikes/plugin-exec/](Spikes/plugin-exec/README.md) | The spike showing downloaded, signed executable plugins running MLX on the GPU, 13 of 13 checks passed |
+| [Package.swift](Package.swift), [Sources/](Sources) | The host (AB-T-0355): `GaeaCore` (plugin manager, GPP workers, scheduler and ledger, gaea.sqlite, the MES engine with G0's mock normalizer, the operator API), `GaeaConsole` (MESEngineUI backends), `GaeaApp` (`Gaea.app`, `--headless`, `--snapshot`), `GaeaCLI` (`gaea`), `GaeaOperator` (the socket's wire types) |
+| [Apps/Gaea/](Apps/Gaea), [scripts/build-app.sh](scripts/build-app.sh) | `Gaea.app`'s Info.plist, and the Release build that signs it with Developer ID (the CLI ships in `Contents/Helpers/gaea`) |
+| [tools/acceptance-g0.sh](tools/acceptance-g0.sh), [tools/release-standin.py](tools/release-standin.py) | G0's exit tests against a built app, and a local stand-in for GitHub's Releases API |
+| [Docs/Evidence/AB-T-0355/](Docs/Evidence/AB-T-0355/README.md) | The host's acceptance: conformance reports, a recorded GPP session, console screenshots |
 
 Decisions G-1 to G-23 are filed as AB-D records. The plan's §1 maps each one to its id.
 
@@ -49,5 +53,10 @@ Decisions G-1 to G-23 are filed as AB-D records. The plan's §1 maps each one to
 - **Other areas' repos change through asks:** `bridge ask --to mlx-engine | mlx-apps | …`. That covers
   mlx-engine-swift, media-engine-spec, mlx-image-runtime and the Pixel Agency apps (plan §4). Don't edit their docs
   silently.
+- **Building and checking the host.** `swift build`, `swift test`, then `scripts/build-app.sh` for a signed Release
+  `dist/Gaea.app`. This volume is case-insensitive, so the app's target is `GaeaApp`, the CLI's is `GaeaCLI`, and the
+  binaries are `Gaea` and `gaea` in different folders. `GAEA_HOME` moves Gaea's folder (keep it short: the operator
+  socket's path is at most 103 bytes). `GAEA_GITHUB_TOKEN=$(gh auth token)` reads private plugin repos; Gaea never
+  stores it.
 - **MLX in a plugin finds its metallib through the plugin's own main bundle**
   (`Contents/Resources/mlx-swift_Cmlx.bundle`). When testing, hide the build folder: MLX falls back to build paths.

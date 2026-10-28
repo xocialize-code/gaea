@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.xocialize.gaea</string>
+	<key>CFBundleName</key>
+	<string>Gaea</string>
+	<key>CFBundleDisplayName</key>
+	<string>Gaea</string>
+	<key>CFBundleExecutable</key>
+	<string>Gaea</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>__VERSION__</string>
+	<key>CFBundleVersion</key>
+	<string>__VERSION__</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>26.0</string>
+	<key>LSUIElement</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>Apache-2.0</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Gaea serves MES clients on your network when paired mode is on.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_mes-engine._tcp</string>
+	</array>
+</dict>
+</plist>

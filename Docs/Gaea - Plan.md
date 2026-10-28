@@ -227,7 +227,9 @@ starts while the phase before it is being built.
 - Gaea PRD: [draft 0.2](Gaea%20-%20PRD.md), open questions decided (replaces Engines-PRD).
 - GaeaPluginKit and a plugin template repo whose CI publishes releases.
 - The Gaea host, grown out of the spike: MESEngineKit, a mock normalizer, the scheduler, the plugin manager (repo
-  URLs, enable and disable), gaea.sqlite, the local operator API and CLI, a minimal console.
+  URLs, enable and disable), gaea.sqlite, the local operator API and CLI, a minimal console. **Done (AB-T-0355,
+  v0.1.0):** both exit tests pass on the demo's GitHub releases; see
+  [Evidence/AB-T-0355](Evidence/AB-T-0355/README.md).
 - A notary profile and a CI signing pipeline.
 - **Measurements:**
   - a worker's baseline footprint after MLX starts;

@@ -1,0 +1,9 @@
+2026-10-28T04:51:24Z operator: listening on /Users/dustinnielson/Library/Caches/gaea-t/acc/refuse/operator.sock (same user, Developer ID team)
+2026-10-28T04:51:24Z gaea 0.1.0 starting: /Users/dustinnielson/Library/Caches/gaea-t/acc/refuse, budget 103.08 GB
+2026-10-28T04:51:24Z gaea: serving MES at http://127.0.0.1:17634/mes/v0
+2026-10-28T04:51:25Z plugins: refused com.xocialize.gaea.demo v0.3.0: Refused: the bundle's signature is invalid (a sealed resource is missing or invalid, OSStatus -67054).
+2026-10-28T04:51:25Z operator: plugins.add failed: Refused: the bundle's signature is invalid (a sealed resource is missing or invalid, OSStatus -67054).
+2026-10-28T04:51:25Z plugins: refused com.xocialize.gaea.demo v0.4.0: Refused: the bundle isn't signed with a Developer ID (ad hoc signature, no team).
+2026-10-28T04:51:25Z operator: plugins.add failed: Refused: the bundle isn't signed with a Developer ID (ad hoc signature, no team).
+2026-10-28T04:51:25Z operator: plugins.add failed: otherteam/gaea-plugin-demo has no release Gaea 0.1.0 can install: v0.5.0 is from team ABCDE12345; Gaea v1 runs only plugins signed by CFZS6RXUCP, and third-party plugins come with the trust list later (G-22)
+
