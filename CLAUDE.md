@@ -25,6 +25,7 @@ process of its own.
 | Path | What |
 |---|---|
 | [Docs/Gaea - Generative multimedia server.md](Docs/Gaea%20-%20Generative%20multimedia%20server.md) | The concept, the operator's original document |
+| [Docs/Gaea - PRD.md](Docs/Gaea%20-%20PRD.md) | The product requirements (SRV, MEM, PLG, UI, IMG, AUD, VID, CLI, DST); replaces Engines-PRD |
 | [Docs/Gaea - Plan.md](Docs/Gaea%20-%20Plan.md) | The plan: decisions G-1 to G-20, architecture, the plugin protocol (GPP), manifest.json, changes per repo, phases G0 to G4 |
 | [spec/GPP-1.md](spec/GPP-1.md) | The Gaea Plugin Protocol v1 and manifest.json: messages, lifecycle, errors, escalation, the manifest's fields and rules |
 | [schemas/v1/](schemas/v1) | JSON Schemas for one GPP line (`gpp.schema.json`), manifest.json, and the MLXEngine types a manifest carries; MES's own schemas vendored in `schemas/vendor/mes-v0` |

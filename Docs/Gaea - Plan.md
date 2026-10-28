@@ -220,7 +220,7 @@ starts while the phase before it is being built.
   enablement store) gates the host. AB-A-0208 to mlx-apps covers the doc changes now and the retirements at G1 exit.
 - **Work orders:** AB-T-0353 (GPP v1 and the manifest schema) blocks AB-T-0354 (the kit and template repo), which
   blocks AB-T-0355 (the host skeleton) and AB-T-0356 (the measurements).
-- Gaea PRD.
+- Gaea PRD: [draft 0.1](Gaea%20-%20PRD.md), for review (replaces Engines-PRD).
 - GaeaPluginKit and a plugin template repo whose CI publishes releases.
 - The Gaea host, grown out of the spike: MESEngineKit, a mock normalizer, the scheduler, the plugin manager (repo
   URLs, enable and disable), gaea.sqlite, the local operator API and CLI, a minimal console.
