@@ -268,7 +268,10 @@ starts while the phase before it is being built.
      refused `no_capacity`. Idle workers are charged their peak, which over-evicts (carried to AB-T-0371). See
      [Evidence/AB-T-0363](Evidence/AB-T-0363/README.md).
   4. Plugins:
-     - AB-T-0367: FLUX.2 Klein;
+     - AB-T-0367: FLUX.2 Klein. **Done**
+       ([v0.1.0](https://github.com/xocialize/gaea-plugin-flux2-klein/releases/tag/v0.1.0)): Klein 4B and 4B Base,
+       generate and multi-reference edit (Gaea's default editor), byte for byte the in-process images, warm 6.32 s
+       against 6.30 s at 1024² bf16; see [Evidence/AB-T-0367](Evidence/AB-T-0367/README.md);
      - AB-T-0368: Qwen-Image-Edit;
      - AB-T-0369: the processing pack on ForgeCore;
      - AB-T-0370: the LLM prompt enhancer.

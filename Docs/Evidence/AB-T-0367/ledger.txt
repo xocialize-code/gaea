@@ -1,0 +1,2 @@
+budget 103.08 GB, charged 36.40 GB, free 66.68 GB; host 0.01 GB; 0 queued
+  com.xocialize.gaea.flux2-klein 0.1.0 pid 43291: declared 36.40 GB, phys_footprint 25.64 GB, worker says 25.64 GB, charged 36.40 GB lanes ["klein-4b": "int4", "klein-4b-base": "bf16"]

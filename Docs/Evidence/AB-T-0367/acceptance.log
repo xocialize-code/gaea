@@ -1,0 +1,30 @@
+# FLUX.2 Klein plugin acceptance (AB-T-0367) 2026-10-28T21:32:37Z — Gaea 0.2.1, flux2-klein 0.1.0, source stand-in
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add by repo URL installs flux2-klein 0.1.0
+PASS  image.generate offers Klein 4B and Klein 4B Base (best)
+{"max_count": 8, "max_height": 2048, "max_megapixels": 1.048576, "max_width": 2048}
+PASS  image.edit: Klein 4B is the default, not named-only, up to 4 images
+      cold: 7.22 s from submit to settled (launch, prepare bf16, generate)
+      warm: 6.12 s from submit to settled; worker run 6.075 s
+PASS  Klein 4B bf16 1024² seed 42 succeeds with one 1024² PNG, 4 steps
+PASS  a warm run gives the same bytes again
+      base: 74.85 s from submit to settled (launch base, prepare bf16, 28 steps CFG)
+PASS  quality best reaches Klein 4B Base (28 steps, guidance 4, the negative prompt honoured)
+      edit: 20.38 s from submit to settled; worker run 20.334 s
+PASS  image.edit with no model reaches Klein 4B: two references, the first image's 1024²
+PASS  count 2 gives two different 768×512 images, seeds 7 and 8
+PASS  Klein 4B reports the negative prompt as ignored
+PASS  x-gaea.lane int4 runs lane int4, and 1000² snaps to 992²
+{'code': 'out_of_limits', 'message': "Input 'images' takes at most 4.", 'param': 'images', 'request_id': 'req_bhsanqn323yj'}
+PASS  five references are refused out_of_limits at submit
+91e5e7d05445b52ad6c925cbbc1bbe097f3ff4e5b08e6c5193275c87990145dc 91e5e7d05445b52ad6c925cbbc1bbe097f3ff4e5b08e6c5193275c87990145dc
+PASS  Klein 4B through Gaea is byte for byte the in-process image
+025284a674d08bf6bf84babbceaae54724a9f17b139e263096f88c8045dac9bb 025284a674d08bf6bf84babbceaae54724a9f17b139e263096f88c8045dac9bb
+PASS  Klein 4B Base through Gaea is byte for byte the in-process image
+2a8189190f5d47026ed7885566f3698214a499fa4a53787b69eb27c9b17bd95a 2a8189190f5d47026ed7885566f3698214a499fa4a53787b69eb27c9b17bd95a
+PASS  the two-reference edit through Gaea is byte for byte the in-process image
+6eafe83a2b32f5279e4304e340ad96d5cfe6b500319cfb1bd40b1bb61f0d40ce 6eafe83a2b32f5279e4304e340ad96d5cfe6b500319cfb1bd40b1bb61f0d40ce
+PASS  the int4 lane through Gaea is byte for byte the in-process image
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.1.0-2026-10-28T213239Z.gpp passes validate.py
+== 16 passed, 0 failed

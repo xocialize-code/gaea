@@ -1,0 +1,2 @@
+on  klein-4b  FLUX.2 Klein 4B  [com.xocialize.gaea.flux2-klein 0.1.0] lanes: bf16* 25.90 GB, int8 22.70 GB, int4 20.50 GB
+on  klein-4b-base  FLUX.2 Klein 4B Base  [com.xocialize.gaea.flux2-klein 0.1.0] lanes: bf16* 27.10 GB, int8 23.90 GB, int4 21.70 GB
