@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | Draft 0.8, 2026-10-28: decisions filed on the bridge (AB-D-0163…0185). **G0's exit tests pass** (AB-T-0353…0356 done; Gaea v0.1.1). Asks answered: mlx-engine-swift v0.72.0 (AB-A-0206), MESKit v0.5.0 (AB-A-0207). AB-A-0208 added G-20 and its follow-ups (AB-T-0358…0362) |
+| **Status** | Draft 0.9, 2026-10-28: decisions filed on the bridge (AB-D-0163…0185). **G0's exit tests pass** (AB-T-0353…0356 done; Gaea v0.1.1). **G1's work orders are filed** (AB-T-0363…0375). Asks answered: mlx-engine-swift v0.72.0 (AB-A-0206), MESKit v0.5.0 (AB-A-0207). AB-A-0208 added G-20 and its follow-ups (AB-T-0358…0362) |
 | **Source** | [Gaea - Generative multimedia server](Gaea%20-%20Generative%20multimedia%20server.md) (the concept; "Quanos" was the working name before Gaea) |
 | **Evidence** | [Plugin spike](../Spikes/plugin-exec/README.md): downloaded, signed executable plugins run real MLX jobs on the GPU (13 of 13 checks passed) |
 | **Replaces** | The separate Pixel Agency Image Engine and Video Engine in `ml(x)/PixelAgency/Docs/Engines-PRD.md` |
@@ -254,6 +254,25 @@ starts while the phase before it is being built.
   LoRA, starting from what is worth keeping in Lite, and it grows with each profile. It replaces Lite as the client
   the MES client conformance suite runs against.
 - **MESClientKit's engine picker** (G-19).
+- **Work orders** (filed 2026-10-28; `blocks` edges on the bridge):
+  1. AB-T-0364 (P1): the host runs plugins' MES offers end to end, with real images from the spool, and the models
+     root becomes a setting.
+  2. AB-T-0365 (P1): gaea-plugin-z-image, with int4, int8 and bf16 lanes. It is the first real plugin.
+  3. AB-T-0363 (P1): eviction, requeue-once and lane fallback, tested with Z-Image's lanes and the demo.
+  4. Plugins:
+     - AB-T-0367: FLUX.2 Klein;
+     - AB-T-0368: Qwen-Image-Edit;
+     - AB-T-0369: the processing pack on ForgeCore;
+     - AB-T-0370: the LLM prompt enhancer.
+  5. AB-T-0366: the normalizer library (AB-T-0359) replaces the mock, and the Image conformance suite passes.
+  6. AB-T-0371: the cross-process governor, on mlx-engine's MLX-free policy (AB-T-0357).
+  7. AB-T-0372: Gaea Lab, which needs PixelAgencyRun's new package (AB-T-0360).
+  8. AB-T-0373: TierBench parity with pixel-agency-image-engine v0.9.1.
+  9. AB-T-0375: the exit gate, which gives AB-A-0208 the go for the retirements.
+  10. AB-T-0374 (P3): the research plugins. They are not on the exit path.
+- **Weights:** the image models are in MLXEngine's store, `~/Library/Application Support/MLXEngine/Models`, which
+  is Gaea's default models root. The bulk model cache moved to `/Volumes/DEV_VOL1/models` on 2026-10-28. Never
+  download weights onto the Satechi volume.
 - **Exit:**
   - the Image conformance suite passes;
   - TierBench parity with pixel-agency-image-engine at 0.9.x;
