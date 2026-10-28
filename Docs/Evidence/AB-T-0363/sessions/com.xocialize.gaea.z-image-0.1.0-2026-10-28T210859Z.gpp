@@ -1,0 +1,14 @@
+# manifest: /tmp/g363/main/Plugins/com.xocialize.gaea.z-image/0.1.0/z-image.gaeaplugin/Contents/Resources/manifest.json
+# Gaea 0.2.1 session with com.xocialize.gaea.z-image 0.1.0
+W {"engine":{"contract":"1.57.0","version":"0.72.0"},"kit":{"version":"0.2.0"},"manifest_sha256":"8ceb51392e5fe4e138b00dfaae35c441f789ae2ec5f03ddeaba637845ac4cd3a","models":["z-image-turbo","z-image"],"pid":35665,"plugin":{"id":"com.xocialize.gaea.z-image","version":"0.1.0"},"protocol":1,"type":"hello"}
+H {"budget":{"ceilingBytes":44000000000,"wiresWeights":false},"cache_root":"/tmp/g363/main/Caches/plugins/com.xocialize.gaea.z-image","id":"h1","models_root":"/Users/dustinnielson/Library/Application Support/MLXEngine/Models","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"int8","model":"z-image-turbo","type":"prepare"}
+W {"lane":"int8","model":"z-image-turbo","re":"h2","seconds":1.237,"type":"prepared"}
+W {"report":{"availableBytes":1000000000,"budgetBytes":44000000000,"date":814914540.432499,"gpuActiveBytes":14851940372,"gpuCacheBytes":2143452634,"physFootprintBytes":17219232912,"residentBytes":15000000000,"residents":{"z-image-turbo":15000000000},"running":[],"transientReserveBytes":28000000000},"type":"memory"}
+H {"id":"h3","inputs":{"prompt":"/tmp/g363/main/Caches/spool/jobs/job_2f82mgc53vnjmn3g2q09/outputs/worker-inputs/prompt-0.txt"},"job":"job_2f82mgc53vnjmn3g2q09","lane":"int8","model":"z-image-turbo","operation":"image.generate","output_dir":"/tmp/g363/main/Caches/spool/jobs/job_2f82mgc53vnjmn3g2q09/outputs/worker","params":{"count":1,"seed":42,"size":{"height":1024,"width":1024}},"seed":42,"type":"run"}
+W {"job":"job_2f82mgc53vnjmn3g2q09","re":"h3","stage":"encode","type":"progress"}
+W {"job":"job_2f82mgc53vnjmn3g2q09","re":"h3","stage":"denoise","type":"progress"}
+W {"fraction":0.125,"job":"job_2f82mgc53vnjmn3g2q09","of":8,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.25,"job":"job_2f82mgc53vnjmn3g2q09","of":8,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+# exited: signal 9

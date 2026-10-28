@@ -1,0 +1,13 @@
+2026-10-28T21:08:43Z scheduler: launched com.xocialize.gaea.demo 0.3.0, pid 35589, hello after 0.244958041 seconds
+2026-10-28T21:08:43Z scheduler: evicting com.xocialize.gaea.demo to make room for z-image-turbo int8
+2026-10-28T21:08:43Z scheduler: stopped com.xocialize.gaea.demo 0.3.0 (shutdown)
+2026-10-28T21:08:43Z scheduler: launched com.xocialize.gaea.z-image 0.1.0, pid 35605, hello after 0.289888583 seconds
+2026-10-28T21:08:58Z scheduler: evicting com.xocialize.gaea.z-image to make room for demo-matmul fp32
+2026-10-28T21:08:59Z scheduler: stopped com.xocialize.gaea.z-image 0.1.0 (shutdown)
+2026-10-28T21:08:59Z scheduler: launched com.xocialize.gaea.demo 0.3.0, pid 35646, hello after 0.013042416 seconds
+2026-10-28T21:08:59Z scheduler: evicting com.xocialize.gaea.demo to make room for z-image-turbo int8
+2026-10-28T21:08:59Z scheduler: stopped com.xocialize.gaea.demo 0.3.0 (shutdown)
+2026-10-28T21:08:59Z scheduler: launched com.xocialize.gaea.z-image 0.1.0, pid 35665, hello after 0.012970917 seconds
+2026-10-28T21:09:03Z scheduler: com.xocialize.gaea.z-image's worker died during job_2f82mgc53vnjmn3g2q09 (the worker exited (signal 9)); requeueing once
+2026-10-28T21:09:03Z scheduler: launched com.xocialize.gaea.z-image 0.1.0, pid 35752, hello after 0.014515709 seconds
+2026-10-28T21:09:18Z scheduler: lane_fallback z-image-turbo: bf16 → int8

@@ -30,6 +30,9 @@ public enum OperatorAPI {
         case modelsDisable = "models.disable"
         /// The shared weights folder: `path` sets it, `path` = `default` returns to MLXEngine's store, none reads it.
         case modelsRoot = "models.root"
+        /// A model's default lane (MEM-7): `id` the model, `lane` sets it, `lane` = `default` returns to the manifest's
+        /// default, none reads it.
+        case modelsLane = "models.lane"
         case ledger
     }
 }

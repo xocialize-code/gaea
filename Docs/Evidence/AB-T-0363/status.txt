@@ -1,0 +1,9 @@
+Gaea 0.2.1
+MES:       http://127.0.0.1:17660/mes/v0 (open, this Mac only)
+Operations: image.edit [z-image-turbo, z-image]; image.generate [demo-gradient, z-image-turbo, z-image, demo-matmul]
+Plugins:   2 installed, 2 enabled
+Workers:   none
+Memory:    0.00 GB charged of 44.00 GB budget; host 0.03 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Operator:  /tmp/g363/main/operator.sock (same user, Developer ID team); you are pid 35572, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/g363/main/gaea.sqlite

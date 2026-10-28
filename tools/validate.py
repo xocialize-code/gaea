@@ -270,7 +270,8 @@ SENDER = {"H": "H→W", "W": "W→H"}
 
 
 def parse_transcript(path):
-    """Yields (line number, sender, message) and the manifest the header names."""
+    """Yields (line number, sender, message) and the manifest the header names. The host's `# exited: <how>` comment,
+    where the worker process ended, is yielded as sender `#`."""
     manifest, lines = None, []
     for n, raw in enumerate(path.read_text().splitlines(), 1):
         if not raw.strip():
@@ -279,6 +280,9 @@ def parse_transcript(path):
             mm = re.match(r"#\s*manifest:\s*(\S+)", raw)
             if mm:
                 manifest = mm.group(1)
+            me = re.match(r"#\s*exited:\s*(.+)", raw)
+            if me:
+                lines.append((n, "#", me.group(1).strip()))
             continue
         sender, _, body = raw.partition(" ")
         lines.append((n, sender, body))
@@ -298,8 +302,15 @@ def check_transcript(path, manifest_path=None):
     jobs = {}                          # job -> run id
     hello = False
     shutdown = False
+    exited = None                      # how the worker process ended, when the host recorded it
     for n, sender, body in lines:
         where = f"{label}:{n}"
+        if exited is not None:
+            errs.append(f"{where}: a line after the worker exited ({exited})")
+            continue
+        if sender == "#":
+            exited = body
+            continue
         if sender not in SENDER:
             errs.append(f"{where}: line must start with 'H ' or 'W ', got {sender!r}")
             continue
@@ -383,7 +394,9 @@ def check_transcript(path, manifest_path=None):
             ends = CONVERSATION[req["type"]][1]
             if ends and (sender, rid) not in ended:
                 cancelled = req["type"] == "run" and shutdown
-                if not cancelled:
+                # A worker that died (SIGKILL, a crash) leaves its requests open; the host requeues the run (SRV-8).
+                died = exited is not None and not shutdown
+                if not cancelled and not died:
                     errs.append(f"{label}: {req['type']} {rid} never ended")
     return errs
 

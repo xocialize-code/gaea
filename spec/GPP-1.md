@@ -260,7 +260,9 @@ python3 tools/make_examples.py
 
 - **`validate.py`** checks every schema's references, the example manifests, and the transcripts in
   `examples/v1/gpp`. A transcript is the lines of a session, each prefixed `H ` or `W `, with a `# manifest:` header
-  naming the manifest it runs against. `--manifest <file>` checks one manifest (a plugin build runs it before
+  naming the manifest it runs against. Gaea ends each recorded session with `# exited: status N` or `# exited:
+  signal N`, where the worker process ended. Requests still open when a worker exited without a shutdown are not
+  errors, since the worker died and the host requeues its run (SRV-8), but no line may follow the exit. `--manifest <file>` checks one manifest (a plugin build runs it before
   signing); `--transcript <file>` checks one transcript.
 - **`test_validator.py`** runs the negative cases: every fixture in `examples/v1/invalid` must fail with the error its
   `# expect:` line names, and each listed mutation of a valid manifest must be rejected.

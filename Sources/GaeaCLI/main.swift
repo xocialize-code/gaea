@@ -18,6 +18,8 @@ import GaeaOperator
 //   gaea models [list]                  every plugin model, on or off
 //   gaea models enable|disable <id>
 //   gaea models root [<folder> | default]  the shared weights folder: read it, set it, or go back to MLXEngine's store
+//   gaea models lane <id> [<lane> | default]  the lane a model loads when it fits (MEM-7): read it, set it, or go back
+//                                       to the manifest's default
 //
 // --json prints the JSON answer instead of the text. GAEA_HOME points at another Gaea folder.
 
@@ -25,7 +27,7 @@ let usage = """
     usage: gaea status | logs [-n N] | ledger
            gaea plugins [list | add <repo-url> [version] | check | update <id> [version] | rollback <id>
                          | enable <id> | disable <id> | remove <id> | logs <id> [-n N]]
-           gaea models [list | enable <id> | disable <id> | root [<folder> | default]]
+           gaea models [list | enable <id> | disable <id> | root [<folder> | default] | lane <id> [<lane> | default]]
            (--json for JSON)
     """
 
@@ -79,6 +81,10 @@ func fail(_ message: String) -> Never {
         guard args.count >= 3 else { return OperatorRequest(command: .modelsRoot) }
         let path = args[2] == "default" ? "default" : URL(fileURLWithPath: args[2]).standardizedFileURL.path
         return OperatorRequest(command: .modelsRoot, args: ["path": path])
+    case ("models", "lane"):
+        var a = ["id": operand()]
+        if args.count >= 4 { a["lane"] = args[3] }
+        return OperatorRequest(command: .modelsLane, args: a)
     case ("-h", _), ("--help", _), ("help", _):
         print(usage)
         exit(0)

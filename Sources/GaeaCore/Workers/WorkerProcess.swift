@@ -29,7 +29,7 @@ public struct WorkerFailure: Error, Sendable, CustomStringConvertible {
 /// before its hello (a refused launch requirement is a SIGKILL) fails the launch at once through `terminationHandler`,
 /// not after the 10 s wait (GPP-1 §2).
 ///
-/// Every line both ways is recorded to a transcript (`H `/`W ` prefixed, `# manifest:` header) that
+/// Every line both ways is recorded to a transcript (`H `/`W ` prefixed, `# manifest:` header, `# exited:` last) that
 /// `tools/validate.py --transcript` checks.
 public final class WorkerProcess: @unchecked Sendable {
     public let pluginID: String
@@ -467,6 +467,7 @@ public final class WorkerProcess: @unchecked Sendable {
         }
         let how = reason == .uncaughtSignal ? "signal \(status)" : "status \(status)"
         HostLog.append("=== \(Date().formatted(.iso8601)) exited (\(how)) ===\n", to: log)
+        writeLock.withLock { _ in try? transcript?.write(contentsOf: Data("# exited: \(how)\n".utf8)) }
         helloWaiter?.resume(throwing: exitFailure())
         for p in pending {
             p.continuation.resume(throwing: WorkerFailure(code: "internal", message: "the worker exited (\(how))", workerExited: true))

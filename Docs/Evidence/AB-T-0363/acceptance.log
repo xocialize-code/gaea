@@ -1,0 +1,32 @@
+# Scheduler acceptance (AB-T-0363) 2026-10-28T21:08:40Z — Gaea 0.2.1, z-image 0.1.0, demo 0.3.0, budget 44000000000, source stand-in
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add z-image 0.1.0 and demo 0.3.0 by repo URL
+PASS  the budget is 44 GB
+z-image-turbo: int8 (set by the operator)
+PASS  the operator sets Turbo's default lane to int8
+PASS  demo-matmul runs, and the demo's worker stays resident and idle
+PASS  int8 (43.0 GB) doesn't fit beside the demo (2.37 GB): the demo is stopped and int8 runs
+PASS  …the log says why, and only Z-Image's worker is left
+PASS  the reverse: the idle Z-Image worker (43.0 GB charged) is stopped to admit demo-matmul
+      killed Z-Image's worker, pid 35665, at progress 0.25
+PASS  the job completes on a relaunched worker, with requeued: true
+PASS  …on a new process, with worker_died recorded
+PASS  …and the image is the one the clean int8 run gave
+PASS  the operator sets Turbo's default lane to bf16 (48.5 GB, more than the budget)
+{'code': 'lane_fallback', 'message': "Loaded z-image-turbo lane int8 (43.00 GB) instead of the default bf16 (48.50 GB), which doesn't fit in the memory free now.", 'param': 'x-gaea.lane'}
+PASS  without x-gaea.lane: int8 runs, with a lane_fallback warning naming both lanes
+{'code': 'no_capacity', 'job': 'job_75absqxzb88t7wcdppmx', 'message': 'Lane bf16 needs 48.50 GB and 44.00 GB is free; a request that names a lane never falls back.'}
+PASS  x-gaea.lane bf16 is refused no_capacity, not fallen back
+PASS  the operator's default goes back to the manifest's int4
+OK
+PASS  transcript com.xocialize.gaea.demo-0.3.0-2026-10-28T210843Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.demo-0.3.0-2026-10-28T210859Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.1.0-2026-10-28T210843Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.1.0-2026-10-28T210859Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.1.0-2026-10-28T210903Z.gpp passes validate.py
+PASS  the killed worker's transcript ends at its exit, signal 9
+== 20 passed, 0 failed

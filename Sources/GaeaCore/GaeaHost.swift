@@ -168,8 +168,9 @@ public final class GaeaHost: Sendable {
                 let lines = catalog.map { c in
                     let optIn = c.offer.namedOnly == true
                     let on = c.plugin.enabled && enablement.isEnabled(c.model.id, optIn: optIn)
+                    let chosen = defaultLane(c.model, plugin: c.plugin.id)
                     return "\(on ? "on " : "off") \(c.model.id)  \(c.model.title)  [\(c.plugin.id) \(c.plugin.version)] lanes: "
-                        + c.model.lanes.map { "\($0.id)\($0.default ? "*" : "") \(LaneChoice.need($0).gb)" }.joined(separator: ", ")
+                        + c.model.lanes.map { "\($0.id)\($0.id == chosen ? "*" : "") \(LaneChoice.need($0).gb)" }.joined(separator: ", ")
                 }
                 return OperatorResponse(id: request.id, ok: true, text: lines.isEmpty ? "No models: add a plugin." : lines.joined(separator: "\n"))
             case .modelsEnable, .modelsDisable:
@@ -189,6 +190,22 @@ public final class GaeaHost: Sendable {
                 let source = options.modelsRoot != nil ? "--models-root, for this launch" : stored != nil ? "set by the operator" : "MLXEngine's store, the default"
                 return OperatorResponse(id: request.id, ok: true, text: "\(root) (\(source))",
                                         json: Self.json(["models_root": root, "stored": stored ?? ""]))
+            case .modelsLane:
+                let id = try arg("id")
+                guard let c = await engine.catalog().first(where: { $0.model.id == id }) else { throw OperatorError("no model \(id)") }
+                let key = Scheduler.laneSetting(plugin: c.plugin.id, model: id)
+                if let lane = args["lane"], !lane.isEmpty {
+                    guard lane == "default" || c.model.lanes.contains(where: { $0.id == lane }) else {
+                        throw OperatorError("\(id) has no lane \(lane): \(c.model.lanes.map(\.id).joined(separator: ", "))")
+                    }
+                    try database.setSetting(key, lane == "default" ? nil : lane)
+                    log("operator: \(id)'s default lane is now \(lane == "default" ? "the manifest's" : lane)")
+                }
+                let stored = (try? database.setting(key)) ?? nil
+                let lane = defaultLane(c.model, plugin: c.plugin.id) ?? ""
+                return OperatorResponse(id: request.id, ok: true,
+                                        text: "\(id): \(lane) (\(stored != nil ? "set by the operator" : "the manifest's default"))",
+                                        json: Self.json(["model": id, "lane": lane, "stored": stored ?? ""]))
             case .ledger:
                 let ledger = await scheduler.ledger()
                 return OperatorResponse(id: request.id, ok: true, text: Self.describe(ledger), json: Self.json(ledger))
@@ -229,6 +246,12 @@ public final class GaeaHost: Sendable {
             version: Gaea.version, endpoint: endpoint, paired: options.paired, plugins: plugins.count,
             enabled: plugins.filter(\.enabled).count, operations: descriptors.map(\.operation), ledger: ledger,
             operatorPolicy: operatorServer.policy.rawValue)))
+    }
+
+    /// The lane a model loads when it fits: the operator's choice, else the manifest's default.
+    func defaultLane(_ model: PluginManifest.Model, plugin: String) -> String? {
+        let stored = (try? database.setting(Scheduler.laneSetting(plugin: plugin, model: model.id))) ?? nil
+        return stored.flatMap { s in model.lanes.first { $0.id == s }?.id } ?? model.lanes.first(where: \.default)?.id ?? model.lanes.first?.id
     }
 
     func pluginList(_ id: String) async throws -> OperatorResponse {

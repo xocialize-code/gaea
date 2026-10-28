@@ -241,8 +241,8 @@ starts while the phase before it is being built.
 - **Exit:**
   - the Base conformance suite passes against Gaea with a demo plugin;
   - a plugin added by repo URL installs, updates, rolls back, and enables and disables.
-  - **Both pass** (AB-R-0621, AB-R-0622). Still open: AB-T-0363 (eviction, requeue-once and lane fallback with real
-    workers, which need a plugin with several lanes; a natural first job for G1's Z-Image plugin).
+  - **Both pass** (AB-R-0621, AB-R-0622). AB-T-0363 (eviction, requeue-once and lane fallback with real workers)
+    was carried into G1 and passed there with Z-Image's lanes.
 
 **G1. Image**
 - The image normalizer, ported.
@@ -262,7 +262,11 @@ starts while the phase before it is being built.
      ([v0.1.0](https://github.com/xocialize/gaea-plugin-z-image/releases/tag/v0.1.0), on GaeaPluginKit 0.2.0):
      through Gaea, Turbo's 1024² image is byte for byte the in-process one, at 11.46 s against 11.47 s; see
      [Evidence/AB-T-0365](Evidence/AB-T-0365/README.md).
-  3. AB-T-0363 (P1): eviction, requeue-once and lane fallback, tested with Z-Image's lanes and the demo.
+  3. AB-T-0363 (P1): eviction, requeue-once and lane fallback, tested with Z-Image's lanes and the demo. **Done**
+     (Gaea 0.2.1, under a 44 GB budget): an idle worker is evicted both ways; a SIGKILLed run is requeued on a new
+     worker and gives the same bytes; a bf16 default falls back to int8 with `lane_fallback`, and a named bf16 is
+     refused `no_capacity`. Idle workers are charged their peak, which over-evicts (carried to AB-T-0371). See
+     [Evidence/AB-T-0363](Evidence/AB-T-0363/README.md).
   4. Plugins:
      - AB-T-0367: FLUX.2 Klein;
      - AB-T-0368: Qwen-Image-Edit;

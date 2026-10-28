@@ -199,6 +199,9 @@ public actor Scheduler: WorkerControl {
     /// The `gaea.sqlite` setting that holds the operator's models root.
     public static let modelsRootSetting = "models.root"
 
+    /// The gaea.sqlite key of the operator's default lane for one plugin model (MEM-7).
+    public static func laneSetting(plugin: String, model: String) -> String { "plugin:\(plugin):lane:\(model)" }
+
     /// Changes the models root and keeps it (nil returns to MLXEngine's store). Idle workers stop now and busy ones when
     /// their run ends, so the next job's worker is configured with the new folder.
     public func setModelsRoot(_ url: URL?) async throws {
@@ -318,7 +321,7 @@ public actor Scheduler: WorkerControl {
             await retire(plugin: job.pluginID)
         }
 
-        let preferred = try? database.setting("plugin:\(plugin.id):lane:\(model.id)")
+        let preferred = try? database.setting(Self.laneSetting(plugin: plugin.id, model: model.id))
         let (lane, fellBackFrom) = try await chooseLane(model, plugin: plugin.id, named: job.namedLane, preferred: preferred ?? nil)
         var fallbackMessage: String?
         if let fellBackFrom {
