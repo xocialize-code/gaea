@@ -9,8 +9,7 @@
 #   tools/acceptance-g0.sh <short-work-dir> <evidence-dir>
 #
 # <short-work-dir> holds the test Gaea folders; keep it short (a Unix socket path is at most 103 bytes).
-# Needs: dist/Gaea.app (scripts/build-app.sh), MES_CONFORMANCE (media-engine-spec's mes-conformance), GAEA_GITHUB_TOKEN
-# while the plugin repos are private, and STANDIN_ROOT: a tools/release-standin.py tree with tamper/, adhoc/ and
+# Needs: dist/Gaea.app (scripts/build-app.sh), MES_CONFORMANCE (media-engine-spec's mes-conformance), and STANDIN_ROOT: a tools/release-standin.py tree with tamper/, adhoc/ and
 # otherteam/ repos (see the receipt doc for how they were made).
 set -uo pipefail
 cd "${0:A:h}/.."
@@ -46,6 +45,8 @@ start() { # home, port, extra args… → waits for the operator socket
 stop() { pkill -TERM -f "$GAEA --headless --port $1" ; sleep 1 }
 
 say "# Gaea G0 acceptance $(date -u +%FT%TZ) — $($CLI --help >/dev/null 2>&1; codesign -dv $APP 2>&1 | grep -E '^(Identifier|TeamIdentifier)' | tr '\n' ' ')"
+unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN   # the plugin repos are public: Gaea reads them anonymously
+say "GitHub: anonymous (no token in Gaea's environment)"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 
 # ---- 2. Lifecycle on the real releases, plus 1. conformance (open mode; Base's shortest outputs TTL, 60 s, so the
@@ -54,21 +55,20 @@ H=$WORK/main; P=17630
 start $H $P --outputs-ttl 60
 export GAEA_HOME=$H
 t0=$(python3 -c 'import time; print(time.time())')
-check "add by repo URL installs the newest compatible release (v0.2.1)" zsh -c "$CLI plugins add $REPO | grep -q 'Installed .* 0.2.1'"
+check "add by repo URL, naming the pre-release v0.2.0, installs it" zsh -c "$CLI plugins add $REPO 0.2.0 | grep -q 'Installed .* 0.2.0'"
 say "      add took $(python3 -c "import time; print(round(time.time()-$t0,2))") s (download, sha256, signature, manifest)"
 job $P '{"operation":"image.generate","inputs":{"prompt":"a lighthouse at dusk"}}' > "$OUT/job-first.json"
-check "a MES job runs on the plugin's worker on the GPU (0.2.1)" zsh -c "grep -q '\"version\":\"0.2.1\"' $OUT/job-first.json && grep -q 'Device(gpu, 0)' $OUT/job-first.json"
+check "a MES job runs on the plugin's worker on the GPU (0.2.0)" zsh -c "grep -q '\"version\":\"0.2.0\"' $OUT/job-first.json && grep -q 'Device(gpu, 0)' $OUT/job-first.json"
 "$CONFORMANCE" engine "http://127.0.0.1:$P/mes/v0" --max-ttl-wait 75 -o "$OUT/conformance-open" > "$OUT/conformance-open.txt" 2>&1
 check "MES Base conformance, open mode: Base 0.1 conforms" grep -q 'Base 0.1: conforms' "$OUT/conformance-open.txt"
 say "      $(tail -2 "$OUT/conformance-open.txt" | head -1)"
-check "update to a named release (0.2.0) installs beside and switches" zsh -c "$CLI plugins update $ID 0.2.0 | grep -q 'now runs 0.2.0'"
 check "check for updates finds 0.2.1" zsh -c "$CLI plugins check | grep -q 'update available: 0.2.1'"
 check "update installs the newest and keeps 0.2.0 for rollback" zsh -c "$CLI plugins update $ID | grep -q 'now runs 0.2.1' && $CLI plugins | grep -q 'rollback: 0.2.0'"
 check "versions sit side by side on disk" zsh -c "ls $H/Plugins/$ID | tr '\n' ' ' | grep -q '0.2.0 0.2.1'"
 check "roll back switches to 0.2.0" zsh -c "$CLI plugins rollback $ID | grep -q 'now runs 0.2.0'"
 job $P '{"operation":"image.generate","inputs":{"prompt":"after rollback"}}' > "$OUT/job-after-rollback.json"
 check "the next job runs the rolled-back version" grep -q '"version":"0.2.0"' "$OUT/job-after-rollback.json"
-# Switch when idle: an update during a long run waits for it.
+# Switch when idle: an update during a long run waits for it (0.2.1 is installed already, so this is a switch).
 mes -X POST "http://127.0.0.1:$P/mes/v0/jobs" -H 'Content-Type: application/json' \
   -d '{"operation":"image.generate","inputs":{"prompt":"long"},"extensions":{"x-gaea.demo_matmul":{"n":8192,"iterations":300}}}' > "$OUT/long-job.json"
 sleep 2
@@ -126,7 +126,7 @@ fi
 # ---- 1. Paired mode: TLS, pairing, bearer tokens (BASE-005, 006, 090)
 export GAEA_HOME=$WORK/paired
 start $GAEA_HOME 17633 --paired --host 127.0.0.1 --approve-pairings
-$CLI plugins add $REPO > /dev/null
+check "a plain add takes the newest full release and skips pre-releases (v0.2.1)" zsh -c "$CLI plugins add $REPO | grep -q 'Installed .* 0.2.1'"
 "$CONFORMANCE" engine "https://127.0.0.1:17633/mes/v0" --pair --max-ttl-wait 0 -o "$OUT/conformance-paired" > "$OUT/conformance-paired.txt" 2>&1
 check "MES Base conformance, paired mode: Base 0.1 conforms" grep -q 'Base 0.1: conforms' "$OUT/conformance-paired.txt"
 say "      $(tail -2 "$OUT/conformance-paired.txt" | head -1)"

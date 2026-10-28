@@ -8,7 +8,7 @@ import GaeaOperator
 //   gaea logs [-n 80]                   Gaea's own log
 //   gaea ledger                         memory across processes (MEM-4)
 //   gaea plugins [list]                 installed plugins
-//   gaea plugins add <repo-url>         add by Git repo URL (G-18)
+//   gaea plugins add <repo-url> [version]  add by Git repo URL (G-18): the newest full release, or that version
 //   gaea plugins check                  read every plugin's repo for updates
 //   gaea plugins update <id> [version]  install beside, switch when idle
 //   gaea plugins rollback <id>          back to the version kept
@@ -22,7 +22,7 @@ import GaeaOperator
 
 let usage = """
     usage: gaea status | logs [-n N] | ledger
-           gaea plugins [list | add <repo-url> | check | update <id> [version] | rollback <id>
+           gaea plugins [list | add <repo-url> [version] | check | update <id> [version] | rollback <id>
                          | enable <id> | disable <id> | remove <id> | logs <id> [-n N]]
            gaea models [list | enable <id> | disable <id>]
            (--json for JSON)
@@ -54,7 +54,10 @@ func fail(_ message: String) -> Never {
     case ("logs", _): return OperatorRequest(command: .logs, args: lines.map { ["lines": $0] } ?? [:])
     case ("ledger", _): return OperatorRequest(command: .ledger)
     case ("plugins", nil), ("plugins", "list"): return OperatorRequest(command: .pluginsList)
-    case ("plugins", "add"): return OperatorRequest(command: .pluginsAdd, args: ["repo": operand()])
+    case ("plugins", "add"):
+        var a = ["repo": operand()]
+        if args.count >= 4 { a["version"] = args[3] }
+        return OperatorRequest(command: .pluginsAdd, args: a)
     case ("plugins", "check"): return OperatorRequest(command: .pluginsCheck)
     case ("plugins", "update"):
         var a = ["id": operand()]

@@ -1,11 +1,11 @@
-# Gaea G0 acceptance 2026-10-28T04:49:59Z — Identifier=com.xocialize.gaea TeamIdentifier=CFZS6RXUCP 
+# Gaea G0 acceptance 2026-10-28T05:10:50Z — Identifier=com.xocialize.gaea TeamIdentifier=CFZS6RXUCP 
+GitHub: anonymous (no token in Gaea's environment)
 host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
-PASS  add by repo URL installs the newest compatible release (v0.2.1)
-      add took 1.86 s (download, sha256, signature, manifest)
-PASS  a MES job runs on the plugin's worker on the GPU (0.2.1)
+PASS  add by repo URL, naming the pre-release v0.2.0, installs it
+      add took 1.6 s (download, sha256, signature, manifest)
+PASS  a MES job runs on the plugin's worker on the GPU (0.2.0)
 PASS  MES Base conformance, open mode: Base 0.1 conforms
       28 passed · 0 failed · 16 skipped — Base 0.1: conforms, Image 0.1: conforms
-PASS  update to a named release (0.2.0) installs beside and switches
 PASS  check for updates finds 0.2.1
 PASS  update installs the newest and keeps 0.2.0 for rollback
 PASS  versions sit side by side on disk
@@ -26,7 +26,6 @@ PASS  a request naming an unknown lane is refused (422)
 PASS  MES has no configuration routes (plugins, config, operator, admin → 404)
 PASS  the only TCP listener is MES on loopback
 PASS  the operator socket is mode 0600 in a 0700 folder
-gaea: Gaea closed the connection without answering (refused by its audit-token check?).
 PASS  the operator API checks the caller's code: an unsigned client gets no answer
 PASS  the signed gaea CLI is answered
 PASS  MCP lists only operations and the four helpers (BASE-080 above)
@@ -37,15 +36,16 @@ PASS  a tampered plugin is refused at install (seal broken)
 PASS  an ad-hoc-signed plugin is refused at install
 PASS  another team's plugin is refused, naming G-22
 PASS  nothing refused reached the plugin folder or staging
+PASS  a plain add takes the newest full release and skips pre-releases (v0.2.1)
 PASS  MES Base conformance, paired mode: Base 0.1 conforms
       30 passed · 0 failed · 14 skipped — Base 0.1: conforms, Image 0.1: conforms
 OK
-PASS  transcript com.xocialize.gaea.demo-0.2.0-2026-10-28T045112Z.gpp validates
+PASS  transcript com.xocialize.gaea.demo-0.2.0-2026-10-28T051053Z.gpp validates
 OK
-PASS  transcript com.xocialize.gaea.demo-0.2.0-2026-10-28T045122Z.gpp validates
+PASS  transcript com.xocialize.gaea.demo-0.2.0-2026-10-28T051201Z.gpp validates
 OK
-PASS  transcript com.xocialize.gaea.demo-0.2.1-2026-10-28T045002Z.gpp validates
+PASS  transcript com.xocialize.gaea.demo-0.2.0-2026-10-28T051212Z.gpp validates
 OK
-PASS  transcript com.xocialize.gaea.demo-0.2.1-2026-10-28T045127Z.gpp validates
+PASS  transcript com.xocialize.gaea.demo-0.2.1-2026-10-28T051216Z.gpp validates
 
 35 passed, 0 failed

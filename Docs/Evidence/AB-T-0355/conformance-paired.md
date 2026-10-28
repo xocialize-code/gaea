@@ -2,11 +2,11 @@
 
 | | |
 |---|---|
-| **Engine** | Gaea (`eng_gaea_dustin_s_mac_studio`) · gaea 0.1.0 |
+| **Engine** | Gaea (`eng_gaea_dustin_s_mac_studio`) · gaea 0.1.1 |
 | **URL** | https://127.0.0.1:17633/mes/v0 · paired |
 | **Profiles** | image 0.1 |
 | **Features** | uploads, sse, grants, previews, websocket, mcp, pairing |
-| **Suite** | MES conformance 0.1 · 2026-10-28T04:51:27Z |
+| **Suite** | MES conformance 0.1 · 2026-10-28T05:12:16Z |
 | **Result** | 30 passed · 0 failed · 14 skipped |
 | **Base 0.1** | ✅ conforms |
 | **Image 0.1** | ✅ conforms for the operations offered |

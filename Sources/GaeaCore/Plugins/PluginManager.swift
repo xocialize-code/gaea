@@ -119,13 +119,19 @@ public actor PluginManager {
 
     // MARK: - Adding
 
-    /// Adds a plugin from its repo: the newest compatible release, downloaded, checked (sha256, signature, manifest) and
-    /// installed enabled. Another team's release is refused (G-22): v1 has no trust list.
+    /// Adds a plugin from its repo: the newest compatible release (or the release `version` names, a pre-release
+    /// included), downloaded, checked (sha256, signature, manifest) and installed enabled. Another team's release is
+    /// refused (G-22): v1 has no trust list.
     @discardableResult
-    public func add(repository text: String, progress: @escaping @Sendable (Double) -> Void = { _ in }) async throws -> InstalledPlugin {
+    public func add(repository text: String, version: String? = nil,
+                    progress: @escaping @Sendable (Double) -> Void = { _ in }) async throws -> InstalledPlugin {
         guard let repo = PluginRepository(text) else { throw ManagerError.badRepository(text) }
         progress(0.02)
-        let (release, releaseManifest) = try await newestCompatible(repo, newerThan: nil)
+        let (release, releaseManifest) = if let version {
+            try await named(repo, version: version)
+        } else {
+            try await newestCompatible(repo, newerThan: nil)
+        }
         if let existing = try database.plugin(releaseManifest.id) {
             throw ManagerError.alreadyAdded("\(existing.title) (\(existing.id))")
         }
@@ -140,41 +146,67 @@ public actor PluginManager {
         return try launchable(releaseManifest.id)
     }
 
-    /// The newest release whose manifest this Gaea can run: protocol, `min_gaea`, the trusted team, and the three assets.
+    /// The newest release whose manifest this Gaea can run (`compatibility`), newer than `current` when given.
+    ///
+    /// **Pre-releases are skipped**, as GitHub's own "latest" skips them: Gaea installs and offers updates only from full
+    /// releases unless the operator names a pre-release's version (`add … version`, `update … version`).
     func newestCompatible(_ repo: PluginRepository, newerThan current: SemVer?) async throws -> (PluginRelease, PluginManifest) {
         let releases = try await source.releases(repo).sorted { $0.version > $1.version }
         var reasons: [String] = []
-        let gaea = SemVer(Gaea.version)!
+        var skipped: [String] = []
         for release in releases {
             if let current, release.version <= current { break }
-            guard release.zip != nil, release.checksum != nil, let manifestAsset = release.manifest else {
-                reasons.append("\(release.tag) lacks the .gaeaplugin.zip, its .sha256 or manifest.json")
+            if release.prerelease {
+                skipped.append(release.tag)
                 continue
             }
-            let manifest: PluginManifest
-            do {
-                manifest = try JSONDecoder().decode(PluginManifest.self, from: try await source.data(manifestAsset))
-            } catch {
-                reasons.append("\(release.tag)'s manifest doesn't decode (\(error))")
-                continue
+            switch await compatibility(release) {
+            case .success(let manifest): return (release, manifest)
+            case .failure(let reason): reasons.append(reason.description)
             }
-            guard Gaea.protocols.contains(manifest.protocol) else {
-                reasons.append("\(release.tag) speaks GPP \(manifest.protocol)")
-                continue
-            }
-            guard let minGaea = SemVer(manifest.minGaea), minGaea <= gaea else {
-                reasons.append("\(release.tag) needs Gaea \(manifest.minGaea)")
-                continue
-            }
-            guard manifest.team == GPP.trustedTeam else {
-                reasons.append("\(release.tag) is from team \(manifest.team); Gaea v1 runs only plugins signed by "
-                    + "\(GPP.trustedTeam), and third-party plugins come with the trust list later (G-22)")
-                continue
-            }
-            return (release, manifest)
         }
-        if current != nil, reasons.isEmpty { throw ManagerError.noUpdate(repo.description) }
+        if !skipped.isEmpty { reasons.append("pre-releases \(skipped.joined(separator: ", ")) are installed only by version") }
+        if current != nil, reasons.allSatisfy({ $0.hasPrefix("pre-releases") }) { throw ManagerError.noUpdate(repo.description) }
         throw ManagerError.noCompatibleRelease(repo, reasons)
+    }
+
+    /// The release tagged `version` (a pre-release too), if this Gaea can run it.
+    func named(_ repo: PluginRepository, version: String) async throws -> (PluginRelease, PluginManifest) {
+        guard let wanted = SemVer(version) else { throw ManagerError.noCompatibleRelease(repo, ["\(version) isn't a version"]) }
+        guard let release = try await source.releases(repo).first(where: { $0.version == wanted }) else {
+            throw ManagerError.noCompatibleRelease(repo, ["no release \(version)"])
+        }
+        switch await compatibility(release) {
+        case .success(let manifest): return (release, manifest)
+        case .failure(let reason): throw ManagerError.noCompatibleRelease(repo, [reason.description])
+        }
+    }
+
+    struct Incompatible: Error, CustomStringConvertible { let description: String }
+
+    /// Whether this Gaea can run a release, from its published manifest: the three assets, GPP protocol, `min_gaea`, and
+    /// the trusted team (G-22).
+    func compatibility(_ release: PluginRelease) async -> Result<PluginManifest, Incompatible> {
+        guard release.zip != nil, release.checksum != nil, let manifestAsset = release.manifest else {
+            return .failure(Incompatible(description: "\(release.tag) lacks the .gaeaplugin.zip, its .sha256 or manifest.json"))
+        }
+        let manifest: PluginManifest
+        do {
+            manifest = try JSONDecoder().decode(PluginManifest.self, from: try await source.data(manifestAsset))
+        } catch {
+            return .failure(Incompatible(description: "\(release.tag)'s manifest doesn't decode (\(error))"))
+        }
+        guard Gaea.protocols.contains(manifest.protocol) else {
+            return .failure(Incompatible(description: "\(release.tag) speaks GPP \(manifest.protocol)"))
+        }
+        guard let minGaea = SemVer(manifest.minGaea), minGaea <= SemVer(Gaea.version)! else {
+            return .failure(Incompatible(description: "\(release.tag) needs Gaea \(manifest.minGaea)"))
+        }
+        guard manifest.team == GPP.trustedTeam else {
+            return .failure(Incompatible(description: "\(release.tag) is from team \(manifest.team); Gaea v1 runs only plugins signed by "
+                + "\(GPP.trustedTeam), and third-party plugins come with the trust list later (G-22)"))
+        }
+        return .success(manifest)
     }
 
     /// Downloads, checks and installs one release beside any versions already there. Nothing reaches the plugin folder
@@ -334,17 +366,8 @@ public actor PluginManager {
         let current = SemVer(row.activeVersion)
         let release: PluginRelease
         let manifest: PluginManifest
-        if let version, let wanted = SemVer(version) {
-            let all = try await source.releases(repo)
-            guard let match = all.first(where: { $0.version == wanted }), let asset = match.manifest else {
-                throw ManagerError.noCompatibleRelease(repo, ["no release \(version)"])
-            }
-            let candidate = try JSONDecoder().decode(PluginManifest.self, from: try await source.data(asset))
-            guard candidate.team == GPP.trustedTeam, Gaea.protocols.contains(candidate.protocol),
-                  SemVer(candidate.minGaea).map({ $0 <= SemVer(Gaea.version)! }) == true else {
-                throw ManagerError.noCompatibleRelease(repo, ["\(version) isn't compatible with Gaea \(Gaea.version)"])
-            }
-            (release, manifest) = (match, candidate)
+        if let version {
+            (release, manifest) = try await named(repo, version: version)
         } else {
             (release, manifest) = try await newestCompatible(repo, newerThan: current)
         }

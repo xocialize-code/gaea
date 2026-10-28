@@ -133,7 +133,7 @@ public final class GaeaHost: Sendable {
             case .pluginsList:
                 return try await pluginList(request.id)
             case .pluginsAdd:
-                let plugin = try await manager.add(repository: try arg("repo"))
+                let plugin = try await manager.add(repository: try arg("repo"), version: args["version"])
                 return OperatorResponse(id: request.id, ok: true, text: "Installed \(plugin.title) \(plugin.version) (\(plugin.id)), enabled.",
                                         json: Self.json(["id": plugin.id, "version": plugin.version]))
             case .pluginsCheck:
