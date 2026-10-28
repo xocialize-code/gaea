@@ -46,5 +46,7 @@
 
 ## Not covered here
 
-- Demo 0.3.0 is not published yet. This run used a local stand-in for its GitHub release; publishing (notarize, release) follows.
+- This run used a local stand-in for demo 0.3.0's GitHub release. The release itself followed the same day:
+  [v0.3.0](https://github.com/xocialize/gaea-plugin-demo/releases/tag/v0.3.0), rebuilt by `scripts/release.sh`.
+  `gaea-plugin-check` reported ALL PASS, it was notarized (Accepted), and Gatekeeper reports "Notarized Developer ID".
 - The Settings window was built and its actions go through `Scheduler.setModelsRoot`, which the CLI checks exercise. It was not driven by hand in this run.
