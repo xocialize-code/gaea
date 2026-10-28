@@ -231,10 +231,11 @@ starts while the phase before it is being built.
   v0.1.0):** both exit tests pass on the demo's GitHub releases; see
   [Evidence/AB-T-0355](Evidence/AB-T-0355/README.md).
 - A notary profile and a CI signing pipeline.
-- **Measurements:**
-  - a worker's baseline footprint after MLX starts;
-  - a real model's cold start through a worker, against in-process;
-  - spool throughput for 4K images and 1080p frame batches.
+- **Measurements:** **Done (AB-T-0356)**, Release, M5 Max; see §6.1 and
+  [Evidence/AB-T-0356](Evidence/AB-T-0356/README.md).
+  - a worker's baseline footprint after MLX starts: 146 MB;
+  - a real model's cold start through a worker, against in-process: Z-Image Turbo int4, 12.52 s against 12.59 s;
+  - spool throughput for 4K images and 1080p frame batches: files are enough, no IOSurface.
 - **Exit:**
   - the Base conformance suite passes against Gaea with a demo plugin;
   - a plugin added by repo URL installs, updates, rolls back, and enables and disables.
@@ -291,15 +292,41 @@ starts while the phase before it is being built.
 
 | Risk | Mitigation |
 |---|---|
-| **Fixed cost per process:** MLX start-up and the Metal context in every worker | Measure in G0. Keep workers warm; group small models into packs. |
+| **Fixed cost per process:** MLX start-up and the Metal context in every worker | Measured in G0 (AB-T-0356): **146 MB** of `phys_footprint` once MLX and the Metal device are up with no model (3 MB at hello, 5 MB after `configure`), and **about 80 ms** from launch to a finished first GPU op (235 ms on the first launch of a newly signed bundle). Unloading a model leaves about 209 MB; only exiting returns it. Ten idle workers cost about 1.5 GB. Keep workers warm; group small models into packs. |
 | **The same weights loaded twice:** for example, a text encoder shared by two families, in two processes | Accept it at first and let the ledger account for it. Later, either a shared-component plugin or co-locating families that share an encoder. |
-| **Large media between processes:** video frames | Files in the spool to start with. IOSurface or shared memory only if the G0 measurement says so. |
+| **Large media between processes:** video frames | Files in the spool. The G0 measurement says they are enough (§6.1). |
 | **One GPU job at a time limits throughput** (G-13) | Measure in G1 before letting small jobs run alongside a heavy one. Spread work across servers (G-19). |
 | **Harder debugging across processes** | Logs per plugin (stderr) in the console, `gaea plugins logs`, and job ids in every message |
 | **Our Developer ID is a single point of trust** | Notarization in CI, a pinned requirement, and a rollback version kept on disk |
 | **A repo URL that points at someone else's code** (G-18) | The signature, not the URL, decides: an unknown team is refused until the user adds it to the trust list. |
 | **Spec work gates audio and video** | Run the spec work in parallel with the previous phase. The mock engine and conformance suite come first, as in R0. |
 | **MES loses its reference client while Lite is deprecated** | Gaea Lab takes over the client conformance role before Lite is deprecated, not after. |
+
+### 6.1 Measured in G0: out of process, and the spool (AB-T-0356)
+
+Release builds on a Mac17,14 (M5 Max, 128 GB): gaea-plugin-kit 0.1.1, z-image-swift 0.5.4, mlx-engine-swift 0.72.0.
+Each figure is the median of 5 to 7 runs. The spread of each, and the harness, are in
+[Evidence/AB-T-0356](Evidence/AB-T-0356/README.md).
+
+- **A worker's fixed cost** is 146 MB and about 80 ms. See the risk above.
+- **A real model costs the same out of process.**
+  - Z-Image Turbo int4, cold, from launch to the first 1024² image: 12.52 s through a worker, 12.59 s in-process.
+  - The warm second job: 11.50 s and 11.47 s.
+  - The spreads overlap, and the two PNGs are byte-identical.
+  - What the worker adds is launch, hello and `configure`: about 22 ms, against 9 ms of engine init in-process.
+- **No IOSurface or shared memory: the spool stays as files** (GPP v1 as written).
+  - The file path covers host write, worker read, worker write, host read and the GPP round trip.
+  - For single images it costs 0.06–0.36% of the Z-Image job (4K PNG: 6–8 ms; 4K 16-bit TIFF: 17–41 ms).
+  - For 1080p raw RGBA frames it costs 3.2 ms per frame on the internal SSD and 7.1 ms on the external volume. That is
+    1.0% and 2.2% of RIFE's 0.32 s per frame, the cheapest real video job on record.
+  - Both are under the 5% bar, so no shared-memory handoff was built.
+- **The codec is what costs.** PNG at each of the four hops costs 20 ms per 1080p frame on every core, and 160 ms on
+  one. Frame batches should cross the spool raw, or in the plugin's native format, rather than as PNG. That choice
+  belongs to the video profile (G3).
+- **Long batches will hit the line limit.** A `result` carries about 245 bytes per file output, so the 1 MiB line cap
+  stops one `result` at roughly 4,000 outputs. Longer batches use `chunk` (GPP v1 already has it) or an output folder.
+- **Where the spool lives.** Writes run at 7.6 GB/s to the internal SSD and 2.8 GB/s to the external one; both stay
+  under the bar. Give the spool's volume free space: the external volume was 100% full when measured.
 
 ## 7. Questions
 
