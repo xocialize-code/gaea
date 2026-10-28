@@ -1,18 +1,19 @@
 # manifest: z-image.json
-# Download on the operator's command, then a generate with a stored preset, then an unload under memory pressure.
+# The plugin reads its stored preset once configured; then a download on the operator's command, a generate
+# with that preset, and an unload under memory pressure.
 W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.z-image","version":"0.1.0"},"pid":51022,"models":["z-image-turbo"],"manifest_sha256":"5be98f0c9a5667df55afc282d46abdcb25aae8576cfc0e635382a3507975bf76","kit":{"version":"0.1.0"},"engine":{"version":"0.72.0","contract":"1.57.0"}}
 H {"type":"configure","id":"h1","budget":{"ceilingBytes":48000000000,"cacheLimitBytes":2147483648,"wiresWeights":true},"models_root":"/Users/me/Library/Application Support/MLXEngine/Models","cache_root":"/Users/me/Library/Caches/Gaea/plugins/com.xocialize.gaea.z-image","settings":{"default_lane":"int4"}}
 W {"type":"configured","re":"h1"}
+W {"type":"storage.get","id":"w1","namespace":"presets","key":"studio-portrait"}
+H {"type":"storage.result","re":"w1","found":true,"value":{"x-zimage.shift":2.5}}
 H {"type":"materialize","id":"h2","model":"z-image-turbo","lane":"int4"}
 W {"type":"materialize.progress","re":"h2","model":"z-image-turbo","lane":"int4","fraction":0.0,"bytes_done":0,"bytes_total":20612345678}
 W {"type":"materialize.progress","re":"h2","model":"z-image-turbo","lane":"int4","fraction":0.5,"bytes_done":10306172839,"bytes_total":20612345678}
 W {"type":"materialize.done","re":"h2","model":"z-image-turbo","lane":"int4","bytes":20612345678,"seconds":412.7}
-W {"type":"storage.get","id":"w1","namespace":"presets","key":"studio-portrait"}
-H {"type":"storage.result","re":"w1","found":true,"value":{"x-zimage.shift":2.5}}
 H {"type":"prepare","id":"h3","model":"z-image-turbo","lane":"int4"}
 W {"type":"prepared","re":"h3","model":"z-image-turbo","lane":"int4","seconds":9.8}
 W {"type":"memory","report":{"budgetBytes":48000000000,"residentBytes":11900000000,"transientReserveBytes":28000000000,"availableBytes":8100000000,"physFootprintBytes":12450000000,"gpuActiveBytes":11880000000,"gpuCacheBytes":0,"residents":{"z-image-turbo":11900000000},"running":[],"date":783313000.0}}
-H {"type":"run","id":"h4","job":"job_a91c","operation":"image.generate","model":"z-image-turbo","lane":"int4","inputs":{},"params":{"prompt":"a lighthouse at dusk, film photo","width":1024,"height":1024,"steps":8,"quality":"standard"},"model_params":{"x-zimage.shift":2.5},"seed":42,"output_dir":"/Users/me/Library/Caches/Gaea/spool/job_a91c/out"}
+H {"type":"run","id":"h4","job":"job_a91c","operation":"image.generate","model":"z-image-turbo","lane":"int4","inputs":{},"params":{"prompt":"a lighthouse at dusk, film photo","negative_prompt":"blurry","width":1024,"height":1024,"steps":8,"quality":"standard"},"model_params":{"x-zimage.shift":2.5},"seed":42,"output_dir":"/Users/me/Library/Caches/Gaea/spool/job_a91c/out"}
 W {"type":"progress","re":"h4","job":"job_a91c","stage":"encode_prompt"}
 W {"type":"progress","re":"h4","job":"job_a91c","stage":"denoise","step":4,"of":8,"fraction":0.5}
 W {"type":"progress","re":"h4","job":"job_a91c","stage":"denoise","step":8,"of":8,"fraction":1.0}

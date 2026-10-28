@@ -20,5 +20,6 @@ W {"type":"storage.put","id":"w7","namespace":"cache","key":"huge","value":"…"
 H {"type":"error","re":"w7","code":"storage_failed","message":"Value is larger than 1 MiB.","retryable":false}
 H {"type":"run","id":"h2","job":"job_b001","operation":"image.generate","model":"z-image-turbo","lane":"bf16","inputs":{},"params":{"prompt":"x"},"output_dir":"/Users/me/Library/Caches/Gaea/spool/job_b001/out"}
 W {"type":"error","re":"h2","job":"job_b001","code":"not_materialized","message":"Lane bf16 of z-image-turbo has no weights on disk; send materialize or prepare first.","retryable":true,"detail":{"repo":"mlx-community/Z-Image-Turbo-bf16","revision":"main"}}
-W {"type":"error","code":"protocol","message":"Line 9 of stdin is not valid JSON; ignored.","retryable":false}
+# stdin (not JSON): {"type":"run","id":"h3",
+W {"type":"error","code":"protocol","message":"Line 10 of stdin is not valid JSON; ignored.","retryable":false}
 H {"type":"shutdown","id":"h4"}

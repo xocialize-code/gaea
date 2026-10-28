@@ -318,7 +318,7 @@ def check_transcript(path, manifest_path=None):
         d = direction[t]
         if d != "either" and d != SENDER[sender]:
             errs.append(f"{where}: {t} goes {d}, but {sender} sent it")
-        if shutdown:
+        if shutdown and not ends_run_on_shutdown(msg, sender, sent, ended):
             errs.append(f"{where}: {t} after shutdown")
         if not hello:
             if t != "hello":
@@ -386,6 +386,13 @@ def check_transcript(path, manifest_path=None):
                 if not cancelled:
                     errs.append(f"{label}: {req['type']} {rid} never ended")
     return errs
+
+
+def ends_run_on_shutdown(msg, sender, sent, ended):
+    """After shutdown the worker may still end a run that was in flight, with error code cancelled (§3.4)."""
+    req = sent["H"].get(msg.get("re"))
+    return (sender == "W" and msg["type"] == "error" and msg.get("code") == "cancelled"
+            and req is not None and req["type"] == "run" and ("H", msg["re"]) not in ended)
 
 
 def check_against_manifest(msg, manifest, where):
