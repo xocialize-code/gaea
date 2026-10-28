@@ -272,7 +272,11 @@ starts while the phase before it is being built.
        ([v0.1.0](https://github.com/xocialize/gaea-plugin-flux2-klein/releases/tag/v0.1.0)): Klein 4B and 4B Base,
        generate and multi-reference edit (Gaea's default editor), byte for byte the in-process images, warm 6.32 s
        against 6.30 s at 1024² bf16; see [Evidence/AB-T-0367](Evidence/AB-T-0367/README.md);
-     - AB-T-0368: Qwen-Image-Edit;
+     - AB-T-0368: Qwen-Image-Edit. **Done**
+       ([v0.1.1](https://github.com/xocialize/gaea-plugin-qwen-image/releases/tag/v0.1.1), with Gaea 0.2.2):
+       Qwen-Image-Edit 2511 (bf16, 63 GB) and Qwen-Image Flash (int8, 31.6 GB) in one plugin, byte for byte the
+       in-process images; the edit is slow, about 27 s a step with two references (AB-A-0214). See
+       [Evidence/AB-T-0368](Evidence/AB-T-0368/README.md);
      - AB-T-0369: the processing pack on ForgeCore;
      - AB-T-0370: the LLM prompt enhancer.
   5. AB-T-0366: the normalizer library (AB-T-0359) replaces the mock, and the Image conformance suite passes.

@@ -1,0 +1,2 @@
+on  qwen-image-edit  Qwen-Image-Edit 2511  [com.xocialize.gaea.qwen-image 0.1.1] lanes: bf16* 63.00 GB
+on  qwen-image-flash  Qwen-Image Flash  [com.xocialize.gaea.qwen-image 0.1.1] lanes: int8* 31.60 GB

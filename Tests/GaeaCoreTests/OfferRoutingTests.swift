@@ -108,6 +108,13 @@ import Testing
 
     /// The real thing: demo 0.3.0's signed bundle answers `image.generate` with PNGs under `output_dir`, and the host's
     /// collection hands them to MES byte for byte. Needs the bundle built next door (`scripts/build-plugin.sh`).
+    @Test func imageInputsTakeTheMostEveryOfferAllows() {
+        #expect(GaeaEngine.maxImages([PluginManifest.Limits(maxImages: 3), PluginManifest.Limits(maxImages: 4)]) == 4)
+        // One offer that doesn't say leaves the profile's count as it was.
+        #expect(GaeaEngine.maxImages([PluginManifest.Limits(maxImages: 3), PluginManifest.Limits(maxPixels: 1)]) == nil)
+        #expect(GaeaEngine.maxImages([PluginManifest.Limits(maxImages: 3), nil]) == nil)
+    }
+
     @Test(.enabled(if: FileManager.default.fileExists(atPath: WorkerProcessTests.demo.appending(path: "Contents/Resources/manifest.json").path)
           && ((try? JSONDecoder().decode(PluginManifest.self, from: Data(contentsOf: WorkerProcessTests.demo
                 .appending(path: "Contents/Resources/manifest.json"))))?.offers.isEmpty == false)))

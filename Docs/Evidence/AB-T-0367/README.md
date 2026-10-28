@@ -59,7 +59,9 @@
 - `count` 2 at 768×512 gives two different images, seeds 7 and 8, and the distilled model reports a negative prompt
   as ignored.
 - `x-gaea.lane: int4` runs lane int4; 1000² snaps to 992² with `size_snapped`.
-- Five references are refused `out_of_limits` (`images`) when the job is submitted, from the offer's `max_images` 4.
+- Five references are refused `out_of_limits` (`images`) when the job is submitted. In Gaea 0.2.1 that limit was
+  MESKit's default for `image.edit`, which happens to be 4; the offer's `max_images` wasn't applied. Gaea 0.2.2 sets
+  each image input's count from the offers (AB-T-0368).
 - The recorded GPP sessions pass `tools/validate.py --transcript`.
 
 ## Fixed along the way

@@ -1,0 +1,25 @@
+# Qwen-Image plugin acceptance (AB-T-0368) 2026-10-28T22:46:03Z — Gaea 0.2.2, qwen-image 0.1.1, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add by repo URL installs qwen-image 0.1.1
+{"max_count": 8, "max_height": 8192, "max_megapixels": 1.048576, "max_width": 8192}
+PASS  image.edit offers Qwen-Image-Edit 2511 for standard and best, up to 3 images
+PASS  image.generate offers Qwen-Image Flash under the NVIDIA Open Model License, with its notice
+      flash cold: 13.98 s from submit to settled (launch, prepare int8, generate); worker run 12.482 s
+      flash warm: 11.86 s from submit to settled; worker run 11.799 s
+PASS  Flash int8 1024² seed 42 succeeds with one 1024² PNG, 4 steps
+PASS  a warm run gives the same bytes again
+      edit cold: 554.24 s from submit to settled (prepare bf16 beside Flash, 20 steps CFG 4); worker run 548.449 s
+PASS  image.edit on Qwen-Image-Edit: two references, 1024² from the first, 20 steps, guidance 4
+      edit, one 1280×768 reference (warm): 292.08 s from submit to settled; worker run 291.978 s
+PASS  a 1280×768 input is edited at 1312×800 (about 1024² at its aspect), reported size_snapped
+PASS  count 2 gives two different 768×512 images, seeds 7 and 8
+PASS  Flash reports the negative prompt as ignored
+{'code': 'out_of_limits', 'message': "Input 'images' takes at most 3.", 'param': 'images', 'request_id': 'req_se46wa458dqb'}
+PASS  four references are refused out_of_limits at submit
+bf76d3cfde6aa10509b80a1976afab4ad5465027081c54d4f583cdd9604641f9 bf76d3cfde6aa10509b80a1976afab4ad5465027081c54d4f583cdd9604641f9
+PASS  Flash through Gaea is byte for byte the in-process image
+a12e59d2db441ba7ff12b04922acd827153437316dc3e450bffbe284aae88556 a12e59d2db441ba7ff12b04922acd827153437316dc3e450bffbe284aae88556
+PASS  the two-reference edit through Gaea is byte for byte the in-process image
+OK
+PASS  transcript com.xocialize.gaea.qwen-image-0.1.1-2026-10-28T224606Z.gpp passes validate.py
+== 13 passed, 0 failed

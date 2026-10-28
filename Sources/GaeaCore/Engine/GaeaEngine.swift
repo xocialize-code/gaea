@@ -168,6 +168,9 @@ public struct GaeaEngine: MediaEngine {
             if !served.isEmpty, let limits = Self.limits(served.map(\.manifestOffer.limits), else: descriptor.limits) {
                 descriptor.limits = limits
             }
+            if !served.isEmpty, let most = Self.maxImages(served.map(\.manifestOffer.limits)) {
+                for i in descriptor.inputs.indices where descriptor.inputs[i].kind == .image { descriptor.inputs[i].max = most }
+            }
 
             let lanes = Array(Set(served.flatMap { $0.allowedLanes.map(\.id) } + mock.flatMap { $0.model.lanes.map(\.id) })).sorted()
             var extensions = [ExtensionSpec(name: Self.laneExtension, title: "Lane", schema: [
@@ -207,6 +210,14 @@ public struct GaeaEngine: MediaEngine {
             limits.maxMegapixels = Double(pixels.compactMap(\.self).max()!) / 1_000_000
         }
         return limits
+    }
+
+    /// How many images an image input takes: the most any offer allows (`max_images`), when every offer says. MES
+    /// refuses more at submit (`out_of_limits`); a model that takes fewer than another refuses the rest itself.
+    static func maxImages(_ offers: [PluginManifest.Limits?]) -> Int? {
+        let counts = offers.map { $0?.maxImages }
+        guard !counts.isEmpty, counts.allSatisfy({ $0 != nil }) else { return nil }
+        return counts.compactMap(\.self).max()
     }
 
     /// The MES extension that carries a plugin operation's options. MES names are `x-<vendor>.<name>` with one dot

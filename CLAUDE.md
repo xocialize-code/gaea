@@ -35,6 +35,7 @@ process of its own.
 | `../gaea-plugin-demo` ([xocialize/gaea-plugin-demo](https://github.com/xocialize/gaea-plugin-demo)) | The demo plugin and the template every plugin starts from: bundle layout, signing, check, notarize, release CI |
 | `../gaea-plugin-z-image` ([xocialize/gaea-plugin-z-image](https://github.com/xocialize/gaea-plugin-z-image)) | The first model plugin (AB-T-0365): Z-Image Turbo and base on z-image-swift, int4/int8/bf16 lanes; the pattern for Klein and Qwen |
 | `../gaea-plugin-flux2-klein` ([xocialize/gaea-plugin-flux2-klein](https://github.com/xocialize/gaea-plugin-flux2-klein)) | FLUX.2 Klein 4B and 4B Base (AB-T-0367): generate and multi-reference edit, bf16/int8/int4 lanes; `klein-inproc` is its in-process reference |
+| `../gaea-plugin-qwen-image` ([xocialize/gaea-plugin-qwen-image](https://github.com/xocialize/gaea-plugin-qwen-image)) | Qwen-Image-Edit 2511 (bf16) and Qwen-Image Flash (int8, NVIDIA Open Model License) (AB-T-0368); `qwen-inproc` is its in-process reference |
 | [Spikes/plugin-exec/](Spikes/plugin-exec/README.md) | The spike showing downloaded, signed executable plugins running MLX on the GPU, 13 of 13 checks passed |
 | [Package.swift](Package.swift), [Sources/](Sources) | The host (AB-T-0355): `GaeaCore` (plugin manager, GPP workers, scheduler and ledger, gaea.sqlite, the MES engine: plugins' own offers run as themselves (AB-T-0364), G0's mock normalizer for models without one, the operator API), `GaeaConsole` (MESEngineUI backends), `GaeaApp` (`Gaea.app`, `--headless`, `--snapshot`), `GaeaCLI` (`gaea`), `GaeaOperator` (the socket's wire types) |
 | [Apps/Gaea/](Apps/Gaea), [scripts/build-app.sh](scripts/build-app.sh) | `Gaea.app`'s Info.plist, and the Release build that signs it with Developer ID (the CLI ships in `Contents/Helpers/gaea`) |
@@ -43,6 +44,7 @@ process of its own.
 | [tools/acceptance-scheduler.sh](tools/acceptance-scheduler.sh) | AB-T-0363's acceptance: eviction both ways, a SIGKILLed run requeued once, lane fallback and a named lane refused, with Z-Image and the demo under a 44 GB budget |
 | [tools/acceptance-z-image.sh](tools/acceptance-z-image.sh) | AB-T-0365's acceptance: the Z-Image plugin by repo URL, parity with in-process z-image-swift, routing, count, lanes, edit |
 | [tools/acceptance-klein.sh](tools/acceptance-klein.sh) | AB-T-0367's acceptance: the Klein plugin by repo URL, generate, base and a two-reference edit byte for byte against `klein-inproc` |
+| [tools/acceptance-qwen.sh](tools/acceptance-qwen.sh) | AB-T-0368's acceptance: the Qwen plugin by repo URL, Flash and a two-reference edit byte for byte against `qwen-inproc`, edit sizes, limits |
 | [Docs/Evidence/AB-T-0355/](Docs/Evidence/AB-T-0355/README.md) | The host's acceptance: conformance reports, a recorded GPP session, console screenshots |
 
 Decisions G-1 to G-23 are filed as AB-D records. The plan's §1 maps each one to its id.
