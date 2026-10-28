@@ -131,12 +131,24 @@ public struct GaeaPluginBackend: EnginePluginBackend {
 }
 
 extension GaeaHost {
-    /// The System page's processes: Gaea itself and every running worker, each read with `proc_pid_rusage` (UI-4).
+    /// The System page's processes: Gaea itself and every running worker, each read with `proc_pid_rusage` (UI-4). The
+    /// detail lines carry the ledger (MEM-4): under Gaea, the budget and what the workers are charged; under each worker,
+    /// its models' lanes and its charge, the larger of what it declared and what it measures.
     public var processSource: EngineProcessSource {
         .processes { [scheduler] in
-            [EngineProcess.current(title: "Gaea")] + (await scheduler.processes()).map {
-                EngineProcess(id: $0.pluginID, title: $0.title, detail: $0.models.joined(separator: ", "), pid: $0.pid, role: .worker)
+            let ledger = await scheduler.ledger()
+            var host = EngineProcess.current(title: "Gaea")
+            host.detail = "Budget \(Self.gb(ledger.budgetBytes)) · workers charged \(Self.gb(ledger.chargedBytes)) · "
+                + "free \(Self.gb(ledger.availableBytes))" + (ledger.queued > 0 ? " · \(ledger.queued) queued" : "")
+            return [host] + ledger.workers.map { worker in
+                let lanes = worker.lanes.sorted { $0.key < $1.key }.map { "\($0.key) \($0.value)" }.joined(separator: ", ")
+                let charge = "charged \(Self.gb(worker.chargedBytes)) (declared \(Self.gb(worker.declaredBytes)))"
+                    + (worker.busy ? " · running" : "") + (worker.overrun ? " · past its declaration" : "")
+                return EngineProcess(id: worker.pluginID, title: worker.title,
+                                     detail: lanes.isEmpty ? charge : "\(lanes) · \(charge)", pid: worker.pid, role: .worker)
             }
         }
     }
+
+    static func gb(_ bytes: UInt64) -> String { String(format: "%.1f GB", Double(bytes) / 1e9) }
 }

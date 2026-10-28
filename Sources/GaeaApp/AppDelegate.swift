@@ -146,7 +146,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 print("wrote \(file.path)")
             }
         }
-        NSApp.terminate(nil)
+        // Not NSApp.terminate: called from this main-actor task, its terminateLater reply would wait on another main-actor
+        // task that can't start until this one returns, so the snapshot never quit.
+        serving?.cancel()
+        await host?.scheduler.stopAll()
+        host?.operatorServer.stop()
+        exit(0)
     }
 
     private static func mainMenu() -> NSMenu {
