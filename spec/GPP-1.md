@@ -261,8 +261,8 @@ python3 tools/make_examples.py
 - **`test_validator.py`** runs the negative cases: every fixture in `examples/v1/invalid` must fail with the error its
   `# expect:` line names, and each listed mutation of a valid manifest must be rejected.
 - **Replays.** GaeaPluginKit's tests replay every transcript here: they send its `H` lines to the kit's worker
-  (over a fake package) and compare each `W` line field by field, masking only `pid`, `seconds`, `date`, the measured
-  memory fields and computed output values. A comment `# stdin (not JSON): <text>` makes a replay send `<text>` as a
+  (over a fake package) and compare each `W` line field by field, masking only `pid`, `seconds`, `date`, `kit` (the
+  transcripts are kit-agnostic), the measured memory fields and computed output values. A comment `# stdin (not JSON): <text>` makes a replay send `<text>` as a
   raw line, so a transcript can show the answer to a line that isn't JSON.
 - **`make_examples.py`** regenerates the example manifests (`models[]` from `tools/manifest-gen`, built on
   mlx-engine-swift) and refreshes the transcripts' manifest digests.
