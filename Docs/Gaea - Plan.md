@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | Draft 0.7, 2026-10-28: decisions filed on the bridge (AB-D-0163…0185), G0 started (AB-T-0353…0356). Asks answered: mlx-engine-swift v0.72.0 (AB-A-0206), MESKit v0.5.0 (AB-A-0207). AB-A-0208 added G-20 and its follow-ups (AB-T-0358…0362) |
+| **Status** | Draft 0.8, 2026-10-28: decisions filed on the bridge (AB-D-0163…0185). **G0's exit tests pass** (AB-T-0353…0356 done; Gaea v0.1.1). Asks answered: mlx-engine-swift v0.72.0 (AB-A-0206), MESKit v0.5.0 (AB-A-0207). AB-A-0208 added G-20 and its follow-ups (AB-T-0358…0362) |
 | **Source** | [Gaea - Generative multimedia server](Gaea%20-%20Generative%20multimedia%20server.md) (the concept; "Quanos" was the working name before Gaea) |
 | **Evidence** | [Plugin spike](../Spikes/plugin-exec/README.md): downloaded, signed executable plugins run real MLX jobs on the GPU (13 of 13 checks passed) |
 | **Replaces** | The separate Pixel Agency Image Engine and Video Engine in `ml(x)/PixelAgency/Docs/Engines-PRD.md` |
@@ -216,7 +216,7 @@ The Ask column gives the bridge ask that carries each change to the area that ow
 The image phase comes first, then audio, then video, as the source document asks. Spec work for each later profile
 starts while the phase before it is being built.
 
-**G0. Foundations** (started 2026-10-27)
+**G0. Foundations** (started 2026-10-27; exit tests pass 2026-10-28)
 - **Done:** decisions G-1 to G-20 filed, and the `gaea` area on the bridge roster. GPP v1 and the manifest schema
   (AB-T-0353): [spec/GPP-1.md](../spec/GPP-1.md), with schemas, fixtures and a validator (69 of 69 negative cases).
 - **Asks:** AB-A-0206 to mlx-engine (GPP needs a manifest lane export, download-only materialize, wire envelopes
@@ -225,12 +225,14 @@ starts while the phase before it is being built.
 - **Work orders:** AB-T-0353 (GPP v1 and the manifest schema) blocks AB-T-0354 (the kit and template repo), which
   blocks AB-T-0355 (the host skeleton) and AB-T-0356 (the measurements).
 - Gaea PRD: [draft 0.2](Gaea%20-%20PRD.md), open questions decided (replaces Engines-PRD).
-- GaeaPluginKit and a plugin template repo whose CI publishes releases.
+- GaeaPluginKit and a plugin template repo whose CI publishes releases. **Done (AB-T-0354):** kit v0.1.1;
+  [demo v0.2.1](https://github.com/xocialize/gaea-plugin-demo/releases/tag/v0.2.1) notarized and accepted by Gatekeeper.
 - The Gaea host, grown out of the spike: MESEngineKit, a mock normalizer, the scheduler, the plugin manager (repo
   URLs, enable and disable), gaea.sqlite, the local operator API and CLI, a minimal console. **Done (AB-T-0355,
   v0.1.0):** both exit tests pass on the demo's GitHub releases; see
   [Evidence/AB-T-0355](Evidence/AB-T-0355/README.md).
-- A notary profile and a CI signing pipeline.
+- A notary profile and a CI signing pipeline. **Local: done** with the fleet's `mlx-notary` profile. **CI:** the
+  workflow is ready but needs the four signing and notary secrets (gaea-plugin-demo README, "CI secrets").
 - **Measurements:** **Done (AB-T-0356)**, Release, M5 Max; see §6.1 and
   [Evidence/AB-T-0356](Evidence/AB-T-0356/README.md).
   - a worker's baseline footprint after MLX starts: 146 MB;
@@ -239,6 +241,8 @@ starts while the phase before it is being built.
 - **Exit:**
   - the Base conformance suite passes against Gaea with a demo plugin;
   - a plugin added by repo URL installs, updates, rolls back, and enables and disables.
+  - **Both pass** (AB-R-0621, AB-R-0622). Still open: AB-T-0363 (eviction, requeue-once and lane fallback with real
+    workers, which need a plugin with several lanes; a natural first job for G1's Z-Image plugin).
 
 **G1. Image**
 - The image normalizer, ported.
