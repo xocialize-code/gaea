@@ -1,0 +1,28 @@
+# Gaea offers acceptance (AB-T-0364) 2026-10-28T17:58:42Z — Gaea 0.2.0, demo 0.3.0
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add by repo URL installs demo 0.3.0
+PASS  image.generate offers demo-gradient (default) and the mocked demo-matmul
+PASS  the offer's x- param is an MES extension, beside x-gaea.lane
+PASS  the job succeeds with two PNG images, 640×480 after size_snapped
+PASS  effective carries the worker's own (size, the angle) and x-gaea.worker
+['4b2671f183f4a3ef9c72f9d35d0f8d0016a05e1b26bcdcb2b9e9dd38ea449da3', 'e871335c08e0cbc337f53ddfed91f0767f347a9bedc7b75a4c7066e9ce7227cf']
+PASS  the served PNGs are byte for byte what the worker writes
+PASS  demo-matmul runs its GPU stage through the mock
+PASS  the models root defaults to MLXEngine's store
+invalid_request: /tmp/g364/nowhere isn't a folder.
+PASS  a folder that doesn't exist is refused
+PASS  gaea models root <folder> sets it
+PASS  status shows it
+PASS  it survives a restart
+PASS  the next worker's configure carries it
+PASS  gaea models root default goes back to MLXEngine's store
+PASS  --models-root overrides it for one launch
+PASS  MES Base conformance, open mode: Base 0.1 conforms
+      28 passed · 0 failed · 16 skipped — Base 0.1: conforms, Image 0.1: conforms
+OK
+PASS  transcript com.xocialize.gaea.demo-0.3.0-2026-10-28T175843Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.demo-0.3.0-2026-10-28T175845Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.demo-0.3.0-2026-10-28T175848Z.gpp passes validate.py
+== 19 passed, 0 failed

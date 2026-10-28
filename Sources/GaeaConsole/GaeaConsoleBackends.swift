@@ -19,21 +19,32 @@ public struct GaeaConsoleBackend: EngineConsoleBackend {
 
     public func models() async -> [EngineModel] {
         let catalog = await host.engine.catalog()
+        let routes = await host.engine.routes()
         let live = await operations()
         let resident = Set(await host.scheduler.residentModels())
         let rows = Dictionary(uniqueKeysWithValues: ((try? host.database.plugins()) ?? []).map { ($0.id, $0) })
+        func isDefault(_ model: String, for operation: String) -> Bool {
+            live.first { $0.operation == operation }?.models.contains { $0.id == model && $0.isDefault == true } ?? false
+        }
         return catalog.map { entry in
             let optIn = entry.offer.namedOnly == true
             let lane = entry.model.lanes.first(where: \.default)
-            let isDefault = live.first { $0.operation == GaeaEngine.mockOperation }?.models.contains { $0.id == entry.model.id && $0.isDefault == true } ?? false
             let row = rows[entry.plugin.id]
             let bundled = lane.map { $0.resolved.materialization == .bundled || $0.resolved.weightSources.isEmpty } ?? true
+            // A model with offers of its own (AB-T-0364) shows each; one without runs through the mock's image.generate.
+            let own = routes.filter { $0.plugin.id == entry.plugin.id && $0.model.id == entry.model.id }
+            let offer = own.first?.offer ?? entry.offer
+            let roles: [EngineModel.Role] = own.isEmpty
+                ? [.init(operation: GaeaEngine.mockOperation, qualityTiers: entry.offer.qualityTiers,
+                         isDefault: isDefault(entry.model.id, for: GaeaEngine.mockOperation), namedOnly: optIn)]
+                : own.map { .init(operation: $0.operation, qualityTiers: $0.offer.qualityTiers,
+                                  isDefault: isDefault(entry.model.id, for: $0.operation), namedOnly: $0.offer.namedOnly == true) }
             return EngineModel(
-                id: entry.model.id, title: entry.model.title, summary: entry.plugin.manifest.summary ?? "", license: entry.offer.license,
+                id: entry.model.id, title: entry.model.title, summary: entry.plugin.manifest.summary ?? "", license: offer.license,
                 optIn: optIn, enabled: entry.plugin.enabled && host.enablement.isEnabled(entry.model.id, optIn: optIn),
                 acceptedAt: host.enablement.acceptedAt(entry.model.id),
-                roles: [.init(operation: GaeaEngine.mockOperation, qualityTiers: entry.offer.qualityTiers, isDefault: isDefault, namedOnly: optIn)],
-                notes: entry.offer.notes, memoryClass: entry.offer.memoryClass, speedClass: entry.offer.speedClass,
+                roles: roles,
+                notes: offer.notes, memoryClass: offer.memoryClass, speedClass: offer.speedClass,
                 footprintBytes: lane.map { $0.resolved.persistentBytes + $0.resolved.peakTransientBytes },
                 install: bundled ? .builtIn : .notDownloaded(bytes: nil), resident: resident.contains(entry.model.id),
                 source: entry.model.package.provenance.sourceRepo, sourceURL: URL(string: entry.plugin.repo),

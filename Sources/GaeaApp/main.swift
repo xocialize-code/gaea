@@ -9,7 +9,7 @@ import GaeaCore
 //   Gaea --snapshot <dir>      render the console's Plugins, Models and System pages to PNGs, then quit
 //
 //   --port N (17630)  --paired [--host 0.0.0.0] [--approve-pairings]  --no-advertise  --budget-bytes N
-//   --outputs-ttl S  --idle-seconds S
+//   --outputs-ttl S  --idle-seconds S  --models-root <folder> (this launch only; `gaea models root` keeps one)
 //
 // Configuration happens here, in Gaea's own UI, or with the `gaea` CLI on this Mac (G-17). MES clients can't
 // configure it. GAEA_HOME moves Gaea's folder; GAEA_GITHUB_TOKEN reads private plugin repos (never stored).
@@ -33,6 +33,7 @@ struct Launch {
             case "--host": options.bindHost = args.next()
             case "--no-advertise": options.advertise = false
             case "--budget-bytes": options.budgetBytes = args.next().flatMap(UInt64.init)
+            case "--models-root": options.modelsRoot = args.next().map { URL(fileURLWithPath: ($0 as NSString).expandingTildeInPath, isDirectory: true) }
             case "--idle-seconds": options.idleTimeout = .seconds(Int(args.next() ?? "") ?? 900)
             case "--outputs-ttl": options.outputsTTLSeconds = args.next().flatMap(Int.init)
             // Headless only: pre-approve every pairing (development, unattended hosts). The app asks its operator.

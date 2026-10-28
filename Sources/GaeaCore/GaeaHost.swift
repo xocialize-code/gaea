@@ -17,6 +17,8 @@ public final class GaeaHost: Sendable {
         public var bindHost: String?
         public var advertise = true
         public var budgetBytes: UInt64?
+        /// The shared weights folder for this launch, over the operator's setting (`--models-root`).
+        public var modelsRoot: URL?
         public var operatorPolicy: OperatorServer.Policy?
         public var echoLog = true
         /// Pairing approvals; the default declines (the app asks its operator).
@@ -47,7 +49,7 @@ public final class GaeaHost: Sendable {
         database = try GaeaDatabase(path: paths.database)
         manager = PluginManager(database: database, paths: paths, log: log)
         scheduler = Scheduler(manager: manager, database: database, paths: paths, log: log, budgetBytes: options.budgetBytes,
-                              idleTimeout: options.idleTimeout)
+                              modelsRoot: options.modelsRoot, idleTimeout: options.idleTimeout)
         enablement = try ModelEnablement(store: DatabaseEnablementStore(database))
         engine = GaeaEngine(manager: manager, scheduler: scheduler, enablement: enablement)
 
@@ -93,7 +95,7 @@ public final class GaeaHost: Sendable {
         await manager.attach(workers: scheduler) { [server] in await server.reloadDescriptors() }
         try operatorServer.start()
         defer { operatorServer.stop() }
-        log("gaea \(Gaea.version) starting: \(paths.root.path), budget \(scheduler.budgetBytes.gb)")
+        log("gaea \(Gaea.version) starting: \(paths.root.path), budget \(scheduler.budgetBytes.gb), models \(await scheduler.modelsRoot.path)")
         let chores = Task { [manager, scheduler] in
             await manager.checkForUpdates()
             while !Task.isCancelled {
@@ -177,6 +179,16 @@ public final class GaeaHost: Sendable {
                 try enablement.set(id, enabled: on, optIn: model.offer.namedOnly == true)
                 await server.reloadDescriptors()
                 return OperatorResponse(id: request.id, ok: true, text: "\(id) \(on ? "enabled" : "disabled").")
+            case .modelsRoot:
+                if let path = args["path"], !path.isEmpty {
+                    let url = path == "default" ? nil : URL(fileURLWithPath: (path as NSString).expandingTildeInPath, isDirectory: true)
+                    try await scheduler.setModelsRoot(url)
+                }
+                let root = await scheduler.modelsRoot.path
+                let stored = (try? database.setting(Scheduler.modelsRootSetting)) ?? nil
+                let source = options.modelsRoot != nil ? "--models-root, for this launch" : stored != nil ? "set by the operator" : "MLXEngine's store, the default"
+                return OperatorResponse(id: request.id, ok: true, text: "\(root) (\(source))",
+                                        json: Self.json(["models_root": root, "stored": stored ?? ""]))
             case .ledger:
                 let ledger = await scheduler.ledger()
                 return OperatorResponse(id: request.id, ok: true, text: Self.describe(ledger), json: Self.json(ledger))
@@ -205,6 +217,7 @@ public final class GaeaHost: Sendable {
             Plugins:   \(plugins.count) installed, \(plugins.filter(\.enabled).count) enabled
             Workers:   \(ledger.workers.map { "\($0.pluginID) pid \($0.pid)\($0.busy ? " (busy)" : "")" }.joined(separator: ", ").ifEmpty("none"))
             Memory:    \(ledger.chargedBytes.gb) charged of \(ledger.budgetBytes.gb) budget; host \(ledger.hostFootprintBytes.gb)
+            Models:    \(await scheduler.modelsRoot.path)
             Operator:  \(paths.socket.path) (\(operatorServer.policy.rawValue)); you are \(peer)
             Database:  \(paths.database.path)
             """

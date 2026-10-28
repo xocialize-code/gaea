@@ -14,6 +14,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let menuBar = MenuBarPreferences()
     private var window: EngineConsoleWindowController?
     private var statusItem: EngineStatusItemController?
+    private var settings: SettingsWindowController?
     private var host: GaeaHost?
     private var serving: Task<Void, Never>?
 
@@ -84,6 +85,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         console.status = .failed(message)
     }
 
+    @objc func showSettings(_ sender: Any?) {
+        guard let host else { return }
+        if settings == nil { settings = SettingsWindowController(host: host) }
+        settings?.show()
+    }
+
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { false }
 
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
@@ -146,6 +153,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let main = NSMenu()
         let appItem = NSMenuItem()
         let appMenu = NSMenu()
+        appMenu.addItem(withTitle: "Settings…", action: #selector(AppDelegate.showSettings(_:)), keyEquivalent: ",")
+        appMenu.addItem(.separator())
         appMenu.addItem(withTitle: "Quit Gaea", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         appItem.submenu = appMenu
         main.addItem(appItem)

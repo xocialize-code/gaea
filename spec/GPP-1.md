@@ -105,6 +105,10 @@ runs well past its declaration is a manifest bug, logged against the plugin vers
 | `result` | W→H | `re`, `job`, `outputs[]`, `effective`, `warnings[]`, `seconds` | Success. Each output has `path` and `media_type`, or a `value`. |
 | `cancel` | H→W | `id`, `job` | Stop cooperatively. The run ends with `error` code `cancelled`, or with its `result` if it finished first. Nothing answers `cancel` itself. |
 
+`inputs` are paths even for text and data: Gaea writes a text input (an MES `prompt`, an `instruction`) to a UTF-8
+`.txt` file and a data input (`points`) to a `.json` file in the job's spool, one file per value, and sends a list
+when an input has several values. `params` arrive with the offer's `defaults` under what the request sent.
+
 What the host has already done before `run` (plan §3.3): validated the MES request against the profile, chosen this
 model and lane, admitted it to memory, and normalized `params` to the profile vocabulary. `model_params` (only `x-`
 extension keys) and `adapters` reach the worker exactly as the client sent them (G-3). The worker owns the

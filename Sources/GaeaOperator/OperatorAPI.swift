@@ -28,6 +28,8 @@ public enum OperatorAPI {
         case modelsList = "models.list"
         case modelsEnable = "models.enable"
         case modelsDisable = "models.disable"
+        /// The shared weights folder: `path` sets it, `path` = `default` returns to MLXEngine's store, none reads it.
+        case modelsRoot = "models.root"
         case ledger
     }
 }

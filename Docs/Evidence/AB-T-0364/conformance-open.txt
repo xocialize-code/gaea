@@ -1,0 +1,64 @@
+Gaea (eng_gaea_dustin_s_mac_studio) · gaea 0.2.0 · open
+✅ BASE-001  Engine information validates; uploads and SSE are claimed; Base 0.1 is offered
+✅ BASE-002  Responses echo MES-Version and carry MES-Request-Id, on success and on error
+✅ BASE-003  An unsupported MES-Version is refused with 400 unsupported_version
+✅ BASE-004  A request from a browser origin outside the allowlist is refused with 403 origin_not_allowed
+➖ BASE-005  Paired mode: the handshake needs no token; everything else answers 401 without one
+     open mode
+➖ BASE-006  Paired mode: the certificate served is the one tls.fingerprint_sha256 names
+     open mode
+✅ BASE-010  Descriptors validate, name their profile, and offer at least one licensed model
+➖ BASE-013  Adapter offers are consistent: an id names one adapter everywhere, defaults lie in their ranges
+     no model offer lists adapters
+✅ BASE-011  The operations list has an ETag, and If-None-Match answers 304
+✅ BASE-012  One descriptor by name matches the list; an unknown one is 404 unknown_operation
+✅ BASE-020  A job: 201 with Location, then held with a valid result, plan and provenance
+✅ BASE-021  Request errors: 400 invalid_request, 404 unknown_operation, 422 unsupported_parameter, with valid error bodies
+✅ BASE-022  An Idempotency-Key repeated returns the original job
+✅ BASE-023  A long poll on a held job answers at once with a valid snapshot
+✅ BASE-024  GET jobs lists the caller's jobs and filters by state
+✅ BASE-025  An output: its media type, its bytes and an ETag of its SHA-256
+✅ BASE-026  Outputs serve byte ranges: 206 with Content-Range, suffixes, and 416 beyond the end
+✅ BASE-027  Confirm purges: the job is purged and succeeded, its outputs answer 410 gone
+✅ BASE-028  Release is idempotent; a released job's outputs answer 410
+➖ BASE-029  Adapters: a run lists them in provenance with licence and strength; unknown, out-of-range and policy-failing ones are refused
+     no model offer lists adapters
+➖ BASE-030  Uploads: 201 with the right size and SHA-256, at most an hour's expiry, and single use
+     no operation takes an image input the suite can supply
+✅ BASE-031  An upload whose Content-Digest doesn't match is refused
+➖ BASE-040  Grants: the engine pulls with the bearer token, and fails the job on a wrong SHA-256
+     no operation takes an image input the suite can supply
+✅ BASE-050  SSE: framed events that validate, rising seq, output_ready, then job.ended after confirm
+✅ BASE-051  SSE resumes after Last-Event-ID
+✅ BASE-052  WebSocket: pong, engine.health on "*", the client's job events, error messages
+✅ BASE-060  Health validates
+✅ BASE-070  Retention deadlines respect the engine's TTLs
+✅ BASE-071  Outputs expire: after outputs_ttl_s the job is expired and its outputs answer 410
+✅ BASE-080  MCP: a session lists one tool per operation (dots → underscores) and the four helpers
+➖ IMAGE-001  fill and erase keep black-mask pixels byte-identical
+     the engine offers none of image.fill, image.erase
+➖ IMAGE-002  upscale returns exactly input size × scale, for each scale offered
+     the engine offers none of image.upscale
+➖ IMAGE-003  Image operations keep the input size (except upscale and extend)
+     no size-keeping image operation is offered
+➖ IMAGE-004  matte masks are 8-bit grey; extract carries alpha
+     the engine offers none of image.matte
+➖ IMAGE-005  EXIF orientation is applied; outputs are upright with no rotation flag
+     no size-keeping image operation is offered
+➖ IMAGE-006  A non-sRGB input is converted: a color_converted warning and an output tagged sRGB
+     no size-keeping image operation is offered
+✅ IMAGE-007  The seed is reported, and the same seed reproduces the result
+✅ IMAGE-008  size and aspect together are refused with 400
+✅ IMAGE-009  Descriptors match the profile table: required inputs and outputs, of the right kinds
+➖ IMAGE-010  An output the operation doesn't offer is refused with 422 unsupported_parameter
+     every operation offers every output in the vocabulary
+➖ IMAGE-011  enhance_prompt returns enhanced data with prompt and applied, for a target model the target operation offers
+     the engine offers none of image.enhance_prompt
+✅ IMAGE-012  With prompt_enhance off the text goes as typed: no prompt_rewritten unless prompt_enhance_ignored says why
+➖ IMAGE-013  An ic adapter's required slots are counted: too few references or images is 400
+     no operation the suite can drive offers an ic adapter on generate or edit
+➖ BASE-090  Pairing: the token is handed out once, and unpairing revokes it
+     open mode
+
+28 passed · 0 failed · 16 skipped — Base 0.1: conforms, Image 0.1: conforms
+Report: /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0364/conformance-open/report.md

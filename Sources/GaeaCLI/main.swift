@@ -17,6 +17,7 @@ import GaeaOperator
 //   gaea plugins logs <id> [-n 80]      a plugin's events and its worker's stderr (UI-6)
 //   gaea models [list]                  every plugin model, on or off
 //   gaea models enable|disable <id>
+//   gaea models root [<folder> | default]  the shared weights folder: read it, set it, or go back to MLXEngine's store
 //
 // --json prints the JSON answer instead of the text. GAEA_HOME points at another Gaea folder.
 
@@ -24,7 +25,7 @@ let usage = """
     usage: gaea status | logs [-n N] | ledger
            gaea plugins [list | add <repo-url> [version] | check | update <id> [version] | rollback <id>
                          | enable <id> | disable <id> | remove <id> | logs <id> [-n N]]
-           gaea models [list | enable <id> | disable <id>]
+           gaea models [list | enable <id> | disable <id> | root [<folder> | default]]
            (--json for JSON)
     """
 
@@ -74,6 +75,10 @@ func fail(_ message: String) -> Never {
     case ("models", nil), ("models", "list"): return OperatorRequest(command: .modelsList)
     case ("models", "enable"): return OperatorRequest(command: .modelsEnable, args: ["id": operand()])
     case ("models", "disable"): return OperatorRequest(command: .modelsDisable, args: ["id": operand()])
+    case ("models", "root"):
+        guard args.count >= 3 else { return OperatorRequest(command: .modelsRoot) }
+        let path = args[2] == "default" ? "default" : URL(fileURLWithPath: args[2]).standardizedFileURL.path
+        return OperatorRequest(command: .modelsRoot, args: ["path": path])
     case ("-h", _), ("--help", _), ("help", _):
         print(usage)
         exit(0)

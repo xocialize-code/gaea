@@ -76,23 +76,28 @@ public struct WorkerJob: Sendable {
     public var operation: String
     /// `x-gaea.lane` from the request: that lane or a refusal.
     public var namedLane: String?
+    /// The lanes the offer may run on (GPP-1 §4.3); nil for all of the model's.
+    public var lanes: [String]?
     public var params: [String: JSONValue]
     public var inputs: [String: JSONValue]
     public var modelParams: [String: JSONValue]?
+    public var adapters: [JSONValue]
     public var seed: Int?
     public var outputDir: URL
 
-    public init(job: String, pluginID: String, model: String, operation: String, namedLane: String? = nil,
+    public init(job: String, pluginID: String, model: String, operation: String, namedLane: String? = nil, lanes: [String]? = nil,
                 params: [String: JSONValue] = [:], inputs: [String: JSONValue] = [:], modelParams: [String: JSONValue]? = nil,
-                seed: Int? = nil, outputDir: URL) {
+                adapters: [JSONValue] = [], seed: Int? = nil, outputDir: URL) {
         self.job = job
         self.pluginID = pluginID
         self.model = model
         self.operation = operation
         self.namedLane = namedLane
+        self.lanes = lanes
         self.params = params
         self.inputs = inputs
         self.modelParams = modelParams
+        self.adapters = adapters
         self.seed = seed
         self.outputDir = outputDir
     }
@@ -147,6 +152,11 @@ public actor Scheduler: WorkerControl {
     let paths: GaeaPaths
     let log: HostLog
     public let budgetBytes: UInt64
+    /// The shared weights folder workers are configured with (G-9, MEM-8): `--models-root`, else the operator's
+    /// `models.root` setting, else MLXEngine's store.
+    public private(set) var modelsRoot: URL
+    /// Workers to stop once their run ends, because the models root changed under them.
+    var restartWhenIdle: Set<String> = []
     let gpu = GPULane()
     var waits = WorkerProcess.Waits()
     /// Workers idle this long are shut down.
@@ -171,18 +181,40 @@ public actor Scheduler: WorkerControl {
     var onWorkersChanged: (@Sendable () -> Void)?
 
     public init(manager: PluginManager, database: GaeaDatabase, paths: GaeaPaths, log: HostLog,
-                budgetBytes: UInt64? = nil, idleTimeout: Duration = .seconds(900)) {
+                budgetBytes: UInt64? = nil, modelsRoot: URL? = nil, idleTimeout: Duration = .seconds(900)) {
         self.manager = manager
         self.database = database
         self.paths = paths
         self.log = log
         self.idleTimeout = idleTimeout
+        let stored = (try? database.setting(Self.modelsRootSetting)).flatMap { $0 }.map { URL(fileURLWithPath: $0, isDirectory: true) }
+        self.modelsRoot = modelsRoot ?? stored ?? paths.modelsRoot
         // Three quarters of unified memory, unless the operator set a budget.
         let configured = (try? database.setting("memory.budget_bytes")).flatMap { $0 }.flatMap(UInt64.init)
         self.budgetBytes = budgetBytes ?? configured ?? ProcessInfo.processInfo.physicalMemory / 4 * 3
     }
 
     public func setWaits(_ waits: WorkerProcess.Waits) { self.waits = waits }
+
+    /// The `gaea.sqlite` setting that holds the operator's models root.
+    public static let modelsRootSetting = "models.root"
+
+    /// Changes the models root and keeps it (nil returns to MLXEngine's store). Idle workers stop now and busy ones when
+    /// their run ends, so the next job's worker is configured with the new folder.
+    public func setModelsRoot(_ url: URL?) async throws {
+        let root = url?.standardizedFileURL ?? paths.modelsRoot
+        var isDirectory: ObjCBool = false
+        guard FileManager.default.fileExists(atPath: root.path, isDirectory: &isDirectory), isDirectory.boolValue else {
+            throw WorkerFailure(code: "invalid_request", message: "\(root.path) isn't a folder.")
+        }
+        try database.setSetting(Self.modelsRootSetting, url == nil ? nil : root.path)
+        guard root.path != modelsRoot.path else { return }
+        log("scheduler: models root \(modelsRoot.path) → \(root.path)")
+        modelsRoot = root
+        for id in Array(slots.keys) {
+            if busy.contains(id) { restartWhenIdle.insert(id) } else { await retire(plugin: id) }
+        }
+    }
     public func observeWorkers(_ handler: @escaping @Sendable () -> Void) { onWorkersChanged = handler }
 
     // MARK: - WorkerControl
@@ -256,6 +288,7 @@ public actor Scheduler: WorkerControl {
         }
         busy.remove(job.pluginID)
         slots[job.pluginID]?.lastUsed = Date()
+        if restartWhenIdle.remove(job.pluginID) != nil { await retire(plugin: job.pluginID) }
         await gpu.release()
         await manager.pluginBecameIdle(job.pluginID)
         return try outcome.get()
@@ -273,7 +306,12 @@ public actor Scheduler: WorkerControl {
             plugin = try await manager.launchable(job.pluginID)
         }
         guard plugin.enabled else { throw WorkerFailure(code: "unknown_model", message: "\(plugin.title) is disabled") }
-        guard let model = plugin.model(job.model) else { throw WorkerFailure(code: "unknown_model", message: "no model \(job.model)") }
+        guard var model = plugin.model(job.model) else { throw WorkerFailure(code: "unknown_model", message: "no model \(job.model)") }
+        if let allowed = job.lanes {
+            model.lanes = model.lanes.filter { allowed.contains($0.id) }
+            guard !model.lanes.isEmpty else { throw WorkerFailure(code: "unknown_model", message: "no lane of \(model.id) serves this offer") }
+            if !model.lanes.contains(where: \.default) { model.lanes[0].default = true }
+        }
 
         // A worker on another version (an update switched in) is replaced.
         if let slot = slots[job.pluginID], slot.plugin.version != plugin.version || !slot.worker.isRunning {
@@ -304,6 +342,7 @@ public actor Scheduler: WorkerControl {
             "inputs": .object(job.inputs), "params": .object(job.params), "output_dir": .string(job.outputDir.path),
         ]
         if let modelParams = job.modelParams, !modelParams.isEmpty { fields["model_params"] = .object(modelParams) }
+        if !job.adapters.isEmpty { fields["adapters"] = .array(job.adapters) }
         if let seed = job.seed { fields["seed"] = .int(Int64(seed)) }
         try FileManager.default.createDirectory(at: job.outputDir, withIntermediateDirectories: true)
 
@@ -363,7 +402,7 @@ public actor Scheduler: WorkerControl {
         slots[plugin.id] = Slot(worker: worker, plugin: plugin)
         onWorkersChanged?()
         let ceiling = max(available(for: plugin.id, keeping: ""), 1 << 30)
-        try await worker.configure(budget: WorkerBudgetWire(ceilingBytes: ceiling, wiresWeights: false), modelsRoot: paths.modelsRoot,
+        try await worker.configure(budget: WorkerBudgetWire(ceilingBytes: ceiling, wiresWeights: false), modelsRoot: modelsRoot,
                                    cacheRoot: cache, settings: settings(for: plugin))
         return worker
     }

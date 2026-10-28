@@ -256,7 +256,8 @@ starts while the phase before it is being built.
 - **MESClientKit's engine picker** (G-19).
 - **Work orders** (filed 2026-10-28; `blocks` edges on the bridge):
   1. AB-T-0364 (P1): the host runs plugins' MES offers end to end, with real images from the spool, and the models
-     root becomes a setting.
+     root becomes a setting. **Done** (Gaea 0.2.0, demo 0.3.0's `demo-gradient`): see
+     [Evidence/AB-T-0364](Evidence/AB-T-0364/README.md).
   2. AB-T-0365 (P1): gaea-plugin-z-image, with int4, int8 and bf16 lanes. It is the first real plugin.
   3. AB-T-0363 (P1): eviction, requeue-once and lane fallback, tested with Z-Image's lanes and the demo.
   4. Plugins:
