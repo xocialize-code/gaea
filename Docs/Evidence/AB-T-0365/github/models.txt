@@ -1,0 +1,2 @@
+on  z-image-turbo  Z-Image Turbo  [com.xocialize.gaea.z-image 0.1.0] lanes: int4* 39.90 GB, int8 43.00 GB, bf16 48.50 GB
+on  z-image  Z-Image  [com.xocialize.gaea.z-image 0.1.0] lanes: int4* 39.90 GB, int8 43.00 GB, bf16 48.50 GB

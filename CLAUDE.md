@@ -33,11 +33,13 @@ process of its own.
 | `tools/` | `validate.py` (schemas, manifests, transcripts), `test_validator.py` (negative cases), `make_examples.py` (regenerate examples) |
 | `../gaea-plugin-kit` ([xocialize/gaea-plugin-kit](https://github.com/xocialize/gaea-plugin-kit)) | GaeaPluginKit: the GPP worker over MLXServeEngine, the manifest generator, and `gaea-plugin-check` (a tiny host) |
 | `../gaea-plugin-demo` ([xocialize/gaea-plugin-demo](https://github.com/xocialize/gaea-plugin-demo)) | The demo plugin and the template every plugin starts from: bundle layout, signing, check, notarize, release CI |
+| `../gaea-plugin-z-image` ([xocialize/gaea-plugin-z-image](https://github.com/xocialize/gaea-plugin-z-image)) | The first model plugin (AB-T-0365): Z-Image Turbo and base on z-image-swift, int4/int8/bf16 lanes; the pattern for Klein and Qwen |
 | [Spikes/plugin-exec/](Spikes/plugin-exec/README.md) | The spike showing downloaded, signed executable plugins running MLX on the GPU, 13 of 13 checks passed |
 | [Package.swift](Package.swift), [Sources/](Sources) | The host (AB-T-0355): `GaeaCore` (plugin manager, GPP workers, scheduler and ledger, gaea.sqlite, the MES engine: plugins' own offers run as themselves (AB-T-0364), G0's mock normalizer for models without one, the operator API), `GaeaConsole` (MESEngineUI backends), `GaeaApp` (`Gaea.app`, `--headless`, `--snapshot`), `GaeaCLI` (`gaea`), `GaeaOperator` (the socket's wire types) |
 | [Apps/Gaea/](Apps/Gaea), [scripts/build-app.sh](scripts/build-app.sh) | `Gaea.app`'s Info.plist, and the Release build that signs it with Developer ID (the CLI ships in `Contents/Helpers/gaea`) |
 | [tools/acceptance-g0.sh](tools/acceptance-g0.sh), [tools/release-standin.py](tools/release-standin.py) | G0's exit tests against a built app, and a local stand-in for GitHub's Releases API |
 | [tools/acceptance-offers.sh](tools/acceptance-offers.sh), [tools/gpp-run.py](tools/gpp-run.py) | AB-T-0364's acceptance (offers run as themselves, the models root), and one run sent straight to a worker for comparison |
+| [tools/acceptance-z-image.sh](tools/acceptance-z-image.sh) | AB-T-0365's acceptance: the Z-Image plugin by repo URL, parity with in-process z-image-swift, routing, count, lanes, edit |
 | [Docs/Evidence/AB-T-0355/](Docs/Evidence/AB-T-0355/README.md) | The host's acceptance: conformance reports, a recorded GPP session, console screenshots |
 
 Decisions G-1 to G-23 are filed as AB-D records. The plan's §1 maps each one to its id.

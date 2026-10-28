@@ -32,9 +32,9 @@ check() { # name, then a command whose exit status decides
 }
 mes() { curl -s -H 'MES-Version: 0.1' "$@" }
 job() { # port, json body → prints the settled job
-  local id; id=$(mes -X POST "http://127.0.0.1:$1/mes/v0/jobs" -H 'Content-Type: application/json' -d "$2" | python3 -c 'import json,sys; print(json.load(sys.stdin)["id"])')
+  local id j; id=$(mes -X POST "http://127.0.0.1:$1/mes/v0/jobs" -H 'Content-Type: application/json' -d "$2" | python3 -c 'import json,sys; print(json.load(sys.stdin)["id"])')
   for _ in 1 2 3 4 5 6; do
-    local j; j=$(mes "http://127.0.0.1:$1/mes/v0/jobs/$id?wait=10")
+    j=$(mes "http://127.0.0.1:$1/mes/v0/jobs/$id?wait=10")
     print -r -- "$j" | python3 -c 'import json,sys; sys.exit(0 if json.load(sys.stdin)["state"] in ("holding","purged") else 1)' && { print -r -- "$j"; return }
   done
   print -r -- "$j"

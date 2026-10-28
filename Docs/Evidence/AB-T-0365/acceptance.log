@@ -1,0 +1,18 @@
+# Z-Image plugin acceptance (AB-T-0365) 2026-10-28T19:20:42Z — Gaea 0.2.0, z-image 0.1.0, source stand-in
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add by repo URL installs z-image 0.1.0
+PASS  image.generate: Turbo is the default, Z-Image is offered for best
+PASS  image.edit: both, named-only
+      cold: 12.77 s from submit to settled (launch, prepare int4, generate)
+PASS  Turbo int4 1024² seed 42 through Gaea succeeds with one 1024² PNG
+ac59f107c37c9601041e89efb628c69803e55d35cbcf7b374f98ab684f23f276 ac59f107c37c9601041e89efb628c69803e55d35cbcf7b374f98ab684f23f276
+PASS  …and it is byte for byte the image z-image-swift makes in-process
+PASS  a warm run gives the same bytes again
+PASS  quality best reaches Z-Image (28 steps, guidance 4, the negative prompt honoured)
+PASS  count 2 gives two different 768×512 images, seeds 7 and 8
+PASS  Turbo reports the negative prompt as ignored
+PASS  x-gaea.lane int8 runs lane int8, and 1000² snaps to 992²
+PASS  image.edit on Turbo re-generates the 1024² input at strength 0.8
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.1.0-2026-10-28T192043Z.gpp passes validate.py
+== 12 passed, 0 failed

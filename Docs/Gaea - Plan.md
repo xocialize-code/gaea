@@ -258,7 +258,10 @@ starts while the phase before it is being built.
   1. AB-T-0364 (P1): the host runs plugins' MES offers end to end, with real images from the spool, and the models
      root becomes a setting. **Done** (Gaea 0.2.0, demo 0.3.0's `demo-gradient`): see
      [Evidence/AB-T-0364](Evidence/AB-T-0364/README.md).
-  2. AB-T-0365 (P1): gaea-plugin-z-image, with int4, int8 and bf16 lanes. It is the first real plugin.
+  2. AB-T-0365 (P1): gaea-plugin-z-image, with int4, int8 and bf16 lanes. It is the first real plugin. **Done**
+     ([v0.1.0](https://github.com/xocialize/gaea-plugin-z-image/releases/tag/v0.1.0), on GaeaPluginKit 0.2.0):
+     through Gaea, Turbo's 1024² image is byte for byte the in-process one, at 11.46 s against 11.47 s; see
+     [Evidence/AB-T-0365](Evidence/AB-T-0365/README.md).
   3. AB-T-0363 (P1): eviction, requeue-once and lane fallback, tested with Z-Image's lanes and the demo.
   4. Plugins:
      - AB-T-0367: FLUX.2 Klein;
