@@ -1,0 +1,6 @@
+# manifest: demo.json
+# expect: job j2 answers run of j1
+W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.2.0"},"pid":1,"models":["demo-matmul"],"manifest_sha256":"e57f6e5533d466639780806bd96a1870d8bdfc7a3a77df23988a821b057e632b"}
+H {"type":"run","id":"h2","job":"j1","operation":"x-gaea.demo.matmul","model":"demo-matmul","lane":"fp32","inputs":{},"params":{},"output_dir":"/o"}
+W {"type":"progress","re":"h2","job":"j2","stage":"matmul"}
+W {"type":"result","re":"h2","job":"j1","outputs":[{"name":"checksum","value":1}],"effective":{},"warnings":[],"seconds":1}

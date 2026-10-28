@@ -1,0 +1,408 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Gaea plugin manifest, version 1",
+  "description": "Contents/Resources/manifest.json in a .gaeaplugin bundle. Generated at build time from the plugin's code (the engine-owned models[] by MLXToolKit's own encoders), sealed by the bundle signature, and read by the host before it launches anything. Gaea keys are snake_case like MES; objects the engine owns keep the engine's camelCase. See spec/GPP-1.md §4.",
+  "type": "object",
+  "required": [
+    "manifest_version",
+    "id",
+    "version",
+    "protocol",
+    "min_gaea",
+    "team",
+    "repo",
+    "title",
+    "license",
+    "executable",
+    "models",
+    "offers"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "manifest_version": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/PluginId"
+    },
+    "version": {
+      "$ref": "common.schema.json#/$defs/Semver"
+    },
+    "protocol": {
+      "description": "The GPP major version the worker speaks.",
+      "const": 1
+    },
+    "min_gaea": {
+      "$ref": "common.schema.json#/$defs/Semver"
+    },
+    "team": {
+      "$ref": "common.schema.json#/$defs/TeamId"
+    },
+    "repo": {
+      "$ref": "common.schema.json#/$defs/GitHubRepo"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "license": {
+      "description": "SPDX id of the plugin's own code. Model and adapter licences are in models[] and offers[].",
+      "type": "string",
+      "minLength": 1
+    },
+    "executable": {
+      "description": "The worker's file name in Contents/MacOS.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._-]+$"
+    },
+    "engine": {
+      "description": "The MLXEngine build the worker links, when it links one.",
+      "type": "object",
+      "required": [
+        "package",
+        "version",
+        "contract"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "package": {
+          "const": "mlx-engine-swift"
+        },
+        "version": {
+          "$ref": "common.schema.json#/$defs/Semver"
+        },
+        "contract": {
+          "$ref": "common.schema.json#/$defs/Semver"
+        }
+      }
+    },
+    "models": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/Model"
+      }
+    },
+    "offers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Offer"
+      }
+    },
+    "helpers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Helper"
+      }
+    },
+    "settings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Setting"
+      }
+    },
+    "storage": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "migrations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "migrations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Model": {
+      "description": "One MLXEngine package and the lanes (configurations) this plugin can run it in. The host chooses a lane by memory; exactly one is the default.",
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "package",
+        "lanes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/ModelId"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "package": {
+          "$ref": "engine.schema.json#/$defs/PackageManifest"
+        },
+        "lanes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Lane"
+          }
+        }
+      }
+    },
+    "Lane": {
+      "type": "object",
+      "required": [
+        "id",
+        "default",
+        "resolved"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/LaneId"
+        },
+        "default": {
+          "type": "boolean"
+        },
+        "resolved": {
+          "$ref": "engine.schema.json#/$defs/ResolvedLane"
+        }
+      }
+    },
+    "Offer": {
+      "description": "One MES model offer for one operation: what Gaea advertises in that operation's descriptor (models[]) and how it renders the model's own options.",
+      "type": "object",
+      "required": [
+        "operation",
+        "profile",
+        "model"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "$ref": "../vendor/mes-v0/common.schema.json#/$defs/OperationId"
+        },
+        "profile": {
+          "enum": [
+            "image",
+            "audio",
+            "video"
+          ]
+        },
+        "model": {
+          "$ref": "../vendor/mes-v0/descriptor.schema.json#/$defs/ModelOffer"
+        },
+        "lanes": {
+          "description": "Lanes that may serve this offer. Omitted: all of the model's lanes.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "common.schema.json#/$defs/LaneId"
+          }
+        },
+        "params": {
+          "description": "The model's own options, beyond the profile vocabulary. Every name is an x- extension (G-3); MESFormsUI renders them.",
+          "$ref": "#/$defs/ExtensionParams"
+        },
+        "defaults": {
+          "description": "This model's defaults for profile-vocabulary params (for example steps).",
+          "type": "object"
+        },
+        "limits": {
+          "$ref": "#/$defs/Limits"
+        },
+        "adapters_meta": {
+          "description": "Host-side facts for each adapter in model.adapters, by adapter id.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/AdapterMeta"
+          }
+        }
+      }
+    },
+    "ExtensionParams": {
+      "type": "object",
+      "required": [
+        "type",
+        "properties"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "object"
+        },
+        "properties": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^x-[a-z0-9]+\\.[a-z][a-z0-9_]*$"
+          },
+          "additionalProperties": {
+            "$ref": "../vendor/mes-v0/descriptor.schema.json#/$defs/ParamProperty"
+          }
+        },
+        "required": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": {
+          "const": false
+        }
+      }
+    },
+    "Limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_pixels": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "min_side": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_side": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "size_multiple": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_images": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "max_frames": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sample_rates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "AdapterMeta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "trigger": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prompt_template": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "clearance": {
+          "description": "How the adapter was checked on each base model.",
+          "type": "object",
+          "additionalProperties": {
+            "enum": [
+              "perceptual",
+              "mechanical",
+              "declared"
+            ]
+          }
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source": {
+          "$ref": "engine.schema.json#/$defs/WeightSource"
+        }
+      }
+    },
+    "Helper": {
+      "description": "An operation Gaea itself calls, never offered to clients: a prompt rewrite before a generate (G-10), or a smoke test.",
+      "type": "object",
+      "required": [
+        "operation",
+        "model",
+        "title"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "$ref": "common.schema.json#/$defs/HelperOperationId"
+        },
+        "model": {
+          "$ref": "common.schema.json#/$defs/ModelId"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "params": {
+          "$ref": "../vendor/mes-v0/descriptor.schema.json#/$defs/ParamsSchema"
+        }
+      }
+    },
+    "Setting": {
+      "description": "An operator setting, rendered as a form in Gaea's console and sent to the worker in configure. Replaces environment variables.",
+      "type": "object",
+      "required": [
+        "key",
+        "title",
+        "schema",
+        "apply"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "$ref": "common.schema.json#/$defs/SettingKey"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "schema": {
+          "$ref": "../vendor/mes-v0/descriptor.schema.json#/$defs/ParamProperty"
+        },
+        "apply": {
+          "description": "What a change takes: sent live, an unload and prepare of the affected models, or a worker restart.",
+          "enum": [
+            "live",
+            "reload_models",
+            "restart_worker"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,397 @@
+{
+  "manifest_version": 1,
+  "id": "com.xocialize.gaea.z-image",
+  "version": "0.1.0",
+  "protocol": 1,
+  "min_gaea": "0.1.0",
+  "team": "CFZS6RXUCP",
+  "repo": "https://github.com/xocialize/gaea-plugin-z-image",
+  "title": "Z-Image",
+  "summary": "Tongyi-MAI's Z-Image Turbo: fast photoreal text-to-image and image-to-image.",
+  "license": "MIT",
+  "executable": "gaea-z-image-worker",
+  "engine": {
+    "package": "mlx-engine-swift",
+    "version": "0.72.0",
+    "contract": "1.57.0"
+  },
+  "models": [
+    {
+      "id": "z-image-turbo",
+      "lanes": [
+        {
+          "default": true,
+          "id": "int4",
+          "resolved": {
+            "capabilities": [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion": {
+              "major": 1,
+              "minor": 57,
+              "patch": 0
+            },
+            "footprintQuant": "int4",
+            "materialization": "engine",
+            "peakTransientBytes": 28000000000,
+            "peakTransientSource": "quantMatch",
+            "persistentBytes": 11900000000,
+            "persistentSource": "quantMatch",
+            "quant": "int4",
+            "selfMaterializing": false,
+            "weightSources": [
+              {
+                "matching": [
+                  "transformer/*",
+                  "text_encoder/*",
+                  "vae/*",
+                  "tokenizer/*",
+                  "scheduler/*",
+                  "*.json"
+                ],
+                "repo": "mlx-community/Z-Image-Turbo-bf16",
+                "revision": "main",
+                "role": "snapshot"
+              }
+            ]
+          }
+        },
+        {
+          "default": false,
+          "id": "int8",
+          "resolved": {
+            "capabilities": [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion": {
+              "major": 1,
+              "minor": 57,
+              "patch": 0
+            },
+            "footprintQuant": "int8",
+            "materialization": "engine",
+            "peakTransientBytes": 28000000000,
+            "peakTransientSource": "quantMatch",
+            "persistentBytes": 15000000000,
+            "persistentSource": "quantMatch",
+            "quant": "int8",
+            "selfMaterializing": false,
+            "weightSources": [
+              {
+                "matching": [
+                  "transformer/*",
+                  "text_encoder/*",
+                  "vae/*",
+                  "tokenizer/*",
+                  "scheduler/*",
+                  "*.json"
+                ],
+                "repo": "mlx-community/Z-Image-Turbo-bf16",
+                "revision": "main",
+                "role": "snapshot"
+              }
+            ]
+          }
+        },
+        {
+          "default": false,
+          "id": "bf16",
+          "resolved": {
+            "capabilities": [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion": {
+              "major": 1,
+              "minor": 57,
+              "patch": 0
+            },
+            "footprintQuant": "bf16",
+            "materialization": "engine",
+            "peakTransientBytes": 28000000000,
+            "peakTransientSource": "quantMatch",
+            "persistentBytes": 20500000000,
+            "persistentSource": "quantMatch",
+            "quant": "bf16",
+            "selfMaterializing": false,
+            "weightSources": [
+              {
+                "matching": [
+                  "transformer/*",
+                  "text_encoder/*",
+                  "vae/*",
+                  "tokenizer/*",
+                  "scheduler/*",
+                  "*.json"
+                ],
+                "repo": "mlx-community/Z-Image-Turbo-bf16",
+                "revision": "main",
+                "role": "snapshot"
+              }
+            ]
+          }
+        }
+      ],
+      "package": {
+        "contractVersion": {
+          "major": 1,
+          "minor": 57,
+          "patch": 0
+        },
+        "license": {
+          "portCodeLicense": {
+            "identifier": "MIT"
+          },
+          "weightLicense": {
+            "identifier": "Apache-2.0"
+          }
+        },
+        "provenance": {
+          "revision": "main",
+          "sourceRepo": "Tongyi-MAI/Z-Image-Turbo",
+          "tier": 1
+        },
+        "requirements": {
+          "footprints": [
+            {
+              "peakActivationBytes": 28000000000,
+              "quant": "bf16",
+              "residentBytes": 20500000000
+            },
+            {
+              "peakActivationBytes": 28000000000,
+              "quant": "int8",
+              "residentBytes": 15000000000
+            },
+            {
+              "peakActivationBytes": 28000000000,
+              "quant": "int4",
+              "residentBytes": 11900000000
+            }
+          ],
+          "os": {
+            "minMacOS": {
+              "major": 26,
+              "minor": 0,
+              "patch": 0
+            }
+          },
+          "requiredBackends": [
+            "metalGPU"
+          ]
+        },
+        "specialties": [],
+        "surfaces": [
+          {
+            "capability": "textToImage",
+            "name": "z-image-turbo-t2i",
+            "parameters": [
+              {
+                "kind": "string",
+                "name": "prompt",
+                "required": true,
+                "summary": "The text prompt."
+              },
+              {
+                "kind": "string",
+                "name": "negativePrompt",
+                "required": false,
+                "summary": "What to steer away from."
+              },
+              {
+                "kind": "integer",
+                "name": "width",
+                "required": false,
+                "summary": "Output width."
+              },
+              {
+                "kind": "integer",
+                "name": "height",
+                "required": false,
+                "summary": "Output height."
+              },
+              {
+                "kind": "integer",
+                "name": "steps",
+                "required": false,
+                "summary": "Denoising steps."
+              },
+              {
+                "kind": "number",
+                "name": "guidanceScale",
+                "required": false,
+                "summary": "CFG scale."
+              },
+              {
+                "kind": "integer",
+                "name": "seed",
+                "required": false,
+                "summary": "RNG seed for reproducibility."
+              }
+            ],
+            "summary": "Z-Image-Turbo 6B text-to-image: distilled 8-step at guidance 0.",
+            "supportedModes": []
+          },
+          {
+            "capability": "imageEdit",
+            "name": "z-image-turbo-img2img",
+            "parameters": [
+              {
+                "kind": "string",
+                "name": "images",
+                "required": true,
+                "summary": "Conditioning input image(s), in prompt order."
+              },
+              {
+                "kind": "string",
+                "name": "prompt",
+                "required": true,
+                "summary": "The edit instruction."
+              },
+              {
+                "kind": "string",
+                "name": "negativePrompt",
+                "required": false,
+                "summary": "What to steer away from."
+              },
+              {
+                "kind": "integer",
+                "name": "width",
+                "required": false,
+                "summary": "Output width."
+              },
+              {
+                "kind": "integer",
+                "name": "height",
+                "required": false,
+                "summary": "Output height."
+              },
+              {
+                "kind": "integer",
+                "name": "steps",
+                "required": false,
+                "summary": "Denoising steps."
+              },
+              {
+                "kind": "number",
+                "name": "guidanceScale",
+                "required": false,
+                "summary": "True-CFG scale."
+              },
+              {
+                "kind": "integer",
+                "name": "seed",
+                "required": false,
+                "summary": "RNG seed for reproducibility."
+              }
+            ],
+            "summary": "Z-Image-Turbo image-to-image; metaData[\"strength\"] 0–1.",
+            "supportedModes": []
+          }
+        ]
+      },
+      "title": "Z-Image Turbo"
+    }
+  ],
+  "offers": [
+    {
+      "operation": "image.generate",
+      "profile": "image",
+      "model": {
+        "id": "z-image-turbo",
+        "title": "Z-Image Turbo",
+        "license": {
+          "spdx": "Apache-2.0",
+          "commercial_use": true,
+          "terms_url": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "memory_class": "large",
+        "speed_class": "fast",
+        "quality_tiers": [
+          "draft",
+          "standard"
+        ],
+        "default": true,
+        "notes": "Distilled 8-step, no CFG: negative prompts do nothing. Low seed variance is a model trait."
+      },
+      "defaults": {
+        "steps": 8
+      },
+      "limits": {
+        "max_pixels": 2359296,
+        "min_side": 256,
+        "max_side": 1536,
+        "size_multiple": 16
+      },
+      "params": {
+        "type": "object",
+        "properties": {
+          "x-zimage.shift": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6,
+            "default": 3,
+            "description": "Flow-matching shift; higher favours composition over detail.",
+            "x-mes-ui": {
+              "widget": "slider",
+              "label": "Shift",
+              "advanced": true
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "operation": "image.edit",
+      "profile": "image",
+      "model": {
+        "id": "z-image-turbo",
+        "title": "Z-Image Turbo (image to image)",
+        "license": {
+          "spdx": "Apache-2.0",
+          "commercial_use": true,
+          "terms_url": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "memory_class": "large",
+        "speed_class": "fast",
+        "quality_tiers": [
+          "draft"
+        ],
+        "named_only": true,
+        "notes": "Re-generates from the input image; strength 0–1 (default 0.75). Not an instruction editor."
+      },
+      "limits": {
+        "max_pixels": 2359296,
+        "size_multiple": 16,
+        "max_images": 1
+      }
+    }
+  ],
+  "helpers": [],
+  "settings": [
+    {
+      "key": "default_lane",
+      "title": "Default precision",
+      "description": "Which lane Gaea loads when memory allows more than one.",
+      "schema": {
+        "type": "string",
+        "enum": [
+          "int4",
+          "int8",
+          "bf16"
+        ],
+        "default": "int4"
+      },
+      "apply": "reload_models"
+    }
+  ],
+  "storage": {
+    "schema_version": 1,
+    "migrations": [
+      "0001_presets"
+    ]
+  }
+}

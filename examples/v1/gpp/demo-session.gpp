@@ -1,0 +1,21 @@
+# manifest: demo.json
+# The plugin-exec spike's session on GPP v1: launch, configure, a run, a cancelled run, shutdown.
+# H = host to worker (stdin), W = worker to host (stdout). One JSON object per line.
+W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.2.0"},"pid":48211,"models":["demo-matmul"],"manifest_sha256":"e57f6e5533d466639780806bd96a1870d8bdfc7a3a77df23988a821b057e632b","kit":{"version":"0.1.0"}}
+H {"type":"configure","id":"h1","budget":{"ceilingBytes":8000000000,"wiresWeights":false},"models_root":"/Users/me/Library/Application Support/MLXEngine/Models","cache_root":"/Users/me/Library/Caches/Gaea/plugins/com.xocialize.gaea.demo","settings":{}}
+W {"type":"configured","re":"h1"}
+H {"type":"prepare","id":"h2","model":"demo-matmul","lane":"fp32"}
+W {"type":"prepared","re":"h2","model":"demo-matmul","lane":"fp32","seconds":0.21}
+W {"type":"memory","report":{"budgetBytes":8000000000,"residentBytes":0,"transientReserveBytes":2370000000,"availableBytes":5630000000,"physFootprintBytes":31457280,"residents":{"demo-matmul":0},"running":[],"date":783312000.5}}
+H {"type":"run","id":"h3","job":"job_7f3a","operation":"x-gaea.demo.matmul","model":"demo-matmul","lane":"fp32","inputs":{},"params":{"n":4096,"iterations":3},"output_dir":"/Users/me/Library/Caches/Gaea/spool/job_7f3a/out"}
+W {"type":"progress","re":"h3","job":"job_7f3a","stage":"matmul","step":1,"of":3}
+W {"type":"progress","re":"h3","job":"job_7f3a","stage":"matmul","step":2,"of":3}
+W {"type":"progress","re":"h3","job":"job_7f3a","stage":"matmul","step":3,"of":3}
+W {"type":"result","re":"h3","job":"job_7f3a","outputs":[{"name":"checksum","value":{"device":"gpu","checksum":-1.25e9}}],"effective":{"n":4096,"iterations":3},"warnings":[],"seconds":1.53}
+W {"type":"memory","report":{"budgetBytes":8000000000,"residentBytes":0,"transientReserveBytes":2370000000,"availableBytes":5630000000,"physFootprintBytes":2370000000,"residents":{"demo-matmul":0},"running":[],"date":783312002.1}}
+H {"type":"run","id":"h4","job":"job_8c01","operation":"x-gaea.demo.matmul","model":"demo-matmul","lane":"fp32","inputs":{},"params":{"n":8192,"iterations":200,"holdBytes":2000000000},"output_dir":"/Users/me/Library/Caches/Gaea/spool/job_8c01/out"}
+W {"type":"progress","re":"h4","job":"job_8c01","stage":"matmul","step":1,"of":200}
+H {"type":"cancel","id":"h5","job":"job_8c01"}
+W {"type":"error","re":"h4","job":"job_8c01","code":"cancelled","message":"Cancelled at step 2 of 200.","retryable":false}
+W {"type":"memory","report":{"budgetBytes":8000000000,"residentBytes":0,"transientReserveBytes":2370000000,"availableBytes":5630000000,"physFootprintBytes":2410000000,"residents":{"demo-matmul":0},"running":[],"date":783312004.9}}
+H {"type":"shutdown","id":"h6"}

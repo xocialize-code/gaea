@@ -1,0 +1,6 @@
+# manifest: demo.json
+# expect: already ended
+W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.2.0"},"pid":1,"models":["demo-matmul"],"manifest_sha256":"e57f6e5533d466639780806bd96a1870d8bdfc7a3a77df23988a821b057e632b"}
+H {"type":"configure","id":"h1","budget":{"ceilingBytes":8000000000,"wiresWeights":false},"models_root":"/m","cache_root":"/c","settings":{}}
+W {"type":"configured","re":"h1"}
+W {"type":"configured","re":"h1"}

@@ -1,0 +1,109 @@
+{
+  "manifest_version": 1,
+  "id": "com.xocialize.gaea.demo",
+  "version": "0.2.0",
+  "protocol": 1,
+  "min_gaea": "0.1.0",
+  "team": "CFZS6RXUCP",
+  "repo": "https://github.com/xocialize/gaea-plugin-demo",
+  "title": "Gaea demo worker",
+  "summary": "A GPU matmul loop that proves the plugin path end to end: download, verify, launch, run, cancel.",
+  "license": "Apache-2.0",
+  "executable": "gaea-demo-worker",
+  "models": [
+    {
+      "id": "demo-matmul",
+      "lanes": [
+        {
+          "default": true,
+          "id": "fp32",
+          "resolved": {
+            "capabilities": [],
+            "contractVersion": {
+              "major": 1,
+              "minor": 57,
+              "patch": 0
+            },
+            "footprintQuant": "fp32",
+            "materialization": "bundled",
+            "peakTransientBytes": 2370000000,
+            "peakTransientSource": "largestThatFits",
+            "persistentBytes": 0,
+            "persistentSource": "largestThatFits",
+            "selfMaterializing": false,
+            "weightSources": []
+          }
+        }
+      ],
+      "package": {
+        "contractVersion": {
+          "major": 1,
+          "minor": 57,
+          "patch": 0
+        },
+        "license": {
+          "portCodeLicense": {
+            "identifier": "Apache-2.0"
+          },
+          "weightLicense": {
+            "identifier": "Apache-2.0"
+          }
+        },
+        "provenance": {
+          "revision": "0.2.0",
+          "sourceRepo": "xocialize/gaea-plugin-demo",
+          "tier": 1
+        },
+        "requirements": {
+          "footprints": [
+            {
+              "peakActivationBytes": 2370000000,
+              "quant": "fp32",
+              "residentBytes": 0
+            }
+          ],
+          "os": {},
+          "requiredBackends": [
+            "metalGPU"
+          ]
+        },
+        "specialties": [],
+        "surfaces": []
+      },
+      "title": "Demo matmul (GPU smoke test)"
+    }
+  ],
+  "offers": [],
+  "helpers": [
+    {
+      "operation": "x-gaea.demo.matmul",
+      "model": "demo-matmul",
+      "title": "Matmul smoke test",
+      "summary": "n×n fp32 matmul, repeated; holds holdBytes to exercise the memory ledger.",
+      "params": {
+        "type": "object",
+        "properties": {
+          "n": {
+            "type": "integer",
+            "minimum": 16,
+            "maximum": 16384,
+            "default": 4096
+          },
+          "iterations": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000,
+            "default": 10
+          },
+          "holdBytes": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  ],
+  "settings": []
+}

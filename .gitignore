@@ -1,0 +1,8 @@
+.build/
+.swiftpm/
+dist/
+__pycache__/
+*.xcuserstate
+xcuserdata/
+.DS_Store
+.mdmini_comments_*

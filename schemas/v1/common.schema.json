@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Gaea v1 common definitions",
+  "$defs": {
+    "PluginId": {
+      "description": "Reverse-DNS, lower case; also the bundle's CFBundleIdentifier.",
+      "type": "string",
+      "maxLength": 128,
+      "pattern": "^[a-z0-9]+(\\.[a-z0-9][a-z0-9-]*)+$"
+    },
+    "Semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?$"
+    },
+    "TeamId": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{10}$"
+    },
+    "GitHubRepo": {
+      "type": "string",
+      "pattern": "^https://github\\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "ModelId": {
+      "$ref": "../vendor/mes-v0/common.schema.json#/$defs/Id"
+    },
+    "LaneId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.-]{0,31}$"
+    },
+    "HelperOperationId": {
+      "description": "An operation only Gaea calls (helper sequencing, smoke tests). Never offered to MES clients.",
+      "type": "string",
+      "pattern": "^x-[a-z0-9]+(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "RequestId": {
+      "description": "Unique per sender per connection. Replies carry it back as re.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.:-]{1,64}$"
+    },
+    "JobId": {
+      "$ref": "../vendor/mes-v0/common.schema.json#/$defs/Id"
+    },
+    "Path": {
+      "description": "An absolute file path. The host only sends, and only accepts, paths inside the job's spool folder or the plugin's own cache.",
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 1024,
+      "pattern": "^/"
+    },
+    "Paths": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/Path"
+      }
+    },
+    "Namespace": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_.-]{0,63}$"
+    },
+    "StorageKey": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "SettingKey": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$"
+    }
+  }
+}

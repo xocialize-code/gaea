@@ -1,0 +1,24 @@
+# manifest: z-image.json
+# The plugin store, and the failures a host must handle: a run whose lane is missing from disk (deleted behind
+# Gaea's back), a storage failure, and a protocol error (no re: the line couldn't be attributed to a request).
+W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.z-image","version":"0.1.0"},"pid":51990,"models":["z-image-turbo"],"manifest_sha256":"5be98f0c9a5667df55afc282d46abdcb25aae8576cfc0e635382a3507975bf76","kit":{"version":"0.1.0"},"engine":{"version":"0.72.0","contract":"1.57.0"}}
+H {"type":"configure","id":"h1","budget":{"ceilingBytes":24000000000,"wiresWeights":false},"models_root":"/Users/me/Library/Application Support/MLXEngine/Models","cache_root":"/Users/me/Library/Caches/Gaea/plugins/com.xocialize.gaea.z-image","settings":{"default_lane":"bf16"}}
+W {"type":"configured","re":"h1"}
+W {"type":"storage.put","id":"w1","namespace":"presets","key":"studio-portrait","value":{"x-zimage.shift":2.5}}
+H {"type":"storage.result","re":"w1"}
+W {"type":"storage.put","id":"w2","namespace":"presets","key":"night","value":{"x-zimage.shift":4}}
+H {"type":"storage.result","re":"w2"}
+W {"type":"storage.query","id":"w3","namespace":"presets","limit":1}
+H {"type":"storage.result","re":"w3","items":[{"key":"night","value":{"x-zimage.shift":4}}],"more":true}
+W {"type":"storage.query","id":"w4","namespace":"presets","after":"night","limit":10}
+H {"type":"storage.result","re":"w4","items":[{"key":"studio-portrait","value":{"x-zimage.shift":2.5}}],"more":false}
+W {"type":"storage.delete","id":"w5","namespace":"presets","key":"night"}
+H {"type":"storage.result","re":"w5"}
+W {"type":"storage.get","id":"w6","namespace":"presets","key":"night"}
+H {"type":"storage.result","re":"w6","found":false}
+W {"type":"storage.put","id":"w7","namespace":"cache","key":"huge","value":"…"}
+H {"type":"error","re":"w7","code":"storage_failed","message":"Value is larger than 1 MiB.","retryable":false}
+H {"type":"run","id":"h2","job":"job_b001","operation":"image.generate","model":"z-image-turbo","lane":"bf16","inputs":{},"params":{"prompt":"x"},"output_dir":"/Users/me/Library/Caches/Gaea/spool/job_b001/out"}
+W {"type":"error","re":"h2","job":"job_b001","code":"not_materialized","message":"Lane bf16 of z-image-turbo has no weights on disk; send materialize or prepare first.","retryable":true,"detail":{"repo":"mlx-community/Z-Image-Turbo-bf16","revision":"main"}}
+W {"type":"error","code":"protocol","message":"Line 9 of stdin is not valid JSON; ignored.","retryable":false}
+H {"type":"shutdown","id":"h4"}

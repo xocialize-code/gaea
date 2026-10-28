@@ -1,0 +1,441 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MLXEngine types carried in a Gaea manifest",
+  "description": "The JSON form of mlx-engine-swift's MLXToolKit types (contract 1.57.0 and later), as their Codable conformances write them: camelCase keys, optionals omitted when nil. The engine is the authority. ResolvedLane is pinned field by field because Gaea's scheduler reads it; PackageManifest is checked at its top level only and decoded with MLXToolKit itself, so engine minors that add fields don't break Gaea. Enumerations the engine grows (quant, capability, backend) are checked by shape, not by list.",
+  "$defs": {
+    "SemanticVersion": {
+      "type": "object",
+      "required": [
+        "major",
+        "minor",
+        "patch"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "major": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "minor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "patch": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "Quant": {
+      "type": "string",
+      "pattern": "^(fp|bf|int|mxfp)[0-9]+$"
+    },
+    "Capability": {
+      "type": "string",
+      "pattern": "^[a-z][A-Za-z0-9]*$"
+    },
+    "Bytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "WeightSource": {
+      "type": "object",
+      "required": [
+        "role",
+        "repo"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repo": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "matching": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "ActivationScaling": {
+      "type": "object",
+      "required": [
+        "axis",
+        "baseBytes",
+        "bytesPerUnit",
+        "measuredCeiling"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "axis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "baseBytes": {
+          "$ref": "#/$defs/Bytes"
+        },
+        "bytesPerUnit": {
+          "type": "number",
+          "minimum": 0
+        },
+        "measuredCeiling": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "ResolvedLane": {
+      "description": "MLXToolKit.ResolvedLane: one configuration's memory and weight facts, resolved the way MLXServeEngine.register() resolves them.",
+      "type": "object",
+      "required": [
+        "contractVersion",
+        "persistentBytes",
+        "persistentSource",
+        "peakTransientBytes",
+        "peakTransientSource",
+        "materialization",
+        "weightSources",
+        "selfMaterializing",
+        "capabilities"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "contractVersion": {
+          "$ref": "#/$defs/SemanticVersion"
+        },
+        "quant": {
+          "$ref": "#/$defs/Quant"
+        },
+        "footprintQuant": {
+          "$ref": "#/$defs/Quant"
+        },
+        "persistentBytes": {
+          "$ref": "#/$defs/Bytes"
+        },
+        "persistentSource": {
+          "$ref": "#/$defs/FootprintSource"
+        },
+        "peakTransientBytes": {
+          "$ref": "#/$defs/Bytes"
+        },
+        "peakTransientSource": {
+          "$ref": "#/$defs/FootprintSource"
+        },
+        "activationScaling": {
+          "$ref": "#/$defs/ActivationScaling"
+        },
+        "expectedWeightReadBytesPerRun": {
+          "$ref": "#/$defs/Bytes"
+        },
+        "minSustainedReadBytesPerSecond": {
+          "$ref": "#/$defs/Bytes"
+        },
+        "materialization": {
+          "enum": [
+            "engine",
+            "package",
+            "bundled",
+            "undeclared"
+          ]
+        },
+        "weightSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WeightSource"
+          }
+        },
+        "selfMaterializing": {
+          "type": "boolean"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Capability"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "materialization"
+            ],
+            "properties": {
+              "materialization": {
+                "const": "engine"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "weightSources": {
+                "minItems": 1
+              },
+              "selfMaterializing": {
+                "const": false
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "materialization"
+            ],
+            "properties": {
+              "materialization": {
+                "const": "package"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "selfMaterializing": {
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "materialization"
+            ],
+            "properties": {
+              "materialization": {
+                "const": "bundled"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "weightSources": {
+                "maxItems": 0
+              },
+              "selfMaterializing": {
+                "const": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    "FootprintSource": {
+      "enum": [
+        "hint",
+        "quantMatch",
+        "largestThatFits",
+        "undeclared"
+      ]
+    },
+    "PackageManifest": {
+      "description": "MLXToolKit.PackageManifest, carried unchanged. Top level only: decode it with MLXToolKit for the rest.",
+      "type": "object",
+      "required": [
+        "contractVersion",
+        "license",
+        "provenance",
+        "requirements",
+        "specialties",
+        "surfaces"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "contractVersion": {
+          "$ref": "#/$defs/SemanticVersion"
+        },
+        "license": {
+          "type": "object",
+          "required": [
+            "weightLicense",
+            "portCodeLicense"
+          ],
+          "properties": {
+            "weightLicense": {
+              "type": "object",
+              "required": [
+                "identifier"
+              ]
+            },
+            "portCodeLicense": {
+              "type": "object",
+              "required": [
+                "identifier"
+              ]
+            }
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "required": [
+            "sourceRepo",
+            "revision",
+            "tier"
+          ],
+          "properties": {
+            "sourceRepo": {
+              "type": "string",
+              "minLength": 1
+            },
+            "revision": {
+              "type": "string",
+              "minLength": 1
+            },
+            "tier": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "requirements": {
+          "type": "object",
+          "required": [
+            "footprints",
+            "requiredBackends"
+          ],
+          "properties": {
+            "footprints": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "quant",
+                  "residentBytes"
+                ],
+                "properties": {
+                  "quant": {
+                    "$ref": "#/$defs/Quant"
+                  },
+                  "residentBytes": {
+                    "$ref": "#/$defs/Bytes"
+                  },
+                  "peakActivationBytes": {
+                    "$ref": "#/$defs/Bytes"
+                  }
+                }
+              }
+            },
+            "requiredBackends": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "specialties": {
+          "type": "array"
+        },
+        "surfaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "capability",
+              "summary"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "capability": {
+                "$ref": "#/$defs/Capability"
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "WorkerBudget": {
+      "description": "MLXToolKit.WorkerBudget: the memory ceiling the host assigns a worker (MLXServeEngine(workerBudget:)).",
+      "type": "object",
+      "required": [
+        "ceilingBytes",
+        "wiresWeights"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "ceilingBytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "cacheLimitBytes": {
+          "$ref": "#/$defs/Bytes"
+        },
+        "wiresWeights": {
+          "type": "boolean"
+        }
+      }
+    },
+    "WorkerMemoryReport": {
+      "description": "MLXToolKit.WorkerMemoryReport (MLXServeEngine.workerMemoryReport()): the declared charge and the measured phys_footprint. date is Foundation's default Date encoding, seconds since 2001-01-01.",
+      "type": "object",
+      "required": [
+        "budgetBytes",
+        "residentBytes",
+        "transientReserveBytes",
+        "availableBytes",
+        "residents",
+        "running",
+        "date"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "budgetBytes": {
+          "$ref": "#/$defs/Bytes"
+        },
+        "residentBytes": {
+          "$ref": "#/$defs/Bytes"
+        },
+        "transientReserveBytes": {
+          "$ref": "#/$defs/Bytes"
+        },
+        "availableBytes": {
+          "$ref": "#/$defs/Bytes"
+        },
+        "physFootprintBytes": {
+          "$ref": "#/$defs/Bytes"
+        },
+        "gpuActiveBytes": {
+          "$ref": "#/$defs/Bytes"
+        },
+        "gpuCacheBytes": {
+          "$ref": "#/$defs/Bytes"
+        },
+        "residents": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/Bytes"
+          }
+        },
+        "running": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "date": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

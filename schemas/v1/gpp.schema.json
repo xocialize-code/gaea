@@ -1,0 +1,1298 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Gaea Plugin Protocol v1: one line",
+  "description": "Every line on a worker's stdin or stdout is one of these objects, encoded as a single line of UTF-8 JSON (at most 1 MiB). See spec/GPP-1.md.",
+  "type": "object",
+  "required": [
+    "type"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "hello",
+        "configure",
+        "configured",
+        "materialize",
+        "materialize.progress",
+        "materialize.done",
+        "prepare",
+        "prepared",
+        "run",
+        "progress",
+        "chunk",
+        "result",
+        "error",
+        "cancel",
+        "unload",
+        "unloaded",
+        "shutdown",
+        "memory.query",
+        "memory",
+        "storage.get",
+        "storage.put",
+        "storage.delete",
+        "storage.query",
+        "storage.result"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "hello"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/hello"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "configure"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/configure"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "configured"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/configured"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "materialize"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/materialize"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "materialize.progress"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/materialize.progress"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "materialize.done"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/materialize.done"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "prepare"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/prepare"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "prepared"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/prepared"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "run"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/run"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "progress"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/progress"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "chunk"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/chunk"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "result"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/result"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "error"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/error"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "cancel"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/cancel"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "unload"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/unload"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "unloaded"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/unloaded"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "shutdown"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/shutdown"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "memory.query"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/memory.query"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "memory"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/memory"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "storage.get"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/storage.get"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "storage.put"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/storage.put"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "storage.delete"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/storage.delete"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "storage.query"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/storage.query"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "storage.result"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/storage.result"
+      }
+    }
+  ],
+  "$defs": {
+    "hello": {
+      "description": "W→H. The worker's first line, before anything else. The host fails the launch if it doesn't arrive within the hello timeout, or if any field disagrees with the verified manifest.",
+      "type": "object",
+      "required": [
+        "type",
+        "protocol",
+        "plugin",
+        "pid",
+        "models",
+        "manifest_sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "hello"
+        },
+        "protocol": {
+          "const": 1
+        },
+        "plugin": {
+          "type": "object",
+          "required": [
+            "id",
+            "version"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "$ref": "common.schema.json#/$defs/PluginId"
+            },
+            "version": {
+              "$ref": "common.schema.json#/$defs/Semver"
+            }
+          }
+        },
+        "pid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "models": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "common.schema.json#/$defs/ModelId"
+          }
+        },
+        "manifest_sha256": {
+          "$ref": "../vendor/mes-v0/common.schema.json#/$defs/Sha256"
+        },
+        "kit": {
+          "type": "object",
+          "required": [
+            "version"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "version": {
+              "$ref": "common.schema.json#/$defs/Semver"
+            }
+          }
+        },
+        "engine": {
+          "type": "object",
+          "required": [
+            "version",
+            "contract"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "version": {
+              "$ref": "common.schema.json#/$defs/Semver"
+            },
+            "contract": {
+              "$ref": "common.schema.json#/$defs/Semver"
+            }
+          }
+        }
+      }
+    },
+    "configure": {
+      "description": "H→W. Sent once after hello, and again when an operator setting with apply=live changes. The worker builds its engine with this budget and these folders.",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "budget",
+        "models_root",
+        "cache_root",
+        "settings"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "configure"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "budget": {
+          "$ref": "engine.schema.json#/$defs/WorkerBudget"
+        },
+        "models_root": {
+          "$ref": "common.schema.json#/$defs/Path"
+        },
+        "cache_root": {
+          "$ref": "common.schema.json#/$defs/Path"
+        },
+        "settings": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "common.schema.json#/$defs/SettingKey"
+          }
+        }
+      }
+    },
+    "configured": {
+      "description": "W→H. configure was applied.",
+      "type": "object",
+      "required": [
+        "type",
+        "re"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "configured"
+        },
+        "re": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        }
+      }
+    },
+    "materialize": {
+      "description": "H→W. Download a lane's weights into models_root without loading them (MLXServeEngine.materialize(package:)). Only for lanes whose materialization is engine.",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "model",
+        "lane"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "materialize"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "model": {
+          "$ref": "common.schema.json#/$defs/ModelId"
+        },
+        "lane": {
+          "$ref": "common.schema.json#/$defs/LaneId"
+        }
+      }
+    },
+    "materialize.progress": {
+      "description": "W→H. Download progress, byte-weighted across every source.",
+      "type": "object",
+      "required": [
+        "type",
+        "re",
+        "model",
+        "lane",
+        "fraction"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "materialize.progress"
+        },
+        "re": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "model": {
+          "$ref": "common.schema.json#/$defs/ModelId"
+        },
+        "lane": {
+          "$ref": "common.schema.json#/$defs/LaneId"
+        },
+        "fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "bytes_done": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "bytes_total": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "materialize.done": {
+      "description": "W→H. Every source for the lane is on disk.",
+      "type": "object",
+      "required": [
+        "type",
+        "re",
+        "model",
+        "lane",
+        "bytes",
+        "seconds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "materialize.done"
+        },
+        "re": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "model": {
+          "$ref": "common.schema.json#/$defs/ModelId"
+        },
+        "lane": {
+          "$ref": "common.schema.json#/$defs/LaneId"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "seconds": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "prepare": {
+      "description": "H→W. Load a lane to resident. Downloads first if the weights are missing (and sends materialize.progress).",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "model",
+        "lane"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "prepare"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "model": {
+          "$ref": "common.schema.json#/$defs/ModelId"
+        },
+        "lane": {
+          "$ref": "common.schema.json#/$defs/LaneId"
+        }
+      }
+    },
+    "prepared": {
+      "description": "W→H. The lane is resident. A memory message follows.",
+      "type": "object",
+      "required": [
+        "type",
+        "re",
+        "model",
+        "lane",
+        "seconds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "prepared"
+        },
+        "re": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "model": {
+          "$ref": "common.schema.json#/$defs/ModelId"
+        },
+        "lane": {
+          "$ref": "common.schema.json#/$defs/LaneId"
+        },
+        "seconds": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "run": {
+      "description": "H→W. One job. inputs and params are already normalized by Gaea against the MES profile; model_params and adapters pass through unchanged (G-3). The worker writes every output under output_dir.",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "job",
+        "operation",
+        "model",
+        "lane",
+        "inputs",
+        "params",
+        "output_dir"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "run"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "job": {
+          "$ref": "common.schema.json#/$defs/JobId"
+        },
+        "operation": {
+          "anyOf": [
+            {
+              "$ref": "../vendor/mes-v0/common.schema.json#/$defs/OperationId"
+            },
+            {
+              "$ref": "common.schema.json#/$defs/HelperOperationId"
+            }
+          ]
+        },
+        "model": {
+          "$ref": "common.schema.json#/$defs/ModelId"
+        },
+        "lane": {
+          "$ref": "common.schema.json#/$defs/LaneId"
+        },
+        "inputs": {
+          "type": "object",
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/Path"
+              },
+              {
+                "$ref": "common.schema.json#/$defs/Paths"
+              }
+            ]
+          }
+        },
+        "params": {
+          "type": "object"
+        },
+        "model_params": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^x-[a-z0-9]+\\.[a-z][a-z0-9_]*$"
+          }
+        },
+        "adapters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "strength"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "$ref": "../vendor/mes-v0/common.schema.json#/$defs/Id"
+              },
+              "strength": {
+                "type": "number"
+              },
+              "inputs": {
+                "type": "object",
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "$ref": "common.schema.json#/$defs/Path"
+                    },
+                    {
+                      "$ref": "common.schema.json#/$defs/Paths"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "output_dir": {
+          "$ref": "common.schema.json#/$defs/Path"
+        }
+      }
+    },
+    "progress": {
+      "description": "W→H. Progress of a run. stage is the worker's own phase name (denoise, decode, …); Gaea reports it to MES clients as running with this detail.",
+      "type": "object",
+      "required": [
+        "type",
+        "re",
+        "job",
+        "stage"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "progress"
+        },
+        "re": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "job": {
+          "$ref": "common.schema.json#/$defs/JobId"
+        },
+        "stage": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "step": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "of": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "chunk": {
+      "description": "W→H. One piece of a streamed output (MES RFC 0002), already written to path. The last piece has final=true; the result still follows.",
+      "type": "object",
+      "required": [
+        "type",
+        "re",
+        "job",
+        "output",
+        "index",
+        "path",
+        "media_type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "chunk"
+        },
+        "re": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "job": {
+          "$ref": "common.schema.json#/$defs/JobId"
+        },
+        "output": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "path": {
+          "$ref": "common.schema.json#/$defs/Path"
+        },
+        "media_type": {
+          "$ref": "../vendor/mes-v0/common.schema.json#/$defs/MediaType"
+        },
+        "final": {
+          "type": "boolean"
+        }
+      }
+    },
+    "result": {
+      "description": "W→H. The run succeeded. File outputs are paths under output_dir; small structured outputs (a caption, boxes) are value.",
+      "type": "object",
+      "required": [
+        "type",
+        "re",
+        "job",
+        "outputs",
+        "effective",
+        "warnings",
+        "seconds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "result"
+        },
+        "re": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "job": {
+          "$ref": "common.schema.json#/$defs/JobId"
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]*$"
+              },
+              "path": {
+                "$ref": "common.schema.json#/$defs/Path"
+              },
+              "media_type": {
+                "$ref": "../vendor/mes-v0/common.schema.json#/$defs/MediaType"
+              },
+              "value": {}
+            },
+            "anyOf": [
+              {
+                "required": [
+                  "path",
+                  "media_type"
+                ]
+              },
+              {
+                "required": [
+                  "value"
+                ]
+              }
+            ]
+          }
+        },
+        "effective": {
+          "description": "The values the model actually used, after its own snapping (size grid, steps).",
+          "type": "object"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "$ref": "../vendor/mes-v0/common.schema.json#/$defs/Warning"
+          }
+        },
+        "seconds": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "error": {
+      "description": "either. A request failed, or (without re) the sender hit a protocol error. A run's error ends that run.",
+      "type": "object",
+      "required": [
+        "type",
+        "code",
+        "message",
+        "retryable"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "error"
+        },
+        "re": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "job": {
+          "$ref": "common.schema.json#/$defs/JobId"
+        },
+        "code": {
+          "enum": [
+            "cancelled",
+            "invalid_request",
+            "unsupported_operation",
+            "unknown_model",
+            "not_materialized",
+            "materialize_failed",
+            "out_of_memory",
+            "model_error",
+            "storage_failed",
+            "busy",
+            "protocol",
+            "internal"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "detail": {
+          "type": "object"
+        }
+      }
+    },
+    "cancel": {
+      "description": "H→W. Cancel a run cooperatively. The run ends with error code cancelled (or with its result if it finished first). Nothing replies to cancel itself.",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "job"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "cancel"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "job": {
+          "$ref": "common.schema.json#/$defs/JobId"
+        }
+      }
+    },
+    "unload": {
+      "description": "H→W. Drop a model from memory (memory pressure, idle sweep, disable). Without lane: every lane of the model.",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "model"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "unload"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "model": {
+          "$ref": "common.schema.json#/$defs/ModelId"
+        },
+        "lane": {
+          "$ref": "common.schema.json#/$defs/LaneId"
+        }
+      }
+    },
+    "unloaded": {
+      "description": "W→H. The model is no longer resident. A memory message follows.",
+      "type": "object",
+      "required": [
+        "type",
+        "re",
+        "model"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "unloaded"
+        },
+        "re": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "model": {
+          "$ref": "common.schema.json#/$defs/ModelId"
+        }
+      }
+    },
+    "shutdown": {
+      "description": "H→W. Finish nothing, flush, and exit 0. Runs in flight end with error code cancelled first.",
+      "type": "object",
+      "required": [
+        "type",
+        "id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "shutdown"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        }
+      }
+    },
+    "memory.query": {
+      "description": "H→W. Ask for a memory report now.",
+      "type": "object",
+      "required": [
+        "type",
+        "id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "memory.query"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        }
+      }
+    },
+    "memory": {
+      "description": "W→H. The engine's WorkerMemoryReport, unchanged. Sent in reply to memory.query (with re) and unprompted after every prepared, unloaded and result.",
+      "type": "object",
+      "required": [
+        "type",
+        "report"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "memory"
+        },
+        "re": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "report": {
+          "$ref": "engine.schema.json#/$defs/WorkerMemoryReport"
+        }
+      }
+    },
+    "storage.get": {
+      "description": "W→H. Read one value from the plugin's own store in gaea.sqlite (G-5). The plugin id is implied by the connection.",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "namespace",
+        "key"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "storage.get"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "namespace": {
+          "$ref": "common.schema.json#/$defs/Namespace"
+        },
+        "key": {
+          "$ref": "common.schema.json#/$defs/StorageKey"
+        }
+      }
+    },
+    "storage.put": {
+      "description": "W→H. Write one JSON value (at most 1 MiB encoded).",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "namespace",
+        "key",
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "storage.put"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "namespace": {
+          "$ref": "common.schema.json#/$defs/Namespace"
+        },
+        "key": {
+          "$ref": "common.schema.json#/$defs/StorageKey"
+        },
+        "value": {}
+      }
+    },
+    "storage.delete": {
+      "description": "W→H. Delete one key.",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "namespace",
+        "key"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "storage.delete"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "namespace": {
+          "$ref": "common.schema.json#/$defs/Namespace"
+        },
+        "key": {
+          "$ref": "common.schema.json#/$defs/StorageKey"
+        }
+      }
+    },
+    "storage.query": {
+      "description": "W→H. List keys in a namespace, optionally by prefix, in key order.",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "namespace"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "storage.query"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "namespace": {
+          "$ref": "common.schema.json#/$defs/Namespace"
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "after": {
+          "$ref": "common.schema.json#/$defs/StorageKey"
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        }
+      }
+    },
+    "storage.result": {
+      "description": "H→W. The answer to a storage request: found and value for get; items (and more) for query; nothing else for put and delete. A failure is an error with code storage_failed.",
+      "type": "object",
+      "required": [
+        "type",
+        "re"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "storage.result"
+        },
+        "re": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "found": {
+          "type": "boolean"
+        },
+        "value": {},
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "key",
+              "value"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "key": {
+                "$ref": "common.schema.json#/$defs/StorageKey"
+              },
+              "value": {}
+            }
+          }
+        },
+        "more": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "x-gaea-direction": {
+    "hello": "W→H",
+    "configure": "H→W",
+    "configured": "W→H",
+    "materialize": "H→W",
+    "materialize.progress": "W→H",
+    "materialize.done": "W→H",
+    "prepare": "H→W",
+    "prepared": "W→H",
+    "run": "H→W",
+    "progress": "W→H",
+    "chunk": "W→H",
+    "result": "W→H",
+    "error": "either",
+    "cancel": "H→W",
+    "unload": "H→W",
+    "unloaded": "W→H",
+    "shutdown": "H→W",
+    "memory.query": "H→W",
+    "memory": "W→H",
+    "storage.get": "W→H",
+    "storage.put": "W→H",
+    "storage.delete": "W→H",
+    "storage.query": "W→H",
+    "storage.result": "H→W"
+  }
+}

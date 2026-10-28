@@ -1,0 +1,3 @@
+# manifest: demo.json
+# expect: manifest_sha256 is not the manifest's digest
+W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.2.0"},"pid":1,"models":["demo-matmul"],"manifest_sha256":"0000000000000000000000000000000000000000000000000000000000000000"}

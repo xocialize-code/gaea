@@ -1,0 +1,2 @@
+# manifest: demo.json
+# expect: never said hello
