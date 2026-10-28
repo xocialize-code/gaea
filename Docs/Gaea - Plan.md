@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | Draft 0.6, 2026-10-28: decisions filed on the bridge (AB-D-0163…0182), G0 started (AB-T-0353…0356). Asks answered: mlx-engine-swift v0.72.0 (AB-A-0206), MESKit v0.5.0 (AB-A-0207). AB-A-0208 added G-20 and its follow-ups (AB-T-0358…0362) |
+| **Status** | Draft 0.7, 2026-10-28: decisions filed on the bridge (AB-D-0163…0185), G0 started (AB-T-0353…0356). Asks answered: mlx-engine-swift v0.72.0 (AB-A-0206), MESKit v0.5.0 (AB-A-0207). AB-A-0208 added G-20 and its follow-ups (AB-T-0358…0362) |
 | **Source** | [Gaea - Generative multimedia server](Gaea%20-%20Generative%20multimedia%20server.md) (the concept; "Quanos" was the working name before Gaea) |
 | **Evidence** | [Plugin spike](../Spikes/plugin-exec/README.md): downloaded, signed executable plugins run real MLX jobs on the GPU (13 of 13 checks passed) |
 | **Replaces** | The separate Pixel Agency Image Engine and Video Engine in `ml(x)/PixelAgency/Docs/Engines-PRD.md` |
@@ -18,7 +18,8 @@ plugins do the generating.
 ## 1. Decisions
 
 G-1 to G-19 were agreed on 2026-10-27: G-1 to G-9 came from the proposal, and G-10 to G-19 are the answers to the
-open questions. G-20 was agreed on 2026-10-28 from mlx-apps' reply on AB-A-0208. Each is filed on the bridge under
+open questions. G-20 was agreed on 2026-10-28 from mlx-apps' reply on AB-A-0208, and G-21 to G-23 answer the PRD's open
+questions. Each is filed on the bridge under
 the `gaea` area; the Record column gives its id.
 
 | ID | Decision | Why | Record |
@@ -43,6 +44,9 @@ the `gaea` area; the Record column gives its id.
 | G-18 | **Plugins are added by Git repo URL** in Gaea's UI, and each plugin, and each model in it, can be enabled or disabled. Gaea reads the repo's GitHub Releases for the plugin and its updates. A repo URL never grants trust: the bundle must still be signed by a trusted team (G-7), and a new team asks to join the trust list. | Q8 | AB-D-0180 |
 | G-19 | **Several Gaea servers can share a LAN,** each focused on its own area (for example a video server and an image and audio server), or one server can serve its own Mac and the local network. Each server is configured and runs on its own. Clients discover servers over Bonjour and send each job to a server that offers the operation and model. | Q8 | AB-D-0181 |
 | G-20 | **Pixel Agency Desktop keeps working without Gaea, and nothing Desktop links is retired until it has a home.** `ImageLibrary` gets its own repo. `ImageServerAPI` and `ImageServerModels` stay a library. The image normalizer's host half becomes an MLX-free library that Gaea and Desktop's built-in engine both link. The run workflow moves to a package that Gaea Lab and Desktop share. Desktop keeps its built-in ForgeCore engine and sends only scaling to Gaea. | Desktop depends on all four things the plan retires (AB-A-0208, reply #1). | AB-D-0182 |
+| G-21 | **Apache-2.0** for Gaea, GaeaPluginKit and our plugins; each model keeps its own weight licence. | PRD OQ-1; as the engines were (D-2). | AB-D-0183 |
+| G-22 | **v1 runs only plugins signed by our own team.** Other teams wait for G4's trust list; G-7's design stands. | PRD OQ-2 | AB-D-0184 |
+| G-23 | **Lane fallback with a warning:** the default lane when it fits, else the largest smaller lane that fits, with a `lane_fallback` warning. A request naming a lane (`x-gaea.lane`) never falls back. | PRD OQ-3 | AB-D-0185 |
 
 ## 2. Architecture
 
@@ -220,7 +224,7 @@ starts while the phase before it is being built.
   enablement store) gates the host. AB-A-0208 to mlx-apps covers the doc changes now and the retirements at G1 exit.
 - **Work orders:** AB-T-0353 (GPP v1 and the manifest schema) blocks AB-T-0354 (the kit and template repo), which
   blocks AB-T-0355 (the host skeleton) and AB-T-0356 (the measurements).
-- Gaea PRD: [draft 0.1](Gaea%20-%20PRD.md), for review (replaces Engines-PRD).
+- Gaea PRD: [draft 0.2](Gaea%20-%20PRD.md), open questions decided (replaces Engines-PRD).
 - GaeaPluginKit and a plugin template repo whose CI publishes releases.
 - The Gaea host, grown out of the spike: MESEngineKit, a mock normalizer, the scheduler, the plugin manager (repo
   URLs, enable and disable), gaea.sqlite, the local operator API and CLI, a minimal console.

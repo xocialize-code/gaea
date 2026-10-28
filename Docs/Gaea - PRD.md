@@ -2,14 +2,14 @@
 
 | | |
 |---|---|
-| **Status** | Draft 0.1, 2026-10-28, for review. Replaces [Engines-PRD](../../ml%28x%29/PixelAgency/Docs/Engines-PRD.md) (superseded 2026-10-27). |
+| **Status** | Draft 0.2, 2026-10-28: the three open questions are decided (G-21 to G-23). Replaces [Engines-PRD](../../ml%28x%29/PixelAgency/Docs/Engines-PRD.md) (superseded 2026-10-27). |
 | **Product** | **Gaea**: one MES media server for the Image, Audio and Video profiles, whose models are plugins. Plus **Gaea Lab**, its reference client. |
-| **Licence** | Open source, distributed on GitHub ([xocialize/gaea](https://github.com/xocialize/gaea)). The licence itself is OQ-1. Model weights download separately under their own licences. |
+| **Licence** | Apache-2.0 for Gaea, GaeaPluginKit and our plugins (G-21), on GitHub ([xocialize/gaea](https://github.com/xocialize/gaea)). Model weights download separately under their own licences. |
 | **Platform** | Apple silicon, macOS 26 or later (mlx-engine-swift 0.72.0 requires it). |
 | **Companion documents** | [Concept](Gaea%20-%20Generative%20multimedia%20server.md) · [Plan](Gaea%20-%20Plan.md) (decisions G-1 to G-20, architecture, phases) · [GPP-1](../spec/GPP-1.md) (the plugin protocol and manifest) · [MES-PRD](../../ml%28x%29/PixelAgency/Docs/MES-PRD.md) · [Desktop-PRD](../../ml%28x%29/PixelAgency/Docs/Desktop-PRD.md) |
 
 > **Sources:** **N** the operator's concept or direction · **A** adopted from the plan's decisions or the Engines PRD ·
-> **P** proposed here. `G-n` is a plan decision (AB-D-0163 to AB-D-0182), `ENG-n`/`IMG-n`/`VID-n` an Engines-PRD
+> **P** proposed here. `G-n` is a plan decision (AB-D-0163 to AB-D-0185), `ENG-n`/`IMG-n`/`VID-n` an Engines-PRD
 > requirement carried over, and `MES:` the MES PRD.
 
 ---
@@ -84,7 +84,7 @@ and video generation and processing on the Mac.
 | MEM-4 | **A ledger across processes:** each worker's declared charge and its measured `phys_footprint`, summed against the Mac's budget. A worker that runs past its declaration is logged against the plugin version. | A | G-8; GPP-1 §3.2 |
 | MEM-5 | **Memory comes back on demand:** unload, then shutdown, then SIGTERM, then SIGKILL, each with a bounded wait. | A | GPP-1 §5; the spike freed 5.12 GB in 65 ms |
 | MEM-6 | **Each worker gets a budget** and sizes MLX's cache and wired limits from it. | A | `WorkerBudget` (AB-A-0206) |
-| MEM-7 | **Lane choice by memory:** where a model has several lanes (quants), Gaea loads the operator's default lane when it fits and a smaller one when it doesn't, and says so in the result. | P | Manifest `lanes[]` |
+| MEM-7 | **Lane choice by memory:** where a model has several lanes (quants), Gaea loads the operator's default lane when it fits, else the largest smaller lane that fits, and adds a `lane_fallback` warning naming both. A request that names a lane (`x-gaea.lane`) gets that lane or is refused; it never falls back. | N | G-23; manifest `lanes[]` |
 | MEM-8 | **One shared weights folder,** `~/Library/Application Support/MLXEngine/Models`, shared with the ML[X] apps and Desktop. | A | G-9; ENG-13 |
 | MEM-9 | **Download without loading,** on the operator's command, with progress and a size preview. | A | GPP `materialize`; AB-A-0206 |
 
@@ -94,7 +94,7 @@ and video generation and processing on the Mac.
 |---|---|---|---|
 | PLG-1 | **A plugin is a signed executable bundle** (`.gaeaplugin`): a worker binary, its metallib and resources, and a sealed `manifest.json`. It runs as a child process. | A | G-2; GPP-1 §4 |
 | PLG-2 | **Added by Git repo URL** in Gaea's UI. Gaea reads the repo's GitHub Releases for the plugin and its updates. | N | G-18; concept |
-| PLG-3 | **Trust from the signature, never the URL:** Gaea runs only plugins signed by a trusted team: ours by default, others once the operator approves them. The check runs at install and again at launch. | A | G-7, G-18 |
+| PLG-3 | **Trust from the signature, never the URL:** Gaea runs only plugins signed by a trusted team. The check runs at install and again at launch. **In v1 the only trusted team is ours;** another team's release is refused with a message saying third-party plugins come later. The trust list and its approval flow ship in G4. | N | G-7, G-18, G-22 |
 | PLG-4 | **Update and roll back:** versions installed side by side, switched when idle, the previous one kept. Gaea checks for updates and shows what changed. | N | Concept: "check for newer versions" |
 | PLG-5 | **Enable and disable** a plugin, or any model in it. A disabled model disappears from descriptors. | N | G-18 |
 | PLG-6 | **Plugins describe; Gaea renders.** Each plugin's settings and model options are forms that Gaea draws from the manifest (MESFormsUI). Plugins ship no UI code. | A | Plan §2.1; replaces the concept's "UI per model" |
@@ -181,7 +181,8 @@ Video needs Base time conventions and MES Video 0.1 first (plan §4). Everything
 | DST-1 | **Developer ID, hardened runtime, notarized in CI** for Gaea and every plugin. No sandbox, no App Store. | N | G-6 |
 | DST-2 | **GitHub releases** for Gaea (`xocialize/gaea`) and for each plugin repo. | N | G-11 |
 | DST-3 | **Gaea updates itself** through the same GitHub release path (or Sparkle). | P | Plan G4 |
-| DST-4 | **A guide for plugin authors,** built on the template repo. | P | Plan G4 |
+| DST-4 | **A guide for plugin authors,** built on the template repo, shipping with the trust list. | P | Plan G4; G-22 |
+| DST-5 | **Apache-2.0** for Gaea, GaeaPluginKit and every plugin we publish. A manifest's `license` names the plugin's code licence; each model's weight licence is separate. | N | G-21 |
 
 ## 13. What we reuse
 
@@ -211,11 +212,13 @@ The plan's §6 holds the full list. The product-level ones:
 
 ## 15. Open questions
 
-| # | Question | Proposal |
-|---|---|---|
-| OQ-1 | **Gaea's licence.** The engines were Apache-2.0 (D-2). | Apache-2.0 for Gaea, GaeaPluginKit and our plugins; each model keeps its own weight licence. |
-| OQ-2 | **Plugins from other teams in v1,** or ours only until G4's trust list? | Ours only in v1; the trust list ships in G4. |
-| OQ-3 | **Lane fallback (MEM-7):** load a smaller lane automatically, or refuse and tell the client? | Fall back, and warn in the result; a request that names a lane never falls back. |
+None open. Answered on 2026-10-28:
+
+| # | Question | Answer | Decision |
+|---|---|---|---|
+| OQ-1 | **Gaea's licence.** The engines were Apache-2.0 (D-2). | Apache-2.0 for Gaea, GaeaPluginKit and our plugins; each model keeps its own weight licence. | G-21 (AB-D-0183) |
+| OQ-2 | **Plugins from other teams in v1,** or ours only until G4's trust list? | Ours only in v1; the trust list ships in G4. | G-22 (AB-D-0184) |
+| OQ-3 | **Lane fallback (MEM-7):** load a smaller lane automatically, or refuse and tell the client? | Fall back and warn in the result; a request that names a lane never falls back. | G-23 (AB-D-0185) |
 
 ## 16. Phasing
 
@@ -231,6 +234,8 @@ flowchart LR
 
 ## Appendix. Revision history
 
+- **0.2 (2026-10-28):** the open questions are decided: Apache-2.0 (G-21, new DST-5), our plugins only in v1 (G-22,
+  PLG-3), and lane fallback with a warning (G-23, MEM-7).
 - **0.1 (2026-10-28):** first draft. Carries over the Engines PRD's surviving requirements (ENG-3, 6, 7, 8, 10, 13, 14;
   IMG-1 to IMG-5; VID-1 to VID-3, VID-5, VID-6, VID-8) and the measured image tier plan. Drops what Gaea decided
   against: sandboxing and the App Store (ENG-11, ENG-12, G-6), remote providers (VID-4, G-12), one engine per profile
