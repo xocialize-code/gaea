@@ -213,14 +213,14 @@ The image phase comes first, then audio, then video, as the source document asks
 starts while the phase before it is being built.
 
 **G0. Foundations** (started 2026-10-27)
-- **Done:** decisions G-1 to G-19 filed, and the `gaea` area on the bridge roster.
+- **Done:** decisions G-1 to G-20 filed, and the `gaea` area on the bridge roster. GPP v1 and the manifest schema
+  (AB-T-0353): [spec/GPP-1.md](../spec/GPP-1.md), with schemas, fixtures and a validator (69 of 69 negative cases).
 - **Asks:** AB-A-0206 to mlx-engine (GPP needs a manifest lane export, download-only materialize, wire envelopes
   and monitor events) gates the kit. AB-A-0207 to mlx-apps (MESKit's Plugins page, multi-process System page and
   enablement store) gates the host. AB-A-0208 to mlx-apps covers the doc changes now and the retirements at G1 exit.
 - **Work orders:** AB-T-0353 (GPP v1 and the manifest schema) blocks AB-T-0354 (the kit and template repo), which
   blocks AB-T-0355 (the host skeleton) and AB-T-0356 (the measurements).
 - Gaea PRD.
-- GPP v1 and the manifest JSON Schema, with fixtures.
 - GaeaPluginKit and a plugin template repo whose CI publishes releases.
 - The Gaea host, grown out of the spike: MESEngineKit, a mock normalizer, the scheduler, the plugin manager (repo
   URLs, enable and disable), gaea.sqlite, the local operator API and CLI, a minimal console.
