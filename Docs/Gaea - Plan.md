@@ -306,18 +306,22 @@ starts while the phase before it is being built.
        covers.
 
      See [Evidence/AB-T-0373](Evidence/AB-T-0373/README.md).
-  9. AB-T-0377 (P1): the coverage that parity found missing, as plugins.
+  9. AB-T-0377 (P1): the coverage that parity found missing, as plugins. **Done** (Gaea 0.6.0, 513c465)
      - **Operations:** relight (CIDNet), colorize (DDColor), describe (Mage-VL) and score (SigLIP2).
      - **Models:** DRUNet and BOPBTL restore, and the Nacre, VOSR2 and Anime4K upscalers.
-     - **Why it blocks the exit:** Desktop's auto-describe and scoring need it against Gaea.
-  10. AB-T-0378 (P1): adapters. A LoRA is an adapter on a base model, not a plugin.
-      - **Adding one:** the operator adds a LoRA by its Hugging Face repo URL, and Gaea keeps the registration in
-        gaea.sqlite.
-      - **Licence:** each adapter is offered with its licence. Research and unlabelled licences are opt-in.
-      - **Running:** a request's adapters reach the base model's plugin.
-      - **Already in place:** the normalizer and the GPP path. Missing are the offers, registration, and plugins
-        applying the LoRA.
-      - **It blocks Gaea Lab** (CLI-3's model → LoRA) and the exit.
+     - See [Evidence/AB-T-0377](Evidence/AB-T-0377/README.md).
+  10. AB-T-0378 (P1): adapters. A LoRA is an adapter on a base model, not a plugin. **Done** (Gaea 0.7.0)
+      - **Contract:** GPP-1 §3.3, §4.3 and §4.8. An offer's `adapter_support`, shipped adapters' pinned sources in
+        `adapters_meta`, and `run.adapters` carrying kind, format and source.
+      - **Adding one:** `gaea adapters add <hf-url> --model <id>`, or Settings › Adapters. Gaea pins the commit,
+        sha256 and licence, and keeps the registration in gaea.sqlite. Unknown, research and gated licences are opt-in.
+      - **Plugins** (AB-T-0381, kit 0.5.0): Qwen-Image 0.2.0 ships v0.9.1's 27 Flash adapters, and Klein 0.2.0 its 7.
+      - **Parity:** all 34 are byte-identical to v0.9.1, with median times 1.00.
+      - **Conformance:** 40 open and 43 paired, with BASE-013, BASE-029 and IMAGE-013 passing.
+      - See [Evidence/AB-T-0378](Evidence/AB-T-0378/README.md).
+      - **Found on the way:**
+        - AB-T-0382: CI builds no metallib, so plugins release locally.
+        - AB-T-0383 (P1, blocks the exit): a Klein edit on a large input differs from v0.9.1, with or without adapters.
   11. AB-T-0375: the exit gate, which gives AB-A-0208 the go for the retirements.
   12. AB-T-0374 (P3): the research plugins, with research licences authorized (2026-10-29). They are not on the exit
       path.

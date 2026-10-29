@@ -1,0 +1,22 @@
+# manifest: /Volumes/Satechi/Development/gaea-plugin-qwen-image/dist/qwen-image.gaeaplugin/Contents/Resources/manifest.json
+# gaea-plugin-check session against qwen-image.gaeaplugin
+W {"engine":{"contract":"1.57.0","version":"0.72.0"},"kit":{"version":"0.5.0"},"manifest_sha256":"e8a00b7db65bf0d1bb8c883883aec6b4589015ae076a5c51585100ec9b034ba9","models":["qwen-image-edit","qwen-image-flash"],"pid":47679,"plugin":{"id":"com.xocialize.gaea.qwen-image","version":"0.2.0"},"protocol":1,"type":"hello"}
+H {"budget":{"ceilingBytes":64000000000,"wiresWeights":false},"cache_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-0F6C7D91-E6FC-470B-83A3-04C7E1F5085F/cache","id":"h1","models_root":"/Users/dustinnielson/Library/Application Support/MLXEngine/Models","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"int8","model":"qwen-image-flash","type":"prepare"}
+W {"lane":"int8","model":"qwen-image-flash","re":"h2","seconds":1.036,"type":"prepared"}
+W {"report":{"availableBytes":32400000000,"budgetBytes":64000000000,"date":814987036.689042,"gpuActiveBytes":22262732264,"gpuCacheBytes":180447628,"physFootprintBytes":24816321408,"residentBytes":22300000000,"residents":{"qwen-image-flash":22300000000},"running":[],"transientReserveBytes":9300000000},"type":"memory"}
+H {"adapters":[{"format":"diffusers-peft","id":"qwen-image:peter-chan-s-concept-art","kind":"plain","source":{"bytes":590058848,"file":"loras/peter-chan-s-concept-art.safetensors","repo":"xocialize/qwen-image-flash-loras","revision":"a60485ca35e32b69c2d71930c2ef3d3745271411","sha256":"5d5a7d2fa1b83f6aa9d6dfb7dc8178138b677ff5249aac30e1a9a6dce9dd3ee0"},"strength":0.8},{"format":"kohya","id":"qwen-image:dott4k","kind":"plain","source":{"bytes":590154464,"file":"LhBW3CcSiF6V7aKepWm3k_adapter.safetensors","repo":"furaidosu/dott4k-qwen-image-lora","revision":"558137f8d745e87c13602fe45146b39bd7e7aabd","sha256":"25f03695d2bde7d07fc5df3947d47ff41e56d9860214c472eb8a5d909f2e4507"},"strength":0.6}],"id":"h3","inputs":{"prompt":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-0F6C7D91-E6FC-470B-83A3-04C7E1F5085F/spool/job_check/in/prompt-0.txt"},"job":"job_check","lane":"int8","model":"qwen-image-flash","operation":"image.generate","output_dir":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-0F6C7D91-E6FC-470B-83A3-04C7E1F5085F/spool/job_check/out","params":{"count":1,"size":{"height":1024,"width":1024}},"seed":42,"type":"run"}
+W {"job":"job_check","re":"h3","stage":"encode","type":"progress"}
+W {"job":"job_check","re":"h3","stage":"denoise","type":"progress"}
+W {"fraction":0.25,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.5,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.75,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":1,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":4,"type":"progress"}
+W {"job":"job_check","re":"h3","stage":"decode","type":"progress"}
+W {"job":"job_check","re":"h3","stage":"postprocess","type":"progress"}
+W {"effective":{"count":1,"seed":42,"size":{"height":1024,"width":1024},"x-qwen.steps":4},"job":"job_check","outputs":[{"media_type":"image/png","name":"images","path":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-0F6C7D91-E6FC-470B-83A3-04C7E1F5085F/spool/job_check/out/image-0.png"}],"re":"h3","seconds":11.109,"type":"result","warnings":[]}
+W {"report":{"availableBytes":32400000000,"budgetBytes":64000000000,"date":814987047.799471,"gpuActiveBytes":23438582360,"gpuCacheBytes":2415919108,"physFootprintBytes":27433567392,"residentBytes":22300000000,"residents":{"qwen-image-flash":22300000000},"running":[],"transientReserveBytes":9300000000},"type":"memory"}
+H {"id":"h4","type":"memory.query"}
+W {"re":"h4","report":{"availableBytes":32400000000,"budgetBytes":64000000000,"date":814987047.799738,"gpuActiveBytes":23438582360,"gpuCacheBytes":2415919108,"physFootprintBytes":27433567392,"residentBytes":22300000000,"residents":{"qwen-image-flash":22300000000},"running":[],"transientReserveBytes":9300000000},"type":"memory"}
+H {"id":"h5","type":"shutdown"}

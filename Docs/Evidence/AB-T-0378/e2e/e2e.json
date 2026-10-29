@@ -1,0 +1,80 @@
+{
+ "offer": {
+  "model": "qwen-image-flash",
+  "max_adapters": 4,
+  "adapters": 1,
+  "adapter": {
+   "id": "qwen-image:pchan-upstream",
+   "kind": "plain",
+   "license": {
+    "commercial_use": true,
+    "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first.",
+    "spdx": "CreativeML-OpenRAIL-M",
+    "terms_url": "https://huggingface.co/furaidosu/pchan-concept-qwen-image-lora/blob/4c3ae4475cb6268f410068eb966f513601170fb8/README.md"
+   },
+   "strength": {
+    "default": 1,
+    "max": 2,
+    "min": 0
+   },
+   "title": "Peter Chan (upstream)"
+  }
+ },
+ "unknown adapter": {
+  "status": 422,
+  "error": {
+   "code": "unsupported_parameter",
+   "message": "image.generate offers no adapter qwen-image:no-such-lora.",
+   "param": "adapters",
+   "request_id": "req_tjrt8egnhw2m"
+  }
+ },
+ "strength out of range": {
+  "status": 422,
+  "error": {
+   "code": "out_of_limits",
+   "message": "Adapter qwen-image:pchan-upstream takes a strength from 0.0 to 2.0.",
+   "param": "adapters",
+   "request_id": "req_awd537y05mzy"
+  }
+ },
+ "opt-in adapter not enabled": {
+  "status": 422,
+  "error": {
+   "code": "unsupported_parameter",
+   "message": "image.generate offers no adapter qwen-image:martha.",
+   "param": "adapters",
+   "request_id": "req_sb93vh8yxcpj"
+  }
+ },
+ "run": {
+  "outcome": "succeeded",
+  "error": null,
+  "wall_s": 31.5,
+  "adapters": [
+   {
+    "id": "qwen-image:pchan-upstream",
+    "license": {
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/furaidosu/pchan-concept-qwen-image-lora/blob/4c3ae4475cb6268f410068eb966f513601170fb8/README.md"
+    },
+    "revision": "4c3ae4475cb6268f410068eb966f513601170fb8",
+    "strength": 0.8,
+    "title": "Peter Chan (upstream)"
+   }
+  ],
+  "licenses": null,
+  "timings": {
+   "finished_at": "2026-10-29T17:55:30Z",
+   "queue_ms": 0,
+   "received_at": "2026-10-29T17:54:58Z",
+   "run_ms": 31538,
+   "started_at": "2026-10-29T17:54:58Z"
+  },
+  "files": [
+   "run-0.png"
+  ]
+ }
+}

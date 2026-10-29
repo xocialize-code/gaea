@@ -62,8 +62,10 @@ extension PluginOffers {
     }
 
     static func shipped(_ offer: AdapterOffer, _ meta: PluginManifest.AdapterMeta) -> ModelAdapter {
+        // MES says only yes, no or unknown; a permissive licence is `allowed` even with a notice, another `yes` is
+        // `conditional` (OpenRAIL's use restrictions), as v0.9.1's registry says.
         let use: String = switch offer.license.commercialUse {
-        case .yes: offer.license.notice == nil ? "allowed" : "conditional"
+        case .yes: Self.permissive.contains(offer.license.spdx) ? "allowed" : "conditional"
         case .no: "prohibited"
         default: "unknown"
         }
@@ -87,6 +89,9 @@ extension PluginOffers {
                             source: .init(repo: row.repo, revision: row.revision, file: row.file, sha256: row.sha256, bytes: row.bytes),
                             registered: true)
     }
+
+    /// Licences that allow commercial use without conditions beyond attribution.
+    static let permissive: Set<String> = ["Apache-2.0", "MIT", "BSD-2-Clause", "BSD-3-Clause", "CC0-1.0", "CC-BY-4.0", "Unlicense"]
 
     /// The operator's registrations; none when the database can't be read.
     func registrations() -> [GaeaDatabase.AdapterRow] { (try? manager.database.adapters()) ?? [] }

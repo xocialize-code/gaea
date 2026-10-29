@@ -1,0 +1,47 @@
+==> build gaea-plugin-check
+Building for production...
+[Planning deferred tasks]
+[4 / 7] gaea-plugin-check-product
+[5 / 8] gaea-plugin-check-product
+[7 / 8] gaea-plugin-check-product
+[8 / 8] gaea-plugin-check-product
+Build complete! (2.54 sec)
+/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/tmp.YOJT7PEH6F/bare/gaea-qwen-image-worker: replacing existing signature
+==> hidden: /Volumes/Satechi/Development/gaea-plugin-qwen-image/.build
+==> drive qwen-image.gaeaplugin over GPP
+PASS manifest com.xocialize.gaea.qwen-image 0.2.0, sha256 e8a00b7db65b…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.qwen-image, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-qwen-image-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 47028
+W {"engine":{"contract":"1.57.0","version":"0.72.0"},"kit":{"version":"0.5.0"},"manifest_sha256":"e8a00b7db65bf0d1bb8c883883aec6b4589015ae076a5c51585100ec9b034ba9","models":["qwen-image-edit","qwen-image-flash"],"pid":47028,"plugin":{"id":"com.xocialize.gaea.qwen-image","version":"0.2.0"},"protocol":1,"type":"hello"}
+PASS hello after 364 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+H {"budget":{"ceilingBytes":64000000000,"wiresWeights":false},"cache_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-29468369-B84D-4735-80ED-17153D65A6D0/cache","id":"h1","models_root":"/Users/dustinnielson/Library/Application Support/MLXEngine/Models","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"int8","model":"qwen-image-flash","type":"prepare"}
+W {"lane":"int8","model":"qwen-image-flash","re":"h2","seconds":1.068,"type":"prepared"}
+W {"report":{"availableBytes":32400000000,"budgetBytes":64000000000,"date":814986959.71923,"gpuActiveBytes":22262732264,"gpuCacheBytes":180447628,"physFootprintBytes":24608539592,"residentBytes":22300000000,"residents":{"qwen-image-flash":22300000000},"running":[],"transientReserveBytes":9300000000},"type":"memory"}
+PASS prepared qwen-image-flash lane int8 in 1.07 s
+H {"id":"h3","inputs":{"prompt":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-29468369-B84D-4735-80ED-17153D65A6D0/spool/job_check/in/prompt-0.txt"},"job":"job_check","lane":"int8","model":"qwen-image-flash","operation":"image.generate","output_dir":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-29468369-B84D-4735-80ED-17153D65A6D0/spool/job_check/out","params":{"count":1,"size":{"height":512,"width":512}},"seed":42,"type":"run"}
+W {"job":"job_check","re":"h3","stage":"encode","type":"progress"}
+W {"job":"job_check","re":"h3","stage":"denoise","type":"progress"}
+W {"fraction":0.25,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.5,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.75,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":1,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":4,"type":"progress"}
+W {"job":"job_check","re":"h3","stage":"decode","type":"progress"}
+W {"job":"job_check","re":"h3","stage":"postprocess","type":"progress"}
+W {"effective":{"count":1,"seed":42,"size":{"height":512,"width":512},"x-qwen.steps":4},"job":"job_check","outputs":[{"media_type":"image/png","name":"images","path":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-29468369-B84D-4735-80ED-17153D65A6D0/spool/job_check/out/image-0.png"}],"re":"h3","seconds":3.3,"type":"result","warnings":[]}
+W {"report":{"availableBytes":32400000000,"budgetBytes":64000000000,"date":814986963.019946,"gpuActiveBytes":22263505492,"gpuCacheBytes":2245820616,"physFootprintBytes":24780014896,"residentBytes":22300000000,"residents":{"qwen-image-flash":22300000000},"running":[],"transientReserveBytes":9300000000},"type":"memory"}
+PASS image.generate ran in 3.30 s (wall 3.30 s), 8 progress lines; outputs [{"path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-29468369-B84D-4735-80ED-17153D65A6D0\/spool\/job_check\/out\/image-0.png","name":"images","media_type":"image\/png"}]
+H {"id":"h4","type":"memory.query"}
+W {"re":"h4","report":{"availableBytes":32400000000,"budgetBytes":64000000000,"date":814986963.0202,"gpuActiveBytes":22263505492,"gpuCacheBytes":2245820616,"physFootprintBytes":24780014896,"residentBytes":22300000000,"residents":{"qwen-image-flash":22300000000},"running":[],"transientReserveBytes":9300000000},"type":"memory"}
+PASS memory report: worker says phys_footprint 24780014896 B; host read 24780014896 B now, peak 30602860336 B
+H {"id":"h5","type":"shutdown"}
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-qwen-image/dist/check-session.gpp
+ALL PASS
+==> validate the session (tools/validate.py --transcript)
+OK
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

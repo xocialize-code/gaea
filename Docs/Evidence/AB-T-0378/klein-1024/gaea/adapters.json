@@ -1,0 +1,307 @@
+[
+ {
+  "adapter": "flux2-klein:refcontrol-pose",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:refcontrol-pose",
+    "license": {
+     "commercial_use": true,
+     "notice": "Self-trained by xocialize on black-forest-labs/FLUX.2-klein-base-4B (Apache-2.0). Training frames came from Wikimedia Commons contributors (CC-BY / CC-BY-SA) and Pexels videographers; they are not redistributed, only the weights.",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/refcontrol-FLUX.2-klein-4B-pose-lora/blob/b2b0edf2622f2abd980bf868441149d71b3eb7b0/README.md"
+    },
+    "revision": "b2b0edf2622f2abd980bf868441149d71b3eb7b0",
+    "strength": 1,
+    "title": "RefControl Pose"
+   }
+  ],
+  "run_ms": 29795,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 29805,
+  "files": [
+   "flux2-klein_refcontrol-pose-0.png"
+  ],
+  "sha256": [
+   "b946d7d70b5af291020876c79d06ee21678641d5a5c9cd2fa5230bf9d806d5f9"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:consistence-edit",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:consistence-edit",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/consistence-edit-FLUX.2-klein-4B-lora/blob/f043b846a356529a6b0c269945f0888522064490/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/consistence-edit-FLUX.2-klein-4B-lora/blob/f043b846a356529a6b0c269945f0888522064490/LICENSE"
+    },
+    "revision": "f043b846a356529a6b0c269945f0888522064490",
+    "strength": 0.6,
+    "title": "Consistence Edit"
+   }
+  ],
+  "run_ms": 13115,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 13122,
+  "files": [
+   "flux2-klein_consistence-edit-0.png"
+  ],
+  "sha256": [
+   "8ac814b7648a54d3ef4260883b232d8ff5e9a0d5c2304737250d11e78cc1e198"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:background-remove",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:background-remove",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/background-remove-FLUX.2-klein-4B-lora/blob/10f38b4af9de00f1a3b177e44d0aaec30d842af6/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/background-remove-FLUX.2-klein-4B-lora/blob/10f38b4af9de00f1a3b177e44d0aaec30d842af6/LICENSE"
+    },
+    "revision": "10f38b4af9de00f1a3b177e44d0aaec30d842af6",
+    "strength": 1.1,
+    "title": "Background Removal"
+   }
+  ],
+  "run_ms": 10950,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 10954,
+  "files": [
+   "flux2-klein_background-remove-0.png"
+  ],
+  "sha256": [
+   "5e51632d2d59cf52be5073befb8d82793932fa1ac38f648c7152a892229f539a"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:outpaint",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:outpaint",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/outpaint-FLUX.2-klein-4B-lora/blob/dafbfeeed5db940fd74cd9c0fb6981560e77d343/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/outpaint-FLUX.2-klein-4B-lora/blob/dafbfeeed5db940fd74cd9c0fb6981560e77d343/LICENSE"
+    },
+    "revision": "dafbfeeed5db940fd74cd9c0fb6981560e77d343",
+    "strength": 1.1,
+    "title": "Outpaint (Green Screen)"
+   }
+  ],
+  "run_ms": 10882,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 10886,
+  "files": [
+   "flux2-klein_outpaint-0.png"
+  ],
+  "sha256": [
+   "aa1a231f7011a87875c46eb1b764e92934025950c74d6d49c92ab649db9ab285"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:spritesheet",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:spritesheet",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/spritesheet-FLUX.2-klein-4B-lora/blob/9d68d65506dce961fef1473e1edd11def3ff9f96/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/spritesheet-FLUX.2-klein-4B-lora/blob/9d68d65506dce961fef1473e1edd11def3ff9f96/LICENSE"
+    },
+    "revision": "9d68d65506dce961fef1473e1edd11def3ff9f96",
+    "strength": 1.1,
+    "title": "2x2 Sprite Sheet"
+   }
+  ],
+  "run_ms": 10787,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 10794,
+  "files": [
+   "flux2-klein_spritesheet-0.png"
+  ],
+  "sha256": [
+   "21f6c07772bc68127a4f74a03085a13ebecb543805117e954cc0c936076885fc"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:zoom",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:zoom",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/zoom-FLUX.2-klein-4B-lora/blob/ec25220671322176b8e6bc13d2bd6ab09bde43ea/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/zoom-FLUX.2-klein-4B-lora/blob/ec25220671322176b8e6bc13d2bd6ab09bde43ea/LICENSE"
+    },
+    "revision": "ec25220671322176b8e6bc13d2bd6ab09bde43ea",
+    "strength": 1.1,
+    "title": "Red Zoom"
+   }
+  ],
+  "run_ms": 10969,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 10974,
+  "files": [
+   "flux2-klein_zoom-0.png"
+  ],
+  "sha256": [
+   "7e3055f96fd162659c517ec03ca4266cabaf347490f8232b29c954cfe2c7d6e3"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:tryon",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:tryon",
+    "license": {
+     "commercial_use": true,
+     "notice": "Self-trained by xocialize on black-forest-labs/FLUX.2-klein-base-4B (Apache-2.0). Training frames came from Pexels (train-only); they are not redistributed, only the weights.",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/tryon-FLUX.2-klein-4B-lora/blob/5e590220c687190a3d8dc66d173570f9de097984/README.md"
+    },
+    "revision": "5e590220c687190a3d8dc66d173570f9de097984",
+    "strength": 1,
+    "title": "Virtual Try-On"
+   }
+  ],
+  "run_ms": 40366,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 40374,
+  "files": [
+   "flux2-klein_tryon-0.png"
+  ],
+  "sha256": [
+   "3a49cd12c2df1b72bc3e9ad057aeafa0d64588aa217a6bf8e75f1988f1f48ab0"
+  ]
+ },
+ {
+  "adapter": "none",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": null,
+  "run_ms": 12973,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [],
+  "wall_ms": 12976,
+  "files": [
+   "none-0.png"
+  ],
+  "sha256": [
+   "6a11c7c9876590e47732fe6db7d1a64705438f539687e3a86695a0b119a5dd84"
+  ]
+ }
+]

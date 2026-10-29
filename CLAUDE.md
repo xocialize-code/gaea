@@ -50,6 +50,7 @@ process of its own.
 | [tools/acceptance-forge.sh](tools/acceptance-forge.sh) | AB-T-0369's acceptance: the processing pack from GitHub, every model by name through the normalizer, footprints with one and all loaded |
 | [tools/acceptance-prompt-enhance.sh](tools/acceptance-prompt-enhance.sh) | AB-T-0370's acceptance: the enhancer by repo URL, and the normalizer calling it only where a profile asks |
 | [tools/parity-run.sh](tools/parity-run.sh), [tools/parity-compare.swift](tools/parity-compare.swift), [tools/parity-seeded.py](tools/parity-seeded.py) | AB-T-0373's G1 parity: one TierBench run against Gaea or pixel-agency-image-engine, two runs paired output by output (bytes, pixels, median warm times, routing), and seeded jobs for what TierBench sends unseeded |
+| [tools/adapters-e2e.py](tools/adapters-e2e.py), [tools/parity-adapters.py](tools/parity-adapters.py) | AB-T-0378's adapters: one registered LoRA through MES (offer, run, refusals), and every offered adapter once, seeded, against Gaea or v0.9.1 (`--compare`) |
 | [Docs/Evidence/AB-T-0355/](Docs/Evidence/AB-T-0355/README.md) | The host's acceptance: conformance reports, a recorded GPP session, console screenshots |
 
 Decisions G-1 to G-23 are filed as AB-D records. The plan's §1 maps each one to its id.
@@ -65,6 +66,8 @@ Decisions G-1 to G-23 are filed as AB-D records. The plan's §1 maps each one to
   URLs). Create new plugin repos there.
 - **Trust comes from the signature, never the URL** (G-7, G-18). Verify the bundle with a Developer ID requirement
   pinned to a trusted team, and launch with `Process.launchRequirement`.
+- **Adapters (LoRAs) are not plugins** (GPP-1 §4.8). Plugins ship catalogs in their manifests; the operator adds one by
+  Hugging Face URL (`gaea adapters add <url> --model <id>`), registered plain, pinned to a commit and sha256.
 - **Plugins ship no UI code.** Their settings forms come from manifest descriptors, rendered by MESFormsUI.
 - **Other areas' repos change through asks:** `bridge ask --to mlx-engine | mlx-apps | …`. That covers
   mlx-engine-swift, media-engine-spec, mlx-image-runtime and the Pixel Agency apps (plan §4). Don't edit their docs

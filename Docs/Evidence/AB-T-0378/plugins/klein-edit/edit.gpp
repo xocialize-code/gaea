@@ -1,0 +1,23 @@
+# manifest: /Volumes/Satechi/Development/gaea-plugin-flux2-klein/dist/flux2-klein.gaeaplugin/Contents/Resources/manifest.json
+# gaea-plugin-check session against flux2-klein.gaeaplugin
+W {"engine":{"contract":"1.57.0","version":"0.72.0"},"kit":{"version":"0.5.0"},"manifest_sha256":"6da6b76215ffd0ac095c64e3790e690b7c1973fb66fd592ae791b31121a32af0","models":["klein-4b","klein-4b-base"],"pid":48380,"plugin":{"id":"com.xocialize.gaea.flux2-klein","version":"0.2.0"},"protocol":1,"type":"hello"}
+H {"budget":{"ceilingBytes":64000000000,"wiresWeights":false},"cache_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-F0C2AEFF-10A5-4F56-8283-4FED91E11763/cache","id":"h1","models_root":"/Users/dustinnielson/Library/Application Support/MLXEngine/Models","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"bf16","model":"klein-4b","type":"prepare"}
+W {"lane":"bf16","model":"klein-4b","re":"h2","seconds":0.82,"type":"prepared"}
+W {"report":{"availableBytes":38100000000,"budgetBytes":64000000000,"date":814987097.436132,"gpuActiveBytes":14315456916,"gpuCacheBytes":92723930,"physFootprintBytes":14627597184,"residentBytes":14700000000,"residents":{"klein-4b":14700000000},"running":[],"transientReserveBytes":11200000000},"type":"memory"}
+H {"adapters":[{"format":"bfl-fused","id":"flux2-klein:refcontrol-pose","inputs":{"pose":"/Volumes/Satechi/Development/gaea-plugin-flux2-klein/scripts/fixtures/pose-512.png","reference":"/Volumes/Satechi/Development/gaea-plugin-flux2-klein/scripts/fixtures/fox-256.png"},"kind":"ic","source":{"bytes":92426792,"file":"refcontrol-pose-klein-4b.safetensors","repo":"xocialize/refcontrol-FLUX.2-klein-4B-pose-lora","revision":"b2b0edf2622f2abd980bf868441149d71b3eb7b0","sha256":"f9880f9070576ff1603c0988ed2afc9957deb0d7dd7c52cf15decbd4087f1339"},"strength":1},{"format":"bfl-fused","id":"flux2-klein:background-remove","kind":"plain","source":{"bytes":76039072,"file":"flux-background-remove-lora.safetensors","repo":"xocialize/background-remove-FLUX.2-klein-4B-lora","revision":"10f38b4af9de00f1a3b177e44d0aaec30d842af6","sha256":"79d8cd4a5ea67c196b173aeb7c751bcfffc79823993b2a033107d4a8db68bcea"},"strength":1.1}],"id":"h3","inputs":{"instruction":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-F0C2AEFF-10A5-4F56-8283-4FED91E11763/spool/job_check/in/instruction-0.txt"},"job":"job_check","lane":"bf16","model":"klein-4b","operation":"image.edit","output_dir":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-F0C2AEFF-10A5-4F56-8283-4FED91E11763/spool/job_check/out","params":{"size":{"height":512,"width":512}},"seed":7,"type":"run"}
+W {"job":"job_check","re":"h3","stage":"encode","type":"progress"}
+W {"job":"job_check","re":"h3","stage":"encode","type":"progress"}
+W {"job":"job_check","re":"h3","stage":"denoise","type":"progress"}
+W {"fraction":0.25,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.5,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.75,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":1,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":4,"type":"progress"}
+W {"job":"job_check","re":"h3","stage":"decode","type":"progress"}
+W {"job":"job_check","re":"h3","stage":"postprocess","type":"progress"}
+W {"effective":{"seed":7,"size":{"height":512,"width":512},"x-klein.steps":4},"job":"job_check","outputs":[{"media_type":"image/png","name":"image","path":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-F0C2AEFF-10A5-4F56-8283-4FED91E11763/spool/job_check/out/image-0.png"}],"re":"h3","seconds":3.489,"type":"result","warnings":[]}
+W {"report":{"availableBytes":38100000000,"budgetBytes":64000000000,"date":814987100.926393,"gpuActiveBytes":14451773852,"gpuCacheBytes":2039084568,"physFootprintBytes":16755207352,"residentBytes":14700000000,"residents":{"klein-4b":14700000000},"running":[],"transientReserveBytes":11200000000},"type":"memory"}
+H {"id":"h4","type":"memory.query"}
+W {"re":"h4","report":{"availableBytes":38100000000,"budgetBytes":64000000000,"date":814987100.926717,"gpuActiveBytes":14451773852,"gpuCacheBytes":2039084568,"physFootprintBytes":16755207352,"residentBytes":14700000000,"residents":{"klein-4b":14700000000},"running":[],"transientReserveBytes":11200000000},"type":"memory"}
+H {"id":"h5","type":"shutdown"}

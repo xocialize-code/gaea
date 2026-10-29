@@ -1,0 +1,4 @@
+# Klein adapter golden check 2026-10-29T17:18:16Z: com.xocialize.gaea.flux2-klein 0.2.0
+PASS  edit (klein-4b bf16, flux2-klein:refcontrol-pose ic + flux2-klein:background-remove plain): byte-identical, sha256 61b1664b63ebfdfa…; over GPP ran in 3.49 s; in-process {"adapters":["flux2-klein:refcontrol-pose=1.0","flux2-klein:background-remove=1.1"],"cold_s":4.3209509590000001,"guidance":1,"height":512,"lane":"bf16","model":"klein-4b","prepare_s":0.81985025,"references":0,"run1_s":3.4845463329999999,"run2_s":3.485864791,"seed":7,"steps":4,"width":512}
+PASS  control: without the adapters the edit differs (sha256 50621148a36fd81b…)
+== 2 passed, 0 failed

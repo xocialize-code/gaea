@@ -1,0 +1,1471 @@
+[
+ {
+  "adapter": "qwen-image:peter-chan-s-concept-art",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:peter-chan-s-concept-art",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Peter Chan's concept art"
+   }
+  ],
+  "run_ms": 15238,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 15247,
+  "files": [
+   "qwen-image_peter-chan-s-concept-art-0.png"
+  ],
+  "sha256": [
+   "db33ca2dd183bae5511cae60dc359ca937d67c57b60b750f6ecfdc8db5a247a4"
+  ]
+ },
+ {
+  "adapter": "qwen-image:day-of-the-tentacle",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:day-of-the-tentacle",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Day of the Tentacle"
+   }
+  ],
+  "run_ms": 11677,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 11682,
+  "files": [
+   "qwen-image_day-of-the-tentacle-0.png"
+  ],
+  "sha256": [
+   "c7fbaa496f547dbb9b4ca490839123a7c1b037538dacdab4ef1dbe7f409d29fe"
+  ]
+ },
+ {
+  "adapter": "qwen-image:dott4k",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:dott4k",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": "unknown",
+     "notice": "Its licence doesn't say whether commercial use is allowed.",
+     "spdx": "NOASSERTION",
+     "terms_url": "https://huggingface.co/furaidosu/dott4k-qwen-image-lora/blob/558137f8d745e87c13602fe45146b39bd7e7aabd/README.md"
+    },
+    "revision": "558137f8d745e87c13602fe45146b39bd7e7aabd",
+    "strength": 1,
+    "title": "Dott4k"
+   }
+  ],
+  "run_ms": 12016,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 12037,
+  "files": [
+   "qwen-image_dott4k-0.png"
+  ],
+  "sha256": [
+   "f00b3a7f6d30f968e28b06014a230563ee4e979a37bfc3f6cf29f9cdeac760d1"
+  ]
+ },
+ {
+  "adapter": "qwen-image:dott4k-v2",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:dott4k-v2",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": "unknown",
+     "notice": "Its licence doesn't say whether commercial use is allowed.",
+     "spdx": "NOASSERTION",
+     "terms_url": "https://huggingface.co/furaidosu/dott4kv2-qwen-image-lora/blob/03133c18f7ca56cd3c3484018ff3fed580eb41ee/README.md"
+    },
+    "revision": "03133c18f7ca56cd3c3484018ff3fed580eb41ee",
+    "strength": 1,
+    "title": "Dott4k.v2"
+   }
+  ],
+  "run_ms": 11687,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 11694,
+  "files": [
+   "qwen-image_dott4k-v2-0.png"
+  ],
+  "sha256": [
+   "44cd223bc6f9052f8d8a6cd7ea195952d1e0baf681a20196e64ffaf88b9548fd"
+  ]
+ },
+ {
+  "adapter": "qwen-image:dott4k-fal",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:dott4k-fal",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": "unknown",
+     "notice": "Its licence doesn't say whether commercial use is allowed.",
+     "spdx": "NOASSERTION",
+     "terms_url": "https://huggingface.co/furaidosu/dott4kfalcomplete-qwen-image-lora/blob/49b926d6dc85b318402a6d46392fc256fb641587/README.md"
+    },
+    "revision": "49b926d6dc85b318402a6d46392fc256fb641587",
+    "strength": 1,
+    "title": "Dott4k.fal"
+   }
+  ],
+  "run_ms": 12042,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 12046,
+  "files": [
+   "qwen-image_dott4k-fal-0.png"
+  ],
+  "sha256": [
+   "5b743d04e63c3967cd891dd7b0e8f5bd37e3c6c870f5ea6849231240e4c21a85"
+  ]
+ },
+ {
+  "adapter": "qwen-image:dott4kv4-10epochs-modelscope",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:dott4kv4-10epochs-modelscope",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Dott4kv4.10epochs.modelscope"
+   }
+  ],
+  "run_ms": 12270,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 12274,
+  "files": [
+   "qwen-image_dott4kv4-10epochs-modelscope-0.png"
+  ],
+  "sha256": [
+   "84be737996e989916f16af856acd1527f86c593d6940dc3e3fcc5cd3ccae8537"
+  ]
+ },
+ {
+  "adapter": "qwen-image:sam-and-max-hit-the-road",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:sam-and-max-hit-the-road",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Sam and Max hit the road"
+   }
+  ],
+  "run_ms": 11747,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 11751,
+  "files": [
+   "qwen-image_sam-and-max-hit-the-road-0.png"
+  ],
+  "sha256": [
+   "dc60a3304eabba145e76384e089b2a5c50f89e1b2e96c6a09606da909f71ab5e"
+  ]
+ },
+ {
+  "adapter": "qwen-image:return-to-monkey-island",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:return-to-monkey-island",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Return to Monkey Island"
+   }
+  ],
+  "run_ms": 11718,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 11723,
+  "files": [
+   "qwen-image_return-to-monkey-island-0.png"
+  ],
+  "sha256": [
+   "3a84b94c09719a33da94ec10cfbb1b0fd3a14440ee170763aa56b4c26e5b2295"
+  ]
+ },
+ {
+  "adapter": "qwen-image:rex-crowle",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:rex-crowle",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Rex Crowle"
+   }
+  ],
+  "run_ms": 11695,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 11711,
+  "files": [
+   "qwen-image_rex-crowle-0.png"
+  ],
+  "sha256": [
+   "14024ea532da50477928e0eb85233d3e1f58aac345d0817157bb8ef703cdf00a"
+  ]
+ },
+ {
+  "adapter": "qwen-image:total-drama",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:total-drama",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Total Drama"
+   }
+  ],
+  "run_ms": 11706,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 11710,
+  "files": [
+   "qwen-image_total-drama-0.png"
+  ],
+  "sha256": [
+   "03660b6b563efdb29fe466d0bdae7e3f97c078b747793b64aff5195cd5ee6180"
+  ]
+ },
+ {
+  "adapter": "qwen-image:enjuto-mojamuto",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:enjuto-mojamuto",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": "unknown",
+     "notice": "Its licence doesn't say whether commercial use is allowed.",
+     "spdx": "NOASSERTION",
+     "terms_url": "https://huggingface.co/furaidosu/enjuto-qwen-image-lora/blob/02950bdd0f663224ef114b185fef10e883aca600/README.md"
+    },
+    "revision": "02950bdd0f663224ef114b185fef10e883aca600",
+    "strength": 1,
+    "title": "Enjuto Mojamuto"
+   }
+  ],
+  "run_ms": 11923,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 11927,
+  "files": [
+   "qwen-image_enjuto-mojamuto-0.png"
+  ],
+  "sha256": [
+   "e76fcc3193f0ffdffa1331f277f8c4eea42d76b740000a05f852dfd94f0b0bb8"
+  ]
+ },
+ {
+  "adapter": "qwen-image:masha-2d-cartoon",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:masha-2d-cartoon",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Masha 2d cartoon"
+   }
+  ],
+  "run_ms": 12107,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 12111,
+  "files": [
+   "qwen-image_masha-2d-cartoon-0.png"
+  ],
+  "sha256": [
+   "433a63063d7a5da4d4e0ee6212af4e440b605d0e4448da654215d0c656df0962"
+  ]
+ },
+ {
+  "adapter": "qwen-image:masha-2d-anime",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:masha-2d-anime",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Masha 2d anime"
+   }
+  ],
+  "run_ms": 11980,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 11984,
+  "files": [
+   "qwen-image_masha-2d-anime-0.png"
+  ],
+  "sha256": [
+   "b4e9fae3d0e9f0024e77792f12832725d71bf475b36be8ddafc3bd2b1b6d6340"
+  ]
+ },
+ {
+  "adapter": "qwen-image:pablo-lobato",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:pablo-lobato",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Pablo Lobato"
+   }
+  ],
+  "run_ms": 11664,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 11668,
+  "files": [
+   "qwen-image_pablo-lobato-0.png"
+  ],
+  "sha256": [
+   "5654ddb2370051ec7bda335d314e2872ee83357b8b06cc6c089dd24cff113a03"
+  ]
+ },
+ {
+  "adapter": "qwen-image:tostiadvbg",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:tostiadvbg",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "TostiAdvBg"
+   }
+  ],
+  "run_ms": 12200,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 12204,
+  "files": [
+   "qwen-image_tostiadvbg-0.png"
+  ],
+  "sha256": [
+   "29c77b4762290b5d5d58ccee1bc7ce7049acec5d469e9c58e96240f0ff76b7d8"
+  ]
+ },
+ {
+  "adapter": "qwen-image:blobfish",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:blobfish",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Blobfish"
+   }
+  ],
+  "run_ms": 12412,
+  "prompt": "BLBFSH Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten",
+   "prompt_rewritten"
+  ],
+  "wall_ms": 12419,
+  "files": [
+   "qwen-image_blobfish-0.png"
+  ],
+  "sha256": [
+   "0b9fb51e17264ac97759a966678fd9bdf2a3719eb0d99adbb71ffd3246dfd921"
+  ]
+ },
+ {
+  "adapter": "qwen-image:the-bad-taxidermist",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:the-bad-taxidermist",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "The Bad Taxidermist"
+   }
+  ],
+  "run_ms": 12416,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 12420,
+  "files": [
+   "qwen-image_the-bad-taxidermist-0.png"
+  ],
+  "sha256": [
+   "370fee97a806344803f9562e74c98b807b153fe3bee94341af207af910bbc084"
+  ]
+ },
+ {
+  "adapter": "qwen-image:casivaras",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:casivaras",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Casivaras"
+   }
+  ],
+  "run_ms": 11752,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 11757,
+  "files": [
+   "qwen-image_casivaras-0.png"
+  ],
+  "sha256": [
+   "1c061a8fb03ba8b7bbbad5ada9df9239d9a96590b36e4a80b90dd2012250b6ac"
+  ]
+ },
+ {
+  "adapter": "qwen-image:piccoli-figurativo",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:piccoli-figurativo",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Piccoli Figurativo"
+   }
+  ],
+  "run_ms": 11674,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 11677,
+  "files": [
+   "qwen-image_piccoli-figurativo-0.png"
+  ],
+  "sha256": [
+   "4cab5c7007fb20ca5e10f46b147c8b9ed7d6dadef33a6751f5a56c78ecd903be"
+  ]
+ },
+ {
+  "adapter": "qwen-image:piccoli-abstracto",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:piccoli-abstracto",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Piccoli Abstracto"
+   }
+  ],
+  "run_ms": 12421,
+  "prompt": "abstract painting. Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten",
+   "prompt_rewritten"
+  ],
+  "wall_ms": 12428,
+  "files": [
+   "qwen-image_piccoli-abstracto-0.png"
+  ],
+  "sha256": [
+   "82c63d4f926c9afa28746c7f82842aa497bc1a8bb11adfc1e475d265d2dc1bd0"
+  ]
+ },
+ {
+  "adapter": "qwen-image:puzzolo",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:puzzolo",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Puzzolo"
+   }
+  ],
+  "run_ms": 12453,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 12460,
+  "files": [
+   "qwen-image_puzzolo-0.png"
+  ],
+  "sha256": [
+   "b386b6009c93d180b015d0d37ce4f86695f17fdf2c7167a4cf1d8278818acc2d"
+  ]
+ },
+ {
+  "adapter": "qwen-image:panoramic-wide-fisheye",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:panoramic-wide-fisheye",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Panoramic Wide Fisheye"
+   }
+  ],
+  "run_ms": 11761,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 11765,
+  "files": [
+   "qwen-image_panoramic-wide-fisheye-0.png"
+  ],
+  "sha256": [
+   "d62cd7e1c1739c0029c31b006fea1496c152ad135b4f6d8423fa7eed28ae5c30"
+  ]
+ },
+ {
+  "adapter": "qwen-image:panorama-v2-2512",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:panorama-v2-2512",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Panorama.v2.2512"
+   }
+  ],
+  "run_ms": 12213,
+  "prompt": "Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 12217,
+  "files": [
+   "qwen-image_panorama-v2-2512-0.png"
+  ],
+  "sha256": [
+   "dae7e9d791b64a64acc59169cd2d47c4882fb80eb14d3f8e36b60c9236ebdd4f"
+  ]
+ },
+ {
+  "adapter": "qwen-image:china-zorrilla",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:china-zorrilla",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "China Zorrilla"
+   }
+  ],
+  "run_ms": 12367,
+  "prompt": "tok Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten",
+   "prompt_rewritten"
+  ],
+  "wall_ms": 12371,
+  "files": [
+   "qwen-image_china-zorrilla-0.png"
+  ],
+  "sha256": [
+   "a8c59c804fa58f048192d67d1823d4fba6dd3b7aef9c0cdeea68dfd52af56ccd"
+  ]
+ },
+ {
+  "adapter": "qwen-image:martha",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:martha",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Martha"
+   }
+  ],
+  "run_ms": 12391,
+  "prompt": "martha Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten",
+   "prompt_rewritten"
+  ],
+  "wall_ms": 12395,
+  "files": [
+   "qwen-image_martha-0.png"
+  ],
+  "sha256": [
+   "b47378f7d2c7357c1afba85f18ed1dac4ba66a338fb416a1dba478cab052412d"
+  ]
+ },
+ {
+  "adapter": "qwen-image:la-sabelo-pablo-carayani-camara",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:la-sabelo-pablo-carayani-camara",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "La Sabelo (Pablo Carayani Camar\u00e1)"
+   }
+  ],
+  "run_ms": 12406,
+  "prompt": "LASABELO Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten",
+   "prompt_rewritten"
+  ],
+  "wall_ms": 12410,
+  "files": [
+   "qwen-image_la-sabelo-pablo-carayani-camara-0.png"
+  ],
+  "sha256": [
+   "512ab3c04f23f5619850e9f8ff0e7be56c9a3e975e019175f492397d40ac36ee"
+  ]
+ },
+ {
+  "adapter": "qwen-image:estoy-presa",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:estoy-presa",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Estoy Presa"
+   }
+  ],
+  "run_ms": 12405,
+  "prompt": "STYPRS Cinematic realism, low-angle shot. A solitary, rugged lighthouse perched precariously on a jagged cliff edge, illuminated with a warm, pulsating beacon against a twilight sky. The horizon blends deep indigo and charcoal hues, with streaks of orange and violet clouds suggesting the latest sunset. Rough, weathered stone textures of the cliff face, visible moss, and crashing sea foam at the base. Volumetric fog rolls through the lantern room, creating atmospheric depth. Shot on 35mm lens, f/2.8, shallow depth of field blurring the distant ocean, bokeh effect on lighthouse light. 8K resolution, highly detailed, photorealistic masterpiece, dramatic natural lighting, moody atmosphere, National Geographic style photography. Ultra HD, 4K, cinematic composition",
+  "enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "qwen-image",
+   "seed": 7,
+   "version": 1
+  },
+  "warnings": [
+   "prompt_rewritten",
+   "prompt_rewritten"
+  ],
+  "wall_ms": 12410,
+  "files": [
+   "qwen-image_estoy-presa-0.png"
+  ],
+  "sha256": [
+   "642f721dfd5fe3591d29cc39cb3cba7a7c3e3e41e9af8e44e3b3035a892d5f23"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:refcontrol-pose",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:refcontrol-pose",
+    "license": {
+     "commercial_use": true,
+     "notice": "Self-trained by xocialize on black-forest-labs/FLUX.2-klein-base-4B (Apache-2.0). Training frames came from Wikimedia Commons contributors (CC-BY / CC-BY-SA) and Pexels videographers; they are not redistributed, only the weights.",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/refcontrol-FLUX.2-klein-4B-pose-lora/blob/b2b0edf2622f2abd980bf868441149d71b3eb7b0/README.md"
+    },
+    "revision": "b2b0edf2622f2abd980bf868441149d71b3eb7b0",
+    "strength": 1,
+    "title": "RefControl Pose"
+   }
+  ],
+  "run_ms": 48547,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 48555,
+  "files": [
+   "flux2-klein_refcontrol-pose-0.png"
+  ],
+  "sha256": [
+   "7dab9e4ec0973edc113b7e8df0c2885ca71e5cb33fd399c3ae3b57356817851f"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:consistence-edit",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:consistence-edit",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/consistence-edit-FLUX.2-klein-4B-lora/blob/f043b846a356529a6b0c269945f0888522064490/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/consistence-edit-FLUX.2-klein-4B-lora/blob/f043b846a356529a6b0c269945f0888522064490/LICENSE"
+    },
+    "revision": "f043b846a356529a6b0c269945f0888522064490",
+    "strength": 0.6,
+    "title": "Consistence Edit"
+   }
+  ],
+  "run_ms": 17262,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 17271,
+  "files": [
+   "flux2-klein_consistence-edit-0.png"
+  ],
+  "sha256": [
+   "a8e71e5d25a1c1d46f3f93c32fdfcf539782253f3f8ebcfa5a6a2d753e7290d1"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:background-remove",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:background-remove",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/background-remove-FLUX.2-klein-4B-lora/blob/10f38b4af9de00f1a3b177e44d0aaec30d842af6/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/background-remove-FLUX.2-klein-4B-lora/blob/10f38b4af9de00f1a3b177e44d0aaec30d842af6/LICENSE"
+    },
+    "revision": "10f38b4af9de00f1a3b177e44d0aaec30d842af6",
+    "strength": 1.1,
+    "title": "Background Removal"
+   }
+  ],
+  "run_ms": 14748,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 14757,
+  "files": [
+   "flux2-klein_background-remove-0.png"
+  ],
+  "sha256": [
+   "8a919dfef1b39700abe07f3a9b805cdd740d53fe17c85f0b12d4cec73018da4f"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:outpaint",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:outpaint",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/outpaint-FLUX.2-klein-4B-lora/blob/dafbfeeed5db940fd74cd9c0fb6981560e77d343/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/outpaint-FLUX.2-klein-4B-lora/blob/dafbfeeed5db940fd74cd9c0fb6981560e77d343/LICENSE"
+    },
+    "revision": "dafbfeeed5db940fd74cd9c0fb6981560e77d343",
+    "strength": 1.1,
+    "title": "Outpaint (Green Screen)"
+   }
+  ],
+  "run_ms": 14760,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 14769,
+  "files": [
+   "flux2-klein_outpaint-0.png"
+  ],
+  "sha256": [
+   "d7b5e5ac44974ef40e6db31067be97f4168a4ad66c6e831efef9092b6e0009b1"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:spritesheet",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:spritesheet",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/spritesheet-FLUX.2-klein-4B-lora/blob/9d68d65506dce961fef1473e1edd11def3ff9f96/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/spritesheet-FLUX.2-klein-4B-lora/blob/9d68d65506dce961fef1473e1edd11def3ff9f96/LICENSE"
+    },
+    "revision": "9d68d65506dce961fef1473e1edd11def3ff9f96",
+    "strength": 1.1,
+    "title": "2x2 Sprite Sheet"
+   }
+  ],
+  "run_ms": 14753,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 14771,
+  "files": [
+   "flux2-klein_spritesheet-0.png"
+  ],
+  "sha256": [
+   "32122f48dc5ae15b542d72eaa84f7f75de8475b1b865f0eadd51662fedfc49ec"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:zoom",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:zoom",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/zoom-FLUX.2-klein-4B-lora/blob/ec25220671322176b8e6bc13d2bd6ab09bde43ea/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/zoom-FLUX.2-klein-4B-lora/blob/ec25220671322176b8e6bc13d2bd6ab09bde43ea/LICENSE"
+    },
+    "revision": "ec25220671322176b8e6bc13d2bd6ab09bde43ea",
+    "strength": 1.1,
+    "title": "Red Zoom"
+   }
+  ],
+  "run_ms": 14700,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 14711,
+  "files": [
+   "flux2-klein_zoom-0.png"
+  ],
+  "sha256": [
+   "9c20ecff55a708245c6fd1f6b220d848b885a13adf49e93ebc8053157cffc834"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:tryon",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:tryon",
+    "license": {
+     "commercial_use": true,
+     "notice": "Self-trained by xocialize on black-forest-labs/FLUX.2-klein-base-4B (Apache-2.0). Training frames came from Pexels (train-only); they are not redistributed, only the weights.",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/tryon-FLUX.2-klein-4B-lora/blob/5e590220c687190a3d8dc66d173570f9de097984/README.md"
+    },
+    "revision": "5e590220c687190a3d8dc66d173570f9de097984",
+    "strength": 1,
+    "title": "Virtual Try-On"
+   }
+  ],
+  "run_ms": 64326,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  },
+  "warnings": [
+   "prompt_rewritten"
+  ],
+  "wall_ms": 64335,
+  "files": [
+   "flux2-klein_tryon-0.png"
+  ],
+  "sha256": [
+   "5ccc38135c48a84c1f6db2cb5d72d23258f16f111e2f19dd0cb962f42756ee65"
+  ]
+ }
+]

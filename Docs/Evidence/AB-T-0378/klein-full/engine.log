@@ -1,0 +1,9 @@
+8 adapters offered
+{"adapter": "flux2-klein:background-remove", "outcome": "succeeded", "run_ms": 10581, "sha256": ["078f05bcf4b0d17abc19ec5e62d553deb099899889e49dbdd2d59c7c00f3ffc1"]}
+{"adapter": "flux2-klein:consistence-edit", "outcome": "succeeded", "run_ms": 12648, "sha256": ["04f2891dfdc13f5b223cf5eb2e979ea2a7f0dc69465ee4f0191fc683bb02366b"]}
+{"adapter": "flux2-klein:outpaint", "outcome": "succeeded", "run_ms": 10588, "sha256": ["e9bbe997fa039e8b622216b363d1f4cf932df9dc40eee85dc20026cbacc5ab03"]}
+{"adapter": "flux2-klein:refcontrol-pose", "outcome": "succeeded", "run_ms": 29859, "sha256": ["7970c084cdae67f8658ccfac16466da74064cf374c41161eddb5fdfd52c1cafd"]}
+{"adapter": "flux2-klein:spritesheet", "outcome": "succeeded", "run_ms": 10619, "sha256": ["e8fdf85f68adc7e3edb3e454f92a0d8de46d91dfb58bf2749db50e134c5f449a"]}
+{"adapter": "flux2-klein:tryon", "outcome": "succeeded", "run_ms": 40473, "sha256": ["f28283737bd226fcd9c5da21188c905cd671b3e137212abdcbec8e4a57774894"]}
+{"adapter": "flux2-klein:zoom", "outcome": "succeeded", "run_ms": 10503, "sha256": ["511a3b69e242adbe63f6075b8a0053ea4074f495b101ca5276e44dc2e4ae3655"]}
+{"adapter": "none", "outcome": "succeeded", "run_ms": 12805, "sha256": ["529082f8f9f94b6c96ab0cb94bcc7dd8b75fdb0850167acd8f2fec5481405fbe"]}

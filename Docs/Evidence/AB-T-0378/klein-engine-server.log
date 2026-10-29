@@ -1,0 +1,15 @@
+Registering models (models folder: /Users/dustinnielson/Library/Application Support/MLXEngine/Models)…
+[License] xocialize/Qwen-Image-2.1-Turbo: weight license LicenseRef-Qwen-Research is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] xocialize/Qwen-Image-2.1: weight license LicenseRef-Qwen-Research is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] mlx-community/flux-3-image-klein-bf16: weight license LicenseRef-FLUX-Kommunity-1.0 is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:peter-chan-s-concept-art: xocialize/qwen-image-flash-loras: weight license CreativeML-OpenRAIL-M is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:dott4k: furaidosu/dott4k-qwen-image-lora: weight license NOASSERTION is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:dott4k-v2: furaidosu/dott4kv2-qwen-image-lora: weight license NOASSERTION is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:dott4k-fal: furaidosu/dott4kfalcomplete-qwen-image-lora: weight license NOASSERTION is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:enjuto-mojamuto: furaidosu/enjuto-qwen-image-lora: weight license NOASSERTION is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+14 operations, 45 models offered (research models named-only)
+34 adapters offered
+16-bit upscale (output.bit_depth 16): anime4k-upscale, heart-upscale, nerve-upscale, realplksr-upscale, vosr2-upscale
+16-bit restore (output.bit_depth 16): gfpgan-face, nafnet-restore, restoreformer-face
+2026-10-29T11:43:13-0700 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17611
+pixel-agency-image-engine listening on http://127.0.0.1:17611/mes/v0 (open mode, loopback only)

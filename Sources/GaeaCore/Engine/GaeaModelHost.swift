@@ -160,7 +160,9 @@ struct GaeaModelHost: ModelHost {
         // Inputs travel as spool paths (GPP-1 §1): images as the PNGs the normalizer made, the prompt as a text file.
         // An `ic` adapter's images (`adapter<n>.<role>`) travel with the adapter instead (GPP-1 §3.3).
         var inputs: [String: GPPValue] = [:]
-        for (name, images) in work.inputs.sorted(by: { $0.key < $1.key }) {
+        // An input with no images is left out, not sent empty: an ic edit whose images all fill the adapter's slots has
+        // none of its own (IMAGE-013).
+        for (name, images) in work.inputs.sorted(by: { $0.key < $1.key }) where !images.isEmpty {
             var paths: [GPPValue] = []
             for (i, image) in images.enumerated() {
                 let url = inputDirectory.appending(path: "\(name)-\(i).\(image.format == .jpeg ? "jpg" : "png")")
@@ -180,7 +182,10 @@ struct GaeaModelHost: ModelHost {
         let limits = call.limits
         var asked: (width: Int, height: Int)?
         if let w = work.width, let h = work.height { asked = (w, h) }
-        let run = Self.runSize(asked: asked, first: work.inputs["images"]?.first ?? work.inputs["image"]?.first, limits: limits)
+        // An ic edit whose images all fill the adapter's slots sizes by its first slot image.
+        let first = work.inputs["images"]?.first ?? work.inputs["image"]?.first
+            ?? work.inputs.filter { $0.key.hasPrefix("adapter") }.sorted { $0.key < $1.key }.lazy.compactMap(\.value.first).first
+        let run = Self.runSize(asked: asked, first: first, limits: limits)
         var params: [String: GPPValue] = call.defaults
         params["count"] = 1
         if let run { params["size"] = ["width": .int(Int64(run.width)), "height": .int(Int64(run.height))] }

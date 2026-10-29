@@ -1,0 +1,1044 @@
+[
+ {
+  "adapter": "qwen-image:peter-chan-s-concept-art",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:peter-chan-s-concept-art",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Peter Chan's concept art"
+   }
+  ],
+  "run_ms": 11068,
+  "wall_ms": 11072,
+  "files": [
+   "qwen-image_peter-chan-s-concept-art-0.png"
+  ],
+  "sha256": [
+   "6a8b07cec3baf3754e84e175de53362b8f4f2ea19c836abb236fbdaae754d992"
+  ]
+ },
+ {
+  "adapter": "qwen-image:day-of-the-tentacle",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:day-of-the-tentacle",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Day of the Tentacle"
+   }
+  ],
+  "run_ms": 25807,
+  "wall_ms": 25811,
+  "files": [
+   "qwen-image_day-of-the-tentacle-0.png"
+  ],
+  "sha256": [
+   "a86f13f22a4ef0152e0eb5a1e0423cffde01948520b8ce8319a739617718cca7"
+  ]
+ },
+ {
+  "adapter": "qwen-image:dott4k",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:dott4k",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": "unknown",
+     "notice": "Its licence doesn't say whether commercial use is allowed.",
+     "spdx": "NOASSERTION",
+     "terms_url": "https://huggingface.co/furaidosu/dott4k-qwen-image-lora/blob/558137f8d745e87c13602fe45146b39bd7e7aabd/README.md"
+    },
+    "revision": "558137f8d745e87c13602fe45146b39bd7e7aabd",
+    "strength": 1,
+    "title": "Dott4k"
+   }
+  ],
+  "run_ms": 10321,
+  "wall_ms": 10325,
+  "files": [
+   "qwen-image_dott4k-0.png"
+  ],
+  "sha256": [
+   "4e4235ead45faf9121f319c5e78ad7411fcb91ec0f874385dfeefde58224e280"
+  ]
+ },
+ {
+  "adapter": "qwen-image:dott4k-v2",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:dott4k-v2",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": "unknown",
+     "notice": "Its licence doesn't say whether commercial use is allowed.",
+     "spdx": "NOASSERTION",
+     "terms_url": "https://huggingface.co/furaidosu/dott4kv2-qwen-image-lora/blob/03133c18f7ca56cd3c3484018ff3fed580eb41ee/README.md"
+    },
+    "revision": "03133c18f7ca56cd3c3484018ff3fed580eb41ee",
+    "strength": 1,
+    "title": "Dott4k.v2"
+   }
+  ],
+  "run_ms": 20494,
+  "wall_ms": 20498,
+  "files": [
+   "qwen-image_dott4k-v2-0.png"
+  ],
+  "sha256": [
+   "119d6cbe829f692655ce7703eebaa10ec53b12446d6bfd96c10dfe1c5a287aa6"
+  ]
+ },
+ {
+  "adapter": "qwen-image:dott4k-fal",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:dott4k-fal",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": "unknown",
+     "notice": "Its licence doesn't say whether commercial use is allowed.",
+     "spdx": "NOASSERTION",
+     "terms_url": "https://huggingface.co/furaidosu/dott4kfalcomplete-qwen-image-lora/blob/49b926d6dc85b318402a6d46392fc256fb641587/README.md"
+    },
+    "revision": "49b926d6dc85b318402a6d46392fc256fb641587",
+    "strength": 1,
+    "title": "Dott4k.fal"
+   }
+  ],
+  "run_ms": 27312,
+  "wall_ms": 27316,
+  "files": [
+   "qwen-image_dott4k-fal-0.png"
+  ],
+  "sha256": [
+   "0584802d0a8e3a0c6a79aeea9b034677ce90b26052efebd6c554b4dc32955d76"
+  ]
+ },
+ {
+  "adapter": "qwen-image:dott4kv4-10epochs-modelscope",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:dott4kv4-10epochs-modelscope",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Dott4kv4.10epochs.modelscope"
+   }
+  ],
+  "run_ms": 17361,
+  "wall_ms": 17365,
+  "files": [
+   "qwen-image_dott4kv4-10epochs-modelscope-0.png"
+  ],
+  "sha256": [
+   "ed6798f54b8c0b0e533088bfc4dfe36aed2380bb7eb61126e8cf298b4e25325c"
+  ]
+ },
+ {
+  "adapter": "qwen-image:sam-and-max-hit-the-road",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:sam-and-max-hit-the-road",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Sam and Max hit the road"
+   }
+  ],
+  "run_ms": 25573,
+  "wall_ms": 25578,
+  "files": [
+   "qwen-image_sam-and-max-hit-the-road-0.png"
+  ],
+  "sha256": [
+   "483d9ad80a4f85eded00260f4822993780085f49f8328013e2c1eb79e05efc95"
+  ]
+ },
+ {
+  "adapter": "qwen-image:return-to-monkey-island",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:return-to-monkey-island",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Return to Monkey Island"
+   }
+  ],
+  "run_ms": 26638,
+  "wall_ms": 26642,
+  "files": [
+   "qwen-image_return-to-monkey-island-0.png"
+  ],
+  "sha256": [
+   "1c1539e20531f6e4c4425bd255ed30aa4a04a085ec0e7deaab065588c1e55be2"
+  ]
+ },
+ {
+  "adapter": "qwen-image:rex-crowle",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:rex-crowle",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Rex Crowle"
+   }
+  ],
+  "run_ms": 27005,
+  "wall_ms": 27008,
+  "files": [
+   "qwen-image_rex-crowle-0.png"
+  ],
+  "sha256": [
+   "ead1b1aedfbbc513334de097ef901a0fc1d4aaea6e288b6097c796783b6dd8e3"
+  ]
+ },
+ {
+  "adapter": "qwen-image:total-drama",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:total-drama",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Total Drama"
+   }
+  ],
+  "run_ms": 25937,
+  "wall_ms": 25941,
+  "files": [
+   "qwen-image_total-drama-0.png"
+  ],
+  "sha256": [
+   "6a76547c77ef11ba48adeb5455f4a931ab55a45ddad23f9e8fc9fdf3fb2f39bd"
+  ]
+ },
+ {
+  "adapter": "qwen-image:enjuto-mojamuto",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:enjuto-mojamuto",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": "unknown",
+     "notice": "Its licence doesn't say whether commercial use is allowed.",
+     "spdx": "NOASSERTION",
+     "terms_url": "https://huggingface.co/furaidosu/enjuto-qwen-image-lora/blob/02950bdd0f663224ef114b185fef10e883aca600/README.md"
+    },
+    "revision": "02950bdd0f663224ef114b185fef10e883aca600",
+    "strength": 1,
+    "title": "Enjuto Mojamuto"
+   }
+  ],
+  "run_ms": 24401,
+  "wall_ms": 24405,
+  "files": [
+   "qwen-image_enjuto-mojamuto-0.png"
+  ],
+  "sha256": [
+   "3ee1f083effed3fe1afa1fec8da747a239ab9cdf4a2f43f364689d9f8f536426"
+  ]
+ },
+ {
+  "adapter": "qwen-image:masha-2d-cartoon",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:masha-2d-cartoon",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Masha 2d cartoon"
+   }
+  ],
+  "run_ms": 22622,
+  "wall_ms": 22625,
+  "files": [
+   "qwen-image_masha-2d-cartoon-0.png"
+  ],
+  "sha256": [
+   "799a06e7f02baf910a2d2ed5a9f027558fea3900b1b42778de401b498ac1b44a"
+  ]
+ },
+ {
+  "adapter": "qwen-image:masha-2d-anime",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:masha-2d-anime",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Masha 2d anime"
+   }
+  ],
+  "run_ms": 26294,
+  "wall_ms": 26298,
+  "files": [
+   "qwen-image_masha-2d-anime-0.png"
+  ],
+  "sha256": [
+   "d6ef1d630a01a5d6be5f0c676fae65af2ef4dbebe2c0297faf3f0e17fe9ca59f"
+  ]
+ },
+ {
+  "adapter": "qwen-image:pablo-lobato",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:pablo-lobato",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Pablo Lobato"
+   }
+  ],
+  "run_ms": 25687,
+  "wall_ms": 25691,
+  "files": [
+   "qwen-image_pablo-lobato-0.png"
+  ],
+  "sha256": [
+   "b210736d366c2b570d5449743df5b39169475b300269efc7bedf7946dfbad44f"
+  ]
+ },
+ {
+  "adapter": "qwen-image:tostiadvbg",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:tostiadvbg",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "TostiAdvBg"
+   }
+  ],
+  "run_ms": 16444,
+  "wall_ms": 16445,
+  "files": [
+   "qwen-image_tostiadvbg-0.png"
+  ],
+  "sha256": [
+   "d3eadf3ce9b30b96e86d5356992bef09ce863949d82172b4f9fb07d5af5375a1"
+  ]
+ },
+ {
+  "adapter": "qwen-image:blobfish",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:blobfish",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Blobfish"
+   }
+  ],
+  "run_ms": 24431,
+  "wall_ms": 24435,
+  "files": [
+   "qwen-image_blobfish-0.png"
+  ],
+  "sha256": [
+   "c925c058118ed7e06558df4e03466b61a8898d6c2dc540663bfb9bc38c5a4ee3"
+  ]
+ },
+ {
+  "adapter": "qwen-image:the-bad-taxidermist",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:the-bad-taxidermist",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "The Bad Taxidermist"
+   }
+  ],
+  "run_ms": 26542,
+  "wall_ms": 26546,
+  "files": [
+   "qwen-image_the-bad-taxidermist-0.png"
+  ],
+  "sha256": [
+   "ff3b8a62976238bde22763c8c82c14ceb21c2194f586888ee01bd1cdb455b754"
+  ]
+ },
+ {
+  "adapter": "qwen-image:casivaras",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:casivaras",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Casivaras"
+   }
+  ],
+  "run_ms": 23328,
+  "wall_ms": 23331,
+  "files": [
+   "qwen-image_casivaras-0.png"
+  ],
+  "sha256": [
+   "229feeb6284826c21db5226f69bb7f06e78eb840283eba10ea2924db0a7666d9"
+  ]
+ },
+ {
+  "adapter": "qwen-image:piccoli-figurativo",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:piccoli-figurativo",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Piccoli Figurativo"
+   }
+  ],
+  "run_ms": 25711,
+  "wall_ms": 25715,
+  "files": [
+   "qwen-image_piccoli-figurativo-0.png"
+  ],
+  "sha256": [
+   "64cf4b88b676e17ada73f40b88dec6fb7d6450a6c9d08b860a107fd4bbd60258"
+  ]
+ },
+ {
+  "adapter": "qwen-image:piccoli-abstracto",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:piccoli-abstracto",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Piccoli Abstracto"
+   }
+  ],
+  "run_ms": 26083,
+  "wall_ms": 26087,
+  "files": [
+   "qwen-image_piccoli-abstracto-0.png"
+  ],
+  "sha256": [
+   "6e8bdca07d01631560ca186f4d1a09882a8d246d8b950acb38928c58ddcca7d5"
+  ]
+ },
+ {
+  "adapter": "qwen-image:puzzolo",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:puzzolo",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Puzzolo"
+   }
+  ],
+  "run_ms": 26779,
+  "wall_ms": 26786,
+  "files": [
+   "qwen-image_puzzolo-0.png"
+  ],
+  "sha256": [
+   "fcb72a2625a6b674b68b0b54669d49fb963675eabdd1fd911d9b71a04dc8aeea"
+  ]
+ },
+ {
+  "adapter": "qwen-image:panoramic-wide-fisheye",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:panoramic-wide-fisheye",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Panoramic Wide Fisheye"
+   }
+  ],
+  "run_ms": 24021,
+  "wall_ms": 24025,
+  "files": [
+   "qwen-image_panoramic-wide-fisheye-0.png"
+  ],
+  "sha256": [
+   "25290a1e1db811dafa7284c7755942f62dbadb58adaae3e63f2ce010f2382cd6"
+  ]
+ },
+ {
+  "adapter": "qwen-image:panorama-v2-2512",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:panorama-v2-2512",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Panorama.v2.2512"
+   }
+  ],
+  "run_ms": 15923,
+  "wall_ms": 15927,
+  "files": [
+   "qwen-image_panorama-v2-2512-0.png"
+  ],
+  "sha256": [
+   "661d0b0e08bdfb595a26f8b4d97f4595a94d517556738f930456ba0cb8da53e3"
+  ]
+ },
+ {
+  "adapter": "qwen-image:china-zorrilla",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:china-zorrilla",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "China Zorrilla"
+   }
+  ],
+  "run_ms": 24571,
+  "wall_ms": 24575,
+  "files": [
+   "qwen-image_china-zorrilla-0.png"
+  ],
+  "sha256": [
+   "6740875693bc6b86132acfd489e28684884a0bc7a3851fb8f7c82c35cc0faa17"
+  ]
+ },
+ {
+  "adapter": "qwen-image:martha",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:martha",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Martha"
+   }
+  ],
+  "run_ms": 26271,
+  "wall_ms": 26275,
+  "files": [
+   "qwen-image_martha-0.png"
+  ],
+  "sha256": [
+   "b74da7b876b49e94e83a9def54d05a9eb49622a2723bc04ee21135e3b0e1f402"
+  ]
+ },
+ {
+  "adapter": "qwen-image:la-sabelo-pablo-carayani-camara",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:la-sabelo-pablo-carayani-camara",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "La Sabelo (Pablo Carayani Camar\u00e1)"
+   }
+  ],
+  "run_ms": 22943,
+  "wall_ms": 22947,
+  "files": [
+   "qwen-image_la-sabelo-pablo-carayani-camara-0.png"
+  ],
+  "sha256": [
+   "61f227aa816d74d2e320385bf63e27e2ab2b2c3cd4ae049883215931ff2987ca"
+  ]
+ },
+ {
+  "adapter": "qwen-image:estoy-presa",
+  "operation": "image.generate",
+  "model": "qwen-image-flash",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "qwen-image:estoy-presa",
+    "license": {
+     "accepted_required": true,
+     "commercial_use": true,
+     "notice": "Commercial use is allowed on the conditions of its licence (CreativeML-OpenRAIL-M): read them first. CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+     "spdx": "CreativeML-OpenRAIL-M",
+     "terms_url": "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+    },
+    "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+    "strength": 1,
+    "title": "Estoy Presa"
+   }
+  ],
+  "run_ms": 24006,
+  "wall_ms": 24016,
+  "files": [
+   "qwen-image_estoy-presa-0.png"
+  ],
+  "sha256": [
+   "0c33d7c1e6ead427f197bffa01d9d6f0583a4982e25b2f7df442d2e70fddf2a4"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:refcontrol-pose",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:refcontrol-pose",
+    "license": {
+     "commercial_use": true,
+     "notice": "Self-trained by xocialize on black-forest-labs/FLUX.2-klein-base-4B (Apache-2.0). Training frames came from Wikimedia Commons contributors (CC-BY / CC-BY-SA) and Pexels videographers; they are not redistributed, only the weights.",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/refcontrol-FLUX.2-klein-4B-pose-lora/blob/b2b0edf2622f2abd980bf868441149d71b3eb7b0/README.md"
+    },
+    "revision": "b2b0edf2622f2abd980bf868441149d71b3eb7b0",
+    "strength": 1,
+    "title": "RefControl Pose"
+   }
+  ],
+  "run_ms": 49671,
+  "wall_ms": 49682,
+  "files": [
+   "flux2-klein_refcontrol-pose-0.png"
+  ],
+  "sha256": [
+   "7dab9e4ec0973edc113b7e8df0c2885ca71e5cb33fd399c3ae3b57356817851f"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:consistence-edit",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:consistence-edit",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/consistence-edit-FLUX.2-klein-4B-lora/blob/f043b846a356529a6b0c269945f0888522064490/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/consistence-edit-FLUX.2-klein-4B-lora/blob/f043b846a356529a6b0c269945f0888522064490/LICENSE"
+    },
+    "revision": "f043b846a356529a6b0c269945f0888522064490",
+    "strength": 0.6,
+    "title": "Consistence Edit"
+   }
+  ],
+  "run_ms": 28723,
+  "wall_ms": 28733,
+  "files": [
+   "flux2-klein_consistence-edit-0.png"
+  ],
+  "sha256": [
+   "a8e71e5d25a1c1d46f3f93c32fdfcf539782253f3f8ebcfa5a6a2d753e7290d1"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:background-remove",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:background-remove",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/background-remove-FLUX.2-klein-4B-lora/blob/10f38b4af9de00f1a3b177e44d0aaec30d842af6/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/background-remove-FLUX.2-klein-4B-lora/blob/10f38b4af9de00f1a3b177e44d0aaec30d842af6/LICENSE"
+    },
+    "revision": "10f38b4af9de00f1a3b177e44d0aaec30d842af6",
+    "strength": 1.1,
+    "title": "Background Removal"
+   }
+  ],
+  "run_ms": 15358,
+  "wall_ms": 15367,
+  "files": [
+   "flux2-klein_background-remove-0.png"
+  ],
+  "sha256": [
+   "8a919dfef1b39700abe07f3a9b805cdd740d53fe17c85f0b12d4cec73018da4f"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:outpaint",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:outpaint",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/outpaint-FLUX.2-klein-4B-lora/blob/dafbfeeed5db940fd74cd9c0fb6981560e77d343/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/outpaint-FLUX.2-klein-4B-lora/blob/dafbfeeed5db940fd74cd9c0fb6981560e77d343/LICENSE"
+    },
+    "revision": "dafbfeeed5db940fd74cd9c0fb6981560e77d343",
+    "strength": 1.1,
+    "title": "Outpaint (Green Screen)"
+   }
+  ],
+  "run_ms": 17487,
+  "wall_ms": 17493,
+  "files": [
+   "flux2-klein_outpaint-0.png"
+  ],
+  "sha256": [
+   "d7b5e5ac44974ef40e6db31067be97f4168a4ad66c6e831efef9092b6e0009b1"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:spritesheet",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:spritesheet",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/spritesheet-FLUX.2-klein-4B-lora/blob/9d68d65506dce961fef1473e1edd11def3ff9f96/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/spritesheet-FLUX.2-klein-4B-lora/blob/9d68d65506dce961fef1473e1edd11def3ff9f96/LICENSE"
+    },
+    "revision": "9d68d65506dce961fef1473e1edd11def3ff9f96",
+    "strength": 1.1,
+    "title": "2x2 Sprite Sheet"
+   }
+  ],
+  "run_ms": 17650,
+  "wall_ms": 17658,
+  "files": [
+   "flux2-klein_spritesheet-0.png"
+  ],
+  "sha256": [
+   "32122f48dc5ae15b542d72eaa84f7f75de8475b1b865f0eadd51662fedfc49ec"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:zoom",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:zoom",
+    "license": {
+     "commercial_use": true,
+     "notice": "Keep this repo's NOTICE file (the original author's attribution) with any redistributed copy: https://huggingface.co/xocialize/zoom-FLUX.2-klein-4B-lora/blob/ec25220671322176b8e6bc13d2bd6ab09bde43ea/NOTICE",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/zoom-FLUX.2-klein-4B-lora/blob/ec25220671322176b8e6bc13d2bd6ab09bde43ea/LICENSE"
+    },
+    "revision": "ec25220671322176b8e6bc13d2bd6ab09bde43ea",
+    "strength": 1.1,
+    "title": "Red Zoom"
+   }
+  ],
+  "run_ms": 17580,
+  "wall_ms": 17603,
+  "files": [
+   "flux2-klein_zoom-0.png"
+  ],
+  "sha256": [
+   "9c20ecff55a708245c6fd1f6b220d848b885a13adf49e93ebc8053157cffc834"
+  ]
+ },
+ {
+  "adapter": "flux2-klein:tryon",
+  "operation": "image.edit",
+  "model": "klein-4b",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": [
+   {
+    "id": "flux2-klein:tryon",
+    "license": {
+     "commercial_use": true,
+     "notice": "Self-trained by xocialize on black-forest-labs/FLUX.2-klein-base-4B (Apache-2.0). Training frames came from Pexels (train-only); they are not redistributed, only the weights.",
+     "spdx": "Apache-2.0",
+     "terms_url": "https://huggingface.co/xocialize/tryon-FLUX.2-klein-4B-lora/blob/5e590220c687190a3d8dc66d173570f9de097984/README.md"
+    },
+    "revision": "5e590220c687190a3d8dc66d173570f9de097984",
+    "strength": 1,
+    "title": "Virtual Try-On"
+   }
+  ],
+  "run_ms": 66203,
+  "wall_ms": 66212,
+  "files": [
+   "flux2-klein_tryon-0.png"
+  ],
+  "sha256": [
+   "5ccc38135c48a84c1f6db2cb5d72d23258f16f111e2f19dd0cb962f42756ee65"
+  ]
+ }
+]

@@ -1,0 +1,1370 @@
+{
+  "engine" : {
+    "contract" : "1.57.0",
+    "package" : "mlx-engine-swift",
+    "version" : "0.72.0"
+  },
+  "executable" : "gaea-qwen-image-worker",
+  "helpers" : [
+
+  ],
+  "id" : "com.xocialize.gaea.qwen-image",
+  "license" : "Apache-2.0",
+  "manifest_version" : 1,
+  "min_gaea" : "0.7.0",
+  "models" : [
+    {
+      "id" : "qwen-image-edit",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 57,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 21000000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 42000000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*"
+                ],
+                "repo" : "Qwen/Qwen-Image-Edit-2511",
+                "revision" : "main",
+                "role" : "transformer"
+              },
+              {
+                "matching" : [
+                  "vae/*"
+                ],
+                "repo" : "Qwen/Qwen-Image-Edit-2511",
+                "revision" : "main",
+                "role" : "vae"
+              },
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "processor/*"
+                ],
+                "repo" : "Qwen/Qwen-Image-Edit-2511",
+                "revision" : "main",
+                "role" : "text-encoder"
+              },
+              {
+                "matching" : [
+                  "model_index.json",
+                  "scheduler/*"
+                ],
+                "repo" : "Qwen/Qwen-Image-Edit-2511",
+                "revision" : "main",
+                "role" : "pipeline-config"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 57,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "Apache-2.0"
+          }
+        },
+        "provenance" : {
+          "revision" : "main",
+          "sourceRepo" : "Qwen/Qwen-Image-Edit-2511",
+          "tier" : 1
+        },
+        "requirements" : {
+          "chipFloor" : "max",
+          "footprints" : [
+            {
+              "peakActivationBytes" : 21000000000,
+              "quant" : "bf16",
+              "residentBytes" : 42000000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "imageEdit",
+            "name" : "qwen-image-edit",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "images",
+                "required" : true,
+                "summary" : "Conditioning input image(s), in prompt order."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The edit instruction."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "True-CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Qwen-Image-Edit-2511 instruction editing (20B zero_cond_t DiT + Qwen2.5-VL conditioning): multi-image fusion, identity-preserving edits, 1024²-area output, 20-step true CFG. Opt-in step-residual cache via metaData stepCacheMode (conservative|aggressive).",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "Qwen-Image-Edit 2511"
+    },
+    {
+      "id" : "qwen-image-flash",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 57,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 9300000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 22300000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/model-int8.safetensors",
+                  "transformer/config.json"
+                ],
+                "repo" : "mlx-community/Qwen-Image-Flash-8bit",
+                "revision" : "main",
+                "role" : "transformer"
+              },
+              {
+                "matching" : [
+                  "vae/*"
+                ],
+                "repo" : "mlx-community/Qwen-Image-Flash-8bit",
+                "revision" : "main",
+                "role" : "vae"
+              },
+              {
+                "matching" : [
+                  "text_encoder/model-int8.safetensors",
+                  "text_encoder/config.json",
+                  "tokenizer/*"
+                ],
+                "repo" : "mlx-community/Qwen-Image-Flash-8bit",
+                "revision" : "main",
+                "role" : "text-encoder"
+              },
+              {
+                "matching" : [
+                  "model_index.json",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Qwen-Image-Flash-8bit",
+                "revision" : "main",
+                "role" : "pipeline-config"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 57,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "LicenseRef-NVIDIA-Open-Model"
+          }
+        },
+        "provenance" : {
+          "revision" : "main",
+          "sourceRepo" : "nvidia/Qwen-Image-Flash",
+          "tier" : 1
+        },
+        "requirements" : {
+          "chipFloor" : "max",
+          "footprints" : [
+            {
+              "peakActivationBytes" : 19300000000,
+              "quant" : "bf16",
+              "residentBytes" : 41400000000
+            },
+            {
+              "peakActivationBytes" : 9300000000,
+              "quant" : "int8",
+              "residentBytes" : 22300000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "adapters" : {
+              "baseModel" : "qwen-image",
+              "binding" : "perRequest",
+              "formats" : [
+                "diffusers-peft",
+                "kohya",
+                "diffusers-legacy"
+              ],
+              "kinds" : [
+                "plain"
+              ],
+              "maxCount" : 4,
+              "strengthRange" : {
+                "max" : 2,
+                "min" : 0
+              }
+            },
+            "capability" : "textToImage",
+            "name" : "qwen-image-flash",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              },
+              {
+                "kind" : "array",
+                "name" : "adapters",
+                "required" : false,
+                "summary" : "Adapters (LoRA) by catalog id, each {id, strength?, conditioning?}; up to 4, strength 0.0…2.0."
+              }
+            ],
+            "summary" : "Qwen-Image-Flash text-to-image (NVIDIA DMD2 4-step distill of Qwen-Image, 20B MMDiT + Qwen2.5-VL conditioning): four deterministic steps on a static shift-3 FlowMatch Euler schedule with guidance internalized (true CFG 1.0), tested at 1024²; any size divisible by 16. Up to 4 adapters per request (`adapters`, by catalog id), rank-stacked on the resident DiT.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "Qwen-Image Flash"
+    }
+  ],
+  "offers" : [
+    {
+      "limits" : {
+        "max_images" : 3,
+        "max_pixels" : 1048576,
+        "size_multiple" : 32
+      },
+      "model" : {
+        "id" : "qwen-image-edit",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "memory_class" : "xlarge",
+        "notes" : "Instruction editing with up to 3 references, named \"Picture 1\", \"Picture 2\"… in the instruction. Draws about 1024² at the first image's aspect; 20 steps of true CFG. Needs about 63 GB.",
+        "quality_tiers" : [
+          "standard",
+          "best"
+        ],
+        "speed_class" : "slow",
+        "title" : "Qwen-Image-Edit 2511"
+      },
+      "operation" : "image.edit",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-qwen.guidance" : {
+            "default" : 4,
+            "description" : "True classifier-free guidance: how strongly the instruction steers. 1 turns CFG off.",
+            "maximum" : 20,
+            "minimum" : 1,
+            "type" : "number",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Guidance",
+              "widget" : "slider"
+            }
+          },
+          "x-qwen.steps" : {
+            "default" : 20,
+            "description" : "Denoising steps; fewer is faster and coarser.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "adapter_support" : {
+        "base_model" : "qwen-image",
+        "formats" : [
+          "diffusers-peft",
+          "kohya",
+          "diffusers-legacy"
+        ],
+        "kinds" : [
+          "plain"
+        ],
+        "max_count" : 4,
+        "strength" : {
+          "max" : 2,
+          "min" : 0
+        }
+      },
+      "adapters_meta" : {
+        "qwen-image:blobfish" : {
+          "bytes" : 590058832,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058832,
+            "file" : "loras/blobfish.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "a6aba72f70e24ec15ec3a91cc0ba0cf6021165f0b2c6d97b41c14199dcea4f74"
+          },
+          "status" : "candidate",
+          "trigger" : "BLBFSH"
+        },
+        "qwen-image:casivaras" : {
+          "bytes" : 590058840,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058840,
+            "file" : "loras/casivaras.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "796b8f44d517108c9ff4c1e047ab1abeee3bb3de01728a3bfb8256a7c7d4d740"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:china-zorrilla" : {
+          "bytes" : 590058832,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058832,
+            "file" : "loras/china-zorrilla.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "2c99c72067d9dd3cffc66c359d27df9d288945b03c10f30a26f0a56b72b1b7d0"
+          },
+          "status" : "candidate",
+          "trigger" : "tok"
+        },
+        "qwen-image:day-of-the-tentacle" : {
+          "bytes" : 590058840,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058840,
+            "file" : "loras/day-of-the-tentacle.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "d60270b7b18bfcb2ad617413887ce116a617621a6e800deb5a4de6e7b5911b09"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:dott4k" : {
+          "bytes" : 590154464,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "kohya",
+          "source" : {
+            "bytes" : 590154464,
+            "file" : "LhBW3CcSiF6V7aKepWm3k_adapter.safetensors",
+            "repo" : "furaidosu/dott4k-qwen-image-lora",
+            "revision" : "558137f8d745e87c13602fe45146b39bd7e7aabd",
+            "sha256" : "25f03695d2bde7d07fc5df3947d47ff41e56d9860214c472eb8a5d909f2e4507"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:dott4k-fal" : {
+          "bytes" : 590154464,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "kohya",
+          "source" : {
+            "bytes" : 590154464,
+            "file" : "dott4k-fal-complete.safetensors",
+            "repo" : "furaidosu/dott4kfalcomplete-qwen-image-lora",
+            "revision" : "49b926d6dc85b318402a6d46392fc256fb641587",
+            "sha256" : "9b4d96982e88b63290e866a89c9a4601fab758312b083ea7b6f36bcf43fa352d"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:dott4k-v2" : {
+          "bytes" : 295146160,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 295146160,
+            "file" : "dott4k.safetensors",
+            "repo" : "furaidosu/dott4kv2-qwen-image-lora",
+            "revision" : "03133c18f7ca56cd3c3484018ff3fed580eb41ee",
+            "sha256" : "9f2723c8145981085ef56afccfaf925f9e1369156e47b16783f4f94ab38257d7"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:dott4kv4-10epochs-modelscope" : {
+          "bytes" : 236117032,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 236117032,
+            "file" : "loras/dott4kv4-10epochs-modelscope.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "73cfee0e2ad5acf3a587ceab3bf358f8fce51f822cd34969bad87891304bef4d"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:enjuto-mojamuto" : {
+          "bytes" : 590154464,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "kohya",
+          "source" : {
+            "bytes" : 590154464,
+            "file" : "fal-enjuto-qwen-image-lora.safetensors",
+            "repo" : "furaidosu/enjuto-qwen-image-lora",
+            "revision" : "02950bdd0f663224ef114b185fef10e883aca600",
+            "sha256" : "15eb61b03651e664b6243fa588af187640272e15d8fbc83627f37931d1e6c4ed"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:estoy-presa" : {
+          "bytes" : 590058840,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058840,
+            "file" : "loras/estoy-presa.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "0dd8b7ebb826fbf09e9d4e45fb2a1b960e75860668b4b2a3125a244998dc4e57"
+          },
+          "status" : "candidate",
+          "trigger" : "STYPRS"
+        },
+        "qwen-image:la-sabelo-pablo-carayani-camara" : {
+          "bytes" : 590058840,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058840,
+            "file" : "loras/la-sabelo-pablo-carayani-camara.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "f1e49c3064b6449745ffec29adf603dd7e3440a76f1c0459bb3bcabd7943d0bc"
+          },
+          "status" : "candidate",
+          "trigger" : "LASABELO"
+        },
+        "qwen-image:martha" : {
+          "bytes" : 590058832,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058832,
+            "file" : "loras/martha.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "6d85d6f0889d8a6b9ff5cf06eb8aa8c2c554a9b066634c1565f1e6a92076f519"
+          },
+          "status" : "candidate",
+          "trigger" : "martha"
+        },
+        "qwen-image:masha-2d-anime" : {
+          "bytes" : 590154464,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "kohya",
+          "source" : {
+            "bytes" : 590154464,
+            "file" : "loras/masha-2d-anime.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "4449a084e62348bcd0bc36195901e63c46c388b698876fcfe6c17baa77c5a751"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:masha-2d-cartoon" : {
+          "bytes" : 590154464,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "kohya",
+          "source" : {
+            "bytes" : 590154464,
+            "file" : "loras/masha-2d-cartoon.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "2b3947b3814f7cb9cc2ba92319c0bd36b7b7422ba5d0eb693ffc4104933cd77a"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:pablo-lobato" : {
+          "bytes" : 590058832,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058832,
+            "file" : "loras/pablo-lobato.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "e8d68e6e729b4d97ae2253b90ddc6883ce8d812d20e62c0b9e029eb268ebb832"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:panorama-v2-2512" : {
+          "bytes" : 236117048,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 236117048,
+            "file" : "loras/panorama-v2-2512.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "36dc629514b10a4db25332c07649d0463c12c30bdad75783d5f4c8ae1053a248"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:panoramic-wide-fisheye" : {
+          "bytes" : 590058840,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058840,
+            "file" : "loras/panoramic-wide-fisheye.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "94fdf1914b9cab01df162487a5d39f8a92aedfd4b2567144b27705cde95c4726"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:peter-chan-s-concept-art" : {
+          "bytes" : 590058848,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058848,
+            "file" : "loras/peter-chan-s-concept-art.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "5d5a7d2fa1b83f6aa9d6dfb7dc8178138b677ff5249aac30e1a9a6dce9dd3ee0"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:piccoli-abstracto" : {
+          "bytes" : 590058832,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058832,
+            "file" : "loras/piccoli-abstracto.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "bcc80ff82df5c29397e111172003239acdd5400ef5d1a307959a44d21b4a476d"
+          },
+          "status" : "candidate",
+          "trigger" : "abstract painting"
+        },
+        "qwen-image:piccoli-figurativo" : {
+          "bytes" : 590058840,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058840,
+            "file" : "loras/piccoli-figurativo.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "9734f88360277c021c24dc6192451f84b03b738d90bd9ef1c6623c26b4604981"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:puzzolo" : {
+          "bytes" : 590058840,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058840,
+            "file" : "loras/puzzolo.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "aa0fd8952081eaaf83c91dba3802ae362d95752f1dfa63592a5a74f3718ff175"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:return-to-monkey-island" : {
+          "bytes" : 590058840,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058840,
+            "file" : "loras/return-to-monkey-island.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "24b6265d4685662e36df4480cd60ca9eb6ce61dcf0897b47e426db758e24543e"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:rex-crowle" : {
+          "bytes" : 590058840,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058840,
+            "file" : "loras/rex-crowle.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "4240842161801b9c8598f3b314bd8e93196bb9ebe434331fca3e1f939519bd35"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:sam-and-max-hit-the-road" : {
+          "bytes" : 590058816,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058816,
+            "file" : "loras/sam-and-max-hit-the-road.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "a342495a1e152a1e216f8108116dd81b68c72ef8456758e3f1dc78ab54ff1d32"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:the-bad-taxidermist" : {
+          "bytes" : 590058848,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058848,
+            "file" : "loras/the-bad-taxidermist.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "e1b57d7e816829f5701e1791d62609fc4fef9bcac30f1ccb8a1f2f70bd329510"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:tostiadvbg" : {
+          "bytes" : 236117048,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 236117048,
+            "file" : "loras/tostiadvbg.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "d02e1b994abb059f38e5851e47a47e1c3ccff29fe2238ac05f734495daf277c6"
+          },
+          "status" : "candidate"
+        },
+        "qwen-image:total-drama" : {
+          "bytes" : 590058848,
+          "clearance" : {
+            "qwen-image" : "declared"
+          },
+          "format" : "diffusers-peft",
+          "source" : {
+            "bytes" : 590058848,
+            "file" : "loras/total-drama.safetensors",
+            "repo" : "xocialize/qwen-image-flash-loras",
+            "revision" : "a60485ca35e32b69c2d71930c2ef3d3745271411",
+            "sha256" : "f6e9a2ca6dcb5bc442c2ab58ede855933d8fa99378732bca92c19b9fa1b49bc3"
+          },
+          "status" : "candidate"
+        }
+      },
+      "defaults" : {
+        "count" : 1
+      },
+      "limits" : {
+        "max_pixels" : 1048576,
+        "max_side" : 2048,
+        "min_side" : 256,
+        "size_multiple" : 16
+      },
+      "model" : {
+        "adapters" : [
+          {
+            "id" : "qwen-image:peter-chan-s-concept-art",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Peter Chan's concept art"
+          },
+          {
+            "id" : "qwen-image:day-of-the-tentacle",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Day of the Tentacle"
+          },
+          {
+            "id" : "qwen-image:dott4k",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : "unknown",
+              "spdx" : "NOASSERTION",
+              "terms_url" : "https://huggingface.co/furaidosu/dott4k-qwen-image-lora/blob/558137f8d745e87c13602fe45146b39bd7e7aabd/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Dott4k"
+          },
+          {
+            "id" : "qwen-image:dott4k-v2",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : "unknown",
+              "spdx" : "NOASSERTION",
+              "terms_url" : "https://huggingface.co/furaidosu/dott4kv2-qwen-image-lora/blob/03133c18f7ca56cd3c3484018ff3fed580eb41ee/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Dott4k.v2"
+          },
+          {
+            "id" : "qwen-image:dott4k-fal",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : "unknown",
+              "spdx" : "NOASSERTION",
+              "terms_url" : "https://huggingface.co/furaidosu/dott4kfalcomplete-qwen-image-lora/blob/49b926d6dc85b318402a6d46392fc256fb641587/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Dott4k.fal"
+          },
+          {
+            "id" : "qwen-image:dott4kv4-10epochs-modelscope",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "spdx" : "Apache-2.0",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Dott4kv4.10epochs.modelscope"
+          },
+          {
+            "id" : "qwen-image:sam-and-max-hit-the-road",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Sam and Max hit the road"
+          },
+          {
+            "id" : "qwen-image:return-to-monkey-island",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Return to Monkey Island"
+          },
+          {
+            "id" : "qwen-image:rex-crowle",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Rex Crowle"
+          },
+          {
+            "id" : "qwen-image:total-drama",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Total Drama"
+          },
+          {
+            "id" : "qwen-image:enjuto-mojamuto",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : "unknown",
+              "spdx" : "NOASSERTION",
+              "terms_url" : "https://huggingface.co/furaidosu/enjuto-qwen-image-lora/blob/02950bdd0f663224ef114b185fef10e883aca600/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Enjuto Mojamuto"
+          },
+          {
+            "id" : "qwen-image:masha-2d-cartoon",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "spdx" : "Apache-2.0",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Masha 2d cartoon"
+          },
+          {
+            "id" : "qwen-image:masha-2d-anime",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "spdx" : "Apache-2.0",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Masha 2d anime"
+          },
+          {
+            "id" : "qwen-image:pablo-lobato",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Pablo Lobato"
+          },
+          {
+            "id" : "qwen-image:tostiadvbg",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "spdx" : "Apache-2.0",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image-2512; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "TostiAdvBg"
+          },
+          {
+            "id" : "qwen-image:blobfish",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Blobfish"
+          },
+          {
+            "id" : "qwen-image:the-bad-taxidermist",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "The Bad Taxidermist"
+          },
+          {
+            "id" : "qwen-image:casivaras",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Casivaras"
+          },
+          {
+            "id" : "qwen-image:piccoli-figurativo",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Piccoli Figurativo"
+          },
+          {
+            "id" : "qwen-image:piccoli-abstracto",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Piccoli Abstracto"
+          },
+          {
+            "id" : "qwen-image:puzzolo",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Puzzolo"
+          },
+          {
+            "id" : "qwen-image:panoramic-wide-fisheye",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Panoramic Wide Fisheye"
+          },
+          {
+            "id" : "qwen-image:panorama-v2-2512",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "spdx" : "Apache-2.0",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image-2512; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Panorama.v2.2512"
+          },
+          {
+            "id" : "qwen-image:china-zorrilla",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "China Zorrilla"
+          },
+          {
+            "id" : "qwen-image:martha",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Martha"
+          },
+          {
+            "id" : "qwen-image:la-sabelo-pablo-carayani-camara",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "La Sabelo (Pablo Carayani Camará)"
+          },
+          {
+            "id" : "qwen-image:estoy-presa",
+            "kind" : "plain",
+            "license" : {
+              "commercial_use" : true,
+              "notice" : "CreativeML Open RAIL-M: commercial use is allowed, subject to the licence's use restrictions (Attachment A), which pass on to anyone you share outputs or the adapter with.",
+              "spdx" : "CreativeML-OpenRAIL-M",
+              "terms_url" : "https://huggingface.co/xocialize/qwen-image-flash-loras/blob/a60485ca35e32b69c2d71930c2ef3d3745271411/README.md"
+            },
+            "notes" : "Trained on Qwen/Qwen-Image; not yet judged on our stack.",
+            "strength" : {
+              "default" : 1,
+              "max" : 2,
+              "min" : 0
+            },
+            "title" : "Estoy Presa"
+          }
+        ],
+        "id" : "qwen-image-flash",
+        "license" : {
+          "commercial_use" : true,
+          "notice" : "Licensed by NVIDIA Corporation under the NVIDIA Open Model License",
+          "spdx" : "LicenseRef-NVIDIA-Open-Model",
+          "terms_url" : "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/"
+        },
+        "memory_class" : "large",
+        "notes" : "4 distilled steps without CFG: negative prompts do nothing. Strong text rendering and layout.",
+        "quality_tiers" : [
+          "draft",
+          "standard"
+        ],
+        "speed_class" : "standard",
+        "title" : "Qwen-Image Flash"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-qwen.steps" : {
+            "default" : 4,
+            "description" : "Denoising steps. Flash is distilled for 4.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    }
+  ],
+  "protocol" : 1,
+  "repo" : "https://github.com/xocialize-code/gaea-plugin-qwen-image",
+  "settings" : [
+
+  ],
+  "summary" : "Qwen's 20B image family: Qwen-Image-Edit 2511 (Apache-2.0), a high-fidelity instruction editor with up to 3 references, and Qwen-Image Flash (NVIDIA Open Model License), 4-step text to image with strong text rendering.",
+  "team" : "CFZS6RXUCP",
+  "title" : "Qwen-Image",
+  "version" : "0.2.0"
+}
