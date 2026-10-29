@@ -53,7 +53,7 @@ public struct GaeaConsoleBackend: EngineConsoleBackend {
                 notes: offer.notes, memoryClass: offer.memoryClass, speedClass: offer.speedClass,
                 footprintBytes: lane.map { $0.resolved.persistentBytes + $0.resolved.peakTransientBytes },
                 install: bundled ? .builtIn : .notDownloaded(bytes: nil), resident: resident.contains(entry.model.id),
-                source: entry.model.package.provenance.sourceRepo, sourceURL: URL(string: entry.plugin.repo),
+                source: entry.model.sourceRepo, sourceURL: URL(string: entry.plugin.repo),
                 tags: entry.model.lanes.map { $0.id + ($0.default ? " (default)" : "") },
                 plugin: EngineModel.Plugin(id: entry.plugin.id, title: entry.plugin.title), version: entry.plugin.version,
                 update: row?.latestVersion.map { EngineUpdate(version: $0, notes: row?.latestNotes, publishedAt: row?.latestPublishedAt,

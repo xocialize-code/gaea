@@ -133,6 +133,36 @@ import Testing
         #expect(GaeaModelHost.operations[.textToImage] == "image.generate" && GaeaModelHost.operations[.imageEdit] == "image.edit")
         #expect(GaeaModelHost.capabilities.count == GaeaModelHost.operations.count)
         #expect(GaeaModelHost.operations.values.allSatisfy { ImageProfile.operations.operations[$0] != nil })
+        // The defect detector is a helper Gaea calls, never an operation it offers.
+        #expect(GaeaModelHost.helperCapabilities[GaeaModelHost.defectsHelper] == .defectDetect)
+        #expect(!GaeaModelHost.operations.values.contains(GaeaModelHost.defectsHelper))
+    }
+
+    /// AB-T-0377: the licence link names the model's own checkpoint (the default lane's), not a package-wide repo.
+    @Test func theSourceRepoIsTheDefaultLanesCheckpoint() throws {
+        let data = try Data(contentsOf: repoRoot.appending(path: "examples/v1/manifest/z-image.json"))
+        // Z-Image's lanes name a snapshot, not a checkpoint: its provenance stands.
+        let zImage = try JSONDecoder().decode(PluginManifest.self, from: data).models[0]
+        #expect(zImage.sourceRepo == "Tongyi-MAI/Z-Image-Turbo")
+        // mlx-qwen-llm-swift's shape: one provenance for every size, each lane its own checkpoint.
+        var json = try #require(JSONSerialization.jsonObject(with: data) as? [String: Any])
+        var model = try #require((json["models"] as? [[String: Any]])?.first)
+        var package = try #require(model["package"] as? [String: Any])
+        var provenance = try #require(package["provenance"] as? [String: Any])
+        provenance["sourceRepo"] = "mlx-community/Qwen3.5-0.8B-MLX-8bit"
+        package["provenance"] = provenance
+        model["package"] = package
+        var lanes = try #require(model["lanes"] as? [[String: Any]])
+        for i in lanes.indices {
+            var resolved = try #require(lanes[i]["resolved"] as? [String: Any])
+            let repo = lanes[i]["default"] as? Bool == true ? "mlx-community/Qwen3.5-4B-MLX-4bit" : "mlx-community/Qwen3.5-4B-MLX-8bit"
+            resolved["weightSources"] = [["role": "checkpoint", "repo": repo]]
+            lanes[i]["resolved"] = resolved
+        }
+        model["lanes"] = lanes
+        json["models"] = [model]
+        let qwen = try JSONDecoder().decode(PluginManifest.self, from: JSONSerialization.data(withJSONObject: json)).models[0]
+        #expect(qwen.sourceRepo == "mlx-community/Qwen3.5-4B-MLX-4bit")
     }
 
     @Test(.enabled(if: FileManager.default.fileExists(atPath: WorkerProcessTests.demo.appending(path: "Contents/Resources/manifest.json").path)

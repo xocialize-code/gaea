@@ -24,6 +24,9 @@ struct GaeaModelHost: ModelHost {
         .imageAnalysis: "image.describe", .imageQualityScore: "image.score",
     ]
     static let capabilities = Dictionary(uniqueKeysWithValues: operations.map { ($0.value, $0.key) })
+    /// The helper a plugin serves defect detection as (restore's scratches, then inpainting): Gaea calls it, and never
+    /// offers it to clients (GPP-1 §4.4).
+    static let defectsHelper = "x-gaea.image.defects"
     /// The text input an operation takes the model call's `prompt` as.
     static let textInputs = ["image.generate": "prompt", "image.edit": "instruction", "image.fill": "prompt",
                              "image.describe": "question"]
@@ -36,22 +39,28 @@ struct GaeaModelHost: ModelHost {
             guard let first = group.first else { continue }
             cards.append(Self.card(first, all: group))
         }
-        // The prompt enhancer's backbones: models whose plugin serves the rewrite helper, routed as `llm`.
-        for helper in await offers.liveHelpers() where helper.helper.operation == GaeaPromptEnhancer.operation {
-            if !cards.contains(where: { $0.id == helper.model.id }) { cards.append(Self.backboneCard(helper)) }
+        // The helpers' models: the prompt enhancer's backbones, routed as `llm`, and the defect detector.
+        for helper in await offers.liveHelpers() {
+            guard let capability = Self.helperCapabilities[helper.helper.operation] else { continue }
+            if !cards.contains(where: { $0.id == helper.model.id }) { cards.append(Self.helperCard(helper, capability)) }
         }
         return cards
     }
 
-    static func backboneCard(_ helper: PluginOffers.Helper) -> ModelCard {
+    /// The capability each helper Gaea calls serves.
+    static let helperCapabilities: [String: ModelCapability] = [GaeaPromptEnhancer.operation: .llm, defectsHelper: .defectDetect]
+
+    static func backboneCard(_ helper: PluginOffers.Helper) -> ModelCard { helperCard(helper, .llm) }
+
+    static func helperCard(_ helper: PluginOffers.Helper, _ capability: ModelCapability) -> ModelCard {
         let license = PluginOffers.offer(helper.model).license
         let lane = helper.model.lanes.first(where: \.default) ?? helper.model.lanes.first
         return ModelCard(
-            id: helper.model.id, displayName: helper.model.title, capabilities: [.llm], maturity: .prod,
+            id: helper.model.id, displayName: helper.model.title, capabilities: [capability], maturity: .prod,
             license: .init(license.commercialUse == .yes ? .permissive : .restricted, weights: [license.spdx]),
-            sourceRepo: helper.model.package.provenance.sourceRepo, revision: helper.plugin.version,
-            envelope: .init(maxPixels: 1, multipleOf: 1, maxInputs: 0), footprintBytes: lane?.resolved.persistentBytes,
-            downloaded: true)
+            sourceRepo: helper.model.sourceRepo, revision: helper.plugin.version,
+            envelope: .init(maxPixels: capability == .llm ? 1 : 4096 * 4096, multipleOf: 1, maxInputs: capability == .llm ? 0 : 1),
+            footprintBytes: lane?.resolved.persistentBytes, downloaded: true)
     }
 
     static func card(_ route: PluginRoute, all: [PluginRoute]) -> ModelCard {
@@ -61,12 +70,11 @@ struct GaeaModelHost: ModelHost {
         let envelope = ModelCard.Envelope(maxPixels: limits.compactMap(\.maxPixels).max() ?? 1024 * 1024,
                                           multipleOf: limits.compactMap(\.sizeMultiple).max() ?? 16,
                                           maxInputs: limits.compactMap(\.maxImages).max() ?? 1)
-        let provenance = route.model.package.provenance
         let defaultLane = route.model.lanes.first(where: \.default) ?? route.model.lanes.first
         return ModelCard(
             id: route.model.id, displayName: route.model.title, capabilities: capabilities, maturity: .prod,
             license: .init(license.commercialUse == .yes ? .permissive : .restricted, weights: [license.spdx]),
-            sourceRepo: provenance.sourceRepo, revision: route.plugin.version, envelope: envelope,
+            sourceRepo: route.model.sourceRepo, revision: route.plugin.version, envelope: envelope,
             defaults: .init(steps: param(all, suffix: ".steps")?.intValue, guidance: param(all, suffix: ".guidance")?.doubleValue),
             footprintBytes: defaultLane?.resolved.persistentBytes, downloaded: true)
     }
@@ -83,13 +91,14 @@ struct GaeaModelHost: ModelHost {
     }
 
     func route(_ capability: ModelCapability, model: String?) async throws -> ModelRoute {
-        if capability == .llm {
-            let backbones = await offers.liveHelpers().filter { $0.helper.operation == GaeaPromptEnhancer.operation }
-            guard let helper = backbones.first(where: { model == nil || $0.model.id == model }) else {
-                throw MESError(.modelUnavailable, "No prompt enhancer backbone \(model ?? "") is enabled.")
+        if let operation = Self.helperCapabilities.first(where: { $0.value == capability })?.key {
+            let helpers = await offers.liveHelpers().filter { $0.helper.operation == operation }
+            guard let helper = helpers.first(where: { model == nil || $0.model.id == model }) else {
+                throw MESError(.modelUnavailable, capability == .llm ? "No prompt enhancer backbone \(model ?? "") is enabled."
+                                                                     : "No plugin model serves \(operation).")
             }
-            let card = Self.backboneCard(helper)
-            return ModelRoute(id: card.id, packageID: "\(helper.plugin.id)/\(helper.model.id)", capability: .llm,
+            let card = Self.helperCard(helper, capability)
+            return ModelRoute(id: card.id, packageID: "\(helper.plugin.id)/\(helper.model.id)", capability: capability,
                               displayName: card.displayName, license: card.license, envelope: card.envelope,
                               revision: helper.plugin.version, footprintBytes: card.footprintBytes)
         }
@@ -117,14 +126,22 @@ struct GaeaModelHost: ModelHost {
     func prepare(_ route: ModelRoute, progress: @escaping @Sendable (ModelProgress) -> Void) async throws {}
 
     func run(_ work: ModelWork, progress: @escaping @Sendable (ModelProgress) -> Void) async throws -> ModelResult {
-        guard let operation = Self.operations[work.route.capability],
-              let route = await offers.liveRoutes().first(where: { $0.operation == operation && $0.model.id == work.route.id }) else {
+        let call: Callee
+        if let operation = Self.operations[work.route.capability],
+           let route = await offers.liveRoutes().first(where: { $0.operation == operation && $0.model.id == work.route.id }) {
+            call = Callee(route)
+        } else if work.route.capability != .llm,
+                  let operation = Self.helperCapabilities.first(where: { $0.value == work.route.capability })?.key,
+                  let helper = await offers.liveHelpers().first(where: { $0.helper.operation == operation && $0.model.id == work.route.id }) {
+            call = Callee(helper)
+        } else {
             throw MESError(.modelUnavailable, "\(work.route.id) isn't enabled for \(work.route.capability).")
         }
+        let operation = call.operation
         let scope = NormalizerScope.current ?? NormalizerScope(jobID: "job_\(UUID().uuidString.prefix(8).lowercased())",
                                                                  directory: FileManager.default.temporaryDirectory, extensions: [:])
-        let call = scope.nextCall()
-        let directory = scope.directory.appending(path: "worker-\(call)", directoryHint: .isDirectory)
+        let index = scope.nextCall()
+        let directory = scope.directory.appending(path: "worker-\(index)", directoryHint: .isDirectory)
         let inputDirectory = directory.appending(path: "inputs", directoryHint: .isDirectory)
         try FileManager.default.createDirectory(at: inputDirectory, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: directory) }
@@ -148,11 +165,11 @@ struct GaeaModelHost: ModelHost {
 
         // The size the normalizer asks for, run at the offer's smallest side when it is smaller and brought back after;
         // an edit without one keeps its first image's size, which the normalizer restores.
-        let limits = route.manifestOffer.limits
+        let limits = call.limits
         var asked: (width: Int, height: Int)?
         if let w = work.width, let h = work.height { asked = (w, h) }
         let run = Self.runSize(asked: asked, first: work.inputs["images"]?.first ?? work.inputs["image"]?.first, limits: limits)
-        var params: [String: GPPValue] = route.manifestOffer.defaults?.objectValue ?? [:]
+        var params: [String: GPPValue] = call.defaults
         params["count"] = 1
         if let run { params["size"] = ["width": .int(Int64(run.width)), "height": .int(Int64(run.height))] }
         if let negative = work.params["negativePrompt"]?.stringValue { params["negative_prompt"] = .string(negative) }
@@ -161,24 +178,39 @@ struct GaeaModelHost: ModelHost {
         for (key, value) in work.params where key != "prompt" && key != "negativePrompt" { params[key] = value.gpp }
         if let mode = work.mode { params["mode"] = .string(mode) }
 
-        let names = Set(route.extensions.map(\.name))
+        let names = Set(call.extensions)
         let modelParams = scope.extensions.filter { names.contains($0.key) }.mapValues(\.gpp)
         let workerDirectory = directory.appending(path: "out", directoryHint: .isDirectory)
-        let job = WorkerJob(job: "\(scope.jobID)-\(call)", pluginID: route.plugin.id, model: route.model.id, operation: operation,
-                            namedLane: scope.extensions[GaeaEngine.laneExtension]?.stringValue, lanes: route.manifestOffer.lanes,
+        let job = WorkerJob(job: "\(scope.jobID)-\(index)", pluginID: call.plugin.id, model: call.model.id, operation: operation,
+                            namedLane: scope.extensions[GaeaEngine.laneExtension]?.stringValue, lanes: call.lanes,
                             params: params, inputs: inputs, modelParams: modelParams, seed: Int(clamping: work.seed),
                             outputDir: workerDirectory)
-        let ran = try await GaeaEngine.schedule(job, scheduler: scheduler, title: route.plugin.title) { line in
+        let ran = try await GaeaEngine.schedule(job, scheduler: scheduler, title: call.plugin.title) { line in
             guard line["type"]?.stringValue == "progress" else { return }
             progress(ModelProgress(phase: line["stage"]?.stringValue ?? "running", fraction: line["fraction"]?.doubleValue,
                                    step: line["step"]?.intValue, totalSteps: line["of"]?.intValue))
         }
-        scope.record(route, ran)
+        if let route = call.route { scope.record(route, ran) }
 
+        // A describe answers with text and a score with a value (`ImageAnalysisResponse.text`,
+        // `ImageQualityScoreResponse.score` and its `subscores`); everything else with a file.
         let outputs = ran.result["outputs"]?.arrayValue ?? []
+        func value(_ name: String) -> GPPValue? { outputs.first { $0["name"]?.stringValue == name }?["value"] }
+        switch work.route.capability {
+        case .imageQualityScore:
+            guard let score = value("score")?.doubleValue else { throw MESError(.engineError, "\(call.plugin.title) returned no score.") }
+            let subscores = (value("subscores")?.objectValue ?? [:]).compactMapValues { $0.doubleValue.map(Float.init) }
+            return .score(Float(score), subscores: subscores)
+        case .imageAnalysis:
+            guard let text = value("text")?.stringValue ?? outputs.lazy.compactMap({ $0["value"]?.stringValue }).first else {
+                throw MESError(.engineError, "\(call.plugin.title) returned no text.")
+            }
+            return .text(text)
+        default:
+            break
+        }
         guard let output = outputs.first(where: { $0["path"] != nil }), let path = output["path"]?.stringValue else {
-            if let text = outputs.first?["value"]?.stringValue { return .text(text) }
-            throw MESError(.engineError, "\(route.plugin.title) returned no output.")
+            throw MESError(.engineError, "\(call.plugin.title) returned no output.")
         }
         let root = workerDirectory.resolvingSymlinksInPath().standardizedFileURL.path + "/"
         let source = URL(fileURLWithPath: path).resolvingSymlinksInPath().standardizedFileURL
@@ -195,7 +227,34 @@ struct GaeaModelHost: ModelHost {
             return .matte(ModelMatte(data: data, width: size?.width, height: size?.height), score: score.map(Float.init))
         }
         let format: ModelImage.Format = source.pathExtension.lowercased() == "jpg" || source.pathExtension.lowercased() == "jpeg" ? .jpeg : .png
-        return .image(ModelImage(format: format, data: data, width: size?.width, height: size?.height))
+        let image = ModelImage(format: format, data: data, width: size?.width, height: size?.height)
+        // An upscale that ran behind a guard or a chain says which models made it (`upscale_model`).
+        if let model = value("upscale_model")?.stringValue { return .upscaled(image, model: model) }
+        return .image(image)
+    }
+
+    /// What a model call goes to: a plugin's offer of the operation, or a helper Gaea calls (the defect detector).
+    struct Callee {
+        var plugin: InstalledPlugin
+        var model: PluginManifest.Model
+        var operation: String
+        /// The offer, for the job's record; nil for a helper.
+        var route: PluginRoute?
+        var limits: PluginManifest.Limits?
+        var defaults: [String: GPPValue]
+        var lanes: [String]?
+        var extensions: [String]
+
+        init(_ route: PluginRoute) {
+            plugin = route.plugin; model = route.model; operation = route.operation; self.route = route
+            limits = route.manifestOffer.limits; defaults = route.manifestOffer.defaults?.objectValue ?? [:]
+            lanes = route.manifestOffer.lanes; extensions = route.extensions.map(\.name)
+        }
+
+        init(_ helper: PluginOffers.Helper) {
+            plugin = helper.plugin; model = helper.model; operation = helper.helper.operation; route = nil
+            limits = nil; defaults = [:]; lanes = nil; extensions = []
+        }
     }
 
     /// The size to run at: the one asked, or for an image input without one, the first image's; scaled up, keeping the
@@ -267,4 +326,14 @@ final class NormalizerScope: Sendable {
     func nextCall() -> Int { state.withLock { $0.next += 1; return $0.next } }
     func record(_ route: PluginRoute, _ ran: WorkerJobResult) { state.withLock { $0.calls.append(Call(route: route, ran: ran)) } }
     var calls: [Call] { state.withLock { $0.calls } }
+}
+
+extension PluginManifest.Model {
+    /// Where the model's weights come from, for its licence link (`terms_url`) and the console: the default lane's
+    /// checkpoint, else its package's provenance. A package may name one repo for every size it serves:
+    /// mlx-qwen-llm-swift names `mlx-community/Qwen3.5-0.8B-MLX-8bit` for the 4B and the 9B too (AB-T-0373).
+    public var sourceRepo: String {
+        let lane = lanes.first(where: \.default) ?? lanes.first
+        return lane?.resolved.weightSources.first { $0.role == "checkpoint" }?.repo ?? package.provenance.sourceRepo
+    }
 }

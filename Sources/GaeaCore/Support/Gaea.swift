@@ -4,7 +4,7 @@ import GaeaOperator
 /// Gaea's identity and the folders it uses.
 public enum Gaea {
     /// This build's version, compared with a plugin manifest's `min_gaea`.
-    public static let version = "0.5.0"
+    public static let version = "0.6.0"
     /// GPP protocol versions this host speaks (GPP-1 §6).
     public static let protocols: ClosedRange<Int> = 1...1
 }
