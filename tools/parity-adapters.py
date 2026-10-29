@@ -37,16 +37,19 @@ def run(port, photo, out):
     def upload():
         return {"upload": json.loads(call(f"{base}/uploads", photo.read_bytes(), "image/png")[1])["upload_id"]}
 
+    # KLEIN_ONLY=1 leaves out Flash; NO_ADAPTERS=1 leaves out every adapter; CONTROL=1 adds an edit without one, on
+    # CONTROL_MODEL (default klein-4b).
     import os
-    cases = [] if os.environ.get("KLEIN_ONLY") else \
+    cases = [] if os.environ.get("KLEIN_ONLY") or os.environ.get("NO_ADAPTERS") else \
         [("image.generate", "qwen-image-flash", a) for a in offered("image.generate", "qwen-image-flash")]
-    cases += [("image.edit", "klein-4b", a) for a in offered("image.edit", "klein-4b")]
-    if os.environ.get("CONTROL"):  # the same Klein edit without an adapter
-        cases.append(("image.edit", "klein-4b", {"id": "none", "strength": {"default": 0}}))
+    if not os.environ.get("NO_ADAPTERS"):
+        cases += [("image.edit", "klein-4b", a) for a in offered("image.edit", "klein-4b")]
+    if os.environ.get("CONTROL"):
+        cases.append(("image.edit", os.environ.get("CONTROL_MODEL", "klein-4b"), {"id": "none", "strength": {"default": 0}}))
     print(f"{len(cases)} adapters offered", flush=True)
     results = []
     for operation, model, adapter in cases:
-        name = adapter["id"].replace(":", "_")
+        name = adapter["id"].replace(":", "_") if adapter["id"] != "none" else f"none-{model}"
         if operation == "image.generate":
             body = {"operation": operation, "model": model, "params": {"seed": 7, "size": {"width": 1024, "height": 1024}},
                     "inputs": {"prompt": PROMPT}}
@@ -84,8 +87,9 @@ def run(port, photo, out):
 
 
 def compare(a, b):
-    ra = {r["adapter"]: r for r in json.loads((a / "adapters.json").read_text())}
-    rb = {r["adapter"]: r for r in json.loads((b / "adapters.json").read_text())}
+    def key(r): return r["adapter"] if r["adapter"] != "none" else f"none ({r['model']})"
+    ra = {key(r): r for r in json.loads((a / "adapters.json").read_text())}
+    rb = {key(r): r for r in json.loads((b / "adapters.json").read_text())}
     same = 0
     print("| Adapter | Model | Gaea run (ms) | v0.9.1 run (ms) | Revision and licence | Same prompt | Same bytes |\n|---|---|---|---|---|---|---|")
     for aid in sorted(set(ra) | set(rb)):

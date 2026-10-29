@@ -321,7 +321,9 @@ starts while the phase before it is being built.
       - See [Evidence/AB-T-0378](Evidence/AB-T-0378/README.md).
       - **Found on the way:**
         - AB-T-0382: CI builds no metallib, so plugins release locally.
-        - AB-T-0383 (P1, blocks the exit): a Klein edit on a large input differs from v0.9.1, with or without adapters.
+        - AB-T-0383: a Klein edit on a large input differed from v0.9.1, with or without adapters. **Done**: Klein
+          0.2.1 and the host send no size for an edit that asks none, as v0.9.1 does; 8 of 8 and Qwen Edit
+          byte-identical on a 2040×1356 photo. See [Evidence/AB-T-0383](Evidence/AB-T-0383/README.md).
   11. AB-T-0375: the exit gate, which gives AB-A-0208 the go for the retirements.
   12. AB-T-0374 (P3): the research plugins, with research licences authorized (2026-10-29). They are not on the exit
       path.

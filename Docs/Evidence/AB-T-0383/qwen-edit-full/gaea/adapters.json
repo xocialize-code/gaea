@@ -1,0 +1,25 @@
+[
+ {
+  "adapter": "none",
+  "operation": "image.edit",
+  "model": "qwen-image-edit",
+  "status": 200,
+  "outcome": "succeeded",
+  "error": null,
+  "provenance_adapters": null,
+  "run_ms": 307379,
+  "prompt": null,
+  "enhancement": {
+   "applied": false,
+   "outcome": "no_profile"
+  },
+  "warnings": [],
+  "wall_ms": 307386,
+  "files": [
+   "none-qwen-image-edit-0.png"
+  ],
+  "sha256": [
+   "79e512b0efb5d308e1b4c75b9114b67cd59046f7d50ee61ada975df3329dfe98"
+  ]
+ }
+]

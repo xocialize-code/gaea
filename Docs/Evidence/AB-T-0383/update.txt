@@ -1,0 +1,2 @@
+com.xocialize.gaea.flux2-klein now runs 0.2.1.
+on  com.xocialize.gaea.flux2-klein 0.2.1  FLUX.2 Klein  https://github.com/xocialize-code/gaea-plugin-flux2-klein

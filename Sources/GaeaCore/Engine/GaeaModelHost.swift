@@ -177,15 +177,14 @@ struct GaeaModelHost: ModelHost {
             inputs[name] = .string(url.path)
         }
 
-        // The size the normalizer asks for, run at the offer's smallest side when it is smaller and brought back after;
-        // an edit without one keeps its first image's size, which the normalizer restores.
+        // The size the normalizer asks for, run at the offer's smallest side when it is smaller and brought back after.
         let limits = call.limits
         var asked: (width: Int, height: Int)?
         if let w = work.width, let h = work.height { asked = (w, h) }
-        // An ic edit whose images all fill the adapter's slots sizes by its first slot image.
-        let first = work.inputs["images"]?.first ?? work.inputs["image"]?.first
-            ?? work.inputs.filter { $0.key.hasPrefix("adapter") }.sorted { $0.key < $1.key }.lazy.compactMap(\.value.first).first
-        let run = Self.runSize(asked: asked, first: first, limits: limits)
+        // An edit that asks no size sends none: the model chooses, as on v0.9.1 (Klein draws 1024²), and the normalizer
+        // brings it back to the first image's size (AB-T-0383).
+        let run = work.route.capability == .imageEdit && asked == nil
+            ? nil : Self.runSize(asked: asked, first: work.inputs["images"]?.first ?? work.inputs["image"]?.first, limits: limits)
         var params: [String: GPPValue] = call.defaults
         params["count"] = 1
         if let run { params["size"] = ["width": .int(Int64(run.width)), "height": .int(Int64(run.height))] }
