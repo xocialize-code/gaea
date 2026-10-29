@@ -1,0 +1,7 @@
+server eng_gaea_dustin_s_mac_studio_xfd2ei http://127.0.0.1:17791/mes/v0
+server eng_gaea_dustin_s_mac_studio_w5md5a http://127.0.0.1:17792/mes/v0
+scaling engines, best first: ["eng_gaea_dustin_s_mac_studio_xfd2ei"]
+scale x2, the picker's choice: completed on eng_gaea_dustin_s_mac_studio_xfd2ei, 1 output(s)
+scale x4 on NERVE: completed on eng_gaea_dustin_s_mac_studio_xfd2ei, 1 output(s)
+generate on Z-Image Turbo: completed on eng_gaea_dustin_s_mac_studio_xfd2ei, 1 output(s)
+generate on Qwen-Image Flash: completed on eng_gaea_dustin_s_mac_studio_w5md5a, 1 output(s)
