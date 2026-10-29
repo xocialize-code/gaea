@@ -23,6 +23,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/xocialize/media-engine-spec.git", from: "0.5.0"),
+        // The Image profile's host half, MLX-free: operation table, validation, plans (AB-T-0359, G-20).
+        .package(url: "https://github.com/xocialize/pixel-agency-normalizer.git", from: "0.1.0"),
         // GaeaProtocol only: the MLX-free manifest types and GPP vocabulary. Its MLXToolKit is the only engine code
         // the host links.
         .package(url: "https://github.com/xocialize/gaea-plugin-kit.git", from: "0.1.1"),
@@ -39,9 +41,9 @@ let package = Package(
                 .product(name: "MLXToolKit", package: "mlx-engine-swift"),
                 // The governor's admission and eviction rules, shared with MLXServeEngine (AB-D-0170), MLX-free.
                 .product(name: "MLXMemoryPolicy", package: "mlx-engine-swift"),
+                .product(name: "PixelAgencyNormalizer", package: "pixel-agency-normalizer"),
                 .product(name: "MESCore", package: "media-engine-spec"),
                 .product(name: "MESEngineKit", package: "media-engine-spec"),
-                .product(name: "MockEngineCore", package: "media-engine-spec"),
                 .product(name: "GRDB", package: "GRDB.swift"),
             ]
         ),
@@ -61,6 +63,7 @@ let package = Package(
                 .product(name: "GaeaProtocol", package: "gaea-plugin-kit"),
                 .product(name: "MESCore", package: "media-engine-spec"),
                 .product(name: "MESEngineKit", package: "media-engine-spec"),
+                .product(name: "PixelAgencyNormalizer", package: "pixel-agency-normalizer"),
             ]
         ),
     ]

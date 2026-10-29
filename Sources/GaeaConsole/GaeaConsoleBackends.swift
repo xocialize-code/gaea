@@ -31,14 +31,20 @@ public struct GaeaConsoleBackend: EngineConsoleBackend {
             let lane = entry.model.lanes.first(where: \.default)
             let row = rows[entry.plugin.id]
             let bundled = lane.map { $0.resolved.materialization == .bundled || $0.resolved.weightSources.isEmpty } ?? true
-            // A model with offers of its own (AB-T-0364) shows each; one without runs through the mock's image.generate.
+            // The operations the normalizer offers the model for, as clients see them; a model that is off shows its
+            // plugin's own offers.
             let own = routes.filter { $0.plugin.id == entry.plugin.id && $0.model.id == entry.model.id }
             let offer = own.first?.offer ?? entry.offer
-            let roles: [EngineModel.Role] = own.isEmpty
-                ? [.init(operation: GaeaEngine.mockOperation, qualityTiers: entry.offer.qualityTiers,
-                         isDefault: isDefault(entry.model.id, for: GaeaEngine.mockOperation), namedOnly: optIn)]
-                : own.map { .init(operation: $0.operation, qualityTiers: $0.offer.qualityTiers,
+            let offered: [EngineModel.Role] = live.compactMap { descriptor in
+                descriptor.models.first { $0.id == entry.model.id }.map {
+                    .init(operation: descriptor.operation, qualityTiers: $0.qualityTiers, isDefault: $0.isDefault == true,
+                          namedOnly: $0.namedOnly == true)
+                }
+            }
+            let roles = offered.isEmpty
+                ? own.map { .init(operation: $0.operation, qualityTiers: $0.offer.qualityTiers,
                                   isDefault: isDefault(entry.model.id, for: $0.operation), namedOnly: $0.offer.namedOnly == true) }
+                : offered
             return EngineModel(
                 id: entry.model.id, title: entry.model.title, summary: entry.plugin.manifest.summary ?? "", license: offer.license,
                 optIn: optIn, enabled: entry.plugin.enabled && host.enablement.isEnabled(entry.model.id, optIn: optIn),

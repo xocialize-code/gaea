@@ -1,11 +1,11 @@
 #!/bin/zsh
 # AB-T-0363's acceptance: the scheduler's memory paths with real workers. gaea-plugin-z-image (int4, int8 and bf16
-# lanes of 39.9, 43.0 and 48.5 GB) and the demo plugin (demo-matmul, 2.37 GB) under a 43.1 GB budget, on the shared
+# lanes of 39.9, 43.0 and 48.5 GB) and the demo plugin (demo-gradient, 0.2 GB) under a 43.1 GB budget, on the shared
 # memory policy since Gaea 0.3.0 (AB-T-0371: an idle worker is charged its resident or measured bytes, not its peak):
 #
 #   1. eviction: Turbo's default set to int8 by the operator (`gaea models lane`); with the demo's worker idle and
 #      resident, int8 doesn't fit beside what it measures, so the demo is stopped (LRU) and int8 runs; then the idle
-#      Z-Image worker is kept for demo-matmul, since it is charged what it holds, not its 28 GB peak;
+#      Z-Image worker is kept for demo-gradient, since it is charged what it holds, not its 28 GB peak;
 #   2. requeue once (SRV-8): the Z-Image worker SIGKILLed mid-run, the job completes on a relaunched worker with
 #      `requeued: true` and the image a clean run gives;
 #   3. lane fallback (G-23, MEM-7): Turbo's default set to bf16, which can't fit in 43.1 GB: a job without x-gaea.lane gets
@@ -27,7 +27,7 @@ Z=com.xocialize.gaea.z-image; DEMO=com.xocialize.gaea.demo
 BUDGET=43100000000
 PROMPT="A lighthouse on a rocky coast at dusk, photorealistic, 35mm film"
 TURBO='{"operation":"image.generate","model":"z-image-turbo","inputs":{"prompt":"'$PROMPT'"},"params":{"size":{"width":1024,"height":1024},"seed":42}'
-MATMUL='{"operation":"image.generate","model":"demo-matmul","inputs":{"prompt":"mocked"},"extensions":{"x-gaea.demo_matmul":{"n":1024,"iterations":3}}}'
+DEMOJOB='{"operation":"image.generate","model":"demo-gradient","inputs":{"prompt":"a gradient"},"params":{"size":{"width":512,"height":512},"seed":1}}'
 mkdir -p "$OUT"; rm -rf "$WORK"; mkdir -p "$WORK"
 LOG="$OUT/acceptance.log"; : > "$LOG"
 pass=0; fail=0
@@ -84,8 +84,8 @@ check "the budget is 43.1 GB" grep -q '43.10 GB' "$OUT/status.txt"
 
 # 1. Eviction, both ways.
 check "the operator sets Turbo's default lane to int8" zsh -c "$CLI models lane z-image-turbo int8 && $CLI models lane z-image-turbo | grep -q 'int8 (set by the operator)'"
-job $P "$MATMUL" > "$OUT/job-demo-1.json"
-check "demo-matmul runs, and the demo's worker stays resident and idle" ok 'grep -q "\"outcome\":\"succeeded\"" $OUT/job-demo-1.json && [[ $(workers) == $DEMO ]]'
+job $P "$DEMOJOB" > "$OUT/job-demo-1.json"
+check "demo-gradient runs, and the demo's worker stays resident and idle" ok 'grep -q "\"outcome\":\"succeeded\"" $OUT/job-demo-1.json && [[ $(workers) == $DEMO ]]'
 $CLI ledger > "$OUT/ledger-1-demo.txt"
 job $P "$TURBO}" > "$OUT/job-evict.json"
 $CLI ledger > "$OUT/ledger-2-turbo.txt"
@@ -93,9 +93,9 @@ check "int8 (43.0 GB) doesn't fit beside the idle demo's measured bytes: the dem
 import json; j = json.load(open('$OUT/job-evict.json')); w = j['plan']['effective']['model_params']['x-gaea.worker']
 assert j['outcome'] == 'succeeded' and w['lane'] == 'int8', w; assert not any(x['code'] == 'lane_fallback' for x in j.get('warnings', [])), j.get('warnings')"
 check "…the log says why, and only Z-Image's worker is left" ok '(( $(logged "evicting $DEMO to make room for z-image-turbo int8") == 1 )) && [[ $(workers) == $Z ]]'
-job $P "$MATMUL" > "$OUT/job-demo-2.json"
+job $P "$DEMOJOB" > "$OUT/job-demo-2.json"
 $CLI ledger > "$OUT/ledger-2b-both.txt"
-check "the idle Z-Image worker is kept for demo-matmul: charged what it holds, not its 28 GB peak" ok 'grep -q "\"outcome\":\"succeeded\"" $OUT/job-demo-2.json && (( $(logged "evicting $Z to make room") == 0 )) && [[ $(workers) == "$DEMO $Z" ]]'
+check "the idle Z-Image worker is kept for demo-gradient: charged what it holds, not its 28 GB peak" ok 'grep -q "\"outcome\":\"succeeded\"" $OUT/job-demo-2.json && (( $(logged "evicting $Z to make room") == 0 )) && [[ $(workers) == "$DEMO $Z" ]]'
 
 # 2. Requeue once: SIGKILL the worker while it generates.
 ID=$(submit $P "$TURBO}")

@@ -4,7 +4,7 @@ import ImageIO
 import MESCore
 import MESEngineCore
 import MLXToolKit
-import MockEngineCore
+import PixelAgencyNormalizer
 import Synchronization
 
 typealias MESValue = MESCore.JSONValue
@@ -50,15 +50,14 @@ public struct PluginRoute: Sendable {
 /// Gaea's `MediaEngine`: what MESEngineKit serves (SRV-1). Plugins do the generating; this decides which plugin model
 /// a request reaches, and the scheduler runs it.
 ///
-/// **Plugin offers run as themselves** (AB-T-0364). A manifest offer of an MES Image operation is served as that
-/// operation: the request's inputs reach the worker as spool paths, its params as `params`, the offer's `x-`
-/// extensions as `model_params`, and the files the worker writes under `output_dir` become the job's outputs, moved
-/// rather than re-encoded.
+/// **The Image profile goes through the image normalizer** (pixel-agency-normalizer, AB-T-0366): it validates, chooses
+/// the model by tier and content, plans the job and applies the profile's rules (sizes, masks kept exact, upright sRGB,
+/// alpha, the seed). Its models are the enabled plugin models (`GaeaModelHost`), and each model call runs as that
+/// plugin's offer of the capability's operation, whose worker does the model-specific mapping (Plan §3.3).
 ///
-/// **The G0 mock normalizer** (Plan §5 G0, AB-T-0355) still covers models that offer nothing, such as the demo's
-/// helper, until the image normalizer arrives (AB-T-0366). Each is offered for `image.generate`: the run's GPU stage is
-/// the model's own plugin operation, and the image itself comes from MESKit's `MockImageEngine`, which follows the
-/// Image profile's rules. Its options arrive as the request's `x-` extension named after it (`extensionName`).
+/// **An offer the normalizer doesn't serve runs as itself** (AB-T-0364): the request's inputs reach the worker as spool
+/// paths, its params as `params`, the offer's `x-` extensions as `model_params`, and the files the worker writes under
+/// `output_dir` become the job's outputs, moved rather than re-encoded.
 ///
 /// Either way the worker's `effective` and warnings travel with the result, under
 /// `effective.model_params["x-gaea.worker"]`.
@@ -66,10 +65,9 @@ public struct GaeaEngine: MediaEngine {
     let manager: PluginManager
     let scheduler: Scheduler
     let enablement: ModelEnablement
-    let pixels = MockImageEngine(steps: 1)
+    let offers: PluginOffers
+    let normalizer: ImageNormalizer
 
-    /// The operation the mock normalizer offers.
-    public static let mockOperation = "image.generate"
     /// The extension a request names a lane with (MEM-7, G-23).
     public static let laneExtension = "x-gaea.lane"
 
@@ -77,124 +75,81 @@ public struct GaeaEngine: MediaEngine {
         self.manager = manager
         self.scheduler = scheduler
         self.enablement = enablement
+        let offers = PluginOffers(manager: manager, enablement: enablement)
+        self.offers = offers
+        // Gaea's scheduler owns memory, so the host keeps the normalizer's residency hooks at their defaults.
+        normalizer = ImageNormalizer(host: GaeaModelHost(offers: offers, scheduler: scheduler),
+                                     options: .init(enablement: enablement))
     }
+    /// Every model of every installed plugin, on or off, with the offer the console lists it under.
+    public func catalog() async -> [PluginModelOffer] { await offers.catalog() }
 
-    /// Every model of every installed plugin, on or off, with the offer the normalizer makes for it.
-    public func catalog() async -> [PluginModelOffer] {
-        var offers: [PluginModelOffer] = []
-        for plugin in await manager.installed() {
-            for model in plugin.manifest.models {
-                let helper = plugin.manifest.helpers?.first { $0.model == model.id }
-                let manifestOffer = plugin.manifest.offers.first { $0.modelID == model.id }
-                guard let operation = helper?.operation ?? manifestOffer?.operation else { continue }
-                offers.append(PluginModelOffer(plugin: plugin, model: model, offer: Self.offer(model), operation: operation,
-                                               params: helper?.params ?? manifestOffer?.params))
-            }
-        }
-        return offers
-    }
+    static func offer(_ model: PluginManifest.Model) -> ModelOffer { PluginOffers.offer(model) }
 
-    static func offer(_ model: PluginManifest.Model) -> ModelOffer {
-        let weights = model.package.license.weightLicense
-        let permissive = weights.isPermissive
-        let license = License(spdx: weights.identifier, commercialUse: permissive ? .yes : .no,
-                              notice: weights.requiredDisplayText, acceptedRequired: permissive ? nil : true)
-        let need = model.lanes.first(where: \.default).map(LaneChoice.need) ?? 0
-        let memory: ModelOffer.MemoryClass = switch need {
-        case ..<(4 << 30): .small
-        case ..<(16 << 30): .medium
-        case ..<(48 << 30): .large
-        default: .xlarge
-        }
-        var offer = ModelOffer(id: model.id, title: model.title, license: license, memoryClass: memory, speedClass: .standard,
-                               qualityTiers: [.draft, .standard, .best])
-        offer.namedOnly = permissive ? nil : true
-        offer.notes = "Gaea G0: the GPU stage runs on this plugin; the image is MESKit's mock (AB-T-0355)."
-        return offer
-    }
+    /// Every installed plugin's offers of MES Image operations, on or off.
+    public func routes() async -> [PluginRoute] { await offers.routes() }
 
-    /// Every installed plugin's offers of MES Image operations, on or off. An offer whose `model` isn't a valid MES
-    /// offer, or that names a model the plugin doesn't declare, is left out and logged by the validator at build time.
-    public func routes() async -> [PluginRoute] {
-        var routes: [PluginRoute] = []
-        for plugin in await manager.installed() {
-            for manifestOffer in plugin.manifest.offers {
-                guard manifestOffer.profile == ImageProfile.id, ImageProfile.operations.operations[manifestOffer.operation] != nil,
-                      let id = manifestOffer.modelID, let model = plugin.model(id),
-                      var offer = try? JSONDecoder().decode(ModelOffer.self, from: JSONEncoder().encode(manifestOffer.model))
-                else { continue }
-                if Self.offer(model).namedOnly == true { offer.namedOnly = true }
-                routes.append(PluginRoute(plugin: plugin, model: model, manifestOffer: manifestOffer, offer: offer))
-            }
-        }
-        return routes
-    }
-
-    func isLive(_ plugin: InstalledPlugin, _ model: PluginManifest.Model) -> Bool {
-        plugin.enabled && enablement.isEnabled(model.id, optIn: Self.offer(model).namedOnly == true)
-    }
-
-    func liveRoutes() async -> [PluginRoute] {
-        await routes().filter { isLive($0.plugin, $0.model) }
-    }
-
-    /// The offers clients see through the mock: enabled plugins' enabled models that offer no MES operation of their
-    /// own. A research or otherwise restricted model is opt-in and named-only (PLG-11).
-    func liveOffers() async -> [PluginModelOffer] {
-        let routed = Set(await routes().map { "\($0.plugin.id)/\($0.model.id)" })
-        return await catalog().filter { candidate in
-            !routed.contains("\(candidate.plugin.id)/\(candidate.model.id)") && isLive(candidate.plugin, candidate.model)
-        }
-    }
-
+    func liveRoutes() async -> [PluginRoute] { await offers.liveRoutes() }
+    /// The normalizer's descriptors, from the enabled plugin models (`GaeaModelHost`), with what Gaea adds: each model's
+    /// licence as its plugin's offer states it (a notice, its terms), the image count the offers allow, the lane
+    /// extension (MEM-7), and the offers' own options as `x-` extensions (Base §6.2).
     public func descriptors() async -> [Descriptor] {
         let routes = await liveRoutes()
-        let mocked = await liveOffers()
-        let profile = await pixels.descriptors()
         var descriptors: [Descriptor] = []
-        for operation in Set(routes.map(\.operation) + (mocked.isEmpty ? [] : [Self.mockOperation])).sorted() {
-            guard var descriptor = profile.first(where: { $0.operation == operation }) else { continue }
-            let served = routes.filter { $0.operation == operation }
-            let mock = operation == Self.mockOperation ? mocked : []
-            var models: [ModelOffer] = []
-            for route in served where !models.contains(where: { $0.id == route.offer.id }) { models.append(route.offer) }
-            for candidate in mock where !models.contains(where: { $0.id == candidate.offer.id }) { models.append(candidate.offer) }
-            // One default per operation: the first a plugin marked, else the first that isn't named-only.
-            let chosen = models.firstIndex { $0.isDefault == true && $0.namedOnly != true } ?? models.firstIndex { $0.namedOnly != true }
-            for i in models.indices { models[i].isDefault = i == chosen ? true : nil }
-            descriptor.models = models
-            descriptor.summary = mock.isEmpty ? "Served by Gaea's plugins."
-                : "Gaea's plugins; models without an offer of their own run their GPU stage on the plugin and return MESKit's mock image."
-            if !served.isEmpty, let limits = Self.limits(served.map(\.manifestOffer.limits), else: descriptor.limits) {
-                descriptor.limits = limits
+        for var descriptor in await normalizer.descriptors() {
+            let models = Set(descriptor.models.map(\.id))
+            let served = routes.filter { models.contains($0.model.id) }
+            for i in descriptor.models.indices {
+                let id = descriptor.models[i].id
+                if let route = served.first(where: { $0.model.id == id }) {
+                    descriptor.models[i].license = route.offer.license
+                }
+                // The plugin's own say on the offer that runs this operation: named-only stays named-only (Z-Image's
+                // image-to-image isn't an instruction editor), and is never the default.
+                let runs = served.first { $0.model.id == id && $0.operation == descriptor.operation }
+                    ?? served.first { $0.model.id == id && $0.operation == "image.edit" }
+                if runs?.offer.namedOnly == true {
+                    descriptor.models[i].namedOnly = true
+                    descriptor.models[i].isDefault = nil
+                }
             }
-            if !served.isEmpty, let most = Self.maxImages(served.map(\.manifestOffer.limits)) {
+            if !descriptor.models.contains(where: { $0.isDefault == true }),
+               let first = descriptor.models.firstIndex(where: { $0.namedOnly != true }) {
+                descriptor.models[first].isDefault = true
+            }
+            let own = served.filter { $0.operation == descriptor.operation }
+            if !own.isEmpty, let most = Self.maxImages(own.map(\.manifestOffer.limits)) {
                 for i in descriptor.inputs.indices where descriptor.inputs[i].kind == .image { descriptor.inputs[i].max = most }
             }
-
-            let lanes = Array(Set(served.flatMap { $0.allowedLanes.map(\.id) } + mock.flatMap { $0.model.lanes.map(\.id) })).sorted()
-            var extensions = [ExtensionSpec(name: Self.laneExtension, title: "Lane", schema: [
-                "type": "string", "enum": .array(lanes.map { .string($0) }),
-                "x-mes-ui": ["label": "Lane", "widget": "picker", "advanced": true,
-                             "help": "Run this lane (quant) or refuse; without it Gaea picks the default lane, or a smaller one that fits."],
-            ])]
-            var seen: Set<String> = [Self.laneExtension]
+            let lanes = Array(Set(served.flatMap { $0.allowedLanes.map(\.id) })).sorted()
+            var extensions = descriptor.extensions ?? []
+            var seen = Set(extensions.map(\.name))
+            if !lanes.isEmpty, seen.insert(Self.laneExtension).inserted {
+                extensions.append(ExtensionSpec(name: Self.laneExtension, title: "Lane", schema: [
+                    "type": "string", "enum": .array(lanes.map { .string($0) }),
+                    "x-mes-ui": ["label": "Lane", "widget": "picker", "advanced": true,
+                                 "help": "Run this lane (quant) or refuse; without it Gaea picks the default lane, or a smaller one that fits."],
+                ]))
+            }
             for route in served {
                 for (name, schema) in route.extensions where seen.insert(name).inserted {
                     let title = schema["x-mes-ui"]?["label"]?.stringValue ?? schema["title"]?.stringValue ?? name
                     extensions.append(ExtensionSpec(name: name, title: title, schema: schema.mes))
                 }
             }
-            // Each mocked plugin operation's options travel as an `x-` extension named after it, unchanged (SRV-4, G-3).
-            for candidate in mock where seen.insert(Self.extensionName(candidate.operation)).inserted {
-                guard let params = candidate.params, params["type"]?.stringValue == "object" else { continue }
-                extensions.append(ExtensionSpec(name: Self.extensionName(candidate.operation), title: "\(candidate.plugin.title) options",
-                                                schema: params.mes))
-            }
-            descriptor.extensions = extensions
+            descriptor.extensions = extensions.isEmpty ? nil : extensions
             descriptors.append(descriptor)
         }
         return descriptors
+    }
+
+    public func validate(_ request: JobRequest, descriptor: Descriptor) throws {
+        try normalizer.validate(request, descriptor: descriptor)
+    }
+
+    public func defaultModel(for request: JobRequest, descriptor: Descriptor, kitChoice: ModelOffer,
+                             candidates: [ModelOffer]) -> ModelOffer? {
+        normalizer.defaultModel(for: request, descriptor: descriptor, kitChoice: kitChoice, candidates: candidates)
     }
 
     /// The descriptor's limits from its offers' (GPP-1 §4.3): the largest each offer allows, when every offer says.
@@ -232,23 +187,19 @@ public struct GaeaEngine: MediaEngine {
     public func residentModels() async -> [String] { await scheduler.residentModels() }
 
     public func run(_ context: RunContext) async throws -> RunOutput {
-        if let route = await liveRoutes().first(where: { $0.operation == context.operation && $0.model.id == context.model.id }) {
-            return try await run(route, context)
+        if context.descriptor.profile == ImageProfile.id {
+            let scope = NormalizerScope(jobID: context.jobID,
+                                        directory: context.outputDirectory.appending(path: "worker", directoryHint: .isDirectory),
+                                        extensions: context.extensions)
+            defer { try? FileManager.default.removeItem(at: scope.directory) }
+            var output = try await NormalizerScope.$current.withValue(scope) { try await normalizer.run(context) }
+            Self.attach(scope.calls, to: &output)
+            return output
         }
-        guard context.operation == Self.mockOperation,
-              let target = await liveOffers().first(where: { $0.model.id == context.model.id }) else {
+        guard let route = await liveRoutes().first(where: { $0.operation == context.operation && $0.model.id == context.model.id }) else {
             throw MESError(.modelUnavailable, "\(context.model.id) isn't enabled for \(context.operation).")
         }
-        let job = WorkerJob(
-            job: context.jobID, pluginID: target.plugin.id, model: target.model.id, operation: target.operation,
-            namedLane: context.extensions[Self.laneExtension]?.stringValue,
-            params: context.extensions[Self.extensionName(target.operation)]?.objectValue?.mapValues(\.gpp) ?? [:],
-            seed: context.param("seed")?.intValue,
-            outputDir: context.outputDirectory.appending(path: "worker", directoryHint: .isDirectory))
-        let ran = try await schedule(job, title: target.plugin.title, context: context)
-        var output = try await pixels.run(context)
-        Self.attach(ran, plugin: target.plugin, model: target.model.id, operation: target.operation, to: &output)
-        return output
+        return try await run(route, context)
     }
 
     /// One plugin offer, run as itself.
@@ -285,15 +236,22 @@ public struct GaeaEngine: MediaEngine {
     func schedule(_ job: WorkerJob, title: String, context: RunContext,
                   onLine: @escaping @Sendable ([String: GPPValue]) -> Void = { _ in }) async throws -> WorkerJobResult {
         let reporter = context.reporter
+        return try await Self.schedule(job, scheduler: scheduler, title: title) { line in
+            onLine(line)
+            guard line["type"]?.stringValue == "progress" else { return }
+            let step = line["step"]?.intValue, of = line["of"]?.intValue
+            let stage = line["stage"]?.stringValue ?? "running"
+            Task { await reporter.progress(.running, step: step, steps: of, fraction: line["fraction"]?.doubleValue, message: stage) }
+        }
+    }
+
+    /// Runs a job through the scheduler and turns its refusals into MES errors: a lane that doesn't fit is
+    /// `no_capacity`, an unknown one `unsupported_parameter`, a worker's refusal of the request `invalid_request`.
+    static func schedule(_ job: WorkerJob, scheduler: Scheduler, title: String,
+                         onLine: @escaping @Sendable ([String: GPPValue]) -> Void) async throws -> WorkerJobResult {
         let ran: WorkerJobResult
         do {
-            ran = try await scheduler.run(job) { line in
-                onLine(line)
-                guard line["type"]?.stringValue == "progress" else { return }
-                let step = line["step"]?.intValue, of = line["of"]?.intValue
-                let stage = line["stage"]?.stringValue ?? "running"
-                Task { await reporter.progress(.running, step: step, steps: of, fraction: line["fraction"]?.doubleValue, message: stage) }
-            }
+            ran = try await scheduler.run(job, progress: onLine)
         } catch let refusal as LaneChoice.Refusal {
             switch refusal {
             case .unknownLane: throw MESError(.unsupportedParameter, refusal.description, param: Self.laneExtension)
@@ -335,6 +293,36 @@ public struct GaeaEngine: MediaEngine {
             output.warnings.append(Warning(code: "lane_fallback", message: message, param: Self.laneExtension))
         }
         output.revisions[model] = plugin.version
+    }
+
+    /// The normalizer's model calls on the result: the first call's worker facts under `x-gaea.worker` (with `calls` and
+    /// their seconds summed when there were several), the worker's `x-` options in `effective`, its warnings except
+    /// `size_snapped` (the normalizer's sizes stand), a `lane_fallback` warning, and the plugin version as the revision.
+    static func attach(_ calls: [NormalizerScope.Call], to output: inout RunOutput) {
+        guard let first = calls.first else { return }
+        for call in calls {
+            var one = RunOutput(outputs: [], effective: [:])
+            attach(call.ran, plugin: call.route.plugin, model: call.route.model.id, operation: call.route.operation, to: &one)
+            for warning in one.warnings where warning.code != "size_snapped"
+                && !output.warnings.contains(where: { $0.code == warning.code && $0.message == warning.message }) {
+                output.warnings.append(warning)
+            }
+            for (model, revision) in one.revisions { output.revisions[model] = revision }
+        }
+        var worker = RunOutput(outputs: [], effective: [:])
+        attach(first.ran, plugin: first.route.plugin, model: first.route.model.id, operation: first.route.operation, to: &worker)
+        if var facts = worker.effective["model_params"]?.objectValue?["x-gaea.worker"]?.objectValue {
+            if calls.count > 1 {
+                facts["calls"] = .number(Double(calls.count))
+                facts["seconds"] = .number(calls.compactMap { $0.ran.result["seconds"]?.doubleValue }.reduce(0, +))
+            }
+            var modelParams = output.effective["model_params"]?.objectValue ?? [:]
+            modelParams["x-gaea.worker"] = .object(facts)
+            output.effective["model_params"] = .object(modelParams)
+            for (key, value) in facts["effective"]?.objectValue ?? [:] where key.hasPrefix("x-") && output.effective[key] == nil {
+                output.effective[key] = value
+            }
+        }
     }
 
     // MARK: - Spool
@@ -427,5 +415,70 @@ extension PluginRoute {
     var allowedLanes: [PluginManifest.Lane] {
         guard let lanes = manifestOffer.lanes else { return model.lanes }
         return model.lanes.filter { lanes.contains($0.id) }
+    }
+}
+
+/// The plugins' models and offers, on or off, as the engine and the normalizer's host read them.
+struct PluginOffers: Sendable {
+    let manager: PluginManager
+    let enablement: ModelEnablement
+
+
+    /// Every model of every installed plugin, on or off, with the offer the console lists it under.
+    public func catalog() async -> [PluginModelOffer] {
+        var offers: [PluginModelOffer] = []
+        for plugin in await manager.installed() {
+            for model in plugin.manifest.models {
+                let helper = plugin.manifest.helpers?.first { $0.model == model.id }
+                let manifestOffer = plugin.manifest.offers.first { $0.modelID == model.id }
+                guard let operation = helper?.operation ?? manifestOffer?.operation else { continue }
+                offers.append(PluginModelOffer(plugin: plugin, model: model, offer: Self.offer(model), operation: operation,
+                                               params: helper?.params ?? manifestOffer?.params))
+            }
+        }
+        return offers
+    }
+
+    static func offer(_ model: PluginManifest.Model) -> ModelOffer {
+        let weights = model.package.license.weightLicense
+        let permissive = weights.isPermissive
+        let license = License(spdx: weights.identifier, commercialUse: permissive ? .yes : .no,
+                              notice: weights.requiredDisplayText, acceptedRequired: permissive ? nil : true)
+        let need = model.lanes.first(where: \.default).map(LaneChoice.need) ?? 0
+        let memory: ModelOffer.MemoryClass = switch need {
+        case ..<(4 << 30): .small
+        case ..<(16 << 30): .medium
+        case ..<(48 << 30): .large
+        default: .xlarge
+        }
+        var offer = ModelOffer(id: model.id, title: model.title, license: license, memoryClass: memory, speedClass: .standard,
+                               qualityTiers: [.draft, .standard, .best])
+        offer.namedOnly = permissive ? nil : true
+        return offer
+    }
+
+    /// Every installed plugin's offers of MES Image operations, on or off. An offer whose `model` isn't a valid MES
+    /// offer, or that names a model the plugin doesn't declare, is left out and logged by the validator at build time.
+    public func routes() async -> [PluginRoute] {
+        var routes: [PluginRoute] = []
+        for plugin in await manager.installed() {
+            for manifestOffer in plugin.manifest.offers {
+                guard manifestOffer.profile == ImageProfile.id, ImageProfile.operations.operations[manifestOffer.operation] != nil,
+                      let id = manifestOffer.modelID, let model = plugin.model(id),
+                      var offer = try? JSONDecoder().decode(ModelOffer.self, from: JSONEncoder().encode(manifestOffer.model))
+                else { continue }
+                if Self.offer(model).namedOnly == true { offer.namedOnly = true }
+                routes.append(PluginRoute(plugin: plugin, model: model, manifestOffer: manifestOffer, offer: offer))
+            }
+        }
+        return routes
+    }
+
+    func isLive(_ plugin: InstalledPlugin, _ model: PluginManifest.Model) -> Bool {
+        plugin.enabled && enablement.isEnabled(model.id, optIn: Self.offer(model).namedOnly == true)
+    }
+
+    func liveRoutes() async -> [PluginRoute] {
+        await routes().filter { isLive($0.plugin, $0.model) }
     }
 }

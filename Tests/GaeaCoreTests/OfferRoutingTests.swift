@@ -3,6 +3,7 @@ import Foundation
 import GaeaProtocol
 import MESCore
 import MESEngineCore
+import PixelAgencyNormalizer
 import Testing
 @testable import GaeaCore
 
@@ -113,6 +114,25 @@ import Testing
         // One offer that doesn't say leaves the profile's count as it was.
         #expect(GaeaEngine.maxImages([PluginManifest.Limits(maxImages: 3), PluginManifest.Limits(maxPixels: 1)]) == nil)
         #expect(GaeaEngine.maxImages([PluginManifest.Limits(maxImages: 3), nil]) == nil)
+    }
+
+    @Test func theHostRunsSmallImagesAtTheOffersSmallestSide() {
+        let limits = PluginManifest.Limits(minSide: 256, sizeMultiple: 16)
+        // 64×48 asked: run at 352×256, aspect kept, multiples of 16; the host scales the result back.
+        let asked = GaeaModelHost.runSize(asked: (64, 48), first: nil, limits: limits)
+        #expect(asked?.width == 352 && asked?.height == 256)
+        // An edit without a size takes its first image's, scaled up the same way.
+        let edit = GaeaModelHost.runSize(asked: nil, first: ModelImage(format: .png, data: Data(), width: 72, height: 40), limits: limits)
+        #expect(edit?.width == 464 && edit?.height == 256)
+        // Big enough, or no smallest side: the size asked, untouched (nil leaves it to the worker).
+        #expect(GaeaModelHost.runSize(asked: (1024, 768), first: nil, limits: limits).map { [$0.width, $0.height] } == [1024, 768])
+        #expect(GaeaModelHost.runSize(asked: nil, first: ModelImage(format: .png, data: Data(), width: 512, height: 512), limits: limits) == nil)
+    }
+
+    @Test func everyCapabilityRunsAsOneImageOperation() {
+        #expect(GaeaModelHost.operations[.textToImage] == "image.generate" && GaeaModelHost.operations[.imageEdit] == "image.edit")
+        #expect(GaeaModelHost.capabilities.count == GaeaModelHost.operations.count)
+        #expect(GaeaModelHost.operations.values.allSatisfy { ImageProfile.operations.operations[$0] != nil })
     }
 
     @Test(.enabled(if: FileManager.default.fileExists(atPath: WorkerProcessTests.demo.appending(path: "Contents/Resources/manifest.json").path)

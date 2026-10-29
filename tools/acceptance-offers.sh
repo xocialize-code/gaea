@@ -1,4 +1,6 @@
 #!/bin/zsh
+# Since Gaea 0.4.0 (AB-T-0366) the G0 mock normalizer is gone, so demo-matmul, which has no offer of its own, is no
+# longer offered: the checks here that use it fail by design. The Image profile's acceptance is AB-T-0366's conformance run.
 # AB-T-0364's acceptance, against a built Gaea.app and a locally built demo plugin (0.3.0 or later, which offers
 # image.generate on demo-gradient):
 #

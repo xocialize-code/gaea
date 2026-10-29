@@ -1,4 +1,6 @@
 #!/bin/zsh
+# Since Gaea 0.4.0 (AB-T-0366) the G0 mock normalizer is gone, so demo-matmul, which has no offer of its own, is no
+# longer offered: the checks here that use it fail by design. The Image profile's acceptance is AB-T-0366's conformance run.
 # G0's exit tests for the Gaea host (AB-T-0355), against a built Gaea.app:
 #
 #   1. the MES Base conformance suite passes against Gaea serving the demo plugin (open mode, then paired mode);

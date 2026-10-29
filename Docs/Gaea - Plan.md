@@ -279,7 +279,10 @@ starts while the phase before it is being built.
        [Evidence/AB-T-0368](Evidence/AB-T-0368/README.md);
      - AB-T-0369: the processing pack on ForgeCore;
      - AB-T-0370: the LLM prompt enhancer.
-  5. AB-T-0366: the normalizer library (AB-T-0359) replaces the mock, and the Image conformance suite passes.
+  5. AB-T-0366: the normalizer library (AB-T-0359) replaces the mock, and the Image conformance suite passes. **Done**
+     (Gaea 0.4.0 on pixel-agency-normalizer 0.1.0): each model call runs as a plugin's offer (`GaeaModelHost`); with
+     Qwen-Image, Z-Image and Klein installed, Base and Image conform open and paired, and the mock is deleted. Upscale,
+     matte and enhance_prompt wait on AB-T-0369 and AB-T-0370. See [Evidence/AB-T-0366](Evidence/AB-T-0366/README.md).
   6. AB-T-0371: the cross-process governor, on mlx-engine's MLX-free policy (AB-T-0357). **Done** (Gaea 0.3.0 on
      mlx-engine-swift 0.73.0's `MLXMemoryPolicy`): idle workers are charged what they hold, not their peak; three
      plugins (160 GB declared) under a 70 GB budget, with no OOM and every eviction logged with its reason. See
