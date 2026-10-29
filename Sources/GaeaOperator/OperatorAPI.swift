@@ -6,7 +6,7 @@ import Foundation
 ///
 /// One request per line, one response per line:
 ///
-///     {"id":"1","command":"plugins.add","args":{"repo":"https://github.com/xocialize/gaea-plugin-demo"}}
+///     {"id":"1","command":"plugins.add","args":{"repo":"https://github.com/xocialize-code/gaea-plugin-demo"}}
 ///     {"id":"1","ok":true,"text":"Installed …","json":"{…}"}
 public enum OperatorAPI {
     /// The socket's file name inside Gaea's Application Support folder.

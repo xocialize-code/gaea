@@ -5,13 +5,16 @@ It serves a folder laid out as <root>/<owner>/<repo>/<tag>/<asset files> the way
 releases, so Gaea's real install path (GAEA_GITHUB_API=http://127.0.0.1:<port>) can be pointed at releases that
 GitHub doesn't have: a tampered bundle, an ad-hoc-signed one, a second version.
 
-    python3 tools/release-standin.py <root> [--port 8766]
+    python3 tools/release-standin.py <root> [--port 8766] [--moved OLD=NEW ...]
 
+GET /repos/<owner>/<repo>                        the repo's current full_name
 GET /repos/<owner>/<repo>/releases               the releases, newest tag first
 GET /repos/<owner>/<repo>/releases/assets/<id>   an asset's bytes (the API path Gaea uses with a token)
 GET /download/<owner>/<repo>/<tag>/<name>        an asset's bytes (the public download link)
 
 A file named `notes.md` in a tag's folder becomes the release body, and `prerelease` marks it a pre-release.
+`--moved OLD=NEW` answers an owner's old name as GitHub does after a transfer: <root>/NEW/<repo> is served under
+/repos/OLD/<repo> too, and its full_name is NEW/<repo>.
 """
 import argparse
 import hashlib
@@ -36,6 +39,14 @@ def version_key(tag):
 
 class Handler(BaseHTTPRequestHandler):
     root = "."
+    moved = {}
+
+    def owner(self, owner, repo):
+        """The owner whose folder holds the repo: the one asked for, or the one it moved to."""
+        if os.path.isdir(os.path.join(self.root, owner, repo)):
+            return owner
+        new = self.moved.get(owner)
+        return new if new and os.path.isdir(os.path.join(self.root, new, repo)) else owner
 
     def log_message(self, fmt, *args):
         sys.stderr.write("standin: " + fmt % args + "\n")
@@ -78,6 +89,12 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         parts = [unquote(p) for p in urlparse(self.path).path.strip("/").split("/")]
+        if len(parts) >= 3 and parts[0] == "repos":
+            parts[1] = self.owner(parts[1], parts[2])
+        if len(parts) == 3 and parts[0] == "repos":
+            if not os.path.isdir(os.path.join(self.root, parts[1], parts[2])):
+                return self.send(404, b'{"message":"Not Found"}')
+            return self.send(200, json.dumps({"full_name": f"{parts[1]}/{parts[2]}"}).encode())
         if len(parts) == 4 and parts[0] == "repos" and parts[3] == "releases":
             releases = self.releases(parts[1], parts[2])
             if releases is None:
@@ -102,7 +119,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("root")
     parser.add_argument("--port", type=int, default=8766)
+    parser.add_argument("--moved", action="append", default=[], metavar="OLD=NEW")
     args = parser.parse_args()
+    Handler.moved = dict(m.split("=", 1) for m in args.moved)
     Handler.root = os.path.abspath(args.root)
     server = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
     print(f"release stand-in on http://127.0.0.1:{args.port} serving {Handler.root}", flush=True)

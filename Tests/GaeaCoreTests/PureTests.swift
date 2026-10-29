@@ -17,13 +17,13 @@ let repoRoot = URL(fileURLWithPath: #filePath).deletingLastPathComponent().delet
 
 @Suite struct PluginRepositoryTests {
     @Test func readsTheSpellingsOperatorsUse() {
-        for text in ["https://github.com/xocialize/gaea-plugin-demo", "https://github.com/xocialize/gaea-plugin-demo.git",
-                     "https://github.com/xocialize/gaea-plugin-demo/", "xocialize/gaea-plugin-demo"] {
-            #expect(PluginRepository(text)?.description == "xocialize/gaea-plugin-demo", "\(text)")
+        for text in ["https://github.com/xocialize-code/gaea-plugin-demo", "https://github.com/xocialize-code/gaea-plugin-demo.git",
+                     "https://github.com/xocialize-code/gaea-plugin-demo/", "xocialize-code/gaea-plugin-demo"] {
+            #expect(PluginRepository(text)?.description == "xocialize-code/gaea-plugin-demo", "\(text)")
         }
         #expect(PluginRepository("https://gitlab.com/a/b") == nil)
         #expect(PluginRepository("https://github.com/a") == nil)
-        #expect(PluginRepository("Xocialize/Gaea-Plugin-Demo")!.matches(PluginRepository("xocialize/gaea-plugin-demo")!))
+        #expect(PluginRepository("Xocialize-Code/Gaea-Plugin-Demo")!.matches(PluginRepository("xocialize-code/gaea-plugin-demo")!))
     }
 }
 

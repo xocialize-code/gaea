@@ -5,7 +5,7 @@
   "protocol": 1,
   "min_gaea": "0.1.0",
   "team": "CFZS6RXUCP",
-  "repo": "https://github.com/xocialize/gaea-plugin-demo",
+  "repo": "https://github.com/xocialize-code/gaea-plugin-demo",
   "title": "Gaea demo worker",
   "summary": "A GPU matmul loop that proves the plugin path end to end: download, verify, launch, run, cancel.",
   "license": "Apache-2.0",

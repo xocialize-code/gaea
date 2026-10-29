@@ -19,7 +19,7 @@ WORK=${1:?work dir}; OUT=${2:?evidence dir}
 APP=${APP:-dist/Gaea.app}
 GAEA="$APP/Contents/MacOS/Gaea"; CLI="$APP/Contents/Helpers/gaea"
 CONFORMANCE=${MES_CONFORMANCE:?path to mes-conformance}
-REPO=https://github.com/xocialize/gaea-plugin-demo; ID=com.xocialize.gaea.demo
+REPO=https://github.com/xocialize-code/gaea-plugin-demo; ID=com.xocialize.gaea.demo
 mkdir -p "$OUT"; rm -rf "$WORK"; mkdir -p "$WORK"
 LOG="$OUT/acceptance.log"; : > "$LOG"
 pass=0; fail=0
@@ -113,7 +113,7 @@ stop $P
 
 # ---- 3. Refusals at install, through the same path, from a stand-in releases API
 if [[ -n "${STANDIN_ROOT:-}" ]]; then
-  python3 tools/release-standin.py "$STANDIN_ROOT" --port 8766 > "$WORK/standin.out" 2>&1 &
+  python3 tools/release-standin.py "$STANDIN_ROOT" --moved xocialize=xocialize-code --port 8766 > "$WORK/standin.out" 2>&1 &
   STANDIN=$!; sleep 1
   R=$WORK/refuse; GAEA_GITHUB_API=http://127.0.0.1:8766 start $R 17634
   export GAEA_HOME=$R

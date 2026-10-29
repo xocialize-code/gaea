@@ -55,7 +55,7 @@ public final class GaeaHost: Sendable {
 
         var config = EngineConfiguration(id: "eng_gaea_\(Host.current().localizedName.map(Self.slug) ?? "mac")", name: "Gaea",
                                          implementationName: "gaea", implementationVersion: Gaea.version,
-                                         implementationURL: "https://github.com/xocialize/gaea", spoolDirectory: paths.spool)
+                                         implementationURL: "https://github.com/xocialize-code/gaea", spoolDirectory: paths.spool)
         config.stateDirectory = paths.serverState
         config.port = options.port
         config.advertise = options.advertise

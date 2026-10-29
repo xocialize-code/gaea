@@ -256,7 +256,8 @@ public actor PluginManager {
         let manifest: PluginManifest
         do {
             manifest = try JSONDecoder().decode(PluginManifest.self, from: manifestData)
-            try Self.check(manifest, expected: expected, release: release, repo: repo, signature: signature, bundle: staged)
+            let addedFrom = await repository(declared: manifest.repo, addedFrom: repo)
+            try Self.check(manifest, expected: expected, release: release, repo: addedFrom, signature: signature, bundle: staged)
         } catch {
             database.record("refused", plugin: expected.id, version: release.version.description, "\(error)")
             throw error
@@ -273,6 +274,17 @@ public actor PluginManager {
             version: manifest.version, bundlePath: bundle.path, zipSHA256: digest,
             manifestSHA256: SHA256.hash(data: manifestData).map { String(format: "%02x", $0) }.joined(),
             signature: signature.description, notarized: signature.notarized)
+    }
+
+    /// The repo a manifest is checked against: the one it was added from, or the manifest's own when GitHub says both
+    /// are the same repo under an old and a new name (a transfer or rename). Releases built before the move keep their
+    /// old repo, and installs added by the old URL meet releases built after it.
+    func repository(declared: String, addedFrom repo: PluginRepository) async -> PluginRepository {
+        guard let declared = PluginRepository(declared), !declared.matches(repo),
+              let a = try? await source.canonical(declared), let b = try? await source.canonical(repo), a.matches(b)
+        else { return repo }
+        log("plugins: \(declared) and \(repo) are the same repo, now \(a)")
+        return declared
     }
 
     /// The sealed manifest agrees with the release, the signature and the repo it was added from, and declares nothing

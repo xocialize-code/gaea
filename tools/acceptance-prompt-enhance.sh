@@ -67,17 +67,17 @@ unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN GAEA_GITHUB_API
 H=$WORK/main; P=17750
 start $H $P
 export GAEA_HOME=$H
-check "add FLUX.2 Klein and Z-Image from GitHub" zsh -c "$CLI plugins add https://github.com/xocialize/gaea-plugin-flux2-klein | grep -q Installed && $CLI plugins add https://github.com/xocialize/gaea-plugin-z-image | grep -q Installed"
+check "add FLUX.2 Klein and Z-Image from GitHub" zsh -c "$CLI plugins add https://github.com/xocialize-code/gaea-plugin-flux2-klein | grep -q Installed && $CLI plugins add https://github.com/xocialize-code/gaea-plugin-z-image | grep -q Installed"
 if [[ ${REPO_FROM:-} != github ]]; then
   stop $P
-  REL=$WORK/standin/xocialize/gaea-plugin-prompt-enhance/v$VERSION; mkdir -p "$REL"
+  REL=$WORK/standin/xocialize-code/gaea-plugin-prompt-enhance/v$VERSION; mkdir -p "$REL"
   cp "$PLUGIN_DIST/prompt-enhance-$VERSION.gaeaplugin.zip" "$PLUGIN_DIST/prompt-enhance-$VERSION.gaeaplugin.zip.sha256" "$PLUGIN_DIST/manifest.json" "$REL/"
-  python3 tools/release-standin.py "$WORK/standin" --port 8773 > "$WORK/standin.out" 2>&1 &
+  python3 tools/release-standin.py "$WORK/standin" --moved xocialize=xocialize-code --port 8773 > "$WORK/standin.out" 2>&1 &
   STANDIN=$!; sleep 1
   GAEA_GITHUB_API=http://127.0.0.1:8773 GAEA_HOME=$H "$GAEA" --headless --port $P --no-advertise > "$H.out" 2>&1 &
   for _ in {1..50}; do [[ -S $H/operator.sock ]] && break; sleep 0.2; done
 fi
-check "add the prompt enhancer $VERSION by repo URL" zsh -c "$CLI plugins add https://github.com/xocialize/gaea-plugin-prompt-enhance | grep -q 'Installed .* $VERSION'"
+check "add the prompt enhancer $VERSION by repo URL" zsh -c "$CLI plugins add https://github.com/xocialize-code/gaea-plugin-prompt-enhance | grep -q 'Installed .* $VERSION'"
 $CLI models > "$OUT/models.txt"
 mes "http://127.0.0.1:$P/mes/v0/operations" > "$OUT/operations.json"
 check "image.enhance_prompt offers the backbones; image.generate declares prompt_enhance" py "

@@ -1,7 +1,7 @@
 # manifest: z-image.json
 # The plugin reads its stored preset once configured; then a download on the operator's command, a generate
 # with that preset, and an unload under memory pressure.
-W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.z-image","version":"0.1.0"},"pid":51022,"models":["z-image-turbo"],"manifest_sha256":"5be98f0c9a5667df55afc282d46abdcb25aae8576cfc0e635382a3507975bf76","kit":{"version":"0.1.0"},"engine":{"version":"0.72.0","contract":"1.57.0"}}
+W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.z-image","version":"0.1.0"},"pid":51022,"models":["z-image-turbo"],"manifest_sha256":"1aca07a191ece21a0f76c4205d56502180ee930cf8902155a4f638e62b11db66","kit":{"version":"0.1.0"},"engine":{"version":"0.72.0","contract":"1.57.0"}}
 H {"type":"configure","id":"h1","budget":{"ceilingBytes":48000000000,"cacheLimitBytes":2147483648,"wiresWeights":true},"models_root":"/Users/me/Library/Application Support/MLXEngine/Models","cache_root":"/Users/me/Library/Caches/Gaea/plugins/com.xocialize.gaea.z-image","settings":{"default_lane":"int4"}}
 W {"type":"configured","re":"h1"}
 W {"type":"storage.get","id":"w1","namespace":"presets","key":"studio-portrait"}

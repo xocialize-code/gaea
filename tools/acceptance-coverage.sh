@@ -39,7 +39,7 @@ for _ in {1..100}; do mes "http://127.0.0.1:$P/mes/v0/operations" > /dev/null &&
 
 # ---- 1. The releases, by repo URL
 GAEA_HOME=$H "$CLI" plugins update com.xocialize.gaea.forge 0.2.0 >> "$LOG" 2>&1
-GAEA_HOME=$H "$CLI" plugins add https://github.com/xocialize/gaea-plugin-mage-vl >> "$LOG" 2>&1
+GAEA_HOME=$H "$CLI" plugins add https://github.com/xocialize-code/gaea-plugin-mage-vl >> "$LOG" 2>&1
 GAEA_HOME=$H "$CLI" plugins list > "$OUT/plugins.txt" 2>&1
 check "forge 0.2.0 is the active version" grep -Eq 'com.xocialize.gaea.forge.*0\.2\.0' "$OUT/plugins.txt"
 check "mage-vl 0.1.0 is installed" grep -Eq 'com.xocialize.gaea.mage-vl.*0\.1\.0' "$OUT/plugins.txt"

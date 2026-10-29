@@ -66,7 +66,7 @@ unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN GAEA_GITHUB_API
 H=$WORK/main; P=17700
 start $H $P --budget-bytes $BUDGET
 export GAEA_HOME=$H
-check "add Qwen-Image, Z-Image and FLUX.2 Klein by repo URL" zsh -c "for r in qwen-image z-image flux2-klein; do $CLI plugins add https://github.com/xocialize/gaea-plugin-\$r | grep -q Installed || exit 1; done"
+check "add Qwen-Image, Z-Image and FLUX.2 Klein by repo URL" zsh -c "for r in qwen-image z-image flux2-klein; do $CLI plugins add https://github.com/xocialize-code/gaea-plugin-\$r | grep -q Installed || exit 1; done"
 $CLI models > "$OUT/models.txt"
 $CLI status > "$OUT/status.txt"
 

@@ -142,6 +142,21 @@ public struct GitHubReleaseSource: Sendable {
         try FileManager.default.moveItem(at: temporary, to: file)
     }
 
+    /// The repo's current owner and name. GitHub keeps answering a transferred or renamed repo under its old name, and
+    /// `full_name` gives the new one.
+    public func canonical(_ repo: PluginRepository) async throws -> PluginRepository {
+        let url = apiRoot.appending(path: "repos/\(repo.owner)/\(repo.name)")
+        let (data, response) = try await session.data(for: request(url, accept: "application/vnd.github+json"))
+        let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+        if status == 404 { throw SourceError.notFound(repo) }
+        guard status == 200 else { throw SourceError.http(status, url.absoluteString) }
+        struct Wire: Decodable { var full_name: String }
+        guard let canonical = PluginRepository(try JSONDecoder().decode(Wire.self, from: data).full_name) else {
+            throw SourceError.http(status, url.absoluteString)
+        }
+        return canonical
+    }
+
     /// A small asset's bytes (the manifest, the checksum).
     public func data(_ asset: PluginRelease.Asset) async throws -> Data {
         let url = Self.token != nil ? asset.apiURL : asset.downloadURL

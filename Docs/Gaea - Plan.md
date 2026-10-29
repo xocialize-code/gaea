@@ -226,7 +226,7 @@ starts while the phase before it is being built.
   blocks AB-T-0355 (the host skeleton) and AB-T-0356 (the measurements).
 - Gaea PRD: [draft 0.2](Gaea%20-%20PRD.md), open questions decided (replaces Engines-PRD).
 - GaeaPluginKit and a plugin template repo whose CI publishes releases. **Done (AB-T-0354):** kit v0.1.1;
-  [demo v0.2.1](https://github.com/xocialize/gaea-plugin-demo/releases/tag/v0.2.1) notarized and accepted by Gatekeeper.
+  [demo v0.2.1](https://github.com/xocialize-code/gaea-plugin-demo/releases/tag/v0.2.1) notarized and accepted by Gatekeeper.
 - The Gaea host, grown out of the spike: MESEngineKit, a mock normalizer, the scheduler, the plugin manager (repo
   URLs, enable and disable), gaea.sqlite, the local operator API and CLI, a minimal console. **Done (AB-T-0355,
   v0.1.0):** both exit tests pass on the demo's GitHub releases; see
@@ -259,7 +259,7 @@ starts while the phase before it is being built.
      root becomes a setting. **Done** (Gaea 0.2.0, demo 0.3.0's `demo-gradient`): see
      [Evidence/AB-T-0364](Evidence/AB-T-0364/README.md).
   2. AB-T-0365 (P1): gaea-plugin-z-image, with int4, int8 and bf16 lanes. It is the first real plugin. **Done**
-     ([v0.1.0](https://github.com/xocialize/gaea-plugin-z-image/releases/tag/v0.1.0), on GaeaPluginKit 0.2.0):
+     ([v0.1.0](https://github.com/xocialize-code/gaea-plugin-z-image/releases/tag/v0.1.0), on GaeaPluginKit 0.2.0):
      through Gaea, Turbo's 1024² image is byte for byte the in-process one, at 11.46 s against 11.47 s; see
      [Evidence/AB-T-0365](Evidence/AB-T-0365/README.md).
   3. AB-T-0363 (P1): eviction, requeue-once and lane fallback, tested with Z-Image's lanes and the demo. **Done**
@@ -269,21 +269,21 @@ starts while the phase before it is being built.
      [Evidence/AB-T-0363](Evidence/AB-T-0363/README.md).
   4. Plugins:
      - AB-T-0367: FLUX.2 Klein. **Done**
-       ([v0.1.0](https://github.com/xocialize/gaea-plugin-flux2-klein/releases/tag/v0.1.0)): Klein 4B and 4B Base,
+       ([v0.1.0](https://github.com/xocialize-code/gaea-plugin-flux2-klein/releases/tag/v0.1.0)): Klein 4B and 4B Base,
        generate and multi-reference edit (Gaea's default editor), byte for byte the in-process images, warm 6.32 s
        against 6.30 s at 1024² bf16; see [Evidence/AB-T-0367](Evidence/AB-T-0367/README.md);
      - AB-T-0368: Qwen-Image-Edit. **Done**
-       ([v0.1.1](https://github.com/xocialize/gaea-plugin-qwen-image/releases/tag/v0.1.1), with Gaea 0.2.2):
+       ([v0.1.1](https://github.com/xocialize-code/gaea-plugin-qwen-image/releases/tag/v0.1.1), with Gaea 0.2.2):
        Qwen-Image-Edit 2511 (bf16, 63 GB) and Qwen-Image Flash (int8, 31.6 GB) in one plugin, byte for byte the
        in-process images; the edit is slow, about 27 s a step with two references (AB-A-0214). See
        [Evidence/AB-T-0368](Evidence/AB-T-0368/README.md);
      - AB-T-0369: the processing pack on ForgeCore. **Done**
-       ([v0.1.1](https://github.com/xocialize/gaea-plugin-forge/releases/tag/v0.1.1), Gaea 0.4.1): fourteen models in one
+       ([v0.1.1](https://github.com/xocialize-code/gaea-plugin-forge/releases/tag/v0.1.1), Gaea 0.4.1): fourteen models in one
        worker (2.51 GB with all loaded), every call byte for byte ForgeCore's in-process output; with every G1 plugin,
        conformance passes 35 open and 38 paired, upscale and matte included. See
        [Evidence/AB-T-0369](Evidence/AB-T-0369/README.md);
      - AB-T-0370: the LLM prompt enhancer. **Done**
-       ([v0.1.0](https://github.com/xocialize/gaea-plugin-prompt-enhance/releases/tag/v0.1.0), Gaea 0.5.0): Qwen3.5 4B and
+       ([v0.1.0](https://github.com/xocialize-code/gaea-plugin-prompt-enhance/releases/tag/v0.1.0), Gaea 0.5.0): Qwen3.5 4B and
        9B behind prompt-enhance-kit's profiles as the `x-gaea.prompt.enhance` helper; Gaea calls it only when a profile's
        decision says so; every profile's greedy rewrite is the in-process text; with every G1 plugin, conformance passes
        37 open and 40 paired. See [Evidence/AB-T-0370](Evidence/AB-T-0370/README.md).

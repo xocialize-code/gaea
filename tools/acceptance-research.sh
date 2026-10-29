@@ -92,7 +92,7 @@ if [[ ${REPO_FROM:-} != github ]]; then
     REL=$WORK/standin/xocialize/$repo/v$v; mkdir -p "$REL"
     cp "$DEV/$repo/dist/$name-$v.gaeaplugin.zip" "$DEV/$repo/dist/$name-$v.gaeaplugin.zip.sha256" "$DEV/$repo/dist/manifest.json" "$REL/"
   done
-  python3 tools/release-standin.py "$WORK/standin" --port 8771 > "$WORK/standin.out" 2>&1 &
+  python3 tools/release-standin.py "$WORK/standin" --moved xocialize=xocialize-code --port 8771 > "$WORK/standin.out" 2>&1 &
   STANDIN=$!; sleep 1
   export GAEA_GITHUB_API=http://127.0.0.1:8771
 fi
@@ -101,7 +101,7 @@ quiet
 H=$WORK/main; P=17680
 start $H $P
 export GAEA_HOME=$H
-check "add gaea-plugin-flux2-klein (the default image.generate)" zsh -c "$CLI plugins add https://github.com/xocialize/gaea-plugin-flux2-klein | grep -q 'Installed'"
+check "add gaea-plugin-flux2-klein (the default image.generate)" zsh -c "$CLI plugins add https://github.com/xocialize-code/gaea-plugin-flux2-klein | grep -q 'Installed'"
 for f in $FAMILIES; do
   check "add ${REPO[$f]} by repo URL" zsh -c "$CLI plugins add https://github.com/xocialize/${REPO[$f]} | tee -a $LOG | grep -q 'Installed'"
 done

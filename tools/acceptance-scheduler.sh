@@ -67,10 +67,10 @@ say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sy
 unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN
 if [[ ${REPO_FROM:-} != github ]]; then
   for name dist version in z-image $Z_DIST $ZV demo $DEMO_DIST $DV; do
-    REL=$WORK/standin/xocialize/gaea-plugin-$name/v$version; mkdir -p "$REL"
+    REL=$WORK/standin/xocialize-code/gaea-plugin-$name/v$version; mkdir -p "$REL"
     cp "$dist/$name-$version.gaeaplugin.zip" "$dist/$name-$version.gaeaplugin.zip.sha256" "$dist/manifest.json" "$REL/"
   done
-  python3 tools/release-standin.py "$WORK/standin" --port 8769 > "$WORK/standin.out" 2>&1 &
+  python3 tools/release-standin.py "$WORK/standin" --moved xocialize=xocialize-code --port 8769 > "$WORK/standin.out" 2>&1 &
   STANDIN=$!; sleep 1
   export GAEA_GITHUB_API=http://127.0.0.1:8769
 fi
@@ -78,7 +78,7 @@ fi
 H=$WORK/main; P=17660
 start $H $P --budget-bytes $BUDGET
 export GAEA_HOME=$H
-check "add z-image $ZV and demo $DV by repo URL" zsh -c "$CLI plugins add https://github.com/xocialize/gaea-plugin-z-image | grep -q 'Installed .* $ZV' && $CLI plugins add https://github.com/xocialize/gaea-plugin-demo | grep -q 'Installed .* $DV'"
+check "add z-image $ZV and demo $DV by repo URL" zsh -c "$CLI plugins add https://github.com/xocialize-code/gaea-plugin-z-image | grep -q 'Installed .* $ZV' && $CLI plugins add https://github.com/xocialize-code/gaea-plugin-demo | grep -q 'Installed .* $DV'"
 $CLI status > "$OUT/status.txt"
 check "the budget is 43.1 GB" grep -q '43.10 GB' "$OUT/status.txt"
 

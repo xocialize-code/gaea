@@ -67,9 +67,9 @@ say "# Qwen-Image plugin acceptance (AB-T-0368) $(date -u +%FT%TZ) — Gaea $(de
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN
 if [[ ${REPO_FROM:-} != github ]]; then
-  REL=$WORK/standin/xocialize/gaea-plugin-qwen-image/v$VERSION; mkdir -p "$REL"
+  REL=$WORK/standin/xocialize-code/gaea-plugin-qwen-image/v$VERSION; mkdir -p "$REL"
   cp "$PLUGIN_DIST/qwen-image-$VERSION.gaeaplugin.zip" "$PLUGIN_DIST/qwen-image-$VERSION.gaeaplugin.zip.sha256" "$PLUGIN_DIST/manifest.json" "$REL/"
-  python3 tools/release-standin.py "$WORK/standin" --port 8771 > "$WORK/standin.out" 2>&1 &
+  python3 tools/release-standin.py "$WORK/standin" --moved xocialize=xocialize-code --port 8771 > "$WORK/standin.out" 2>&1 &
   STANDIN=$!; sleep 1
   export GAEA_GITHUB_API=http://127.0.0.1:8771
 fi
@@ -77,7 +77,7 @@ fi
 H=$WORK/main; P=17680
 start $H $P
 export GAEA_HOME=$H
-check "add by repo URL installs qwen-image $VERSION" zsh -c "$CLI plugins add https://github.com/xocialize/gaea-plugin-qwen-image | grep -q 'Installed .* $VERSION'"
+check "add by repo URL installs qwen-image $VERSION" zsh -c "$CLI plugins add https://github.com/xocialize-code/gaea-plugin-qwen-image | grep -q 'Installed .* $VERSION'"
 $CLI models > "$OUT/models.txt"
 mes "http://127.0.0.1:$P/mes/v0/operations" > "$OUT/operations.json"
 check "image.edit offers Qwen-Image-Edit 2511 for standard and best, up to 3 images" py "

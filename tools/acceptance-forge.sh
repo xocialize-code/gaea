@@ -63,7 +63,7 @@ unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN GAEA_GITHUB_API
 H=$WORK/main; P=17730
 start $H $P
 export GAEA_HOME=$H
-check "add the pack by repo URL" zsh -c "$CLI plugins add https://github.com/xocialize/gaea-plugin-forge | grep -q 'Installed .*0.1'"
+check "add the pack by repo URL" zsh -c "$CLI plugins add https://github.com/xocialize-code/gaea-plugin-forge | grep -q 'Installed .*0.1'"
 $CLI models > "$OUT/models.txt"
 mes "http://127.0.0.1:$P/mes/v0/operations" > "$OUT/operations.json"
 check "fill, erase, extend, upscale, matte, segment and restore are offered, with the table's defaults" py "

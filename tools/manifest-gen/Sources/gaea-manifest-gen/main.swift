@@ -38,7 +38,7 @@ func demo() -> [Model] {
     // (Spikes/plugin-exec/README.md, check 5). Nothing is downloaded.
     let manifest = PackageManifest(
         license: LicenseDeclaration(weightLicense: .apache2, portCodeLicense: .apache2),
-        provenance: Provenance(sourceRepo: "xocialize/gaea-plugin-demo", revision: "0.2.0", tier: 1),
+        provenance: Provenance(sourceRepo: "xocialize-code/gaea-plugin-demo", revision: "0.2.0", tier: 1),
         requirements: RequirementsManifest(
             footprints: [QuantFootprint(quant: .fp32, residentBytes: 0, peakActivationBytes: 2_370_000_000)],
             requiredBackends: [.metalGPU]),

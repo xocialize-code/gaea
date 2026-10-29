@@ -1,7 +1,7 @@
 # manifest: z-image.json
 # The plugin store, and the failures a host must handle: a run whose lane is missing from disk (deleted behind
 # Gaea's back), a storage failure, and a protocol error (no re: the line couldn't be attributed to a request).
-W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.z-image","version":"0.1.0"},"pid":51990,"models":["z-image-turbo"],"manifest_sha256":"5be98f0c9a5667df55afc282d46abdcb25aae8576cfc0e635382a3507975bf76","kit":{"version":"0.1.0"},"engine":{"version":"0.72.0","contract":"1.57.0"}}
+W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.z-image","version":"0.1.0"},"pid":51990,"models":["z-image-turbo"],"manifest_sha256":"1aca07a191ece21a0f76c4205d56502180ee930cf8902155a4f638e62b11db66","kit":{"version":"0.1.0"},"engine":{"version":"0.72.0","contract":"1.57.0"}}
 H {"type":"configure","id":"h1","budget":{"ceilingBytes":24000000000,"wiresWeights":false},"models_root":"/Users/me/Library/Application Support/MLXEngine/Models","cache_root":"/Users/me/Library/Caches/Gaea/plugins/com.xocialize.gaea.z-image","settings":{"default_lane":"bf16"}}
 W {"type":"configured","re":"h1"}
 W {"type":"storage.put","id":"w1","namespace":"presets","key":"studio-portrait","value":{"x-zimage.shift":2.5}}

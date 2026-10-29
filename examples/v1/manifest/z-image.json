@@ -5,7 +5,7 @@
   "protocol": 1,
   "min_gaea": "0.1.0",
   "team": "CFZS6RXUCP",
-  "repo": "https://github.com/xocialize/gaea-plugin-z-image",
+  "repo": "https://github.com/xocialize-code/gaea-plugin-z-image",
   "title": "Z-Image",
   "summary": "Tongyi-MAI's Z-Image Turbo: fast photoreal text-to-image and image-to-image.",
   "license": "MIT",

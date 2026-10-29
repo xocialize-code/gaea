@@ -54,9 +54,9 @@ say "# Gaea offers acceptance (AB-T-0364) $(date -u +%FT%TZ) — Gaea $(defaults
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 
 # The demo's release, as GitHub would serve it.
-REL=$WORK/standin/xocialize/gaea-plugin-demo/v$VERSION; mkdir -p "$REL"
+REL=$WORK/standin/xocialize-code/gaea-plugin-demo/v$VERSION; mkdir -p "$REL"
 cp "$DEMO_DIST/demo-$VERSION.gaeaplugin.zip" "$DEMO_DIST/demo-$VERSION.gaeaplugin.zip.sha256" "$DEMO_DIST/manifest.json" "$REL/"
-python3 tools/release-standin.py "$WORK/standin" --port 8767 > "$WORK/standin.out" 2>&1 &
+python3 tools/release-standin.py "$WORK/standin" --moved xocialize=xocialize-code --port 8767 > "$WORK/standin.out" 2>&1 &
 STANDIN=$!; sleep 1
 export GAEA_GITHUB_API=http://127.0.0.1:8767
 unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN
@@ -64,7 +64,7 @@ unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN
 H=$WORK/main; P=17640
 start $H $P
 export GAEA_HOME=$H
-check "add by repo URL installs demo $VERSION" zsh -c "$CLI plugins add https://github.com/xocialize/gaea-plugin-demo | grep -q 'Installed .* $VERSION'"
+check "add by repo URL installs demo $VERSION" zsh -c "$CLI plugins add https://github.com/xocialize-code/gaea-plugin-demo | grep -q 'Installed .* $VERSION'"
 mes "http://127.0.0.1:$P/mes/v0/operations" > "$OUT/operations.json"
 check "image.generate offers demo-gradient (default) and the mocked demo-matmul" python3 -c "
 import json; ops = json.load(open('$OUT/operations.json'))['operations']; g = [o for o in ops if o['operation'] == 'image.generate'][0]

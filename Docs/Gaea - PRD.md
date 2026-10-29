@@ -4,7 +4,7 @@
 |---|---|
 | **Status** | Draft 0.2, 2026-10-28: the three open questions are decided (G-21 to G-23). Replaces [Engines-PRD](../../ml%28x%29/PixelAgency/Docs/Engines-PRD.md) (superseded 2026-10-27). |
 | **Product** | **Gaea**: one MES media server for the Image, Audio and Video profiles, whose models are plugins. Plus **Gaea Lab**, its reference client. |
-| **Licence** | Apache-2.0 for Gaea, GaeaPluginKit and our plugins (G-21), on GitHub ([xocialize/gaea](https://github.com/xocialize/gaea)). Model weights download separately under their own licences. |
+| **Licence** | Apache-2.0 for Gaea, GaeaPluginKit and our plugins (G-21), on GitHub ([xocialize-code/gaea](https://github.com/xocialize-code/gaea)). Model weights download separately under their own licences. |
 | **Platform** | Apple silicon, macOS 26 or later (mlx-engine-swift 0.72.0 requires it). |
 | **Companion documents** | [Concept](Gaea%20-%20Generative%20multimedia%20server.md) · [Plan](Gaea%20-%20Plan.md) (decisions G-1 to G-20, architecture, phases) · [GPP-1](../spec/GPP-1.md) (the plugin protocol and manifest) · [MES-PRD](../../ml%28x%29/PixelAgency/Docs/MES-PRD.md) · [Desktop-PRD](../../ml%28x%29/PixelAgency/Docs/Desktop-PRD.md) |
 
@@ -179,7 +179,7 @@ Video needs Base time conventions and MES Video 0.1 first (plan §4). Everything
 | ID | Requirement | Src | Notes |
 |---|---|---|---|
 | DST-1 | **Developer ID, hardened runtime, notarized in CI** for Gaea and every plugin. No sandbox, no App Store. | N | G-6 |
-| DST-2 | **GitHub releases** for Gaea (`xocialize/gaea`) and for each plugin repo. | N | G-11 |
+| DST-2 | **GitHub releases** for Gaea (`xocialize-code/gaea`) and for each plugin repo. | N | G-11 |
 | DST-3 | **Gaea updates itself** through the same GitHub release path (or Sparkle). | P | Plan G4 |
 | DST-4 | **A guide for plugin authors,** built on the template repo, shipping with the trust list. | P | Plan G4; G-22 |
 | DST-5 | **Apache-2.0** for Gaea, GaeaPluginKit and every plugin we publish. A manifest's `license` names the plugin's code licence; each model's weight licence is separate. | N | G-21 |
