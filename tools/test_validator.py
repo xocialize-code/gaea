@@ -102,6 +102,8 @@ MANIFEST_CASES = [
     (Z, setp(OFFER0 + ["model", "adapters"], [ADAPTER]), "has no adapters_meta", "listed adapter with no metadata"),
     (Z, setp(OFFER0 + ["model", "adapters"], [ADAPTER]), "declares no adapter_support", "listed adapter, no adapter_support"),
     (Z, setp(OFFER0 + ["adapter_support"], dict(SUPPORT, max_count=0)), "below 1", "adapter_support that takes none"),
+    (Z, setp(OFFER0 + ["adapter_support"], SUPPORT), None, "adapter_support alone is valid"),
+    (Z, setp(OFFER0 + ["adapter_support"], dict(SUPPORT, kinds=["plain", "plain"])), "not unique", "adapter kinds repeated"),
     (Z, setp(["settings", 0, "apply"], "maybe"), "not in", "unknown setting apply mode"),
     (Z, delp(["settings", 0, "schema", "default"]), "has no default", "setting without a default"),
     (Z, setp(["settings", 0, "schema", "default"], "fp8"), "default is not in its enum", "setting default outside enum"),

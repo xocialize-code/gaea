@@ -24,7 +24,7 @@ MANIFEST_SCHEMA = SCHEMAS / "v1" / "manifest.schema.json"
 GPP_SCHEMA = SCHEMAS / "v1" / "gpp.schema.json"
 
 ASSERTIONS = {"type", "enum", "const", "properties", "required", "additionalProperties", "propertyNames",
-              "minProperties", "items", "minItems", "maxItems", "minimum", "maximum", "exclusiveMinimum",
+              "minProperties", "items", "minItems", "maxItems", "uniqueItems", "minimum", "maximum", "exclusiveMinimum",
               "minLength", "maxLength", "pattern", "oneOf", "anyOf", "allOf", "if", "then", "$ref"}
 ANNOTATIONS = {"$schema", "title", "description", "default", "$defs", "$comment"}
 _cache = {}
@@ -123,6 +123,8 @@ def validate(value, schema, file, path="$"):
     if isinstance(value, list):
         if "minItems" in schema and len(value) < schema["minItems"]:
             errs.append(f"{path}: fewer than {schema['minItems']} items")
+        if schema.get("uniqueItems") and len({json.dumps(v, sort_keys=True) for v in value}) != len(value):
+            errs.append(f"{path}: items are not unique")
         if "maxItems" in schema and len(value) > schema["maxItems"]:
             errs.append(f"{path}: more than {schema['maxItems']} items")
         if "items" in schema:
