@@ -146,6 +146,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 print("wrote \(file.path)")
             }
         }
+        // Gaea's own Settings: the adapters tab (GPP-1 §4.8).
+        if let host {
+            for appearance in [NSAppearance.Name.aqua, .darkAqua] {
+                let view = NSHostingView(rootView: AdaptersView(host: host).frame(width: 720, height: 760)
+                    .background(Color(nsColor: .windowBackgroundColor)))
+                view.appearance = NSAppearance(named: appearance)
+                view.frame = NSRect(x: 0, y: 0, width: 720, height: 760)
+                let window = NSWindow(contentRect: view.frame, styleMask: [.borderless], backing: .buffered, defer: false)
+                window.appearance = NSAppearance(named: appearance)
+                window.contentView = view
+                view.layoutSubtreeIfNeeded()
+                try? await Task.sleep(for: .milliseconds(1200))
+                view.layoutSubtreeIfNeeded()
+                guard let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { continue }
+                view.cacheDisplay(in: view.bounds, to: rep)
+                let file = directory.appendingPathComponent("settings-adapters-\(appearance == .aqua ? "light" : "dark").png")
+                try? rep.representation(using: .png, properties: [:])?.write(to: file)
+                print("wrote \(file.path)")
+            }
+        }
         // Not NSApp.terminate: called from this main-actor task, its terminateLater reply would wait on another main-actor
         // task that can't start until this one returns, so the snapshot never quit.
         serving?.cancel()

@@ -6,7 +6,7 @@ import GaeaCore
 //
 //   Gaea                       the menu bar item and console, serving MES (UI-1, UI-2)
 //   Gaea --headless            the server alone, for a studio Mac at login (SRV-10)
-//   Gaea --snapshot <dir>      render the console's Plugins, Models and System pages to PNGs, then quit
+//   Gaea --snapshot <dir>      render the console's Plugins, Models and System pages and Settings' Adapters tab to PNGs, then quit
 //
 //   --port N (17630)  --paired [--host 0.0.0.0] [--approve-pairings]  --no-advertise  --budget-bytes N
 //   --outputs-ttl S  --idle-seconds S  --models-root <folder> (this launch only; `gaea models root` keeps one)
