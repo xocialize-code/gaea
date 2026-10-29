@@ -1,0 +1,2 @@
+budget 103.08 GB, charged 5.61 GB, free 97.47 GB; host 0.12 GB; 0 queued
+  com.xocialize.gaea.forge 0.1.1 pid 42182: declared 19.61 GB, phys_footprint 2.51 GB, worker says 2.51 GB, charged 5.61 GB lanes ["nafnet-restore": "fp16", "lama-inpaint": "fp16", "sam21-segment": "fp16", "heart-upscale": "fp16", "gfpgan-face": "fp32", "birefnet-matte": "fp16", "realplksr-upscale": "fp32", "edgetam-segment": "fp16", "restormer-defocus": "fp32", "scunet-denoise": "fp32", "restoreformer-face": "fp32", "restormer-denoise": "fp32", "restormer-motion": "fp32", "nerve-upscale": "fp16"]

@@ -1,0 +1,14 @@
+on  lama-inpaint  LaMa inpaint  [com.xocialize.gaea.forge 0.1.1] lanes: fp16* 4.50 GB
+on  nerve-upscale  NERVE upscale  [com.xocialize.gaea.forge 0.1.1] lanes: fp16* 6.16 GB
+on  realplksr-upscale  RealPLKSR upscale  [com.xocialize.gaea.forge 0.1.1] lanes: fp32* 8.70 GB
+on  heart-upscale  HEART upscale  [com.xocialize.gaea.forge 0.1.1] lanes: fp16* 8.66 GB
+on  birefnet-matte  BiRefNet matte  [com.xocialize.gaea.forge 0.1.1] lanes: fp16* 14.90 GB
+on  edgetam-segment  EdgeTAM segment  [com.xocialize.gaea.forge 0.1.1] lanes: fp16* 1.50 GB
+on  sam21-segment  SAM 2.1 segment  [com.xocialize.gaea.forge 0.1.1] lanes: fp16* 2.85 GB
+on  nafnet-restore  NAFNet restore  [com.xocialize.gaea.forge 0.1.1] lanes: fp16* 5.86 GB
+on  restormer-motion  Restormer motion deblur  [com.xocialize.gaea.forge 0.1.1] lanes: fp32* 5.68 GB
+on  restormer-defocus  Restormer defocus deblur  [com.xocialize.gaea.forge 0.1.1] lanes: fp32* 5.68 GB
+on  restormer-denoise  Restormer denoise  [com.xocialize.gaea.forge 0.1.1] lanes: fp32* 5.68 GB
+on  scunet-denoise  SCUNet denoise  [com.xocialize.gaea.forge 0.1.1] lanes: fp32* 5.18 GB
+on  gfpgan-face  GFPGAN face restore  [com.xocialize.gaea.forge 0.1.1] lanes: fp32* 2.40 GB
+on  restoreformer-face  RestoreFormer++ face restore  [com.xocialize.gaea.forge 0.1.1] lanes: fp32* 2.35 GB

@@ -1,0 +1,2 @@
+[Prewarm] nerve-upscale: paged 2 file(s) / 0.0 GB into cache in 0.0s
+{"applied_scale":2,"model":"upscale","package":"nerve-upscale","phys_footprint":606225512,"prepare_s":0.0039668749999999999,"run_s":0.071637707999999994,"total_s":0.11068054099999999}

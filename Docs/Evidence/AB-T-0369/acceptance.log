@@ -1,0 +1,44 @@
+# Forge pack acceptance (AB-T-0369) 2026-10-29T01:39:16Z — Gaea 0.4.1, from GitHub
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add the pack by repo URL
+{'image.fill': 'lama-inpaint', 'image.erase': 'lama-inpaint', 'image.extend': 'lama-inpaint', 'image.upscale': 'realplksr-upscale', 'image.restore': 'nafnet-restore', 'image.matte': 'birefnet-matte', 'image.segment': 'sam21-segment'}
+PASS  fill, erase, extend, upscale, matte, segment and restore are offered, with the table's defaults
+fp16 0.077 []
+PASS  nafnet: nafnet-restore, 256×256
+fp16 0.045 []
+PASS  lama: lama-inpaint, 256×256
+fp16 0.053 []
+PASS  migan: lama-inpaint, 256×256
+{'mode': 'fast'}
+PASS  …draft runs MI-GAN, LaMa's fast mode
+fp16 0.066 []
+PASS  nerve: nerve-upscale, 512×512
+fp32 0.181 []
+PASS  realplksr: realplksr-upscale, 1024×1024
+fp16 0.6 []
+PASS  heart: heart-upscale, 1024×1024
+fp16 0.396 []
+PASS  birefnet: birefnet-matte, 256×256
+fp16 0.04 []
+PASS  edgetam: edgetam-segment, 256×256
+fp16 0.039 []
+PASS  sam21: sam21-segment, 256×256
+fp32 0.245 []
+PASS  restormer-motion: restormer-motion, 256×256
+fp32 0.249 []
+PASS  restormer-defocus: restormer-defocus, 256×256
+fp32 0.24 []
+PASS  restormer-denoise: restormer-denoise, 256×256
+fp32 0.098 []
+PASS  scunet-denoise: scunet-denoise, 256×256
+fp32 0.346 []
+PASS  gfpgan-face: gfpgan-face, 512×512
+fp32 0.238 []
+PASS  restoreformer-face: restoreformer-face, 512×512
+PASS  restore kind faces with no model picks GFPGAN
+all loaded: phys 2.51 GB, declared 19.61 GB
+PASS  one worker holds all fourteen models' lanes
+PASS  no worker died
+OK
+PASS  transcript com.xocialize.gaea.forge-0.1.1-2026-10-29T013925Z.gpp passes validate.py
+== 22 passed, 0 failed

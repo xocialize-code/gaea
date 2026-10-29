@@ -277,7 +277,11 @@ starts while the phase before it is being built.
        Qwen-Image-Edit 2511 (bf16, 63 GB) and Qwen-Image Flash (int8, 31.6 GB) in one plugin, byte for byte the
        in-process images; the edit is slow, about 27 s a step with two references (AB-A-0214). See
        [Evidence/AB-T-0368](Evidence/AB-T-0368/README.md);
-     - AB-T-0369: the processing pack on ForgeCore;
+     - AB-T-0369: the processing pack on ForgeCore. **Done**
+       ([v0.1.1](https://github.com/xocialize/gaea-plugin-forge/releases/tag/v0.1.1), Gaea 0.4.1): fourteen models in one
+       worker (2.51 GB with all loaded), every call byte for byte ForgeCore's in-process output; with every G1 plugin,
+       conformance passes 35 open and 38 paired, upscale and matte included. See
+       [Evidence/AB-T-0369](Evidence/AB-T-0369/README.md);
      - AB-T-0370: the LLM prompt enhancer.
   5. AB-T-0366: the normalizer library (AB-T-0359) replaces the mock, and the Image conformance suite passes. **Done**
      (Gaea 0.4.0 on pixel-agency-normalizer 0.1.0): each model call runs as a plugin's offer (`GaeaModelHost`); with

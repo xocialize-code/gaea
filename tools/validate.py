@@ -162,16 +162,22 @@ def walk_refs(node, file):
 
 # ---------------------------------------------------------------------------------------------------- manifests
 
-# MES operation -> the MLXEngine capabilities that can serve it. An offer's lanes must back one of them.
+# MES operation -> the MLXEngine capabilities that can serve it (MLXToolKit `Capability` raw values, as the image
+# normalizer's operation table maps them). An offer's lanes must back one of them.
 OPERATION_CAPABILITIES = {
     "image.generate": {"textToImage"},
     "image.edit": {"imageEdit"},
-    "image.fill": {"inpaint", "imageEdit"},
-    "image.erase": {"inpaint", "objectRemoval"},
-    "image.upscale": {"superResolution", "upscale"},
-    "image.matte": {"matting", "backgroundRemoval"},
-    "image.segment": {"segmentation"},
-    "image.describe": {"imageAnalysis", "caption"},
+    "image.fill": {"imageInpaint", "imageEdit"},
+    "image.erase": {"imageInpaint", "imageEdit"},
+    "image.extend": {"imageInpaint", "imageEdit"},
+    "image.upscale": {"imageUpscale"},
+    "image.restore": {"imageRestore"},
+    "image.relight": {"imageRelight"},
+    "image.colorize": {"imageColorize"},
+    "image.matte": {"matting"},
+    "image.segment": {"promptSegment"},
+    "image.describe": {"imageAnalysis"},
+    "image.score": {"imageQualityScore"},
 }
 
 

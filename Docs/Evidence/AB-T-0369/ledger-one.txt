@@ -1,0 +1,2 @@
+budget 103.08 GB, charged 0.53 GB, free 102.55 GB; host 0.10 GB; 0 queued
+  com.xocialize.gaea.forge 0.1.1 pid 42182: declared 5.86 GB, phys_footprint 0.53 GB, worker says 0.53 GB, charged 0.53 GB lanes ["nafnet-restore": "fp16"]

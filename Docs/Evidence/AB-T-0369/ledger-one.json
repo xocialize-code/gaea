@@ -1,0 +1,23 @@
+{
+  "budgetBytes" : 103079215104,
+  "hostFootprintBytes" : 98632640,
+  "queued" : 0,
+  "workers" : [
+    {
+      "busy" : false,
+      "chargedBytes" : 533595192,
+      "declaredBytes" : 5860000000,
+      "lanes" : {
+        "nafnet-restore" : "fp16"
+      },
+      "overrun" : false,
+      "physFootprintBytes" : 533595192,
+      "pid" : 42182,
+      "pluginID" : "com.xocialize.gaea.forge",
+      "reportedDeclaredBytes" : 5860000000,
+      "reportedFootprintBytes" : 533611576,
+      "title" : "Forge processing pack",
+      "version" : "0.1.1"
+    }
+  ]
+}

@@ -131,8 +131,10 @@ struct GaeaModelHost: ModelHost {
         params["count"] = 1
         if let run { params["size"] = ["width": .int(Int64(run.width)), "height": .int(Int64(run.height))] }
         if let negative = work.params["negativePrompt"]?.stringValue { params["negative_prompt"] = .string(negative) }
-        if let strength = work.params["strength"]?.numberValue { params["strength"] = .double(strength) }
-        for key in ["scale", "kind"] { if let value = work.params[key] { params[key] = value.gpp } }
+        // The call's own params (`scale`, `kind`, `strength`, `points`, `pointLabels`, …) and its mode (MI-GAN is LaMa's
+        // `fast`) go as they are: the worker maps them onto its capability (GPP-1 §3.3).
+        for (key, value) in work.params where key != "prompt" && key != "negativePrompt" { params[key] = value.gpp }
+        if let mode = work.mode { params["mode"] = .string(mode) }
 
         let names = Set(route.extensions.map(\.name))
         let modelParams = scope.extensions.filter { names.contains($0.key) }.mapValues(\.gpp)
@@ -148,8 +150,9 @@ struct GaeaModelHost: ModelHost {
         }
         scope.record(route, ran)
 
-        guard let output = ran.result["outputs"]?.arrayValue?.first, let path = output["path"]?.stringValue else {
-            if let text = ran.result["outputs"]?.arrayValue?.first?["value"]?.stringValue { return .text(text) }
+        let outputs = ran.result["outputs"]?.arrayValue ?? []
+        guard let output = outputs.first(where: { $0["path"] != nil }), let path = output["path"]?.stringValue else {
+            if let text = outputs.first?["value"]?.stringValue { return .text(text) }
             throw MESError(.engineError, "\(route.plugin.title) returned no output.")
         }
         let root = workerDirectory.resolvingSymlinksInPath().standardizedFileURL.path + "/"
@@ -160,6 +163,11 @@ struct GaeaModelHost: ModelHost {
         if let asked, let got = size, (got.width, got.height) != (asked.width, asked.height) {
             data = try Self.resized(data, to: asked)                       // the size the normalizer asked for
             size = asked
+        }
+        // A matte or a mask comes back as one (matte, segment), with the model's score when it gives one.
+        if [.matting, .promptSegment, .defectDetect].contains(work.route.capability) {
+            let score = outputs.first { $0["name"]?.stringValue == "score" }?["value"]?.doubleValue
+            return .matte(ModelMatte(data: data, width: size?.width, height: size?.height), score: score.map(Float.init))
         }
         let format: ModelImage.Format = source.pathExtension.lowercased() == "jpg" || source.pathExtension.lowercased() == "jpeg" ? .jpeg : .png
         return .image(ModelImage(format: format, data: data, width: size?.width, height: size?.height))

@@ -1,0 +1,36 @@
+{
+  "budgetBytes" : 103079215104,
+  "hostFootprintBytes" : 122749936,
+  "queued" : 0,
+  "workers" : [
+    {
+      "busy" : false,
+      "chargedBytes" : 5606000000,
+      "declaredBytes" : 19606000000,
+      "lanes" : {
+        "birefnet-matte" : "fp16",
+        "edgetam-segment" : "fp16",
+        "gfpgan-face" : "fp32",
+        "heart-upscale" : "fp16",
+        "lama-inpaint" : "fp16",
+        "nafnet-restore" : "fp16",
+        "nerve-upscale" : "fp16",
+        "realplksr-upscale" : "fp32",
+        "restoreformer-face" : "fp32",
+        "restormer-defocus" : "fp32",
+        "restormer-denoise" : "fp32",
+        "restormer-motion" : "fp32",
+        "sam21-segment" : "fp16",
+        "scunet-denoise" : "fp32"
+      },
+      "overrun" : false,
+      "physFootprintBytes" : 2510949832,
+      "pid" : 42182,
+      "pluginID" : "com.xocialize.gaea.forge",
+      "reportedDeclaredBytes" : 19606000000,
+      "reportedFootprintBytes" : 2510949832,
+      "title" : "Forge processing pack",
+      "version" : "0.1.1"
+    }
+  ]
+}

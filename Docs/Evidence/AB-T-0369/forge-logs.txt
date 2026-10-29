@@ -1,0 +1,7 @@
+== events ==
+2026-10-29T01:39:25Z installed 0.1.1: added from xocialize/gaea-plugin-forge (v0.1.1); Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea.forge, notarized, hardened runtime
+== worker stderr (/tmp/g369a/main/Logs/plugins/com.xocialize.gaea.forge.log) ==
+
+=== 2026-10-29T01:39:25Z launch com.xocialize.gaea.forge 0.1.1 ===
+2026-10-28 18:39:30.121 gaea-forge-worker[42182:786374] FBBA: creating VNFaceBBoxAligner from VNFaceDetectorRevision2: VNFaceDetectorRevision2
+
