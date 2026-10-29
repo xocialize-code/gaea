@@ -1,6 +1,6 @@
 # manifest: demo.json
 # expect: a line after the worker exited (signal 9)
-W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.2.0"},"pid":1,"models":["demo-matmul"],"manifest_sha256":"bd69b6dbce5b068d011024feb9055d734cfb71428d0d61938b11c27a1a04e613"}
+W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.2.0"},"pid":1,"models":["demo-matmul"],"manifest_sha256":"d0cdaa96493eaaf380cdecaab443e1cc2775d446818b79d5b726a6501c1a6745"}
 H {"type":"prepare","id":"h2","model":"demo-matmul","lane":"fp32"}
 # exited: signal 9
 W {"type":"prepared","re":"h2","model":"demo-matmul","lane":"fp32","seconds":0.1}

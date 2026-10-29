@@ -51,7 +51,7 @@
         },
         "provenance": {
           "revision": "0.2.0",
-          "sourceRepo": "xocialize/gaea-plugin-demo",
+          "sourceRepo": "xocialize-code/gaea-plugin-demo",
           "tier": 1
         },
         "requirements": {
