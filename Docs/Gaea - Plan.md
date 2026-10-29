@@ -244,7 +244,7 @@ starts while the phase before it is being built.
   - **Both pass** (AB-R-0621, AB-R-0622). AB-T-0363 (eviction, requeue-once and lane fallback with real workers)
     was carried into G1 and passed there with Z-Image's lanes.
 
-**G1. Image**
+**G1. Image** (exited 2026-10-29, AB-T-0375)
 - The image normalizer, ported.
 - Plugins: Z-Image, FLUX.2 Klein, Qwen-Image-Edit, the processing pack (LaMa and MI-GAN, NERVE, RealPLKSR, HEART,
   BiRefNet, SAM 2.1 and EdgeTAM, the restore models), and the LLM plugin for prompt enhancement.
@@ -330,8 +330,9 @@ starts while the phase before it is being built.
         - AB-T-0383: a Klein edit on a large input differed from v0.9.1, with or without adapters. **Done**: Klein
           0.2.1 and the host send no size for an edit that asks none, as v0.9.1 does; 8 of 8 and Qwen Edit
           byte-identical on a 2040×1356 photo. See [Evidence/AB-T-0383](Evidence/AB-T-0383/README.md).
-  11. AB-T-0375: the exit gate, which gives AB-A-0208 the go for the retirements. **Every exit test passes**
-      (2026-10-29):
+  11. AB-T-0375: the exit gate, which gives AB-A-0208 the go for the retirements. **G1 exited 2026-10-29**: every
+      exit test passes (receipt AB-R-0656), and AB-A-0208 has the go for the freeze, Lite's deprecation and the Image
+      Server's retirement, which mlx-apps carries out:
       - **Conformance:** open 40 and paired 43, none failing, with every G1 plugin.
       - **Parity:** byte-identical across AB-T-0373, AB-T-0377, AB-T-0378 and AB-T-0383.
       - **Clients against Gaea:** Lab (11 of 11 client conformance), and Desktop's own ticket runner (4 of 4 across
