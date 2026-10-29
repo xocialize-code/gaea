@@ -1,0 +1,685 @@
+# gaea on :17761, pid 82747, 2026-10-29T03:30:08Z, suites: tiers upscale restore segment generate edits erase
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+tiers image.generate klein-4b [draft] photo: 5210 ms 
+tiers image.generate z-image-turbo [standard] photo: 4081 ms 
+tiers image.generate z-image-turbo [best] photo: 2631 ms 
+tiers image.edit klein-4b [draft] photo: 2835 ms 
+tiers image.edit klein-4b [standard] photo: 2805 ms 
+tiers image.edit klein-4b [best] photo: 2802 ms 
+tiers image.fill lama-inpaint [draft] photo: 505 ms 
+tiers image.fill lama-inpaint [standard] photo: 214 ms 
+tiers image.fill lama-inpaint [best] photo: 105 ms 
+tiers image.erase lama-inpaint [draft] photo: 78 ms 
+tiers image.erase lama-inpaint [standard] photo: 113 ms 
+tiers image.erase lama-inpaint [best] photo: 113 ms 
+tiers image.extend lama-inpaint [draft] photo: 99 ms 
+tiers image.extend lama-inpaint [standard] photo: 191 ms 
+tiers image.extend lama-inpaint [best] photo: 155 ms 
+tiers image.upscale nerve-upscale [draft] photo: 230 ms 
+tiers image.upscale realplksr-upscale [standard] photo: 620 ms 
+tiers image.upscale heart-upscale [best] photo: 2069 ms 
+tiers image.restore nafnet-restore [draft] photo: 100 ms 
+tiers image.restore nafnet-restore [standard] photo: 86 ms 
+tiers image.restore nafnet-restore [best] photo: 91 ms 
+tiers image.matte birefnet-matte photo: 365 ms 
+tiers image.segment sam21-segment photo: 70 ms 
+tiers image.enhance_prompt qwen3.5-4b photo: 1124 ms 
+upscale-x4 image.upscale realplksr-upscale warm-up: 219 ms 
+upscale-x4 image.upscale realplksr-upscale 0801: 208 ms psnr=25.89 ssim=0.7648
+upscale-x4 image.upscale realplksr-upscale 0802: 209 ms psnr=29.76 ssim=0.7893
+upscale-x4 image.upscale realplksr-upscale 0803: 213 ms psnr=30.88 ssim=0.8966
+upscale-x4 image.upscale realplksr-upscale 0804: 226 ms psnr=23.22 ssim=0.6796
+upscale-x4 image.upscale realplksr-upscale 0805: 213 ms psnr=23.95 ssim=0.6471
+upscale-x4 image.upscale realplksr-upscale 0806: 221 ms psnr=25.04 ssim=0.7564
+upscale-x4 image.upscale heart-upscale warm-up: 555 ms 
+upscale-x4 image.upscale heart-upscale 0801: 525 ms psnr=26.39 ssim=0.7941
+upscale-x4 image.upscale heart-upscale 0802: 531 ms psnr=29.88 ssim=0.8069
+upscale-x4 image.upscale heart-upscale 0803: 526 ms psnr=32.53 ssim=0.934
+upscale-x4 image.upscale heart-upscale 0804: 532 ms psnr=23.58 ssim=0.7023
+upscale-x4 image.upscale heart-upscale 0805: 516 ms psnr=24.95 ssim=0.6844
+upscale-x4 image.upscale heart-upscale 0806: 525 ms psnr=24.98 ssim=0.7729
+upscale-x4 image.upscale nerve-upscale warm-up: 137 ms 
+upscale-x4 image.upscale nerve-upscale 0801: 129 ms psnr=26 ssim=0.7691
+upscale-x4 image.upscale nerve-upscale 0802: 128 ms psnr=30.52 ssim=0.8325
+upscale-x4 image.upscale nerve-upscale 0803: 131 ms psnr=31.97 ssim=0.9214
+upscale-x4 image.upscale nerve-upscale 0804: 133 ms psnr=23.52 ssim=0.7055
+upscale-x4 image.upscale nerve-upscale 0805: 123 ms psnr=24.44 ssim=0.6727
+upscale-x4 image.upscale nerve-upscale 0806: 130 ms psnr=25.39 ssim=0.7736
+upscale-x2 image.upscale realplksr-upscale warm-up: 584 ms 
+upscale-x2 image.upscale realplksr-upscale 0801: 575 ms psnr=32.02 ssim=0.9378
+upscale-x2 image.upscale realplksr-upscale 0802: 575 ms psnr=35.43 ssim=0.9328
+upscale-x2 image.upscale realplksr-upscale 0803: 579 ms psnr=36.32 ssim=0.9697
+upscale-x2 image.upscale realplksr-upscale 0804: 589 ms psnr=28.41 ssim=0.8882
+upscale-x2 image.upscale realplksr-upscale 0805: 571 ms psnr=29.37 ssim=0.8866
+upscale-x2 image.upscale realplksr-upscale 0806: 580 ms psnr=30.23 ssim=0.9205
+upscale-x2 image.upscale heart-upscale warm-up: 2038 ms 
+upscale-x2 image.upscale heart-upscale 0801: 2025 ms psnr=32.35 ssim=0.9427
+upscale-x2 image.upscale heart-upscale 0802: 2022 ms psnr=35.95 ssim=0.9432
+upscale-x2 image.upscale heart-upscale 0803: 2011 ms psnr=38.53 ssim=0.9792
+upscale-x2 image.upscale heart-upscale 0804: 2039 ms psnr=30.07 ssim=0.9054
+upscale-x2 image.upscale heart-upscale 0805: 2007 ms psnr=30.61 ssim=0.9007
+upscale-x2 image.upscale heart-upscale 0806: 2018 ms psnr=31.16 ssim=0.935
+upscale-x2 image.upscale nerve-upscale warm-up: 189 ms 
+upscale-x2 image.upscale nerve-upscale 0801: 188 ms psnr=29.46 ssim=0.864
+upscale-x2 image.upscale nerve-upscale 0802: 192 ms psnr=33.33 ssim=0.8791
+upscale-x2 image.upscale nerve-upscale 0803: 197 ms psnr=35.13 ssim=0.9492
+upscale-x2 image.upscale nerve-upscale 0804: 203 ms psnr=26.61 ssim=0.8489
+upscale-x2 image.upscale nerve-upscale 0805: 182 ms psnr=27.66 ssim=0.8245
+upscale-x2 image.upscale nerve-upscale 0806: 194 ms psnr=28.91 ssim=0.8834
+restore-denoise image.restore nafnet-restore input: 188 ms psnr-degraded=24.08
+restore-denoise image.restore scunet-denoise warm-up: 1233 ms 
+restore-denoise image.restore scunet-denoise 0811: 1185 ms psnr=30.66 ssim=0.8614
+restore-denoise image.restore scunet-denoise 0812: 1178 ms psnr=34.66 ssim=0.9152
+restore-denoise image.restore scunet-denoise 0813: 1192 ms psnr=32.51 ssim=0.8926
+restore-denoise image.restore scunet-denoise 0814: 1174 ms psnr=33.92 ssim=0.9679
+restore-denoise image.restore scunet-denoise 0815: 1188 ms psnr=35.09 ssim=0.9138
+restore-denoise image.restore scunet-denoise 0816: 1180 ms psnr=33.09 ssim=0.8682
+restore-denoise image.restore restormer-denoise warm-up: 2826 ms 
+restore-denoise image.restore restormer-denoise 0811: 2790 ms psnr=25.8 ssim=0.7717
+restore-denoise image.restore restormer-denoise 0812: 2789 ms psnr=27.07 ssim=0.8077
+restore-denoise image.restore restormer-denoise 0813: 2796 ms psnr=26.95 ssim=0.8135
+restore-denoise image.restore restormer-denoise 0814: 2794 ms psnr=27.33 ssim=0.9002
+restore-denoise image.restore restormer-denoise 0815: 2798 ms psnr=28.01 ssim=0.8294
+restore-denoise image.restore restormer-denoise 0816: 2798 ms psnr=27.12 ssim=0.7906
+restore-denoise image.restore nafnet-restore warm-up: 191 ms 
+restore-denoise image.restore nafnet-restore 0811: 185 ms psnr=30.18 ssim=0.8409
+restore-denoise image.restore nafnet-restore 0812: 183 ms psnr=33.52 ssim=0.8945
+restore-denoise image.restore nafnet-restore 0813: 184 ms psnr=31.97 ssim=0.8877
+restore-denoise image.restore nafnet-restore 0814: 180 ms psnr=32.66 ssim=0.9536
+restore-denoise image.restore nafnet-restore 0815: 185 ms psnr=34.65 ssim=0.9063
+restore-denoise image.restore nafnet-restore 0816: 183 ms psnr=32.85 ssim=0.8651
+restore-deblur image.restore nafnet-restore input: 158 ms psnr-degraded=25.6
+restore-deblur image.restore restormer-motion warm-up: 2829 ms 
+restore-deblur image.restore restormer-motion 0811: 2791 ms psnr=24.76 ssim=0.6339
+restore-deblur image.restore restormer-motion 0812: 2787 ms psnr=24.68 ssim=0.7387
+restore-deblur image.restore restormer-motion 0813: 2786 ms psnr=24.22 ssim=0.7391
+restore-deblur image.restore restormer-motion 0814: 2772 ms psnr=23.49 ssim=0.7849
+restore-deblur image.restore restormer-motion 0815: 2785 ms psnr=31.06 ssim=0.8495
+restore-deblur image.restore restormer-motion 0816: 2785 ms psnr=27.45 ssim=0.7422
+restore-deblur image.restore restormer-defocus warm-up: 2829 ms 
+restore-deblur image.restore restormer-defocus 0811: 2781 ms psnr=27.02 ssim=0.741
+restore-deblur image.restore restormer-defocus 0812: 2786 ms psnr=26.49 ssim=0.8063
+restore-deblur image.restore restormer-defocus 0813: 2779 ms psnr=25.92 ssim=0.7937
+restore-deblur image.restore restormer-defocus 0814: 2770 ms psnr=24.6 ssim=0.8387
+restore-deblur image.restore restormer-defocus 0815: 2786 ms psnr=25.53 ssim=0.7777
+restore-deblur image.restore restormer-defocus 0816: 2786 ms psnr=29.93 ssim=0.8197
+restore-deblur image.restore nafnet-restore warm-up: 163 ms 
+restore-deblur image.restore nafnet-restore 0811: 158 ms psnr=25.57 ssim=0.6412
+restore-deblur image.restore nafnet-restore 0812: 152 ms psnr=25.95 ssim=0.7432
+restore-deblur image.restore nafnet-restore 0813: 157 ms psnr=24.88 ssim=0.7391
+restore-deblur image.restore nafnet-restore 0814: 141 ms psnr=23.96 ssim=0.788
+restore-deblur image.restore nafnet-restore 0815: 160 ms psnr=31.51 ssim=0.8442
+restore-deblur image.restore nafnet-restore 0816: 156 ms psnr=28.68 ssim=0.7525
+segment-1click image.segment sam21-segment warm-up: 53 ms 
+segment-1click image.segment sam21-segment 106024: 15 ms iou=0.9672
+segment-1click image.segment sam21-segment 124080: 44 ms iou=0.06375
+segment-1click image.segment sam21-segment 153077: 41 ms iou=0.8506
+segment-1click image.segment sam21-segment 153093: 39 ms iou=0.9419
+segment-1click image.segment sam21-segment 181079: 38 ms iou=0.9661
+segment-1click image.segment sam21-segment 189080: 37 ms iou=0.5421
+segment-1click image.segment sam21-segment 208001: 39 ms iou=0.6794
+segment-1click image.segment sam21-segment 209070: 38 ms iou=0.9976
+segment-1click image.segment sam21-segment 21077: 39 ms iou=0.7873
+segment-1click image.segment sam21-segment 227092: 37 ms iou=0.9932
+segment-1click image.segment sam21-segment 24077: 39 ms iou=0.5598
+segment-1click image.segment sam21-segment 271008: 39 ms iou=0.1995
+segment-1click image.segment sam21-segment 304074: 38 ms iou=0.9797
+segment-1click image.segment sam21-segment 326038: 38 ms iou=0.9917
+segment-1click image.segment sam21-segment 37073: 37 ms iou=0.9894
+segment-1click image.segment sam21-segment 376043: 39 ms iou=0.9728
+segment-1click image.segment sam21-segment 388016: 38 ms iou=0.992
+segment-1click image.segment sam21-segment 65019: 38 ms iou=0.9958
+segment-1click image.segment sam21-segment 69020: 37 ms iou=0.9814
+segment-1click image.segment sam21-segment 86016: 37 ms iou=0.01223
+segment-1click image.segment sam21-segment banana1: 50 ms iou=0.9861
+segment-1click image.segment sam21-segment banana2: 50 ms iou=0.9649
+segment-1click image.segment sam21-segment banana3: 51 ms iou=0.9875
+segment-1click image.segment sam21-segment book: 50 ms iou=0.9918
+segment-1click image.segment sam21-segment bool: 41 ms iou=0.2996
+segment-1click image.segment sam21-segment bush: 50 ms iou=0.6114
+segment-1click image.segment sam21-segment ceramic: 50 ms iou=0.9818
+segment-1click image.segment sam21-segment cross: 46 ms iou=0.1072
+segment-1click image.segment sam21-segment doll: 44 ms iou=0.9965
+segment-1click image.segment sam21-segment elefant: 49 ms iou=0.1751
+segment-1click image.segment sam21-segment flower: 47 ms iou=0.9993
+segment-1click image.segment sam21-segment fullmoon: 33 ms iou=0.9983
+segment-1click image.segment sam21-segment grave: 47 ms iou=0.9887
+segment-1click image.segment sam21-segment llama: 42 ms iou=0.9654
+segment-1click image.segment sam21-segment memorial: 45 ms iou=0.939
+segment-1click image.segment sam21-segment music: 48 ms iou=0.9888
+segment-1click image.segment sam21-segment person1: 47 ms iou=0.4342
+segment-1click image.segment sam21-segment person2: 49 ms iou=0.6952
+segment-1click image.segment sam21-segment person3: 41 ms iou=0.262
+segment-1click image.segment sam21-segment person4: 46 ms iou=0.9753
+segment-1click image.segment sam21-segment person5: 45 ms iou=0.1848
+segment-1click image.segment sam21-segment person6: 47 ms iou=0.9476
+segment-1click image.segment sam21-segment person7: 48 ms iou=0.9327
+segment-1click image.segment sam21-segment person8: 51 ms iou=0.7017
+segment-1click image.segment sam21-segment scissors: 48 ms iou=0.5819
+segment-1click image.segment sam21-segment sheep: 44 ms iou=0.9914
+segment-1click image.segment sam21-segment stone1: 47 ms iou=0.9974
+segment-1click image.segment sam21-segment stone2: 47 ms iou=0.9985
+segment-1click image.segment sam21-segment teddy: 36 ms iou=0.9695
+segment-1click image.segment sam21-segment tennis: 45 ms iou=0.4883
+segment-1click image.segment edgetam-segment warm-up: 46 ms 
+segment-1click image.segment edgetam-segment 106024: 14 ms iou=0.9512
+segment-1click image.segment edgetam-segment 124080: 35 ms iou=0.06527
+segment-1click image.segment edgetam-segment 153077: 33 ms iou=0.7535
+segment-1click image.segment edgetam-segment 153093: 33 ms iou=0.7799
+segment-1click image.segment edgetam-segment 181079: 34 ms iou=0.3852
+segment-1click image.segment edgetam-segment 189080: 32 ms iou=0.9594
+segment-1click image.segment edgetam-segment 208001: 34 ms iou=0.6819
+segment-1click image.segment edgetam-segment 209070: 33 ms iou=0.9873
+segment-1click image.segment edgetam-segment 21077: 33 ms iou=0.0565
+segment-1click image.segment edgetam-segment 227092: 32 ms iou=0.9942
+segment-1click image.segment edgetam-segment 24077: 34 ms iou=0.387
+segment-1click image.segment edgetam-segment 271008: 33 ms iou=0.1985
+segment-1click image.segment edgetam-segment 304074: 33 ms iou=0.8689
+segment-1click image.segment edgetam-segment 326038: 34 ms iou=0.9406
+segment-1click image.segment edgetam-segment 37073: 32 ms iou=0.04483
+segment-1click image.segment edgetam-segment 376043: 34 ms iou=0.8805
+segment-1click image.segment edgetam-segment 388016: 33 ms iou=0.07739
+segment-1click image.segment edgetam-segment 65019: 34 ms iou=0.9695
+segment-1click image.segment edgetam-segment 69020: 33 ms iou=0.9232
+segment-1click image.segment edgetam-segment 86016: 33 ms iou=0.01125
+segment-1click image.segment edgetam-segment banana1: 47 ms iou=0.974
+segment-1click image.segment edgetam-segment banana2: 46 ms iou=0.4773
+segment-1click image.segment edgetam-segment banana3: 48 ms iou=0.9207
+segment-1click image.segment edgetam-segment book: 47 ms iou=0.9965
+segment-1click image.segment edgetam-segment bool: 38 ms iou=0.4529
+segment-1click image.segment edgetam-segment bush: 45 ms iou=0.5873
+segment-1click image.segment edgetam-segment ceramic: 46 ms iou=0.9191
+segment-1click image.segment edgetam-segment cross: 41 ms iou=0.1076
+segment-1click image.segment edgetam-segment doll: 41 ms iou=0.9751
+segment-1click image.segment edgetam-segment elefant: 46 ms iou=0.9931
+segment-1click image.segment edgetam-segment flower: 44 ms iou=0.995
+segment-1click image.segment edgetam-segment fullmoon: 28 ms iou=0.992
+segment-1click image.segment edgetam-segment grave: 41 ms iou=0.9608
+segment-1click image.segment edgetam-segment llama: 38 ms iou=0.9743
+segment-1click image.segment edgetam-segment memorial: 40 ms iou=0.9786
+segment-1click image.segment edgetam-segment music: 45 ms iou=0.8992
+segment-1click image.segment edgetam-segment person1: 43 ms iou=0.4153
+segment-1click image.segment edgetam-segment person2: 45 ms iou=0.7152
+segment-1click image.segment edgetam-segment person3: 38 ms iou=0.2922
+segment-1click image.segment edgetam-segment person4: 43 ms iou=0.6712
+segment-1click image.segment edgetam-segment person5: 40 ms iou=0.01633
+segment-1click image.segment edgetam-segment person6: 43 ms iou=0.3355
+segment-1click image.segment edgetam-segment person7: 43 ms iou=0.4514
+segment-1click image.segment edgetam-segment person8: 46 ms iou=0.008026
+segment-1click image.segment edgetam-segment scissors: 44 ms iou=0.339
+segment-1click image.segment edgetam-segment sheep: 40 ms iou=0.993
+segment-1click image.segment edgetam-segment stone1: 43 ms iou=0.9983
+segment-1click image.segment edgetam-segment stone2: 43 ms iou=0.9966
+segment-1click image.segment edgetam-segment teddy: 31 ms iou=0.7077
+segment-1click image.segment edgetam-segment tennis: 40 ms iou=0.4803
+generate image.generate z-image-turbo warm-up: 11089 ms 
+generate image.generate z-image-turbo p0: 11217 ms 
+generate image.generate z-image-turbo p1: 11168 ms 
+generate image.generate z-image-turbo p2: 11185 ms 
+generate image.generate z-image-turbo p3: 11168 ms 
+generate image.generate z-image-turbo p4: 11193 ms 
+generate image.generate z-image-turbo p5: 11235 ms 
+generate image.generate z-image-turbo p6: 11222 ms 
+generate image.generate z-image-turbo p7: 11204 ms 
+generate image.generate klein-4b warm-up: 7360 ms 
+generate image.generate klein-4b p0: 7296 ms 
+generate image.generate klein-4b p1: 7163 ms 
+generate image.generate klein-4b p2: 7325 ms 
+generate image.generate klein-4b p3: 7398 ms 
+generate image.generate klein-4b p4: 7269 ms 
+generate image.generate klein-4b p5: 7187 ms 
+generate image.generate klein-4b p6: 7550 ms 
+generate image.generate klein-4b p7: 7109 ms 
+generate image.generate klein-4b-base warm-up: 73921 ms 
+generate image.generate klein-4b-base p0: 72834 ms 
+generate image.generate klein-4b-base p1: 72681 ms 
+generate image.generate klein-4b-base p2: 73287 ms 
+generate image.generate klein-4b-base p3: 74644 ms 
+generate image.generate klein-4b-base p4: 74779 ms 
+generate image.generate klein-4b-base p5: 74845 ms 
+generate image.generate klein-4b-base p6: 76271 ms 
+generate image.generate klein-4b-base p7: 76869 ms 
+generate image.generate qwen-image-flash warm-up: 21030 ms 
+generate image.generate qwen-image-flash p0: 14183 ms 
+generate image.generate qwen-image-flash p1: 13945 ms 
+generate image.generate qwen-image-flash p2: 14109 ms 
+generate image.generate qwen-image-flash p3: 14222 ms 
+generate image.generate qwen-image-flash p4: 13920 ms 
+generate image.generate qwen-image-flash p5: 14029 ms 
+generate image.generate qwen-image-flash p6: 14560 ms 
+generate image.generate qwen-image-flash p7: 13992 ms 
+generate image.generate z-image warm-up: 74773 ms 
+generate image.generate z-image p0: 71825 ms 
+generate image.generate z-image p1: 72257 ms 
+generate image.generate z-image p2: 72293 ms 
+generate image.generate z-image p3: 72645 ms 
+generate image.generate z-image p4: 72536 ms 
+generate image.generate z-image p5: 72275 ms 
+generate image.generate z-image p6: 72230 ms 
+generate image.generate z-image p7: 72364 ms 
+judge image.score ? z-image-turbo/p0: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image-turbo/p0: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image-turbo/p1: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image-turbo/p1: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image-turbo/p2: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image-turbo/p2: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image-turbo/p3: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image-turbo/p3: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image-turbo/p4: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image-turbo/p4: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image-turbo/p5: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image-turbo/p5: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image-turbo/p6: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image-turbo/p6: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image-turbo/p7: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image-turbo/p7: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b/p0: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b/p0: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b/p1: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b/p1: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b/p2: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b/p2: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b/p3: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b/p3: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b/p4: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b/p4: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b/p5: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b/p5: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b/p6: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b/p6: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b/p7: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b/p7: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b-base/p0: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b-base/p0: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b-base/p1: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b-base/p1: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b-base/p2: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b-base/p2: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b-base/p3: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b-base/p3: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b-base/p4: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b-base/p4: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b-base/p5: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b-base/p5: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b-base/p6: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b-base/p6: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? klein-4b-base/p7: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? klein-4b-base/p7: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? qwen-image-flash/p0: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? qwen-image-flash/p0: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? qwen-image-flash/p1: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? qwen-image-flash/p1: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? qwen-image-flash/p2: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? qwen-image-flash/p2: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? qwen-image-flash/p3: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? qwen-image-flash/p3: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? qwen-image-flash/p4: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? qwen-image-flash/p4: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? qwen-image-flash/p5: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? qwen-image-flash/p5: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? qwen-image-flash/p6: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? qwen-image-flash/p6: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? qwen-image-flash/p7: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? qwen-image-flash/p7: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image/p0: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image/p0: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image/p1: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image/p1: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image/p2: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image/p2: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image/p3: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image/p3: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image/p4: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image/p4: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image/p5: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image/p5: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image/p6: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image/p6: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+judge image.score ? z-image/p7: 0 ms  ERROR 404 unknown_operation: No operation image.score on this engine.
+judge image.describe ? z-image/p7: 0 ms  ERROR 404 unknown_operation: No operation image.describe on this engine.
+edits image.edit klein-4b [draft] photo0: 15009 ms 
+edits image.edit klein-4b [draft] photo1: 13381 ms 
+edits image.edit klein-4b [best] photo0: 13403 ms 
+edits image.edit klein-4b [best] photo1: 13383 ms 
+edits image.fill klein-4b [standard] photo0: 13386 ms 
+edits image.fill klein-4b [standard] photo1: 13380 ms 
+edits image.fill klein-4b [best] photo0: 13428 ms 
+edits image.fill klein-4b [best] photo1: 13399 ms 
+edits image.erase lama-inpaint [standard] photo0: 699 ms 
+edits image.erase lama-inpaint [standard] photo1: 435 ms 
+edits image.erase lama-inpaint [best] photo0: 429 ms 
+edits image.erase lama-inpaint [best] photo1: 431 ms 
+edits image.extend lama-inpaint [draft] photo0: 264 ms 
+edits image.extend lama-inpaint [draft] photo1: 252 ms 
+edits image.extend lama-inpaint [standard] photo0: 667 ms 
+edits image.extend lama-inpaint [standard] photo1: 619 ms 
+edits image.extend lama-inpaint [best] photo0: 618 ms 
+edits image.extend lama-inpaint [best] photo1: 619 ms 
+erase-objd image.erase lama-inpaint [draft] warm-up: 191 ms 
+erase-objd image.erase lama-inpaint [draft] corne-000001: 180 ms left=0 psnr_box=9.479 psnr_eff=8.363 psnr_hole=7.785 ring=39.72 ssim_box=0.694
+erase-objd image.erase lama-inpaint [draft] corne-000007: 186 ms left=0 psnr_box=14.04 psnr_eff=10.97 psnr_hole=12.11 ring=64.66 ssim_box=0.7045
+erase-objd image.erase lama-inpaint [draft] corne-000008: 202 ms left=0 psnr_box=10.8 psnr_eff=7.124 psnr_hole=8.046 ring=97.04 ssim_box=0.6397
+erase-objd image.erase lama-inpaint [draft] corne-000014: 158 ms left=0 psnr_box=19.25 psnr_eff=17.65 psnr_hole=17.3 ring=20.33 ssim_box=0.735
+erase-objd image.erase lama-inpaint [draft] corne-000022: 156 ms left=0 psnr_box=22.57 psnr_eff=20.34 psnr_hole=19.49 ring=3.5 ssim_box=0.892
+erase-objd image.erase lama-inpaint [draft] corne-000024: 189 ms left=0 psnr_box=15.48 psnr_eff=11.68 psnr_hole=11.02 ring=39.15 ssim_box=0.7733
+erase-objd image.erase lama-inpaint [draft] corne-000037: 183 ms left=0 psnr_box=13.01 psnr_eff=10.28 psnr_hole=10.32 ring=53.85 ssim_box=0.7862
+erase-objd image.erase lama-inpaint [draft] corne-000044: 171 ms left=0 psnr_box=22.57 psnr_eff=19.88 psnr_hole=19.31 ring=6.219 ssim_box=0.915
+erase-objd image.erase lama-inpaint [draft] corne-000045: 151 ms left=1 psnr_box=10.4 psnr_eff=8.392 psnr_hole=7.828 ring=62.55 ssim_box=0.6251
+erase-objd image.erase lama-inpaint [draft] corne-000050: 185 ms left=0 psnr_box=20.77 psnr_eff=17.59 psnr_hole=17.32 ring=5.977 ssim_box=0.8874
+erase-objd image.erase lama-inpaint [draft] corne-000058: 138 ms left=0 psnr_box=14.1 psnr_eff=13.83 psnr_hole=12.68 ring=8.407 ssim_box=0.8248
+erase-objd image.erase lama-inpaint [draft] corne-000059: 174 ms left=0 psnr_box=18.25 psnr_eff=14.01 psnr_hole=13.12 ring=17.3 ssim_box=0.8608
+erase-objd image.erase lama-inpaint [draft] corne-000063: 165 ms left=0 psnr_box=22.29 psnr_eff=17.27 psnr_hole=18.53 ring=34.04 ssim_box=0.8947
+erase-objd image.erase lama-inpaint [draft] corne-000064: 140 ms left=0 psnr_box=15.27 psnr_eff=9.012 psnr_hole=9.649 ring=3.819 ssim_box=0.857
+erase-objd image.erase lama-inpaint [draft] corne-000065: 162 ms left=0 psnr_box=18.91 psnr_eff=15.9 psnr_hole=16.47 ring=23.31 ssim_box=0.9196
+erase-objd image.erase lama-inpaint [draft] corne-000069: 161 ms left=0 psnr_box=9.768 psnr_eff=8.111 psnr_hole=8.087 ring=70.95 ssim_box=0.7259
+erase-objd image.erase lama-inpaint [draft] corne-000072: 180 ms left=0 psnr_box=17.79 psnr_eff=16.42 psnr_hole=15.39 ring=22.07 ssim_box=0.8336
+erase-objd image.erase lama-inpaint [draft] corne-000073: 188 ms left=0 psnr_box=10.11 psnr_eff=7.188 psnr_hole=8.579 ring=102.3 ssim_box=0.6869
+erase-objd image.erase lama-inpaint [draft] corne-000075: 177 ms left=0 psnr_box=15.86 psnr_eff=12.09 psnr_hole=19.17 ring=113 ssim_box=0.8348
+erase-objd image.erase lama-inpaint [draft] corne-000084: 137 ms left=0 psnr_box=22.39 psnr_eff=15.04 psnr_hole=16.79 ring=40.87 ssim_box=0.8659
+erase-objd image.erase lama-inpaint [draft] corne-000087: 157 ms left=0 psnr_box=12.79 psnr_eff=11.85 psnr_hole=11.39 ring=44.39 ssim_box=0.854
+erase-objd image.erase lama-inpaint [draft] corne-000091: 180 ms left=0 psnr_box=31.77 psnr_eff=27.1 psnr_hole=27.66 ring=9.837 ssim_box=0.8791
+erase-objd image.erase lama-inpaint [draft] corne-000108: 171 ms left=0 psnr_box=16.11 psnr_eff=13.48 psnr_hole=13.1 ring=18.82 ssim_box=0.6528
+erase-objd image.erase lama-inpaint [draft] corne-000122: 123 ms left=0 psnr_box=16.68 psnr_eff=15.39 psnr_hole=15.5 ring=32.24 ssim_box=0.7663
+erase-objd image.erase lama-inpaint [draft] corne-000129: 163 ms left=0 psnr_box=17.18 psnr_eff=13.48 psnr_hole=13.85 ring=44.61 ssim_box=0.8558
+erase-objd image.erase lama-inpaint [draft] corne-000130: 171 ms left=0 psnr_box=16.83 psnr_eff=16.58 psnr_hole=15.56 ring=24.27 ssim_box=0.8179
+erase-objd image.erase lama-inpaint [draft] corne-000136: 158 ms left=0 psnr_box=9.02 psnr_eff=8.623 psnr_hole=8.365 ring=50.64 ssim_box=0.6986
+erase-objd image.erase lama-inpaint [draft] corne-000140: 190 ms left=0 psnr_box=12.94 psnr_eff=10.59 psnr_hole=11.16 ring=65.61 ssim_box=0.6892
+erase-objd image.erase lama-inpaint [draft] corne-000141: 157 ms left=0 psnr_box=20.91 psnr_eff=18.86 psnr_hole=17.81 ring=12.21 ssim_box=0.8925
+erase-objd image.erase lama-inpaint [draft] corne-000145: 145 ms left=0 psnr_box=28.28 psnr_eff=25.3 psnr_hole=24.59 ring=4.868 ssim_box=0.956
+erase-objd image.erase lama-inpaint [draft] corne-000146: 162 ms left=0 psnr_box=16.33 psnr_eff=14.04 psnr_hole=13.32 ring=27.22 ssim_box=0.823
+erase-objd image.erase lama-inpaint [draft] corne-000147: 178 ms left=0 psnr_box=11.56 psnr_eff=6.666 psnr_hole=7.307 ring=123.6 ssim_box=0.8186
+erase-objd image.erase lama-inpaint [draft] corne-000148: 175 ms left=0 psnr_box=14.46 psnr_eff=13.14 psnr_hole=14.85 ring=44.06 ssim_box=0.5936
+erase-objd image.erase lama-inpaint [draft] corne-000149: 142 ms left=0 psnr_box=17.24 psnr_eff=15.14 psnr_hole=14.76 ring=31.73 ssim_box=0.6604
+erase-objd image.erase lama-inpaint [draft] corne-000164: 171 ms left=0 psnr_box=17.87 psnr_eff=15.09 psnr_hole=14.41 ring=8.13 ssim_box=0.8854
+erase-objd image.erase lama-inpaint [draft] corne-000171: 160 ms left=0 psnr_box=20.97 psnr_eff=18.36 psnr_hole=18.28 ring=20.61 ssim_box=0.9365
+erase-objd image.erase lama-inpaint [draft] corne-000184: 187 ms left=0 psnr_box=21.73 psnr_eff=17.71 psnr_hole=17.74 ring=12.75 ssim_box=0.8746
+erase-objd image.erase lama-inpaint [draft] corne-000186: 167 ms left=0 psnr_box=16.26 psnr_eff=13.83 psnr_hole=13.22 ring=40.83 ssim_box=0.7491
+erase-objd image.erase lama-inpaint [draft] corne-000187: 162 ms left=0 psnr_box=28.33 psnr_eff=25.19 psnr_hole=24.79 ring=7.951 ssim_box=0.9091
+erase-objd image.erase lama-inpaint [draft] corne-000203: 159 ms left=0 psnr_box=19.82 psnr_eff=15.96 psnr_hole=15.49 ring=19.15 ssim_box=0.7943
+erase-objd image.erase lama-inpaint [draft] corne-000214: 182 ms left=0 psnr_box=20.44 psnr_eff=17.46 psnr_hole=17.09 ring=27.95 ssim_box=0.5718
+erase-objd image.erase lama-inpaint [draft] corne-000216: 152 ms left=0 psnr_box=20.04 psnr_eff=17.68 psnr_hole=17.11 ring=13.81 ssim_box=0.8752
+erase-objd image.erase lama-inpaint [draft] corne-000217: 172 ms left=0 psnr_box=18.9 psnr_eff=13.64 psnr_hole=14.92 ring=51.57 ssim_box=0.789
+erase-objd image.erase lama-inpaint [draft] rb-1: 192 ms left=0 psnr_box=15.63 psnr_hole=11.59 ssim_box=0.636
+erase-objd image.erase lama-inpaint [draft] rb-13: 188 ms left=1 psnr_box=13.24 psnr_hole=11.21 ssim_box=0.5735
+erase-objd image.erase lama-inpaint [draft] rb-14: 190 ms left=0 psnr_box=12.5 psnr_hole=10.77 ssim_box=0.5588
+erase-objd image.erase lama-inpaint [draft] rb-p55: 180 ms left=0 psnr_box=20.68 psnr_hole=18.97 ssim_box=0.5853
+erase-objd image.erase lama-inpaint [draft] rb-p56: 181 ms left=0 psnr_box=14.23 psnr_hole=13.14 ssim_box=0.5651
+erase-objd image.erase lama-inpaint [draft] rb-p58: 181 ms left=0 psnr_box=16.34 psnr_hole=15.24 ssim_box=0.9077
+erase-objd image.erase lama-inpaint [draft] rb-p71: 155 ms left=0 psnr_box=35.01 psnr_hole=33.62 ssim_box=0.9227
+erase-objd image.erase lama-inpaint [draft] rb-p78: 184 ms left=0 psnr_box=17.64 psnr_hole=16.86 ssim_box=0.1506
+erase-objd image.erase lama-inpaint [draft] rb-p_0: 184 ms left=0 psnr_box=17.83 psnr_hole=18.01 ssim_box=0.2347
+erase-objd image.erase lama-inpaint [draft] rb-p_12: 175 ms left=0 psnr_box=20.86 psnr_hole=19.26 ssim_box=0.8826
+erase-objd image.erase lama-inpaint [draft] rb-p_13: 166 ms left=0 psnr_box=11.35 psnr_hole=10.5 ssim_box=0.6733
+erase-objd image.erase lama-inpaint [draft] rb-p_15: 158 ms left=0 psnr_box=21.71 psnr_hole=22.48 ssim_box=0.8966
+erase-objd image.erase lama-inpaint [draft] rb-p_17: 153 ms left=0 psnr_box=26.97 psnr_hole=25.96 ssim_box=0.9227
+erase-objd image.erase lama-inpaint [draft] rb-p_40: 168 ms left=0 psnr_box=21.94 psnr_hole=20.32 ssim_box=0.8301
+erase-objd image.erase lama-inpaint [draft] rb-p_43: 164 ms left=0 psnr_box=11.34 psnr_hole=11 ssim_box=0.6575
+erase-objd image.erase lama-inpaint [draft] rb-p_47: 179 ms left=0 psnr_box=31.16 psnr_hole=30.65 ssim_box=0.8989
+erase-objd image.erase lama-inpaint [draft] rb-p_6: 152 ms left=0 psnr_box=10.72 psnr_hole=9.735 ssim_box=0.851
+erase-eff image.erase lama-inpaint [draft] corne-000001: 165 ms left=0 psnr_box=11.05 psnr_eff=9.934 psnr_hole=9.934 ring=18.99 ssim_box=0.7612
+erase-eff image.erase lama-inpaint [draft] corne-000007: 181 ms left=0 psnr_box=14.83 psnr_eff=11.77 psnr_hole=11.77 ring=50.27 ssim_box=0.7036
+erase-eff image.erase lama-inpaint [draft] corne-000008: 189 ms left=0 psnr_box=15.56 psnr_eff=11.41 psnr_hole=11.41 ring=60.91 ssim_box=0.6432
+erase-eff image.erase lama-inpaint [draft] corne-000014: 152 ms left=0 psnr_box=22.69 psnr_eff=21.13 psnr_hole=21.13 ring=15.95 ssim_box=0.8637
+erase-eff image.erase lama-inpaint [draft] corne-000022: 153 ms left=0 psnr_box=15.07 psnr_eff=12.78 psnr_hole=12.78 ring=12.73 ssim_box=0.8015
+erase-eff image.erase lama-inpaint [draft] corne-000024: 176 ms left=0 psnr_box=20.16 psnr_eff=16.35 psnr_hole=16.35 ring=28.86 ssim_box=0.7851
+erase-eff image.erase lama-inpaint [draft] corne-000037: 181 ms left=0 psnr_box=18.36 psnr_eff=15.65 psnr_hole=15.65 ring=10.54 ssim_box=0.8383
+erase-eff image.erase lama-inpaint [draft] corne-000044: 171 ms left=0 psnr_box=26.24 psnr_eff=23.62 psnr_hole=23.62 ring=10.69 ssim_box=0.9175
+erase-eff image.erase lama-inpaint [draft] corne-000045: 153 ms left=0 psnr_box=19.5 psnr_eff=17.5 psnr_hole=17.5 ring=24.94 ssim_box=0.8807
+erase-eff image.erase lama-inpaint [draft] corne-000050: 181 ms left=0 psnr_box=22.13 psnr_eff=18.97 psnr_hole=18.97 ring=25.28 ssim_box=0.9148
+erase-eff image.erase lama-inpaint [draft] corne-000058: 133 ms left=0 psnr_box=15.31 psnr_eff=15.01 psnr_hole=15.01 ring=17.28 ssim_box=0.8326
+erase-eff image.erase lama-inpaint [draft] corne-000059: 170 ms left=0 psnr_box=20.11 psnr_eff=15.87 psnr_hole=15.87 ring=5.995 ssim_box=0.8919
+erase-eff image.erase lama-inpaint [draft] corne-000063: 154 ms left=0 psnr_box=24.63 psnr_eff=19.68 psnr_hole=19.68 ring=19.08 ssim_box=0.9059
+erase-eff image.erase lama-inpaint [draft] corne-000064: 136 ms left=0 psnr_box=14.32 psnr_eff=7.982 psnr_hole=7.982 ring=20.42 ssim_box=0.8665
+erase-eff image.erase lama-inpaint [draft] corne-000065: 156 ms left=0 psnr_box=24.39 psnr_eff=21.44 psnr_hole=21.44 ring=9.918 ssim_box=0.963
+erase-eff image.erase lama-inpaint [draft] corne-000069: 164 ms left=0 psnr_box=18.81 psnr_eff=16.4 psnr_hole=16.4 ring=34.93 ssim_box=0.854
+erase-eff image.erase lama-inpaint [draft] corne-000072: 179 ms left=0 psnr_box=21.87 psnr_eff=20.45 psnr_hole=20.45 ring=15.25 ssim_box=0.8588
+erase-eff image.erase lama-inpaint [draft] corne-000073: 183 ms left=0 psnr_box=15.61 psnr_eff=14.14 psnr_hole=14.14 ring=19.69 ssim_box=0.6744
+erase-eff image.erase lama-inpaint [draft] corne-000075: 172 ms left=0 psnr_box=27.31 psnr_eff=25.63 psnr_hole=25.63 ring=9.148 ssim_box=0.8794
+erase-eff image.erase lama-inpaint [draft] corne-000084: 142 ms left=0 psnr_box=27.71 psnr_eff=20.5 psnr_hole=20.5 ring=23.21 ssim_box=0.8844
+erase-eff image.erase lama-inpaint [draft] corne-000087: 152 ms left=0 psnr_box=26.82 psnr_eff=25.72 psnr_hole=25.72 ring=9.869 ssim_box=0.9614
+erase-eff image.erase lama-inpaint [draft] corne-000091: 175 ms left=0 psnr_box=33.07 psnr_eff=28.78 psnr_hole=28.78 ring=8.398 ssim_box=0.8762
+erase-eff image.erase lama-inpaint [draft] corne-000108: 170 ms left=0 psnr_box=19.59 psnr_eff=17.02 psnr_hole=17.02 ring=23.72 ssim_box=0.6428
+erase-eff image.erase lama-inpaint [draft] corne-000122: 129 ms left=0 psnr_box=19.42 psnr_eff=18.25 psnr_hole=18.25 ring=17.18 ssim_box=0.7344
+erase-eff image.erase lama-inpaint [draft] corne-000129: 158 ms left=0 psnr_box=19.21 psnr_eff=15.46 psnr_hole=15.46 ring=40.87 ssim_box=0.8684
+erase-eff image.erase lama-inpaint [draft] corne-000130: 167 ms left=0 psnr_box=26.51 psnr_eff=24.48 psnr_hole=24.48 ring=13.48 ssim_box=0.8415
+erase-eff image.erase lama-inpaint [draft] corne-000136: 157 ms left=0 psnr_box=14.09 psnr_eff=13.82 psnr_hole=13.82 ring=7.13 ssim_box=0.7697
+erase-eff image.erase lama-inpaint [draft] corne-000140: 189 ms left=0 psnr_box=14.89 psnr_eff=12.54 psnr_hole=12.54 ring=61.04 ssim_box=0.6622
+erase-eff image.erase lama-inpaint [draft] corne-000141: 153 ms left=0 psnr_box=17.02 psnr_eff=14.97 psnr_hole=14.97 ring=16.41 ssim_box=0.7967
+erase-eff image.erase lama-inpaint [draft] corne-000145: 138 ms left=0 psnr_box=27.86 psnr_eff=24.87 psnr_hole=24.87 ring=6.532 ssim_box=0.9581
+erase-eff image.erase lama-inpaint [draft] corne-000146: 163 ms left=0 psnr_box=21.03 psnr_eff=18.74 psnr_hole=18.74 ring=16.84 ssim_box=0.8449
+erase-eff image.erase lama-inpaint [draft] corne-000147: 177 ms left=0 psnr_box=21.56 psnr_eff=16.74 psnr_hole=16.74 ring=5.806 ssim_box=0.8927
+erase-eff image.erase lama-inpaint [draft] corne-000148: 175 ms left=0 psnr_box=18.12 psnr_eff=16.5 psnr_hole=16.5 ring=33.36 ssim_box=0.5823
+erase-eff image.erase lama-inpaint [draft] corne-000149: 140 ms left=0 psnr_box=24.63 psnr_eff=22.56 psnr_hole=22.56 ring=10.1 ssim_box=0.8247
+erase-eff image.erase lama-inpaint [draft] corne-000164: 172 ms left=0 psnr_box=20.29 psnr_eff=17.5 psnr_hole=17.5 ring=8.465 ssim_box=0.8909
+erase-eff image.erase lama-inpaint [draft] corne-000171: 156 ms left=0 psnr_box=21.55 psnr_eff=18.94 psnr_hole=18.94 ring=6.745 ssim_box=0.9356
+erase-eff image.erase lama-inpaint [draft] corne-000184: 186 ms left=0 psnr_box=29.51 psnr_eff=25.83 psnr_hole=25.83 ring=3.93 ssim_box=0.9243
+erase-eff image.erase lama-inpaint [draft] corne-000186: 166 ms left=0 psnr_box=19.45 psnr_eff=16.41 psnr_hole=16.41 ring=35.22 ssim_box=0.7829
+erase-eff image.erase lama-inpaint [draft] corne-000187: 163 ms left=0 psnr_box=27.91 psnr_eff=24.77 psnr_hole=24.77 ring=9.53 ssim_box=0.9054
+erase-eff image.erase lama-inpaint [draft] corne-000203: 153 ms left=0 psnr_box=25.2 psnr_eff=21.46 psnr_hole=21.46 ring=7.807 ssim_box=0.8464
+erase-eff image.erase lama-inpaint [draft] corne-000214: 188 ms left=0 psnr_box=21.69 psnr_eff=18.78 psnr_hole=18.78 ring=23.7 ssim_box=0.6114
+erase-eff image.erase lama-inpaint [draft] corne-000216: 151 ms left=0 psnr_box=20.32 psnr_eff=17.96 psnr_hole=17.96 ring=13.17 ssim_box=0.8654
+erase-eff image.erase lama-inpaint [draft] corne-000217: 171 ms left=0 psnr_box=24.85 psnr_eff=19.48 psnr_hole=19.48 ring=12.61 ssim_box=0.8288
+erase-objd image.erase lama-inpaint [standard] warm-up: 428 ms 
+erase-objd image.erase lama-inpaint [standard] corne-000001: 403 ms left=0 psnr_box=7.743 psnr_eff=6.626 psnr_hole=5.864 ring=39.72 ssim_box=0.667
+erase-objd image.erase lama-inpaint [standard] corne-000007: 405 ms left=0 psnr_box=13.66 psnr_eff=10.6 psnr_hole=11.45 ring=64.66 ssim_box=0.7235
+erase-objd image.erase lama-inpaint [standard] corne-000008: 417 ms left=0 psnr_box=11.65 psnr_eff=7.914 psnr_hole=9.797 ring=97.04 ssim_box=0.6682
+erase-objd image.erase lama-inpaint [standard] corne-000014: 389 ms left=0 psnr_box=18.87 psnr_eff=17.27 psnr_hole=16.81 ring=20.33 ssim_box=0.7372
+erase-objd image.erase lama-inpaint [standard] corne-000022: 386 ms left=0 psnr_box=31.97 psnr_eff=30.21 psnr_hole=29.65 ring=3.5 ssim_box=0.953
+erase-objd image.erase lama-inpaint [standard] corne-000024: 419 ms left=0 psnr_box=15.49 psnr_eff=11.7 psnr_hole=11.03 ring=39.15 ssim_box=0.7915
+erase-objd image.erase lama-inpaint [standard] corne-000037: 416 ms left=0 psnr_box=14.16 psnr_eff=11.43 psnr_hole=11.74 ring=53.85 ssim_box=0.8299
+erase-objd image.erase lama-inpaint [standard] corne-000044: 404 ms left=0 psnr_box=27.93 psnr_eff=25.37 psnr_hole=24.96 ring=6.219 ssim_box=0.9278
+erase-objd image.erase lama-inpaint [standard] corne-000045: 388 ms left=1 psnr_box=11.65 psnr_eff=9.639 psnr_hole=9.538 ring=62.55 ssim_box=0.6848
+erase-objd image.erase lama-inpaint [standard] corne-000050: 422 ms left=0 psnr_box=22.68 psnr_eff=19.53 psnr_hole=19.29 ring=5.977 ssim_box=0.9142
+erase-objd image.erase lama-inpaint [standard] corne-000058: 383 ms left=0 psnr_box=15.22 psnr_eff=14.95 psnr_hole=13.81 ring=8.407 ssim_box=0.8739
+erase-objd image.erase lama-inpaint [standard] corne-000059: 406 ms left=0 psnr_box=14.71 psnr_eff=10.45 psnr_hole=9.326 ring=17.3 ssim_box=0.8356
+erase-objd image.erase lama-inpaint [standard] corne-000063: 392 ms left=0 psnr_box=22.67 psnr_eff=17.64 psnr_hole=19.09 ring=34.04 ssim_box=0.9067
+erase-objd image.erase lama-inpaint [standard] corne-000064: 371 ms left=0 psnr_box=15.64 psnr_eff=9.337 psnr_hole=10.02 ring=3.819 ssim_box=0.8801
+erase-objd image.erase lama-inpaint [standard] corne-000065: 393 ms left=0 psnr_box=21 psnr_eff=18 psnr_hole=19.92 ring=23.31 ssim_box=0.9369
+erase-objd image.erase lama-inpaint [standard] corne-000069: 398 ms left=0 psnr_box=9.64 psnr_eff=8.009 psnr_hole=7.893 ring=70.95 ssim_box=0.7189
+erase-objd image.erase lama-inpaint [standard] corne-000072: 415 ms left=0 psnr_box=16.71 psnr_eff=15.36 psnr_hole=14.13 ring=22.07 ssim_box=0.8397
+erase-objd image.erase lama-inpaint [standard] corne-000073: 417 ms left=0 psnr_box=10.09 psnr_eff=7.171 psnr_hole=8.537 ring=102.3 ssim_box=0.7102
+erase-objd image.erase lama-inpaint [standard] corne-000075: 404 ms left=0 psnr_box=15.66 psnr_eff=11.89 psnr_hole=18.28 ring=113 ssim_box=0.8641
+erase-objd image.erase lama-inpaint [standard] corne-000084: 374 ms left=0 psnr_box=23.29 psnr_eff=15.95 psnr_hole=17.96 ring=40.87 ssim_box=0.8774
+erase-objd image.erase lama-inpaint [standard] corne-000087: 387 ms left=0 psnr_box=10.38 psnr_eff=9.544 psnr_hole=8.289 ring=44.39 ssim_box=0.8505
+erase-objd image.erase lama-inpaint [standard] corne-000091: 409 ms left=0 psnr_box=31.46 psnr_eff=26.68 psnr_hole=27.18 ring=9.837 ssim_box=0.8627
+erase-objd image.erase lama-inpaint [standard] corne-000108: 401 ms left=0 psnr_box=16.89 psnr_eff=14.27 psnr_hole=13.94 ring=18.82 ssim_box=0.6567
+erase-objd image.erase lama-inpaint [standard] corne-000122: 361 ms left=0 psnr_box=16.5 psnr_eff=15.22 psnr_hole=15.23 ring=32.24 ssim_box=0.7898
+erase-objd image.erase lama-inpaint [standard] corne-000129: 394 ms left=0 psnr_box=18.5 psnr_eff=14.79 psnr_hole=15.55 ring=44.61 ssim_box=0.8858
+erase-objd image.erase lama-inpaint [standard] corne-000130: 400 ms left=0 psnr_box=17.74 psnr_eff=17.36 psnr_hole=18.18 ring=24.27 ssim_box=0.8355
+erase-objd image.erase lama-inpaint [standard] corne-000136: 386 ms left=1 psnr_box=7.906 psnr_eff=7.537 psnr_hole=7.025 ring=50.64 ssim_box=0.7119
+erase-objd image.erase lama-inpaint [standard] corne-000140: 422 ms left=0 psnr_box=14.04 psnr_eff=11.69 psnr_hole=12.99 ring=65.61 ssim_box=0.7545
+erase-objd image.erase lama-inpaint [standard] corne-000141: 388 ms left=0 psnr_box=21.54 psnr_eff=19.49 psnr_hole=18.5 ring=12.21 ssim_box=0.9261
+erase-objd image.erase lama-inpaint [standard] corne-000145: 385 ms left=0 psnr_box=29.62 psnr_eff=26.66 psnr_hole=26.03 ring=4.868 ssim_box=0.9717
+erase-objd image.erase lama-inpaint [standard] corne-000146: 391 ms left=0 psnr_box=17.59 psnr_eff=15.28 psnr_hole=14.91 ring=27.22 ssim_box=0.8505
+erase-objd image.erase lama-inpaint [standard] corne-000147: 407 ms left=0 psnr_box=13.71 psnr_eff=8.822 psnr_hole=10.65 ring=123.6 ssim_box=0.8519
+erase-objd image.erase lama-inpaint [standard] corne-000148: 401 ms left=1 psnr_box=12.01 psnr_eff=11.01 psnr_hole=10.87 ring=44.06 ssim_box=0.6265
+erase-objd image.erase lama-inpaint [standard] corne-000149: 382 ms left=0 psnr_box=16.98 psnr_eff=14.88 psnr_hole=14.39 ring=31.73 ssim_box=0.6696
+erase-objd image.erase lama-inpaint [standard] corne-000164: 402 ms left=0 psnr_box=20.77 psnr_eff=17.98 psnr_hole=17.38 ring=8.13 ssim_box=0.9363
+erase-objd image.erase lama-inpaint [standard] corne-000171: 414 ms left=0 psnr_box=22.56 psnr_eff=19.96 psnr_hole=20.42 ring=20.61 ssim_box=0.9522
+erase-objd image.erase lama-inpaint [standard] corne-000184: 422 ms left=0 psnr_box=22.29 psnr_eff=18.26 psnr_hole=18.33 ring=12.75 ssim_box=0.9031
+erase-objd image.erase lama-inpaint [standard] corne-000186: 401 ms left=0 psnr_box=16.09 psnr_eff=13.68 psnr_hole=12.95 ring=40.83 ssim_box=0.7629
+erase-objd image.erase lama-inpaint [standard] corne-000187: 394 ms left=0 psnr_box=27.59 psnr_eff=24.44 psnr_hole=23.94 ring=7.951 ssim_box=0.911
+erase-objd image.erase lama-inpaint [standard] corne-000203: 391 ms left=0 psnr_box=19.96 psnr_eff=16.1 psnr_hole=15.65 ring=19.15 ssim_box=0.7947
+erase-objd image.erase lama-inpaint [standard] corne-000214: 421 ms left=0 psnr_box=20.28 psnr_eff=17.29 psnr_hole=16.88 ring=27.95 ssim_box=0.5787
+erase-objd image.erase lama-inpaint [standard] corne-000216: 388 ms left=0 psnr_box=17.26 psnr_eff=14.9 psnr_hole=14.14 ring=13.81 ssim_box=0.8846
+erase-objd image.erase lama-inpaint [standard] corne-000217: 408 ms left=0 psnr_box=19.41 psnr_eff=14.14 psnr_hole=15.67 ring=51.57 ssim_box=0.7877
+erase-objd image.erase lama-inpaint [standard] rb-1: 449 ms left=0 psnr_box=17.06 psnr_hole=14.25 ssim_box=0.6352
+erase-objd image.erase lama-inpaint [standard] rb-13: 420 ms left=0 psnr_box=15.14 psnr_hole=13.59 ssim_box=0.6069
+erase-objd image.erase lama-inpaint [standard] rb-14: 423 ms left=0 psnr_box=14.38 psnr_hole=13.31 ssim_box=0.5737
+erase-objd image.erase lama-inpaint [standard] rb-p55: 413 ms left=0 psnr_box=20.39 psnr_hole=18.54 ssim_box=0.5706
+erase-objd image.erase lama-inpaint [standard] rb-p56: 417 ms left=0 psnr_box=15.01 psnr_hole=15.12 ssim_box=0.5641
+erase-objd image.erase lama-inpaint [standard] rb-p58: 414 ms left=0 psnr_box=16.89 psnr_hole=16.36 ssim_box=0.9111
+erase-objd image.erase lama-inpaint [standard] rb-p71: 393 ms left=0 psnr_box=32.3 psnr_hole=28.81 ssim_box=0.9155
+erase-objd image.erase lama-inpaint [standard] rb-p78: 416 ms left=0 psnr_box=17.03 psnr_hole=15.18 ssim_box=0.1403
+erase-objd image.erase lama-inpaint [standard] rb-p_0: 409 ms left=0 psnr_box=17.39 psnr_hole=17.01 ssim_box=0.1898
+erase-objd image.erase lama-inpaint [standard] rb-p_12: 406 ms left=0 psnr_box=20.79 psnr_hole=19.15 ssim_box=0.8789
+erase-objd image.erase lama-inpaint [standard] rb-p_13: 398 ms left=0 psnr_box=12 psnr_hole=11.37 ssim_box=0.7217
+erase-objd image.erase lama-inpaint [standard] rb-p_15: 391 ms left=0 psnr_box=22.21 psnr_hole=23.6 ssim_box=0.8894
+erase-objd image.erase lama-inpaint [standard] rb-p_17: 387 ms left=0 psnr_box=26.94 psnr_hole=25.87 ssim_box=0.9149
+erase-objd image.erase lama-inpaint [standard] rb-p_40: 395 ms left=0 psnr_box=25.2 psnr_hole=24.61 ssim_box=0.8677
+erase-objd image.erase lama-inpaint [standard] rb-p_43: 402 ms left=0 psnr_box=12.09 psnr_hole=12.13 ssim_box=0.6972
+erase-objd image.erase lama-inpaint [standard] rb-p_47: 406 ms left=0 psnr_box=31.11 psnr_hole=30.53 ssim_box=0.8988
+erase-objd image.erase lama-inpaint [standard] rb-p_6: 388 ms left=0 psnr_box=11.18 psnr_hole=10.33 ssim_box=0.8741
+erase-eff image.erase lama-inpaint [standard] corne-000001: 405 ms left=0 psnr_box=10.15 psnr_eff=9.03 psnr_hole=9.03 ring=16.51 ssim_box=0.7693
+erase-eff image.erase lama-inpaint [standard] corne-000007: 407 ms left=0 psnr_box=14.23 psnr_eff=11.17 psnr_hole=11.17 ring=50.81 ssim_box=0.7579
+erase-eff image.erase lama-inpaint [standard] corne-000008: 420 ms left=0 psnr_box=14.96 psnr_eff=10.76 psnr_hole=10.76 ring=77.77 ssim_box=0.6593
+erase-eff image.erase lama-inpaint [standard] corne-000014: 392 ms left=0 psnr_box=20.62 psnr_eff=19.05 psnr_hole=19.05 ring=12.1 ssim_box=0.8426
+erase-eff image.erase lama-inpaint [standard] corne-000022: 391 ms left=0 psnr_box=26.97 psnr_eff=24.84 psnr_hole=24.84 ring=7.12 ssim_box=0.9394
+erase-eff image.erase lama-inpaint [standard] corne-000024: 416 ms left=0 psnr_box=19.24 psnr_eff=15.42 psnr_hole=15.42 ring=32.16 ssim_box=0.7978
+erase-eff image.erase lama-inpaint [standard] corne-000037: 411 ms left=0 psnr_box=17.91 psnr_eff=15.2 psnr_hole=15.2 ring=9.606 ssim_box=0.8447
+erase-eff image.erase lama-inpaint [standard] corne-000044: 397 ms left=0 psnr_box=27.04 psnr_eff=24.44 psnr_hole=24.44 ring=8.258 ssim_box=0.9297
+erase-eff image.erase lama-inpaint [standard] corne-000045: 387 ms left=0 psnr_box=20.17 psnr_eff=18.17 psnr_hole=18.17 ring=18.3 ssim_box=0.9134
+erase-eff image.erase lama-inpaint [standard] corne-000050: 412 ms left=0 psnr_box=22.63 psnr_eff=19.48 psnr_hole=19.48 ring=19.46 ssim_box=0.9303
+erase-eff image.erase lama-inpaint [standard] corne-000058: 378 ms left=0 psnr_box=15.9 psnr_eff=15.62 psnr_hole=15.62 ring=8.605 ssim_box=0.8801
+erase-eff image.erase lama-inpaint [standard] corne-000059: 406 ms left=0 psnr_box=22.13 psnr_eff=17.91 psnr_hole=17.91 ring=4.252 ssim_box=0.924
+erase-eff image.erase lama-inpaint [standard] corne-000063: 392 ms left=0 psnr_box=25 psnr_eff=20.06 psnr_hole=20.06 ring=23.67 ssim_box=0.9167
+erase-eff image.erase lama-inpaint [standard] corne-000064: 373 ms left=0 psnr_box=20.12 psnr_eff=13.8 psnr_hole=13.8 ring=11.41 ssim_box=0.9082
+erase-eff image.erase lama-inpaint [standard] corne-000065: 386 ms left=0 psnr_box=32.83 psnr_eff=30.42 psnr_hole=30.42 ring=6.909 ssim_box=0.9767
+erase-eff image.erase lama-inpaint [standard] corne-000069: 397 ms left=0 psnr_box=15.13 psnr_eff=13.26 psnr_hole=13.26 ring=42.6 ssim_box=0.8669
+erase-eff image.erase lama-inpaint [standard] corne-000072: 408 ms left=0 psnr_box=22.57 psnr_eff=21.12 psnr_hole=21.12 ring=15.32 ssim_box=0.9185
+erase-eff image.erase lama-inpaint [standard] corne-000073: 411 ms left=0 psnr_box=14.42 psnr_eff=12.92 psnr_hole=12.92 ring=23.72 ssim_box=0.7395
+erase-eff image.erase lama-inpaint [standard] corne-000075: 406 ms left=0 psnr_box=24.77 psnr_eff=22.11 psnr_hole=22.11 ring=4.685 ssim_box=0.876
+erase-eff image.erase lama-inpaint [standard] corne-000084: 374 ms left=0 psnr_box=28.67 psnr_eff=21.56 psnr_hole=21.56 ring=16.73 ssim_box=0.8916
+erase-eff image.erase lama-inpaint [standard] corne-000087: 393 ms left=0 psnr_box=16.41 psnr_eff=15.65 psnr_hole=15.65 ring=18.88 ssim_box=0.94
+erase-eff image.erase lama-inpaint [standard] corne-000091: 407 ms left=0 psnr_box=33.37 psnr_eff=29.22 psnr_hole=29.22 ring=7.945 ssim_box=0.8593
+erase-eff image.erase lama-inpaint [standard] corne-000108: 402 ms left=0 psnr_box=21.17 psnr_eff=18.63 psnr_hole=18.63 ring=15.23 ssim_box=0.6437
+erase-eff image.erase lama-inpaint [standard] corne-000122: 371 ms left=0 psnr_box=19.83 psnr_eff=18.6 psnr_hole=18.6 ring=16.99 ssim_box=0.808
+erase-eff image.erase lama-inpaint [standard] corne-000129: 397 ms left=0 psnr_box=23.61 psnr_eff=19.91 psnr_hole=19.91 ring=31.15 ssim_box=0.9189
+erase-eff image.erase lama-inpaint [standard] corne-000130: 404 ms left=0 psnr_box=27.86 psnr_eff=25.69 psnr_hole=25.69 ring=11.51 ssim_box=0.8467
+erase-eff image.erase lama-inpaint [standard] corne-000136: 389 ms left=0 psnr_box=15.1 psnr_eff=14.82 psnr_hole=14.82 ring=4.815 ssim_box=0.8454
+erase-eff image.erase lama-inpaint [standard] corne-000140: 420 ms left=0 psnr_box=16.96 psnr_eff=14.62 psnr_hole=14.62 ring=51.84 ssim_box=0.7764
+erase-eff image.erase lama-inpaint [standard] corne-000141: 387 ms left=0 psnr_box=19.67 psnr_eff=17.62 psnr_hole=17.62 ring=9.835 ssim_box=0.8915
+erase-eff image.erase lama-inpaint [standard] corne-000145: 384 ms left=0 psnr_box=30.71 psnr_eff=27.78 psnr_hole=27.78 ring=4.67 ssim_box=0.9706
+erase-eff image.erase lama-inpaint [standard] corne-000146: 393 ms left=0 psnr_box=24.43 psnr_eff=22.18 psnr_hole=22.18 ring=11.03 ssim_box=0.873
+erase-eff image.erase lama-inpaint [standard] corne-000147: 407 ms left=0 psnr_box=23.7 psnr_eff=18.93 psnr_hole=18.93 ring=6.277 ssim_box=0.8975
+erase-eff image.erase lama-inpaint [standard] corne-000148: 402 ms left=0 psnr_box=16.12 psnr_eff=14.86 psnr_hole=14.86 ring=32.95 ssim_box=0.6315
+erase-eff image.erase lama-inpaint [standard] corne-000149: 390 ms left=0 psnr_box=27.46 psnr_eff=25.43 psnr_hole=25.43 ring=10.03 ssim_box=0.8682
+erase-eff image.erase lama-inpaint [standard] corne-000164: 401 ms left=0 psnr_box=21.54 psnr_eff=18.76 psnr_hole=18.76 ring=7.636 ssim_box=0.9373
+erase-eff image.erase lama-inpaint [standard] corne-000171: 407 ms left=0 psnr_box=24.35 psnr_eff=21.75 psnr_hole=21.75 ring=5.462 ssim_box=0.9573
+erase-eff image.erase lama-inpaint [standard] corne-000184: 417 ms left=0 psnr_box=30.36 psnr_eff=26.78 psnr_hole=26.78 ring=3.147 ssim_box=0.946
+erase-eff image.erase lama-inpaint [standard] corne-000186: 398 ms left=0 psnr_box=22.37 psnr_eff=19.29 psnr_hole=19.29 ring=23.94 ssim_box=0.8198
+erase-eff image.erase lama-inpaint [standard] corne-000187: 393 ms left=0 psnr_box=29.1 psnr_eff=26 psnr_hole=26 ring=6.843 ssim_box=0.9169
+erase-eff image.erase lama-inpaint [standard] corne-000203: 394 ms left=0 psnr_box=27.07 psnr_eff=23.43 psnr_hole=23.43 ring=7.456 ssim_box=0.8354
+erase-eff image.erase lama-inpaint [standard] corne-000214: 422 ms left=0 psnr_box=21.48 psnr_eff=18.56 psnr_hole=18.56 ring=23.24 ssim_box=0.621
+erase-eff image.erase lama-inpaint [standard] corne-000216: 383 ms left=0 psnr_box=20.92 psnr_eff=18.56 psnr_hole=18.56 ring=10.63 ssim_box=0.9176
+erase-eff image.erase lama-inpaint [standard] corne-000217: 417 ms left=0 psnr_box=24.46 psnr_eff=19.07 psnr_hole=19.07 ring=11.15 ssim_box=0.8217
+# Tier bench — Gaea
+
+Run 2026-10-29T04:02:46Z, engine http://127.0.0.1:17761/mes/v0.
+
+### edits
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) |  | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|
+| image.edit | klein-4b | best | 2 | 13383 | 13403 |  | 0.0 | 0 |
+| image.edit | klein-4b | draft | 2 | 13381 | 15009 |  | 0.0 | 0 |
+| image.erase | lama-inpaint | best | 2 | 431 | 429 |  | 0.0 | 0 |
+| image.erase | lama-inpaint | standard | 2 | 435 | 699 |  | 0.0 | 0 |
+| image.extend | lama-inpaint | best | 2 | 619 | 618 |  | 0.0 | 0 |
+| image.extend | lama-inpaint | draft | 2 | 252 | 264 |  | 0.0 | 0 |
+| image.extend | lama-inpaint | standard | 2 | 619 | 667 |  | 0.0 | 0 |
+| image.fill | klein-4b | best | 2 | 13399 | 13428 |  | 0.0 | 0 |
+| image.fill | klein-4b | standard | 2 | 13380 | 13386 |  | 0.0 | 0 |
+
+### erase-eff
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) | fallback | left | psnr_box | psnr_eff | psnr_hole | ring | ssim_box | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| image.erase | lama-inpaint | draft | 43 | 165 | — | 0.0000 | 0.0000 | 21.1678 | 18.3208 | 18.3208 | 19.2094 | 0.8271 | 0.0 | 0 |
+| image.erase | lama-inpaint | standard | 43 | 398 | — | 0.0000 | 0.0000 | 22.1746 | 19.3607 | 19.3607 | 17.2711 | 0.8564 | 0.0 | 0 |
+
+### erase-objd
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) | fallback | left | psnr_box | psnr_eff | psnr_hole | ring | ssim_box | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| image.erase | lama-inpaint | draft | 61 | 171 | 191 | 0.0000 | 0.0333 | 17.8125 | 14.5649 | 15.5096 | 36.4158 | 0.7674 | 0.0 | 0 |
+| image.erase | lama-inpaint | standard | 61 | 402 | 428 | 0.0000 | 0.0500 | 18.3096 | 15.0936 | 16.1320 | 36.4158 | 0.7824 | 0.0 | 0 |
+
+### generate
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) |  | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|
+| image.generate | klein-4b-base | named | 9 | 74779 | 73921 |  | 0.0 | 0 |
+| image.generate | klein-4b | named | 9 | 7296 | 7360 |  | 0.0 | 0 |
+| image.generate | qwen-image-flash | named | 9 | 14109 | 21030 |  | 0.0 | 0 |
+| image.generate | z-image-turbo | named | 9 | 11204 | 11089 |  | 0.0 | 0 |
+| image.generate | z-image | named | 9 | 72293 | 74773 |  | 0.0 | 0 |
+
+### judge
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) |  | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|
+| image.describe | ? | default | 0 | — | — |  | — | 40 |
+| image.score | ? | default | 0 | — | — |  | — | 40 |
+
+### restore-deblur
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) | psnr | psnr-degraded | ssim | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|---|---|---|
+| image.restore | nafnet-restore | named | 8 | 157 | 158 | 26.7577 | 25.6038 | 0.7514 | 0.0 | 0 |
+| image.restore | restormer-defocus | named | 7 | 2786 | 2829 | 26.5801 | — | 0.7962 | 0.0 | 0 |
+| image.restore | restormer-motion | named | 7 | 2786 | 2829 | 25.9420 | — | 0.7480 | 0.0 | 0 |
+| reference | (degraded input) | default | 6 | 0 | — | 26.7690 | — | 0.7564 | — | 0 |
+
+### restore-denoise
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) | psnr | psnr-degraded | ssim | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|---|---|---|
+| image.restore | nafnet-restore | named | 8 | 184 | 188 | 32.6385 | 24.0793 | 0.8914 | 0.0 | 0 |
+| image.restore | restormer-denoise | named | 7 | 2796 | 2826 | 27.0476 | — | 0.8188 | 0.0 | 0 |
+| image.restore | scunet-denoise | named | 7 | 1185 | 1233 | 33.3216 | — | 0.9032 | 0.0 | 0 |
+| reference | (degraded input) | default | 6 | 0 | — | 23.9536 | — | 0.4658 | — | 0 |
+
+### segment-1click
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) | iou | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|---|
+| image.segment | edgetam-segment | named | 51 | 40 | 46 | 0.6508 | 0.0 | 0 |
+| image.segment | sam21-segment | named | 51 | 44 | 53 | 0.7721 | 0.0 | 0 |
+
+### tiers
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) |  | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|
+| image.edit | klein-4b | best | 1 | 2802 | — |  | 0.0 | 0 |
+| image.edit | klein-4b | draft | 1 | 2835 | — |  | 0.0 | 0 |
+| image.edit | klein-4b | standard | 1 | 2805 | — |  | 0.0 | 0 |
+| image.enhance_prompt | qwen3.5-4b | default | 1 | 1124 | — |  | — | 0 |
+| image.erase | lama-inpaint | best | 1 | 113 | — |  | 0.0 | 0 |
+| image.erase | lama-inpaint | draft | 1 | 78 | — |  | 0.0 | 0 |
+| image.erase | lama-inpaint | standard | 1 | 113 | — |  | 0.0 | 0 |
+| image.extend | lama-inpaint | best | 1 | 155 | — |  | 0.0 | 0 |
+| image.extend | lama-inpaint | draft | 1 | 99 | — |  | 0.0 | 0 |
+| image.extend | lama-inpaint | standard | 1 | 191 | — |  | 0.0 | 0 |
+| image.fill | lama-inpaint | best | 1 | 105 | — |  | 0.0 | 0 |
+| image.fill | lama-inpaint | draft | 1 | 505 | — |  | 0.0 | 0 |
+| image.fill | lama-inpaint | standard | 1 | 214 | — |  | 0.0 | 0 |
+| image.generate | klein-4b | draft | 1 | 5210 | — |  | 0.0 | 0 |
+| image.generate | z-image-turbo | best | 1 | 2631 | — |  | 0.0 | 0 |
+| image.generate | z-image-turbo | standard | 1 | 4081 | — |  | 0.0 | 0 |
+| image.matte | birefnet-matte | default | 1 | 365 | — |  | — | 0 |
+| image.restore | nafnet-restore | best | 1 | 91 | — |  | 0.0 | 0 |
+| image.restore | nafnet-restore | draft | 1 | 100 | — |  | 0.0 | 0 |
+| image.restore | nafnet-restore | standard | 1 | 86 | — |  | 0.0 | 0 |
+| image.segment | sam21-segment | default | 1 | 70 | — |  | 0.0 | 0 |
+| image.upscale | heart-upscale | best | 1 | 2069 | — |  | 0.0 | 0 |
+| image.upscale | nerve-upscale | draft | 1 | 230 | — |  | 0.0 | 0 |
+| image.upscale | realplksr-upscale | standard | 1 | 620 | — |  | 0.0 | 0 |
+
+### upscale-x2
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) | psnr | ssim | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|---|---|
+| image.upscale | heart-upscale | named | 7 | 2022 | 2038 | 33.1117 | 0.9344 | 0.0 | 0 |
+| image.upscale | nerve-upscale | named | 7 | 194 | 189 | 30.1837 | 0.8748 | 0.0 | 0 |
+| image.upscale | realplksr-upscale | named | 7 | 579 | 584 | 31.9626 | 0.9226 | 0.0 | 0 |
+
+### upscale-x4
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) | psnr | ssim | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|---|---|
+| image.upscale | heart-upscale | named | 7 | 526 | 555 | 27.0521 | 0.7824 | 0.0 | 0 |
+| image.upscale | nerve-upscale | named | 7 | 130 | 137 | 26.9734 | 0.7791 | 0.0 | 0 |
+| image.upscale | realplksr-upscale | named | 7 | 213 | 219 | 26.4587 | 0.7557 | 0.0 | 0 |
+
+# tier-bench exited 0

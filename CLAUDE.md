@@ -49,6 +49,7 @@ process of its own.
 | [tools/acceptance-scheduler.sh](tools/acceptance-scheduler.sh), [tools/acceptance-governor.sh](tools/acceptance-governor.sh) | AB-T-0363's eviction, SIGKILLed run requeued once, lane fallback and named lane refused (Z-Image and the demo, 43.1 GB budget); AB-T-0371's governor on MLXMemoryPolicy with three plugins under 70 GB |
 | [tools/acceptance-forge.sh](tools/acceptance-forge.sh) | AB-T-0369's acceptance: the processing pack from GitHub, every model by name through the normalizer, footprints with one and all loaded |
 | [tools/acceptance-prompt-enhance.sh](tools/acceptance-prompt-enhance.sh) | AB-T-0370's acceptance: the enhancer by repo URL, and the normalizer calling it only where a profile asks |
+| [tools/parity-run.sh](tools/parity-run.sh), [tools/parity-compare.swift](tools/parity-compare.swift), [tools/parity-seeded.py](tools/parity-seeded.py) | AB-T-0373's G1 parity: one TierBench run against Gaea or pixel-agency-image-engine, two runs paired output by output (bytes, pixels, median warm times, routing), and seeded jobs for what TierBench sends unseeded |
 | [Docs/Evidence/AB-T-0355/](Docs/Evidence/AB-T-0355/README.md) | The host's acceptance: conformance reports, a recorded GPP session, console screenshots |
 
 Decisions G-1 to G-23 are filed as AB-D records. The plan's §1 maps each one to its id.

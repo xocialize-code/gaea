@@ -1,0 +1,224 @@
+[
+ {
+  "name": "klein-generate-draft",
+  "i": 0,
+  "outcome": "succeeded",
+  "error": null,
+  "model": "klein-4b",
+  "queue_ms": 0,
+  "run_ms": 4212,
+  "wall_ms": 4228,
+  "files": [
+   "klein-generate-draft-0-0.png"
+  ],
+  "prompt_enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "flux2-klein",
+   "seed": 7,
+   "version": 2
+  }
+ },
+ {
+  "name": "klein-generate-draft",
+  "i": 1,
+  "outcome": "succeeded",
+  "error": null,
+  "model": "klein-4b",
+  "queue_ms": 0,
+  "run_ms": 2710,
+  "wall_ms": 2712,
+  "files": [
+   "klein-generate-draft-1-0.png"
+  ],
+  "prompt_enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "flux2-klein",
+   "seed": 7,
+   "version": 2
+  }
+ },
+ {
+  "name": "klein-generate-draft",
+  "i": 2,
+  "outcome": "succeeded",
+  "error": null,
+  "model": "klein-4b",
+  "queue_ms": 0,
+  "run_ms": 2715,
+  "wall_ms": 2717,
+  "files": [
+   "klein-generate-draft-2-0.png"
+  ],
+  "prompt_enhancement": {
+   "applied": true,
+   "attempts": 1,
+   "backbone": "qwen3.5-4b",
+   "outcome": "enhanced",
+   "profile": "flux2-klein",
+   "seed": 7,
+   "version": 2
+  }
+ },
+ {
+  "name": "zimage-generate-standard",
+  "i": 0,
+  "outcome": "succeeded",
+  "error": null,
+  "model": "z-image-turbo",
+  "queue_ms": 0,
+  "run_ms": 4831,
+  "wall_ms": 4833,
+  "files": [
+   "zimage-generate-standard-0-0.png"
+  ],
+  "prompt_enhancement": {
+   "applied": false,
+   "outcome": "not_recommended",
+   "profile": "z-image",
+   "version": 2
+  }
+ },
+ {
+  "name": "zimage-generate-standard",
+  "i": 1,
+  "outcome": "succeeded",
+  "error": null,
+  "model": "z-image-turbo",
+  "queue_ms": 0,
+  "run_ms": 2605,
+  "wall_ms": 2607,
+  "files": [
+   "zimage-generate-standard-1-0.png"
+  ],
+  "prompt_enhancement": {
+   "applied": false,
+   "outcome": "not_recommended",
+   "profile": "z-image",
+   "version": 2
+  }
+ },
+ {
+  "name": "zimage-generate-standard",
+  "i": 2,
+  "outcome": "succeeded",
+  "error": null,
+  "model": "z-image-turbo",
+  "queue_ms": 0,
+  "run_ms": 2606,
+  "wall_ms": 2608,
+  "files": [
+   "zimage-generate-standard-2-0.png"
+  ],
+  "prompt_enhancement": {
+   "applied": false,
+   "outcome": "not_recommended",
+   "profile": "z-image",
+   "version": 2
+  }
+ },
+ {
+  "name": "klein-edit",
+  "i": 0,
+  "outcome": "succeeded",
+  "error": null,
+  "model": "klein-4b",
+  "queue_ms": 0,
+  "run_ms": 12566,
+  "wall_ms": 12568,
+  "files": [
+   "klein-edit-0-0.png"
+  ],
+  "prompt_enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  }
+ },
+ {
+  "name": "klein-edit",
+  "i": 1,
+  "outcome": "succeeded",
+  "error": null,
+  "model": "klein-4b",
+  "queue_ms": 0,
+  "run_ms": 12528,
+  "wall_ms": 12530,
+  "files": [
+   "klein-edit-1-0.png"
+  ],
+  "prompt_enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  }
+ },
+ {
+  "name": "klein-edit",
+  "i": 2,
+  "outcome": "succeeded",
+  "error": null,
+  "model": "klein-4b",
+  "queue_ms": 0,
+  "run_ms": 12561,
+  "wall_ms": 12563,
+  "files": [
+   "klein-edit-2-0.png"
+  ],
+  "prompt_enhancement": {
+   "applied": false,
+   "outcome": "needs_vision",
+   "profile": "flux2-klein",
+   "version": 2
+  }
+ },
+ {
+  "name": "klein-fill",
+  "i": 0,
+  "outcome": "succeeded",
+  "error": null,
+  "model": "klein-4b",
+  "queue_ms": 0,
+  "run_ms": 12549,
+  "wall_ms": 12551,
+  "files": [
+   "klein-fill-0-0.png"
+  ],
+  "prompt_enhancement": null
+ },
+ {
+  "name": "klein-fill",
+  "i": 1,
+  "outcome": "succeeded",
+  "error": null,
+  "model": "klein-4b",
+  "queue_ms": 0,
+  "run_ms": 12803,
+  "wall_ms": 12806,
+  "files": [
+   "klein-fill-1-0.png"
+  ],
+  "prompt_enhancement": null
+ },
+ {
+  "name": "klein-fill",
+  "i": 2,
+  "outcome": "succeeded",
+  "error": null,
+  "model": "klein-4b",
+  "queue_ms": 0,
+  "run_ms": 12705,
+  "wall_ms": 12707,
+  "files": [
+   "klein-fill-2-0.png"
+  ],
+  "prompt_enhancement": null
+ }
+]

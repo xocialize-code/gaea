@@ -1,0 +1,24 @@
+2026-10-29T03:30:07Z operator: listening on /tmp/g371r/main/operator.sock (same user, Developer ID team)
+2026-10-29T03:30:07Z gaea 0.5.0 starting: /tmp/g371r/main, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-10-28T20:30:07-0700 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17761
+2026-10-29T03:30:07Z gaea: serving MES at http://127.0.0.1:17761/mes/v0
+gaea 0.5.0 serving MES at http://127.0.0.1:17761/mes/v0; operator API at /tmp/g371r/main/operator.sock
+2026-10-29T03:30:08Z scheduler: launched com.xocialize.gaea.prompt-enhance 0.1.0, pid 82765, hello after 0.354769625 seconds
+2026-10-29T03:30:10Z scheduler: launched com.xocialize.gaea.flux2-klein 0.1.0, pid 82768, hello after 0.297223333 seconds
+2026-10-29T03:30:13Z scheduler: launched com.xocialize.gaea.z-image 0.1.0, pid 82929, hello after 0.298261709 seconds
+2026-10-29T03:30:29Z scheduler: launched com.xocialize.gaea.forge 0.1.1, pid 82984, hello after 0.288333375 seconds
+2026-10-29T03:46:23Z scheduler: launched com.xocialize.gaea.qwen-image 0.1.1, pid 84413, hello after 0.32236225 seconds
+2026-10-29T03:47:47Z scheduler: com.xocialize.gaea.forge idle since 2026-10-29T03:32:24Z; stopping
+2026-10-29T03:47:47Z scheduler: stopped com.xocialize.gaea.forge 0.1.1 (shutdown)
+2026-10-29T03:48:36Z scheduler: policy plan for z-image int4 on com.xocialize.gaea.z-image: needs 112.14 GB of 103.08 GB, evicting [com.xocialize.gaea.flux2-klein]
+2026-10-29T03:48:36Z scheduler: evicting com.xocialize.gaea.flux2-klein to make room for z-image int4 (idle, least recently used; charged 30.32 GB)
+2026-10-29T03:48:36Z scheduler: stopped com.xocialize.gaea.flux2-klein 0.1.0 (shutdown)
+2026-10-29T03:59:30Z scheduler: launched com.xocialize.gaea.flux2-klein 0.1.0, pid 88828, hello after 0.0106155 seconds
+2026-10-29T04:01:19Z scheduler: launched com.xocialize.gaea.forge 0.1.1, pid 89480, hello after 0.018901 seconds
+2026-10-28T21:02:46-0700 error mes-engine: [HummingbirdCore] Server shutdown error: Already closed
+2026-10-28T21:02:46-0700 error mes-engine: [HummingbirdCore] Waiting on child channel: CancellationError()
+2026-10-29T04:02:46Z scheduler: stopped com.xocialize.gaea.flux2-klein 0.1.0 (sigterm)
+2026-10-29T04:02:46Z scheduler: stopped com.xocialize.gaea.prompt-enhance 0.1.0 (sigterm)
+2026-10-29T04:02:46Z scheduler: stopped com.xocialize.gaea.forge 0.1.1 (sigterm)
+2026-10-29T04:02:46Z scheduler: stopped com.xocialize.gaea.qwen-image 0.1.1 (sigterm)
+2026-10-29T04:02:46Z scheduler: stopped com.xocialize.gaea.z-image 0.1.0 (sigterm)

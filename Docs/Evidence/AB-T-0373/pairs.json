@@ -1,0 +1,7198 @@
+[
+  {
+    "engineMs" : 4445,
+    "gaeaMs" : 5210,
+    "key" : "tiers|image.generate|klein-4b|draft|photo",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "maxDiff" : 255,
+        "pixels" : false,
+        "psnr" : 7.816963308451864
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 3674,
+    "gaeaMs" : 4081,
+    "key" : "tiers|image.generate|z-image-turbo|standard|photo",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "maxDiff" : 255,
+        "pixels" : false,
+        "psnr" : 15.619763247782359
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2556,
+    "gaeaMs" : 2631,
+    "key" : "tiers|image.generate|z-image-turbo|best|photo",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "maxDiff" : 243,
+        "pixels" : false,
+        "psnr" : 12.991803845390372
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 12431,
+    "gaeaMs" : 2835,
+    "key" : "tiers|image.edit|klein-4b|draft|photo",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "maxDiff" : 252,
+        "pixels" : false,
+        "psnr" : 16.548119914358516
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 12052,
+    "gaeaMs" : 2805,
+    "key" : "tiers|image.edit|klein-4b|standard|photo",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "maxDiff" : 253,
+        "pixels" : false,
+        "psnr" : 17.366540709455162
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 12071,
+    "gaeaMs" : 2802,
+    "key" : "tiers|image.edit|klein-4b|best|photo",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "maxDiff" : 253,
+        "pixels" : false,
+        "psnr" : 15.722599729922527
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 586,
+    "gaeaMs" : 505,
+    "key" : "tiers|image.fill|lama-inpaint|draft|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 929,
+    "gaeaMs" : 214,
+    "key" : "tiers|image.fill|lama-inpaint|standard|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 113,
+    "gaeaMs" : 105,
+    "key" : "tiers|image.fill|lama-inpaint|best|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 78,
+    "gaeaMs" : 78,
+    "key" : "tiers|image.erase|lama-inpaint|draft|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 115,
+    "gaeaMs" : 113,
+    "key" : "tiers|image.erase|lama-inpaint|standard|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea",
+    "gaeaMs" : 113,
+    "key" : "tiers|image.erase|lama-inpaint|best|photo",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 99,
+    "gaeaMs" : 99,
+    "key" : "tiers|image.extend|lama-inpaint|draft|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 198,
+    "gaeaMs" : 191,
+    "key" : "tiers|image.extend|lama-inpaint|standard|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 156,
+    "gaeaMs" : 155,
+    "key" : "tiers|image.extend|lama-inpaint|best|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 880,
+    "gaeaMs" : 230,
+    "key" : "tiers|image.upscale|nerve-upscale|draft|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1283,
+    "gaeaMs" : 620,
+    "key" : "tiers|image.upscale|realplksr-upscale|standard|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 3694,
+    "gaeaMs" : 2069,
+    "key" : "tiers|image.upscale|heart-upscale|best|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 152,
+    "gaeaMs" : 100,
+    "key" : "tiers|image.restore|nafnet-restore|draft|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 86,
+    "gaeaMs" : 86,
+    "key" : "tiers|image.restore|nafnet-restore|standard|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 84,
+    "gaeaMs" : 91,
+    "key" : "tiers|image.restore|nafnet-restore|best|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1350,
+    "gaeaMs" : 365,
+    "key" : "tiers|image.matte|birefnet-matte|-|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      },
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 920,
+    "gaeaMs" : 70,
+    "key" : "tiers|image.segment|sam21-segment|-|photo",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1153,
+    "gaeaMs" : 1124,
+    "key" : "tiers|image.enhance_prompt|qwen3.5-4b|-|photo",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "note" : "values differ"
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 214,
+    "gaeaMs" : 219,
+    "key" : "upscale-x4|image.upscale|realplksr-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 209,
+    "gaeaMs" : 208,
+    "key" : "upscale-x4|image.upscale|realplksr-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 208,
+    "gaeaMs" : 209,
+    "key" : "upscale-x4|image.upscale|realplksr-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 213,
+    "gaeaMs" : 213,
+    "key" : "upscale-x4|image.upscale|realplksr-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 218,
+    "gaeaMs" : 226,
+    "key" : "upscale-x4|image.upscale|realplksr-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 204,
+    "gaeaMs" : 213,
+    "key" : "upscale-x4|image.upscale|realplksr-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 211,
+    "gaeaMs" : 221,
+    "key" : "upscale-x4|image.upscale|realplksr-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 539,
+    "gaeaMs" : 555,
+    "key" : "upscale-x4|image.upscale|heart-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 528,
+    "gaeaMs" : 525,
+    "key" : "upscale-x4|image.upscale|heart-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 530,
+    "gaeaMs" : 531,
+    "key" : "upscale-x4|image.upscale|heart-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 530,
+    "gaeaMs" : 526,
+    "key" : "upscale-x4|image.upscale|heart-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 535,
+    "gaeaMs" : 532,
+    "key" : "upscale-x4|image.upscale|heart-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 522,
+    "gaeaMs" : 516,
+    "key" : "upscale-x4|image.upscale|heart-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 531,
+    "gaeaMs" : 525,
+    "key" : "upscale-x4|image.upscale|heart-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 161,
+    "gaeaMs" : 137,
+    "key" : "upscale-x4|image.upscale|nerve-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 124,
+    "gaeaMs" : 129,
+    "key" : "upscale-x4|image.upscale|nerve-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 123,
+    "gaeaMs" : 128,
+    "key" : "upscale-x4|image.upscale|nerve-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 125,
+    "gaeaMs" : 131,
+    "key" : "upscale-x4|image.upscale|nerve-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 126,
+    "gaeaMs" : 133,
+    "key" : "upscale-x4|image.upscale|nerve-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 116,
+    "gaeaMs" : 123,
+    "key" : "upscale-x4|image.upscale|nerve-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 121,
+    "gaeaMs" : 130,
+    "key" : "upscale-x4|image.upscale|nerve-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 671,
+    "gaeaMs" : 584,
+    "key" : "upscale-x2|image.upscale|realplksr-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 571,
+    "gaeaMs" : 575,
+    "key" : "upscale-x2|image.upscale|realplksr-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 572,
+    "gaeaMs" : 575,
+    "key" : "upscale-x2|image.upscale|realplksr-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 572,
+    "gaeaMs" : 579,
+    "key" : "upscale-x2|image.upscale|realplksr-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 577,
+    "gaeaMs" : 589,
+    "key" : "upscale-x2|image.upscale|realplksr-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 563,
+    "gaeaMs" : 571,
+    "key" : "upscale-x2|image.upscale|realplksr-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 568,
+    "gaeaMs" : 580,
+    "key" : "upscale-x2|image.upscale|realplksr-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2007,
+    "gaeaMs" : 2038,
+    "key" : "upscale-x2|image.upscale|heart-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 1999,
+    "gaeaMs" : 2025,
+    "key" : "upscale-x2|image.upscale|heart-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1996,
+    "gaeaMs" : 2022,
+    "key" : "upscale-x2|image.upscale|heart-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1998,
+    "gaeaMs" : 2011,
+    "key" : "upscale-x2|image.upscale|heart-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1994,
+    "gaeaMs" : 2039,
+    "key" : "upscale-x2|image.upscale|heart-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1987,
+    "gaeaMs" : 2007,
+    "key" : "upscale-x2|image.upscale|heart-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2010,
+    "gaeaMs" : 2018,
+    "key" : "upscale-x2|image.upscale|heart-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 185,
+    "gaeaMs" : 189,
+    "key" : "upscale-x2|image.upscale|nerve-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 181,
+    "gaeaMs" : 188,
+    "key" : "upscale-x2|image.upscale|nerve-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 184,
+    "gaeaMs" : 192,
+    "key" : "upscale-x2|image.upscale|nerve-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 188,
+    "gaeaMs" : 197,
+    "key" : "upscale-x2|image.upscale|nerve-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 194,
+    "gaeaMs" : 203,
+    "key" : "upscale-x2|image.upscale|nerve-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 172,
+    "gaeaMs" : 182,
+    "key" : "upscale-x2|image.upscale|nerve-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 188,
+    "gaeaMs" : 194,
+    "key" : "upscale-x2|image.upscale|nerve-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 429,
+    "gaeaMs" : 188,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|input",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 1199,
+    "gaeaMs" : 1233,
+    "key" : "restore-denoise|image.restore|scunet-denoise|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 1148,
+    "gaeaMs" : 1185,
+    "key" : "restore-denoise|image.restore|scunet-denoise|-|0811",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1152,
+    "gaeaMs" : 1178,
+    "key" : "restore-denoise|image.restore|scunet-denoise|-|0812",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1145,
+    "gaeaMs" : 1192,
+    "key" : "restore-denoise|image.restore|scunet-denoise|-|0813",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1140,
+    "gaeaMs" : 1174,
+    "key" : "restore-denoise|image.restore|scunet-denoise|-|0814",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1160,
+    "gaeaMs" : 1188,
+    "key" : "restore-denoise|image.restore|scunet-denoise|-|0815",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1152,
+    "gaeaMs" : 1180,
+    "key" : "restore-denoise|image.restore|scunet-denoise|-|0816",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2811,
+    "gaeaMs" : 2826,
+    "key" : "restore-denoise|image.restore|restormer-denoise|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 2754,
+    "gaeaMs" : 2790,
+    "key" : "restore-denoise|image.restore|restormer-denoise|-|0811",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2754,
+    "gaeaMs" : 2789,
+    "key" : "restore-denoise|image.restore|restormer-denoise|-|0812",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2756,
+    "gaeaMs" : 2796,
+    "key" : "restore-denoise|image.restore|restormer-denoise|-|0813",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2756,
+    "gaeaMs" : 2794,
+    "key" : "restore-denoise|image.restore|restormer-denoise|-|0814",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2753,
+    "gaeaMs" : 2798,
+    "key" : "restore-denoise|image.restore|restormer-denoise|-|0815",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2750,
+    "gaeaMs" : 2798,
+    "key" : "restore-denoise|image.restore|restormer-denoise|-|0816",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 182,
+    "gaeaMs" : 191,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 179,
+    "gaeaMs" : 185,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|0811",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 179,
+    "gaeaMs" : 183,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|0812",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 180,
+    "gaeaMs" : 184,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|0813",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 176,
+    "gaeaMs" : 180,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|0814",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 181,
+    "gaeaMs" : 185,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|0815",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 178,
+    "gaeaMs" : 183,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|0816",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-denoise|reference|(degraded input)|-|0811",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-denoise|reference|(degraded input)|-|0812",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-denoise|reference|(degraded input)|-|0813",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-denoise|reference|(degraded input)|-|0814",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-denoise|reference|(degraded input)|-|0815",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-denoise|reference|(degraded input)|-|0816",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 156,
+    "gaeaMs" : 158,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|input",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 2790,
+    "gaeaMs" : 2829,
+    "key" : "restore-deblur|image.restore|restormer-motion|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 2738,
+    "gaeaMs" : 2791,
+    "key" : "restore-deblur|image.restore|restormer-motion|-|0811",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2732,
+    "gaeaMs" : 2787,
+    "key" : "restore-deblur|image.restore|restormer-motion|-|0812",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2738,
+    "gaeaMs" : 2786,
+    "key" : "restore-deblur|image.restore|restormer-motion|-|0813",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2723,
+    "gaeaMs" : 2772,
+    "key" : "restore-deblur|image.restore|restormer-motion|-|0814",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2743,
+    "gaeaMs" : 2785,
+    "key" : "restore-deblur|image.restore|restormer-motion|-|0815",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2744,
+    "gaeaMs" : 2785,
+    "key" : "restore-deblur|image.restore|restormer-motion|-|0816",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2785,
+    "gaeaMs" : 2829,
+    "key" : "restore-deblur|image.restore|restormer-defocus|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 2736,
+    "gaeaMs" : 2781,
+    "key" : "restore-deblur|image.restore|restormer-defocus|-|0811",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2734,
+    "gaeaMs" : 2786,
+    "key" : "restore-deblur|image.restore|restormer-defocus|-|0812",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2736,
+    "gaeaMs" : 2779,
+    "key" : "restore-deblur|image.restore|restormer-defocus|-|0813",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2719,
+    "gaeaMs" : 2770,
+    "key" : "restore-deblur|image.restore|restormer-defocus|-|0814",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2739,
+    "gaeaMs" : 2786,
+    "key" : "restore-deblur|image.restore|restormer-defocus|-|0815",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2737,
+    "gaeaMs" : 2786,
+    "key" : "restore-deblur|image.restore|restormer-defocus|-|0816",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 153,
+    "gaeaMs" : 163,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 148,
+    "gaeaMs" : 158,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|0811",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 143,
+    "gaeaMs" : 152,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|0812",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 148,
+    "gaeaMs" : 157,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|0813",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 132,
+    "gaeaMs" : 141,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|0814",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 153,
+    "gaeaMs" : 160,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|0815",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 146,
+    "gaeaMs" : 156,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|0816",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-deblur|reference|(degraded input)|-|0811",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-deblur|reference|(degraded input)|-|0812",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-deblur|reference|(degraded input)|-|0813",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-deblur|reference|(degraded input)|-|0814",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-deblur|reference|(degraded input)|-|0815",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-deblur|reference|(degraded input)|-|0816",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 55,
+    "gaeaMs" : 53,
+    "key" : "segment-1click|image.segment|sam21-segment|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 15,
+    "gaeaMs" : 15,
+    "key" : "segment-1click|image.segment|sam21-segment|-|106024",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 41,
+    "gaeaMs" : 44,
+    "key" : "segment-1click|image.segment|sam21-segment|-|124080",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 40,
+    "gaeaMs" : 41,
+    "key" : "segment-1click|image.segment|sam21-segment|-|153077",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 40,
+    "gaeaMs" : 39,
+    "key" : "segment-1click|image.segment|sam21-segment|-|153093",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 40,
+    "gaeaMs" : 38,
+    "key" : "segment-1click|image.segment|sam21-segment|-|181079",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 39,
+    "gaeaMs" : 37,
+    "key" : "segment-1click|image.segment|sam21-segment|-|189080",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 41,
+    "gaeaMs" : 39,
+    "key" : "segment-1click|image.segment|sam21-segment|-|208001",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 40,
+    "gaeaMs" : 38,
+    "key" : "segment-1click|image.segment|sam21-segment|-|209070",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 40,
+    "gaeaMs" : 39,
+    "key" : "segment-1click|image.segment|sam21-segment|-|21077",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 40,
+    "gaeaMs" : 37,
+    "key" : "segment-1click|image.segment|sam21-segment|-|227092",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 42,
+    "gaeaMs" : 39,
+    "key" : "segment-1click|image.segment|sam21-segment|-|24077",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 40,
+    "gaeaMs" : 39,
+    "key" : "segment-1click|image.segment|sam21-segment|-|271008",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 41,
+    "gaeaMs" : 38,
+    "key" : "segment-1click|image.segment|sam21-segment|-|304074",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 41,
+    "gaeaMs" : 38,
+    "key" : "segment-1click|image.segment|sam21-segment|-|326038",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 39,
+    "gaeaMs" : 37,
+    "key" : "segment-1click|image.segment|sam21-segment|-|37073",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 40,
+    "gaeaMs" : 39,
+    "key" : "segment-1click|image.segment|sam21-segment|-|376043",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 40,
+    "gaeaMs" : 38,
+    "key" : "segment-1click|image.segment|sam21-segment|-|388016",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 41,
+    "gaeaMs" : 38,
+    "key" : "segment-1click|image.segment|sam21-segment|-|65019",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 39,
+    "gaeaMs" : 37,
+    "key" : "segment-1click|image.segment|sam21-segment|-|69020",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 39,
+    "gaeaMs" : 37,
+    "key" : "segment-1click|image.segment|sam21-segment|-|86016",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 52,
+    "gaeaMs" : 50,
+    "key" : "segment-1click|image.segment|sam21-segment|-|banana1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 52,
+    "gaeaMs" : 50,
+    "key" : "segment-1click|image.segment|sam21-segment|-|banana2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 53,
+    "gaeaMs" : 51,
+    "key" : "segment-1click|image.segment|sam21-segment|-|banana3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 52,
+    "gaeaMs" : 50,
+    "key" : "segment-1click|image.segment|sam21-segment|-|book",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 44,
+    "gaeaMs" : 41,
+    "key" : "segment-1click|image.segment|sam21-segment|-|bool",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 54,
+    "gaeaMs" : 50,
+    "key" : "segment-1click|image.segment|sam21-segment|-|bush",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 51,
+    "gaeaMs" : 50,
+    "key" : "segment-1click|image.segment|sam21-segment|-|ceramic",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 48,
+    "gaeaMs" : 46,
+    "key" : "segment-1click|image.segment|sam21-segment|-|cross",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 46,
+    "gaeaMs" : 44,
+    "key" : "segment-1click|image.segment|sam21-segment|-|doll",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 51,
+    "gaeaMs" : 49,
+    "key" : "segment-1click|image.segment|sam21-segment|-|elefant",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 49,
+    "gaeaMs" : 47,
+    "key" : "segment-1click|image.segment|sam21-segment|-|flower",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 34,
+    "gaeaMs" : 33,
+    "key" : "segment-1click|image.segment|sam21-segment|-|fullmoon",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 47,
+    "gaeaMs" : 47,
+    "key" : "segment-1click|image.segment|sam21-segment|-|grave",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 44,
+    "gaeaMs" : 42,
+    "key" : "segment-1click|image.segment|sam21-segment|-|llama",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 46,
+    "gaeaMs" : 45,
+    "key" : "segment-1click|image.segment|sam21-segment|-|memorial",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 50,
+    "gaeaMs" : 48,
+    "key" : "segment-1click|image.segment|sam21-segment|-|music",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 49,
+    "gaeaMs" : 47,
+    "key" : "segment-1click|image.segment|sam21-segment|-|person1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 51,
+    "gaeaMs" : 49,
+    "key" : "segment-1click|image.segment|sam21-segment|-|person2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 43,
+    "gaeaMs" : 41,
+    "key" : "segment-1click|image.segment|sam21-segment|-|person3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 48,
+    "gaeaMs" : 46,
+    "key" : "segment-1click|image.segment|sam21-segment|-|person4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 48,
+    "gaeaMs" : 45,
+    "key" : "segment-1click|image.segment|sam21-segment|-|person5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 48,
+    "gaeaMs" : 47,
+    "key" : "segment-1click|image.segment|sam21-segment|-|person6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 51,
+    "gaeaMs" : 48,
+    "key" : "segment-1click|image.segment|sam21-segment|-|person7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 53,
+    "gaeaMs" : 51,
+    "key" : "segment-1click|image.segment|sam21-segment|-|person8",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 51,
+    "gaeaMs" : 48,
+    "key" : "segment-1click|image.segment|sam21-segment|-|scissors",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 46,
+    "gaeaMs" : 44,
+    "key" : "segment-1click|image.segment|sam21-segment|-|sheep",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 50,
+    "gaeaMs" : 47,
+    "key" : "segment-1click|image.segment|sam21-segment|-|stone1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 49,
+    "gaeaMs" : 47,
+    "key" : "segment-1click|image.segment|sam21-segment|-|stone2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 37,
+    "gaeaMs" : 36,
+    "key" : "segment-1click|image.segment|sam21-segment|-|teddy",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 47,
+    "gaeaMs" : 45,
+    "key" : "segment-1click|image.segment|sam21-segment|-|tennis",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 47,
+    "gaeaMs" : 46,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 15,
+    "gaeaMs" : 14,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|106024",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 37,
+    "gaeaMs" : 35,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|124080",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 35,
+    "gaeaMs" : 33,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|153077",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 36,
+    "gaeaMs" : 33,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|153093",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 37,
+    "gaeaMs" : 34,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|181079",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 35,
+    "gaeaMs" : 32,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|189080",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 36,
+    "gaeaMs" : 34,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|208001",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 35,
+    "gaeaMs" : 33,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|209070",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 35,
+    "gaeaMs" : 33,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|21077",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 34,
+    "gaeaMs" : 32,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|227092",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 36,
+    "gaeaMs" : 34,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|24077",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 35,
+    "gaeaMs" : 33,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|271008",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 36,
+    "gaeaMs" : 33,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|304074",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 37,
+    "gaeaMs" : 34,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|326038",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 36,
+    "gaeaMs" : 32,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|37073",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 36,
+    "gaeaMs" : 34,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|376043",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 35,
+    "gaeaMs" : 33,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|388016",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 36,
+    "gaeaMs" : 34,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|65019",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 36,
+    "gaeaMs" : 33,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|69020",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 35,
+    "gaeaMs" : 33,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|86016",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 49,
+    "gaeaMs" : 47,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|banana1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 49,
+    "gaeaMs" : 46,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|banana2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 50,
+    "gaeaMs" : 48,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|banana3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 49,
+    "gaeaMs" : 47,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|book",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 40,
+    "gaeaMs" : 38,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|bool",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 48,
+    "gaeaMs" : 45,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|bush",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 48,
+    "gaeaMs" : 46,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|ceramic",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 48,
+    "gaeaMs" : 41,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|cross",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 43,
+    "gaeaMs" : 41,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|doll",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 48,
+    "gaeaMs" : 46,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|elefant",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 46,
+    "gaeaMs" : 44,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|flower",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 31,
+    "gaeaMs" : 28,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|fullmoon",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 44,
+    "gaeaMs" : 41,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|grave",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 40,
+    "gaeaMs" : 38,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|llama",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 43,
+    "gaeaMs" : 40,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|memorial",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 47,
+    "gaeaMs" : 45,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|music",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 45,
+    "gaeaMs" : 43,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|person1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 47,
+    "gaeaMs" : 45,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|person2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 42,
+    "gaeaMs" : 38,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|person3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 44,
+    "gaeaMs" : 43,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|person4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 42,
+    "gaeaMs" : 40,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|person5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 45,
+    "gaeaMs" : 43,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|person6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 46,
+    "gaeaMs" : 43,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|person7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 48,
+    "gaeaMs" : 46,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|person8",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 46,
+    "gaeaMs" : 44,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|scissors",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 43,
+    "gaeaMs" : 40,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|sheep",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 46,
+    "gaeaMs" : 43,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|stone1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 46,
+    "gaeaMs" : 43,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|stone2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 33,
+    "gaeaMs" : 31,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|teddy",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 43,
+    "gaeaMs" : 40,
+    "key" : "segment-1click|image.segment|edgetam-segment|-|tennis",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 10998,
+    "gaeaMs" : 11089,
+    "key" : "generate|image.generate|z-image-turbo|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 11034,
+    "gaeaMs" : 11217,
+    "key" : "generate|image.generate|z-image-turbo|-|p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 11037,
+    "gaeaMs" : 11168,
+    "key" : "generate|image.generate|z-image-turbo|-|p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 11029,
+    "gaeaMs" : 11185,
+    "key" : "generate|image.generate|z-image-turbo|-|p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 11047,
+    "gaeaMs" : 11168,
+    "key" : "generate|image.generate|z-image-turbo|-|p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 11022,
+    "gaeaMs" : 11193,
+    "key" : "generate|image.generate|z-image-turbo|-|p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 11024,
+    "gaeaMs" : 11235,
+    "key" : "generate|image.generate|z-image-turbo|-|p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 11022,
+    "gaeaMs" : 11222,
+    "key" : "generate|image.generate|z-image-turbo|-|p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 11016,
+    "gaeaMs" : 11204,
+    "key" : "generate|image.generate|z-image-turbo|-|p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 8765,
+    "gaeaMs" : 7360,
+    "key" : "generate|image.generate|klein-4b|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 7017,
+    "gaeaMs" : 7296,
+    "key" : "generate|image.generate|klein-4b|-|p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 6938,
+    "gaeaMs" : 7163,
+    "key" : "generate|image.generate|klein-4b|-|p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 7144,
+    "gaeaMs" : 7325,
+    "key" : "generate|image.generate|klein-4b|-|p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 7172,
+    "gaeaMs" : 7398,
+    "key" : "generate|image.generate|klein-4b|-|p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 7035,
+    "gaeaMs" : 7269,
+    "key" : "generate|image.generate|klein-4b|-|p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 6960,
+    "gaeaMs" : 7187,
+    "key" : "generate|image.generate|klein-4b|-|p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 7309,
+    "gaeaMs" : 7550,
+    "key" : "generate|image.generate|klein-4b|-|p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 6858,
+    "gaeaMs" : 7109,
+    "key" : "generate|image.generate|klein-4b|-|p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 79053,
+    "gaeaMs" : 73921,
+    "key" : "generate|image.generate|klein-4b-base|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 76557,
+    "gaeaMs" : 72834,
+    "key" : "generate|image.generate|klein-4b-base|-|p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 76736,
+    "gaeaMs" : 72681,
+    "key" : "generate|image.generate|klein-4b-base|-|p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 77023,
+    "gaeaMs" : 73287,
+    "key" : "generate|image.generate|klein-4b-base|-|p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 79027,
+    "gaeaMs" : 74644,
+    "key" : "generate|image.generate|klein-4b-base|-|p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 77835,
+    "gaeaMs" : 74779,
+    "key" : "generate|image.generate|klein-4b-base|-|p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 76416,
+    "gaeaMs" : 74845,
+    "key" : "generate|image.generate|klein-4b-base|-|p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 76801,
+    "gaeaMs" : 76271,
+    "key" : "generate|image.generate|klein-4b-base|-|p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 76254,
+    "gaeaMs" : 76869,
+    "key" : "generate|image.generate|klein-4b-base|-|p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 16324,
+    "gaeaMs" : 21030,
+    "key" : "generate|image.generate|qwen-image-flash|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 13576,
+    "gaeaMs" : 14183,
+    "key" : "generate|image.generate|qwen-image-flash|-|p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 13570,
+    "gaeaMs" : 13945,
+    "key" : "generate|image.generate|qwen-image-flash|-|p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 13798,
+    "gaeaMs" : 14109,
+    "key" : "generate|image.generate|qwen-image-flash|-|p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 13860,
+    "gaeaMs" : 14222,
+    "key" : "generate|image.generate|qwen-image-flash|-|p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 13601,
+    "gaeaMs" : 13920,
+    "key" : "generate|image.generate|qwen-image-flash|-|p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 13591,
+    "gaeaMs" : 14029,
+    "key" : "generate|image.generate|qwen-image-flash|-|p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 14103,
+    "gaeaMs" : 14560,
+    "key" : "generate|image.generate|qwen-image-flash|-|p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 13661,
+    "gaeaMs" : 13992,
+    "key" : "generate|image.generate|qwen-image-flash|-|p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 71608,
+    "gaeaMs" : 74773,
+    "key" : "generate|image.generate|z-image|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 69086,
+    "gaeaMs" : 71825,
+    "key" : "generate|image.generate|z-image|-|p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 69036,
+    "gaeaMs" : 72257,
+    "key" : "generate|image.generate|z-image|-|p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 69209,
+    "gaeaMs" : 72293,
+    "key" : "generate|image.generate|z-image|-|p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 69411,
+    "gaeaMs" : 72645,
+    "key" : "generate|image.generate|z-image|-|p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 69700,
+    "gaeaMs" : 72536,
+    "key" : "generate|image.generate|z-image|-|p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 70655,
+    "gaeaMs" : 72275,
+    "key" : "generate|image.generate|z-image|-|p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 72096,
+    "gaeaMs" : 72230,
+    "key" : "generate|image.generate|z-image|-|p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 69917,
+    "gaeaMs" : 72364,
+    "key" : "generate|image.generate|z-image|-|p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image-turbo\/p0",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image-turbo\/p0",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image-turbo\/p1",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image-turbo\/p1",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image-turbo\/p2",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image-turbo\/p2",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image-turbo\/p3",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image-turbo\/p3",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image-turbo\/p4",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image-turbo\/p4",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image-turbo\/p5",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image-turbo\/p5",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image-turbo\/p6",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image-turbo\/p6",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image-turbo\/p7",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image-turbo\/p7",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b\/p0",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b\/p0",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b\/p1",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b\/p1",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b\/p2",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b\/p2",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b\/p3",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b\/p3",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b\/p4",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b\/p4",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b\/p5",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b\/p5",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b\/p6",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b\/p6",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b\/p7",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b\/p7",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b-base\/p0",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b-base\/p0",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b-base\/p1",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b-base\/p1",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b-base\/p2",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b-base\/p2",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b-base\/p3",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b-base\/p3",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b-base\/p4",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b-base\/p4",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b-base\/p5",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b-base\/p5",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b-base\/p6",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b-base\/p6",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|klein-4b-base\/p7",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|klein-4b-base\/p7",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|qwen-image-flash\/p0",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|qwen-image-flash\/p0",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|qwen-image-flash\/p1",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|qwen-image-flash\/p1",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|qwen-image-flash\/p2",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|qwen-image-flash\/p2",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|qwen-image-flash\/p3",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|qwen-image-flash\/p3",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|qwen-image-flash\/p4",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|qwen-image-flash\/p4",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|qwen-image-flash\/p5",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|qwen-image-flash\/p5",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|qwen-image-flash\/p6",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|qwen-image-flash\/p6",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|qwen-image-flash\/p7",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|qwen-image-flash\/p7",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image\/p0",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image\/p0",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image\/p1",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image\/p1",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image\/p2",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image\/p2",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image\/p3",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image\/p3",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image\/p4",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image\/p4",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image\/p5",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image\/p5",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image\/p6",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image\/p6",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.score on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.score|?|-|z-image\/p7",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea: 404 unknown_operation: No operation image.describe on this engine.",
+    "gaeaMs" : 0,
+    "key" : "judge|image.describe|?|-|z-image\/p7",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 13829,
+    "gaeaMs" : 15009,
+    "key" : "edits|image.edit|klein-4b|draft|photo0",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "maxDiff" : 252,
+        "pixels" : false,
+        "psnr" : 18.370036456390412
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 12363,
+    "gaeaMs" : 13381,
+    "key" : "edits|image.edit|klein-4b|draft|photo1",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "maxDiff" : 254,
+        "pixels" : false,
+        "psnr" : 17.616737726428347
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 12378,
+    "gaeaMs" : 13403,
+    "key" : "edits|image.edit|klein-4b|best|photo0",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "maxDiff" : 255,
+        "pixels" : false,
+        "psnr" : 17.630580512365125
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 12347,
+    "gaeaMs" : 13383,
+    "key" : "edits|image.edit|klein-4b|best|photo1",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "maxDiff" : 255,
+        "pixels" : false,
+        "psnr" : 17.535271975421086
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 12383,
+    "gaeaMs" : 13386,
+    "key" : "edits|image.fill|klein-4b|standard|photo0",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "maxDiff" : 193,
+        "pixels" : false,
+        "psnr" : 28.270143772746312
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 12418,
+    "gaeaMs" : 13380,
+    "key" : "edits|image.fill|klein-4b|standard|photo1",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "maxDiff" : 246,
+        "pixels" : false,
+        "psnr" : 22.82071757124089
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 12383,
+    "gaeaMs" : 13428,
+    "key" : "edits|image.fill|klein-4b|best|photo0",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "maxDiff" : 233,
+        "pixels" : false,
+        "psnr" : 29.764040752792823
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 12377,
+    "gaeaMs" : 13399,
+    "key" : "edits|image.fill|klein-4b|best|photo1",
+    "outputs" : [
+      {
+        "bytes" : false,
+        "maxDiff" : 226,
+        "pixels" : false,
+        "psnr" : 24.40660754194228
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 523,
+    "gaeaMs" : 699,
+    "key" : "edits|image.erase|lama-inpaint|standard|photo0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 428,
+    "gaeaMs" : 435,
+    "key" : "edits|image.erase|lama-inpaint|standard|photo1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea",
+    "gaeaMs" : 429,
+    "key" : "edits|image.erase|lama-inpaint|best|photo0",
+    "outputs" : [
+
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : -1,
+    "error" : "only on Gaea",
+    "gaeaMs" : 431,
+    "key" : "edits|image.erase|lama-inpaint|best|photo1",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 247,
+    "gaeaMs" : 264,
+    "key" : "edits|image.extend|lama-inpaint|draft|photo0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 248,
+    "gaeaMs" : 252,
+    "key" : "edits|image.extend|lama-inpaint|draft|photo1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 638,
+    "gaeaMs" : 667,
+    "key" : "edits|image.extend|lama-inpaint|standard|photo0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 597,
+    "gaeaMs" : 619,
+    "key" : "edits|image.extend|lama-inpaint|standard|photo1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 601,
+    "gaeaMs" : 618,
+    "key" : "edits|image.extend|lama-inpaint|best|photo0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 595,
+    "gaeaMs" : 619,
+    "key" : "edits|image.extend|lama-inpaint|best|photo1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 173,
+    "gaeaMs" : 191,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 167,
+    "gaeaMs" : 180,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000001",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 176,
+    "gaeaMs" : 186,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000007",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 187,
+    "gaeaMs" : 202,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000008",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 149,
+    "gaeaMs" : 158,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000014",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 148,
+    "gaeaMs" : 156,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000022",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 177,
+    "gaeaMs" : 189,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000024",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 176,
+    "gaeaMs" : 183,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000037",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 168,
+    "gaeaMs" : 171,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000044",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 152,
+    "gaeaMs" : 151,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000045",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 181,
+    "gaeaMs" : 185,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000050",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 136,
+    "gaeaMs" : 138,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000058",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 170,
+    "gaeaMs" : 174,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000059",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 158,
+    "gaeaMs" : 165,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000063",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 138,
+    "gaeaMs" : 140,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000064",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 164,
+    "gaeaMs" : 162,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000065",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 161,
+    "gaeaMs" : 161,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000069",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 175,
+    "gaeaMs" : 180,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000072",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 185,
+    "gaeaMs" : 188,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000073",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 169,
+    "gaeaMs" : 177,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000075",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 138,
+    "gaeaMs" : 137,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000084",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 154,
+    "gaeaMs" : 157,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000087",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 173,
+    "gaeaMs" : 180,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000091",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 167,
+    "gaeaMs" : 171,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000108",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 125,
+    "gaeaMs" : 123,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000122",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 159,
+    "gaeaMs" : 163,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000129",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 167,
+    "gaeaMs" : 171,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000130",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 153,
+    "gaeaMs" : 158,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000136",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 183,
+    "gaeaMs" : 190,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000140",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 151,
+    "gaeaMs" : 157,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000141",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 142,
+    "gaeaMs" : 145,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000145",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 155,
+    "gaeaMs" : 162,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000146",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 173,
+    "gaeaMs" : 178,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000147",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 170,
+    "gaeaMs" : 175,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000148",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 141,
+    "gaeaMs" : 142,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000149",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 166,
+    "gaeaMs" : 171,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000164",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 153,
+    "gaeaMs" : 160,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000171",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 183,
+    "gaeaMs" : 187,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000184",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 163,
+    "gaeaMs" : 167,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000186",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 160,
+    "gaeaMs" : 162,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000187",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 156,
+    "gaeaMs" : 159,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000203",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 181,
+    "gaeaMs" : 182,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000214",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 150,
+    "gaeaMs" : 152,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000216",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 172,
+    "gaeaMs" : 172,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|corne-000217",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 186,
+    "gaeaMs" : 192,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 184,
+    "gaeaMs" : 188,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-13",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 185,
+    "gaeaMs" : 190,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-14",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 176,
+    "gaeaMs" : 180,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-p55",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 180,
+    "gaeaMs" : 181,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-p56",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 177,
+    "gaeaMs" : 181,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-p58",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 155,
+    "gaeaMs" : 155,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-p71",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 180,
+    "gaeaMs" : 184,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-p78",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 178,
+    "gaeaMs" : 184,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-p_0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 169,
+    "gaeaMs" : 175,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-p_12",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 163,
+    "gaeaMs" : 166,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-p_13",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 158,
+    "gaeaMs" : 158,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-p_15",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 152,
+    "gaeaMs" : 153,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-p_17",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 165,
+    "gaeaMs" : 168,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-p_40",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 167,
+    "gaeaMs" : 164,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-p_43",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 173,
+    "gaeaMs" : 179,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-p_47",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 152,
+    "gaeaMs" : 152,
+    "key" : "erase-objd|image.erase|lama-inpaint|draft|rb-p_6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 164,
+    "gaeaMs" : 165,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000001",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 174,
+    "gaeaMs" : 181,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000007",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 183,
+    "gaeaMs" : 189,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000008",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 149,
+    "gaeaMs" : 152,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000014",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 149,
+    "gaeaMs" : 153,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000022",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 176,
+    "gaeaMs" : 176,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000024",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 173,
+    "gaeaMs" : 181,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000037",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 166,
+    "gaeaMs" : 171,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000044",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 151,
+    "gaeaMs" : 153,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000045",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 178,
+    "gaeaMs" : 181,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000050",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 135,
+    "gaeaMs" : 133,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000058",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 171,
+    "gaeaMs" : 170,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000059",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 154,
+    "gaeaMs" : 154,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000063",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 139,
+    "gaeaMs" : 136,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000064",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 158,
+    "gaeaMs" : 156,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000065",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 162,
+    "gaeaMs" : 164,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000069",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 174,
+    "gaeaMs" : 179,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000072",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 182,
+    "gaeaMs" : 183,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000073",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 168,
+    "gaeaMs" : 172,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000075",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 139,
+    "gaeaMs" : 142,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000084",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 149,
+    "gaeaMs" : 152,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000087",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 172,
+    "gaeaMs" : 175,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000091",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 167,
+    "gaeaMs" : 170,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000108",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 128,
+    "gaeaMs" : 129,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000122",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 158,
+    "gaeaMs" : 158,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000129",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 167,
+    "gaeaMs" : 167,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000130",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 152,
+    "gaeaMs" : 157,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000136",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 189,
+    "gaeaMs" : 189,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000140",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 151,
+    "gaeaMs" : 153,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000141",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 139,
+    "gaeaMs" : 138,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000145",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 156,
+    "gaeaMs" : 163,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000146",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 169,
+    "gaeaMs" : 177,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000147",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 169,
+    "gaeaMs" : 175,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000148",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 141,
+    "gaeaMs" : 140,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000149",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 168,
+    "gaeaMs" : 172,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000164",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 151,
+    "gaeaMs" : 156,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000171",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 181,
+    "gaeaMs" : 186,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000184",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 162,
+    "gaeaMs" : 166,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000186",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 161,
+    "gaeaMs" : 163,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000187",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 157,
+    "gaeaMs" : 153,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000203",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 184,
+    "gaeaMs" : 188,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000214",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 147,
+    "gaeaMs" : 151,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000216",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 171,
+    "gaeaMs" : 171,
+    "key" : "erase-eff|image.erase|lama-inpaint|draft|corne-000217",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 398,
+    "gaeaMs" : 428,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 397,
+    "gaeaMs" : 403,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000001",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 392,
+    "gaeaMs" : 405,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000007",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 403,
+    "gaeaMs" : 417,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000008",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 371,
+    "gaeaMs" : 389,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000014",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 376,
+    "gaeaMs" : 386,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000022",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 398,
+    "gaeaMs" : 419,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000024",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 396,
+    "gaeaMs" : 416,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000037",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 387,
+    "gaeaMs" : 404,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000044",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 372,
+    "gaeaMs" : 388,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000045",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 398,
+    "gaeaMs" : 422,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000050",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 364,
+    "gaeaMs" : 383,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000058",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 385,
+    "gaeaMs" : 406,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000059",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 374,
+    "gaeaMs" : 392,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000063",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 359,
+    "gaeaMs" : 371,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000064",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 379,
+    "gaeaMs" : 393,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000065",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 387,
+    "gaeaMs" : 398,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000069",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 391,
+    "gaeaMs" : 415,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000072",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 399,
+    "gaeaMs" : 417,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000073",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 393,
+    "gaeaMs" : 404,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000075",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 359,
+    "gaeaMs" : 374,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000084",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 372,
+    "gaeaMs" : 387,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000087",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 395,
+    "gaeaMs" : 409,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000091",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 393,
+    "gaeaMs" : 401,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000108",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 352,
+    "gaeaMs" : 361,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000122",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 374,
+    "gaeaMs" : 394,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000129",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 399,
+    "gaeaMs" : 400,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000130",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 375,
+    "gaeaMs" : 386,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000136",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 405,
+    "gaeaMs" : 422,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000140",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 375,
+    "gaeaMs" : 388,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000141",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 368,
+    "gaeaMs" : 385,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000145",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 379,
+    "gaeaMs" : 391,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000146",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 402,
+    "gaeaMs" : 407,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000147",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 388,
+    "gaeaMs" : 401,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000148",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 363,
+    "gaeaMs" : 382,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000149",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 388,
+    "gaeaMs" : 402,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000164",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 386,
+    "gaeaMs" : 414,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000171",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 412,
+    "gaeaMs" : 422,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000184",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 387,
+    "gaeaMs" : 401,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000186",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 380,
+    "gaeaMs" : 394,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000187",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 378,
+    "gaeaMs" : 391,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000203",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 408,
+    "gaeaMs" : 421,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000214",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 368,
+    "gaeaMs" : 388,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000216",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 397,
+    "gaeaMs" : 408,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|corne-000217",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 403,
+    "gaeaMs" : 449,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 414,
+    "gaeaMs" : 420,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-13",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 405,
+    "gaeaMs" : 423,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-14",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 402,
+    "gaeaMs" : 413,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-p55",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 405,
+    "gaeaMs" : 417,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-p56",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 399,
+    "gaeaMs" : 414,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-p58",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 379,
+    "gaeaMs" : 393,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-p71",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 402,
+    "gaeaMs" : 416,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-p78",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 400,
+    "gaeaMs" : 409,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-p_0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 395,
+    "gaeaMs" : 406,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-p_12",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 389,
+    "gaeaMs" : 398,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-p_13",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 382,
+    "gaeaMs" : 391,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-p_15",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 386,
+    "gaeaMs" : 387,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-p_17",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 383,
+    "gaeaMs" : 395,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-p_40",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 386,
+    "gaeaMs" : 402,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-p_43",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 395,
+    "gaeaMs" : 406,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-p_47",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 374,
+    "gaeaMs" : 388,
+    "key" : "erase-objd|image.erase|lama-inpaint|standard|rb-p_6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 388,
+    "gaeaMs" : 405,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000001",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 401,
+    "gaeaMs" : 407,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000007",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 403,
+    "gaeaMs" : 420,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000008",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 388,
+    "gaeaMs" : 392,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000014",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 371,
+    "gaeaMs" : 391,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000022",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 400,
+    "gaeaMs" : 416,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000024",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 391,
+    "gaeaMs" : 411,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000037",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 385,
+    "gaeaMs" : 397,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000044",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 374,
+    "gaeaMs" : 387,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000045",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 402,
+    "gaeaMs" : 412,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000050",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 375,
+    "gaeaMs" : 378,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000058",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 387,
+    "gaeaMs" : 406,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000059",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 374,
+    "gaeaMs" : 392,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000063",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 355,
+    "gaeaMs" : 373,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000064",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 381,
+    "gaeaMs" : 386,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000065",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 384,
+    "gaeaMs" : 397,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000069",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 410,
+    "gaeaMs" : 408,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000072",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 404,
+    "gaeaMs" : 411,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000073",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 388,
+    "gaeaMs" : 406,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000075",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 364,
+    "gaeaMs" : 374,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000084",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 382,
+    "gaeaMs" : 393,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000087",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 390,
+    "gaeaMs" : 407,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000091",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 394,
+    "gaeaMs" : 402,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000108",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 348,
+    "gaeaMs" : 371,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000122",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 378,
+    "gaeaMs" : 397,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000129",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 390,
+    "gaeaMs" : 404,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000130",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 381,
+    "gaeaMs" : 389,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000136",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 413,
+    "gaeaMs" : 420,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000140",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 372,
+    "gaeaMs" : 387,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000141",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 368,
+    "gaeaMs" : 384,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000145",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 383,
+    "gaeaMs" : 393,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000146",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 396,
+    "gaeaMs" : 407,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000147",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 393,
+    "gaeaMs" : 402,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000148",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 366,
+    "gaeaMs" : 390,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000149",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 387,
+    "gaeaMs" : 401,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000164",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 385,
+    "gaeaMs" : 407,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000171",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 402,
+    "gaeaMs" : 417,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000184",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 386,
+    "gaeaMs" : 398,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000186",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 380,
+    "gaeaMs" : 393,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000187",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 375,
+    "gaeaMs" : 394,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000203",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 399,
+    "gaeaMs" : 422,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000214",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 367,
+    "gaeaMs" : 383,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000216",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 396,
+    "gaeaMs" : 417,
+    "key" : "erase-eff|image.erase|lama-inpaint|standard|corne-000217",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  }
+]

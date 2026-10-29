@@ -296,7 +296,16 @@ starts while the phase before it is being built.
      plugins (160 GB declared) under a 70 GB budget, with no OOM and every eviction logged with its reason. See
      [Evidence/AB-T-0371](Evidence/AB-T-0371/README.md).
   7. AB-T-0372: Gaea Lab, which needs PixelAgencyRun's new package (AB-T-0360).
-  8. AB-T-0373: TierBench parity with pixel-agency-image-engine v0.9.1.
+  8. AB-T-0373: TierBench parity with pixel-agency-image-engine v0.9.1. **Done** (Gaea 0.5.0, Release):
+     - **Outputs:** every seeded output is byte-identical to v0.9.1's. That's 441 from TierBench and 12 seeded edit,
+       fill and generate jobs.
+     - **Times:** every warm median is within 0.95–1.08 of v0.9.1's.
+     - **Exceedances:** two single first-use samples, each with its cause named.
+     - **Routing:** each tier picks the same model, except best erase, which waits on Mage-Flow (AB-T-0374).
+     - **Not served yet:** relight, colorize, describe, score, DRUNet and four upscalers, which no G1 work order
+       covers.
+
+     See [Evidence/AB-T-0373](Evidence/AB-T-0373/README.md).
   9. AB-T-0375: the exit gate, which gives AB-A-0208 the go for the retirements.
   10. AB-T-0374 (P3): the research plugins. They are not on the exit path.
 - **Weights:** the image models are in MLXEngine's store, `~/Library/Application Support/MLXEngine/Models`, which
