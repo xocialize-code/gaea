@@ -48,7 +48,9 @@ Releases made on this Mac don't use them: `scripts/release.sh` signs with the ke
    gh secret list --org xocialize-code
    ```
 
-   Then re-run one release workflow, e.g. `gh workflow run release -R xocialize-code/gaea-plugin-demo -f tag=v0.3.0`.
+   The next plugin tag pushed is the end-to-end check. Don't re-run the workflow on a tag that's already published:
+   `scripts/release.sh` uploads with `--clobber`, so the release's zip would be replaced by a rebuild with another
+   checksum.
 
 ## The move
 
