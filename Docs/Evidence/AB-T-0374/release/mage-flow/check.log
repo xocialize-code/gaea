@@ -1,0 +1,30 @@
+PASS manifest com.xocialize.gaea.mage-flow 0.1.0, sha256 48902f6988fa…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.mage-flow, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-mage-flow-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 82584
+W {"engine":{"contract":"1.58.0","version":"0.72.0"},"kit":{"version":"0.3.0"},"manifest_sha256":"48902f6988fa378c03a648cead5742309f16c0cccb6a642b4bb13c868873727a","models":["mage-flow","mage-flow-turbo","mage-flow-edit","mage-flow-edit-turbo","mage-flow-edit-base"],"pid":82584,"plugin":{"id":"com.xocialize.gaea.mage-flow","version":"0.1.0"},"protocol":1,"type":"hello"}
+PASS hello after 427 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+H {"budget":{"ceilingBytes":64000000000,"wiresWeights":false},"cache_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-080708B4-3449-415F-84A5-FE82352D76E9/cache","id":"h1","models_root":"/Volumes/DEV_VOL1/models/gaea-research-store","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"int8","model":"mage-flow-turbo","type":"prepare"}
+W {"lane":"int8","model":"mage-flow-turbo","re":"h2","seconds":2.316,"type":"prepared"}
+W {"report":{"availableBytes":46100000000,"budgetBytes":64000000000,"date":814944952.187319,"gpuActiveBytes":14927669576,"gpuCacheBytes":6232,"physFootprintBytes":15004069120,"residentBytes":14200000000,"residents":{"mage-flow-turbo":14200000000},"running":[],"transientReserveBytes":3700000000},"type":"memory"}
+PASS prepared mage-flow-turbo lane int8 in 2.32 s
+H {"id":"h3","inputs":{"prompt":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-080708B4-3449-415F-84A5-FE82352D76E9/spool/job_check/in/prompt-0.txt"},"job":"job_check","lane":"int8","model":"mage-flow-turbo","operation":"image.generate","output_dir":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-080708B4-3449-415F-84A5-FE82352D76E9/spool/job_check/out","params":{"count":1,"size":{"height":512,"width":512}},"seed":42,"type":"run"}
+W {"job":"job_check","re":"h3","stage":"encode","type":"progress"}
+W {"fraction":0.25,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.5,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.75,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":1,"job":"job_check","of":4,"re":"h3","stage":"denoise","step":4,"type":"progress"}
+W {"job":"job_check","re":"h3","stage":"decode","type":"progress"}
+W {"job":"job_check","re":"h3","stage":"postprocess","type":"progress"}
+W {"effective":{"count":1,"seed":42,"size":{"height":512,"width":512},"x-mage.steps":4},"job":"job_check","outputs":[{"media_type":"image/png","name":"images","path":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-080708B4-3449-415F-84A5-FE82352D76E9/spool/job_check/out/image-0.png"}],"re":"h3","seconds":9.682,"type":"result","warnings":[]}
+W {"report":{"availableBytes":46100000000,"budgetBytes":64000000000,"date":814944961.874647,"gpuActiveBytes":15137057960,"gpuCacheBytes":1986752500,"physFootprintBytes":17385828208,"residentBytes":14200000000,"residents":{"mage-flow-turbo":14200000000},"running":[],"transientReserveBytes":3700000000},"type":"memory"}
+PASS image.generate ran in 9.68 s (wall 9.68 s), 7 progress lines; outputs [{"path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-080708B4-3449-415F-84A5-FE82352D76E9\/spool\/job_check\/out\/image-0.png","name":"images","media_type":"image\/png"}]
+H {"id":"h4","type":"memory.query"}
+W {"re":"h4","report":{"availableBytes":46100000000,"budgetBytes":64000000000,"date":814944961.874972,"gpuActiveBytes":15137057960,"gpuCacheBytes":1986752500,"physFootprintBytes":17385828208,"residentBytes":14200000000,"residents":{"mage-flow-turbo":14200000000},"running":[],"transientReserveBytes":3700000000},"type":"memory"}
+PASS memory report: worker says phys_footprint 17385828208 B; host read 17385844592 B now, peak 17386418032 B
+H {"id":"h5","type":"shutdown"}
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-mage-flow/dist/check-session.gpp
+ALL PASS

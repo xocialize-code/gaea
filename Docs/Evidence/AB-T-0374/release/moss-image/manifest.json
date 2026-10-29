@@ -1,0 +1,543 @@
+{
+  "engine" : {
+    "contract" : "1.58.0",
+    "package" : "mlx-engine-swift",
+    "version" : "0.72.0"
+  },
+  "executable" : "gaea-moss-image-worker",
+  "helpers" : [
+
+  ],
+  "id" : "com.xocialize.gaea.moss-image",
+  "license" : "Apache-2.0",
+  "manifest_version" : 1,
+  "min_gaea" : "0.2.0",
+  "models" : [
+    {
+      "id" : "moss-image-sft",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 16700000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 10500000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "model_index.json",
+                  "scheduler/*",
+                  "LICENSE"
+                ],
+                "repo" : "mlx-community/MOSS-Image-SFT-bf16",
+                "revision" : "ea698e99312015505884559ebad94b4a5a0d0753",
+                "role" : "transformer"
+              },
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "tokenizer/*",
+                  "vae/*",
+                  "LICENSE"
+                ],
+                "repo" : "mlx-community/MOSS-Image-SFT-bf16",
+                "revision" : "ea698e99312015505884559ebad94b4a5a0d0753",
+                "role" : "shared"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 10400000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 5800000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "model_index.json",
+                  "scheduler/*",
+                  "LICENSE"
+                ],
+                "repo" : "mlx-community/MOSS-Image-SFT-bf16",
+                "revision" : "ea698e99312015505884559ebad94b4a5a0d0753",
+                "role" : "transformer"
+              },
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "tokenizer/*",
+                  "vae/*",
+                  "LICENSE"
+                ],
+                "repo" : "mlx-community/MOSS-Image-SFT-bf16",
+                "revision" : "ea698e99312015505884559ebad94b4a5a0d0753",
+                "role" : "shared"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "Apache-2.0"
+          }
+        },
+        "provenance" : {
+          "revision" : "ea698e99312015505884559ebad94b4a5a0d0753",
+          "sourceRepo" : "mlx-community/MOSS-Image-SFT-bf16",
+          "tier" : 1
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 16700000000,
+              "quant" : "bf16",
+              "residentBytes" : 10500000000
+            },
+            {
+              "peakActivationBytes" : 16700000000,
+              "quant" : "int8",
+              "residentBytes" : 5800000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "textToImage",
+            "name" : "moss-image-sft",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "MOSS-Image-SFT text-to-image (OpenMOSS, Apache-2.0): 5B single-stream DiT on a Qwen3.5-9B encoder. Strongest open-weight long-text rendering in English and Chinese (line breaks in the prompt are kept), and JSON layout prompts that place text and objects by bounding box (summary.caption + items, yxyx centred pixels, same canvas size as the request). 50 steps, CFG 3, 256²–1456² by area, sides multiples of 16.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "MOSS-Image"
+    },
+    {
+      "id" : "moss-image-base",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 16700000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 10500000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "model_index.json",
+                  "scheduler/*",
+                  "LICENSE"
+                ],
+                "repo" : "mlx-community/MOSS-Image-Base-bf16",
+                "revision" : "56e5c1f98640356efce285957df9a883a53064fa",
+                "role" : "transformer"
+              },
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "tokenizer/*",
+                  "vae/*",
+                  "LICENSE"
+                ],
+                "repo" : "mlx-community/MOSS-Image-SFT-bf16",
+                "revision" : "ea698e99312015505884559ebad94b4a5a0d0753",
+                "role" : "shared"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 10400000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 5800000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "model_index.json",
+                  "scheduler/*",
+                  "LICENSE"
+                ],
+                "repo" : "mlx-community/MOSS-Image-Base-bf16",
+                "revision" : "56e5c1f98640356efce285957df9a883a53064fa",
+                "role" : "transformer"
+              },
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "tokenizer/*",
+                  "vae/*",
+                  "LICENSE"
+                ],
+                "repo" : "mlx-community/MOSS-Image-SFT-bf16",
+                "revision" : "ea698e99312015505884559ebad94b4a5a0d0753",
+                "role" : "shared"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "Apache-2.0"
+          }
+        },
+        "provenance" : {
+          "revision" : "56e5c1f98640356efce285957df9a883a53064fa",
+          "sourceRepo" : "mlx-community/MOSS-Image-Base-bf16",
+          "tier" : 1
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 16700000000,
+              "quant" : "bf16",
+              "residentBytes" : 10500000000
+            },
+            {
+              "peakActivationBytes" : 16700000000,
+              "quant" : "int8",
+              "residentBytes" : 5800000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "textToImage",
+            "name" : "moss-image-base",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "MOSS-Image-Base text-to-image (OpenMOSS, Apache-2.0): the pretrained checkpoint MOSS-Image-SFT is fine-tuned from — same architecture, prompts and layout JSON, less curated composition; the starting point for LoRA training. 50 steps, CFG 3, 256²–1456² by area.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "MOSS-Image Base"
+    }
+  ],
+  "offers" : [
+    {
+      "defaults" : {
+        "count" : 1
+      },
+      "limits" : {
+        "max_pixels" : 2119936,
+        "min_side" : 256,
+        "size_multiple" : 16
+      },
+      "model" : {
+        "id" : "moss-image-sft",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://huggingface.co/OpenMOSS-Team/MOSS-Image-SFT"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only: runs only when a request names it. Long English and Chinese text (line breaks kept), and JSON layout prompts that place text and objects by bounding box (summary.caption + items, yxyx in pixels of the requested canvas). 50 steps with CFG 3: about 2 minutes per 1024² image on an M5 Max. Sides multiples of 16, 256²–1456² by area.",
+        "quality_tiers" : [
+          "standard",
+          "best"
+        ],
+        "speed_class" : "slow",
+        "title" : "MOSS-Image"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-moss.guidance" : {
+            "default" : 3,
+            "description" : "Classifier-free guidance: how strongly the prompt (and against the negative prompt) steers.",
+            "maximum" : 20,
+            "minimum" : 1,
+            "type" : "number",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Guidance",
+              "widget" : "slider"
+            }
+          },
+          "x-moss.steps" : {
+            "default" : 50,
+            "description" : "Euler denoising steps; more is slower and finer. Each step is two forwards (CFG).",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "defaults" : {
+        "count" : 1
+      },
+      "limits" : {
+        "max_pixels" : 2119936,
+        "min_side" : 256,
+        "size_multiple" : 16
+      },
+      "model" : {
+        "id" : "moss-image-base",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://huggingface.co/OpenMOSS-Team/MOSS-Image-SFT"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only: runs only when a request names it. The pretrained checkpoint MOSS-Image is tuned from: the same prompts and layout JSON, less curated composition; for LoRA work and comparison. 50 steps with CFG 3: about 2 minutes per 1024² image on an M5 Max.",
+        "quality_tiers" : [
+          "best"
+        ],
+        "speed_class" : "slow",
+        "title" : "MOSS-Image Base"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-moss.guidance" : {
+            "default" : 3,
+            "description" : "Classifier-free guidance: how strongly the prompt (and against the negative prompt) steers.",
+            "maximum" : 20,
+            "minimum" : 1,
+            "type" : "number",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Guidance",
+              "widget" : "slider"
+            }
+          },
+          "x-moss.steps" : {
+            "default" : 50,
+            "description" : "Euler denoising steps; more is slower and finer. Each step is two forwards (CFG).",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    }
+  ],
+  "protocol" : 1,
+  "repo" : "https://github.com/xocialize/gaea-plugin-moss-image",
+  "settings" : [
+
+  ],
+  "summary" : "OpenMOSS's MOSS-Image (Apache-2.0): a 5B single-stream DiT on a Qwen3.5-9B encoder and the FLUX.2 small decoder. Text-to-image with long English and Chinese text and JSON layout prompts (SFT), and the pretrained Base. A research plugin: every model is named-only.",
+  "team" : "CFZS6RXUCP",
+  "title" : "MOSS-Image",
+  "version" : "0.1.0"
+}

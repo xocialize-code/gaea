@@ -1,0 +1,45 @@
+PASS manifest com.xocialize.gaea.mage-flow 0.1.0, sha256 48902f6988fa…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.mage-flow, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-mage-flow-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 68706
+W {"engine":{"contract":"1.58.0","version":"0.72.0"},"kit":{"version":"0.3.0"},"manifest_sha256":"48902f6988fa378c03a648cead5742309f16c0cccb6a642b4bb13c868873727a","models":["mage-flow","mage-flow-turbo","mage-flow-edit","mage-flow-edit-turbo","mage-flow-edit-base"],"pid":68706,"plugin":{"id":"com.xocialize.gaea.mage-flow","version":"0.1.0"},"protocol":1,"type":"hello"}
+PASS hello after 12 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+H {"budget":{"ceilingBytes":100000000000,"wiresWeights":false},"cache_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-AF826208-73EA-4355-8802-BD5F769926ED/cache","id":"h1","models_root":"/Volumes/DEV_VOL1/Models/gaea-research-store","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"bf16","model":"mage-flow-edit","type":"prepare"}
+W {"lane":"bf16","model":"mage-flow-edit","re":"h2","seconds":0.695,"type":"prepared"}
+W {"report":{"availableBytes":79900000000,"budgetBytes":100000000000,"date":814953368.611628,"gpuActiveBytes":17107656968,"gpuCacheBytes":8344,"physFootprintBytes":17178358528,"residentBytes":16400000000,"residents":{"mage-flow-edit":16400000000},"running":[],"transientReserveBytes":3700000000},"type":"memory"}
+PASS prepared mage-flow-edit lane bf16 in 0.69 s
+H {"id":"h3","inputs":{"images":"/Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0374/github/gaea-mf-turbo-0.png","instruction":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-AF826208-73EA-4355-8802-BD5F769926ED/spool/job_check/in/instruction-0.txt"},"job":"job_check","lane":"bf16","model":"mage-flow-edit","model_params":{"x-mage.guidance":5,"x-mage.steps":20},"operation":"image.edit","output_dir":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-AF826208-73EA-4355-8802-BD5F769926ED/spool/job_check/out","params":{"size":{"height":512,"width":512}},"seed":7,"type":"run"}
+W {"job":"job_check","re":"h3","stage":"encode","type":"progress"}
+W {"fraction":0.05,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.1,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.15,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":0.2,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":4,"type":"progress"}
+W {"fraction":0.25,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":5,"type":"progress"}
+W {"fraction":0.3,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":6,"type":"progress"}
+W {"fraction":0.35,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":7,"type":"progress"}
+W {"fraction":0.4,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":8,"type":"progress"}
+W {"fraction":0.45,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":9,"type":"progress"}
+W {"fraction":0.5,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":10,"type":"progress"}
+W {"fraction":0.55,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":11,"type":"progress"}
+W {"fraction":0.6,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":12,"type":"progress"}
+W {"fraction":0.65,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":13,"type":"progress"}
+W {"fraction":0.7,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":14,"type":"progress"}
+W {"fraction":0.75,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":15,"type":"progress"}
+W {"fraction":0.8,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":16,"type":"progress"}
+W {"fraction":0.85,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":17,"type":"progress"}
+W {"fraction":0.9,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":18,"type":"progress"}
+W {"fraction":0.95,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":19,"type":"progress"}
+W {"fraction":1,"job":"job_check","of":20,"re":"h3","stage":"denoise","step":20,"type":"progress"}
+W {"job":"job_check","re":"h3","stage":"decode","type":"progress"}
+W {"job":"job_check","re":"h3","stage":"postprocess","type":"progress"}
+W {"effective":{"seed":7,"size":{"height":512,"width":512},"x-mage.guidance":5,"x-mage.steps":20},"job":"job_check","outputs":[{"media_type":"image/png","name":"image","path":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-AF826208-73EA-4355-8802-BD5F769926ED/spool/job_check/out/image-0.png"}],"re":"h3","seconds":6.895,"type":"result","warnings":[]}
+W {"report":{"availableBytes":79900000000,"budgetBytes":100000000000,"date":814953375.508097,"gpuActiveBytes":17511507476,"gpuCacheBytes":2097694412,"physFootprintBytes":19871742016,"residentBytes":16400000000,"residents":{"mage-flow-edit":16400000000},"running":[],"transientReserveBytes":3700000000},"type":"memory"}
+PASS image.edit ran in 6.89 s (wall 6.90 s), 23 progress lines; outputs [{"name":"image","media_type":"image\/png","path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-AF826208-73EA-4355-8802-BD5F769926ED\/spool\/job_check\/out\/image-0.png"}]
+H {"id":"h4","type":"memory.query"}
+W {"re":"h4","report":{"availableBytes":79900000000,"budgetBytes":100000000000,"date":814953375.508297,"gpuActiveBytes":17511507476,"gpuCacheBytes":2097694412,"physFootprintBytes":19871742016,"residentBytes":16400000000,"residents":{"mage-flow-edit":16400000000},"running":[],"transientReserveBytes":3700000000},"type":"memory"}
+PASS memory report: worker says phys_footprint 19871742016 B; host read 19871742016 B now, peak 20409333704 B
+H {"id":"h5","type":"shutdown"}
+PASS shutdown: exit 0
+ALL PASS

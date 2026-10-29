@@ -1,0 +1,1557 @@
+{
+  "engine" : {
+    "contract" : "1.58.0",
+    "package" : "mlx-engine-swift",
+    "version" : "0.72.0"
+  },
+  "executable" : "gaea-mage-flow-worker",
+  "helpers" : [
+
+  ],
+  "id" : "com.xocialize.gaea.mage-flow",
+  "license" : "Apache-2.0",
+  "manifest_version" : 1,
+  "min_gaea" : "0.2.0",
+  "models" : [
+    {
+      "id" : "mage-flow",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 3700000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 16400000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "text_encoder/*",
+                  "vae/*",
+                  "*.json"
+                ],
+                "repo" : "mage-flow-community/Mage-Flow",
+                "role" : "components"
+              },
+              {
+                "matching" : [
+                  "folded_adaln.safetensors"
+                ],
+                "repo" : "xocialize/Mage-Flow-mlx",
+                "role" : "mlx-artifacts"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 3700000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 14200000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "vae/*",
+                  "*.json"
+                ],
+                "repo" : "mage-flow-community/Mage-Flow",
+                "role" : "components"
+              },
+              {
+                "matching" : [
+                  "folded_adaln.safetensors",
+                  "transformer-int8.safetensors"
+                ],
+                "repo" : "xocialize/Mage-Flow-mlx",
+                "role" : "mlx-artifacts"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int4",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int4",
+            "materialization" : "engine",
+            "peakTransientBytes" : 3700000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 12900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int4",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "vae/*",
+                  "*.json"
+                ],
+                "repo" : "mage-flow-community/Mage-Flow",
+                "role" : "components"
+              },
+              {
+                "matching" : [
+                  "folded_adaln.safetensors",
+                  "transformer-int4.safetensors"
+                ],
+                "repo" : "xocialize/Mage-Flow-mlx",
+                "role" : "mlx-artifacts"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "MIT"
+          }
+        },
+        "provenance" : {
+          "revision" : "main",
+          "sourceRepo" : "mage-flow-community/Mage-Flow",
+          "tier" : 1
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "bf16",
+              "residentBytes" : 16400000000
+            },
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "int8",
+              "residentBytes" : 14200000000
+            },
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "int4",
+              "residentBytes" : 12900000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "adapters" : {
+              "baseModel" : "mage-flow",
+              "binding" : "perRequest",
+              "formats" : [
+                "diffusers-peft"
+              ],
+              "kinds" : [
+                "plain"
+              ],
+              "maxCount" : 4,
+              "strengthRange" : {
+                "max" : 2,
+                "min" : 0
+              }
+            },
+            "capability" : "textToImage",
+            "name" : "mage-flow-t2i",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              },
+              {
+                "kind" : "array",
+                "name" : "adapters",
+                "required" : false,
+                "summary" : "Adapters (LoRA) by catalog id, each {id, strength?, conditioning?}; up to 4, strength 0.0…2.0."
+              }
+            ],
+            "summary" : "Mage-Flow 4.1B text-to-image (MIT): native-resolution NR-MMDiT rectified flow, Qwen3-VL-4B conditioning, square 512–2048 validated. Tiers via configuration: RL-aligned (20 steps, CFG 5), Base (30/5), Turbo (4 steps, ~2.4 s @512²). Ships Microsoft's mandatory content filter (fail-closed) and bit-exact Gaussian-Shading provenance watermark.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "Mage-Flow"
+    },
+    {
+      "id" : "mage-flow-turbo",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 3700000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 16400000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "text_encoder/*",
+                  "vae/*",
+                  "*.json"
+                ],
+                "repo" : "mage-flow-community/Mage-Flow-Turbo",
+                "role" : "components"
+              },
+              {
+                "matching" : [
+                  "folded_adaln.safetensors"
+                ],
+                "repo" : "xocialize/Mage-Flow-Turbo-mlx",
+                "role" : "mlx-artifacts"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 3700000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 14200000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "vae/*",
+                  "*.json"
+                ],
+                "repo" : "mage-flow-community/Mage-Flow-Turbo",
+                "role" : "components"
+              },
+              {
+                "matching" : [
+                  "folded_adaln.safetensors",
+                  "transformer-int8.safetensors"
+                ],
+                "repo" : "xocialize/Mage-Flow-Turbo-mlx",
+                "role" : "mlx-artifacts"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int4",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int4",
+            "materialization" : "engine",
+            "peakTransientBytes" : 3700000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 12900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int4",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "vae/*",
+                  "*.json"
+                ],
+                "repo" : "mage-flow-community/Mage-Flow-Turbo",
+                "role" : "components"
+              },
+              {
+                "matching" : [
+                  "folded_adaln.safetensors",
+                  "transformer-int4.safetensors"
+                ],
+                "repo" : "xocialize/Mage-Flow-Turbo-mlx",
+                "role" : "mlx-artifacts"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "MIT"
+          }
+        },
+        "provenance" : {
+          "revision" : "main",
+          "sourceRepo" : "mage-flow-community/Mage-Flow",
+          "tier" : 1
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "bf16",
+              "residentBytes" : 16400000000
+            },
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "int8",
+              "residentBytes" : 14200000000
+            },
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "int4",
+              "residentBytes" : 12900000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "adapters" : {
+              "baseModel" : "mage-flow",
+              "binding" : "perRequest",
+              "formats" : [
+                "diffusers-peft"
+              ],
+              "kinds" : [
+                "plain"
+              ],
+              "maxCount" : 4,
+              "strengthRange" : {
+                "max" : 2,
+                "min" : 0
+              }
+            },
+            "capability" : "textToImage",
+            "name" : "mage-flow-t2i",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              },
+              {
+                "kind" : "array",
+                "name" : "adapters",
+                "required" : false,
+                "summary" : "Adapters (LoRA) by catalog id, each {id, strength?, conditioning?}; up to 4, strength 0.0…2.0."
+              }
+            ],
+            "summary" : "Mage-Flow 4.1B text-to-image (MIT): native-resolution NR-MMDiT rectified flow, Qwen3-VL-4B conditioning, square 512–2048 validated. Tiers via configuration: RL-aligned (20 steps, CFG 5), Base (30/5), Turbo (4 steps, ~2.4 s @512²). Ships Microsoft's mandatory content filter (fail-closed) and bit-exact Gaussian-Shading provenance watermark.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "Mage-Flow Turbo"
+    },
+    {
+      "id" : "mage-flow-edit",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 3700000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 16400000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "text_encoder/*",
+                  "vae/*",
+                  "*.json"
+                ],
+                "repo" : "mage-flow-community/Mage-Flow-Edit",
+                "role" : "components"
+              },
+              {
+                "matching" : [
+                  "folded_adaln.safetensors"
+                ],
+                "repo" : "xocialize/Mage-Flow-Edit-mlx",
+                "role" : "mlx-artifacts"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 3700000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 14200000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "vae/*",
+                  "*.json"
+                ],
+                "repo" : "mage-flow-community/Mage-Flow-Edit",
+                "role" : "components"
+              },
+              {
+                "matching" : [
+                  "folded_adaln.safetensors",
+                  "transformer-int8.safetensors"
+                ],
+                "repo" : "xocialize/Mage-Flow-Edit-mlx",
+                "role" : "mlx-artifacts"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int4",
+          "resolved" : {
+            "capabilities" : [
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int4",
+            "materialization" : "engine",
+            "peakTransientBytes" : 3700000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 12900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int4",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "vae/*",
+                  "*.json"
+                ],
+                "repo" : "mage-flow-community/Mage-Flow-Edit",
+                "role" : "components"
+              },
+              {
+                "matching" : [
+                  "folded_adaln.safetensors",
+                  "transformer-int4.safetensors"
+                ],
+                "repo" : "xocialize/Mage-Flow-Edit-mlx",
+                "role" : "mlx-artifacts"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "MIT"
+          }
+        },
+        "provenance" : {
+          "revision" : "main",
+          "sourceRepo" : "mage-flow-community/Mage-Flow-Edit",
+          "tier" : 1
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "bf16",
+              "residentBytes" : 16400000000
+            },
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "int8",
+              "residentBytes" : 14200000000
+            },
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "int4",
+              "residentBytes" : 12900000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "adapters" : {
+              "baseModel" : "mage-flow-edit",
+              "binding" : "perRequest",
+              "formats" : [
+                "diffusers-peft"
+              ],
+              "kinds" : [
+                "plain",
+                "ic"
+              ],
+              "maxCount" : 4,
+              "strengthRange" : {
+                "max" : 2,
+                "min" : 0
+              }
+            },
+            "capability" : "imageEdit",
+            "name" : "mage-flow-edit",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "images",
+                "required" : true,
+                "summary" : "Conditioning input image(s), in prompt order."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The edit instruction."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "True-CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              },
+              {
+                "kind" : "array",
+                "name" : "adapters",
+                "required" : false,
+                "summary" : "Adapters (LoRA) by catalog id, each {id, strength?, conditioning?}; up to 4, strength 0.0…2.0."
+              }
+            ],
+            "summary" : "Mage-Flow-Edit 4.1B instruction-based image editing (MIT): native-resolution NR-MMDiT with sequence-concat reference conditioning (ref latents held clean, target denoised), Qwen3-VL-4B vision conditioning. 1–3 reference images in prompt order (Image 1 = primary; the trained range); square 512–2048. Tiers via configuration: RL (20/5), Base (30/5), Turbo (4 steps, ~2.4 s @512²). Mandatory fail-closed content filter + Gaussian-Shading watermark. Mode `tiles`: each image edited on its own with the same instruction (image k at seed + k, one conditioner load for all), returned stacked top to bottom in input order. A reference-conditioned adapter's conditioning images lead the references, in slot order.",
+            "supportedModes" : [
+              "tiles"
+            ]
+          }
+        ]
+      },
+      "title" : "Mage-Flow Edit"
+    },
+    {
+      "id" : "mage-flow-edit-turbo",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 3700000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 14200000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "vae/*",
+                  "*.json"
+                ],
+                "repo" : "mage-flow-community/Mage-Flow-Edit-Turbo",
+                "role" : "components"
+              },
+              {
+                "matching" : [
+                  "folded_adaln.safetensors",
+                  "transformer-int8.safetensors"
+                ],
+                "repo" : "xocialize/Mage-Flow-Edit-Turbo-mlx",
+                "role" : "mlx-artifacts"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int4",
+          "resolved" : {
+            "capabilities" : [
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int4",
+            "materialization" : "engine",
+            "peakTransientBytes" : 3700000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 12900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int4",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "vae/*",
+                  "*.json"
+                ],
+                "repo" : "mage-flow-community/Mage-Flow-Edit-Turbo",
+                "role" : "components"
+              },
+              {
+                "matching" : [
+                  "folded_adaln.safetensors",
+                  "transformer-int4.safetensors"
+                ],
+                "repo" : "xocialize/Mage-Flow-Edit-Turbo-mlx",
+                "role" : "mlx-artifacts"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "MIT"
+          }
+        },
+        "provenance" : {
+          "revision" : "main",
+          "sourceRepo" : "mage-flow-community/Mage-Flow-Edit",
+          "tier" : 1
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "bf16",
+              "residentBytes" : 16400000000
+            },
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "int8",
+              "residentBytes" : 14200000000
+            },
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "int4",
+              "residentBytes" : 12900000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "adapters" : {
+              "baseModel" : "mage-flow-edit",
+              "binding" : "perRequest",
+              "formats" : [
+                "diffusers-peft"
+              ],
+              "kinds" : [
+                "plain",
+                "ic"
+              ],
+              "maxCount" : 4,
+              "strengthRange" : {
+                "max" : 2,
+                "min" : 0
+              }
+            },
+            "capability" : "imageEdit",
+            "name" : "mage-flow-edit",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "images",
+                "required" : true,
+                "summary" : "Conditioning input image(s), in prompt order."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The edit instruction."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "True-CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              },
+              {
+                "kind" : "array",
+                "name" : "adapters",
+                "required" : false,
+                "summary" : "Adapters (LoRA) by catalog id, each {id, strength?, conditioning?}; up to 4, strength 0.0…2.0."
+              }
+            ],
+            "summary" : "Mage-Flow-Edit 4.1B instruction-based image editing (MIT): native-resolution NR-MMDiT with sequence-concat reference conditioning (ref latents held clean, target denoised), Qwen3-VL-4B vision conditioning. 1–3 reference images in prompt order (Image 1 = primary; the trained range); square 512–2048. Tiers via configuration: RL (20/5), Base (30/5), Turbo (4 steps, ~2.4 s @512²). Mandatory fail-closed content filter + Gaussian-Shading watermark. Mode `tiles`: each image edited on its own with the same instruction (image k at seed + k, one conditioner load for all), returned stacked top to bottom in input order. A reference-conditioned adapter's conditioning images lead the references, in slot order.",
+            "supportedModes" : [
+              "tiles"
+            ]
+          }
+        ]
+      },
+      "title" : "Mage-Flow Edit Turbo"
+    },
+    {
+      "id" : "mage-flow-edit-base",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 3700000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 16400000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "text_encoder/*",
+                  "vae/*",
+                  "*.json"
+                ],
+                "repo" : "mage-flow-community/Mage-Flow-Edit-Base",
+                "role" : "components"
+              },
+              {
+                "matching" : [
+                  "folded_adaln.safetensors"
+                ],
+                "repo" : "xocialize/Mage-Flow-Edit-Base-mlx",
+                "role" : "mlx-artifacts"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 3700000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 14200000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "vae/*",
+                  "*.json"
+                ],
+                "repo" : "mage-flow-community/Mage-Flow-Edit-Base",
+                "role" : "components"
+              },
+              {
+                "matching" : [
+                  "folded_adaln.safetensors",
+                  "transformer-int8.safetensors"
+                ],
+                "repo" : "xocialize/Mage-Flow-Edit-Base-mlx",
+                "role" : "mlx-artifacts"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int4",
+          "resolved" : {
+            "capabilities" : [
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int4",
+            "materialization" : "engine",
+            "peakTransientBytes" : 3700000000,
+            "peakTransientSource" : "hint",
+            "persistentBytes" : 12900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int4",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "text_encoder/*",
+                  "vae/*",
+                  "*.json"
+                ],
+                "repo" : "mage-flow-community/Mage-Flow-Edit-Base",
+                "role" : "components"
+              },
+              {
+                "matching" : [
+                  "folded_adaln.safetensors",
+                  "transformer-int4.safetensors"
+                ],
+                "repo" : "xocialize/Mage-Flow-Edit-Base-mlx",
+                "role" : "mlx-artifacts"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "MIT"
+          }
+        },
+        "provenance" : {
+          "revision" : "main",
+          "sourceRepo" : "mage-flow-community/Mage-Flow-Edit",
+          "tier" : 1
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "bf16",
+              "residentBytes" : 16400000000
+            },
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "int8",
+              "residentBytes" : 14200000000
+            },
+            {
+              "peakActivationBytes" : 3700000000,
+              "quant" : "int4",
+              "residentBytes" : 12900000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "adapters" : {
+              "baseModel" : "mage-flow-edit",
+              "binding" : "perRequest",
+              "formats" : [
+                "diffusers-peft"
+              ],
+              "kinds" : [
+                "plain",
+                "ic"
+              ],
+              "maxCount" : 4,
+              "strengthRange" : {
+                "max" : 2,
+                "min" : 0
+              }
+            },
+            "capability" : "imageEdit",
+            "name" : "mage-flow-edit",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "images",
+                "required" : true,
+                "summary" : "Conditioning input image(s), in prompt order."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The edit instruction."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "True-CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              },
+              {
+                "kind" : "array",
+                "name" : "adapters",
+                "required" : false,
+                "summary" : "Adapters (LoRA) by catalog id, each {id, strength?, conditioning?}; up to 4, strength 0.0…2.0."
+              }
+            ],
+            "summary" : "Mage-Flow-Edit 4.1B instruction-based image editing (MIT): native-resolution NR-MMDiT with sequence-concat reference conditioning (ref latents held clean, target denoised), Qwen3-VL-4B vision conditioning. 1–3 reference images in prompt order (Image 1 = primary; the trained range); square 512–2048. Tiers via configuration: RL (20/5), Base (30/5), Turbo (4 steps, ~2.4 s @512²). Mandatory fail-closed content filter + Gaussian-Shading watermark. Mode `tiles`: each image edited on its own with the same instruction (image k at seed + k, one conditioner load for all), returned stacked top to bottom in input order. A reference-conditioned adapter's conditioning images lead the references, in slot order.",
+            "supportedModes" : [
+              "tiles"
+            ]
+          }
+        ]
+      },
+      "title" : "Mage-Flow Edit Base"
+    }
+  ],
+  "offers" : [
+    {
+      "defaults" : {
+        "count" : 1
+      },
+      "limits" : {
+        "max_pixels" : 1048576,
+        "max_side" : 1024,
+        "min_side" : 512,
+        "size_multiple" : 16
+      },
+      "model" : {
+        "id" : "mage-flow",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "MIT",
+          "terms_url" : "https://huggingface.co/mage-flow-community/Mage-Flow/blob/main/LICENSE"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only: runs only when a request names it. RL-aligned text-to-image, 20 steps with CFG 5. Square only, 512–1024 px.",
+        "quality_tiers" : [
+          "standard",
+          "best"
+        ],
+        "speed_class" : "slow",
+        "title" : "Mage-Flow"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-mage.guidance" : {
+            "default" : 5,
+            "description" : "Classifier-free guidance: how strongly the prompt (and against the negative prompt) steers. 1 turns CFG off.",
+            "maximum" : 20,
+            "minimum" : 1,
+            "type" : "number",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Guidance",
+              "widget" : "slider"
+            }
+          },
+          "x-mage.steps" : {
+            "default" : 20,
+            "description" : "Denoising steps; more is slower and finer.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "defaults" : {
+        "count" : 1
+      },
+      "limits" : {
+        "max_pixels" : 1048576,
+        "max_side" : 1024,
+        "min_side" : 512,
+        "size_multiple" : 16
+      },
+      "model" : {
+        "id" : "mage-flow-turbo",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "MIT",
+          "terms_url" : "https://huggingface.co/mage-flow-community/Mage-Flow/blob/main/LICENSE"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only: runs only when a request names it. Distilled to 4 steps without CFG: negative prompts do nothing. Square only, 512–1024 px.",
+        "quality_tiers" : [
+          "draft",
+          "standard"
+        ],
+        "speed_class" : "fast",
+        "title" : "Mage-Flow Turbo"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-mage.steps" : {
+            "default" : 4,
+            "description" : "Denoising steps. Mage-Flow Turbo is distilled for 4.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "limits" : {
+        "max_images" : 3,
+        "max_pixels" : 1048576,
+        "max_side" : 1024,
+        "min_side" : 512,
+        "size_multiple" : 16
+      },
+      "model" : {
+        "id" : "mage-flow-edit",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "MIT",
+          "terms_url" : "https://huggingface.co/mage-flow-community/Mage-Flow/blob/main/LICENSE"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only: runs only when a request names it. RL-aligned instruction editing, 20 steps with CFG 5: 1–3 images, named in the instruction in order. Square output.",
+        "quality_tiers" : [
+          "standard",
+          "best"
+        ],
+        "speed_class" : "slow",
+        "title" : "Mage-Flow Edit"
+      },
+      "operation" : "image.edit",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-mage.guidance" : {
+            "default" : 5,
+            "description" : "Classifier-free guidance: how strongly the prompt (and against the negative prompt) steers. 1 turns CFG off.",
+            "maximum" : 20,
+            "minimum" : 1,
+            "type" : "number",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Guidance",
+              "widget" : "slider"
+            }
+          },
+          "x-mage.steps" : {
+            "default" : 20,
+            "description" : "Denoising steps; more is slower and finer.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "limits" : {
+        "max_images" : 3,
+        "max_pixels" : 1048576,
+        "max_side" : 1024,
+        "min_side" : 512,
+        "size_multiple" : 16
+      },
+      "model" : {
+        "id" : "mage-flow-edit-turbo",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "MIT",
+          "terms_url" : "https://huggingface.co/mage-flow-community/Mage-Flow/blob/main/LICENSE"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only: runs only when a request names it. Instruction editing distilled to 4 steps (int8 DiT): 1–3 images, named in the instruction in order. The normalizer's remover for erase at best and the creative upscale's editor, when named.",
+        "quality_tiers" : [
+          "draft",
+          "standard"
+        ],
+        "speed_class" : "fast",
+        "title" : "Mage-Flow Edit Turbo"
+      },
+      "operation" : "image.edit",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-mage.steps" : {
+            "default" : 4,
+            "description" : "Denoising steps. Mage-Flow Edit Turbo is distilled for 4.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "limits" : {
+        "max_images" : 3,
+        "max_pixels" : 1048576,
+        "max_side" : 1024,
+        "min_side" : 512,
+        "size_multiple" : 16
+      },
+      "model" : {
+        "id" : "mage-flow-edit-base",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "MIT",
+          "terms_url" : "https://huggingface.co/mage-flow-community/Mage-Flow/blob/main/LICENSE"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only: runs only when a request names it. The quality edit checkpoint, 30 steps with CFG 5: 1–3 images. Square output.",
+        "quality_tiers" : [
+          "best"
+        ],
+        "speed_class" : "slow",
+        "title" : "Mage-Flow Edit Base"
+      },
+      "operation" : "image.edit",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-mage.guidance" : {
+            "default" : 5,
+            "description" : "Classifier-free guidance: how strongly the prompt (and against the negative prompt) steers. 1 turns CFG off.",
+            "maximum" : 20,
+            "minimum" : 1,
+            "type" : "number",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Guidance",
+              "widget" : "slider"
+            }
+          },
+          "x-mage.steps" : {
+            "default" : 30,
+            "description" : "Denoising steps; more is slower and finer.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    }
+  ],
+  "protocol" : 1,
+  "repo" : "https://github.com/xocialize/gaea-plugin-mage-flow",
+  "settings" : [
+
+  ],
+  "summary" : "Microsoft's Mage-Flow (MIT): a 4.1B native-resolution NR-MMDiT with Qwen3-VL-4B conditioning. Text-to-image (RL-aligned and the 4-step Turbo) and square instruction editing from up to 3 references (RL, Turbo and Base). A research plugin: every model is named-only.",
+  "team" : "CFZS6RXUCP",
+  "title" : "Mage-Flow",
+  "version" : "0.1.0"
+}

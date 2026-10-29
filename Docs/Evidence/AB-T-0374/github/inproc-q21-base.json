@@ -1,0 +1,2 @@
+[License] xocialize/Qwen-Image-2.1: weight license LicenseRef-Qwen-Research is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+{"cold_s":16.150109125,"guidance":1,"height":512,"lane":"bf16","model":"qwen-image-2.1-base","prepare_s":2.9919004999999999,"references":0,"run1_s":13.144528375,"seed":42,"steps":40,"warnings":[],"width":512}

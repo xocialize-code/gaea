@@ -1,0 +1,15 @@
+off flux-3-klein  FLUX 3 Klein  [com.xocialize.gaea.flux3-klein 0.1.0] lanes: bf16* 23.70 GB, int8 18.70 GB, int4 16.90 GB
+on  klein-4b  FLUX.2 Klein 4B  [com.xocialize.gaea.flux2-klein 0.1.0] lanes: bf16* 25.90 GB, int8 22.70 GB, int4 20.50 GB
+on  klein-4b-base  FLUX.2 Klein 4B Base  [com.xocialize.gaea.flux2-klein 0.1.0] lanes: bf16* 27.10 GB, int8 23.90 GB, int4 21.70 GB
+on  moss-image-sft  MOSS-Image  [com.xocialize.gaea.moss-image 0.1.0] lanes: bf16* 27.20 GB, int8 16.20 GB
+on  moss-image-base  MOSS-Image Base  [com.xocialize.gaea.moss-image 0.1.0] lanes: bf16* 27.20 GB, int8 16.20 GB
+on  mage-flow  Mage-Flow  [com.xocialize.gaea.mage-flow 0.1.0] lanes: bf16* 20.10 GB, int8 17.90 GB, int4 16.60 GB
+on  mage-flow-turbo  Mage-Flow Turbo  [com.xocialize.gaea.mage-flow 0.1.0] lanes: bf16* 20.10 GB, int8 17.90 GB, int4 16.60 GB
+on  mage-flow-edit  Mage-Flow Edit  [com.xocialize.gaea.mage-flow 0.1.0] lanes: bf16* 20.10 GB, int8 17.90 GB, int4 16.60 GB
+on  mage-flow-edit-turbo  Mage-Flow Edit Turbo  [com.xocialize.gaea.mage-flow 0.1.0] lanes: int8* 17.90 GB, int4 16.60 GB
+on  mage-flow-edit-base  Mage-Flow Edit Base  [com.xocialize.gaea.mage-flow 0.1.0] lanes: bf16* 20.10 GB, int8 17.90 GB, int4 16.60 GB
+off qwen-image-2.1  Qwen-Image-2.1  [com.xocialize.gaea.qwen-image-21 0.1.0] lanes: bf16* 58.80 GB
+off qwen-image-2.1-base  Qwen-Image-2.1 Base  [com.xocialize.gaea.qwen-image-21 0.1.0] lanes: bf16* 58.80 GB
+on  sensenova-u1  SenseNova-U1.5  [com.xocialize.gaea.sensenova 0.1.0] lanes: int8* 24.70 GB, bf16 39.50 GB
+on  sensenova-u1-fast  SenseNova-U1.5 8-step  [com.xocialize.gaea.sensenova 0.1.0] lanes: int8* 24.70 GB, int4 16.70 GB
+on  sensenova-u1-fast-v1  SenseNova-U1.5 8-step (V1 adapter)  [com.xocialize.gaea.sensenova 0.1.0] lanes: int8* 24.70 GB, int4 16.70 GB

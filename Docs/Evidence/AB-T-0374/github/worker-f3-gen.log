@@ -1,0 +1,39 @@
+PASS manifest com.xocialize.gaea.flux3-klein 0.1.0, sha256 d5ca5be8aa92…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.flux3-klein, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-flux3-klein-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 69007
+W {"engine":{"contract":"1.58.0","version":"0.72.0"},"kit":{"version":"0.3.0"},"manifest_sha256":"d5ca5be8aa9267555bd758c57bb75ffbec337c899c191df62a8c1e0a5939758e","models":["flux-3-klein"],"pid":69007,"plugin":{"id":"com.xocialize.gaea.flux3-klein","version":"0.1.0"},"protocol":1,"type":"hello"}
+PASS hello after 20 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+H {"budget":{"ceilingBytes":100000000000,"wiresWeights":false},"cache_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-9587AFD3-F4D2-4D60-AE0A-2FAC7949AF03/cache","id":"h1","models_root":"/Volumes/DEV_VOL1/Models/gaea-research-store","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"bf16","model":"flux-3-klein","type":"prepare"}
+W {"lane":"bf16","model":"flux-3-klein","re":"h2","seconds":0.294,"type":"prepared"}
+W {"report":{"availableBytes":76300000000,"budgetBytes":100000000000,"date":814953595.868662,"gpuActiveBytes":11433550484,"gpuCacheBytes":0,"physFootprintBytes":11452752632,"residentBytes":11700000000,"residents":{"flux-3-klein":11700000000},"running":[],"transientReserveBytes":12000000000},"type":"memory"}
+PASS prepared flux-3-klein lane bf16 in 0.29 s
+H {"id":"h3","inputs":{"prompt":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-9587AFD3-F4D2-4D60-AE0A-2FAC7949AF03/spool/job_check/in/prompt-0.txt"},"job":"job_check","lane":"bf16","model":"flux-3-klein","model_params":{"x-flux3.steps":16,"x-flux3.upsample":true},"operation":"image.generate","output_dir":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-9587AFD3-F4D2-4D60-AE0A-2FAC7949AF03/spool/job_check/out","params":{"count":1,"size":{"height":512,"width":512}},"seed":42,"type":"run"}
+W {"fraction":0.0625,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.125,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.1875,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":0.25,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":4,"type":"progress"}
+W {"fraction":0.3125,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":5,"type":"progress"}
+W {"fraction":0.375,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":6,"type":"progress"}
+W {"fraction":0.4375,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":7,"type":"progress"}
+W {"fraction":0.5,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":8,"type":"progress"}
+W {"fraction":0.5625,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":9,"type":"progress"}
+W {"fraction":0.625,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":10,"type":"progress"}
+W {"fraction":0.6875,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":11,"type":"progress"}
+W {"fraction":0.75,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":12,"type":"progress"}
+W {"fraction":0.8125,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":13,"type":"progress"}
+W {"fraction":0.875,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":14,"type":"progress"}
+W {"fraction":0.9375,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":15,"type":"progress"}
+W {"fraction":1,"job":"job_check","of":16,"re":"h3","stage":"denoise","step":16,"type":"progress"}
+W {"effective":{"count":1,"seed":42,"size":{"height":512,"width":512},"x-flux3.steps":16,"x-flux3.upsample":true},"job":"job_check","outputs":[{"media_type":"image/png","name":"images","path":"/v[License] mlx-community/flux-3-image-klein-bf16: weight license LicenseRef-FLUX-Kommunity-1.0 is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+ar/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-9587AFD3-F4D2-4D60-AE0A-2FAC7949AF03/spool/job_check/out/image-0.png"}],"re":"h3","seconds":11.404,"type":"result","warnings":[]}
+W {"report":{"availableBytes":76300000000,"budgetBytes":100000000000,"date":814953607.273804,"gpuActiveBytes":11433554492,"gpuCacheBytes":13112320,"physFootprintBytes":12749498088,"residentBytes":11700000000,"residents":{"flux-3-klein":11700000000},"running":[],"transientReserveBytes":12000000000},"type":"memory"}
+PASS image.generate ran in 11.40 s (wall 11.40 s), 16 progress lines; outputs [{"path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-9587AFD3-F4D2-4D60-AE0A-2FAC7949AF03\/spool\/job_check\/out\/image-0.png","name":"images","media_type":"image\/png"}]
+H {"id":"h4","type":"memory.query"}
+W {"re":"h4","report":{"availableBytes":76300000000,"budgetBytes":100000000000,"date":814953607.274034,"gpuActiveBytes":11433554492,"gpuCacheBytes":13112320,"physFootprintBytes":12749498088,"residentBytes":11700000000,"residents":{"flux-3-klein":11700000000},"running":[],"transientReserveBytes":12000000000},"type":"memory"}
+PASS memory report: worker says phys_footprint 12749498088 B; host read 12749498088 B now, peak 24157307608 B
+H {"id":"h5","type":"shutdown"}
+PASS shutdown: exit 0
+ALL PASS

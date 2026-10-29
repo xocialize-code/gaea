@@ -1,0 +1,22 @@
+# manifest: /Volumes/Satechi/Development/gaea-plugin-sensenova/dist/sensenova.gaeaplugin/Contents/Resources/manifest.json
+# gaea-plugin-check session against sensenova.gaeaplugin
+W {"engine":{"contract":"1.58.0","version":"0.72.0"},"kit":{"version":"0.3.0"},"manifest_sha256":"4fd28af52677c654255b3107d8beebeeea7bdbfe96e9fc967701246af9dde768","models":["sensenova-u1","sensenova-u1-fast","sensenova-u1-fast-v1"],"pid":63833,"plugin":{"id":"com.xocialize.gaea.sensenova","version":"0.1.0"},"protocol":1,"type":"hello"}
+H {"budget":{"ceilingBytes":64000000000,"wiresWeights":false},"cache_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-FD07FA5E-B007-4828-AD5B-366804D8FEBF/cache","id":"h1","models_root":"/Volumes/DEV_VOL1/models/gaea-research-store","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"int8","model":"sensenova-u1-fast","type":"prepare"}
+W {"lane":"int8","model":"sensenova-u1-fast","re":"h2","seconds":5.524,"type":"prepared"}
+W {"report":{"availableBytes":39300000000,"budgetBytes":64000000000,"date":814951104.760811,"gpuActiveBytes":19871867000,"gpuCacheBytes":2312,"physFootprintBytes":19980581600,"residentBytes":20500000000,"residents":{"sensenova-u1-fast":20500000000},"running":[],"transientReserveBytes":4200000000},"type":"memory"}
+H {"id":"h3","inputs":{"prompt":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-FD07FA5E-B007-4828-AD5B-366804D8FEBF/spool/job_check/in/prompt-0.txt"},"job":"job_check","lane":"int8","model":"sensenova-u1-fast","operation":"image.generate","output_dir":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-FD07FA5E-B007-4828-AD5B-366804D8FEBF/spool/job_check/out","params":{"count":1,"size":{"height":512,"width":512}},"seed":42,"type":"run"}
+W {"fraction":0.125,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.25,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.375,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":0.5,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":4,"type":"progress"}
+W {"fraction":0.625,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":5,"type":"progress"}
+W {"fraction":0.75,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":6,"type":"progress"}
+W {"fraction":0.875,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":7,"type":"progress"}
+W {"fraction":1,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":8,"type":"progress"}
+W {"effective":{"count":1,"seed":42,"size":{"height":512,"width":512},"x-sensenova.steps":8},"job":"job_check","outputs":[{"media_type":"image/png","name":"images","path":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-FD07FA5E-B007-4828-AD5B-366804D8FEBF/spool/job_check/out/image-0.png"}],"re":"h3","seconds":6.688,"type":"result","warnings":[]}
+W {"report":{"availableBytes":39300000000,"budgetBytes":64000000000,"date":814951111.450351,"gpuActiveBytes":19872944620,"gpuCacheBytes":85004412,"physFootprintBytes":20229291008,"residentBytes":20500000000,"residents":{"sensenova-u1-fast":20500000000},"running":[],"transientReserveBytes":4200000000},"type":"memory"}
+H {"id":"h4","type":"memory.query"}
+W {"re":"h4","report":{"availableBytes":39300000000,"budgetBytes":64000000000,"date":814951111.450664,"gpuActiveBytes":19872944620,"gpuCacheBytes":85004412,"physFootprintBytes":20229291008,"residentBytes":20500000000,"residents":{"sensenova-u1-fast":20500000000},"running":[],"transientReserveBytes":4200000000},"type":"memory"}
+H {"id":"h5","type":"shutdown"}

@@ -1,0 +1,134 @@
+# Research plugins acceptance (AB-T-0374) 2026-10-29T07:51:29Z — Gaea 0.6.0, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2; models root /Volumes/DEV_VOL1/Models/gaea-research-store
+PASS  add gaea-plugin-flux2-klein (the default image.generate)
+Installed Mage-Flow 0.1.0 (com.xocialize.gaea.mage-flow), enabled.
+PASS  add gaea-plugin-mage-flow by repo URL
+Installed SenseNova-U1.5 0.1.0 (com.xocialize.gaea.sensenova), enabled.
+PASS  add gaea-plugin-sensenova by repo URL
+Installed MOSS-Image 0.1.0 (com.xocialize.gaea.moss-image), enabled.
+PASS  add gaea-plugin-moss-image by repo URL
+Installed Qwen-Image-2.1 0.1.0 (com.xocialize.gaea.qwen-image-21), enabled.
+PASS  add gaea-plugin-qwen-image-21 by repo URL
+Installed FLUX 3 Klein 0.1.0 (com.xocialize.gaea.flux3-klein), enabled.
+PASS  add gaea-plugin-flux3-klein by repo URL
+      opt-in: flux-3-klein is off until enabled
+flux-3-klein enabled.
+      opt-in: qwen-image-2.1 is off until enabled
+qwen-image-2.1 enabled.
+      opt-in: qwen-image-2.1-base is off until enabled
+qwen-image-2.1-base enabled.
+['flux-3-klein', 'mage-flow', 'mage-flow-edit', 'mage-flow-edit-base', 'mage-flow-edit-turbo', 'mage-flow-turbo', 'moss-image-base', 'moss-image-sft', 'qwen-image-2.1', 'qwen-image-2.1-base', 'sensenova-u1', 'sensenova-u1-fast', 'sensenova-u1-fast-v1']
+PASS  every research model is listed named_only and never default
+{'mage-flow': 'MIT', 'mage-flow-turbo': 'MIT', 'moss-image-base': 'Apache-2.0', 'moss-image-sft': 'Apache-2.0', 'sensenova-u1': 'Apache-2.0', 'sensenova-u1-fast': 'Apache-2.0', 'sensenova-u1-fast-v1': 'Apache-2.0', 'flux-3-klein': 'LicenseRef-FLUX-Kommunity-1.0', 'qwen-image-2.1': 'LicenseRef-Qwen-Research', 'qwen-image-2.1-base': 'LicenseRef-Qwen-Research', 'mage-flow-edit': 'MIT', 'mage-flow-edit-base': 'MIT', 'mage-flow-edit-turbo': 'MIT'}
+PASS  restricted models were off (opt-in), and say commercial_use false
+klein-4b-base com.xocialize.gaea.flux2-klein
+PASS  image.generate naming no model reaches FLUX.2 Klein, not a research model
+bf16 0.474 512 512 4366f63d8a473f1d
+PASS  mf-turbo: mage-flow-turbo runs by name (image.generate), 2.59 s submit to settled
+bf16 3.483 512 512 aa61b7cfcce676dd
+PASS  mf-flow: mage-flow runs by name (image.generate), 6.98 s submit to settled
+int8 1.02 512 512 209bb8f7ba9a53d2
+PASS  mf-edit-turbo: mage-flow-edit-turbo runs by name (image.edit), 4.44 s submit to settled
+bf16 8.122 512 512 ef1bae58f87d6c90
+PASS  mf-edit: mage-flow-edit runs by name (image.edit), 16.1 s submit to settled
+bf16 10.205 512 512 9064bb44299810f9
+PASS  mf-edit-base: mage-flow-edit-base runs by name (image.edit), 13.83 s submit to settled
+bf16 29.748 512 512 c17d3b52b9d74a91
+PASS  moss-sft: moss-image-sft runs by name (image.generate), 34.44 s submit to settled
+bf16 27.156 512 512 2b9ec57c81181336
+PASS  moss-base: moss-image-base runs by name (image.generate), 29.08 s submit to settled
+bf16 6.371 512 512 9f0563a96369cc34
+PASS  q21-gen: qwen-image-2.1 runs by name (image.generate), 10.29 s submit to settled
+bf16 13.419 512 512 385f678c8d30d198
+PASS  q21-base: qwen-image-2.1-base runs by name (image.generate), 16.52 s submit to settled
+bf16 6.624 512 512 3c155874593d701b
+PASS  q21-edit: qwen-image-2.1 runs by name (image.edit), 6.7 s submit to settled
+bf16 13.801 512 512 f3d9abeed172dd3c
+PASS  f3-gen: flux-3-klein runs by name (image.generate), 16.35 s submit to settled
+bf16 15.351 512 512 293d70549d12d02f
+PASS  f3-edit: flux-3-klein runs by name (image.edit), 15.42 s submit to settled
+int8 12.131 512 512 1c91f22bf13dae5a
+PASS  sn-base-gen: sensenova-u1 runs by name (image.generate), 17.64 s submit to settled
+int8 1.153 512 512 de2f6a7bb9418e34
+PASS  sn-fast-gen: sensenova-u1-fast runs by name (image.generate), 6.15 s submit to settled
+int8 1.164 512 512 0efdf20bd3aacfb5
+PASS  sn-fastv1-gen: sensenova-u1-fast-v1 runs by name (image.generate), 7.29 s submit to settled
+int8 1.334 512 512 c53f301d50890028
+PASS  sn-fast-edit: sensenova-u1-fast runs by name (image.edit), 1.41 s submit to settled
+4366f63d8a473f1dd95f60e2f2cd5f8ebccc7764b827f8fd5d11d4569966673a 4366f63d8a473f1dd95f60e2f2cd5f8ebccc7764b827f8fd5d11d4569966673a
+PASS  mf-turbo: mage-flow-turbo, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: same bytes, pixels identical
+aa61b7cfcce676dd64f794164e9642c2ef1ad03476a61cc0470e0a448dfbf891 aa61b7cfcce676dd64f794164e9642c2ef1ad03476a61cc0470e0a448dfbf891
+PASS  mf-flow: mage-flow, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: same bytes, pixels identical
+209bb8f7ba9a53d29c4a99371114b707fc1dec2695999cb16b1d118c543593c0 209bb8f7ba9a53d29c4a99371114b707fc1dec2695999cb16b1d118c543593c0
+PASS  mf-edit-turbo: mage-flow-edit-turbo, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: same bytes, pixels identical
+ef1bae58f87d6c900a166288e3b0c9fda3772f27d8880e67df05ab1a0c939db6 ef1bae58f87d6c900a166288e3b0c9fda3772f27d8880e67df05ab1a0c939db6
+PASS  mf-edit: mage-flow-edit, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: same bytes, pixels identical
+9064bb44299810f94b2fe0af39e05d261448fce837844117da48ee451d2327a6 9064bb44299810f94b2fe0af39e05d261448fce837844117da48ee451d2327a6
+PASS  mf-edit-base: mage-flow-edit-base, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: same bytes, pixels identical
+6e91b8c46f6d29a7185132679f6809eeb4a463ef3107b02fc9da84114da71260 6e91b8c46f6d29a7185132679f6809eeb4a463ef3107b02fc9da84114da71260
+PASS  moss-sft: moss-image-sft, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: different bytes, pixels identical
+2f729f46222a9e8818a14db1b3ef66c0991f36c132ecb47f3b379a86638449e0 2f729f46222a9e8818a14db1b3ef66c0991f36c132ecb47f3b379a86638449e0
+PASS  moss-base: moss-image-base, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: different bytes, pixels identical
+bd84d69f62df758268a1a8825177fdd55afb21d86b807ed03c0a98f4bd5acd7e bd84d69f62df758268a1a8825177fdd55afb21d86b807ed03c0a98f4bd5acd7e
+PASS  q21-gen: qwen-image-2.1, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: different bytes, pixels differ: 2912 channel values, max 1
+30217a680841a5a116e9b437eb82f5f53b26e88c72a3070d01ae2eca53929d86 30217a680841a5a116e9b437eb82f5f53b26e88c72a3070d01ae2eca53929d86
+PASS  q21-base: qwen-image-2.1-base, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: different bytes, pixels differ: 2115 channel values, max 1
+9185d9fc550c7078f8d7ebac13ab18cd4a4f0499493ddc1473e4c3d1891740f6 9185d9fc550c7078f8d7ebac13ab18cd4a4f0499493ddc1473e4c3d1891740f6
+PASS  q21-edit: qwen-image-2.1, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: different bytes, pixels differ: 1576 channel values, max 1
+f3d9abeed172dd3c936866875ddc224d710f1af7fd9da4ac5393662c98e570ba f3d9abeed172dd3c936866875ddc224d710f1af7fd9da4ac5393662c98e570ba
+PASS  f3-gen: flux-3-klein, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: same bytes, pixels identical
+293d70549d12d02f3be58fe089656e936dd0205175479af566623e08b8a47d35 293d70549d12d02f3be58fe089656e936dd0205175479af566623e08b8a47d35
+PASS  f3-edit: flux-3-klein, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: same bytes, pixels identical
+beb5102a869398256c578b6a1f4d0616b7d3b027560842c2ea7e1cb007dc3312 beb5102a869398256c578b6a1f4d0616b7d3b027560842c2ea7e1cb007dc3312
+PASS  sn-base-gen: sensenova-u1, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: different bytes, pixels identical
+ad4d604129ccb068f57355d841346ac99cff6a7af818d5807184e70aaae244e7 ad4d604129ccb068f57355d841346ac99cff6a7af818d5807184e70aaae244e7
+PASS  sn-fast-gen: sensenova-u1-fast, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: different bytes, pixels identical
+868941b0c1c8ceb8d7389ab22cedd0b85ceab00417c8a992f1ab9c857039edbc 868941b0c1c8ceb8d7389ab22cedd0b85ceab00417c8a992f1ab9c857039edbc
+PASS  sn-fastv1-gen: sensenova-u1-fast-v1, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: different bytes, pixels identical
+83544accd4cddc9564f3ecec530de0ecb0a6f60b3c4dafe921cbf60f89ddfe9a 83544accd4cddc9564f3ecec530de0ecb0a6f60b3c4dafe921cbf60f89ddfe9a
+PASS  sn-fast-edit: sensenova-u1-fast, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: different bytes, pixels identical
+INFO  mf-turbo: mage-flow-turbo through Gaea against v0.9.1: same bytes, pixels identical
+INFO  mf-flow: mage-flow through Gaea against v0.9.1: same bytes, pixels identical
+INFO  mf-edit-turbo: mage-flow-edit-turbo through Gaea against v0.9.1: same bytes, pixels identical
+INFO  mf-edit: mage-flow-edit through Gaea against v0.9.1: same bytes, pixels identical
+INFO  mf-edit-base: mage-flow-edit-base through Gaea against v0.9.1: same bytes, pixels identical
+INFO  moss-sft: moss-image-sft through Gaea against v0.9.1: same bytes, pixels identical
+INFO  moss-base: moss-image-base through Gaea against v0.9.1: same bytes, pixels identical
+INFO  q21-gen: qwen-image-2.1 through Gaea against v0.9.1: same bytes, pixels identical
+INFO  q21-base: qwen-image-2.1-base through Gaea against v0.9.1: same bytes, pixels identical
+INFO  q21-edit: qwen-image-2.1 through Gaea against v0.9.1: same bytes, pixels identical
+INFO  f3-gen: flux-3-klein through Gaea against v0.9.1: same bytes, pixels identical
+INFO  f3-edit: flux-3-klein through Gaea against v0.9.1: same bytes, pixels identical
+INFO  sn-base-gen: sensenova-u1 through Gaea against v0.9.1: same bytes, pixels identical
+INFO  sn-fast-gen: sensenova-u1-fast through Gaea against v0.9.1: same bytes, pixels identical
+INFO  sn-fastv1-gen: sensenova-u1-fast-v1 through Gaea against v0.9.1: same bytes, pixels identical
+INFO  sn-fast-edit: sensenova-u1-fast through Gaea against v0.9.1: same bytes, pixels identical
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.1.0-2026-10-29T075139Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.flux3-klein-0.1.0-2026-10-29T075428Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.mage-flow-0.1.0-2026-10-29T075206Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.moss-image-0.1.0-2026-10-29T075252Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.qwen-image-21-0.1.0-2026-10-29T075354Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.sensenova-0.1.0-2026-10-29T075500Z.gpp passes validate.py
+== 47 passed, 0 failed

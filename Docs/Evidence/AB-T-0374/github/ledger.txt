@@ -1,0 +1,3 @@
+budget 103.08 GB, charged 73.28 GB, free 29.80 GB; host 0.03 GB; 0 queued
+  com.xocialize.gaea.flux3-klein 0.1.0 pid 68432: declared 23.70 GB, phys_footprint 11.78 GB, worker says 13.74 GB, charged 11.78 GB lanes ["flux-3-klein": "bf16"]
+  com.xocialize.gaea.sensenova 0.1.0 pid 68503: declared 65.70 GB, phys_footprint 60.20 GB, worker says 60.20 GB, charged 61.50 GB lanes ["sensenova-u1": "int8", "sensenova-u1-fast": "int8", "sensenova-u1-fast-v1": "int8"]

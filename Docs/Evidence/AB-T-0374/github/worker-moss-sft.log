@@ -1,0 +1,72 @@
+PASS manifest com.xocialize.gaea.moss-image 0.1.0, sha256 4d8ab7649360…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.moss-image, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-moss-image-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 68790
+W {"engine":{"contract":"1.58.0","version":"0.72.0"},"kit":{"version":"0.3.0"},"manifest_sha256":"4d8ab7649360536b2006452eb3cbf0b5824172156e13fc88ebfdd76b11273929","models":["moss-image-sft","moss-image-base"],"pid":68790,"plugin":{"id":"com.xocialize.gaea.moss-image","version":"0.1.0"},"protocol":1,"type":"hello"}
+PASS hello after 17 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+H {"budget":{"ceilingBytes":100000000000,"wiresWeights":false},"cache_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-1CAEA2A5-25D2-463C-99A0-B084B80EBA16/cache","id":"h1","models_root":"/Volumes/DEV_VOL1/Models/gaea-research-store","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"bf16","model":"moss-image-sft","type":"prepare"}
+W {"lane":"bf16","model":"moss-image-sft","re":"h2","seconds":0.256,"type":"prepared"}
+W {"report":{"availableBytes":72800000000,"budgetBytes":100000000000,"date":814953435.115221,"gpuActiveBytes":10276525972,"gpuCacheBytes":0,"physFootprintBytes":10295058328,"residentBytes":10500000000,"residents":{"moss-image-sft":10500000000},"running":[],"transientReserveBytes":16700000000},"type":"memory"}
+PASS prepared moss-image-sft lane bf16 in 0.26 s
+H {"id":"h3","inputs":{"prompt":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-1CAEA2A5-25D2-463C-99A0-B084B80EBA16/spool/job_check/in/prompt-0.txt"},"job":"job_check","lane":"bf16","model":"moss-image-sft","model_params":{"x-moss.guidance":3,"x-moss.steps":50},"operation":"image.generate","output_dir":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-1CAEA2A5-25D2-463C-99A0-B084B80EBA16/spool/job_check/out","params":{"count":1,"size":{"height":512,"width":512}},"seed":42,"type":"run"}
+W {"fraction":0.02,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.04,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.06,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":0.08,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":4,"type":"progress"}
+W {"fraction":0.1,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":5,"type":"progress"}
+W {"fraction":0.12,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":6,"type":"progress"}
+W {"fraction":0.14,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":7,"type":"progress"}
+W {"fraction":0.16,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":8,"type":"progress"}
+W {"fraction":0.18,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":9,"type":"progress"}
+W {"fraction":0.2,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":10,"type":"progress"}
+W {"fraction":0.22,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":11,"type":"progress"}
+W {"fraction":0.24,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":12,"type":"progress"}
+W {"fraction":0.26,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":13,"type":"progress"}
+W {"fraction":0.28,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":14,"type":"progress"}
+W {"fraction":0.3,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":15,"type":"progress"}
+W {"fraction":0.32,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":16,"type":"progress"}
+W {"fraction":0.34,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":17,"type":"progress"}
+W {"fraction":0.36,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":18,"type":"progress"}
+W {"fraction":0.38,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":19,"type":"progress"}
+W {"fraction":0.4,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":20,"type":"progress"}
+W {"fraction":0.42,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":21,"type":"progress"}
+W {"fraction":0.44,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":22,"type":"progress"}
+W {"fraction":0.46,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":23,"type":"progress"}
+W {"fraction":0.48,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":24,"type":"progress"}
+W {"fraction":0.5,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":25,"type":"progress"}
+W {"fraction":0.52,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":26,"type":"progress"}
+W {"fraction":0.54,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":27,"type":"progress"}
+W {"fraction":0.56,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":28,"type":"progress"}
+W {"fraction":0.58,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":29,"type":"progress"}
+W {"fraction":0.6,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":30,"type":"progress"}
+W {"fraction":0.62,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":31,"type":"progress"}
+W {"fraction":0.64,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":32,"type":"progress"}
+W {"fraction":0.66,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":33,"type":"progress"}
+W {"fraction":0.68,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":34,"type":"progress"}
+W {"fraction":0.7,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":35,"type":"progress"}
+W {"fraction":0.72,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":36,"type":"progress"}
+W {"fraction":0.74,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":37,"type":"progress"}
+W {"fraction":0.76,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":38,"type":"progress"}
+W {"fraction":0.78,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":39,"type":"progress"}
+W {"fraction":0.8,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":40,"type":"progress"}
+W {"fraction":0.82,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":41,"type":"progress"}
+W {"fraction":0.84,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":42,"type":"progress"}
+W {"fraction":0.86,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":43,"type":"progress"}
+W {"fraction":0.88,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":44,"type":"progress"}
+W {"fraction":0.9,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":45,"type":"progress"}
+W {"fraction":0.92,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":46,"type":"progress"}
+W {"fraction":0.94,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":47,"type":"progress"}
+W {"fraction":0.96,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":48,"type":"progress"}
+W {"fraction":0.98,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":49,"type":"progress"}
+W {"fraction":1,"job":"job_check","of":50,"re":"h3","stage":"denoise","step":50,"type":"progress"}
+W {"effective":{"count":1,"seed":42,"size":{"height":512,"width":512},"x-moss.guidance":3,"x-moss.steps":50},"job":"job_check","outputs":[{"media_type":"image/png","name":"images","path":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-1CAEA2A5-25D2-463C-99A0-B084B80EBA16/spool/job_check/out/image-0.png"}],"re":"h3","seconds":27.243,"type":"result","warnings":[]}
+W {"report":{"availableBytes":72800000000,"budgetBytes":100000000000,"date":814953462.358739,"gpuActiveBytes":10276525976,"gpuCacheBytes":3932160,"physFootprintBytes":11924906384,"residentBytes":10500000000,"residents":{"moss-image-sft":10500000000},"running":[],"transientReserveBytes":16700000000},"type":"memory"}
+PASS image.generate ran in 27.24 s (wall 27.24 s), 50 progress lines; outputs [{"media_type":"image\/png","name":"images","path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-1CAEA2A5-25D2-463C-99A0-B084B80EBA16\/spool\/job_check\/out\/image-0.png"}]
+H {"id":"h4","type":"memory.query"}
+W {"re":"h4","report":{"availableBytes":72800000000,"budgetBytes":100000000000,"date":814953462.358971,"gpuActiveBytes":10276525976,"gpuCacheBytes":3932160,"physFootprintBytes":11924906384,"residentBytes":10500000000,"residents":{"moss-image-sft":10500000000},"running":[],"transientReserveBytes":16700000000},"type":"memory"}
+PASS memory report: worker says phys_footprint 11924906384 B; host read 11924906384 B now, peak 26423413912 B
+H {"id":"h5","type":"shutdown"}
+PASS shutdown: exit 0
+ALL PASS

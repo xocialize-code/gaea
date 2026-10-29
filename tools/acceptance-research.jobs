@@ -1,0 +1,17 @@
+# family	label	model	operation	params	prompt	input	inproc args (beyond --model --prompt --models-root --runs --out --image)
+mage-flow	mf-turbo	mage-flow-turbo	image.generate	{"size":{"width":512,"height":512},"seed":42}	a lighthouse on a rocky coast at dusk, photorealistic	-	--lane bf16 --size 512 --seed 42
+mage-flow	mf-flow	mage-flow	image.generate	{"size":{"width":512,"height":512},"seed":42}	a lighthouse on a rocky coast at dusk, photorealistic	-	--lane bf16 --size 512 --seed 42
+mage-flow	mf-edit-turbo	mage-flow-edit-turbo	image.edit	{"size":{"width":512,"height":512},"seed":7}	make it a snowy winter night	mf-turbo	--lane int8 --size 512 --seed 7
+mage-flow	mf-edit	mage-flow-edit	image.edit	{"size":{"width":512,"height":512},"seed":7}	make it a snowy winter night	mf-turbo	--lane bf16 --size 512 --seed 7
+mage-flow	mf-edit-base	mage-flow-edit-base	image.edit	{"size":{"width":512,"height":512},"seed":7}	make it a snowy winter night	mf-turbo	--lane bf16 --size 512 --seed 7
+moss-image	moss-sft	moss-image-sft	image.generate	{"size":{"width":512,"height":512},"seed":42,"prompt_enhance":"off"}	a poster that reads "GAEA" in bold letters	-	--lane bf16 --width 512 --height 512 --seed 42
+moss-image	moss-base	moss-image-base	image.generate	{"size":{"width":512,"height":512},"seed":42,"prompt_enhance":"off"}	a red fox sitting in a snowy forest, photorealistic	-	--lane bf16 --width 512 --height 512 --seed 42
+qwen-image-21	q21-gen	qwen-image-2.1	image.generate	{"size":{"width":512,"height":512},"seed":42}	a glass teapot on a wooden table, studio light	-	--lane bf16 --width 512 --height 512 --seed 42
+qwen-image-21	q21-base	qwen-image-2.1-base	image.generate	{"size":{"width":512,"height":512},"seed":42}	a glass teapot on a wooden table, studio light	-	--lane bf16 --width 512 --height 512 --seed 42
+qwen-image-21	q21-edit	qwen-image-2.1	image.edit	{"size":{"width":512,"height":512},"seed":42}	make the teapot cobalt blue, keep everything else	q21-gen	--lane bf16 --width 512 --height 512 --seed 42
+flux3-klein	f3-gen	flux-3-klein	image.generate	{"size":{"width":512,"height":512},"seed":42}	a vintage travel poster that reads "GAEA" in bold letters above a turquoise bay with a white sailboat, flat screen-print colours	-	--lane bf16 --width 512 --height 512 --seed 42
+flux3-klein	f3-edit	flux-3-klein	image.edit	{"size":{"width":512,"height":512},"seed":7}	the same poster at night: a deep navy sky with a full moon over the bay, the lettering "GAEA" glowing warm yellow	f3-gen	--lane bf16 --width 512 --height 512 --seed 7
+sensenova	sn-base-gen	sensenova-u1	image.generate	{"size":{"width":512,"height":512},"seed":42,"prompt_enhance":"off"}	a red fox in snow, photorealistic	-	--lane int8 --width 512 --height 512 --seed 42
+sensenova	sn-fast-gen	sensenova-u1-fast	image.generate	{"size":{"width":512,"height":512},"seed":42,"prompt_enhance":"off"}	a red fox in snow, photorealistic	-	--lane int8 --width 512 --height 512 --seed 42
+sensenova	sn-fastv1-gen	sensenova-u1-fast-v1	image.generate	{"size":{"width":512,"height":512},"seed":42,"prompt_enhance":"off"}	a red fox in snow, photorealistic	-	--lane int8 --width 512 --height 512 --seed 42
+sensenova	sn-fast-edit	sensenova-u1-fast	image.edit	{"size":{"width":512,"height":512},"seed":42,"prompt_enhance":"off"}	make it night, with a full moon over the snow	sn-fast-gen	--lane int8 --width 512 --height 512 --seed 42

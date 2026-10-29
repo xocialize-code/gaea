@@ -1,0 +1,1127 @@
+{
+  "engine" : {
+    "contract" : "1.58.0",
+    "package" : "mlx-engine-swift",
+    "version" : "0.72.0"
+  },
+  "executable" : "gaea-sensenova-worker",
+  "helpers" : [
+
+  ],
+  "id" : "com.xocialize.gaea.sensenova",
+  "license" : "Apache-2.0",
+  "manifest_version" : 1,
+  "min_gaea" : "0.2.0",
+  "models" : [
+    {
+      "id" : "sensenova-u1",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage",
+              "imageEdit",
+              "imageAnalysis"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 4200000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 20500000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "*"
+                ],
+                "repo" : "mlx-community/SenseNova-U1.5-8B-MoT-8bit",
+                "revision" : "main",
+                "role" : "model"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage",
+              "imageEdit",
+              "imageAnalysis"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 4000000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 35500000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "*"
+                ],
+                "repo" : "mlx-community/SenseNova-U1.5-8B-MoT-bf16",
+                "revision" : "main",
+                "role" : "model"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "Apache-2.0"
+          }
+        },
+        "provenance" : {
+          "revision" : "07d76f61474b9c6e6999e22c559314d3439b8c81",
+          "sourceRepo" : "sensenova/SenseNova-U1.5-8B-MoT",
+          "tier" : 3
+        },
+        "requirements" : {
+          "chipFloor" : "pro",
+          "footprints" : [
+            {
+              "peakActivationBytes" : 4000000000,
+              "quant" : "bf16",
+              "residentBytes" : 35500000000
+            },
+            {
+              "peakActivationBytes" : 4200000000,
+              "quant" : "int8",
+              "residentBytes" : 20500000000
+            },
+            {
+              "peakActivationBytes" : 4500000000,
+              "quant" : "int4",
+              "residentBytes" : 12200000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "textToImage",
+            "name" : "sensenova-u1",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "SenseNova-U1.5-8B-MoT unified T2I (pixel-space rectified flow, no VAE): native 2048²-class buckets, text rendering, 50-step base or cfg-free 8-step distill tiers. metaData: think=true for the reasoning mode (base tiers).",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "imageEdit",
+            "name" : "sensenova-u1-edit",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "images",
+                "required" : true,
+                "summary" : "Conditioning input image(s), in prompt order."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The edit instruction."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "True-CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Identity-preserving instruction editing on the same resident model (image-conditioned generation; 50 steps / cfg 4 on the base and pose tiers, 8 steps cfg-free on the 8step distill tiers; metaData imageGuidance (1...4) adds the image-CFG axis). N reference images are conditioned on in the order given.",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "imageAnalysis",
+            "name" : "sensenova-u1-vqa",
+            "parameters" : [
+              {
+                "kind" : "image",
+                "name" : "image",
+                "required" : true,
+                "summary" : "The image to analyze."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "Instruction / question."
+              }
+            ],
+            "summary" : "Visual question answering on the SAME resident model (understanding stream): grounded description, reading, and reasoning about an image. metaData: maxTokens, temperature. Every tier (the distill adapters leave the understanding stream untouched).",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "SenseNova-U1.5"
+    },
+    {
+      "id" : "sensenova-u1-fast",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage",
+              "imageEdit",
+              "imageAnalysis"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 4200000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 20500000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "*"
+                ],
+                "repo" : "mlx-community/SenseNova-U1.5-8B-MoT-8step-v2-8bit",
+                "revision" : "main",
+                "role" : "model"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int4",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage",
+              "imageEdit",
+              "imageAnalysis"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int4",
+            "materialization" : "engine",
+            "peakTransientBytes" : 4500000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 12200000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int4",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "*"
+                ],
+                "repo" : "mlx-community/SenseNova-U1.5-8B-MoT-8step-v2-4bit",
+                "revision" : "main",
+                "role" : "model"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "Apache-2.0"
+          }
+        },
+        "provenance" : {
+          "revision" : "07d76f61474b9c6e6999e22c559314d3439b8c81",
+          "sourceRepo" : "sensenova/SenseNova-U1.5-8B-MoT",
+          "tier" : 3
+        },
+        "requirements" : {
+          "chipFloor" : "pro",
+          "footprints" : [
+            {
+              "peakActivationBytes" : 4000000000,
+              "quant" : "bf16",
+              "residentBytes" : 35500000000
+            },
+            {
+              "peakActivationBytes" : 4200000000,
+              "quant" : "int8",
+              "residentBytes" : 20500000000
+            },
+            {
+              "peakActivationBytes" : 4500000000,
+              "quant" : "int4",
+              "residentBytes" : 12200000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "textToImage",
+            "name" : "sensenova-u1",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "SenseNova-U1.5-8B-MoT unified T2I (pixel-space rectified flow, no VAE): native 2048²-class buckets, text rendering, 50-step base or cfg-free 8-step distill tiers. metaData: think=true for the reasoning mode (base tiers).",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "imageEdit",
+            "name" : "sensenova-u1-edit",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "images",
+                "required" : true,
+                "summary" : "Conditioning input image(s), in prompt order."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The edit instruction."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "True-CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Identity-preserving instruction editing on the same resident model (image-conditioned generation; 50 steps / cfg 4 on the base and pose tiers, 8 steps cfg-free on the 8step distill tiers; metaData imageGuidance (1...4) adds the image-CFG axis). N reference images are conditioned on in the order given.",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "imageAnalysis",
+            "name" : "sensenova-u1-vqa",
+            "parameters" : [
+              {
+                "kind" : "image",
+                "name" : "image",
+                "required" : true,
+                "summary" : "The image to analyze."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "Instruction / question."
+              }
+            ],
+            "summary" : "Visual question answering on the SAME resident model (understanding stream): grounded description, reading, and reasoning about an image. metaData: maxTokens, temperature. Every tier (the distill adapters leave the understanding stream untouched).",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "SenseNova-U1.5 8-step"
+    },
+    {
+      "id" : "sensenova-u1-fast-v1",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage",
+              "imageEdit",
+              "imageAnalysis"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 4200000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 20500000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "*"
+                ],
+                "repo" : "mlx-community/SenseNova-U1.5-8B-MoT-8step-8bit",
+                "revision" : "main",
+                "role" : "model"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int4",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage",
+              "imageEdit",
+              "imageAnalysis"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int4",
+            "materialization" : "engine",
+            "peakTransientBytes" : 4500000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 12200000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int4",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "*"
+                ],
+                "repo" : "mlx-community/SenseNova-U1.5-8B-MoT-8step-4bit",
+                "revision" : "main",
+                "role" : "model"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "Apache-2.0"
+          }
+        },
+        "provenance" : {
+          "revision" : "07d76f61474b9c6e6999e22c559314d3439b8c81",
+          "sourceRepo" : "sensenova/SenseNova-U1.5-8B-MoT",
+          "tier" : 3
+        },
+        "requirements" : {
+          "chipFloor" : "pro",
+          "footprints" : [
+            {
+              "peakActivationBytes" : 4000000000,
+              "quant" : "bf16",
+              "residentBytes" : 35500000000
+            },
+            {
+              "peakActivationBytes" : 4200000000,
+              "quant" : "int8",
+              "residentBytes" : 20500000000
+            },
+            {
+              "peakActivationBytes" : 4500000000,
+              "quant" : "int4",
+              "residentBytes" : 12200000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "textToImage",
+            "name" : "sensenova-u1",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "SenseNova-U1.5-8B-MoT unified T2I (pixel-space rectified flow, no VAE): native 2048²-class buckets, text rendering, 50-step base or cfg-free 8-step distill tiers. metaData: think=true for the reasoning mode (base tiers).",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "imageEdit",
+            "name" : "sensenova-u1-edit",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "images",
+                "required" : true,
+                "summary" : "Conditioning input image(s), in prompt order."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The edit instruction."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "True-CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Identity-preserving instruction editing on the same resident model (image-conditioned generation; 50 steps / cfg 4 on the base and pose tiers, 8 steps cfg-free on the 8step distill tiers; metaData imageGuidance (1...4) adds the image-CFG axis). N reference images are conditioned on in the order given.",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "imageAnalysis",
+            "name" : "sensenova-u1-vqa",
+            "parameters" : [
+              {
+                "kind" : "image",
+                "name" : "image",
+                "required" : true,
+                "summary" : "The image to analyze."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "Instruction / question."
+              }
+            ],
+            "summary" : "Visual question answering on the SAME resident model (understanding stream): grounded description, reading, and reasoning about an image. metaData: maxTokens, temperature. Every tier (the distill adapters leave the understanding stream untouched).",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "SenseNova-U1.5 8-step (V1 adapter)"
+    }
+  ],
+  "offers" : [
+    {
+      "defaults" : {
+        "count" : 1
+      },
+      "limits" : {
+        "max_pixels" : 4194304,
+        "max_side" : 4096,
+        "min_side" : 256,
+        "size_multiple" : 32
+      },
+      "model" : {
+        "id" : "sensenova-u1",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://huggingface.co/sensenova/SenseNova-U1.5-8B-MoT"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only: runs only when a request names it. The 50-step base with CFG 4, honours negative prompts; x-sensenova.think adds a reasoning pass before the render. Strong text rendering. Multiples of 32, up to 2048² in area.",
+        "quality_tiers" : [
+          "standard",
+          "best"
+        ],
+        "speed_class" : "slow",
+        "title" : "SenseNova-U1.5"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-sensenova.guidance" : {
+            "default" : 4,
+            "description" : "Classifier-free guidance: how strongly the prompt (and against the negative prompt) steers. 1 turns CFG off.",
+            "maximum" : 20,
+            "minimum" : 1,
+            "type" : "number",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Guidance",
+              "widget" : "slider"
+            }
+          },
+          "x-sensenova.steps" : {
+            "default" : 50,
+            "description" : "Denoising steps; more is slower and finer.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          },
+          "x-sensenova.think" : {
+            "default" : false,
+            "description" : "Reason about the prompt before drawing: a planning pass ahead of the render. Slower.",
+            "type" : "boolean",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Think",
+              "widget" : "toggle"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "limits" : {
+        "max_images" : 1,
+        "max_pixels" : 4194304,
+        "max_side" : 4096,
+        "min_side" : 256,
+        "size_multiple" : 32
+      },
+      "model" : {
+        "id" : "sensenova-u1",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://huggingface.co/sensenova/SenseNova-U1.5-8B-MoT"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only: runs only when a request names it. Instruction editing from one image, 50 steps with CFG 4. Drawn at the image's size; a negative prompt does nothing.",
+        "quality_tiers" : [
+          "standard",
+          "best"
+        ],
+        "speed_class" : "slow",
+        "title" : "SenseNova-U1.5"
+      },
+      "operation" : "image.edit",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-sensenova.guidance" : {
+            "default" : 4,
+            "description" : "Classifier-free guidance: how strongly the instruction steers. 1 turns CFG off.",
+            "maximum" : 20,
+            "minimum" : 1,
+            "type" : "number",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Guidance",
+              "widget" : "slider"
+            }
+          },
+          "x-sensenova.steps" : {
+            "default" : 50,
+            "description" : "Denoising steps; more is slower and finer.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "defaults" : {
+        "count" : 1
+      },
+      "limits" : {
+        "max_pixels" : 4194304,
+        "max_side" : 4096,
+        "min_side" : 256,
+        "size_multiple" : 32
+      },
+      "model" : {
+        "id" : "sensenova-u1-fast",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://huggingface.co/sensenova/SenseNova-U1.5-8B-MoT"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only: runs only when a request names it. Distilled to 8 steps without CFG (upstream's V2 adapter): negative prompts do nothing. Multiples of 32, up to 2048² in area.",
+        "quality_tiers" : [
+          "draft",
+          "standard"
+        ],
+        "speed_class" : "fast",
+        "title" : "SenseNova-U1.5 8-step"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-sensenova.steps" : {
+            "default" : 8,
+            "description" : "Denoising steps. SenseNova-U1.5 8-step is distilled for 8.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "limits" : {
+        "max_images" : 1,
+        "max_pixels" : 4194304,
+        "max_side" : 4096,
+        "min_side" : 256,
+        "size_multiple" : 32
+      },
+      "model" : {
+        "id" : "sensenova-u1-fast",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://huggingface.co/sensenova/SenseNova-U1.5-8B-MoT"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only: runs only when a request names it. Instruction editing from one image in 8 steps without CFG (V2 adapter). Drawn at the image's size.",
+        "quality_tiers" : [
+          "draft",
+          "standard"
+        ],
+        "speed_class" : "fast",
+        "title" : "SenseNova-U1.5 8-step"
+      },
+      "operation" : "image.edit",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-sensenova.steps" : {
+            "default" : 8,
+            "description" : "Denoising steps. SenseNova-U1.5 8-step is distilled for 8.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "defaults" : {
+        "count" : 1
+      },
+      "limits" : {
+        "max_pixels" : 4194304,
+        "max_side" : 4096,
+        "min_side" : 256,
+        "size_multiple" : 32
+      },
+      "model" : {
+        "id" : "sensenova-u1-fast-v1",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://huggingface.co/sensenova/SenseNova-U1.5-8B-MoT"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only: runs only when a request names it. The V1 8-step adapter, kept so existing seeds reproduce; sensenova-u1-fast's V2 adapter clips and oversharpens less. No CFG: negative prompts do nothing.",
+        "quality_tiers" : [
+          "draft",
+          "standard"
+        ],
+        "speed_class" : "fast",
+        "title" : "SenseNova-U1.5 8-step (V1 adapter)"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-sensenova.steps" : {
+            "default" : 8,
+            "description" : "Denoising steps. SenseNova-U1.5 8-step (V1 adapter) is distilled for 8.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "limits" : {
+        "max_images" : 1,
+        "max_pixels" : 4194304,
+        "max_side" : 4096,
+        "min_side" : 256,
+        "size_multiple" : 32
+      },
+      "model" : {
+        "id" : "sensenova-u1-fast-v1",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://huggingface.co/sensenova/SenseNova-U1.5-8B-MoT"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only: runs only when a request names it. Instruction editing from one image in 8 steps on the V1 adapter. Drawn at the image's size.",
+        "quality_tiers" : [
+          "draft",
+          "standard"
+        ],
+        "speed_class" : "fast",
+        "title" : "SenseNova-U1.5 8-step (V1 adapter)"
+      },
+      "operation" : "image.edit",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-sensenova.steps" : {
+            "default" : 8,
+            "description" : "Denoising steps. SenseNova-U1.5 8-step (V1 adapter) is distilled for 8.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    }
+  ],
+  "protocol" : 1,
+  "repo" : "https://github.com/xocialize/gaea-plugin-sensenova",
+  "settings" : [
+
+  ],
+  "summary" : "SenseTime's SenseNova-U1.5 8B MoT (Apache-2.0): a unified Mixture-of-Transformers drawing in pixel space with rectified flow, no VAE. Text-to-image (the 50-step base with think mode, and two 8-step distillations) and instruction editing from one image. A research plugin: every model is named-only.",
+  "team" : "CFZS6RXUCP",
+  "title" : "SenseNova-U1.5",
+  "version" : "0.1.0"
+}

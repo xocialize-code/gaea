@@ -1,0 +1,63 @@
+PASS manifest com.xocialize.gaea.qwen-image-21 0.1.0, sha256 fa3dd2d9b5ba…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.qwen-image-21, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-qwen-image-21-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 68940
+W {"engine":{"contract":"1.58.0","version":"0.72.0"},"kit":{"version":"0.3.0"},"manifest_sha256":"fa3dd2d9b5ba410bdf936c9051d8fc13c7a8d7c9c62c0bdf590b3d2b69b78343","models":["qwen-image-2.1","qwen-image-2.1-base"],"pid":68940,"plugin":{"id":"com.xocialize.gaea.qwen-image-21","version":"0.1.0"},"protocol":1,"type":"hello"}
+PASS hello after 13 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+H {"budget":{"ceilingBytes":100000000000,"wiresWeights":false},"cache_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-4BF208D0-677F-4A52-821E-7B73176E8FEB/cache","id":"h1","models_root":"/Volumes/DEV_VOL1/Models/gaea-research-store","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"bf16","model":"qwen-image-2.1-base","type":"prepare"}
+W {"lane":"bf16","model":"qwen-image-2.1-base","re":"h2","seconds":0.671,"type":"prepared"}
+W {"report":{"availableBytes":41200000000,"budgetBytes":100000000000,"date":814953551.216413,"gpuActiveBytes":15581455596,"gpuCacheBytes":191315988,"physFootprintBytes":18532413728,"residentBytes":15600000000,"residents":{"qwen-image-2.1-base":15600000000},"running":[],"transientReserveBytes":43200000000},"type":"memory"}
+PASS prepared qwen-image-2.1-base lane bf16 in 0.67 s
+H {"id":"h3","inputs":{"prompt":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-4BF208D0-677F-4A52-821E-7B73176E8FEB/spool/job_check/in/prompt-0.txt"},"job":"job_check","lane":"bf16","model":"qwen-image-2.1-base","model_params":{"x-qwen21.steps":40},"operation":"image.generate","output_dir":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-4BF208D0-677F-4A52-821E-7B73176E8FEB/spool/job_check/out","params":{"count":1,"size":{"height":512,"width":512}},"seed":42,"type":"run"}
+W {"fraction":0.025,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.05,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.075,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":0.1,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":4,"type":"progress"}
+W {"fraction":0.125,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":5,"type":"progress"}
+W {"fraction":0.15,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":6,"type":"progress"}
+W {"fraction":0.175,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":7,"type":"progress"}
+W {"fraction":0.2,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":8,"type":"progress"}
+W {"fraction":0.225,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":9,"type":"progress"}
+W {"fraction":0.25,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":10,"type":"progress"}
+W {"fraction":0.275,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":11,"type":"progress"}
+W {"fraction":0.3,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":12,"type":"progress"}
+W {"fraction":0.325,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":13,"type":"progress"}
+W {"fraction":0.35,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":14,"type":"progress"}
+W {"fraction":0.375,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":15,"type":"progress"}
+W {"fraction":0.4,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":16,"type":"progress"}
+W {"fraction":0.425,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":17,"type":"progress"}
+W {"fraction":0.45,"job":"job_check","of":40,"re":"h[License] xocialize/Qwen-Image-2.1: weight license LicenseRef-Qwen-Research is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+3","stage":"denoise","step":18,"type":"progress"}
+W {"fraction":0.475,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":19,"type":"progress"}
+W {"fraction":0.5,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":20,"type":"progress"}
+W {"fraction":0.525,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":21,"type":"progress"}
+W {"fraction":0.55,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":22,"type":"progress"}
+W {"fraction":0.575,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":23,"type":"progress"}
+W {"fraction":0.6,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":24,"type":"progress"}
+W {"fraction":0.625,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":25,"type":"progress"}
+W {"fraction":0.65,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":26,"type":"progress"}
+W {"fraction":0.675,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":27,"type":"progress"}
+W {"fraction":0.7,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":28,"type":"progress"}
+W {"fraction":0.725,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":29,"type":"progress"}
+W {"fraction":0.75,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":30,"type":"progress"}
+W {"fraction":0.775,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":31,"type":"progress"}
+W {"fraction":0.8,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":32,"type":"progress"}
+W {"fraction":0.825,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":33,"type":"progress"}
+W {"fraction":0.85,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":34,"type":"progress"}
+W {"fraction":0.875,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":35,"type":"progress"}
+W {"fraction":0.9,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":36,"type":"progress"}
+W {"fraction":0.925,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":37,"type":"progress"}
+W {"fraction":0.95,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":38,"type":"progress"}
+W {"fraction":0.975,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":39,"type":"progress"}
+W {"fraction":1,"job":"job_check","of":40,"re":"h3","stage":"denoise","step":40,"type":"progress"}
+W {"effective":{"count":1,"seed":42,"size":{"height":512,"width":512},"x-qwen21.steps":40},"job":"job_check","outputs":[{"media_type":"image/png","name":"images","path":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-4BF208D0-677F-4A52-821E-7B73176E8FEB/spool/job_check/out/image-0.png"}],"re":"h3","seconds":13.142,"type":"result","warnings":[]}
+W {"report":{"availableBytes":41200000000,"budgetBytes":100000000000,"date":814953564.359608,"gpuActiveBytes":15581455596,"gpuCacheBytes":2277195808,"physFootprintBytes":19010908520,"residentBytes":15600000000,"residents":{"qwen-image-2.1-base":15600000000},"running":[],"transientReserveBytes":43200000000},"type":"memory"}
+PASS image.generate ran in 13.14 s (wall 13.14 s), 40 progress lines; outputs [{"name":"images","path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-4BF208D0-677F-4A52-821E-7B73176E8FEB\/spool\/job_check\/out\/image-0.png","media_type":"image\/png"}]
+H {"id":"h4","type":"memory.query"}
+W {"re":"h4","report":{"availableBytes":41200000000,"budgetBytes":100000000000,"date":814953564.359828,"gpuActiveBytes":15581455596,"gpuCacheBytes":2277195808,"physFootprintBytes":19010908520,"residentBytes":15600000000,"residents":{"qwen-image-2.1-base":15600000000},"running":[],"transientReserveBytes":43200000000},"type":"memory"}
+PASS memory report: worker says phys_footprint 19010908520 B; host read 19010908520 B now, peak 32195337424 B
+H {"id":"h5","type":"shutdown"}
+PASS shutdown: exit 0
+ALL PASS

@@ -1,0 +1,31 @@
+PASS manifest com.xocialize.gaea.moss-image 0.1.0, sha256 4d8ab7649360…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.moss-image, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-moss-image-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 40912
+W {"engine":{"contract":"1.58.0","version":"0.72.0"},"kit":{"version":"0.3.0"},"manifest_sha256":"4d8ab7649360536b2006452eb3cbf0b5824172156e13fc88ebfdd76b11273929","models":["moss-image-sft","moss-image-base"],"pid":40912,"plugin":{"id":"com.xocialize.gaea.moss-image","version":"0.1.0"},"protocol":1,"type":"hello"}
+PASS hello after 366 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+H {"budget":{"ceilingBytes":64000000000,"wiresWeights":false},"cache_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-2F862CF3-CFA5-4339-B95B-D3270DBAD5EB/cache","id":"h1","models_root":"/Volumes/DEV_VOL1/models/gaea-research-store","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"int8","model":"moss-image-sft","type":"prepare"}
+W {"lane":"int8","model":"moss-image-sft","re":"h2","seconds":2.556,"type":"prepared"}
+W {"report":{"availableBytes":47800000000,"budgetBytes":64000000000,"date":814950806.660879,"gpuActiveBytes":5605119892,"gpuCacheBytes":0,"physFootprintBytes":7993021408,"residentBytes":5800000000,"residents":{"moss-image-sft":5800000000},"running":[],"transientReserveBytes":10400000000},"type":"memory"}
+PASS prepared moss-image-sft lane int8 in 2.56 s
+H {"id":"h3","inputs":{"prompt":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-2F862CF3-CFA5-4339-B95B-D3270DBAD5EB/spool/job_check/in/prompt-0.txt"},"job":"job_check","lane":"int8","model":"moss-image-sft","operation":"image.generate","output_dir":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-2F862CF3-CFA5-4339-B95B-D3270DBAD5EB/spool/job_check/out","params":{"count":1,"size":{"height":256,"width":256},"x-moss.steps":8},"seed":42,"type":"run"}
+W {"fraction":0.125,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.25,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.375,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":0.5,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":4,"type":"progress"}
+W {"fraction":0.625,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":5,"type":"progress"}
+W {"fraction":0.75,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":6,"type":"progress"}
+W {"fraction":0.875,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":7,"type":"progress"}
+W {"fraction":1,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":8,"type":"progress"}
+W {"effective":{"count":1,"seed":42,"size":{"height":256,"width":256},"x-moss.guidance":3,"x-moss.steps":8},"job":"job_check","outputs":[{"media_type":"image/png","name":"images","path":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-2F862CF3-CFA5-4339-B95B-D3270DBAD5EB/spool/job_check/out/image-0.png"}],"re":"h3","seconds":20.008,"type":"result","warnings":[]}
+W {"report":{"availableBytes":47800000000,"budgetBytes":64000000000,"date":814950826.669267,"gpuActiveBytes":5605119896,"gpuCacheBytes":1261568,"physFootprintBytes":6772002512,"residentBytes":5800000000,"residents":{"moss-image-sft":5800000000},"running":[],"transientReserveBytes":10400000000},"type":"memory"}
+PASS image.generate ran in 20.01 s (wall 20.01 s), 8 progress lines; outputs [{"name":"images","path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-2F862CF3-CFA5-4339-B95B-D3270DBAD5EB\/spool\/job_check\/out\/image-0.png","media_type":"image\/png"}]
+H {"id":"h4","type":"memory.query"}
+W {"re":"h4","report":{"availableBytes":47800000000,"budgetBytes":64000000000,"date":814950826.669497,"gpuActiveBytes":5605119896,"gpuCacheBytes":1261568,"physFootprintBytes":6772002512,"residentBytes":5800000000,"residents":{"moss-image-sft":5800000000},"running":[],"transientReserveBytes":10400000000},"type":"memory"}
+PASS memory report: worker says phys_footprint 6772002512 B; host read 6772002512 B now, peak 15774164952 B
+H {"id":"h5","type":"shutdown"}
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-moss-image/dist/check-session.gpp
+ALL PASS

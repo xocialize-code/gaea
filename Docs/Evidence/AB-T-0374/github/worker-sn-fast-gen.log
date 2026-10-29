@@ -1,0 +1,30 @@
+PASS manifest com.xocialize.gaea.sensenova 0.1.0, sha256 4fd28af52677…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.sensenova, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-sensenova-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 69111
+W {"engine":{"contract":"1.58.0","version":"0.72.0"},"kit":{"version":"0.3.0"},"manifest_sha256":"4fd28af52677c654255b3107d8beebeeea7bdbfe96e9fc967701246af9dde768","models":["sensenova-u1","sensenova-u1-fast","sensenova-u1-fast-v1"],"pid":69111,"plugin":{"id":"com.xocialize.gaea.sensenova","version":"0.1.0"},"protocol":1,"type":"hello"}
+PASS hello after 11 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+H {"budget":{"ceilingBytes":100000000000,"wiresWeights":false},"cache_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-BF8CAFBC-DDA3-4590-9818-3FD59816FD79/cache","id":"h1","models_root":"/Volumes/DEV_VOL1/Models/gaea-research-store","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"int8","model":"sensenova-u1-fast","type":"prepare"}
+W {"lane":"int8","model":"sensenova-u1-fast","re":"h2","seconds":0.858,"type":"prepared"}
+W {"report":{"availableBytes":75300000000,"budgetBytes":100000000000,"date":814953676.50223,"gpuActiveBytes":19871867000,"gpuCacheBytes":2312,"physFootprintBytes":19980696288,"residentBytes":20500000000,"residents":{"sensenova-u1-fast":20500000000},"running":[],"transientReserveBytes":4200000000},"type":"memory"}
+PASS prepared sensenova-u1-fast lane int8 in 0.86 s
+H {"id":"h3","inputs":{"prompt":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-BF8CAFBC-DDA3-4590-9818-3FD59816FD79/spool/job_check/in/prompt-0.txt"},"job":"job_check","lane":"int8","model":"sensenova-u1-fast","model_params":{"x-sensenova.steps":8},"operation":"image.generate","output_dir":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-BF8CAFBC-DDA3-4590-9818-3FD59816FD79/spool/job_check/out","params":{"count":1,"size":{"height":512,"width":512}},"seed":42,"type":"run"}
+W {"fraction":0.125,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.25,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.375,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":0.5,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":4,"type":"progress"}
+W {"fraction":0.625,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":5,"type":"progress"}
+W {"fraction":0.75,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":6,"type":"progress"}
+W {"fraction":0.875,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":7,"type":"progress"}
+W {"fraction":1,"job":"job_check","of":8,"re":"h3","stage":"denoise","step":8,"type":"progress"}
+W {"effective":{"count":1,"seed":42,"size":{"height":512,"width":512},"x-sensenova.steps":8},"job":"job_check","outputs":[{"media_type":"image/png","name":"images","path":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-BF8CAFBC-DDA3-4590-9818-3FD59816FD79/spool/job_check/out/image-0.png"}],"re":"h3","seconds":1.151,"type":"result","warnings":[]}
+W {"report":{"availableBytes":75300000000,"budgetBytes":100000000000,"date":814953677.65464,"gpuActiveBytes":19872944620,"gpuCacheBytes":85004364,"physFootprintBytes":20229979040,"residentBytes":20500000000,"residents":{"sensenova-u1-fast":20500000000},"running":[],"transientReserveBytes":4200000000},"type":"memory"}
+PASS image.generate ran in 1.15 s (wall 1.15 s), 8 progress lines; outputs [{"name":"images","path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-BF8CAFBC-DDA3-4590-9818-3FD59816FD79\/spool\/job_check\/out\/image-0.png","media_type":"image\/png"}]
+H {"id":"h4","type":"memory.query"}
+W {"re":"h4","report":{"availableBytes":75300000000,"budgetBytes":100000000000,"date":814953677.65484,"gpuActiveBytes":19872944620,"gpuCacheBytes":85004364,"physFootprintBytes":20229979040,"residentBytes":20500000000,"residents":{"sensenova-u1-fast":20500000000},"running":[],"transientReserveBytes":4200000000},"type":"memory"}
+PASS memory report: worker says phys_footprint 20229979040 B; host read 20229979040 B now, peak 20643953568 B
+H {"id":"h5","type":"shutdown"}
+PASS shutdown: exit 0
+ALL PASS

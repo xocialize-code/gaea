@@ -1,0 +1,544 @@
+{
+  "engine" : {
+    "contract" : "1.58.0",
+    "package" : "mlx-engine-swift",
+    "version" : "0.72.0"
+  },
+  "executable" : "gaea-flux3-klein-worker",
+  "helpers" : [
+
+  ],
+  "id" : "com.xocialize.gaea.flux3-klein",
+  "license" : "Apache-2.0",
+  "manifest_version" : 1,
+  "min_gaea" : "0.2.0",
+  "models" : [
+    {
+      "id" : "flux-3-klein",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 12000000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 11700000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "model.safetensors",
+                  "config.json",
+                  "manifest.json",
+                  "text_encoder/*",
+                  "vae/*",
+                  "LICENSE.md",
+                  "NOTICE.md"
+                ],
+                "repo" : "mlx-community/flux-3-image-klein-bf16",
+                "revision" : "d1fc3059ae6b06a09221fd6ee67e6100e0b1ec75",
+                "role" : "snapshot"
+              },
+              {
+                "repo" : "mlx-community/flux-3-image-klein-pup-8bit",
+                "revision" : "3391b4504c1327229665a2e7a6b1ecd71e673c30",
+                "role" : "upsampler"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 12000000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 6700000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "model.safetensors",
+                  "config.json",
+                  "manifest.json",
+                  "text_encoder/*",
+                  "vae/*",
+                  "LICENSE.md",
+                  "NOTICE.md"
+                ],
+                "repo" : "mlx-community/flux-3-image-klein-bf16",
+                "revision" : "d1fc3059ae6b06a09221fd6ee67e6100e0b1ec75",
+                "role" : "snapshot"
+              },
+              {
+                "repo" : "mlx-community/flux-3-image-klein-pup-8bit",
+                "revision" : "3391b4504c1327229665a2e7a6b1ecd71e673c30",
+                "role" : "upsampler"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int4",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int4",
+            "materialization" : "engine",
+            "peakTransientBytes" : 12000000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 4900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int4",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "model.safetensors",
+                  "config.json",
+                  "manifest.json",
+                  "text_encoder/*",
+                  "vae/*",
+                  "LICENSE.md",
+                  "NOTICE.md"
+                ],
+                "repo" : "mlx-community/flux-3-image-klein-bf16",
+                "revision" : "d1fc3059ae6b06a09221fd6ee67e6100e0b1ec75",
+                "role" : "snapshot"
+              },
+              {
+                "repo" : "mlx-community/flux-3-image-klein-pup-8bit",
+                "revision" : "3391b4504c1327229665a2e7a6b1ecd71e673c30",
+                "role" : "upsampler"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "LicenseRef-FLUX-Kommunity-1.0"
+          }
+        },
+        "provenance" : {
+          "revision" : "d1fc3059ae6b06a09221fd6ee67e6100e0b1ec75",
+          "sourceRepo" : "mlx-community/flux-3-image-klein-bf16",
+          "tier" : 1
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 12000000000,
+              "quant" : "bf16",
+              "residentBytes" : 11700000000
+            },
+            {
+              "peakActivationBytes" : 12000000000,
+              "quant" : "int8",
+              "residentBytes" : 6700000000
+            },
+            {
+              "peakActivationBytes" : 12000000000,
+              "quant" : "int4",
+              "residentBytes" : 4900000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "textToImage",
+            "name" : "flux-3-klein",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "FLUX 3 Image Klein text-to-image (Black Forest Labs, 5.55B flow-map DiT on Qwen3-VL-4B; 16 steps, no guidance): strong English text rendering, bounding-box layout in the prompt. Write a FULL SCENE CAPTION, not a short request: medium and style, the scene, lighting and camera, and every subject with its colours, materials and place in the frame. Put any text to render in quotes. A short prompt gives generic output. For layout, append a JSON list of boxes after the caption: [{\"id\": \"name_1\", \"bbox\": [top, left, bottom, right] on a 0–1000 grid, \"desc\": \"…\"}], and tag each element in the caption as <name_1>. BFL's prompt upsampler system prompts: huggingface.co/black-forest-labs/flux-3-image-klein-pup (system_prompts.json). FLUX KOMMUNITY LICENCE: non-commercial, or commercial outputs only for businesses under US$5M revenue that filter content and disclose AI generation; never train on outputs.",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "imageEdit",
+            "name" : "flux-3-klein",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "images",
+                "required" : true,
+                "summary" : "Conditioning input image(s), in prompt order."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The edit instruction."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "True-CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "FLUX 3 Image Klein editing and composition with up to 10 reference images. One reference keeps its own size, fitted under 4.19 MP (2048²); several are each fitted under 1 MP. Write the caption as a complete description of the result, the edit folded in. Refer to the n-th reference as 'the n-th image', or as <ref_image_n> in box edits. Write a FULL SCENE CAPTION, not a short request: medium and style, the scene, lighting and camera, and every subject with its colours, materials and place in the frame. Put any text to render in quotes. A short prompt gives generic output. For layout, append a JSON list of boxes after the caption: [{\"id\": \"name_1\", \"bbox\": [top, left, bottom, right] on a 0–1000 grid, \"desc\": \"…\"}], and tag each element in the caption as <name_1>. BFL's prompt upsampler system prompts: huggingface.co/black-forest-labs/flux-3-image-klein-pup (system_prompts.json). FLUX KOMMUNITY LICENCE (see text-to-image).",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "FLUX 3 Klein"
+    }
+  ],
+  "offers" : [
+    {
+      "defaults" : {
+        "count" : 1
+      },
+      "limits" : {
+        "max_pixels" : 4194304,
+        "min_side" : 64,
+        "size_multiple" : 16
+      },
+      "model" : {
+        "id" : "flux-3-klein",
+        "license" : {
+          "accepted_required" : true,
+          "commercial_use" : false,
+          "notice" : "FLUX Kommunity licence: non-commercial use; commercial use of outputs only for businesses under US$5M revenue that filter content and disclose AI generation; never use outputs to train another image model. Read the terms before you use or share results.",
+          "spdx" : "LicenseRef-FLUX-Kommunity-1.0",
+          "terms_url" : "https://huggingface.co/black-forest-labs/flux-3-image-klein/blob/main/LICENSE.md"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only and opt-in (FLUX Kommunity licence). Text-to-image, 16 steps without CFG: negative prompts do nothing. Strong English text and box layout. The model wants full scene captions; short prompts are fine, since its upsampler expands them (about 10 s). Put text to render in quotes, e.g. a sign reading \"OPEN\".",
+        "quality_tiers" : [
+          "standard",
+          "best"
+        ],
+        "speed_class" : "slow",
+        "title" : "FLUX 3 Klein"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-flux3.boxes" : {
+            "description" : "Layout boxes on 0–1 coordinates, {id, bbox: [y_min, x_min, y_max, x_max], desc}, or box edits {id, from: ref_image_n | target, src_bbox, tgt_bbox (null removes), desc}.",
+            "items" : {
+              "properties" : {
+                "bbox" : {
+                  "items" : {
+                    "type" : "number"
+                  },
+                  "maxItems" : 4,
+                  "minItems" : 4,
+                  "type" : "array"
+                },
+                "desc" : {
+                  "type" : "string"
+                },
+                "from" : {
+                  "type" : "string"
+                },
+                "id" : {
+                  "type" : "string"
+                },
+                "src_bbox" : {
+                  "items" : {
+                    "type" : "number"
+                  },
+                  "maxItems" : 4,
+                  "minItems" : 4,
+                  "type" : "array"
+                },
+                "tgt_bbox" : {
+                  "items" : {
+                    "type" : "number"
+                  },
+                  "maxItems" : 4,
+                  "minItems" : 4,
+                  "type" : [
+                    "array",
+                    "null"
+                  ]
+                }
+              },
+              "type" : "object"
+            },
+            "type" : "array",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Layout boxes"
+            }
+          },
+          "x-flux3.steps" : {
+            "default" : 16,
+            "description" : "Denoising steps; the model is tuned for 16.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          },
+          "x-flux3.upsample" : {
+            "default" : true,
+            "description" : "Expand the prompt into a full scene caption with BFL's prompt upsampler first (about 10 s). Off sends the prompt as typed, for a caller that wrote the full caption.",
+            "type" : "boolean",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Prompt upsampler",
+              "widget" : "toggle"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "limits" : {
+        "max_images" : 10,
+        "max_pixels" : 4194304,
+        "min_side" : 64,
+        "size_multiple" : 16
+      },
+      "model" : {
+        "id" : "flux-3-klein",
+        "license" : {
+          "accepted_required" : true,
+          "commercial_use" : false,
+          "notice" : "FLUX Kommunity licence: non-commercial use; commercial use of outputs only for businesses under US$5M revenue that filter content and disclose AI generation; never use outputs to train another image model. Read the terms before you use or share results.",
+          "spdx" : "LicenseRef-FLUX-Kommunity-1.0",
+          "terms_url" : "https://huggingface.co/black-forest-labs/flux-3-image-klein/blob/main/LICENSE.md"
+        },
+        "memory_class" : "large",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only and opt-in (FLUX Kommunity licence). Editing and composition from 1–10 images, named in the instruction in order (\"the second image\"); describe the whole result with the edit folded in. Drawn from noise at the first image's size; strength does nothing. The model wants full scene captions; short prompts are fine, since its upsampler expands them (about 10 s). Put text to render in quotes, e.g. a sign reading \"OPEN\".",
+        "quality_tiers" : [
+          "standard",
+          "best"
+        ],
+        "speed_class" : "slow",
+        "title" : "FLUX 3 Klein"
+      },
+      "operation" : "image.edit",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-flux3.boxes" : {
+            "description" : "Layout boxes on 0–1 coordinates, {id, bbox: [y_min, x_min, y_max, x_max], desc}, or box edits {id, from: ref_image_n | target, src_bbox, tgt_bbox (null removes), desc}.",
+            "items" : {
+              "properties" : {
+                "bbox" : {
+                  "items" : {
+                    "type" : "number"
+                  },
+                  "maxItems" : 4,
+                  "minItems" : 4,
+                  "type" : "array"
+                },
+                "desc" : {
+                  "type" : "string"
+                },
+                "from" : {
+                  "type" : "string"
+                },
+                "id" : {
+                  "type" : "string"
+                },
+                "src_bbox" : {
+                  "items" : {
+                    "type" : "number"
+                  },
+                  "maxItems" : 4,
+                  "minItems" : 4,
+                  "type" : "array"
+                },
+                "tgt_bbox" : {
+                  "items" : {
+                    "type" : "number"
+                  },
+                  "maxItems" : 4,
+                  "minItems" : 4,
+                  "type" : [
+                    "array",
+                    "null"
+                  ]
+                }
+              },
+              "type" : "object"
+            },
+            "type" : "array",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Layout boxes"
+            }
+          },
+          "x-flux3.steps" : {
+            "default" : 16,
+            "description" : "Denoising steps; the model is tuned for 16.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          },
+          "x-flux3.upsample" : {
+            "default" : true,
+            "description" : "Expand the prompt into a full scene caption with BFL's prompt upsampler first (about 10 s). Off sends the prompt as typed, for a caller that wrote the full caption.",
+            "type" : "boolean",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Prompt upsampler",
+              "widget" : "toggle"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    }
+  ],
+  "protocol" : 1,
+  "repo" : "https://github.com/xocialize/gaea-plugin-flux3-klein",
+  "settings" : [
+
+  ],
+  "summary" : "Black Forest Labs' FLUX 3 Image Klein (FLUX Kommunity licence: non-commercial; commercial outputs only for Qualifying Users): a 5.55B flow-map DiT on Qwen3-VL-4B, 16 steps. Text-to-image and editing from up to 10 references, strong English text, bounding-box layout, and BFL's prompt upsampler. A research plugin: named-only and opt-in.",
+  "team" : "CFZS6RXUCP",
+  "title" : "FLUX 3 Klein",
+  "version" : "0.1.0"
+}

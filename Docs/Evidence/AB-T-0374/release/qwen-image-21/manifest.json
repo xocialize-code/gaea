@@ -1,0 +1,665 @@
+{
+  "engine" : {
+    "contract" : "1.58.0",
+    "package" : "mlx-engine-swift",
+    "version" : "0.72.0"
+  },
+  "executable" : "gaea-qwen-image-21-worker",
+  "helpers" : [
+
+  ],
+  "id" : "com.xocialize.gaea.qwen-image-21",
+  "license" : "Apache-2.0",
+  "manifest_version" : 1,
+  "min_gaea" : "0.2.0",
+  "models" : [
+    {
+      "id" : "qwen-image-2.1",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 43200000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 15600000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*"
+                ],
+                "repo" : "xocialize/Qwen-Image-2.1-Turbo",
+                "revision" : "main",
+                "role" : "transformer"
+              },
+              {
+                "matching" : [
+                  "model_index.json",
+                  "scheduler/*",
+                  "LICENSE",
+                  "NOTICE"
+                ],
+                "repo" : "xocialize/Qwen-Image-2.1-Turbo",
+                "revision" : "main",
+                "role" : "pipeline-config"
+              },
+              {
+                "matching" : [
+                  "vae/*"
+                ],
+                "repo" : "xocialize/Qwen-Image-2.1",
+                "revision" : "main",
+                "role" : "vae"
+              },
+              {
+                "matching" : [
+                  "*.safetensors",
+                  "*.json",
+                  "merges.txt"
+                ],
+                "repo" : "Qwen/Qwen3-VL-8B-Instruct",
+                "revision" : "main",
+                "role" : "text-encoder"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "LicenseRef-Qwen-Research"
+          }
+        },
+        "provenance" : {
+          "revision" : "main",
+          "sourceRepo" : "xocialize/Qwen-Image-2.1-Turbo",
+          "tier" : 3
+        },
+        "requirements" : {
+          "chipFloor" : "max",
+          "footprints" : [
+            {
+              "peakActivationBytes" : 43200000000,
+              "quant" : "bf16",
+              "residentBytes" : 15600000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "textToImage",
+            "name" : "qwen-image-2.1-turbo",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Qwen-Image-2.1-Turbo text-to-image: the 2.1 DiT (7B single-stream block-causal, Qwen3-VL-8B conditioning, 64-ch RGBA VAE) distilled to EIGHT fixed FlowMatch Euler steps — the checkpoint's own sampling grid; `steps` is ignored — no guidance, native transparency (RGBA PNG), sizes divisible by 32, 2048² native. About 5x fewer DiT forwards than qwen-image-2.1 at the same memory. RESEARCH LICENCE — non-commercial only.",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "imageEdit",
+            "name" : "qwen-image-2.1-turbo",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "images",
+                "required" : true,
+                "summary" : "Conditioning input image(s), in prompt order."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The edit instruction."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "True-CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Qwen-Image-2.1-Turbo instruction editing with up to 10 reference images (<image1>…<imageN> in the prompt) in eight fixed steps (`steps` is ignored, no guidance); output follows the LAST image's aspect at output_resolution² (default 1024²). Edit noise is domain-separated from the text-to-image draw as in qwen-image-2.1. RESEARCH LICENCE — non-commercial only.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "Qwen-Image-2.1"
+    },
+    {
+      "id" : "qwen-image-2.1-base",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 43200000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 15600000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*"
+                ],
+                "repo" : "xocialize/Qwen-Image-2.1",
+                "revision" : "main",
+                "role" : "transformer"
+              },
+              {
+                "matching" : [
+                  "vae/*"
+                ],
+                "repo" : "xocialize/Qwen-Image-2.1",
+                "revision" : "main",
+                "role" : "vae"
+              },
+              {
+                "matching" : [
+                  "model_index.json",
+                  "scheduler/*",
+                  "processor/*",
+                  "LICENSE",
+                  "NOTICE"
+                ],
+                "repo" : "xocialize/Qwen-Image-2.1",
+                "revision" : "main",
+                "role" : "pipeline-config"
+              },
+              {
+                "matching" : [
+                  "*.safetensors",
+                  "*.json",
+                  "merges.txt"
+                ],
+                "repo" : "Qwen/Qwen3-VL-8B-Instruct",
+                "revision" : "main",
+                "role" : "text-encoder"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "LicenseRef-Qwen-Research"
+          }
+        },
+        "provenance" : {
+          "revision" : "main",
+          "sourceRepo" : "xocialize/Qwen-Image-2.1",
+          "tier" : 3
+        },
+        "requirements" : {
+          "chipFloor" : "max",
+          "footprints" : [
+            {
+              "peakActivationBytes" : 43200000000,
+              "quant" : "bf16",
+              "residentBytes" : 15600000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "textToImage",
+            "name" : "qwen-image-2.1",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Qwen-Image-2.1 text-to-image (7B single-stream block-causal DiT + Qwen3-VL-8B conditioning, 64-ch RGBA VAE): 40 FlowMatch Euler steps, no guidance by default, native transparency (RGBA PNG output; prompt 'This is an RGBA image with transparency. … The image has alpha channel and the background is transparent.'), sizes divisible by 32, 2048² native. RESEARCH LICENCE — non-commercial only.",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "imageEdit",
+            "name" : "qwen-image-2.1",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "images",
+                "required" : true,
+                "summary" : "Conditioning input image(s), in prompt order."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The edit instruction."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "True-CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Qwen-Image-2.1 instruction editing with up to 10 reference images (<image1>…<imageN> in the prompt), identity-preserving edits, transparent-layer editing and subject extraction; output follows the LAST image's aspect at output_resolution² (default 1024²). Edit noise is domain-separated from the text-to-image draw, so a generate-then-edit flow at the same seed cannot replay the generation. RESEARCH LICENCE — non-commercial only.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "Qwen-Image-2.1 Base"
+    }
+  ],
+  "offers" : [
+    {
+      "defaults" : {
+        "count" : 1
+      },
+      "limits" : {
+        "max_pixels" : 4300800,
+        "max_side" : 2752,
+        "min_side" : 256,
+        "size_multiple" : 32
+      },
+      "model" : {
+        "id" : "qwen-image-2.1",
+        "license" : {
+          "commercial_use" : false,
+          "notice" : "Qwen Research License: non-commercial research and evaluation use only. Built with Qwen.",
+          "spdx" : "LicenseRef-Qwen-Research",
+          "terms_url" : "https://huggingface.co/Qwen/Qwen-Image-2.1/blob/main/LICENSE"
+        },
+        "memory_class" : "xlarge",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only and opt-in (Qwen Research licence: non-commercial). The Turbo checkpoint: 8 fixed steps without guidance, so steps and negative prompts do nothing. RGBA PNG; ask for transparency in the prompt. Multiples of 32, up to 2400×1792 in area.",
+        "quality_tiers" : [
+          "standard"
+        ],
+        "speed_class" : "standard",
+        "title" : "Qwen-Image-2.1"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "limits" : {
+        "max_images" : 10,
+        "max_pixels" : 1048576,
+        "max_side" : 2752,
+        "min_side" : 256,
+        "size_multiple" : 32
+      },
+      "model" : {
+        "id" : "qwen-image-2.1",
+        "license" : {
+          "commercial_use" : false,
+          "notice" : "Qwen Research License: non-commercial research and evaluation use only. Built with Qwen.",
+          "spdx" : "LicenseRef-Qwen-Research",
+          "terms_url" : "https://huggingface.co/Qwen/Qwen-Image-2.1/blob/main/LICENSE"
+        },
+        "memory_class" : "xlarge",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only and opt-in (Qwen Research licence: non-commercial). Instruction editing in 8 fixed steps from 1–10 images, named <image1>, <image2>… in the instruction. Drawn from noise at the first image's size fitted to 1024²; strength does nothing.",
+        "quality_tiers" : [
+          "standard"
+        ],
+        "speed_class" : "standard",
+        "title" : "Qwen-Image-2.1"
+      },
+      "operation" : "image.edit",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "defaults" : {
+        "count" : 1
+      },
+      "limits" : {
+        "max_pixels" : 4300800,
+        "max_side" : 2752,
+        "min_side" : 256,
+        "size_multiple" : 32
+      },
+      "model" : {
+        "id" : "qwen-image-2.1-base",
+        "license" : {
+          "commercial_use" : false,
+          "notice" : "Qwen Research License: non-commercial research and evaluation use only. Built with Qwen.",
+          "spdx" : "LicenseRef-Qwen-Research",
+          "terms_url" : "https://huggingface.co/Qwen/Qwen-Image-2.1/blob/main/LICENSE"
+        },
+        "memory_class" : "xlarge",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only and opt-in (Qwen Research licence: non-commercial). The original 40-step checkpoint; true CFG with x-qwen21.guidance above 1 and a negative prompt. About 5× Turbo's time: for layout-critical typography. RGBA PNG. Multiples of 32, up to 2400×1792 in area.",
+        "quality_tiers" : [
+          "best"
+        ],
+        "speed_class" : "slow",
+        "title" : "Qwen-Image-2.1 Base"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-qwen21.guidance" : {
+            "default" : 1,
+            "description" : "True classifier-free guidance, against the negative prompt. 1 (the default) turns it off; above 1 it needs a negative prompt and runs two passes a step.",
+            "maximum" : 20,
+            "minimum" : 1,
+            "type" : "number",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Guidance",
+              "widget" : "slider"
+            }
+          },
+          "x-qwen21.steps" : {
+            "default" : 40,
+            "description" : "Denoising steps; more is slower and finer.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "limits" : {
+        "max_images" : 10,
+        "max_pixels" : 1048576,
+        "max_side" : 2752,
+        "min_side" : 256,
+        "size_multiple" : 32
+      },
+      "model" : {
+        "id" : "qwen-image-2.1-base",
+        "license" : {
+          "commercial_use" : false,
+          "notice" : "Qwen Research License: non-commercial research and evaluation use only. Built with Qwen.",
+          "spdx" : "LicenseRef-Qwen-Research",
+          "terms_url" : "https://huggingface.co/Qwen/Qwen-Image-2.1/blob/main/LICENSE"
+        },
+        "memory_class" : "xlarge",
+        "named_only" : true,
+        "notes" : "Research plugin, named-only and opt-in (Qwen Research licence: non-commercial). Instruction editing in 40 steps from 1–10 images, named <image1>, <image2>… in the instruction; true CFG with guidance above 1 and a negative prompt. At the first image's size fitted to 1024².",
+        "quality_tiers" : [
+          "best"
+        ],
+        "speed_class" : "slow",
+        "title" : "Qwen-Image-2.1 Base"
+      },
+      "operation" : "image.edit",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-qwen21.guidance" : {
+            "default" : 1,
+            "description" : "True classifier-free guidance, against the negative prompt. 1 (the default) turns it off; above 1 it needs a negative prompt and runs two passes a step.",
+            "maximum" : 20,
+            "minimum" : 1,
+            "type" : "number",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Guidance",
+              "widget" : "slider"
+            }
+          },
+          "x-qwen21.steps" : {
+            "default" : 40,
+            "description" : "Denoising steps; more is slower and finer.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    }
+  ],
+  "protocol" : 1,
+  "repo" : "https://github.com/xocialize/gaea-plugin-qwen-image-21",
+  "settings" : [
+
+  ],
+  "summary" : "Qwen-Image-2.1 (Qwen Research licence: non-commercial, research and evaluation only): a 7B block-causal DiT with Qwen3-VL-8B conditioning and an RGBA VAE. The 8-step Turbo and the 40-step base, for generation with native transparency and editing from up to 10 references. A research plugin: named-only and opt-in.",
+  "team" : "CFZS6RXUCP",
+  "title" : "Qwen-Image-2.1",
+  "version" : "0.1.0"
+}
