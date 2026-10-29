@@ -231,10 +231,24 @@ def check_manifest(m, label):
             backing = [l for l in lane_ids if l in models[mid] and wanted & set(models[mid][l]["resolved"]["capabilities"])]
             if not backing:
                 errs.append(f"{where}: no lane of '{mid}' backs {sorted(wanted)} at its quant")
-        adapter_ids = {a["id"] for a in offer["model"].get("adapters", [])}
-        for aid in offer.get("adapters_meta", {}):
+        adapters = offer["model"].get("adapters", [])
+        adapter_ids = {a["id"] for a in adapters}
+        meta = offer.get("adapters_meta", {})
+        for aid in meta:
             if aid not in adapter_ids:
                 errs.append(f"{where}: adapters_meta names '{aid}', which model.adapters doesn't offer")
+        support = offer.get("adapter_support")
+        for a in adapters:
+            if a["id"] not in meta:
+                errs.append(f"{where}: adapter '{a['id']}' has no adapters_meta, so no source to fetch")
+            if support is None:
+                errs.append(f"{where}: lists adapter '{a['id']}' but declares no adapter_support")
+            else:
+                if a["kind"] not in support["kinds"]:
+                    errs.append(f"{where}: adapter '{a['id']}' is {a['kind']}, which adapter_support's kinds leave out")
+                fmt = meta.get(a["id"], {}).get("format")
+                if fmt and fmt not in support["formats"]:
+                    errs.append(f"{where}: adapter '{a['id']}' is {fmt}, which adapter_support's formats leave out")
         for name in offer.get("params", {}).get("required", []):
             if name not in offer["params"]["properties"]:
                 errs.append(f"{where}: params requires undeclared '{name}'")

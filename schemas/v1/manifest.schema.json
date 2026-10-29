@@ -228,6 +228,9 @@
           "additionalProperties": {
             "$ref": "#/$defs/AdapterMeta"
           }
+        },
+        "adapter_support": {
+          "$ref": "#/$defs/AdapterSupport"
         }
       }
     },
@@ -336,9 +339,16 @@
           "minimum": 0
         },
         "source": {
-          "$ref": "engine.schema.json#/$defs/WeightSource"
+          "$ref": "#/$defs/AdapterSource"
+        },
+        "format": {
+          "$ref": "#/$defs/AdapterFormat"
         }
-      }
+      },
+      "required": [
+        "format",
+        "source"
+      ]
     },
     "Helper": {
       "description": "An operation Gaea itself calls, never offered to clients: a prompt rewrite before a generate (G-10), or a smoke test.",
@@ -481,6 +491,101 @@
         "detailed_at_words": {
           "type": "integer",
           "minimum": 1
+        }
+      }
+    },
+    "AdapterSupport": {
+      "description": "Which adapters the model takes for this operation, from its package's AdapterSupport.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_model",
+        "formats",
+        "kinds",
+        "max_count",
+        "strength"
+      ],
+      "properties": {
+        "base_model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "formats": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/AdapterFormat"
+          }
+        },
+        "kinds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "plain",
+              "ic"
+            ]
+          }
+        },
+        "max_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "strength": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "min",
+            "max"
+          ],
+          "properties": {
+            "min": {
+              "type": "number"
+            },
+            "max": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "AdapterFormat": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "diffusers-peft, kohya, bfl-fused, diffusers-legacy, …"
+    },
+    "AdapterSource": {
+      "description": "The pinned file a worker fetches into the models root and checks.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo",
+        "revision",
+        "file",
+        "sha256"
+      ],
+      "properties": {
+        "repo": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
         }
       }
     }

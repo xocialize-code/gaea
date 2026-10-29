@@ -112,7 +112,11 @@ when an input has several values. `params` arrive with the offer's `defaults` un
 
 What the host has already done before `run` (plan §3.3): validated the MES request against the profile, chosen this
 model and lane, admitted it to memory, and normalized `params` to the profile vocabulary. `model_params` (only `x-`
-extension keys) and `adapters` reach the worker exactly as the client sent them (G-3). The worker owns the
+extension keys) and `adapters` reach the worker exactly as the client sent them (G-3). Each adapter keeps the client's
+`id` and `strength`, and an `ic` adapter's images arrive as `inputs {role: path}`. Gaea adds what the worker needs to
+fetch and apply it, so a worker keeps no adapter catalog of its own: `kind`, `format` and `source` (§4.3), taken from
+the offer's `adapters_meta` or from the operator's registration (§4.8). Triggers and prompt templates have already
+been applied to the text inputs. The worker owns the
 model-specific mapping (size grid, steps, masks, tiling) and reports what it actually used in `effective`, which
 Gaea merges into the MES result along with provenance and licences.
 
@@ -188,8 +192,12 @@ What Gaea advertises to MES clients. Each offer is one model for one operation:
 - `params`: the model's own options as `x-` extension parameters, rendered by MESFormsUI. Plugins ship no UI code;
 - `defaults` for profile-vocabulary params, and `limits` (pixels, sides, size multiple, images, seconds, frames,
   sample rates);
-- `adapters_meta`: host-side facts per adapter (trigger, prompt template, status, clearance per base model, size,
-  weight source).
+- `adapter_support`: which adapters the model takes for this operation, from its package's `AdapterSupport`:
+  `base_model` (the package's adapter base id), `formats`, `kinds`, `max_count` and `strength {min, max}`. An offer
+  without it takes no adapters, and Gaea attaches none of the operator's to it (§4.8);
+- `adapters_meta`: host-side facts per adapter the plugin ships (trigger, prompt template, status, clearance per base
+  model, size), with its `format` and its `source`: the Hugging Face `repo`, a pinned 40-hex `revision`, the `file`,
+  its `sha256` and `bytes`.
 
 A plugin may offer nothing (G-10's LLM plugin serves only helpers). The manifest declares no remote providers (G-12):
 MES allows a `remote_provider` on an offer, so this is Gaea's policy, which the host enforces at install.
@@ -227,9 +235,21 @@ variables. Each has a `key`, `title`, `schema` (a MES parameter property with a 
 - every lane was resolved under the manifest's `engine.contract`;
 - every offer names a model and lanes that exist, sits in its own profile, appears once per operation and model, and
   has at least one lane whose `resolved.capabilities` backs the operation;
-- `adapters_meta` describes only adapters the offer lists, and declared params cover their `required` list;
+- `adapters_meta` describes only adapters the offer lists, every adapter it lists has a `source`, and an offer that
+  lists adapters declares `adapter_support` whose `kinds` and `formats` cover them and whose `max_count` is at least 1;
+- declared params cover their `required` list;
 - helpers name existing models; settings keys are unique and every default is valid;
 - a plugin offers something or helps with something.
+
+### 4.8 Adapters the operator registers
+
+An adapter is weights on a base model, not a plugin, so it carries no code and no signature. Besides the adapters a
+plugin ships, the operator adds a LoRA to a server by its Hugging Face repo URL for one of the server's models. Gaea
+pins the repo's revision, takes the file's `sha256` and size from the hub, reads the licence from the model card, and
+keeps the registration in gaea.sqlite. It offers the adapter on that model's offers whose `adapter_support` takes its
+format, and sends its `kind`, `format` and `source` with each `run` that names it, exactly as for a shipped adapter.
+An adapter whose licence is unknown, research-only or gated is opt-in. The worker fetches the file into the models
+root and checks its `sha256`.
 
 ## 5. Escalation
 

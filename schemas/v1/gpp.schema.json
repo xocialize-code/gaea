@@ -776,8 +776,21 @@
                     }
                   ]
                 }
+              },
+              "kind": {
+                "enum": [
+                  "plain",
+                  "ic"
+                ]
+              },
+              "format": {
+                "$ref": "manifest.schema.json#/$defs/AdapterFormat"
+              },
+              "source": {
+                "$ref": "manifest.schema.json#/$defs/AdapterSource"
               }
-            }
+            },
+            "description": "The client's id and strength (and an ic adapter's inputs), with the kind, format and source Gaea adds (GPP-1 §3.3, §4.8)."
           }
         },
         "seed": {

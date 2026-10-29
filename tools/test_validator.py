@@ -44,6 +44,12 @@ D = "demo.json"
 LANE0 = ["models", 0, "lanes", 0]
 RES0 = LANE0 + ["resolved"]
 OFFER0 = ["offers", 0]
+SRC = {"repo": "xocialize/qwen-image-flash-loras", "revision": "a60485ca35e32b69c2d71930c2ef3d3745271411",
+       "file": "loras/martha.safetensors", "sha256": "0" * 64}
+ADAPTER = {"id": "martha", "title": "Martha", "kind": "plain", "strength": {"min": 0, "max": 2, "default": 1},
+           "license": {"spdx": "Apache-2.0", "commercial_use": True}}
+SUPPORT = {"base_model": "qwen-image", "formats": ["diffusers-peft"], "kinds": ["plain"], "max_count": 4,
+           "strength": {"min": 0, "max": 2}}
 
 # (manifest, mutation, the error text it must produce, why)
 MANIFEST_CASES = [
@@ -86,10 +92,16 @@ MANIFEST_CASES = [
     (Z, setp(OFFER0 + ["params", "required"], ["x-zimage.seed"]), "requires undeclared", "required param not declared"),
     (Z, setp(OFFER0 + ["limits", "max_pixels"], 0), "below 1", "zero pixel limit"),
     (Z, setp(OFFER0 + ["limits", "max_megapixels"], 4), "unexpected property 'max_megapixels'", "unknown limit"),
-    (Z, setp(OFFER0 + ["adapters_meta"], {"tryon": {"status": "verified"}}), "which model.adapters doesn't offer",
-     "metadata for an adapter the offer doesn't list"),
-    (Z, setp(OFFER0 + ["adapters_meta"], {"tryon": {"clearance": {"z-image-turbo": "vibes"}}}), "not in",
-     "unknown clearance level"),
+    (Z, setp(OFFER0 + ["adapters_meta"], {"tryon": {"status": "verified", "format": "diffusers-peft", "source": SRC}}),
+     "which model.adapters doesn't offer", "metadata for an adapter the offer doesn't list"),
+    (Z, setp(OFFER0 + ["adapters_meta"], {"tryon": {"clearance": {"z-image-turbo": "vibes"}, "format": "kohya", "source": SRC}}),
+     "not in", "unknown clearance level"),
+    (Z, setp(OFFER0 + ["adapters_meta"], {"tryon": {"format": "kohya"}}), "missing required 'source'", "adapter without a source"),
+    (Z, setp(OFFER0 + ["adapters_meta"], {"tryon": {"format": "kohya", "source": dict(SRC, revision="main")}}),
+     "doesn't match", "adapter revision not pinned to a commit"),
+    (Z, setp(OFFER0 + ["model", "adapters"], [ADAPTER]), "has no adapters_meta", "listed adapter with no metadata"),
+    (Z, setp(OFFER0 + ["model", "adapters"], [ADAPTER]), "declares no adapter_support", "listed adapter, no adapter_support"),
+    (Z, setp(OFFER0 + ["adapter_support"], dict(SUPPORT, max_count=0)), "below 1", "adapter_support that takes none"),
     (Z, setp(["settings", 0, "apply"], "maybe"), "not in", "unknown setting apply mode"),
     (Z, delp(["settings", 0, "schema", "default"]), "has no default", "setting without a default"),
     (Z, setp(["settings", 0, "schema", "default"], "fp8"), "default is not in its enum", "setting default outside enum"),
