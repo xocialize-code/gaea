@@ -1,0 +1,29 @@
+{
+  "resolution": 512,
+  "passes": 1,
+  "structure_resolutions": [
+    64
+  ],
+  "steps_per_pass": 25,
+  "seed": 0,
+  "timings": {
+    "coarse_s": 10.28,
+    "refine_s": 67.46,
+    "gpu_total_s": 77.74
+  },
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition MIG 2g.48gb",
+  "peak_gpu_memory_gb": 19.1,
+  "warnings": [],
+  "refined_faces": 1000000,
+  "refined_vertices": 488280,
+  "coarse_faces": 1535256,
+  "background": "kept existing alpha",
+  "wall_time_s": 83.14,
+  "gpu_size": "large",
+  "coarse_stage": {
+    "model": "tencent/Hunyuan3D-2mini/hunyuan3d-dit-v2-mini-turbo",
+    "steps": 30,
+    "octree_resolution": 256
+  },
+  "client_wall_s": 95.7
+}

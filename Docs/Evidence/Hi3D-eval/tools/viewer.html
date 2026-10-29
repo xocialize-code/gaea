@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>TRELLIS.2 vs Hi3D</title>
+<style>
+  body { margin: 0; background: #1d1f22; color: #ddd; font: 13px -apple-system, sans-serif; }
+  #bar { padding: 8px 12px; display: flex; gap: 10px; align-items: center; background: #2b2e33; border-bottom: 1px solid #444; }
+  select, button { background: #3a3e45; color: #ddd; border: 1px solid #555; border-radius: 4px; padding: 3px 8px; }
+  button.on { background: #4a6da7; }
+  #panes { display: flex; height: calc(100vh - 42px); }
+  .pane { flex: 1; position: relative; overflow: hidden; }
+  .pane + .pane { border-left: 1px solid #444; }
+  .pane img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+  .label { position: absolute; top: 8px; left: 10px; background: #000a; padding: 2px 8px; border-radius: 4px; pointer-events: none; }
+</style>
+<script type="importmap">
+{ "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="bar">
+  <select id="item"></select>
+  <button id="tex">textured</button><button id="shade" class="on">shaded</button><button id="normal">normals</button>
+  <button data-view="front">front</button><button data-view="back">back</button>
+  <button data-view="side">side</button><button data-view="top">top</button>
+  <button data-view="close">close-up</button>
+  <span id="stats"></span>
+</div>
+<div id="panes">
+  <div class="pane" id="p0"><img id="ref"><div class="label">input</div></div>
+  <div class="pane" id="p1"><div class="label" id="lab1">TRELLIS.2 (our port)</div></div>
+  <div class="pane" id="p2"><div class="label" id="lab2">TRELLIS.2 → Hi3D 1024³</div></div>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { PLYLoader } from 'three/addons/loaders/PLYLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const ITEMS = ['hair', 'dress', 'shoes', 'skirt', 'top'];
+const params = new URLSearchParams(location.search);
+const sel = document.getElementById('item');
+for (const i of ITEMS) sel.add(new Option(i, i));
+sel.value = params.get('item') || 'hair';
+
+const shaded = new THREE.MeshStandardMaterial({ color: 0xcfd0d4, roughness: 0.6, metalness: 0.05, side: THREE.DoubleSide });
+const normals = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+const modeParam = params.get('mode');
+let material = modeParam === 'normal' ? normals : modeParam === 'tex' ? null : shaded;
+
+const camera = new THREE.PerspectiveCamera(30, 1, 0.01, 100);
+const views = [];
+for (const id of ['p1', 'p2']) {
+  const el = document.getElementById(id);
+  const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+  renderer.setPixelRatio(devicePixelRatio);
+  el.appendChild(renderer.domElement);
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x26282c);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x404048, 1.6));
+  const key = new THREE.DirectionalLight(0xffffff, 2.2);
+  scene.add(key);
+  const controls = new OrbitControls(camera, renderer.domElement);
+  views.push({ el, renderer, scene, controls, key, mesh: null });
+}
+views[1].controls.addEventListener('change', () => views[0].controls.update());
+
+function setView(name) {
+  const d = 3.2 / Math.min(1, camera.aspect), t = new THREE.Vector3(0, 0, 0);
+  const pos = { front: [0, 0, d], back: [0, 0, -d], side: [d, 0, 0], top: [0, d, 0.001], close: [0.25, 0.2, 1.1] }[name];
+  camera.position.set(...pos);
+  if (name === 'close') t.set(0.1, 0.15, 0.3);
+  for (const v of views) { v.controls.target.copy(t); v.controls.update(); }
+}
+
+function normalize(geom) {
+  geom.computeBoundingBox();
+  const box = geom.boundingBox, c = new THREE.Vector3(), s = new THREE.Vector3();
+  box.getCenter(c); box.getSize(s);
+  geom.translate(-c.x, -c.y, -c.z);
+  const k = 1.6 / Math.max(s.x, s.y, s.z);
+  geom.scale(k, k, k);
+  geom.computeVertexNormals();
+  return geom;
+}
+
+async function loadGeom(url) {
+  if (url.endsWith('.ply')) return new PLYLoader().loadAsync(url);
+  const gltf = await new GLTFLoader().loadAsync(url);
+  const geoms = [];
+  gltf.scene.updateMatrixWorld(true);
+  gltf.scene.traverse(o => { if (o.isMesh) geoms.push([o.geometry.clone().applyMatrix4(o.matrixWorld), o.material]); });
+  geoms[0][0].userData.material = geoms[0][1];
+  return geoms[0][0];
+}
+
+async function show(item) {
+  document.getElementById('ref').src = `${item}.png`;
+  const urls = [
+    params.get('l') || `coarse/${item}_trellis2.ply`,
+    params.get('r') || `out/${item}_t2_hi3d1024/hi3d_refined.glb`,
+  ];
+  const stats = [];
+  for (const [i, url] of urls.entries()) {
+    const v = views[i];
+    if (v.mesh) { v.scene.remove(v.mesh); v.mesh.geometry.dispose(); v.mesh = null; }
+    try {
+      const raw = await loadGeom(url);
+      if (params.get(i ? 'rrot' : 'lrot') === 'zup') raw.rotateX(-Math.PI / 2);
+      const g = normalize(raw);
+      if (g.userData.material) g.userData.material.side = THREE.DoubleSide;
+      v.mesh = new THREE.Mesh(g, material || g.userData.material || shaded);
+      v.scene.add(v.mesh);
+      stats.push(`${(g.index ? g.index.count / 3 : g.attributes.position.count / 3) / 1000 | 0}k faces`);
+    } catch (e) { stats.push('missing'); }
+  }
+  document.getElementById('stats').textContent = `TRELLIS.2 ${stats[0]} · Hi3D ${stats[1]}`;
+}
+
+function resize() {
+  for (const v of views) {
+    const w = v.el.clientWidth, h = v.el.clientHeight;
+    v.renderer.setSize(w, h); camera.aspect = w / h;
+  }
+  camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize);
+
+const keyOffset = new THREE.Vector3(1.5, 2, 1);
+function frame() {
+  for (const v of views) {
+    v.key.position.copy(keyOffset).applyQuaternion(camera.quaternion).add(camera.position);
+    v.renderer.render(v.scene, camera);
+  }
+  requestAnimationFrame(frame);
+}
+
+document.getElementById('tex').onclick = () => setMat(null);
+document.getElementById('shade').onclick = () => setMat(shaded);
+document.getElementById('normal').onclick = () => setMat(normals);
+function setMat(m) {
+  material = m;
+  for (const v of views) if (v.mesh) v.mesh.material = m || v.mesh.geometry.userData.material || shaded;
+  document.getElementById('tex').classList.toggle('on', m === null);
+  document.getElementById('shade').classList.toggle('on', m === shaded);
+  document.getElementById('normal').classList.toggle('on', m === normals);
+}
+for (const b of document.querySelectorAll('[data-view]')) b.onclick = () => setView(b.dataset.view);
+sel.onchange = () => show(sel.value);
+
+if (params.get('lab1')) document.getElementById('lab1').textContent = params.get('lab1');
+if (params.get('lab2')) document.getElementById('lab2').textContent = params.get('lab2');
+resize(); setMat(material); setView(params.get('view') || 'front'); show(sel.value); frame();
+</script>
+</body>
+</html>

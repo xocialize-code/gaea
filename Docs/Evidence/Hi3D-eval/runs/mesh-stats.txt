@@ -1,0 +1,20 @@
+hair
+  TRELLIS.2 {'faces': 295684, 'components': 1017, 'shards<0.01%area': 925, 'boundary_edges': 0, 'watertight': False}
+  Hi3D      {'faces': 1000000, 'components': 682, 'shards<0.01%area': 681, 'boundary_edges': 250, 'watertight': False}
+  run gpu 223.8s peak 30.31 GB warn 1
+dress
+  TRELLIS.2 {'faces': 298646, 'components': 551, 'shards<0.01%area': 537, 'boundary_edges': 0, 'watertight': False}
+  Hi3D      {'faces': 999999, 'components': 2839, 'shards<0.01%area': 2838, 'boundary_edges': 571, 'watertight': False}
+  run gpu 238.38s peak 31.4 GB warn 1
+shoes
+  TRELLIS.2 {'faces': 266310, 'components': 224, 'shards<0.01%area': 218, 'boundary_edges': 0, 'watertight': False}
+  Hi3D      {'faces': 1000000, 'components': 415, 'shards<0.01%area': 413, 'boundary_edges': 162, 'watertight': False}
+  run gpu 139.44s peak 24.33 GB warn 0
+skirt
+  TRELLIS.2 {'faces': 285818, 'components': 1314, 'shards<0.01%area': 1298, 'boundary_edges': 0, 'watertight': False}
+  Hi3D      {'faces': 999999, 'components': 310, 'shards<0.01%area': 309, 'boundary_edges': 223, 'watertight': False}
+  run gpu 226.36s peak 31.0 GB warn 1
+top
+  TRELLIS.2 {'faces': 286144, 'components': 162, 'shards<0.01%area': 158, 'boundary_edges': 0, 'watertight': False}
+  Hi3D      {'faces': 999999, 'components': 37, 'shards<0.01%area': 36, 'boundary_edges': 153, 'watertight': False}
+  run gpu 137.82s peak 23.25 GB warn 0

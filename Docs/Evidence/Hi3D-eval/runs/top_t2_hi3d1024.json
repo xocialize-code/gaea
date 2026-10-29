@@ -1,0 +1,24 @@
+{
+  "resolution": 1024,
+  "passes": 2,
+  "structure_resolutions": [
+    64,
+    128
+  ],
+  "steps_per_pass": 25,
+  "seed": 0,
+  "timings": {
+    "refine_s": 137.82,
+    "gpu_total_s": 137.82
+  },
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition MIG 2g.48gb",
+  "peak_gpu_memory_gb": 23.25,
+  "warnings": [],
+  "refined_faces": 999999,
+  "refined_vertices": 499916,
+  "coarse_faces": 286144,
+  "background": "kept existing alpha",
+  "wall_time_s": 138.95,
+  "gpu_size": "large",
+  "client_wall_s": 147.6
+}

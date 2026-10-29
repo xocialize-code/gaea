@@ -1,0 +1,26 @@
+{
+  "resolution": 1024,
+  "passes": 2,
+  "structure_resolutions": [
+    64,
+    128
+  ],
+  "steps_per_pass": 25,
+  "seed": 0,
+  "timings": {
+    "refine_s": 226.36,
+    "gpu_total_s": 226.36
+  },
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition MIG 2g.48gb",
+  "peak_gpu_memory_gb": 31.0,
+  "warnings": [
+    "adaptive_vox settled at resolution 115 instead of the requested 128 to fit target_num=90000; the returned coordinates are on the coarser grid"
+  ],
+  "refined_faces": 999999,
+  "refined_vertices": 499028,
+  "coarse_faces": 285818,
+  "background": "kept existing alpha",
+  "wall_time_s": 227.64,
+  "gpu_size": "large",
+  "client_wall_s": 235.7
+}
