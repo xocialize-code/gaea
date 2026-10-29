@@ -310,8 +310,17 @@ starts while the phase before it is being built.
      - **Operations:** relight (CIDNet), colorize (DDColor), describe (Mage-VL) and score (SigLIP2).
      - **Models:** DRUNet and BOPBTL restore, and the Nacre, VOSR2 and Anime4K upscalers.
      - **Why it blocks the exit:** Desktop's auto-describe and scoring need it against Gaea.
-  10. AB-T-0375: the exit gate, which gives AB-A-0208 the go for the retirements.
-  11. AB-T-0374 (P3): the research plugins. They are not on the exit path.
+  10. AB-T-0378 (P1): adapters. A LoRA is an adapter on a base model, not a plugin.
+      - **Adding one:** the operator adds a LoRA by its Hugging Face repo URL, and Gaea keeps the registration in
+        gaea.sqlite.
+      - **Licence:** each adapter is offered with its licence. Research and unlabelled licences are opt-in.
+      - **Running:** a request's adapters reach the base model's plugin.
+      - **Already in place:** the normalizer and the GPP path. Missing are the offers, registration, and plugins
+        applying the LoRA.
+      - **It blocks Gaea Lab** (CLI-3's model → LoRA) and the exit.
+  11. AB-T-0375: the exit gate, which gives AB-A-0208 the go for the retirements.
+  12. AB-T-0374 (P3): the research plugins, with research licences authorized (2026-10-29). They are not on the exit
+      path.
 - **Weights:** the image models are in MLXEngine's store, `~/Library/Application Support/MLXEngine/Models`, which
   is Gaea's default models root. The bulk model cache moved to `/Volumes/DEV_VOL1/models` on 2026-10-28. Never
   download weights onto the Satechi volume.
