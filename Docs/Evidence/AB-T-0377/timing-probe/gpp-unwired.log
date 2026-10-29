@@ -1,0 +1,14 @@
+## nacre x2 over GPP
+{"run": 0, "wall_s": 15.589, "worker_s": 15.589, "progress_lines": 100}
+{"run": 1, "wall_s": 15.551, "worker_s": 15.551, "progress_lines": 100}
+{"run": 2, "wall_s": 15.488, "worker_s": 15.488, "progress_lines": 100}
+{"run": 3, "wall_s": 15.519, "worker_s": 15.519, "progress_lines": 100}
+{"model": "nacre-upscale", "op": "image.upscale", "params": "{\"scale\":2}", "warm_s": [15.551, 15.488, 15.519]}
+## drunet over GPP
+{"run": 0, "wall_s": 0.373, "worker_s": 0.373, "progress_lines": 0}
+{"run": 1, "wall_s": 0.301, "worker_s": 0.301, "progress_lines": 0}
+{"run": 2, "wall_s": 0.298, "worker_s": 0.298, "progress_lines": 0}
+{"run": 3, "wall_s": 0.293, "worker_s": 0.293, "progress_lines": 0}
+{"run": 4, "wall_s": 0.301, "worker_s": 0.301, "progress_lines": 0}
+{"run": 5, "wall_s": 0.297, "worker_s": 0.297, "progress_lines": 0}
+{"model": "drunet-denoise", "op": "image.restore", "params": "{}", "warm_s": [0.301, 0.298, 0.293, 0.301, 0.297]}

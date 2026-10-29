@@ -1,0 +1,1679 @@
+[
+ {
+  "name": "relight-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "cidnet-relight",
+  "ran": "cidnet-relight",
+  "model_params": {
+   "model": "cidnet-relight",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp32",
+    "operation": "image.relight",
+    "outputs": [
+     {
+      "name": "applied_strength",
+      "value": 1
+     },
+     {
+      "name": "bypassed",
+      "value": false
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_ppj1ac7qvn05gpekbcg0/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 3.092,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "relight-draft-0.png"
+  ],
+  "sha256": [
+   "082814633db4427df82fcc68edf177e606843f013805ed168bdd770d3b1d28bd"
+  ],
+  "values": {},
+  "run_ms": 3900,
+  "wall_ms": 3903
+ },
+ {
+  "name": "colorize-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "ddcolor-colorize",
+  "ran": "ddcolor-colorize",
+  "model_params": {
+   "model": "ddcolor-colorize",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp16",
+    "operation": "image.colorize",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_hnmndhhyx66x12nk88cj/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 2.175,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "colorize-draft-0.png"
+  ],
+  "sha256": [
+   "a7ddae910e8ca66625f08c07cbb7d64d90558801c50a051b2a682cd007debfa0"
+  ],
+  "values": {},
+  "run_ms": 2189,
+  "wall_ms": 2192
+ },
+ {
+  "name": "restore-general-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nafnet-restore",
+  "ran": "nafnet-restore",
+  "model_params": {
+   "model": "nafnet-restore",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp16",
+    "operation": "image.restore",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_mqxv0g9nc43rtrreynsr/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.301,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-general-draft-0.png"
+  ],
+  "sha256": [
+   "6593f10e27e889cd4efe7afd350d8de7797b0fb625d497571dfdcf644b2f0b4e"
+  ],
+  "values": {},
+  "run_ms": 320,
+  "wall_ms": 323
+ },
+ {
+  "name": "restore-denoise-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nafnet-restore",
+  "ran": "nafnet-restore",
+  "model_params": {
+   "model": "nafnet-restore",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp16",
+    "operation": "image.restore",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_bpcvfm9xv0gqasawrfs7/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.03,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-denoise-draft-0.png"
+  ],
+  "sha256": [
+   "6593f10e27e889cd4efe7afd350d8de7797b0fb625d497571dfdcf644b2f0b4e"
+  ],
+  "values": {},
+  "run_ms": 43,
+  "wall_ms": 45
+ },
+ {
+  "name": "restore-deblur-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "restormer-defocus",
+  "ran": "restormer-defocus",
+  "model_params": {
+   "model": "restormer-defocus",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp32",
+    "operation": "image.restore",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_1hy10h3pbyjd9kd1xxrp/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.623,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-deblur-draft-0.png"
+  ],
+  "sha256": [
+   "e9f046a622233c1362b6a040ddef096916b24d38e020aad6b8d32b266dfa2ceb"
+  ],
+  "values": {},
+  "run_ms": 663,
+  "wall_ms": 666
+ },
+ {
+  "name": "restore-faces-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "gfpgan-face",
+  "ran": "gfpgan-face",
+  "model_params": {
+   "model": "gfpgan-face",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp32",
+    "operation": "image.restore",
+    "outputs": [
+     {
+      "name": "applied_strength",
+      "value": 1
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_yb7njq811h1gz09h5dq6/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.82,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-faces-draft-0.png"
+  ],
+  "sha256": [
+   "27c46cd9f27289b2b00ab094bdb4566927bf8129f06e6f7a1ef4e1d7493eb850"
+  ],
+  "values": {},
+  "run_ms": 871,
+  "wall_ms": 874
+ },
+ {
+  "name": "restore-scratches-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nafnet-restore",
+  "ran": "lama-inpaint",
+  "model_params": {
+   "detector": "bopbtl-defects",
+   "model": "lama-inpaint",
+   "x-gaea.worker": {
+    "effective": {
+     "mode": "best"
+    },
+    "lane": "fp16",
+    "operation": "image.fill",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_dkcc7xjpx73g18e4z22q/outputs/worker/worker-2/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.855,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-scratches-draft-0.png"
+  ],
+  "sha256": [
+   "afdd71c7f65bd0a1ffe5bd206bf4c5601281634f8baa2841f002e4d2a1853ecd"
+  ],
+  "values": {},
+  "run_ms": 2373,
+  "wall_ms": 2376
+ },
+ {
+  "name": "upscale-photo-x2-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nerve-upscale",
+  "ran": "nerve-upscale",
+  "model_params": {
+   "model": "nerve-upscale",
+   "x-gaea.worker": {
+    "effective": {
+     "scale": 2
+    },
+    "lane": "fp16",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "name": "applied_scale",
+      "value": 2
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_1kewbkx5j8vhm2c2m3p6/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.739,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "upscale-photo-x2-draft-0.png"
+  ],
+  "sha256": [
+   "cd26fa1b72ad43082abeaf53d1a097dd6d4f4698408bea85efc1fe515376bd56"
+  ],
+  "values": {},
+  "run_ms": 762,
+  "wall_ms": 765
+ },
+ {
+  "name": "upscale-drawn-x2-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nerve-upscale",
+  "ran": "nerve-upscale",
+  "model_params": {
+   "model": "nerve-upscale",
+   "x-gaea.worker": {
+    "effective": {
+     "scale": 2
+    },
+    "lane": "fp16",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "name": "applied_scale",
+      "value": 2
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_0q60yw684st0k5gn0q6c/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.053,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "upscale-drawn-x2-draft-0.png"
+  ],
+  "sha256": [
+   "422230800f395ff11d08993d40e37a4eb79490bb36c040cb028ffbf197409896"
+  ],
+  "values": {},
+  "run_ms": 73,
+  "wall_ms": 75
+ },
+ {
+  "name": "upscale-photo-x4-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nerve-upscale",
+  "ran": "nerve-upscale",
+  "model_params": {
+   "model": "nerve-upscale",
+   "x-gaea.worker": {
+    "effective": {
+     "scale": 4
+    },
+    "lane": "fp16",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "name": "applied_scale",
+      "value": 4
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_tkkckpa1v2r6qabmvj3c/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.075,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "upscale-photo-x4-draft-0.png"
+  ],
+  "sha256": [
+   "7f0b6443f57c8502c6e5fa9f71a5222dce868a5925855091a8751f7f933da6aa"
+  ],
+  "values": {},
+  "run_ms": 131,
+  "wall_ms": 133
+ },
+ {
+  "name": "upscale-drawn-x4-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nerve-upscale",
+  "ran": "nerve-upscale",
+  "model_params": {
+   "model": "nerve-upscale",
+   "x-gaea.worker": {
+    "effective": {
+     "scale": 4
+    },
+    "lane": "fp16",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "name": "applied_scale",
+      "value": 4
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_r9p8k2kqephgzd7g05jm/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.076,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "upscale-drawn-x4-draft-0.png"
+  ],
+  "sha256": [
+   "3f1efb742d2d0e4b16adf07e3af4200f94ae90401365a08aa4a40c3b3ae822e4"
+  ],
+  "values": {},
+  "run_ms": 126,
+  "wall_ms": 129
+ },
+ {
+  "name": "relight-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "cidnet-relight",
+  "ran": "cidnet-relight",
+  "model_params": {
+   "model": "cidnet-relight",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp32",
+    "operation": "image.relight",
+    "outputs": [
+     {
+      "name": "applied_strength",
+      "value": 1
+     },
+     {
+      "name": "bypassed",
+      "value": false
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_4jg0v8n0md224n73m86j/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.068,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "relight-standard-0.png"
+  ],
+  "sha256": [
+   "082814633db4427df82fcc68edf177e606843f013805ed168bdd770d3b1d28bd"
+  ],
+  "values": {},
+  "run_ms": 79,
+  "wall_ms": 81
+ },
+ {
+  "name": "colorize-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "ddcolor-colorize",
+  "ran": "ddcolor-colorize",
+  "model_params": {
+   "model": "ddcolor-colorize",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp16",
+    "operation": "image.colorize",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_9k92be69zq9jjgcw2fkd/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.124,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "colorize-standard-0.png"
+  ],
+  "sha256": [
+   "a7ddae910e8ca66625f08c07cbb7d64d90558801c50a051b2a682cd007debfa0"
+  ],
+  "values": {},
+  "run_ms": 135,
+  "wall_ms": 137
+ },
+ {
+  "name": "restore-general-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nafnet-restore",
+  "ran": "nafnet-restore",
+  "model_params": {
+   "model": "nafnet-restore",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp16",
+    "operation": "image.restore",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_76xsdww7d5y7rcrdzxhv/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.027,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-general-standard-0.png"
+  ],
+  "sha256": [
+   "6593f10e27e889cd4efe7afd350d8de7797b0fb625d497571dfdcf644b2f0b4e"
+  ],
+  "values": {},
+  "run_ms": 39,
+  "wall_ms": 41
+ },
+ {
+  "name": "restore-denoise-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "scunet-denoise",
+  "ran": "scunet-denoise",
+  "model_params": {
+   "model": "scunet-denoise",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp32",
+    "operation": "image.restore",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_wn9tts4d3340evr3a5tx/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.239,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-denoise-standard-0.png"
+  ],
+  "sha256": [
+   "87149426929a1c5c0da98e10667c2e637b711dc2d856def4d7bb88e29030ad79"
+  ],
+  "values": {},
+  "run_ms": 273,
+  "wall_ms": 275
+ },
+ {
+  "name": "restore-deblur-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "restormer-defocus",
+  "ran": "restormer-defocus",
+  "model_params": {
+   "model": "restormer-defocus",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp32",
+    "operation": "image.restore",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_4ca9sesgv97nnmat8v2e/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.229,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-deblur-standard-0.png"
+  ],
+  "sha256": [
+   "e9f046a622233c1362b6a040ddef096916b24d38e020aad6b8d32b266dfa2ceb"
+  ],
+  "values": {},
+  "run_ms": 241,
+  "wall_ms": 243
+ },
+ {
+  "name": "restore-faces-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "gfpgan-face",
+  "ran": "gfpgan-face",
+  "model_params": {
+   "model": "gfpgan-face",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp32",
+    "operation": "image.restore",
+    "outputs": [
+     {
+      "name": "applied_strength",
+      "value": 1
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_gskx4q182en00rvp6117/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.21,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-faces-standard-0.png"
+  ],
+  "sha256": [
+   "27c46cd9f27289b2b00ab094bdb4566927bf8129f06e6f7a1ef4e1d7493eb850"
+  ],
+  "values": {},
+  "run_ms": 241,
+  "wall_ms": 243
+ },
+ {
+  "name": "restore-scratches-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nafnet-restore",
+  "ran": "lama-inpaint",
+  "model_params": {
+   "detector": "bopbtl-defects",
+   "model": "lama-inpaint",
+   "x-gaea.worker": {
+    "effective": {
+     "mode": "best"
+    },
+    "lane": "fp16",
+    "operation": "image.fill",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_dgez1mysypc1xehaxdtg/outputs/worker/worker-2/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.039,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-scratches-standard-0.png"
+  ],
+  "sha256": [
+   "afdd71c7f65bd0a1ffe5bd206bf4c5601281634f8baa2841f002e4d2a1853ecd"
+  ],
+  "values": {},
+  "run_ms": 638,
+  "wall_ms": 640
+ },
+ {
+  "name": "upscale-photo-x2-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "realplksr-upscale",
+  "ran": "realplksr-upscale",
+  "model_params": {
+   "model": "realplksr-upscale",
+   "x-gaea.worker": {
+    "effective": {
+     "scale": 2
+    },
+    "lane": "fp32",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "name": "applied_scale",
+      "value": 2
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_0te04raxtf5jm1aw2e0f/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.963,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "upscale-photo-x2-standard-0.png"
+  ],
+  "sha256": [
+   "8388c7103c64eeab4295a275f2f321b53eb0afe9512ebcd7e00baf5b9bbda8a3"
+  ],
+  "values": {},
+  "run_ms": 1028,
+  "wall_ms": 1030
+ },
+ {
+  "name": "upscale-drawn-x2-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nerve-upscale",
+  "ran": "nerve-upscale",
+  "model_params": {
+   "model": "nerve-upscale",
+   "x-gaea.worker": {
+    "effective": {
+     "scale": 2
+    },
+    "lane": "fp16",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "name": "applied_scale",
+      "value": 2
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_egq1ga2hs4348prp29ec/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.055,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "upscale-drawn-x2-standard-0.png"
+  ],
+  "sha256": [
+   "422230800f395ff11d08993d40e37a4eb79490bb36c040cb028ffbf197409896"
+  ],
+  "values": {},
+  "run_ms": 73,
+  "wall_ms": 76
+ },
+ {
+  "name": "upscale-photo-x4-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "realplksr-upscale",
+  "ran": "realplksr-upscale",
+  "model_params": {
+   "model": "realplksr-upscale",
+   "x-gaea.worker": {
+    "effective": {
+     "scale": 4
+    },
+    "lane": "fp32",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "name": "applied_scale",
+      "value": 4
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_cmcv3tqysemp1hp21g84/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.169,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "upscale-photo-x4-standard-0.png"
+  ],
+  "sha256": [
+   "5961bb214f02071bb3d6d8412d28c85ed1913950b051d9fe88a0916ca635ad78"
+  ],
+  "values": {},
+  "run_ms": 225,
+  "wall_ms": 228
+ },
+ {
+  "name": "upscale-drawn-x4-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nerve-upscale",
+  "ran": "nerve-upscale",
+  "model_params": {
+   "model": "nerve-upscale",
+   "x-gaea.worker": {
+    "effective": {
+     "scale": 4
+    },
+    "lane": "fp16",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "name": "applied_scale",
+      "value": 4
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_3byke4y3ebwkxexepsp4/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.079,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "upscale-drawn-x4-standard-0.png"
+  ],
+  "sha256": [
+   "3f1efb742d2d0e4b16adf07e3af4200f94ae90401365a08aa4a40c3b3ae822e4"
+  ],
+  "values": {},
+  "run_ms": 127,
+  "wall_ms": 130
+ },
+ {
+  "name": "relight-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "cidnet-relight",
+  "ran": "cidnet-relight",
+  "model_params": {
+   "model": "cidnet-relight",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp32",
+    "operation": "image.relight",
+    "outputs": [
+     {
+      "name": "applied_strength",
+      "value": 1
+     },
+     {
+      "name": "bypassed",
+      "value": false
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_ytjza0c2yvjzeteqa6dn/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.068,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "relight-best-0.png"
+  ],
+  "sha256": [
+   "082814633db4427df82fcc68edf177e606843f013805ed168bdd770d3b1d28bd"
+  ],
+  "values": {},
+  "run_ms": 80,
+  "wall_ms": 82
+ },
+ {
+  "name": "colorize-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "ddcolor-colorize",
+  "ran": "ddcolor-colorize",
+  "model_params": {
+   "model": "ddcolor-colorize",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp16",
+    "operation": "image.colorize",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_6tj1t1hntzfewvwy7am5/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.124,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "colorize-best-0.png"
+  ],
+  "sha256": [
+   "a7ddae910e8ca66625f08c07cbb7d64d90558801c50a051b2a682cd007debfa0"
+  ],
+  "values": {},
+  "run_ms": 135,
+  "wall_ms": 137
+ },
+ {
+  "name": "restore-general-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nafnet-restore",
+  "ran": "nafnet-restore",
+  "model_params": {
+   "model": "nafnet-restore",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp16",
+    "operation": "image.restore",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_239vvt9w4mf067pmhb6e/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.026,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-general-best-0.png"
+  ],
+  "sha256": [
+   "6593f10e27e889cd4efe7afd350d8de7797b0fb625d497571dfdcf644b2f0b4e"
+  ],
+  "values": {},
+  "run_ms": 39,
+  "wall_ms": 42
+ },
+ {
+  "name": "restore-denoise-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "scunet-denoise",
+  "ran": "scunet-denoise",
+  "model_params": {
+   "model": "scunet-denoise",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp32",
+    "operation": "image.restore",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_x3gj0pfmhqdpry9hank0/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.09,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-denoise-best-0.png"
+  ],
+  "sha256": [
+   "87149426929a1c5c0da98e10667c2e637b711dc2d856def4d7bb88e29030ad79"
+  ],
+  "values": {},
+  "run_ms": 103,
+  "wall_ms": 106
+ },
+ {
+  "name": "restore-deblur-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "restormer-defocus",
+  "ran": "restormer-defocus",
+  "model_params": {
+   "model": "restormer-defocus",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp32",
+    "operation": "image.restore",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_yxycg6natat7tj356rqw/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.229,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-deblur-best-0.png"
+  ],
+  "sha256": [
+   "e9f046a622233c1362b6a040ddef096916b24d38e020aad6b8d32b266dfa2ceb"
+  ],
+  "values": {},
+  "run_ms": 241,
+  "wall_ms": 244
+ },
+ {
+  "name": "restore-faces-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "gfpgan-face",
+  "ran": "gfpgan-face",
+  "model_params": {
+   "model": "gfpgan-face",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp32",
+    "operation": "image.restore",
+    "outputs": [
+     {
+      "name": "applied_strength",
+      "value": 1
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_9z05teywww5yrqpeh88r/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.218,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-faces-best-0.png"
+  ],
+  "sha256": [
+   "27c46cd9f27289b2b00ab094bdb4566927bf8129f06e6f7a1ef4e1d7493eb850"
+  ],
+  "values": {},
+  "run_ms": 248,
+  "wall_ms": 251
+ },
+ {
+  "name": "restore-scratches-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nafnet-restore",
+  "ran": "lama-inpaint",
+  "model_params": {
+   "detector": "bopbtl-defects",
+   "model": "lama-inpaint",
+   "x-gaea.worker": {
+    "effective": {
+     "mode": "best"
+    },
+    "lane": "fp16",
+    "operation": "image.fill",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_amdar5aw3afs0ctgcq7d/outputs/worker/worker-2/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.039,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "restore-scratches-best-0.png"
+  ],
+  "sha256": [
+   "afdd71c7f65bd0a1ffe5bd206bf4c5601281634f8baa2841f002e4d2a1853ecd"
+  ],
+  "values": {},
+  "run_ms": 641,
+  "wall_ms": 643
+ },
+ {
+  "name": "upscale-photo-x2-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "heart-upscale",
+  "ran": "heart-upscale",
+  "model_params": {
+   "model": "heart-upscale",
+   "x-gaea.worker": {
+    "effective": {
+     "scale": 2
+    },
+    "lane": "fp16",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "name": "applied_scale",
+      "value": 2
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_5g7me186q5n27b731hb0/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 1.744,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "upscale-photo-x2-best-0.png"
+  ],
+  "sha256": [
+   "e155174e5c7394a59fcf6e407458ccd5244e880e84fc157bd31b7dcd7ff364bc"
+  ],
+  "values": {},
+  "run_ms": 1800,
+  "wall_ms": 1802
+ },
+ {
+  "name": "upscale-drawn-x2-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "heart-upscale",
+  "ran": "heart-upscale",
+  "model_params": {
+   "model": "heart-upscale",
+   "x-gaea.worker": {
+    "effective": {
+     "scale": 2
+    },
+    "lane": "fp16",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "name": "applied_scale",
+      "value": 2
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_v4qj35sz95d591mrqx45/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.462,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "upscale-drawn-x2-best-0.png"
+  ],
+  "sha256": [
+   "7db56922c02db6a332c054f0e270545fdcee503f3ef9e567024b2032347a586d"
+  ],
+  "values": {},
+  "run_ms": 483,
+  "wall_ms": 485
+ },
+ {
+  "name": "upscale-photo-x4-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "heart-upscale",
+  "ran": "heart-upscale",
+  "model_params": {
+   "model": "heart-upscale",
+   "x-gaea.worker": {
+    "effective": {
+     "scale": 4
+    },
+    "lane": "fp16",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "name": "applied_scale",
+      "value": 4
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_az7get3as371zz3gyxwp/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.474,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "upscale-photo-x4-best-0.png"
+  ],
+  "sha256": [
+   "d3eed79bb34cb5613f9fa3bbbcc9057b9327e359ded7f484d6466cf64304d0c6"
+  ],
+  "values": {},
+  "run_ms": 529,
+  "wall_ms": 531
+ },
+ {
+  "name": "upscale-drawn-x4-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "heart-upscale",
+  "ran": "heart-upscale",
+  "model_params": {
+   "model": "heart-upscale",
+   "x-gaea.worker": {
+    "effective": {
+     "scale": 4
+    },
+    "lane": "fp16",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "name": "applied_scale",
+      "value": 4
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_7acenv866pf5qe332j6v/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.481,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "upscale-drawn-x4-best-0.png"
+  ],
+  "sha256": [
+   "23d04d329f884fc001c3c8ea882b7a38b23a8e68075d86d128a1c4d942ebb06f"
+  ],
+  "values": {},
+  "run_ms": 530,
+  "wall_ms": 532
+ },
+ {
+  "name": "describe",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "mage-vl",
+  "ran": "mage-vl",
+  "model_params": {
+   "model": "mage-vl",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "int8",
+    "operation": "image.describe",
+    "outputs": [
+     {
+      "name": "text",
+      "value": "{\n  \"caption\": \"A red fox sits in a snowy forest during golden hour.\",\n  \"alt_text\": \"A red fox sitting in snow with trees in the background.\",\n  \"tags\": [\"fox\", \"snow\", \"forest\", \"golden hour\", \"red\", \"white\", \"natural\"]\n}"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.mage-vl",
+    "seconds": 3.639,
+    "version": "0.1.0"
+   }
+  },
+  "files": [
+   "describe-0.json"
+  ],
+  "sha256": [
+   "db165cf2915bbbaec8b553c22932668b936147de9b8432029e42f6156d727557"
+  ],
+  "values": {
+   "description": {
+    "alt_text": "A red fox sitting in snow with trees in the background.",
+    "caption": "A red fox sits in a snowy forest during golden hour.",
+    "language": "en",
+    "tags": [
+     "fox",
+     "snow",
+     "forest",
+     "golden hour",
+     "red",
+     "white",
+     "natural"
+    ]
+   }
+  },
+  "run_ms": 7494,
+  "wall_ms": 7497
+ },
+ {
+  "name": "describe-sign",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "mage-vl",
+  "ran": "mage-vl",
+  "model_params": {
+   "model": "mage-vl",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "int8",
+    "operation": "image.describe",
+    "outputs": [
+     {
+      "name": "text",
+      "value": "{\n  \"caption\": \"A red fox sitting in a snowy forest during sunset.\",\n  \"alt_text\": \"A red fox in a snowy forest at sunset.\",\n  \"tags\": [\"fox\", \"snow\", \"forest\", \"sunset\", \"red\", \"orange\", \"white\"]\n}"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.mage-vl",
+    "seconds": 0.68,
+    "version": "0.1.0"
+   }
+  },
+  "files": [
+   "describe-sign-0.json"
+  ],
+  "sha256": [
+   "c6375ab65ae9a0a68d3205705d124c1f3e9353536f92cbdd62334a0d608db258"
+  ],
+  "values": {
+   "description": {
+    "alt_text": "A red fox in a snowy forest at sunset.",
+    "caption": "A red fox sitting in a snowy forest during sunset.",
+    "language": "en",
+    "tags": [
+     "fox",
+     "snow",
+     "forest",
+     "sunset",
+     "red",
+     "orange",
+     "white"
+    ]
+   }
+  },
+  "run_ms": 689,
+  "wall_ms": 691
+ },
+ {
+  "name": "score",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "siglip2-quality",
+  "ran": "siglip2-quality",
+  "model_params": {
+   "model": "siglip2-quality",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "int8",
+    "operation": "image.score",
+    "outputs": [
+     {
+      "name": "score",
+      "value": 0.8590082
+     },
+     {
+      "name": "subscores",
+      "value": {}
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.656,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "score-0.json"
+  ],
+  "sha256": [
+   "b419069e741f1ebb9edfd0b95c3152c488f5ace4779f3ca30313ff0f929e0012"
+  ],
+  "values": {
+   "score": {
+    "raw": 0.8590082,
+    "scale": "siglip2-quality: 0 (worst) to 1 (best)",
+    "score": 0.8590082
+   }
+  },
+  "run_ms": 899,
+  "wall_ms": 902
+ },
+ {
+  "name": "score-grey",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "siglip2-quality",
+  "ran": "siglip2-quality",
+  "model_params": {
+   "model": "siglip2-quality",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "int8",
+    "operation": "image.score",
+    "outputs": [
+     {
+      "name": "score",
+      "value": 0.8660716
+     },
+     {
+      "name": "subscores",
+      "value": {}
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.014,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "score-grey-0.json"
+  ],
+  "sha256": [
+   "0912248afbe19546e32fcce2a4bae8e09a147e45f01f4768e733bb91c5e36340"
+  ],
+  "values": {
+   "score": {
+    "raw": 0.8660716,
+    "scale": "siglip2-quality: 0 (worst) to 1 (best)",
+    "score": 0.8660716
+   }
+  },
+  "run_ms": 20,
+  "wall_ms": 23
+ },
+ {
+  "name": "named-drunet",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "drunet-denoise",
+  "ran": "drunet-denoise",
+  "model_params": {
+   "model": "drunet-denoise",
+   "x-gaea.worker": {
+    "effective": {},
+    "lane": "fp32",
+    "operation": "image.restore",
+    "outputs": [
+     {
+      "name": "applied_strength",
+      "value": 0.3
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_09j4facxecq10csz9k4p/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.056,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "named-drunet-0.png"
+  ],
+  "sha256": [
+   "30a75e84547e3c24578f410e1bb9d4f84e8878d050e686294d256f36b8ea6834"
+  ],
+  "values": {},
+  "run_ms": 76,
+  "wall_ms": 79
+ },
+ {
+  "name": "named-anime4k-x2",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "anime4k-upscale",
+  "ran": "anime4k-upscale",
+  "model_params": {
+   "model": "anime4k-upscale",
+   "x-gaea.worker": {
+    "effective": {
+     "scale": 2
+    },
+    "lane": "fp32",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "name": "applied_scale",
+      "value": 2
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_9kbq1fbf4qrgbqzgwqqm/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.433,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "named-anime4k-x2-0.png"
+  ],
+  "sha256": [
+   "9ead892497e0678a1858af8008abebb222435cc79885f2a3989277e08c594e9c"
+  ],
+  "values": {},
+  "run_ms": 550,
+  "wall_ms": 552
+ },
+ {
+  "name": "named-anime4k-x4",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "anime4k-upscale",
+  "ran": "anime4k-upscale",
+  "model_params": {
+   "model": "anime4k-upscale",
+   "x-gaea.worker": {
+    "effective": {
+     "scale": 4
+    },
+    "lane": "fp32",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "name": "applied_scale",
+      "value": 4
+     },
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_hchk75a2sh73jjzmbgb1/outputs/worker/worker-1/out/image-0.png"
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 0.044,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "named-anime4k-x4-0.png"
+  ],
+  "sha256": [
+   "a9610b1e1111816c60370a4b49cfef520d277cd30b33acf3aaf1ced6d735a129"
+  ],
+  "values": {},
+  "run_ms": 100,
+  "wall_ms": 102
+ },
+ {
+  "name": "named-vosr2-x4",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "vosr2-upscale",
+  "ran": "vosr2-upscale",
+  "model_params": {
+   "model": "vosr2-upscale",
+   "ran": "VOSR2",
+   "x-gaea.worker": {
+    "effective": {
+     "guard_route": "generative",
+     "scale": 4
+    },
+    "lane": "fp16",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_ar0rzzn0e1zjn6jtqvd5/outputs/worker/worker-1/out/image-0.png"
+     },
+     {
+      "name": "upscale_model",
+      "value": "VOSR2"
+     },
+     {
+      "name": "applied_scale",
+      "value": 4
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 3.91,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "named-vosr2-x4-0.png"
+  ],
+  "sha256": [
+   "8dc92a415a8f86ac96c4eeebe4a4202bbe102c7521387157e65e67bbd1f45c78"
+  ],
+  "values": {},
+  "run_ms": 4114,
+  "wall_ms": 4116
+ },
+ {
+  "name": "named-nacre-x4",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nacre-upscale",
+  "ran": "nacre-upscale",
+  "model_params": {
+   "model": "nacre-upscale",
+   "ran": "Nacre",
+   "x-gaea.worker": {
+    "effective": {
+     "guard_route": "generative",
+     "scale": 4
+    },
+    "lane": "fp16",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_xzj0afvedvqe3a2x7w08/outputs/worker/worker-1/out/image-0.png"
+     },
+     {
+      "name": "upscale_model",
+      "value": "Nacre"
+     },
+     {
+      "name": "applied_scale",
+      "value": 4
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 6.26,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "named-nacre-x4-0.png"
+  ],
+  "sha256": [
+   "3cb2a65dd514513a5ff6a5716e13118ef8c523459247ce704994157260701689"
+  ],
+  "values": {},
+  "run_ms": 6373,
+  "wall_ms": 6375
+ },
+ {
+  "name": "named-nacre-sign-x2",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nacre-upscale",
+  "ran": "nacre-upscale",
+  "model_params": {
+   "model": "nacre-upscale",
+   "ran": "Nacre + NERVE (protected words)",
+   "x-gaea.worker": {
+    "effective": {
+     "guard_route": "protectWords",
+     "scale": 2
+    },
+    "lane": "fp16",
+    "operation": "image.upscale",
+    "outputs": [
+     {
+      "media_type": "image/png",
+      "name": "image",
+      "path": "/tmp/g377/main/Caches/spool/jobs/job_1phbdz87pab0mc2ejfp7/outputs/worker/worker-1/out/image-0.png"
+     },
+     {
+      "name": "upscale_model",
+      "value": "Nacre + NERVE (protected words)"
+     },
+     {
+      "name": "applied_scale",
+      "value": 2
+     }
+    ],
+    "plugin": "com.xocialize.gaea.forge",
+    "seconds": 5.419,
+    "version": "0.2.0"
+   }
+  },
+  "files": [
+   "named-nacre-sign-x2-0.png"
+  ],
+  "sha256": [
+   "05b0c9cf6157de8d602afb7a5201efb7fbb126c0166f57acc230e8bedcb4c3b0"
+  ],
+  "values": {},
+  "run_ms": 5438,
+  "wall_ms": 5441
+ }
+]

@@ -1,0 +1,8 @@
+faces-live: default in 5.8 s: WebP · SSIMULACRA2 80.6 ≥ 80 · 2048×2048 · 387 KB → 196 KB (-49%) · upscale×4 [best · RealPLKSR upscale] → 2048×2048 · faces recovered with GFPGAN face restore at 50% (faces: 1 of 1 restored)
+faces-live: restoreformer-face in 5.1 s: WebP · SSIMULACRA2 80.4 ≥ 80 · 2048×2048 · 387 KB → 195 KB (-50%) · upscale×4 [best · RealPLKSR upscale] → 2048×2048 · faces recovered with RestoreFormer++ face restore at 50% (faces: 1 of 1 restored)
+faces-live: ticket image.restore completed engine=any ran=RestoreFormer++ face restore
+faces-live: ticket image.restore completed engine=any ran=GFPGAN face restore
+faces-live: cancel → ticket cancelled; result: Failed: The image.restore step ended cancelled.
+faces-live: optimized variant stored after the cancel: false
+wrote /tmp/g377-desktop-work/out/faces-live.png
+working folder: /tmp/g377-desktop-work/out/working-C89AC3D7

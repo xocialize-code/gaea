@@ -1,0 +1,12 @@
+## nacre x2 over GPP
+error {'code': 'invalid_request', 'message': 'configure.budget is not a WorkerBudget: DecodingError.keyNotFound: Key \'wiresWeights\' not found in keyed decoding container. Debug description: No value associated with key CodingKeys(stringValue: "wiresWeights", intValue: nil) ("wiresWeights").', 're': 'c', 'retryable': False, 'type': 'error'}
+## nacre x2 in-process
+{"applied_scale":2,"model":"upscaleNacre","package":"nacre-upscale","phys_footprint":776488496,"prepare_s":0.11380075000000001,"run_s":12.362155458,"total_s":50.330497915999999,"upscale_model":"Nacre","warm_s":[12.962472542,12.369789416,12.479262834]}
+## nacre x2 in-process, sink bound
+{"applied_scale":2,"model":"upscaleNacre","package":"nacre-upscale","phys_footprint":849905296,"prepare_s":0.087295708,"run_s":12.435637042,"total_s":49.875640541999999,"upscale_model":"Nacre","warm_s":[12.410960041999999,12.441948625,12.464598000000001]}
+## drunet over GPP
+error {'code': 'invalid_request', 'message': 'configure.budget is not a WorkerBudget: DecodingError.keyNotFound: Key \'wiresWeights\' not found in keyed decoding container. Debug description: No value associated with key CodingKeys(stringValue: "wiresWeights", intValue: nil) ("wiresWeights").', 're': 'c', 'retryable': False, 'type': 'error'}
+## drunet in-process
+{"model":"denoiseStrength","package":"drunet-denoise","phys_footprint":2588017744,"prepare_s":0.028036665999999998,"run_s":0.23384674999999999,"total_s":1.4151033339999999,"warm_s":[0.22480675,0.21578749999999999,0.21682079200000001,0.22316233399999999,0.235098792]}
+## drunet in-process, sink
+{"model":"denoiseStrength","package":"drunet-denoise","phys_footprint":2612184216,"prepare_s":0.010426041,"run_s":0.24248245800000001,"total_s":1.4134180409999999,"warm_s":[0.217445625,0.224337167,0.22722820899999999,0.231092042,0.222945333]}

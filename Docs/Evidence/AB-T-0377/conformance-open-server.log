@@ -1,0 +1,15 @@
+2026-10-29T07:06:33Z operator: listening on /tmp/g377/main/operator.sock (same user, Developer ID team)
+2026-10-29T07:06:33Z gaea 0.6.0 starting: /tmp/g377/main, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-10-29T00:06:33-0700 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17761
+2026-10-29T07:06:33Z gaea: serving MES at http://127.0.0.1:17761/mes/v0
+gaea 0.6.0 serving MES at http://127.0.0.1:17761/mes/v0; operator API at /tmp/g377/main/operator.sock
+2026-10-29T07:06:34Z scheduler: launched com.xocialize.gaea.z-image 0.1.0, pid 39267, hello after 0.010109917 seconds
+2026-10-29T07:07:54Z scheduler: launched com.xocialize.gaea.flux2-klein 0.1.0, pid 39473, hello after 0.010488209 seconds
+2026-10-29T07:08:46Z scheduler: launched com.xocialize.gaea.forge 0.2.0, pid 39595, hello after 0.014404708 seconds
+2026-10-29T07:09:18Z scheduler: launched com.xocialize.gaea.prompt-enhance 0.1.0, pid 39695, hello after 0.01220825 seconds
+2026-10-29T00:09:45-0700 error mes-engine: [HummingbirdCore] Server shutdown error: Already closed
+2026-10-29T00:09:45-0700 error mes-engine: [HummingbirdCore] Waiting on child channel: CancellationError()
+2026-10-29T07:09:45Z scheduler: stopped com.xocialize.gaea.z-image 0.1.0 (sigterm)
+2026-10-29T07:09:45Z scheduler: stopped com.xocialize.gaea.flux2-klein 0.1.0 (sigterm)
+2026-10-29T07:09:45Z scheduler: stopped com.xocialize.gaea.prompt-enhance 0.1.0 (sigterm)
+2026-10-29T07:09:45Z scheduler: stopped com.xocialize.gaea.forge 0.2.0 (sigterm)

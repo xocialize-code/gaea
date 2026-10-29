@@ -1,0 +1,14 @@
+2026-10-29T05:51:50Z operator: listening on /tmp/g377/main/operator.sock (same user, Developer ID team)
+2026-10-29T05:51:50Z gaea 0.6.0 starting: /tmp/g377/main, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-10-28T22:51:50-0700 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17762
+2026-10-29T05:51:50Z gaea: serving MES at http://127.0.0.1:17762/mes/v0
+gaea 0.6.0 serving MES at http://127.0.0.1:17762/mes/v0; operator API at /tmp/g377/main/operator.sock
+2026-10-29T05:53:07Z plugins: staged com.xocialize.gaea.forge 0.2.0 beside 0.1.1
+2026-10-29T05:53:07Z plugins: com.xocialize.gaea.forge switched 0.1.1 → 0.2.0
+2026-10-29T05:53:14Z plugins: added com.xocialize.gaea.mage-vl 0.1.0 from xocialize/gaea-plugin-mage-vl
+2026-10-29T05:53:15Z scheduler: launched com.xocialize.gaea.forge 0.2.0, pid 26676, hello after 0.7213905 seconds
+2026-10-29T05:53:34Z scheduler: launched com.xocialize.gaea.mage-vl 0.1.0, pid 26716, hello after 0.466880625 seconds
+2026-10-28T22:54:00-0700 error mes-engine: [HummingbirdCore] Server shutdown error: Already closed
+2026-10-28T22:54:00-0700 error mes-engine: [HummingbirdCore] Waiting on child channel: CancellationError()
+2026-10-29T05:54:00Z scheduler: stopped com.xocialize.gaea.mage-vl 0.1.0 (sigterm)
+2026-10-29T05:54:00Z scheduler: stopped com.xocialize.gaea.forge 0.2.0 (sigterm)

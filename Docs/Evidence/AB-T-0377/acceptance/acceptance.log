@@ -1,0 +1,28 @@
+# AB-T-0377 acceptance 2026-10-29T05:51:50Z: 0.6.0 on /tmp/g377/main
+com.xocialize.gaea.forge now runs 0.2.0.
+Installed Mage-VL 0.1.0 (com.xocialize.gaea.mage-vl), enabled.
+PASS  forge 0.2.0 is the active version
+PASS  mage-vl 0.1.0 is installed
+('com.xocialize.gaea.forge', '0.2.0') Developer ID Application: Dustin Nielson (CFZS6RXUCP), id co 1
+('com.xocialize.gaea.mage-vl', '0.1.0') Developer ID Application: Dustin Nielson (CFZS6RXUCP), id co 1
+PASS  both verified and notarized
+image.relight ['cidnet-relight']
+image.colorize ['ddcolor-colorize']
+image.describe ['mage-vl']
+image.score ['siglip2-quality']
+PASS  relight, colorize, describe and score are offered, by the models v0.9.1 defaults to
+['nafnet-restore', 'drunet-denoise', 'gfpgan-face', 'restoreformer-face', 'restormer-defocus', 'restormer-denoise', 'restormer-motion', 'scunet-denoise'] ['realplksr-upscale', 'anime4k-upscale', 'heart-upscale', 'nacre-upscale', 'nerve-upscale', 'vosr2-upscale']
+PASS  restore lists DRUNet; upscale lists Anime4K VL, VOSR2 and Nacre
+43 jobs []
+PASS  every coverage job succeeded
+mage-vl {'alt_text': 'A red fox sitting in snow with trees in the background.', 'caption': 'A red fox sits in a snowy forest during golden hour.', 'language': 'en', 'tags': ['fox', 'snow', 'forest', 'golden hour', 'red', 'white', 'natural']}
+PASS  describe: a caption, alt text and tags (Mage-VL)
+siglip2-quality {'raw': 0.8590082, 'scale': 'siglip2-quality: 0 (worst) to 1 (best)', 'score': 0.8590082}
+PASS  score: a value in 0…1 (SigLIP2)
+{'detector': 'bopbtl-defects', 'model': 'lama-inpaint', 'x-gaea.worker': {'effective': {'mode': 'best'}, 'lane': 'fp16', 'operation': 'image.fill', 'outputs': [{'media_type': 'image/png', 'name': 'image', 'path': '/tmp/g377/main/Caches/spool/jobs/job_dgez1mysypc1xehaxdtg/outputs/worker/worker-2/out/image-0.png'}], 'plugin': 'com.xocialize.gaea.forge', 'seconds': 0.039, 'version': '0.2.0'}}
+PASS  scratches: BOPBTL's defects, then LaMa
+{'named-vosr2-x4': {'model': 'vosr2-upscale', 'ran': 'VOSR2', 'x-gaea.worker': {'effective': {'guard_route': 'generative', 'scale': 4}, 'lane': 'fp16', 'operation': 'image.upscale', 'outputs': [{'media_type': 'image/png', 'name': 'image', 'path': '/tmp/g377/main/Caches/spool/jobs/job_ar0rzzn0e1zjn6jtqvd5/outputs/worker/worker-1/out/image-0.png'}, {'name': 'upscale_model', 'value': 'VOSR2'}, {'name': 'applied_scale', 'value': 4}], 'plugin': 'com.xocialize.gaea.forge', 'seconds': 3.91, 'version': '0.2.0'}}, 'named-nacre-x4': {'model': 'nacre-upscale', 'ran': 'Nacre', 'x-gaea.worker': {'effective': {'guard_route': 'generative', 'scale': 4}, 'lane': 'fp16', 'operation': 'image.upscale', 'outputs': [{'media_type': 'image/png', 'name': 'image', 'path': '/tmp/g377/main/Caches/spool/jobs/job_xzj0afvedvqe3a2x7w08/outputs/worker/worker-1/out/image-0.png'}, {'name': 'upscale_model', 'value': 'Nacre'}, {'name': 'applied_scale', 'value': 4}], 'plugin': 'com.xocialize.gaea.forge', 'seconds': 6.26, 'version': '0.2.0'}}, 'named-nacre-sign-x2': {'model': 'nacre-upscale', 'ran': 'Nacre + NERVE (protected words)', 'x-gaea.worker': {'effective': {'guard_route': 'protectWords', 'scale': 2}, 'lane': 'fp16', 'operation': 'image.upscale', 'outputs': [{'media_type': 'image/png', 'name': 'image', 'path': '/tmp/g377/main/Caches/spool/jobs/job_1phbdz87pab0mc2ejfp7/outputs/worker/worker-1/out/image-0.png'}, {'name': 'upscale_model', 'value': 'Nacre + NERVE (protected words)'}, {'name': 'applied_scale', 'value': 2}], 'plugin': 'com.xocialize.gaea.forge', 'seconds': 5.419, 'version': '0.2.0'}}}
+PASS  guarded upscales name what ran (Nacre on the sign: protected words)
+https://huggingface.co/mlx-community/Qwen3.5-4B-MLX-4bit
+PASS  qwen3.5-4b's terms_url is the 4B's own checkpoint
+== 11 passed, 0 failed

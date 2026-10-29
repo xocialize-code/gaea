@@ -1,0 +1,28 @@
+2026-10-29T06:34:13Z operator: listening on /tmp/g377/main/operator.sock (same user, Developer ID team)
+2026-10-29T06:34:13Z gaea 0.6.0 starting: /tmp/g377/main, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-10-28T23:34:13-0700 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17761
+2026-10-29T06:34:13Z gaea: serving MES at http://127.0.0.1:17761/mes/v0
+gaea 0.6.0 serving MES at http://127.0.0.1:17761/mes/v0; operator API at /tmp/g377/main/operator.sock
+2026-10-29T06:34:14Z scheduler: launched com.xocialize.gaea.forge 0.2.0, pid 32879, hello after 0.024769209 seconds
+2026-10-29T06:34:19Z scheduler: launched com.xocialize.gaea.mage-vl 0.1.0, pid 32894, hello after 0.017555209 seconds
+2026-10-29T06:39:07Z scheduler: launched com.xocialize.gaea.z-image 0.1.0, pid 34912, hello after 0.463854625 seconds
+2026-10-29T06:40:52Z scheduler: launched com.xocialize.gaea.prompt-enhance 0.1.0, pid 35083, hello after 0.520023042 seconds
+2026-10-29T06:40:54Z scheduler: launched com.xocialize.gaea.flux2-klein 0.1.0, pid 35088, hello after 0.406465333 seconds
+2026-10-29T06:49:52Z scheduler: com.xocialize.gaea.mage-vl idle since 2026-10-29T06:34:24Z; stopping
+2026-10-29T06:49:52Z scheduler: stopped com.xocialize.gaea.mage-vl 0.1.0 (shutdown)
+2026-10-29T06:53:03Z scheduler: launched com.xocialize.gaea.qwen-image 0.1.1, pid 36612, hello after 0.50445725 seconds
+2026-10-29T06:54:25Z scheduler: com.xocialize.gaea.forge idle since 2026-10-29T06:39:06Z; stopping
+2026-10-29T06:54:25Z scheduler: stopped com.xocialize.gaea.forge 0.2.0 (shutdown)
+2026-10-29T06:55:12Z scheduler: policy plan for z-image int4 on com.xocialize.gaea.z-image: needs 110.47 GB of 103.08 GB, evicting [com.xocialize.gaea.flux2-klein]
+2026-10-29T06:55:12Z scheduler: evicting com.xocialize.gaea.flux2-klein to make room for z-image int4 (idle, least recently used; charged 30.32 GB)
+2026-10-29T06:55:13Z scheduler: stopped com.xocialize.gaea.flux2-klein 0.1.0 (shutdown)
+2026-10-29T07:05:36Z scheduler: launched com.xocialize.gaea.forge 0.2.0, pid 38147, hello after 0.015226708 seconds
+2026-10-29T07:05:36Z ledger: com.xocialize.gaea.forge 0.2.0 runs at 2.29 GB, past its declared 1.20 GB
+2026-10-29T07:05:37Z scheduler: launched com.xocialize.gaea.mage-vl 0.1.0, pid 38148, hello after 0.016161167 seconds
+2026-10-29T00:06:32-0700 error mes-engine: [HummingbirdCore] Waiting on child channel: CancellationError()
+2026-10-29T00:06:32-0700 error mes-engine: [HummingbirdCore] Server shutdown error: Already closed
+2026-10-29T07:06:32Z scheduler: stopped com.xocialize.gaea.prompt-enhance 0.1.0 (sigterm)
+2026-10-29T07:06:32Z scheduler: stopped com.xocialize.gaea.qwen-image 0.1.1 (sigterm)
+2026-10-29T07:06:33Z scheduler: stopped com.xocialize.gaea.z-image 0.1.0 (sigterm)
+2026-10-29T07:06:33Z scheduler: stopped com.xocialize.gaea.forge 0.2.0 (sigterm)
+2026-10-29T07:06:33Z scheduler: stopped com.xocialize.gaea.mage-vl 0.1.0 (sigterm)

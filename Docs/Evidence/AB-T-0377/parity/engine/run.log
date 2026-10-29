@@ -1,0 +1,366 @@
+# engine on :17611, pid 28023, 2026-10-29T05:59:40Z, suites: singles upscale restore generate
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+singles image.relight cidnet-relight photo-0: 735 ms 
+singles image.relight cidnet-relight photo-1: 644 ms 
+singles image.relight cidnet-relight photo-2: 658 ms 
+singles image.colorize ddcolor-colorize photo-0: 288 ms 
+singles image.colorize ddcolor-colorize photo-1: 264 ms 
+singles image.colorize ddcolor-colorize photo-2: 258 ms 
+singles image.matte birefnet-matte photo-0: 561 ms 
+singles image.matte birefnet-matte photo-1: 641 ms 
+singles image.matte birefnet-matte photo-2: 517 ms 
+singles image.describe mage-vl photo-0: 5818 ms 
+singles image.describe mage-vl photo-1: 1485 ms 
+singles image.describe mage-vl photo-2: 1190 ms 
+singles image.score siglip2-quality photo-0: 391 ms score=0.9125
+singles image.score siglip2-quality photo-1: 116 ms score=0.9125
+singles image.score siglip2-quality photo-2: 109 ms score=0.9125
+upscale-x4 image.upscale realplksr-upscale warm-up: 259 ms 
+upscale-x4 image.upscale realplksr-upscale 0801: 226 ms psnr=25.89 ssim=0.7648
+upscale-x4 image.upscale realplksr-upscale 0802: 217 ms psnr=29.76 ssim=0.7893
+upscale-x4 image.upscale realplksr-upscale 0803: 219 ms psnr=30.88 ssim=0.8966
+upscale-x4 image.upscale realplksr-upscale 0804: 223 ms psnr=23.22 ssim=0.6796
+upscale-x4 image.upscale realplksr-upscale 0805: 211 ms psnr=23.95 ssim=0.6471
+upscale-x4 image.upscale realplksr-upscale 0806: 218 ms psnr=25.04 ssim=0.7564
+upscale-x4 image.upscale nerve-upscale warm-up: 139 ms 
+upscale-x4 image.upscale nerve-upscale 0801: 131 ms psnr=26 ssim=0.7691
+upscale-x4 image.upscale nerve-upscale 0802: 126 ms psnr=30.52 ssim=0.8325
+upscale-x4 image.upscale nerve-upscale 0803: 153 ms psnr=31.97 ssim=0.9214
+upscale-x4 image.upscale nerve-upscale 0804: 159 ms psnr=23.52 ssim=0.7055
+upscale-x4 image.upscale nerve-upscale 0805: 161 ms psnr=24.44 ssim=0.6727
+upscale-x4 image.upscale nerve-upscale 0806: 127 ms psnr=25.39 ssim=0.7736
+upscale-x4 image.upscale heart-upscale warm-up: 1649 ms 
+upscale-x4 image.upscale heart-upscale 0801: 1571 ms psnr=26.39 ssim=0.7941
+upscale-x4 image.upscale heart-upscale 0802: 524 ms psnr=29.88 ssim=0.8069
+upscale-x4 image.upscale heart-upscale 0803: 552 ms psnr=32.53 ssim=0.934
+upscale-x4 image.upscale heart-upscale 0804: 552 ms psnr=23.58 ssim=0.7023
+upscale-x4 image.upscale heart-upscale 0805: 535 ms psnr=24.95 ssim=0.6844
+upscale-x4 image.upscale heart-upscale 0806: 543 ms psnr=24.98 ssim=0.7729
+upscale-x4 image.upscale seedvr2-upscale warm-up: 10497 ms 
+upscale-x4 image.upscale seedvr2-upscale 0801: 10474 ms psnr=25.15 ssim=0.7447
+upscale-x4 image.upscale seedvr2-upscale 0802: 10253 ms psnr=28.9 ssim=0.7821
+upscale-x4 image.upscale seedvr2-upscale 0803: 9932 ms psnr=30.15 ssim=0.8919
+upscale-x4 image.upscale seedvr2-upscale 0804: 4597 ms psnr=22.59 ssim=0.6514
+upscale-x4 image.upscale seedvr2-upscale 0805: 10333 ms psnr=23.66 ssim=0.6169
+upscale-x4 image.upscale seedvr2-upscale 0806: 10164 ms psnr=23.38 ssim=0.7274
+upscale-x4 image.upscale nacre-upscale warm-up: 24164 ms 
+upscale-x4 image.upscale nacre-upscale 0801: 13433 ms psnr=25.17 ssim=0.7624
+upscale-x4 image.upscale nacre-upscale 0802: 4614 ms psnr=29.29 ssim=0.8191
+upscale-x4 image.upscale nacre-upscale 0803: 4545 ms psnr=29.71 ssim=0.9013
+upscale-x4 image.upscale nacre-upscale 0804: 4630 ms psnr=22.34 ssim=0.6702
+upscale-x4 image.upscale nacre-upscale 0805: 4594 ms psnr=22.8 ssim=0.5799
+upscale-x4 image.upscale nacre-upscale 0806: 4552 ms psnr=24.47 ssim=0.7518
+upscale-x4 image.upscale vosr2-upscale warm-up: 2078 ms 
+upscale-x4 image.upscale vosr2-upscale 0801: 1624 ms psnr=25.86 ssim=0.7711
+upscale-x4 image.upscale vosr2-upscale 0802: 1643 ms psnr=29.55 ssim=0.7896
+upscale-x4 image.upscale vosr2-upscale 0803: 1627 ms psnr=31.31 ssim=0.9167
+upscale-x4 image.upscale vosr2-upscale 0804: 1636 ms psnr=23.61 ssim=0.6898
+upscale-x4 image.upscale vosr2-upscale 0805: 1626 ms psnr=23.63 ssim=0.58
+upscale-x4 image.upscale vosr2-upscale 0806: 1627 ms psnr=24.12 ssim=0.7336
+upscale-x4 image.upscale anime4k-upscale warm-up: 105 ms 
+upscale-x4 image.upscale anime4k-upscale 0801: 98 ms psnr=26.83 ssim=0.7941
+upscale-x4 image.upscale anime4k-upscale 0802: 101 ms psnr=30.54 ssim=0.8357
+upscale-x4 image.upscale anime4k-upscale 0803: 99 ms psnr=31.87 ssim=0.9192
+upscale-x4 image.upscale anime4k-upscale 0804: 101 ms psnr=24.05 ssim=0.6937
+upscale-x4 image.upscale anime4k-upscale 0805: 98 ms psnr=24.79 ssim=0.6577
+upscale-x4 image.upscale anime4k-upscale 0806: 92 ms psnr=25.31 ssim=0.7683
+upscale-x2 image.upscale realplksr-upscale warm-up: 606 ms 
+upscale-x2 image.upscale realplksr-upscale 0801: 578 ms psnr=32.02 ssim=0.9378
+upscale-x2 image.upscale realplksr-upscale 0802: 579 ms psnr=35.43 ssim=0.9328
+upscale-x2 image.upscale realplksr-upscale 0803: 582 ms psnr=36.32 ssim=0.9697
+upscale-x2 image.upscale realplksr-upscale 0804: 588 ms psnr=28.41 ssim=0.8882
+upscale-x2 image.upscale realplksr-upscale 0805: 567 ms psnr=29.37 ssim=0.8866
+upscale-x2 image.upscale realplksr-upscale 0806: 582 ms psnr=30.23 ssim=0.9205
+upscale-x2 image.upscale nerve-upscale warm-up: 197 ms 
+upscale-x2 image.upscale nerve-upscale 0801: 191 ms psnr=29.46 ssim=0.864
+upscale-x2 image.upscale nerve-upscale 0802: 190 ms psnr=33.33 ssim=0.8791
+upscale-x2 image.upscale nerve-upscale 0803: 193 ms psnr=35.13 ssim=0.9492
+upscale-x2 image.upscale nerve-upscale 0804: 205 ms psnr=26.61 ssim=0.8489
+upscale-x2 image.upscale nerve-upscale 0805: 180 ms psnr=27.66 ssim=0.8245
+upscale-x2 image.upscale nerve-upscale 0806: 193 ms psnr=28.91 ssim=0.8834
+upscale-x2 image.upscale heart-upscale warm-up: 2091 ms 
+upscale-x2 image.upscale heart-upscale 0801: 2075 ms psnr=32.35 ssim=0.9427
+upscale-x2 image.upscale heart-upscale 0802: 2079 ms psnr=35.95 ssim=0.9432
+upscale-x2 image.upscale heart-upscale 0803: 2064 ms psnr=38.53 ssim=0.9792
+upscale-x2 image.upscale heart-upscale 0804: 2093 ms psnr=30.07 ssim=0.9054
+upscale-x2 image.upscale heart-upscale 0805: 2087 ms psnr=30.61 ssim=0.9007
+upscale-x2 image.upscale heart-upscale 0806: 2093 ms psnr=31.16 ssim=0.935
+upscale-x2 image.upscale seedvr2-upscale warm-up: 4314 ms 
+upscale-x2 image.upscale seedvr2-upscale 0801: 4742 ms psnr=26.78 ssim=0.7959
+upscale-x2 image.upscale seedvr2-upscale 0802: 4738 ms psnr=30.43 ssim=0.8102
+upscale-x2 image.upscale seedvr2-upscale 0803: 4482 ms psnr=32.2 ssim=0.9051
+upscale-x2 image.upscale seedvr2-upscale 0804: 4372 ms psnr=23.12 ssim=0.7257
+upscale-x2 image.upscale seedvr2-upscale 0805: 4701 ms psnr=24.54 ssim=0.668
+upscale-x2 image.upscale seedvr2-upscale 0806: 4473 ms psnr=24.21 ssim=0.7705
+upscale-x2 image.upscale nacre-upscale warm-up: 12481 ms 
+upscale-x2 image.upscale nacre-upscale 0801: 12406 ms psnr=28.54 ssim=0.8879
+upscale-x2 image.upscale nacre-upscale 0802: 12412 ms psnr=32.58 ssim=0.9155
+upscale-x2 image.upscale nacre-upscale 0803: 12374 ms psnr=33.76 ssim=0.9494
+upscale-x2 image.upscale nacre-upscale 0804: 12516 ms psnr=26.75 ssim=0.8515
+upscale-x2 image.upscale nacre-upscale 0805: 12552 ms psnr=25.87 ssim=0.773
+upscale-x2 image.upscale nacre-upscale 0806: 12573 ms psnr=28.67 ssim=0.8878
+upscale-x2 image.upscale vosr2-upscale warm-up: 1700 ms 
+upscale-x2 image.upscale vosr2-upscale 0801: 1662 ms psnr=29.14 ssim=0.8645
+upscale-x2 image.upscale vosr2-upscale 0802: 1651 ms psnr=32.33 ssim=0.8656
+upscale-x2 image.upscale vosr2-upscale 0803: 1658 ms psnr=32.96 ssim=0.9405
+upscale-x2 image.upscale vosr2-upscale 0804: 1672 ms psnr=26.22 ssim=0.8121
+upscale-x2 image.upscale vosr2-upscale 0805: 1651 ms psnr=25.68 ssim=0.7409
+upscale-x2 image.upscale vosr2-upscale 0806: 1661 ms psnr=26.84 ssim=0.8379
+upscale-x2 image.upscale anime4k-upscale warm-up: 109 ms 
+upscale-x2 image.upscale anime4k-upscale 0801: 108 ms psnr=33.13 ssim=0.9394
+upscale-x2 image.upscale anime4k-upscale 0802: 112 ms psnr=36.6 ssim=0.9402
+upscale-x2 image.upscale anime4k-upscale 0803: 115 ms psnr=39.28 ssim=0.9781
+upscale-x2 image.upscale anime4k-upscale 0804: 117 ms psnr=29.49 ssim=0.8852
+upscale-x2 image.upscale anime4k-upscale 0805: 108 ms psnr=30.1 ssim=0.8797
+upscale-x2 image.upscale anime4k-upscale 0806: 110 ms psnr=30.39 ssim=0.9152
+restore-denoise image.restore nafnet-restore input: 330 ms psnr-degraded=24.08
+restore-denoise image.restore scunet-denoise warm-up: 1290 ms 
+restore-denoise image.restore scunet-denoise 0811: 1243 ms psnr=30.66 ssim=0.8614
+restore-denoise image.restore scunet-denoise 0812: 1237 ms psnr=34.66 ssim=0.9152
+restore-denoise image.restore scunet-denoise 0813: 1206 ms psnr=32.51 ssim=0.8926
+restore-denoise image.restore scunet-denoise 0814: 1207 ms psnr=33.92 ssim=0.9679
+restore-denoise image.restore scunet-denoise 0815: 1222 ms psnr=35.09 ssim=0.9138
+restore-denoise image.restore scunet-denoise 0816: 1229 ms psnr=33.09 ssim=0.8682
+restore-denoise image.restore restormer-denoise warm-up: 2890 ms 
+restore-denoise image.restore restormer-denoise 0811: 2819 ms psnr=25.8 ssim=0.7717
+restore-denoise image.restore restormer-denoise 0812: 2824 ms psnr=27.07 ssim=0.8077
+restore-denoise image.restore restormer-denoise 0813: 2819 ms psnr=26.95 ssim=0.8135
+restore-denoise image.restore restormer-denoise 0814: 2824 ms psnr=27.33 ssim=0.9002
+restore-denoise image.restore restormer-denoise 0815: 2831 ms psnr=28.01 ssim=0.8294
+restore-denoise image.restore restormer-denoise 0816: 2827 ms psnr=27.12 ssim=0.7906
+restore-denoise image.restore drunet-denoise warm-up: 343 ms 
+restore-denoise image.restore drunet-denoise 0811: 310 ms psnr=27.27 ssim=0.7053
+restore-denoise image.restore drunet-denoise 0812: 310 ms psnr=28.41 ssim=0.6798
+restore-denoise image.restore drunet-denoise 0813: 307 ms psnr=27.66 ssim=0.6825
+restore-denoise image.restore drunet-denoise 0814: 310 ms psnr=27.47 ssim=0.5922
+restore-denoise image.restore drunet-denoise 0815: 310 ms psnr=27.86 ssim=0.578
+restore-denoise image.restore drunet-denoise 0816: 317 ms psnr=27.36 ssim=0.6242
+restore-denoise image.restore nafnet-restore warm-up: 189 ms 
+restore-denoise image.restore nafnet-restore 0811: 195 ms psnr=30.18 ssim=0.8409
+restore-denoise image.restore nafnet-restore 0812: 182 ms psnr=33.52 ssim=0.8945
+restore-denoise image.restore nafnet-restore 0813: 190 ms psnr=31.97 ssim=0.8877
+restore-denoise image.restore nafnet-restore 0814: 183 ms psnr=32.66 ssim=0.9536
+restore-denoise image.restore nafnet-restore 0815: 189 ms psnr=34.65 ssim=0.9063
+restore-denoise image.restore nafnet-restore 0816: 187 ms psnr=32.85 ssim=0.8651
+restore-deblur image.restore nafnet-restore input: 159 ms psnr-degraded=25.6
+restore-deblur image.restore restormer-motion warm-up: 2848 ms 
+restore-deblur image.restore restormer-motion 0811: 2791 ms psnr=24.76 ssim=0.6339
+restore-deblur image.restore restormer-motion 0812: 2791 ms psnr=24.68 ssim=0.7387
+restore-deblur image.restore restormer-motion 0813: 2803 ms psnr=24.22 ssim=0.7391
+restore-deblur image.restore restormer-motion 0814: 2777 ms psnr=23.49 ssim=0.7849
+restore-deblur image.restore restormer-motion 0815: 2782 ms psnr=31.06 ssim=0.8495
+restore-deblur image.restore restormer-motion 0816: 2774 ms psnr=27.45 ssim=0.7422
+restore-deblur image.restore restormer-defocus warm-up: 2819 ms 
+restore-deblur image.restore restormer-defocus 0811: 2769 ms psnr=27.02 ssim=0.741
+restore-deblur image.restore restormer-defocus 0812: 2771 ms psnr=26.49 ssim=0.8063
+restore-deblur image.restore restormer-defocus 0813: 2767 ms psnr=25.92 ssim=0.7937
+restore-deblur image.restore restormer-defocus 0814: 2751 ms psnr=24.6 ssim=0.8387
+restore-deblur image.restore restormer-defocus 0815: 2778 ms psnr=25.53 ssim=0.7777
+restore-deblur image.restore restormer-defocus 0816: 2770 ms psnr=29.93 ssim=0.8197
+restore-deblur image.restore nafnet-restore warm-up: 156 ms 
+restore-deblur image.restore nafnet-restore 0811: 151 ms psnr=25.57 ssim=0.6412
+restore-deblur image.restore nafnet-restore 0812: 143 ms psnr=25.95 ssim=0.7432
+restore-deblur image.restore nafnet-restore 0813: 147 ms psnr=24.88 ssim=0.7391
+restore-deblur image.restore nafnet-restore 0814: 132 ms psnr=23.96 ssim=0.788
+restore-deblur image.restore nafnet-restore 0815: 152 ms psnr=31.51 ssim=0.8442
+restore-deblur image.restore nafnet-restore 0816: 147 ms psnr=28.68 ssim=0.7525
+generate image.generate z-image-turbo warm-up: 13361 ms 
+generate image.generate z-image-turbo p0: 11180 ms 
+generate image.generate z-image-turbo p1: 11186 ms 
+generate image.generate z-image-turbo p2: 11148 ms 
+generate image.generate z-image-turbo p3: 11168 ms 
+generate image.generate z-image-turbo p4: 11131 ms 
+generate image.generate z-image-turbo p5: 11161 ms 
+generate image.generate z-image-turbo p6: 11164 ms 
+generate image.generate z-image-turbo p7: 11154 ms 
+generate image.generate klein-4b warm-up: 9722 ms 
+generate image.generate klein-4b p0: 7180 ms 
+generate image.generate klein-4b p1: 7108 ms 
+generate image.generate klein-4b p2: 7243 ms 
+generate image.generate klein-4b p3: 7309 ms 
+generate image.generate klein-4b p4: 7160 ms 
+generate image.generate klein-4b p5: 7097 ms 
+generate image.generate klein-4b p6: 7418 ms 
+generate image.generate klein-4b p7: 6967 ms 
+generate image.generate z-image warm-up: 71570 ms 
+generate image.generate z-image p0: 69012 ms 
+generate image.generate z-image p1: 69044 ms 
+generate image.generate z-image p2: 68961 ms 
+generate image.generate z-image p3: 68892 ms 
+generate image.generate z-image p4: 68987 ms 
+generate image.generate z-image p5: 69068 ms 
+generate image.generate z-image p6: 68988 ms 
+generate image.generate z-image p7: 68959 ms 
+generate image.generate klein-4b-base warm-up: 78579 ms 
+generate image.generate klein-4b-base p0: 76178 ms 
+generate image.generate klein-4b-base p1: 76195 ms 
+generate image.generate klein-4b-base p2: 77062 ms 
+generate image.generate klein-4b-base p3: 78959 ms 
+generate image.generate klein-4b-base p4: 76469 ms 
+generate image.generate klein-4b-base p5: 76335 ms 
+generate image.generate klein-4b-base p6: 76985 ms 
+generate image.generate klein-4b-base p7: 76641 ms 
+generate image.generate qwen-image-flash warm-up: 15957 ms 
+generate image.generate qwen-image-flash p0: 13462 ms 
+generate image.generate qwen-image-flash p1: 13530 ms 
+generate image.generate qwen-image-flash p2: 13682 ms 
+generate image.generate qwen-image-flash p3: 13781 ms 
+generate image.generate qwen-image-flash p4: 13499 ms 
+generate image.generate qwen-image-flash p5: 13444 ms 
+generate image.generate qwen-image-flash p6: 14107 ms 
+generate image.generate qwen-image-flash p7: 13540 ms 
+judge image.score siglip2-quality z-image-turbo/p0: 353 ms score=0.8798
+judge image.describe mage-vl z-image-turbo/p0: 3494 ms 
+judge image.score siglip2-quality z-image-turbo/p1: 99 ms score=0.9293
+judge image.describe mage-vl z-image-turbo/p1: 1236 ms 
+judge image.score siglip2-quality z-image-turbo/p2: 99 ms score=0.9274
+judge image.describe mage-vl z-image-turbo/p2: 1105 ms 
+judge image.score siglip2-quality z-image-turbo/p3: 101 ms score=0.9164
+judge image.describe mage-vl z-image-turbo/p3: 1025 ms 
+judge image.score siglip2-quality z-image-turbo/p4: 97 ms score=0.9104
+judge image.describe mage-vl z-image-turbo/p4: 1054 ms 
+judge image.score siglip2-quality z-image-turbo/p5: 97 ms score=0.8726
+judge image.describe mage-vl z-image-turbo/p5: 1392 ms 
+judge image.score siglip2-quality z-image-turbo/p6: 98 ms score=0.9486
+judge image.describe mage-vl z-image-turbo/p6: 1036 ms 
+judge image.score siglip2-quality z-image-turbo/p7: 98 ms score=0.9165
+judge image.describe mage-vl z-image-turbo/p7: 1110 ms 
+judge image.score siglip2-quality klein-4b/p0: 111 ms score=0.9151
+judge image.describe mage-vl klein-4b/p0: 1043 ms 
+judge image.score siglip2-quality klein-4b/p1: 101 ms score=0.8983
+judge image.describe mage-vl klein-4b/p1: 1218 ms 
+judge image.score siglip2-quality klein-4b/p2: 99 ms score=0.9179
+judge image.describe mage-vl klein-4b/p2: 1170 ms 
+judge image.score siglip2-quality klein-4b/p3: 102 ms score=0.9079
+judge image.describe mage-vl klein-4b/p3: 1119 ms 
+judge image.score siglip2-quality klein-4b/p4: 98 ms score=0.8997
+judge image.describe mage-vl klein-4b/p4: 1454 ms 
+judge image.score siglip2-quality klein-4b/p5: 95 ms score=0.8816
+judge image.describe mage-vl klein-4b/p5: 1291 ms 
+judge image.score siglip2-quality klein-4b/p6: 101 ms score=0.9308
+judge image.describe mage-vl klein-4b/p6: 1341 ms 
+judge image.score siglip2-quality klein-4b/p7: 91 ms score=0.897
+judge image.describe mage-vl klein-4b/p7: 1303 ms 
+judge image.score siglip2-quality z-image/p0: 117 ms score=0.8431
+judge image.describe mage-vl z-image/p0: 1080 ms 
+judge image.score siglip2-quality z-image/p1: 98 ms score=0.9071
+judge image.describe mage-vl z-image/p1: 1215 ms 
+judge image.score siglip2-quality z-image/p2: 100 ms score=0.8716
+judge image.describe mage-vl z-image/p2: 1074 ms 
+judge image.score siglip2-quality z-image/p3: 99 ms score=0.8961
+judge image.describe mage-vl z-image/p3: 1093 ms 
+judge image.score siglip2-quality z-image/p4: 101 ms score=0.8952
+judge image.describe mage-vl z-image/p4: 1288 ms 
+judge image.score siglip2-quality z-image/p5: 102 ms score=0.8112
+judge image.describe mage-vl z-image/p5: 1392 ms 
+judge image.score siglip2-quality z-image/p6: 101 ms score=0.912
+judge image.describe mage-vl z-image/p6: 974 ms 
+judge image.score siglip2-quality z-image/p7: 99 ms score=0.9125
+judge image.describe mage-vl z-image/p7: 1001 ms 
+judge image.score siglip2-quality klein-4b-base/p0: 106 ms score=0.9228
+judge image.describe mage-vl klein-4b-base/p0: 1009 ms 
+judge image.score siglip2-quality klein-4b-base/p1: 96 ms score=0.9118
+judge image.describe mage-vl klein-4b-base/p1: 1174 ms 
+judge image.score siglip2-quality klein-4b-base/p2: 93 ms score=0.9194
+judge image.describe mage-vl klein-4b-base/p2: 1151 ms 
+judge image.score siglip2-quality klein-4b-base/p3: 98 ms score=0.8934
+judge image.describe mage-vl klein-4b-base/p3: 1223 ms 
+judge image.score siglip2-quality klein-4b-base/p4: 96 ms score=0.8968
+judge image.describe mage-vl klein-4b-base/p4: 1336 ms 
+judge image.score siglip2-quality klein-4b-base/p5: 94 ms score=0.8942
+judge image.describe mage-vl klein-4b-base/p5: 1427 ms 
+judge image.score siglip2-quality klein-4b-base/p6: 98 ms score=0.9415
+judge image.describe mage-vl klein-4b-base/p6: 1254 ms 
+judge image.score siglip2-quality klein-4b-base/p7: 90 ms score=0.9106
+judge image.describe mage-vl klein-4b-base/p7: 1011 ms 
+judge image.score siglip2-quality qwen-image-flash/p0: 100 ms score=0.9194
+judge image.describe mage-vl qwen-image-flash/p0: 1184 ms 
+judge image.score siglip2-quality qwen-image-flash/p1: 101 ms score=0.8953
+judge image.describe mage-vl qwen-image-flash/p1: 1308 ms 
+judge image.score siglip2-quality qwen-image-flash/p2: 95 ms score=0.908
+judge image.describe mage-vl qwen-image-flash/p2: 1235 ms 
+judge image.score siglip2-quality qwen-image-flash/p3: 99 ms score=0.9196
+judge image.describe mage-vl qwen-image-flash/p3: 1155 ms 
+judge image.score siglip2-quality qwen-image-flash/p4: 97 ms score=0.9008
+judge image.describe mage-vl qwen-image-flash/p4: 1359 ms 
+judge image.score siglip2-quality qwen-image-flash/p5: 98 ms score=0.9023
+judge image.describe mage-vl qwen-image-flash/p5: 1266 ms 
+judge image.score siglip2-quality qwen-image-flash/p6: 97 ms score=0.9235
+judge image.describe mage-vl qwen-image-flash/p6: 1318 ms 
+judge image.score siglip2-quality qwen-image-flash/p7: 88 ms score=0.918
+judge image.describe mage-vl qwen-image-flash/p7: 1126 ms 
+# Tier bench — Pixel Agency Image Engine
+
+Run 2026-10-29T06:34:13Z, engine http://127.0.0.1:17611/mes/v0.
+
+### generate
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) | iqa | recall | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|---|---|
+| image.generate | klein-4b-base | named | 9 | 76641 | 78579 | 0.9113 | 1.0000 | 0.0 | 0 |
+| image.generate | klein-4b | named | 9 | 7180 | 9722 | 0.9060 | 1.0000 | 0.0 | 0 |
+| image.generate | qwen-image-flash | named | 9 | 13540 | 15957 | 0.9109 | 1.0000 | 0.0 | 0 |
+| image.generate | z-image-turbo | named | 9 | 11164 | 13361 | 0.9126 | 0.9583 | 0.0 | 0 |
+| image.generate | z-image | named | 9 | 68988 | 71570 | 0.8811 | 0.9375 | 0.0 | 0 |
+
+### judge
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) | score | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|---|
+| image.describe | mage-vl | default | 40 | 1215 | — | — | 0.0 | 0 |
+| image.score | siglip2-quality | default | 40 | 99 | — | 0.9044 | 0.0 | 0 |
+
+### restore-deblur
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) | psnr | psnr-degraded | ssim | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|---|---|---|
+| image.restore | nafnet-restore | named | 8 | 147 | 159 | 26.7577 | 25.6038 | 0.7514 | 0.0 | 0 |
+| image.restore | restormer-defocus | named | 7 | 2770 | 2819 | 26.5801 | — | 0.7962 | 0.0 | 0 |
+| image.restore | restormer-motion | named | 7 | 2791 | 2848 | 25.9420 | — | 0.7480 | 0.0 | 0 |
+| reference | (degraded input) | default | 6 | 0 | — | 26.7690 | — | 0.7564 | — | 0 |
+
+### restore-denoise
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) | psnr | psnr-degraded | ssim | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|---|---|---|
+| image.restore | drunet-denoise | named | 7 | 310 | 343 | 27.6719 | — | 0.6437 | 0.0 | 0 |
+| image.restore | nafnet-restore | named | 8 | 189 | 330 | 32.6385 | 24.0793 | 0.8914 | 0.0 | 0 |
+| image.restore | restormer-denoise | named | 7 | 2824 | 2890 | 27.0476 | — | 0.8188 | 0.0 | 0 |
+| image.restore | scunet-denoise | named | 7 | 1229 | 1290 | 33.3216 | — | 0.9032 | 0.0 | 0 |
+| reference | (degraded input) | default | 6 | 0 | — | 23.9536 | — | 0.4658 | — | 0 |
+
+### singles
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) | score | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|---|
+| image.colorize | ddcolor-colorize | default | 3 | 264 | 288 | — | 0.0 | 0 |
+| image.describe | mage-vl | default | 3 | 1485 | 5818 | — | 0.0 | 0 |
+| image.matte | birefnet-matte | default | 3 | 641 | 561 | — | 0.0 | 0 |
+| image.relight | cidnet-relight | default | 3 | 658 | 735 | — | 0.0 | 0 |
+| image.score | siglip2-quality | default | 3 | 116 | 391 | 0.9125 | 0.0 | 0 |
+
+### upscale-x2
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) | psnr | ssim | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|---|---|
+| image.upscale | anime4k-upscale | named | 7 | 112 | 109 | 33.1656 | 0.9230 | 0.0 | 0 |
+| image.upscale | heart-upscale | named | 7 | 2087 | 2091 | 33.1117 | 0.9344 | 0.0 | 0 |
+| image.upscale | nacre-upscale | named | 7 | 12516 | 12481 | 29.3621 | 0.8775 | 0.0 | 0 |
+| image.upscale | nerve-upscale | named | 7 | 193 | 197 | 30.1837 | 0.8748 | 0.0 | 0 |
+| image.upscale | realplksr-upscale | named | 7 | 582 | 606 | 31.9626 | 0.9226 | 0.0 | 0 |
+| image.upscale | seedvr2-upscale | named | 7 | 4701 | 4314 | 26.8793 | 0.7792 | 0.0 | 0 |
+| image.upscale | vosr2-upscale | named | 7 | 1661 | 1700 | 28.8615 | 0.8436 | 0.0 | 0 |
+
+### upscale-x4
+
+| Operation | Model | Tier | Runs | Median warm (ms) | First run (ms) | psnr | ssim | Footprint (GB) | Errors |
+|---|---|---|---|---|---|---|---|---|---|
+| image.upscale | anime4k-upscale | named | 7 | 99 | 105 | 27.2325 | 0.7781 | 0.0 | 0 |
+| image.upscale | heart-upscale | named | 7 | 552 | 1649 | 27.0521 | 0.7824 | 0.0 | 0 |
+| image.upscale | nacre-upscale | named | 7 | 4614 | 24164 | 25.6290 | 0.7474 | 0.0 | 0 |
+| image.upscale | nerve-upscale | named | 7 | 153 | 139 | 26.9734 | 0.7791 | 0.0 | 0 |
+| image.upscale | realplksr-upscale | named | 7 | 219 | 259 | 26.4587 | 0.7557 | 0.0 | 0 |
+| image.upscale | seedvr2-upscale | named | 7 | 10253 | 10497 | 25.6371 | 0.7357 | 0.0 | 0 |
+| image.upscale | vosr2-upscale | named | 7 | 1627 | 2078 | 26.3457 | 0.7468 | 0.0 | 0 |
+
+# tier-bench exited 0

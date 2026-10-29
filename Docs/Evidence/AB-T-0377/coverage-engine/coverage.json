@@ -1,0 +1,867 @@
+[
+ {
+  "name": "relight-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "cidnet-relight",
+  "ran": "cidnet-relight",
+  "model_params": {
+   "model": "cidnet-relight"
+  },
+  "files": [
+   "relight-draft-0.png"
+  ],
+  "sha256": [
+   "082814633db4427df82fcc68edf177e606843f013805ed168bdd770d3b1d28bd"
+  ],
+  "values": {},
+  "run_ms": 646,
+  "wall_ms": 649
+ },
+ {
+  "name": "colorize-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "ddcolor-colorize",
+  "ran": "ddcolor-colorize",
+  "model_params": {
+   "model": "ddcolor-colorize"
+  },
+  "files": [
+   "colorize-draft-0.png"
+  ],
+  "sha256": [
+   "a7ddae910e8ca66625f08c07cbb7d64d90558801c50a051b2a682cd007debfa0"
+  ],
+  "values": {},
+  "run_ms": 148,
+  "wall_ms": 150
+ },
+ {
+  "name": "restore-general-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nafnet-restore",
+  "ran": "nafnet-restore",
+  "model_params": {
+   "model": "nafnet-restore"
+  },
+  "files": [
+   "restore-general-draft-0.png"
+  ],
+  "sha256": [
+   "6593f10e27e889cd4efe7afd350d8de7797b0fb625d497571dfdcf644b2f0b4e"
+  ],
+  "values": {},
+  "run_ms": 44,
+  "wall_ms": 47
+ },
+ {
+  "name": "restore-denoise-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nafnet-restore",
+  "ran": "nafnet-restore",
+  "model_params": {
+   "model": "nafnet-restore"
+  },
+  "files": [
+   "restore-denoise-draft-0.png"
+  ],
+  "sha256": [
+   "6593f10e27e889cd4efe7afd350d8de7797b0fb625d497571dfdcf644b2f0b4e"
+  ],
+  "values": {},
+  "run_ms": 35,
+  "wall_ms": 38
+ },
+ {
+  "name": "restore-deblur-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "restormer-defocus",
+  "ran": "restormer-defocus",
+  "model_params": {
+   "model": "restormer-defocus"
+  },
+  "files": [
+   "restore-deblur-draft-0.png"
+  ],
+  "sha256": [
+   "e9f046a622233c1362b6a040ddef096916b24d38e020aad6b8d32b266dfa2ceb"
+  ],
+  "values": {},
+  "run_ms": 274,
+  "wall_ms": 277
+ },
+ {
+  "name": "restore-faces-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "gfpgan-face",
+  "ran": "gfpgan-face",
+  "model_params": {
+   "model": "gfpgan-face"
+  },
+  "files": [
+   "restore-faces-draft-0.png"
+  ],
+  "sha256": [
+   "27c46cd9f27289b2b00ab094bdb4566927bf8129f06e6f7a1ef4e1d7493eb850"
+  ],
+  "values": {},
+  "run_ms": 496,
+  "wall_ms": 505
+ },
+ {
+  "name": "restore-scratches-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nafnet-restore",
+  "ran": "lama-inpaint",
+  "model_params": {
+   "detector": "bopbtl-defects",
+   "model": "lama-inpaint"
+  },
+  "files": [
+   "restore-scratches-draft-0.png"
+  ],
+  "sha256": [
+   "afdd71c7f65bd0a1ffe5bd206bf4c5601281634f8baa2841f002e4d2a1853ecd"
+  ],
+  "values": {},
+  "run_ms": 1231,
+  "wall_ms": 1235
+ },
+ {
+  "name": "upscale-photo-x2-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nerve-upscale",
+  "ran": "nerve-upscale",
+  "model_params": {
+   "model": "nerve-upscale"
+  },
+  "files": [
+   "upscale-photo-x2-draft-0.png"
+  ],
+  "sha256": [
+   "cd26fa1b72ad43082abeaf53d1a097dd6d4f4698408bea85efc1fe515376bd56"
+  ],
+  "values": {},
+  "run_ms": 80,
+  "wall_ms": 83
+ },
+ {
+  "name": "upscale-drawn-x2-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nerve-upscale",
+  "ran": "nerve-upscale",
+  "model_params": {
+   "model": "nerve-upscale"
+  },
+  "files": [
+   "upscale-drawn-x2-draft-0.png"
+  ],
+  "sha256": [
+   "422230800f395ff11d08993d40e37a4eb79490bb36c040cb028ffbf197409896"
+  ],
+  "values": {},
+  "run_ms": 58,
+  "wall_ms": 61
+ },
+ {
+  "name": "upscale-photo-x4-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nerve-upscale",
+  "ran": "nerve-upscale",
+  "model_params": {
+   "model": "nerve-upscale"
+  },
+  "files": [
+   "upscale-photo-x4-draft-0.png"
+  ],
+  "sha256": [
+   "7f0b6443f57c8502c6e5fa9f71a5222dce868a5925855091a8751f7f933da6aa"
+  ],
+  "values": {},
+  "run_ms": 128,
+  "wall_ms": 131
+ },
+ {
+  "name": "upscale-drawn-x4-draft",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nerve-upscale",
+  "ran": "nerve-upscale",
+  "model_params": {
+   "model": "nerve-upscale"
+  },
+  "files": [
+   "upscale-drawn-x4-draft-0.png"
+  ],
+  "sha256": [
+   "3f1efb742d2d0e4b16adf07e3af4200f94ae90401365a08aa4a40c3b3ae822e4"
+  ],
+  "values": {},
+  "run_ms": 130,
+  "wall_ms": 133
+ },
+ {
+  "name": "relight-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "cidnet-relight",
+  "ran": "cidnet-relight",
+  "model_params": {
+   "model": "cidnet-relight"
+  },
+  "files": [
+   "relight-standard-0.png"
+  ],
+  "sha256": [
+   "082814633db4427df82fcc68edf177e606843f013805ed168bdd770d3b1d28bd"
+  ],
+  "values": {},
+  "run_ms": 82,
+  "wall_ms": 85
+ },
+ {
+  "name": "colorize-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "ddcolor-colorize",
+  "ran": "ddcolor-colorize",
+  "model_params": {
+   "model": "ddcolor-colorize"
+  },
+  "files": [
+   "colorize-standard-0.png"
+  ],
+  "sha256": [
+   "a7ddae910e8ca66625f08c07cbb7d64d90558801c50a051b2a682cd007debfa0"
+  ],
+  "values": {},
+  "run_ms": 306,
+  "wall_ms": 309
+ },
+ {
+  "name": "restore-general-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nafnet-restore",
+  "ran": "nafnet-restore",
+  "model_params": {
+   "model": "nafnet-restore"
+  },
+  "files": [
+   "restore-general-standard-0.png"
+  ],
+  "sha256": [
+   "6593f10e27e889cd4efe7afd350d8de7797b0fb625d497571dfdcf644b2f0b4e"
+  ],
+  "values": {},
+  "run_ms": 38,
+  "wall_ms": 40
+ },
+ {
+  "name": "restore-denoise-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "scunet-denoise",
+  "ran": "scunet-denoise",
+  "model_params": {
+   "model": "scunet-denoise"
+  },
+  "files": [
+   "restore-denoise-standard-0.png"
+  ],
+  "sha256": [
+   "87149426929a1c5c0da98e10667c2e637b711dc2d856def4d7bb88e29030ad79"
+  ],
+  "values": {},
+  "run_ms": 132,
+  "wall_ms": 135
+ },
+ {
+  "name": "restore-deblur-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "restormer-defocus",
+  "ran": "restormer-defocus",
+  "model_params": {
+   "model": "restormer-defocus"
+  },
+  "files": [
+   "restore-deblur-standard-0.png"
+  ],
+  "sha256": [
+   "e9f046a622233c1362b6a040ddef096916b24d38e020aad6b8d32b266dfa2ceb"
+  ],
+  "values": {},
+  "run_ms": 434,
+  "wall_ms": 437
+ },
+ {
+  "name": "restore-faces-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "gfpgan-face",
+  "ran": "gfpgan-face",
+  "model_params": {
+   "model": "gfpgan-face"
+  },
+  "files": [
+   "restore-faces-standard-0.png"
+  ],
+  "sha256": [
+   "27c46cd9f27289b2b00ab094bdb4566927bf8129f06e6f7a1ef4e1d7493eb850"
+  ],
+  "values": {},
+  "run_ms": 255,
+  "wall_ms": 257
+ },
+ {
+  "name": "restore-scratches-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nafnet-restore",
+  "ran": "lama-inpaint",
+  "model_params": {
+   "detector": "bopbtl-defects",
+   "model": "lama-inpaint"
+  },
+  "files": [
+   "restore-scratches-standard-0.png"
+  ],
+  "sha256": [
+   "afdd71c7f65bd0a1ffe5bd206bf4c5601281634f8baa2841f002e4d2a1853ecd"
+  ],
+  "values": {},
+  "run_ms": 1069,
+  "wall_ms": 1072
+ },
+ {
+  "name": "upscale-photo-x2-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "realplksr-upscale",
+  "ran": "realplksr-upscale",
+  "model_params": {
+   "model": "realplksr-upscale"
+  },
+  "files": [
+   "upscale-photo-x2-standard-0.png"
+  ],
+  "sha256": [
+   "8388c7103c64eeab4295a275f2f321b53eb0afe9512ebcd7e00baf5b9bbda8a3"
+  ],
+  "values": {},
+  "run_ms": 236,
+  "wall_ms": 239
+ },
+ {
+  "name": "upscale-drawn-x2-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nerve-upscale",
+  "ran": "nerve-upscale",
+  "model_params": {
+   "model": "nerve-upscale"
+  },
+  "files": [
+   "upscale-drawn-x2-standard-0.png"
+  ],
+  "sha256": [
+   "422230800f395ff11d08993d40e37a4eb79490bb36c040cb028ffbf197409896"
+  ],
+  "values": {},
+  "run_ms": 58,
+  "wall_ms": 61
+ },
+ {
+  "name": "upscale-photo-x4-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "realplksr-upscale",
+  "ran": "realplksr-upscale",
+  "model_params": {
+   "model": "realplksr-upscale"
+  },
+  "files": [
+   "upscale-photo-x4-standard-0.png"
+  ],
+  "sha256": [
+   "5961bb214f02071bb3d6d8412d28c85ed1913950b051d9fe88a0916ca635ad78"
+  ],
+  "values": {},
+  "run_ms": 218,
+  "wall_ms": 220
+ },
+ {
+  "name": "upscale-drawn-x4-standard",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nerve-upscale",
+  "ran": "nerve-upscale",
+  "model_params": {
+   "model": "nerve-upscale"
+  },
+  "files": [
+   "upscale-drawn-x4-standard-0.png"
+  ],
+  "sha256": [
+   "3f1efb742d2d0e4b16adf07e3af4200f94ae90401365a08aa4a40c3b3ae822e4"
+  ],
+  "values": {},
+  "run_ms": 122,
+  "wall_ms": 129
+ },
+ {
+  "name": "relight-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "cidnet-relight",
+  "ran": "cidnet-relight",
+  "model_params": {
+   "model": "cidnet-relight"
+  },
+  "files": [
+   "relight-best-0.png"
+  ],
+  "sha256": [
+   "082814633db4427df82fcc68edf177e606843f013805ed168bdd770d3b1d28bd"
+  ],
+  "values": {},
+  "run_ms": 81,
+  "wall_ms": 84
+ },
+ {
+  "name": "colorize-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "ddcolor-colorize",
+  "ran": "ddcolor-colorize",
+  "model_params": {
+   "model": "ddcolor-colorize"
+  },
+  "files": [
+   "colorize-best-0.png"
+  ],
+  "sha256": [
+   "a7ddae910e8ca66625f08c07cbb7d64d90558801c50a051b2a682cd007debfa0"
+  ],
+  "values": {},
+  "run_ms": 163,
+  "wall_ms": 165
+ },
+ {
+  "name": "restore-general-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nafnet-restore",
+  "ran": "nafnet-restore",
+  "model_params": {
+   "model": "nafnet-restore"
+  },
+  "files": [
+   "restore-general-best-0.png"
+  ],
+  "sha256": [
+   "6593f10e27e889cd4efe7afd350d8de7797b0fb625d497571dfdcf644b2f0b4e"
+  ],
+  "values": {},
+  "run_ms": 34,
+  "wall_ms": 37
+ },
+ {
+  "name": "restore-denoise-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "scunet-denoise",
+  "ran": "scunet-denoise",
+  "model_params": {
+   "model": "scunet-denoise"
+  },
+  "files": [
+   "restore-denoise-best-0.png"
+  ],
+  "sha256": [
+   "87149426929a1c5c0da98e10667c2e637b711dc2d856def4d7bb88e29030ad79"
+  ],
+  "values": {},
+  "run_ms": 177,
+  "wall_ms": 180
+ },
+ {
+  "name": "restore-deblur-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "restormer-defocus",
+  "ran": "restormer-defocus",
+  "model_params": {
+   "model": "restormer-defocus"
+  },
+  "files": [
+   "restore-deblur-best-0.png"
+  ],
+  "sha256": [
+   "e9f046a622233c1362b6a040ddef096916b24d38e020aad6b8d32b266dfa2ceb"
+  ],
+  "values": {},
+  "run_ms": 398,
+  "wall_ms": 401
+ },
+ {
+  "name": "restore-faces-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "gfpgan-face",
+  "ran": "gfpgan-face",
+  "model_params": {
+   "model": "gfpgan-face"
+  },
+  "files": [
+   "restore-faces-best-0.png"
+  ],
+  "sha256": [
+   "27c46cd9f27289b2b00ab094bdb4566927bf8129f06e6f7a1ef4e1d7493eb850"
+  ],
+  "values": {},
+  "run_ms": 339,
+  "wall_ms": 342
+ },
+ {
+  "name": "restore-scratches-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nafnet-restore",
+  "ran": "lama-inpaint",
+  "model_params": {
+   "detector": "bopbtl-defects",
+   "model": "lama-inpaint"
+  },
+  "files": [
+   "restore-scratches-best-0.png"
+  ],
+  "sha256": [
+   "afdd71c7f65bd0a1ffe5bd206bf4c5601281634f8baa2841f002e4d2a1853ecd"
+  ],
+  "values": {},
+  "run_ms": 1186,
+  "wall_ms": 1189
+ },
+ {
+  "name": "upscale-photo-x2-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "heart-upscale",
+  "ran": "heart-upscale",
+  "model_params": {
+   "model": "heart-upscale"
+  },
+  "files": [
+   "upscale-photo-x2-best-0.png"
+  ],
+  "sha256": [
+   "e155174e5c7394a59fcf6e407458ccd5244e880e84fc157bd31b7dcd7ff364bc"
+  ],
+  "values": {},
+  "run_ms": 670,
+  "wall_ms": 673
+ },
+ {
+  "name": "upscale-drawn-x2-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "heart-upscale",
+  "ran": "heart-upscale",
+  "model_params": {
+   "model": "heart-upscale"
+  },
+  "files": [
+   "upscale-drawn-x2-best-0.png"
+  ],
+  "sha256": [
+   "7db56922c02db6a332c054f0e270545fdcee503f3ef9e567024b2032347a586d"
+  ],
+  "values": {},
+  "run_ms": 583,
+  "wall_ms": 587
+ },
+ {
+  "name": "upscale-photo-x4-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "heart-upscale",
+  "ran": "heart-upscale",
+  "model_params": {
+   "model": "heart-upscale"
+  },
+  "files": [
+   "upscale-photo-x4-best-0.png"
+  ],
+  "sha256": [
+   "d3eed79bb34cb5613f9fa3bbbcc9057b9327e359ded7f484d6466cf64304d0c6"
+  ],
+  "values": {},
+  "run_ms": 780,
+  "wall_ms": 785
+ },
+ {
+  "name": "upscale-drawn-x4-best",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "heart-upscale",
+  "ran": "heart-upscale",
+  "model_params": {
+   "model": "heart-upscale"
+  },
+  "files": [
+   "upscale-drawn-x4-best-0.png"
+  ],
+  "sha256": [
+   "23d04d329f884fc001c3c8ea882b7a38b23a8e68075d86d128a1c4d942ebb06f"
+  ],
+  "values": {},
+  "run_ms": 760,
+  "wall_ms": 763
+ },
+ {
+  "name": "describe",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "mage-vl",
+  "ran": "mage-vl",
+  "model_params": {
+   "model": "mage-vl"
+  },
+  "files": [
+   "describe-0.json"
+  ],
+  "sha256": [
+   "db165cf2915bbbaec8b553c22932668b936147de9b8432029e42f6156d727557"
+  ],
+  "values": {
+   "description": {
+    "alt_text": "A red fox sitting in snow with trees in the background.",
+    "caption": "A red fox sits in a snowy forest during golden hour.",
+    "language": "en",
+    "tags": [
+     "fox",
+     "snow",
+     "forest",
+     "golden hour",
+     "red",
+     "white",
+     "natural"
+    ]
+   }
+  },
+  "run_ms": 5416,
+  "wall_ms": 5421
+ },
+ {
+  "name": "describe-sign",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "mage-vl",
+  "ran": "mage-vl",
+  "model_params": {
+   "model": "mage-vl"
+  },
+  "files": [
+   "describe-sign-0.json"
+  ],
+  "sha256": [
+   "c6375ab65ae9a0a68d3205705d124c1f3e9353536f92cbdd62334a0d608db258"
+  ],
+  "values": {
+   "description": {
+    "alt_text": "A red fox in a snowy forest at sunset.",
+    "caption": "A red fox sitting in a snowy forest during sunset.",
+    "language": "en",
+    "tags": [
+     "fox",
+     "snow",
+     "forest",
+     "sunset",
+     "red",
+     "orange",
+     "white"
+    ]
+   }
+  },
+  "run_ms": 1043,
+  "wall_ms": 1047
+ },
+ {
+  "name": "score",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "siglip2-quality",
+  "ran": "siglip2-quality",
+  "model_params": {
+   "model": "siglip2-quality"
+  },
+  "files": [
+   "score-0.json"
+  ],
+  "sha256": [
+   "b419069e741f1ebb9edfd0b95c3152c488f5ace4779f3ca30313ff0f929e0012"
+  ],
+  "values": {
+   "score": {
+    "raw": 0.8590082,
+    "scale": "siglip2-quality: 0 (worst) to 1 (best)",
+    "score": 0.8590082
+   }
+  },
+  "run_ms": 609,
+  "wall_ms": 612
+ },
+ {
+  "name": "score-grey",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "siglip2-quality",
+  "ran": "siglip2-quality",
+  "model_params": {
+   "model": "siglip2-quality"
+  },
+  "files": [
+   "score-grey-0.json"
+  ],
+  "sha256": [
+   "0912248afbe19546e32fcce2a4bae8e09a147e45f01f4768e733bb91c5e36340"
+  ],
+  "values": {
+   "score": {
+    "raw": 0.8660716,
+    "scale": "siglip2-quality: 0 (worst) to 1 (best)",
+    "score": 0.8660716
+   }
+  },
+  "run_ms": 21,
+  "wall_ms": 24
+ },
+ {
+  "name": "named-drunet",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "drunet-denoise",
+  "ran": "drunet-denoise",
+  "model_params": {
+   "model": "drunet-denoise"
+  },
+  "files": [
+   "named-drunet-0.png"
+  ],
+  "sha256": [
+   "30a75e84547e3c24578f410e1bb9d4f84e8878d050e686294d256f36b8ea6834"
+  ],
+  "values": {},
+  "run_ms": 76,
+  "wall_ms": 79
+ },
+ {
+  "name": "named-anime4k-x2",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "anime4k-upscale",
+  "ran": "anime4k-upscale",
+  "model_params": {
+   "model": "anime4k-upscale"
+  },
+  "files": [
+   "named-anime4k-x2-0.png"
+  ],
+  "sha256": [
+   "9ead892497e0678a1858af8008abebb222435cc79885f2a3989277e08c594e9c"
+  ],
+  "values": {},
+  "run_ms": 69,
+  "wall_ms": 72
+ },
+ {
+  "name": "named-anime4k-x4",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "anime4k-upscale",
+  "ran": "anime4k-upscale",
+  "model_params": {
+   "model": "anime4k-upscale"
+  },
+  "files": [
+   "named-anime4k-x4-0.png"
+  ],
+  "sha256": [
+   "a9610b1e1111816c60370a4b49cfef520d277cd30b33acf3aaf1ced6d735a129"
+  ],
+  "values": {},
+  "run_ms": 128,
+  "wall_ms": 132
+ },
+ {
+  "name": "named-vosr2-x4",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "vosr2-upscale",
+  "ran": "vosr2-upscale",
+  "model_params": {
+   "model": "vosr2-upscale",
+   "ran": "VOSR2"
+  },
+  "files": [
+   "named-vosr2-x4-0.png"
+  ],
+  "sha256": [
+   "8dc92a415a8f86ac96c4eeebe4a4202bbe102c7521387157e65e67bbd1f45c78"
+  ],
+  "values": {},
+  "run_ms": 4067,
+  "wall_ms": 4070
+ },
+ {
+  "name": "named-nacre-x4",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nacre-upscale",
+  "ran": "nacre-upscale",
+  "model_params": {
+   "model": "nacre-upscale",
+   "ran": "Nacre"
+  },
+  "files": [
+   "named-nacre-x4-0.png"
+  ],
+  "sha256": [
+   "3cb2a65dd514513a5ff6a5716e13118ef8c523459247ce704994157260701689"
+  ],
+  "values": {},
+  "run_ms": 19671,
+  "wall_ms": 19679
+ },
+ {
+  "name": "named-nacre-sign-x2",
+  "outcome": "succeeded",
+  "error": null,
+  "model": "nacre-upscale",
+  "ran": "nacre-upscale",
+  "model_params": {
+   "model": "nacre-upscale",
+   "ran": "Nacre + NERVE (protected words)"
+  },
+  "files": [
+   "named-nacre-sign-x2-0.png"
+  ],
+  "sha256": [
+   "05b0c9cf6157de8d602afb7a5201efb7fbb126c0166f57acc230e8bedcb4c3b0"
+  ],
+  "values": {},
+  "run_ms": 16867,
+  "wall_ms": 16871
+ }
+]

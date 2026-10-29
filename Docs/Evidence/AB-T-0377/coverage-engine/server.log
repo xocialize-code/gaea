@@ -1,0 +1,22 @@
+Registering models (models folder: /Users/dustinnielson/Library/Application Support/MLXEngine/Models)…
+[License] xocialize/Qwen-Image-2.1-Turbo: weight license LicenseRef-Qwen-Research is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] xocialize/Qwen-Image-2.1: weight license LicenseRef-Qwen-Research is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] mlx-community/flux-3-image-klein-bf16: weight license LicenseRef-FLUX-Kommunity-1.0 is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:peter-chan-s-concept-art: xocialize/qwen-image-flash-loras: weight license CreativeML-OpenRAIL-M is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:dott4k: furaidosu/dott4k-qwen-image-lora: weight license NOASSERTION is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:dott4k-v2: furaidosu/dott4kv2-qwen-image-lora: weight license NOASSERTION is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:dott4k-fal: furaidosu/dott4kfalcomplete-qwen-image-lora: weight license NOASSERTION is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:enjuto-mojamuto: furaidosu/enjuto-qwen-image-lora: weight license NOASSERTION is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+14 operations, 41 models offered
+7 adapters offered
+16-bit upscale (output.bit_depth 16): anime4k-upscale, heart-upscale, nerve-upscale, realplksr-upscale, vosr2-upscale
+16-bit restore (output.bit_depth 16): gfpgan-face, nafnet-restore, restoreformer-face
+2026-10-28T22:47:15-0700 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17611
+pixel-agency-image-engine listening on http://127.0.0.1:17611/mes/v0 (open mode, loopback only)
+2026-10-28 22:47:17.467 pixel-agency-image-engine[9727:1495896] FBBA: creating VNFaceBBoxAligner from VNFaceDetectorRevision2: VNFaceDetectorRevision2
+[Prewarm] nerve-upscale: paged 2 file(s) / 0.0 GB into cache in 0.0s
+[Prewarm] realplksr-webphoto-upscale: paged 1 file(s) / 0.0 GB into cache in 0.0s
+[Prewarm] heart-upscale: paged 2 file(s) / 0.0 GB into cache in 0.0s
+[Prewarm] siglip2-iqa: paged 1 file(s) / 0.4 GB into cache in 0.0s
+[Prewarm] vosr2-upscale: paged 4 file(s) / 3.3 GB into cache in 0.2s
+[Prewarm] nacre-upscale: paged 2 file(s) / 0.3 GB into cache in 0.0s

@@ -1,0 +1,20 @@
+# Mage-VL golden check 2026-10-29T05:34:02Z: com.xocialize.gaea.mage-vl 0.1.0
+fox-default: GPP in 0.36 s (cold worker); in-process run 3.55 s, prepare 2.19 s; sha256 8fc56d5b2a0e1171…
+  GPP:        In this image we can see a fox sitting on the snow. In the background we can see the trees and the sky.
+PASS  fox-default: the same text over GPP and in-process
+fox-describe: GPP in 0.76 s (cold worker); in-process run 0.75 s, prepare 2.11 s; sha256 4b4f059c0281d4d0…
+  GPP:        {   "caption": "A red fox sits in a snowy forest during golden hour.",   "alt_text": "A red fox sitting in snow with trees in the background.",   "tags": ["fox", "snow", "forest", "golden hour", "red", "white", "natural"] }
+PASS  fox-describe: the same text over GPP and in-process
+face-default: GPP in 0.28 s (cold worker); in-process run 0.24 s, prepare 4.45 s; sha256 019e6a3bbe882c77…
+  GPP:        In this image we can see a man smiling.
+PASS  face-default: the same text over GPP and in-process
+face-describe: GPP in 0.89 s (cold worker); in-process run 0.95 s, prepare 21.39 s; sha256 6eb43e54ebe2506c…
+  GPP:        {   "caption": "A close-up portrait of a smiling man with a beard, set against a softly blurred background.",   "alt_text": "A smiling man with a beard and short hair.",   "tags": ["portrait", "smiling", "beard", "close-up", "natural light"
+PASS  face-describe: the same text over GPP and in-process
+div2k-0801-default: GPP in 1.27 s (cold worker); in-process run 1.17 s, prepare 4.09 s; sha256 97707a9fc7729897…
+  GPP:        In this image we can see a penguin on the rock.
+PASS  div2k-0801-default: the same text over GPP and in-process
+div2k-0801-describe: GPP in 1.88 s (cold worker); in-process run 1.85 s, prepare 4.33 s; sha256 1ed9a544341e7247…
+  GPP:        {   "caption": "A penguin with a distinctive yellow crest stands on a rocky surface.",   "alt_text": "A penguin with a yellow crest on its head stands on rocks.",   "tags": ["penguin", "crest", "rocks", "nature", "wildlife", "black and whit
+PASS  div2k-0801-describe: the same text over GPP and in-process
+== 6 passed, 0 failed

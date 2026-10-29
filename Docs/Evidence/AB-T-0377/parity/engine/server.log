@@ -1,0 +1,45 @@
+Registering models (models folder: /Users/dustinnielson/Library/Application Support/MLXEngine/Models)…
+[License] xocialize/Qwen-Image-2.1-Turbo: weight license LicenseRef-Qwen-Research is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] xocialize/Qwen-Image-2.1: weight license LicenseRef-Qwen-Research is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] mlx-community/flux-3-image-klein-bf16: weight license LicenseRef-FLUX-Kommunity-1.0 is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:peter-chan-s-concept-art: xocialize/qwen-image-flash-loras: weight license CreativeML-OpenRAIL-M is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:dott4k: furaidosu/dott4k-qwen-image-lora: weight license NOASSERTION is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:dott4k-v2: furaidosu/dott4kv2-qwen-image-lora: weight license NOASSERTION is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:dott4k-fal: furaidosu/dott4kfalcomplete-qwen-image-lora: weight license NOASSERTION is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:enjuto-mojamuto: furaidosu/enjuto-qwen-image-lora: weight license NOASSERTION is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+14 operations, 41 models offered
+7 adapters offered
+16-bit upscale (output.bit_depth 16): anime4k-upscale, heart-upscale, nerve-upscale, realplksr-upscale, vosr2-upscale
+16-bit restore (output.bit_depth 16): gfpgan-face, nafnet-restore, restoreformer-face
+2026-10-28T22:59:40-0700 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17611
+pixel-agency-image-engine listening on http://127.0.0.1:17611/mes/v0 (open mode, loopback only)
+[Prewarm] siglip2-iqa: paged 1 file(s) / 0.4 GB into cache in 0.0s
+[Prewarm] realplksr-webphoto-upscale: paged 1 file(s) / 0.0 GB into cache in 0.0s
+[Prewarm] nerve-upscale: paged 2 file(s) / 0.0 GB into cache in 0.0s
+[Prewarm] heart-upscale: paged 2 file(s) / 0.0 GB into cache in 0.0s
+[Prewarm] nacre-upscale: paged 2 file(s) / 0.3 GB into cache in 0.0s
+[Prewarm] vosr2-upscale: paged 4 file(s) / 3.3 GB into cache in 0.3s
+residency: released cidnet-relight — idle for 600.0 seconds
+residency: released ddcolor — idle for 600.0 seconds
+residency: released imgsrv.mage-vl — idle for 600.0 seconds
+residency: released birefnet — idle for 600.0 seconds
+residency: released siglip2-iqa — idle for 600.0 seconds
+residency: released realplksr-webphoto-upscale — idle for 600.0 seconds
+residency: released nerve-upscale — idle for 600.0 seconds
+residency: released heart-upscale — idle for 600.0 seconds
+residency: released seedvr2-upscale-image — idle for 600.0 seconds
+residency: released scunet-denoise — idle for 600.0 seconds
+residency: released nacre-upscale — idle for 600.0 seconds
+residency: released vosr2-upscale — idle for 600.0 seconds
+residency: released anime4k-upscale — idle for 600.0 seconds
+residency: released drunet-denoise — idle for 600.0 seconds
+residency: released restormer-defocus-deblur — idle for 600.0 seconds
+residency: released restormer-real-denoise — idle for 600.0 seconds
+residency: released restormer-motion-deblur — idle for 600.0 seconds
+residency: released nafnet-restore — idle for 600.0 seconds
+residency: released imgsrv.z-image-turbo — idle for 600.0 seconds
+residency: released imgsrv.qwen3.5-4b — idle for 600.0 seconds
+residency: released imgsrv.klein-4b — idle for 600.0 seconds
+residency: released imgsrv.z-image — idle for 600.0 seconds
+residency: released imgsrv.klein-4b-base — one heavy model at a time (loading qwen-image-flash)
+[Prewarm] siglip2-iqa: paged 1 file(s) / 0.4 GB into cache in 0.0s

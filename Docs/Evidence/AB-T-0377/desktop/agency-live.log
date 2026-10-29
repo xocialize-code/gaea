@@ -1,0 +1,42 @@
+brand: resolved Optional("Summer · revision 2 · the project\'s kit")
+brand: run Optional(PixelAgencyRun.RunSession.Phase.finished) in 9.2 s
+brand: sent prompt: a ceramic coffee mug on a wooden table. warm editorial product photography, soft window light. Colour palette: orange #F46A1F, teal #1A9E9E
+brand: negative: text, watermark, blurry · model: z-image-turbo
+brand: applied acme/summer@2 by project: ["style", "negative", "palette", "model"]
+brand: note: The brand's model settings (steps, guidance, extra parameters) aren't sent: MES engines choose them from the quality tier.
+brand: note: The brand's reference images weren't sent: this engine's image.generate takes none.
+brand: stored ast_01M6382NNF4S6PX0RAE1VGM1XW · generation.brand acme/summer@2 · model z-image-turbo · rights owned 
+export: 1 exported, 1 with an AI disclosure → /tmp/g377-desktop-agency/out/working-E0471A7F/export
+export: ast_01M6382NNF4S6PX0RAE1VGM1XW.png · disclosure trainedAlgorithmicMedia · embedded true
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="XMP Core 6.0.0">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:Iptc4xmpExt="http://iptc.org/std/Iptc4xmpExt/2008-02-29/"
+            xmlns:xmpRights="http://ns.adobe.com/xap/1.0/rights/"
+            xmlns:exif="http://ns.adobe.com/exif/1.0/"
+            xmlns:pa="https://pixelagency.app/ns/provenance/1.0/"
+            xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/">
+         <Iptc4xmpExt:AISystemVersionUsed>gaea 0.6.0</Iptc4xmpExt:AISystemVersionUsed>
+         <Iptc4xmpExt:DigitalSourceType>http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia</Iptc4xmpExt:DigitalSourceType>
+         <Iptc4xmpExt:AISystemUsed>z-image-turbo</Iptc4xmpExt:AISystemUsed>
+         <xmpRights:UsageTerms>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">Rights: owned; AI use allowed.</rdf:li>
+            </rdf:Alt>
+         </xmpRights:UsageTerms>
+         <xmpRights:Marked>True</xmpRights:Marked>
+         <exif:PixelXDimension>1024</exif:PixelXDimension>
+         <exif:ColorSpace>1</exif:ColorSpace>
+         <exif:PixelYDimension>768</exif:PixelYDimension>
+         <pa:Provenance>{"asset":{"content_hash":"sha256:5698e194701bb514ee60caa8b0ecb5e07ec0616db557f7ef0db6e338f2c261ed","id":"ast_01M6382NNF4S6PX0RAE1VGM1XW","source":"generated"},"credit":"Made with z-image-turbo (AI)","disclosure":{"digital_source_type":"http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia","statement":"Created with generative AI."},"exported_at":"2026-10-29T07:13:05Z","exported_by":"Pixel Agency Desktop dev","file":"ast_01M6382NNF4S6PX0RAE1VGM1XW.png","format":"pixel-agency-provenance/1","generation":{"brand":"acme/summer@2","created_by":"Pixel Agency Desktop dev","engine":"Gaea","engine_version":"gaea 0.6.0","license_class":"permissive","model":"z-image-turbo","notices":[],"operation":"image.generate","seed":"5993247884495381","weight_licenses":["Apache-2.0"]},"lineage":[],"rendition":{"height":768,"kind":"original","media_type":"image/png","width":1024},"rights":{"ai_use":"allowed","rights_class":"owned"},"sha256":""}</pa:Provenance>
+         <photoshop:Credit>Made with z-image-turbo (AI)</photoshop:Credit>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+
+describe: completed in 3.2 s 
+describe: caption: A vibrant orange and teal mug sits on a wooden table by a window.
+describe: alt: An orange and teal mug on a wooden table by a window.
+describe: tags: ["mug", "orange", "teal", "vibrant", "window", "wooden table"]
+wrote /tmp/g377-desktop-agency/out/agency-live.png
+working folder: /tmp/g377-desktop-agency/out/working-E0471A7F

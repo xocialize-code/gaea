@@ -1,0 +1,3700 @@
+[
+  {
+    "engineMs" : 735,
+    "gaeaMs" : 976,
+    "key" : "singles|image.relight|cidnet-relight|-|photo-0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 644,
+    "gaeaMs" : 701,
+    "key" : "singles|image.relight|cidnet-relight|-|photo-1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 658,
+    "gaeaMs" : 698,
+    "key" : "singles|image.relight|cidnet-relight|-|photo-2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 288,
+    "gaeaMs" : 297,
+    "key" : "singles|image.colorize|ddcolor-colorize|-|photo-0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 264,
+    "gaeaMs" : 249,
+    "key" : "singles|image.colorize|ddcolor-colorize|-|photo-1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 258,
+    "gaeaMs" : 242,
+    "key" : "singles|image.colorize|ddcolor-colorize|-|photo-2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 561,
+    "gaeaMs" : 824,
+    "key" : "singles|image.matte|birefnet-matte|-|photo-0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      },
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 641,
+    "gaeaMs" : 455,
+    "key" : "singles|image.matte|birefnet-matte|-|photo-1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      },
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 517,
+    "gaeaMs" : 460,
+    "key" : "singles|image.matte|birefnet-matte|-|photo-2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      },
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 5818,
+    "gaeaMs" : 3324,
+    "key" : "singles|image.describe|mage-vl|-|photo-0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 1485,
+    "gaeaMs" : 1109,
+    "key" : "singles|image.describe|mage-vl|-|photo-1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1190,
+    "gaeaMs" : 1110,
+    "key" : "singles|image.describe|mage-vl|-|photo-2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 391,
+    "gaeaMs" : 423,
+    "key" : "singles|image.score|siglip2-quality|-|photo-0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 116,
+    "gaeaMs" : 101,
+    "key" : "singles|image.score|siglip2-quality|-|photo-1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 109,
+    "gaeaMs" : 102,
+    "key" : "singles|image.score|siglip2-quality|-|photo-2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 259,
+    "gaeaMs" : 230,
+    "key" : "upscale-x4|image.upscale|realplksr-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 226,
+    "gaeaMs" : 217,
+    "key" : "upscale-x4|image.upscale|realplksr-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 217,
+    "gaeaMs" : 218,
+    "key" : "upscale-x4|image.upscale|realplksr-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 219,
+    "gaeaMs" : 224,
+    "key" : "upscale-x4|image.upscale|realplksr-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 223,
+    "gaeaMs" : 224,
+    "key" : "upscale-x4|image.upscale|realplksr-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 211,
+    "gaeaMs" : 213,
+    "key" : "upscale-x4|image.upscale|realplksr-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 218,
+    "gaeaMs" : 221,
+    "key" : "upscale-x4|image.upscale|realplksr-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 105,
+    "gaeaMs" : 96,
+    "key" : "upscale-x4|image.upscale|anime4k-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 98,
+    "gaeaMs" : 92,
+    "key" : "upscale-x4|image.upscale|anime4k-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 101,
+    "gaeaMs" : 94,
+    "key" : "upscale-x4|image.upscale|anime4k-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 99,
+    "gaeaMs" : 94,
+    "key" : "upscale-x4|image.upscale|anime4k-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 101,
+    "gaeaMs" : 95,
+    "key" : "upscale-x4|image.upscale|anime4k-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 98,
+    "gaeaMs" : 91,
+    "key" : "upscale-x4|image.upscale|anime4k-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 92,
+    "gaeaMs" : 88,
+    "key" : "upscale-x4|image.upscale|anime4k-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1649,
+    "gaeaMs" : 585,
+    "key" : "upscale-x4|image.upscale|heart-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 1571,
+    "gaeaMs" : 526,
+    "key" : "upscale-x4|image.upscale|heart-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 524,
+    "gaeaMs" : 524,
+    "key" : "upscale-x4|image.upscale|heart-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 552,
+    "gaeaMs" : 528,
+    "key" : "upscale-x4|image.upscale|heart-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 552,
+    "gaeaMs" : 534,
+    "key" : "upscale-x4|image.upscale|heart-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 535,
+    "gaeaMs" : 520,
+    "key" : "upscale-x4|image.upscale|heart-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 543,
+    "gaeaMs" : 527,
+    "key" : "upscale-x4|image.upscale|heart-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 24164,
+    "gaeaMs" : 5434,
+    "key" : "upscale-x4|image.upscale|nacre-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 13433,
+    "gaeaMs" : 5334,
+    "key" : "upscale-x4|image.upscale|nacre-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 4614,
+    "gaeaMs" : 5293,
+    "key" : "upscale-x4|image.upscale|nacre-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 4545,
+    "gaeaMs" : 5294,
+    "key" : "upscale-x4|image.upscale|nacre-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 4630,
+    "gaeaMs" : 5335,
+    "key" : "upscale-x4|image.upscale|nacre-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 4594,
+    "gaeaMs" : 5288,
+    "key" : "upscale-x4|image.upscale|nacre-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 4552,
+    "gaeaMs" : 5321,
+    "key" : "upscale-x4|image.upscale|nacre-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 139,
+    "gaeaMs" : 142,
+    "key" : "upscale-x4|image.upscale|nerve-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 131,
+    "gaeaMs" : 129,
+    "key" : "upscale-x4|image.upscale|nerve-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 126,
+    "gaeaMs" : 127,
+    "key" : "upscale-x4|image.upscale|nerve-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 153,
+    "gaeaMs" : 130,
+    "key" : "upscale-x4|image.upscale|nerve-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 159,
+    "gaeaMs" : 133,
+    "key" : "upscale-x4|image.upscale|nerve-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 161,
+    "gaeaMs" : 123,
+    "key" : "upscale-x4|image.upscale|nerve-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 127,
+    "gaeaMs" : 129,
+    "key" : "upscale-x4|image.upscale|nerve-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2078,
+    "gaeaMs" : 2032,
+    "key" : "upscale-x4|image.upscale|vosr2-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 1624,
+    "gaeaMs" : 1652,
+    "key" : "upscale-x4|image.upscale|vosr2-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1643,
+    "gaeaMs" : 1654,
+    "key" : "upscale-x4|image.upscale|vosr2-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1627,
+    "gaeaMs" : 1652,
+    "key" : "upscale-x4|image.upscale|vosr2-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1636,
+    "gaeaMs" : 1666,
+    "key" : "upscale-x4|image.upscale|vosr2-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1626,
+    "gaeaMs" : 1651,
+    "key" : "upscale-x4|image.upscale|vosr2-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1627,
+    "gaeaMs" : 1661,
+    "key" : "upscale-x4|image.upscale|vosr2-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 606,
+    "gaeaMs" : 591,
+    "key" : "upscale-x2|image.upscale|realplksr-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 578,
+    "gaeaMs" : 579,
+    "key" : "upscale-x2|image.upscale|realplksr-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 579,
+    "gaeaMs" : 580,
+    "key" : "upscale-x2|image.upscale|realplksr-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 582,
+    "gaeaMs" : 581,
+    "key" : "upscale-x2|image.upscale|realplksr-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 588,
+    "gaeaMs" : 588,
+    "key" : "upscale-x2|image.upscale|realplksr-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 567,
+    "gaeaMs" : 568,
+    "key" : "upscale-x2|image.upscale|realplksr-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 582,
+    "gaeaMs" : 581,
+    "key" : "upscale-x2|image.upscale|realplksr-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 109,
+    "gaeaMs" : 103,
+    "key" : "upscale-x2|image.upscale|anime4k-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 108,
+    "gaeaMs" : 103,
+    "key" : "upscale-x2|image.upscale|anime4k-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 112,
+    "gaeaMs" : 105,
+    "key" : "upscale-x2|image.upscale|anime4k-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 115,
+    "gaeaMs" : 106,
+    "key" : "upscale-x2|image.upscale|anime4k-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 117,
+    "gaeaMs" : 109,
+    "key" : "upscale-x2|image.upscale|anime4k-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 108,
+    "gaeaMs" : 95,
+    "key" : "upscale-x2|image.upscale|anime4k-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 110,
+    "gaeaMs" : 102,
+    "key" : "upscale-x2|image.upscale|anime4k-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2091,
+    "gaeaMs" : 2040,
+    "key" : "upscale-x2|image.upscale|heart-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 2075,
+    "gaeaMs" : 2009,
+    "key" : "upscale-x2|image.upscale|heart-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2079,
+    "gaeaMs" : 2013,
+    "key" : "upscale-x2|image.upscale|heart-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2064,
+    "gaeaMs" : 2007,
+    "key" : "upscale-x2|image.upscale|heart-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2093,
+    "gaeaMs" : 2024,
+    "key" : "upscale-x2|image.upscale|heart-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2087,
+    "gaeaMs" : 2015,
+    "key" : "upscale-x2|image.upscale|heart-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2093,
+    "gaeaMs" : 2022,
+    "key" : "upscale-x2|image.upscale|heart-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 12481,
+    "gaeaMs" : 14492,
+    "key" : "upscale-x2|image.upscale|nacre-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 12406,
+    "gaeaMs" : 14447,
+    "key" : "upscale-x2|image.upscale|nacre-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 12412,
+    "gaeaMs" : 14521,
+    "key" : "upscale-x2|image.upscale|nacre-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 12374,
+    "gaeaMs" : 14493,
+    "key" : "upscale-x2|image.upscale|nacre-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 12516,
+    "gaeaMs" : 14500,
+    "key" : "upscale-x2|image.upscale|nacre-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 12552,
+    "gaeaMs" : 15364,
+    "key" : "upscale-x2|image.upscale|nacre-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 12573,
+    "gaeaMs" : 15187,
+    "key" : "upscale-x2|image.upscale|nacre-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 197,
+    "gaeaMs" : 195,
+    "key" : "upscale-x2|image.upscale|nerve-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 191,
+    "gaeaMs" : 186,
+    "key" : "upscale-x2|image.upscale|nerve-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 190,
+    "gaeaMs" : 191,
+    "key" : "upscale-x2|image.upscale|nerve-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 193,
+    "gaeaMs" : 194,
+    "key" : "upscale-x2|image.upscale|nerve-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 205,
+    "gaeaMs" : 202,
+    "key" : "upscale-x2|image.upscale|nerve-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 180,
+    "gaeaMs" : 180,
+    "key" : "upscale-x2|image.upscale|nerve-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 193,
+    "gaeaMs" : 195,
+    "key" : "upscale-x2|image.upscale|nerve-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1700,
+    "gaeaMs" : 1710,
+    "key" : "upscale-x2|image.upscale|vosr2-upscale|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 1662,
+    "gaeaMs" : 1679,
+    "key" : "upscale-x2|image.upscale|vosr2-upscale|-|0801",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1651,
+    "gaeaMs" : 1683,
+    "key" : "upscale-x2|image.upscale|vosr2-upscale|-|0802",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1658,
+    "gaeaMs" : 1703,
+    "key" : "upscale-x2|image.upscale|vosr2-upscale|-|0803",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1672,
+    "gaeaMs" : 1700,
+    "key" : "upscale-x2|image.upscale|vosr2-upscale|-|0804",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1651,
+    "gaeaMs" : 1681,
+    "key" : "upscale-x2|image.upscale|vosr2-upscale|-|0805",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1661,
+    "gaeaMs" : 1682,
+    "key" : "upscale-x2|image.upscale|vosr2-upscale|-|0806",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 330,
+    "gaeaMs" : 197,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|input",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 1290,
+    "gaeaMs" : 1385,
+    "key" : "restore-denoise|image.restore|scunet-denoise|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 1243,
+    "gaeaMs" : 1334,
+    "key" : "restore-denoise|image.restore|scunet-denoise|-|0811",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1237,
+    "gaeaMs" : 1327,
+    "key" : "restore-denoise|image.restore|scunet-denoise|-|0812",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1206,
+    "gaeaMs" : 1330,
+    "key" : "restore-denoise|image.restore|scunet-denoise|-|0813",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1207,
+    "gaeaMs" : 1321,
+    "key" : "restore-denoise|image.restore|scunet-denoise|-|0814",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1222,
+    "gaeaMs" : 1338,
+    "key" : "restore-denoise|image.restore|scunet-denoise|-|0815",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1229,
+    "gaeaMs" : 1328,
+    "key" : "restore-denoise|image.restore|scunet-denoise|-|0816",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2890,
+    "gaeaMs" : 2914,
+    "key" : "restore-denoise|image.restore|restormer-denoise|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 2819,
+    "gaeaMs" : 2861,
+    "key" : "restore-denoise|image.restore|restormer-denoise|-|0811",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2824,
+    "gaeaMs" : 2865,
+    "key" : "restore-denoise|image.restore|restormer-denoise|-|0812",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2819,
+    "gaeaMs" : 2865,
+    "key" : "restore-denoise|image.restore|restormer-denoise|-|0813",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2824,
+    "gaeaMs" : 2870,
+    "key" : "restore-denoise|image.restore|restormer-denoise|-|0814",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2831,
+    "gaeaMs" : 2859,
+    "key" : "restore-denoise|image.restore|restormer-denoise|-|0815",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2827,
+    "gaeaMs" : 2862,
+    "key" : "restore-denoise|image.restore|restormer-denoise|-|0816",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 343,
+    "gaeaMs" : 426,
+    "key" : "restore-denoise|image.restore|drunet-denoise|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 310,
+    "gaeaMs" : 376,
+    "key" : "restore-denoise|image.restore|drunet-denoise|-|0811",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 310,
+    "gaeaMs" : 369,
+    "key" : "restore-denoise|image.restore|drunet-denoise|-|0812",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 307,
+    "gaeaMs" : 378,
+    "key" : "restore-denoise|image.restore|drunet-denoise|-|0813",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 310,
+    "gaeaMs" : 383,
+    "key" : "restore-denoise|image.restore|drunet-denoise|-|0814",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 310,
+    "gaeaMs" : 377,
+    "key" : "restore-denoise|image.restore|drunet-denoise|-|0815",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 317,
+    "gaeaMs" : 378,
+    "key" : "restore-denoise|image.restore|drunet-denoise|-|0816",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 189,
+    "gaeaMs" : 191,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 195,
+    "gaeaMs" : 190,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|0811",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 182,
+    "gaeaMs" : 189,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|0812",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 190,
+    "gaeaMs" : 190,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|0813",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 183,
+    "gaeaMs" : 186,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|0814",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 189,
+    "gaeaMs" : 189,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|0815",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 187,
+    "gaeaMs" : 187,
+    "key" : "restore-denoise|image.restore|nafnet-restore|-|0816",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-denoise|reference|(degraded input)|-|0811",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-denoise|reference|(degraded input)|-|0812",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-denoise|reference|(degraded input)|-|0813",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-denoise|reference|(degraded input)|-|0814",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-denoise|reference|(degraded input)|-|0815",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-denoise|reference|(degraded input)|-|0816",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 159,
+    "gaeaMs" : 164,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|input",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 2848,
+    "gaeaMs" : 2917,
+    "key" : "restore-deblur|image.restore|restormer-motion|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 2791,
+    "gaeaMs" : 2855,
+    "key" : "restore-deblur|image.restore|restormer-motion|-|0811",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2791,
+    "gaeaMs" : 2839,
+    "key" : "restore-deblur|image.restore|restormer-motion|-|0812",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2803,
+    "gaeaMs" : 2843,
+    "key" : "restore-deblur|image.restore|restormer-motion|-|0813",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2777,
+    "gaeaMs" : 2840,
+    "key" : "restore-deblur|image.restore|restormer-motion|-|0814",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2782,
+    "gaeaMs" : 2973,
+    "key" : "restore-deblur|image.restore|restormer-motion|-|0815",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2774,
+    "gaeaMs" : 3011,
+    "key" : "restore-deblur|image.restore|restormer-motion|-|0816",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2819,
+    "gaeaMs" : 3045,
+    "key" : "restore-deblur|image.restore|restormer-defocus|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 2769,
+    "gaeaMs" : 2926,
+    "key" : "restore-deblur|image.restore|restormer-defocus|-|0811",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2771,
+    "gaeaMs" : 2950,
+    "key" : "restore-deblur|image.restore|restormer-defocus|-|0812",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2767,
+    "gaeaMs" : 2893,
+    "key" : "restore-deblur|image.restore|restormer-defocus|-|0813",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2751,
+    "gaeaMs" : 2872,
+    "key" : "restore-deblur|image.restore|restormer-defocus|-|0814",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2778,
+    "gaeaMs" : 2860,
+    "key" : "restore-deblur|image.restore|restormer-defocus|-|0815",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 2770,
+    "gaeaMs" : 2849,
+    "key" : "restore-deblur|image.restore|restormer-defocus|-|0816",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 156,
+    "gaeaMs" : 163,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 151,
+    "gaeaMs" : 158,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|0811",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 143,
+    "gaeaMs" : 153,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|0812",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 147,
+    "gaeaMs" : 155,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|0813",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 132,
+    "gaeaMs" : 140,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|0814",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 152,
+    "gaeaMs" : 161,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|0815",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 147,
+    "gaeaMs" : 156,
+    "key" : "restore-deblur|image.restore|nafnet-restore|-|0816",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-deblur|reference|(degraded input)|-|0811",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-deblur|reference|(degraded input)|-|0812",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-deblur|reference|(degraded input)|-|0813",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-deblur|reference|(degraded input)|-|0814",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-deblur|reference|(degraded input)|-|0815",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 0,
+    "gaeaMs" : 0,
+    "key" : "restore-deblur|reference|(degraded input)|-|0816",
+    "outputs" : [
+
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 13361,
+    "gaeaMs" : 13895,
+    "key" : "generate|image.generate|z-image-turbo|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 11180,
+    "gaeaMs" : 11387,
+    "key" : "generate|image.generate|z-image-turbo|-|p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 11186,
+    "gaeaMs" : 11359,
+    "key" : "generate|image.generate|z-image-turbo|-|p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 11148,
+    "gaeaMs" : 11364,
+    "key" : "generate|image.generate|z-image-turbo|-|p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 11168,
+    "gaeaMs" : 11342,
+    "key" : "generate|image.generate|z-image-turbo|-|p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 11131,
+    "gaeaMs" : 11420,
+    "key" : "generate|image.generate|z-image-turbo|-|p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 11161,
+    "gaeaMs" : 11434,
+    "key" : "generate|image.generate|z-image-turbo|-|p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 11164,
+    "gaeaMs" : 11357,
+    "key" : "generate|image.generate|z-image-turbo|-|p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 11154,
+    "gaeaMs" : 11361,
+    "key" : "generate|image.generate|z-image-turbo|-|p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 9722,
+    "gaeaMs" : 10658,
+    "key" : "generate|image.generate|klein-4b|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 7180,
+    "gaeaMs" : 7469,
+    "key" : "generate|image.generate|klein-4b|-|p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 7108,
+    "gaeaMs" : 7381,
+    "key" : "generate|image.generate|klein-4b|-|p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 7243,
+    "gaeaMs" : 7537,
+    "key" : "generate|image.generate|klein-4b|-|p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 7309,
+    "gaeaMs" : 7654,
+    "key" : "generate|image.generate|klein-4b|-|p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 7160,
+    "gaeaMs" : 7444,
+    "key" : "generate|image.generate|klein-4b|-|p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 7097,
+    "gaeaMs" : 7413,
+    "key" : "generate|image.generate|klein-4b|-|p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 7418,
+    "gaeaMs" : 7760,
+    "key" : "generate|image.generate|klein-4b|-|p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 6967,
+    "gaeaMs" : 7313,
+    "key" : "generate|image.generate|klein-4b|-|p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 78579,
+    "gaeaMs" : 74521,
+    "key" : "generate|image.generate|klein-4b-base|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 76178,
+    "gaeaMs" : 72887,
+    "key" : "generate|image.generate|klein-4b-base|-|p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 76195,
+    "gaeaMs" : 72967,
+    "key" : "generate|image.generate|klein-4b-base|-|p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 77062,
+    "gaeaMs" : 72861,
+    "key" : "generate|image.generate|klein-4b-base|-|p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 78959,
+    "gaeaMs" : 73142,
+    "key" : "generate|image.generate|klein-4b-base|-|p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 76469,
+    "gaeaMs" : 72955,
+    "key" : "generate|image.generate|klein-4b-base|-|p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 76335,
+    "gaeaMs" : 72701,
+    "key" : "generate|image.generate|klein-4b-base|-|p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 76985,
+    "gaeaMs" : 73500,
+    "key" : "generate|image.generate|klein-4b-base|-|p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 76641,
+    "gaeaMs" : 73305,
+    "key" : "generate|image.generate|klein-4b-base|-|p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 15957,
+    "gaeaMs" : 21482,
+    "key" : "generate|image.generate|qwen-image-flash|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 13462,
+    "gaeaMs" : 13722,
+    "key" : "generate|image.generate|qwen-image-flash|-|p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 13530,
+    "gaeaMs" : 13520,
+    "key" : "generate|image.generate|qwen-image-flash|-|p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 13682,
+    "gaeaMs" : 13728,
+    "key" : "generate|image.generate|qwen-image-flash|-|p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 13781,
+    "gaeaMs" : 13732,
+    "key" : "generate|image.generate|qwen-image-flash|-|p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 13499,
+    "gaeaMs" : 13476,
+    "key" : "generate|image.generate|qwen-image-flash|-|p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 13444,
+    "gaeaMs" : 13439,
+    "key" : "generate|image.generate|qwen-image-flash|-|p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 14107,
+    "gaeaMs" : 14160,
+    "key" : "generate|image.generate|qwen-image-flash|-|p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 13540,
+    "gaeaMs" : 13651,
+    "key" : "generate|image.generate|qwen-image-flash|-|p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 71570,
+    "gaeaMs" : 71989,
+    "key" : "generate|image.generate|z-image|-|warm-up",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : false
+  },
+  {
+    "engineMs" : 69012,
+    "gaeaMs" : 68907,
+    "key" : "generate|image.generate|z-image|-|p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 69044,
+    "gaeaMs" : 68874,
+    "key" : "generate|image.generate|z-image|-|p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 68961,
+    "gaeaMs" : 68868,
+    "key" : "generate|image.generate|z-image|-|p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 68892,
+    "gaeaMs" : 68896,
+    "key" : "generate|image.generate|z-image|-|p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 68987,
+    "gaeaMs" : 68860,
+    "key" : "generate|image.generate|z-image|-|p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 69068,
+    "gaeaMs" : 68904,
+    "key" : "generate|image.generate|z-image|-|p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 68988,
+    "gaeaMs" : 68891,
+    "key" : "generate|image.generate|z-image|-|p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 68959,
+    "gaeaMs" : 68958,
+    "key" : "generate|image.generate|z-image|-|p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 353,
+    "gaeaMs" : 691,
+    "key" : "judge|image.score|siglip2-quality|-|z-image-turbo\/p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 3494,
+    "gaeaMs" : 3553,
+    "key" : "judge|image.describe|mage-vl|-|z-image-turbo\/p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 99,
+    "gaeaMs" : 94,
+    "key" : "judge|image.score|siglip2-quality|-|z-image-turbo\/p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1236,
+    "gaeaMs" : 1247,
+    "key" : "judge|image.describe|mage-vl|-|z-image-turbo\/p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 99,
+    "gaeaMs" : 92,
+    "key" : "judge|image.score|siglip2-quality|-|z-image-turbo\/p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1105,
+    "gaeaMs" : 1099,
+    "key" : "judge|image.describe|mage-vl|-|z-image-turbo\/p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 101,
+    "gaeaMs" : 91,
+    "key" : "judge|image.score|siglip2-quality|-|z-image-turbo\/p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1025,
+    "gaeaMs" : 1016,
+    "key" : "judge|image.describe|mage-vl|-|z-image-turbo\/p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 97,
+    "gaeaMs" : 92,
+    "key" : "judge|image.score|siglip2-quality|-|z-image-turbo\/p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1054,
+    "gaeaMs" : 1051,
+    "key" : "judge|image.describe|mage-vl|-|z-image-turbo\/p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 97,
+    "gaeaMs" : 92,
+    "key" : "judge|image.score|siglip2-quality|-|z-image-turbo\/p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1392,
+    "gaeaMs" : 1386,
+    "key" : "judge|image.describe|mage-vl|-|z-image-turbo\/p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 98,
+    "gaeaMs" : 92,
+    "key" : "judge|image.score|siglip2-quality|-|z-image-turbo\/p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1036,
+    "gaeaMs" : 1053,
+    "key" : "judge|image.describe|mage-vl|-|z-image-turbo\/p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 98,
+    "gaeaMs" : 94,
+    "key" : "judge|image.score|siglip2-quality|-|z-image-turbo\/p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1110,
+    "gaeaMs" : 1127,
+    "key" : "judge|image.describe|mage-vl|-|z-image-turbo\/p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 111,
+    "gaeaMs" : 110,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b\/p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1043,
+    "gaeaMs" : 1063,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b\/p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 101,
+    "gaeaMs" : 94,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b\/p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1218,
+    "gaeaMs" : 1228,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b\/p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 99,
+    "gaeaMs" : 90,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b\/p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1170,
+    "gaeaMs" : 1170,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b\/p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 102,
+    "gaeaMs" : 96,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b\/p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1119,
+    "gaeaMs" : 1113,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b\/p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 98,
+    "gaeaMs" : 93,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b\/p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1454,
+    "gaeaMs" : 1446,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b\/p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 95,
+    "gaeaMs" : 88,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b\/p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1291,
+    "gaeaMs" : 1290,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b\/p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 101,
+    "gaeaMs" : 94,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b\/p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1341,
+    "gaeaMs" : 1342,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b\/p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 91,
+    "gaeaMs" : 86,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b\/p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1303,
+    "gaeaMs" : 1296,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b\/p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 106,
+    "gaeaMs" : 100,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b-base\/p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1009,
+    "gaeaMs" : 1019,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b-base\/p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 96,
+    "gaeaMs" : 93,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b-base\/p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1174,
+    "gaeaMs" : 1172,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b-base\/p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 93,
+    "gaeaMs" : 88,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b-base\/p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1151,
+    "gaeaMs" : 1147,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b-base\/p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 98,
+    "gaeaMs" : 91,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b-base\/p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1223,
+    "gaeaMs" : 1222,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b-base\/p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 96,
+    "gaeaMs" : 92,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b-base\/p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1336,
+    "gaeaMs" : 1339,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b-base\/p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 94,
+    "gaeaMs" : 90,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b-base\/p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1427,
+    "gaeaMs" : 1444,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b-base\/p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 98,
+    "gaeaMs" : 86,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b-base\/p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1254,
+    "gaeaMs" : 1294,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b-base\/p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 90,
+    "gaeaMs" : 87,
+    "key" : "judge|image.score|siglip2-quality|-|klein-4b-base\/p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1011,
+    "gaeaMs" : 1018,
+    "key" : "judge|image.describe|mage-vl|-|klein-4b-base\/p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 100,
+    "gaeaMs" : 95,
+    "key" : "judge|image.score|siglip2-quality|-|qwen-image-flash\/p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1184,
+    "gaeaMs" : 1202,
+    "key" : "judge|image.describe|mage-vl|-|qwen-image-flash\/p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 101,
+    "gaeaMs" : 94,
+    "key" : "judge|image.score|siglip2-quality|-|qwen-image-flash\/p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1308,
+    "gaeaMs" : 1317,
+    "key" : "judge|image.describe|mage-vl|-|qwen-image-flash\/p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 95,
+    "gaeaMs" : 91,
+    "key" : "judge|image.score|siglip2-quality|-|qwen-image-flash\/p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1235,
+    "gaeaMs" : 1236,
+    "key" : "judge|image.describe|mage-vl|-|qwen-image-flash\/p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 99,
+    "gaeaMs" : 95,
+    "key" : "judge|image.score|siglip2-quality|-|qwen-image-flash\/p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1155,
+    "gaeaMs" : 1154,
+    "key" : "judge|image.describe|mage-vl|-|qwen-image-flash\/p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 97,
+    "gaeaMs" : 92,
+    "key" : "judge|image.score|siglip2-quality|-|qwen-image-flash\/p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1359,
+    "gaeaMs" : 1359,
+    "key" : "judge|image.describe|mage-vl|-|qwen-image-flash\/p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 98,
+    "gaeaMs" : 91,
+    "key" : "judge|image.score|siglip2-quality|-|qwen-image-flash\/p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1266,
+    "gaeaMs" : 1268,
+    "key" : "judge|image.describe|mage-vl|-|qwen-image-flash\/p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 97,
+    "gaeaMs" : 93,
+    "key" : "judge|image.score|siglip2-quality|-|qwen-image-flash\/p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1318,
+    "gaeaMs" : 1314,
+    "key" : "judge|image.describe|mage-vl|-|qwen-image-flash\/p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 88,
+    "gaeaMs" : 83,
+    "key" : "judge|image.score|siglip2-quality|-|qwen-image-flash\/p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1126,
+    "gaeaMs" : 1122,
+    "key" : "judge|image.describe|mage-vl|-|qwen-image-flash\/p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 117,
+    "gaeaMs" : 111,
+    "key" : "judge|image.score|siglip2-quality|-|z-image\/p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1080,
+    "gaeaMs" : 1082,
+    "key" : "judge|image.describe|mage-vl|-|z-image\/p0",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 98,
+    "gaeaMs" : 91,
+    "key" : "judge|image.score|siglip2-quality|-|z-image\/p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1215,
+    "gaeaMs" : 1212,
+    "key" : "judge|image.describe|mage-vl|-|z-image\/p1",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 100,
+    "gaeaMs" : 95,
+    "key" : "judge|image.score|siglip2-quality|-|z-image\/p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1074,
+    "gaeaMs" : 1072,
+    "key" : "judge|image.describe|mage-vl|-|z-image\/p2",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 99,
+    "gaeaMs" : 93,
+    "key" : "judge|image.score|siglip2-quality|-|z-image\/p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1093,
+    "gaeaMs" : 1088,
+    "key" : "judge|image.describe|mage-vl|-|z-image\/p3",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 101,
+    "gaeaMs" : 94,
+    "key" : "judge|image.score|siglip2-quality|-|z-image\/p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1288,
+    "gaeaMs" : 1283,
+    "key" : "judge|image.describe|mage-vl|-|z-image\/p4",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 102,
+    "gaeaMs" : 97,
+    "key" : "judge|image.score|siglip2-quality|-|z-image\/p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1392,
+    "gaeaMs" : 1394,
+    "key" : "judge|image.describe|mage-vl|-|z-image\/p5",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 101,
+    "gaeaMs" : 94,
+    "key" : "judge|image.score|siglip2-quality|-|z-image\/p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 974,
+    "gaeaMs" : 969,
+    "key" : "judge|image.describe|mage-vl|-|z-image\/p6",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 99,
+    "gaeaMs" : 90,
+    "key" : "judge|image.score|siglip2-quality|-|z-image\/p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  },
+  {
+    "engineMs" : 1001,
+    "gaeaMs" : 995,
+    "key" : "judge|image.describe|mage-vl|-|z-image\/p7",
+    "outputs" : [
+      {
+        "bytes" : true,
+        "maxDiff" : 0,
+        "pixels" : true
+      }
+    ],
+    "warm" : true
+  }
+]

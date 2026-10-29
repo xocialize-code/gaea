@@ -1,0 +1,9 @@
+2026-10-29T07:17:52Z operator: listening on /tmp/g377/main/operator.sock (same user, Developer ID team)
+2026-10-29T07:17:52Z gaea 0.6.0 starting: /tmp/g377/main, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-10-29T00:17:52-0700 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17762
+2026-10-29T07:17:52Z gaea: serving MES at http://127.0.0.1:17762/mes/v0
+gaea 0.6.0 serving MES at http://127.0.0.1:17762/mes/v0; operator API at /tmp/g377/main/operator.sock
+2026-10-29T07:17:52Z scheduler: launched com.xocialize.gaea.mage-vl 0.1.0, pid 63212, hello after 0.01188425 seconds
+2026-10-29T00:17:58-0700 error mes-engine: [HummingbirdCore] Server shutdown error: Already closed
+2026-10-29T00:17:58-0700 error mes-engine: [HummingbirdCore] Waiting on child channel: CancellationError()
+2026-10-29T07:17:59Z scheduler: stopped com.xocialize.gaea.mage-vl 0.1.0 (sigterm)

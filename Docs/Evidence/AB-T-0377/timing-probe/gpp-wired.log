@@ -1,0 +1,4 @@
+## drunet over GPP, wired
+{"model": "drunet-denoise", "op": "image.restore", "params": "{}", "warm_s": [0.242, 0.231, 0.244, 0.233, 0.233]}
+## nacre x2 over GPP, wired
+{"model": "nacre-upscale", "op": "image.upscale", "params": "{\"scale\":2}", "warm_s": [12.483, 12.426]}
