@@ -44,6 +44,7 @@ public final class GaeaHost: Sendable {
     public init(paths: GaeaPaths = GaeaPaths(), options: Options = Options()) throws {
         self.paths = paths
         self.options = options
+        let installed = FileManager.default.fileExists(atPath: paths.database.path)
         try paths.create()
         log = HostLog(file: paths.hostLog, echo: options.echoLog)
         database = try GaeaDatabase(path: paths.database)
@@ -53,7 +54,7 @@ public final class GaeaHost: Sendable {
         enablement = try ModelEnablement(store: DatabaseEnablementStore(database))
         engine = GaeaEngine(manager: manager, scheduler: scheduler, enablement: enablement)
 
-        var config = EngineConfiguration(id: "eng_gaea_\(Host.current().localizedName.map(Self.slug) ?? "mac")", name: "Gaea",
+        var config = EngineConfiguration(id: Self.engineID(database, installed: installed), name: "Gaea",
                                          implementationName: "gaea", implementationVersion: Gaea.version,
                                          implementationURL: "https://github.com/xocialize-code/gaea", spoolDirectory: paths.spool)
         config.stateDirectory = paths.serverState
@@ -80,6 +81,21 @@ public final class GaeaHost: Sendable {
     }
 
     final class HandlerBox: @unchecked Sendable { weak var host: GaeaHost? }
+
+    /// The setting that keeps this server's MES engine id.
+    static let engineIDSetting = "engine.id"
+
+    /// This server's MES engine id, kept in gaea.sqlite: clients key pairings and routing by it (Base §4), so two servers
+    /// on one Mac (G-19) must not share one. A new install takes the Mac's name and a random suffix; one that existed
+    /// before ids were kept keeps `eng_gaea_<mac>`, the id its clients paired with.
+    static func engineID(_ database: GaeaDatabase, installed: Bool) -> String {
+        if let stored = (try? database.setting(engineIDSetting)) ?? nil { return stored }
+        let mac = "eng_gaea_\(Host.current().localizedName.map(Self.slug) ?? "mac")"
+        let suffix = String((0..<6).map { _ in "abcdefghijkmnpqrstuvwxyz23456789".randomElement()! })
+        let id = installed ? mac : "\(mac)_\(suffix)"
+        try? database.setSetting(engineIDSetting, id)
+        return id
+    }
 
     static func slug(_ name: String) -> String {
         String(name.lowercased().map { $0.isLetter || $0.isNumber ? $0 : "_" }.prefix(24))

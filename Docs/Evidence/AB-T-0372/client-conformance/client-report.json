@@ -1,0 +1,84 @@
+{
+  "client" : "'/Volumes/Satechi/Development/gaea-mes-media-server/dist/Gaea Lab.app/Contents/Helpers/lab-run' --engine {url} --operation image.generate --text prompt={prompt} --out {out}",
+  "results" : [
+    {
+      "id" : "CLIENT-001",
+      "milliseconds" : 1148,
+      "spec" : "§2 rule 3",
+      "status" : "pass",
+      "title" : "Every request names the Base version (MES-Version: 0.1)"
+    },
+    {
+      "id" : "CLIENT-002",
+      "milliseconds" : 1,
+      "spec" : "§7.1, §16",
+      "status" : "pass",
+      "title" : "Job requests use only described inputs and parameters, valid against the descriptor"
+    },
+    {
+      "id" : "CLIENT-003",
+      "milliseconds" : 0,
+      "spec" : "§7.3, §11",
+      "status" : "pass",
+      "title" : "One submission per task, and following the job doesn't busy-poll"
+    },
+    {
+      "id" : "CLIENT-004",
+      "milliseconds" : 0,
+      "spec" : "§7.3, §13, §16",
+      "status" : "pass",
+      "title" : "What the client collects, it confirms or releases: no job is left holding"
+    },
+    {
+      "id" : "CLIENT-005",
+      "milliseconds" : 0,
+      "spec" : "§7",
+      "status" : "pass",
+      "title" : "The task completes: the job's output is fetched and the client exits 0"
+    },
+    {
+      "id" : "CLIENT-010",
+      "milliseconds" : 3047,
+      "spec" : "§7.1, §12, §16",
+      "status" : "pass",
+      "title" : "429 busy: waits for Retry-After, then retries and completes"
+    },
+    {
+      "id" : "CLIENT-011",
+      "milliseconds" : 3040,
+      "spec" : "§12, §16",
+      "status" : "pass",
+      "title" : "503 no_capacity: waits for Retry-After, then retries and completes"
+    },
+    {
+      "id" : "CLIENT-020",
+      "milliseconds" : 60,
+      "spec" : "§7.2, §16",
+      "status" : "pass",
+      "title" : "A failed job is reported as a failure; no outputs are fetched and nothing is resubmitted"
+    },
+    {
+      "id" : "CLIENT-021",
+      "milliseconds" : 849,
+      "spec" : "§7.2, §16",
+      "status" : "pass",
+      "title" : "A job cancelled on the engine is reported, and no outputs are fetched"
+    },
+    {
+      "id" : "CLIENT-022",
+      "milliseconds" : 59,
+      "spec" : "§12",
+      "status" : "pass",
+      "title" : "An unknown error code is handled by its HTTP class: reported, and a 4xx isn't retried"
+    },
+    {
+      "id" : "CLIENT-023",
+      "milliseconds" : 1012,
+      "spec" : "§7.3, §13",
+      "status" : "pass",
+      "title" : "Outputs that are gone (410) are reported, not retried in a loop"
+    }
+  ],
+  "startedAt" : "2026-10-29T20:17:06Z",
+  "suite" : "MES client conformance 0.1"
+}

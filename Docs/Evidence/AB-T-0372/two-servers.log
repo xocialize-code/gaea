@@ -1,0 +1,44 @@
+
+== 1. zimage-generate (expect server A)
+lab-run --engine http://127.0.0.1:17791/mes/v0 --engine http://127.0.0.1:17792/mes/v0 --operation image.generate --model z-image-turbo --text prompt=a lighthouse on a cliff at dusk --param seed=7
+ran on Gaea (127.0.0.1:17791) · picked for z-image-turbo
+saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0372/two-servers/zimage-generate/generate-20261029-131726.png
+model z-image-turbo · Apache-2.0
+
+== 2. flash-lora (expect server B)
+lab-run --engine http://127.0.0.1:17791/mes/v0 --engine http://127.0.0.1:17792/mes/v0 --operation image.generate --model qwen-image-flash --adapter qwen-image:martha=0.8 --text prompt=a lighthouse on a cliff at dusk --param seed=7
+ran on Gaea (127.0.0.1:17792) · picked for qwen-image-flash
+saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0372/two-servers/flash-lora/generate-20261029-131737.png
+model qwen-image-flash · LicenseRef-NVIDIA-Open-Model · adapter qwen-image:martha 0.8 @a60485ca35e3
+
+== 3. lora-implies-model (expect server B)
+lab-run --engine http://127.0.0.1:17791/mes/v0 --engine http://127.0.0.1:17792/mes/v0 --operation image.generate --adapter qwen-image:martha=0.8 --text prompt=a lighthouse on a cliff at dusk --param seed=7
+ran on Gaea (127.0.0.1:17792) · picked for qwen-image-flash
+saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0372/two-servers/lora-implies-model/generate-20261029-131747.png
+model qwen-image-flash · LicenseRef-NVIDIA-Open-Model · adapter qwen-image:martha 0.8 @a60485ca35e3
+
+== 4. upscale (expect server A)
+lab-run --engine http://127.0.0.1:17791/mes/v0 --engine http://127.0.0.1:17792/mes/v0 --operation image.upscale --file image=/private/tmp/claude-501/-Volumes-Satechi-Development-gaea-mes-media-server/c320af8b-3192-4279-ac2c-7ee8c4bc9dec/scratchpad/photo-1024w.png --param scale=2
+ran on Gaea (127.0.0.1:17791) · picked for realplksr-upscale
+saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0372/two-servers/upscale/upscale-20261029-131748.png
+model realplksr-upscale · Apache-2.0
+
+== 5. klein-edit (expect server B)
+lab-run --engine http://127.0.0.1:17791/mes/v0 --engine http://127.0.0.1:17792/mes/v0 --operation image.edit --model klein-4b --file images=/private/tmp/claude-501/-Volumes-Satechi-Development-gaea-mes-media-server/c320af8b-3192-4279-ac2c-7ee8c4bc9dec/scratchpad/photo-1024w.png --text instruction=make it a snowy winter scene --param seed=7
+ran on Gaea (127.0.0.1:17792) · picked for klein-4b
+saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0372/two-servers/klein-edit/edit-20261029-131801.png
+model klein-4b · Apache-2.0
+
+== 6. score (expect server A)
+lab-run --engine http://127.0.0.1:17791/mes/v0 --engine http://127.0.0.1:17792/mes/v0 --operation image.score --file image=/private/tmp/claude-501/-Volumes-Satechi-Development-gaea-mes-media-server/c320af8b-3192-4279-ac2c-7ee8c4bc9dec/scratchpad/photo-1024w.png
+ran on Gaea (127.0.0.1:17791) · picked for siglip2-quality
+saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0372/two-servers/score/score-20261029-131801.json
+model siglip2-quality · Apache-2.0
+
+== where each job ran
+flash-lora           Gaea (127.0.0.1:17792)                   model qwen-image-flash
+klein-edit           Gaea (127.0.0.1:17792)                   model klein-4b
+lora-implies-model   Gaea (127.0.0.1:17792)                   model qwen-image-flash
+score                Gaea (127.0.0.1:17791)                   model siglip2-quality
+upscale              Gaea (127.0.0.1:17791)                   model realplksr-upscale
+zimage-generate      Gaea (127.0.0.1:17791)                   model z-image-turbo

@@ -295,7 +295,13 @@ starts while the phase before it is being built.
      mlx-engine-swift 0.73.0's `MLXMemoryPolicy`): idle workers are charged what they hold, not their peak; three
      plugins (160 GB declared) under a 70 GB budget, with no OOM and every eviction logged with its reason. See
      [Evidence/AB-T-0371](Evidence/AB-T-0371/README.md).
-  7. AB-T-0372: Gaea Lab, which needs PixelAgencyRun's new package (AB-T-0360).
+  7. AB-T-0372: Gaea Lab, the reference client. **Done** (Gaea Lab 0.1.0, notarized; `Apps/GaeaLab`)
+     - **Build:** Lite's workflow (pixel-agency-run) over an `EnginePool` of every server, routed by MESClientKit's
+       `EnginePicker`, with a LoRA panel and `lab-run`.
+     - **Results:** App → Gaea → model → LoRA works. Six jobs across two servers with different plugins each reached
+       the right one. Client conformance passes 11 of 11 against `lab-run`.
+     - **Fixed on the way:** two servers on one Mac shared an engine id; Gaea 0.7.1 keeps one per install.
+     - See [Evidence/AB-T-0372](Evidence/AB-T-0372/README.md).
   8. AB-T-0373: TierBench parity with pixel-agency-image-engine v0.9.1. **Done** (Gaea 0.5.0, Release):
      - **Outputs:** every seeded output is byte-identical to v0.9.1's. That's 441 from TierBench and 12 seeded edit,
        fill and generate jobs.

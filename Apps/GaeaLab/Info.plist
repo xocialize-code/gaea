@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.xocialize.gaea.lab</string>
+	<key>CFBundleName</key>
+	<string>Gaea Lab</string>
+	<key>CFBundleDisplayName</key>
+	<string>Gaea Lab</string>
+	<key>CFBundleExecutable</key>
+	<string>GaeaLab</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>__VERSION__</string>
+	<key>CFBundleVersion</key>
+	<string>__VERSION__</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>26.0</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.graphics-design</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Apache-2.0</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Gaea Lab finds MES servers on your network and sends them your jobs.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_mes-engine._tcp</string>
+	</array>
+</dict>
+</plist>

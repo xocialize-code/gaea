@@ -55,4 +55,15 @@ import Testing
         try database.deletePlugin("com.example.p")
         #expect(try database.versions(of: "com.example.p").isEmpty)
     }
+
+    /// G-19: two servers on one Mac don't share an engine id; an install that existed keeps the one its clients paired with.
+    @Test func eachInstallKeepsAnEngineIDOfItsOwn() throws {
+        let a = try GaeaDatabase(), b = try GaeaDatabase(), old = try GaeaDatabase()
+        let idA = GaeaHost.engineID(a, installed: false), idB = GaeaHost.engineID(b, installed: false)
+        #expect(idA != idB && idA.hasPrefix("eng_gaea_") && idA.count > idB.split(separator: "_").dropLast().joined(separator: "_").count)
+        #expect(GaeaHost.engineID(a, installed: false) == idA)              // kept
+        let legacy = GaeaHost.engineID(old, installed: true)
+        #expect(!legacy.isEmpty && GaeaHost.engineID(old, installed: false) == legacy)
+        #expect(try old.setting(GaeaHost.engineIDSetting) == legacy)
+    }
 }
