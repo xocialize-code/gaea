@@ -1,0 +1,4 @@
+budget 103.08 GB, charged 34.29 GB, free 68.79 GB; host 0.04 GB; 0 queued
+  com.xocialize.gaea.flux2-klein 0.1.0 pid 61142: declared 25.90 GB, phys_footprint 16.72 GB, worker says 16.72 GB, charged 16.72 GB lanes ["klein-4b": "bf16"]
+  com.xocialize.gaea.prompt-enhance 0.1.0 pid 61137: declared 7.57 GB, phys_footprint 3.47 GB, worker says 3.47 GB, charged 3.47 GB lanes ["qwen3.5-4b": "int4"]
+  com.xocialize.gaea.z-image 0.1.0 pid 61179: declared 39.90 GB, phys_footprint 14.09 GB, worker says 14.25 GB, charged 14.09 GB lanes ["z-image-turbo": "int4"]

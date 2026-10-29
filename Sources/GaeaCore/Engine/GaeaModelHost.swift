@@ -36,7 +36,22 @@ struct GaeaModelHost: ModelHost {
             guard let first = group.first else { continue }
             cards.append(Self.card(first, all: group))
         }
+        // The prompt enhancer's backbones: models whose plugin serves the rewrite helper, routed as `llm`.
+        for helper in await offers.liveHelpers() where helper.helper.operation == GaeaPromptEnhancer.operation {
+            if !cards.contains(where: { $0.id == helper.model.id }) { cards.append(Self.backboneCard(helper)) }
+        }
         return cards
+    }
+
+    static func backboneCard(_ helper: PluginOffers.Helper) -> ModelCard {
+        let license = PluginOffers.offer(helper.model).license
+        let lane = helper.model.lanes.first(where: \.default) ?? helper.model.lanes.first
+        return ModelCard(
+            id: helper.model.id, displayName: helper.model.title, capabilities: [.llm], maturity: .prod,
+            license: .init(license.commercialUse == .yes ? .permissive : .restricted, weights: [license.spdx]),
+            sourceRepo: helper.model.package.provenance.sourceRepo, revision: helper.plugin.version,
+            envelope: .init(maxPixels: 1, multipleOf: 1, maxInputs: 0), footprintBytes: lane?.resolved.persistentBytes,
+            downloaded: true)
     }
 
     static func card(_ route: PluginRoute, all: [PluginRoute]) -> ModelCard {
@@ -68,6 +83,16 @@ struct GaeaModelHost: ModelHost {
     }
 
     func route(_ capability: ModelCapability, model: String?) async throws -> ModelRoute {
+        if capability == .llm {
+            let backbones = await offers.liveHelpers().filter { $0.helper.operation == GaeaPromptEnhancer.operation }
+            guard let helper = backbones.first(where: { model == nil || $0.model.id == model }) else {
+                throw MESError(.modelUnavailable, "No prompt enhancer backbone \(model ?? "") is enabled.")
+            }
+            let card = Self.backboneCard(helper)
+            return ModelRoute(id: card.id, packageID: "\(helper.plugin.id)/\(helper.model.id)", capability: .llm,
+                              displayName: card.displayName, license: card.license, envelope: card.envelope,
+                              revision: helper.plugin.version, footprintBytes: card.footprintBytes)
+        }
         guard let operation = Self.operations[capability] else {
             throw MESError(.modelUnavailable, "No plugin serves \(capability).")
         }

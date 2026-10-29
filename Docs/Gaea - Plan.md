@@ -282,7 +282,11 @@ starts while the phase before it is being built.
        worker (2.51 GB with all loaded), every call byte for byte ForgeCore's in-process output; with every G1 plugin,
        conformance passes 35 open and 38 paired, upscale and matte included. See
        [Evidence/AB-T-0369](Evidence/AB-T-0369/README.md);
-     - AB-T-0370: the LLM prompt enhancer.
+     - AB-T-0370: the LLM prompt enhancer. **Done**
+       ([v0.1.0](https://github.com/xocialize/gaea-plugin-prompt-enhance/releases/tag/v0.1.0), Gaea 0.5.0): Qwen3.5 4B and
+       9B behind prompt-enhance-kit's profiles as the `x-gaea.prompt.enhance` helper; Gaea calls it only when a profile's
+       decision says so; every profile's greedy rewrite is the in-process text; with every G1 plugin, conformance passes
+       37 open and 40 paired. See [Evidence/AB-T-0370](Evidence/AB-T-0370/README.md).
   5. AB-T-0366: the normalizer library (AB-T-0359) replaces the mock, and the Image conformance suite passes. **Done**
      (Gaea 0.4.0 on pixel-agency-normalizer 0.1.0): each model call runs as a plugin's offer (`GaeaModelHost`); with
      Qwen-Image, Z-Image and Klein installed, Base and Image conform open and paired, and the mock is deleted. Upscale,

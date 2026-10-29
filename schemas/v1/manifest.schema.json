@@ -366,6 +366,13 @@
         },
         "params": {
           "$ref": "../vendor/mes-v0/descriptor.schema.json#/$defs/ParamsSchema"
+        },
+        "profiles": {
+          "description": "For a prompt-enhance helper (x-gaea.prompt.enhance): the profiles it rewrites with, so Gaea decides whether a prompt needs the model before it calls (GPP-1 §4.4).",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PromptProfile"
+          }
         }
       }
     },
@@ -401,6 +408,79 @@
             "reload_models",
             "restart_worker"
           ]
+        }
+      }
+    },
+    "PromptProfile": {
+      "description": "The facts a prompt profile's decision reads: which models it serves, its policy, its tasks, and when a prompt goes as typed.",
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "title",
+        "models",
+        "policy",
+        "tasks",
+        "structured",
+        "suggests_size",
+        "lays_out_canvas",
+        "large",
+        "pass_through_structured"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "models": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/ModelId"
+          }
+        },
+        "policy": {
+          "enum": [
+            "required",
+            "recommended",
+            "optional"
+          ]
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "textToImage",
+              "imageEdit"
+            ]
+          }
+        },
+        "structured": {
+          "type": "boolean"
+        },
+        "suggests_size": {
+          "type": "boolean"
+        },
+        "lays_out_canvas": {
+          "type": "boolean"
+        },
+        "large": {
+          "type": "boolean"
+        },
+        "pass_through_structured": {
+          "type": "boolean"
+        },
+        "detailed_at_words": {
+          "type": "integer",
+          "minimum": 1
         }
       }
     }

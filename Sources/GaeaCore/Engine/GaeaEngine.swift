@@ -67,6 +67,7 @@ public struct GaeaEngine: MediaEngine {
     let enablement: ModelEnablement
     let offers: PluginOffers
     let normalizer: ImageNormalizer
+    let enhancer: GaeaPromptEnhancer
 
     /// The extension a request names a lane with (MEM-7, G-23).
     public static let laneExtension = "x-gaea.lane"
@@ -77,8 +78,11 @@ public struct GaeaEngine: MediaEngine {
         self.enablement = enablement
         let offers = PluginOffers(manager: manager, enablement: enablement)
         self.offers = offers
-        // Gaea's scheduler owns memory, so the host keeps the normalizer's residency hooks at their defaults.
-        normalizer = ImageNormalizer(host: GaeaModelHost(offers: offers, scheduler: scheduler),
+        // Gaea's scheduler owns memory, so the host keeps the normalizer's residency hooks at their defaults. The prompt
+        // enhancer is the LLM plugin's helper (AB-T-0370).
+        let enhancer = GaeaPromptEnhancer(scheduler: scheduler)
+        self.enhancer = enhancer
+        normalizer = ImageNormalizer(host: GaeaModelHost(offers: offers, scheduler: scheduler), enhancer: enhancer,
                                      options: .init(enablement: enablement))
     }
     /// Every model of every installed plugin, on or off, with the offer the console lists it under.
@@ -94,6 +98,7 @@ public struct GaeaEngine: MediaEngine {
     /// licence as its plugin's offer states it (a notice, its terms), the image count the offers allow, the lane
     /// extension (MEM-7), and the offers' own options as `x-` extensions (Base §6.2).
     public func descriptors() async -> [Descriptor] {
+        await enhancer.refresh(offers)
         let routes = await liveRoutes()
         var descriptors: [Descriptor] = []
         for var descriptor in await normalizer.descriptors() {
@@ -188,6 +193,7 @@ public struct GaeaEngine: MediaEngine {
 
     public func run(_ context: RunContext) async throws -> RunOutput {
         if context.descriptor.profile == ImageProfile.id {
+            await enhancer.refresh(offers)
             let scope = NormalizerScope(jobID: context.jobID,
                                         directory: context.outputDirectory.appending(path: "worker", directoryHint: .isDirectory),
                                         extensions: context.extensions)
@@ -422,6 +428,25 @@ extension PluginRoute {
 struct PluginOffers: Sendable {
     let manager: PluginManager
     let enablement: ModelEnablement
+
+    /// A helper an enabled plugin model serves (GPP-1 §4.4): an operation Gaea calls itself, such as the prompt rewrite.
+    struct Helper: Sendable {
+        var plugin: InstalledPlugin
+        var model: PluginManifest.Model
+        var helper: PluginManifest.Helper
+    }
+
+    /// The helpers of enabled plugins' enabled models, in install order.
+    func liveHelpers() async -> [Helper] {
+        var helpers: [Helper] = []
+        for plugin in await manager.installed() {
+            for helper in plugin.manifest.helpers ?? [] {
+                guard let model = plugin.model(helper.model), isLive(plugin, model) else { continue }
+                helpers.append(Helper(plugin: plugin, model: model, helper: helper))
+            }
+        }
+        return helpers
+    }
 
 
     /// Every model of every installed plugin, on or off, with the offer the console lists it under.

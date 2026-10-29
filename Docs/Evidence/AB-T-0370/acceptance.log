@@ -1,0 +1,26 @@
+# Prompt enhancer acceptance (AB-T-0370) 2026-10-29T02:18:57Z — Gaea 0.5.0, prompt-enhance 0.1.0, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add FLUX.2 Klein and Z-Image from GitHub
+PASS  add the prompt enhancer 0.1.0 by repo URL
+['qwen3.5-4b', 'qwen3.5-9b']
+PASS  image.enhance_prompt offers the backbones; image.generate declares prompt_enhance
+{"applied": true, "attempts": 1, "backbone": "qwen3.5-4b", "outcome": "enhanced", "profile": "flux2-klein", "seed": 42, "version": 2}
+PASS  klein-auto: enhanced, the helper called
+{"applied": false, "outcome": "passed_through", "profile": "flux2-klein", "version": 2}
+PASS  klein-detailed: passed_through, the helper not called
+{"applied": false, "outcome": "not_recommended", "profile": "z-image", "version": 2}
+PASS  zimage-auto: not_recommended, the helper not called
+{"applied": true, "attempts": 1, "backbone": "qwen3.5-4b", "outcome": "enhanced", "profile": "z-image", "seed": 42, "version": 2}
+PASS  zimage-on: enhanced, the helper called
+{"applied": false, "outcome": "off", "profile": "flux2-klein", "version": 2}
+PASS  klein-off: off, the helper not called
+{"bytes": 711, "href": "/mes/v0/jobs/job_fqww7cntg6hrkx3qdxq5/outputs/0", "index": 0, "kind": "data", "media_type": "application/json", "name": "enhanced", "sha256": "cc9311d13010cec72f41a8da57a950767e0e01ff1c088c6ae8828808c289d1d9", "value": {"applied": true, "prompt": "A small, reddish-brown fox with a thick white-tipped tail trots deliberately through a field of deep, untouched powder snow. The
+PASS  image.enhance_prompt for Klein: the rewrite as data, the helper called
+PASS  the helper ran three times in all
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.1.0-2026-10-29T021904Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.prompt-enhance-0.1.0-2026-10-29T021902Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.1.0-2026-10-29T021909Z.gpp passes validate.py
+== 13 passed, 0 failed

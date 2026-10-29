@@ -1,0 +1,20 @@
+# Prompt enhancer golden check 2026-10-29T02:17:38Z: com.xocialize.gaea.prompt-enhance 0.1.0
+flux2-klein: GPP enhanced in 1.21 s (cold worker); in-process enhanced in 1.20 s, prepare 0.76 s, 0 tokens at 0.0/s over whole calls
+  GPP:        A small red fox with a thick, fluffy tail stands amidst a field of deep, untouched white snow, its orange fur contrasting sharply against the pale ground. The animal is captured in a low-angle shot, looking slightly upward with bright, aler
+PASS  flux2-klein (qwen3.5-4b): the same text over GPP and in-process
+qwen-image: GPP enhanced in 1.26 s (cold worker); in-process enhanced in 1.26 s, prepare 0.76 s, 0 tokens at 0.0/s over whole calls
+  GPP:        Cinematic street photography of a charming bakery storefront, bathed in warm, golden-hour sunlight that casts long, inviting shadows. The facade features rustic wooden shutters and large glass windows displaying an array of freshly baked go
+PASS  qwen-image (qwen3.5-4b): the same text over GPP and in-process
+z-image: GPP enhanced in 0.79 s (cold worker); in-process enhanced in 0.79 s, prepare 0.76 s, 0 tokens at 0.0/s over whole calls
+  GPP:        In the image, an old lighthouse stands solitary against a twilight sky, its weathered stone structure illuminated by a warm, flickering light that spills from the lantern room and casts long, rhythmic shadows across the base. The surroundin
+PASS  z-image (qwen3.5-4b): the same text over GPP and in-process
+mage-flow: GPP enhanced in 1.31 s (cold worker); in-process enhanced in 1.31 s, prepare 0.76 s, 0 tokens at 0.0/s over whole calls
+  GPP:        A fluffy orange tabby cat sits perched on a narrow, weathered wooden windowsill, its front paws stretched forward as if reaching for a distant bird while its tail curls elegantly around the edge. The setting is a cozy, sun-drenched room in 
+PASS  mage-flow (qwen3.5-4b): the same text over GPP and in-process
+sensenova-u1.5: GPP enhanced in 19.83 s (cold worker); in-process enhanced in 19.76 s, prepare 0.76 s, 1502 tokens at 76.0/s over whole calls
+  GPP:        {"subjects":[{"description":"A charismatic jazz musician, likely a saxophonist or pianist, dressed in a stylish, slightly vintage suit or blazer, playing with intense passion and focus.","appearance_action":"The musician is captured mid-per
+PASS  sensenova-u1.5 (qwen3.5-9b): the same text over GPP and in-process
+moss-image: GPP enhanced in 8.61 s (cold worker); in-process enhanced in 8.61 s, prepare 0.76 s, 556 tokens at 64.6/s over whole calls
+  GPP:        {"summary":{"meta":["educational infographic","diagram","clean vector art"],"canvas":"single","caption":"A clear, step-by-step infographic illustrating the water cycle, featuring a central ocean, rising clouds, rain, and a river flowing bac
+PASS  moss-image (qwen3.5-9b): the same text over GPP and in-process
+== 6 passed, 0 failed
