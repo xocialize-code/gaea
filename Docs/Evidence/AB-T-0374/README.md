@@ -144,6 +144,25 @@ and ship no weights.
 | Qwen-Image-2.1 | Qwen Research licence: non-commercial, research and evaluation only | Research tier only, never default: AB-D-0085 | Named-only and opt-in; `commercial_use: false` |
 | FLUX 3 Klein | FLUX Kommunity v1.0 | Restricted, named-only, `commercial_use: false` with the Qualifying-User notice: AB-D-0151 | Named-only and opt-in; `commercial_use: false` |
 
+**The operator's authorization (2026-10-29).** The operator authorized research-licensed models for this task, in
+the gaea main session: "You are authorized for research." The gate therefore passes the research and non-commercial
+weight licences, the Qwen Research licence and FLUX Kommunity v1.0, as `--allow-research` does on
+pixel-agency-image-engine. The operator accepts their terms. Every offer still states its licence truthfully, is
+named-only, and says `commercial_use: false` where the weights aren't permissive. LoRAs are not part of this task;
+they are adapters on base models in a separate work order.
+
+**Each verdict's source.** The licence was read from the source below, and the manifest's `weightLicense` (what Gaea
+keys named-only and opt-in on) and the offers' MES licence were checked against it, in
+`release/<family>/manifest.json`.
+
+| Family | Source of the licence | Package `weightLicense` | Offer licence (MES) |
+|---|---|---|---|
+| Mage-Flow | <https://huggingface.co/mage-flow-community/Mage-Flow/blob/main/LICENSE>; the Hub card says `license: mit` (read 2026-10-29) | `MIT` (all 5 models) | `MIT`, `commercial_use: true` |
+| SenseNova-U1.5 | <https://huggingface.co/sensenova/SenseNova-U1.5-8B-MoT>: the card says `license: apache-2.0`, as does the mirror's README in the store (`models--mlx-community--SenseNova-U1.5-8B-MoT-8bit/README.md`) | `Apache-2.0` (all 3) | `Apache-2.0`, `commercial_use: true` |
+| MOSS-Image | <https://huggingface.co/OpenMOSS-Team/MOSS-Image-SFT>; the mirror's `LICENSE` (Apache License 2.0) in `models--mlx-community--MOSS-Image-SFT-bf16/` | `Apache-2.0` (both) | `Apache-2.0`, `commercial_use: true` |
+| Qwen-Image-2.1 | <https://huggingface.co/Qwen/Qwen-Image-2.1/blob/main/LICENSE>; the mirror's `LICENSE` ("Qwen RESEARCH LICENSE AGREEMENT", release date September 20, 2026) and `NOTICE` in `models--xocialize--Qwen-Image-2.1/` | `LicenseRef-Qwen-Research` (both) | `LicenseRef-Qwen-Research`, `commercial_use: false`, notice "non-commercial research and evaluation use only. Built with Qwen." |
+| FLUX 3 Klein | <https://huggingface.co/black-forest-labs/flux-3-image-klein/blob/main/LICENSE.md>; the snapshot's `LICENSE.md` ("FLUX Kommunity License v.1.0") in `models--mlx-community--flux-3-image-klein-bf16/` | `LicenseRef-FLUX-Kommunity-1.0` | `LicenseRef-FLUX-Kommunity-1.0`, `commercial_use: false`, the Kommunity notice (non-commercial; commercial outputs only for Qualifying Users who filter and disclose; never train on outputs) |
+
 ## How "named-only" and "opt-in" come about
 
 - **From the licence.** Gaea derives an offer's named-only *and* opt-in state from the package's weight licence
