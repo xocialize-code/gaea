@@ -33,6 +33,14 @@ public enum OperatorAPI {
         /// A model's default lane (MEM-7): `id` the model, `lane` sets it, `lane` = `default` returns to the manifest's
         /// default, none reads it.
         case modelsLane = "models.lane"
+        /// Adapters (LoRAs), shipped by plugins or added by the operator (GPP-1 §4.8).
+        case adaptersList = "adapters.list"
+        /// `url` a Hugging Face repo, `model` the model it's for; optional `file`, `id`, `title`, `trigger`, `format`,
+        /// `strength`, `notes`.
+        case adaptersAdd = "adapters.add"
+        case adaptersRemove = "adapters.remove"
+        case adaptersEnable = "adapters.enable"
+        case adaptersDisable = "adapters.disable"
         case ledger
     }
 }

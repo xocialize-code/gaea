@@ -206,6 +206,38 @@ public final class GaeaHost: Sendable {
                 return OperatorResponse(id: request.id, ok: true,
                                         text: "\(id): \(lane) (\(stored != nil ? "set by the operator" : "the manifest's default"))",
                                         json: Self.json(["model": id, "lane": lane, "stored": stored ?? ""]))
+            case .adaptersList:
+                let listings = await engine.adapterListings()
+                let lines = listings.map { a in
+                    "\(a.enabled ? "on " : "off") \(a.id)  \(a.title)  [\(a.model)\(a.operations.isEmpty ? "" : ": " + a.operations.joined(separator: ", "))] "
+                        + "\(a.format), \(a.license)\(a.optIn ? ", opt-in" : "")\(a.registered ? ", added" : "")"
+                        + (a.trigger.map { ", trigger \"\($0)\"" } ?? "")
+                }
+                return OperatorResponse(id: request.id, ok: true,
+                                        text: lines.isEmpty ? "No adapters: no plugin ships one, and none was added." : lines.joined(separator: "\n"),
+                                        json: Self.json(listings))
+            case .adaptersAdd:
+                let row = try await engine.registerAdapter(.init(
+                    url: try arg("url"), model: try arg("model"), file: args["file"], id: args["id"], title: args["title"],
+                    trigger: args["trigger"], format: args["format"], strength: args["strength"].flatMap(Double.init),
+                    notes: args["notes"]))
+                await server.reloadDescriptors()
+                let optIn = await engine.adapterListings().first { $0.id == row.id }?.optIn ?? true
+                log("operator: added adapter \(row.id) (\(row.repo)@\(row.revision.prefix(12)) \(row.file)) for \(row.modelID)")
+                return OperatorResponse(
+                    id: request.id, ok: true,
+                    text: "Added \(row.id) for \(row.modelID): \(row.repo)@\(row.revision.prefix(12)) \(row.file), \(row.format), \(row.license)."
+                        + (optIn ? " Its terms are \(row.commercialUse == "unknown" ? "unknown" : row.commercialUse)\(row.licenseGated ? " and gated" : ""), so it's off until you enable it: gaea adapters enable \(row.id)" : " On."),
+                    json: Self.json(row))
+            case .adaptersRemove:
+                try engine.removeAdapter(try arg("id"))
+                await server.reloadDescriptors()
+                return OperatorResponse(id: request.id, ok: true, text: "Removed \(try arg("id")). Its weights stay in the models root.")
+            case .adaptersEnable, .adaptersDisable:
+                let on = request.command == OperatorAPI.Command.adaptersEnable.rawValue
+                try await engine.setAdapter(try arg("id"), enabled: on)
+                await server.reloadDescriptors()
+                return OperatorResponse(id: request.id, ok: true, text: "\(try arg("id")) \(on ? "enabled" : "disabled").")
             case .ledger:
                 let ledger = await scheduler.ledger()
                 return OperatorResponse(id: request.id, ok: true, text: Self.describe(ledger), json: Self.json(ledger))

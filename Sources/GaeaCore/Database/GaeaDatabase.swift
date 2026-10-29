@@ -90,6 +90,33 @@ public final class GaeaDatabase: Sendable {
                 t.column("message", .text).notNull()
             }
         }
+        migrator.registerMigration("v2") { db in
+            // LoRAs the operator added by Hugging Face repo URL for one model (GPP-1 §4.8, AB-T-0378). Enablement of an
+            // opt-in one is `adapter:<id>` in model_choice, as for shipped adapters.
+            try db.create(table: "adapter") { t in
+                t.primaryKey("id", .text)
+                t.column("model_id", .text).notNull()
+                t.column("title", .text).notNull()
+                t.column("kind", .text).notNull().defaults(to: "plain")
+                t.column("format", .text).notNull()
+                t.column("repo", .text).notNull()
+                t.column("revision", .text).notNull()
+                t.column("file", .text).notNull()
+                t.column("sha256", .text).notNull()
+                t.column("bytes", .integer)
+                t.column("trigger", .text)
+                t.column("prompt_template", .text)
+                t.column("license", .text).notNull()
+                t.column("commercial_use", .text).notNull()
+                t.column("license_gated", .boolean).notNull().defaults(to: false)
+                t.column("license_url", .text)
+                t.column("notes", .text)
+                t.column("strength_default", .double).notNull().defaults(to: 1)
+                t.column("strength_min", .double)
+                t.column("strength_max", .double)
+                t.column("added_at", .datetime).notNull()
+            }
+        }
         return migrator
     }
 

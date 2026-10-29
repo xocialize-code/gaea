@@ -33,11 +33,12 @@ struct GaeaModelHost: ModelHost {
 
     func models() async -> [ModelCard] {
         let routes = await offers.liveRoutes()
+        let registrations = offers.registrations()
         var cards: [ModelCard] = []
         for (key, group) in Dictionary(grouping: routes, by: { "\($0.plugin.id)/\($0.model.id)" }).sorted(by: { $0.key < $1.key }) {
             _ = key
             guard let first = group.first else { continue }
-            cards.append(Self.card(first, all: group))
+            cards.append(Self.card(first, all: group, adapters: PluginOffers.adapters(group, registrations: registrations)))
         }
         // The helpers' models: the prompt enhancer's backbones, routed as `llm`, and the defect detector.
         for helper in await offers.liveHelpers() {
@@ -63,7 +64,7 @@ struct GaeaModelHost: ModelHost {
             footprintBytes: lane?.resolved.persistentBytes, downloaded: true)
     }
 
-    static func card(_ route: PluginRoute, all: [PluginRoute]) -> ModelCard {
+    static func card(_ route: PluginRoute, all: [PluginRoute], adapters: [ModelAdapter] = []) -> ModelCard {
         let capabilities = all.compactMap { capabilities[$0.operation] }
         let license = route.offer.license
         let limits = all.compactMap(\.manifestOffer.limits)
@@ -76,7 +77,14 @@ struct GaeaModelHost: ModelHost {
             license: .init(license.commercialUse == .yes ? .permissive : .restricted, weights: [license.spdx]),
             sourceRepo: route.model.sourceRepo, revision: route.plugin.version, envelope: envelope,
             defaults: .init(steps: param(all, suffix: ".steps")?.intValue, guidance: param(all, suffix: ".guidance")?.doubleValue),
-            footprintBytes: defaultLane?.resolved.persistentBytes, downloaded: true)
+            footprintBytes: defaultLane?.resolved.persistentBytes, downloaded: true, adapters: adapters.map(\.card))
+    }
+
+    /// What the offer's surface accepts of adapters (GPP-1 §4.3), in the normalizer's terms.
+    static func adapterSupport(_ route: PluginRoute) -> ModelRoute.AdapterSupport? {
+        guard let support = route.manifestOffer.adapterSupport else { return nil }
+        return .init(kinds: support.kinds, maxCount: support.maxCount, strengthMin: support.strength.min,
+                     strengthMax: support.strength.max)
     }
 
     /// The default of the offers' first `x-` param named `….suffix` (a plugin's steps, its guidance).
@@ -116,10 +124,13 @@ struct GaeaModelHost: ModelHost {
             throw MESError(.modelUnavailable, model.map { "\($0) isn't enabled for \(operation)." } ?? "No plugin model offers \(operation).")
         }
         let all = await offers.liveRoutes().filter { $0.plugin.id == chosen.plugin.id && $0.model.id == chosen.model.id }
-        let card = Self.card(chosen, all: all)
+        let adapters = PluginOffers.adapters(all, registrations: offers.registrations())
+        let card = Self.card(chosen, all: all, adapters: adapters)
         return ModelRoute(id: card.id, packageID: "\(chosen.plugin.id)/\(chosen.model.id)", capability: capability,
                           displayName: card.displayName, license: card.license, envelope: card.envelope, defaults: card.defaults,
-                          revision: chosen.plugin.version, footprintBytes: card.footprintBytes)
+                          revision: chosen.plugin.version, footprintBytes: card.footprintBytes,
+                          adapterSupport: Self.adapterSupport(chosen),
+                          adapterRevisions: Dictionary(adapters.map { ($0.card.id, $0.source.revision) }) { a, _ in a })
     }
 
     /// Nothing to do ahead of the run: the scheduler admits and prepares the lane when the job reaches the worker.
@@ -147,6 +158,7 @@ struct GaeaModelHost: ModelHost {
         defer { try? FileManager.default.removeItem(at: directory) }
 
         // Inputs travel as spool paths (GPP-1 §1): images as the PNGs the normalizer made, the prompt as a text file.
+        // An `ic` adapter's images (`adapter<n>.<role>`) travel with the adapter instead (GPP-1 §3.3).
         var inputs: [String: GPPValue] = [:]
         for (name, images) in work.inputs.sorted(by: { $0.key < $1.key }) {
             var paths: [GPPValue] = []
@@ -180,11 +192,12 @@ struct GaeaModelHost: ModelHost {
 
         let names = Set(call.extensions)
         let modelParams = scope.extensions.filter { names.contains($0.key) }.mapValues(\.gpp)
+        let adapters = try await runAdapters(work, call: call, inputs: &inputs)
         let workerDirectory = directory.appending(path: "out", directoryHint: .isDirectory)
         let job = WorkerJob(job: "\(scope.jobID)-\(index)", pluginID: call.plugin.id, model: call.model.id, operation: operation,
                             namedLane: scope.extensions[GaeaEngine.laneExtension]?.stringValue, lanes: call.lanes,
-                            params: params, inputs: inputs, modelParams: modelParams, seed: Int(clamping: work.seed),
-                            outputDir: workerDirectory)
+                            params: params, inputs: inputs, modelParams: modelParams, adapters: adapters,
+                            seed: Int(clamping: work.seed), outputDir: workerDirectory)
         let ran = try await GaeaEngine.schedule(job, scheduler: scheduler, title: call.plugin.title) { line in
             guard line["type"]?.stringValue == "progress" else { return }
             progress(ModelProgress(phase: line["stage"]?.stringValue ?? "running", fraction: line["fraction"]?.doubleValue,
@@ -231,6 +244,26 @@ struct GaeaModelHost: ModelHost {
         // An upscale that ran behind a guard or a chain says which models made it (`upscale_model`).
         if let model = value("upscale_model")?.stringValue { return .upscaled(image, model: model) }
         return .image(image)
+    }
+
+    /// The call's adapters as `run.adapters` items (GPP-1 §3.3), each with the kind, format and source the worker needs.
+    /// An `ic` adapter's slot images move from the job's inputs onto the adapter. The normalizer has already checked the
+    /// ids, counts and strengths against the offer and applied the triggers.
+    func runAdapters(_ work: ModelWork, call: Callee, inputs: inout [String: GPPValue]) async throws -> [GPPValue] {
+        guard let chosen = work.adapters, !chosen.isEmpty else { return [] }
+        guard let route = call.route else { throw MESError(.invalidRequest, "\(call.model.id) takes no adapters.") }
+        let routes = await offers.liveRoutes().filter { $0.plugin.id == route.plugin.id && $0.model.id == route.model.id }
+        let known = PluginOffers.adapters(routes, registrations: offers.registrations())
+        return try chosen.map { choice in
+            guard let adapter = known.first(where: { $0.card.id == choice.id }) else {
+                throw MESError(.invalidRequest, "\(call.model.id) has no adapter \(choice.id).")
+            }
+            var slots: [String: GPPValue] = [:]
+            for (role, name) in choice.conditioning.sorted(by: { $0.key < $1.key }) {
+                if let path = inputs.removeValue(forKey: name) { slots[role] = path }
+            }
+            return adapter.runItem(strength: choice.strength ?? adapter.card.defaultStrength, inputs: slots)
+        }
     }
 
     /// What a model call goes to: a plugin's offer of the operation, or a helper Gaea calls (the defect detector).

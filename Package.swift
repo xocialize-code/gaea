@@ -27,7 +27,7 @@ let package = Package(
         .package(url: "https://github.com/xocialize/pixel-agency-normalizer.git", from: "0.1.0"),
         // GaeaProtocol only: the MLX-free manifest types and GPP vocabulary. Its MLXToolKit is the only engine code
         // the host links.
-        .package(url: "https://github.com/xocialize-code/gaea-plugin-kit.git", from: "0.3.0"),
+        .package(url: "https://github.com/xocialize-code/gaea-plugin-kit.git", from: "0.4.0"),
         .package(url: "https://github.com/xocialize/mlx-engine-swift.git", from: "0.73.0"),
         .package(url: "https://github.com/groue/GRDB.swift.git", from: "7.0.0"),
     ],

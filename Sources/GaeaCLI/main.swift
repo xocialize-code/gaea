@@ -20,6 +20,11 @@ import GaeaOperator
 //   gaea models root [<folder> | default]  the shared weights folder: read it, set it, or go back to MLXEngine's store
 //   gaea models lane <id> [<lane> | default]  the lane a model loads when it fits (MEM-7): read it, set it, or go back
 //                                       to the manifest's default
+//   gaea adapters [list]                every adapter (LoRA), shipped by a plugin or added, on or off
+//   gaea adapters add <hf-url> --model <id> [--file f] [--id id] [--title t] [--trigger t] [--format f] [--strength s]
+//                                       add a LoRA by its Hugging Face repo URL for one model (GPP-1 §4.8)
+//   gaea adapters enable|disable <id>   an opt-in adapter starts off; enabling it accepts its terms
+//   gaea adapters remove <id>           an added one (its weights stay in the models root)
 //
 // --json prints the JSON answer instead of the text. GAEA_HOME points at another Gaea folder.
 
@@ -28,6 +33,8 @@ let usage = """
            gaea plugins [list | add <repo-url> [version] | check | update <id> [version] | rollback <id>
                          | enable <id> | disable <id> | remove <id> | logs <id> [-n N]]
            gaea models [list | enable <id> | disable <id> | root [<folder> | default] | lane <id> [<lane> | default]]
+           gaea adapters [list | add <hf-url> --model <id> [--file f] [--id id] [--title t] [--trigger t] [--format f]
+                          [--strength s] | enable <id> | disable <id> | remove <id>]
            (--json for JSON)
     """
 
@@ -85,6 +92,21 @@ func fail(_ message: String) -> Never {
         var a = ["id": operand()]
         if args.count >= 4 { a["lane"] = args[3] }
         return OperatorRequest(command: .modelsLane, args: a)
+    case ("adapters", nil), ("adapters", "list"): return OperatorRequest(command: .adaptersList)
+    case ("adapters", "add"):
+        var a = ["url": operand()]
+        var rest = Array(args.dropFirst(3))
+        while let flag = rest.first, flag.hasPrefix("--"), rest.count >= 2 {
+            let key = String(flag.dropFirst(2))
+            guard ["model", "file", "id", "title", "trigger", "format", "strength", "notes"].contains(key) else { fail(usage) }
+            a[key] = rest[1]
+            rest.removeFirst(2)
+        }
+        guard rest.isEmpty, a["model"] != nil else { fail(usage) }
+        return OperatorRequest(command: .adaptersAdd, args: a)
+    case ("adapters", "enable"): return OperatorRequest(command: .adaptersEnable, args: ["id": operand()])
+    case ("adapters", "disable"): return OperatorRequest(command: .adaptersDisable, args: ["id": operand()])
+    case ("adapters", "remove"): return OperatorRequest(command: .adaptersRemove, args: ["id": operand()])
     case ("-h", _), ("--help", _), ("help", _):
         print(usage)
         exit(0)

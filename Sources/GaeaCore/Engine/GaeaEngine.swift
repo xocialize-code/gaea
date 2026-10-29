@@ -218,7 +218,14 @@ public struct GaeaEngine: MediaEngine {
         for (key, value) in context.params { params[key] = value.gpp }
         let names = Set(route.extensions.map(\.name))
         let modelParams = context.extensions.filter { names.contains($0.key) }.mapValues(\.gpp)
-        let adapters: [GPPValue] = context.adapters.map { .object(["id": .string($0.id), "strength": .double($0.strength)]) }
+        // Each adapter with the kind, format and source the worker fetches and applies (GPP-1 §3.3).
+        let known = PluginOffers.adapters([route], registrations: (try? manager.database.adapters()) ?? [])
+        let adapters: [GPPValue] = try context.adapters.map { choice in
+            guard let adapter = known.first(where: { $0.card.id == choice.id }) else {
+                throw MESError(.invalidRequest, "\(route.model.id) has no adapter \(choice.id).")
+            }
+            return adapter.runItem(strength: choice.strength)
+        }
         let job = WorkerJob(
             job: context.jobID, pluginID: route.plugin.id, model: route.model.id, operation: route.operation,
             namedLane: context.extensions[Self.laneExtension]?.stringValue, lanes: route.manifestOffer.lanes,
