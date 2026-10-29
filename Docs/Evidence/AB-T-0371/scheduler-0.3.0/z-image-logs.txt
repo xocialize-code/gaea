@@ -1,0 +1,10 @@
+== events ==
+2026-10-28T23:58:23Z installed 0.1.0: added from xocialize/gaea-plugin-z-image (v0.1.0); Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea.z-image, notarized, hardened runtime
+2026-10-28T23:58:40Z worker_died 0.1.0: during job_4c1rvvzx1vh2veefnjbf: the worker exited (signal 9)
+== worker stderr (/tmp/g363b/main/Logs/plugins/com.xocialize.gaea.z-image.log) ==
+
+=== 2026-10-28T23:58:24Z launch com.xocialize.gaea.z-image 0.1.0 ===
+=== 2026-10-28T23:58:40Z exited (signal 9) ===
+
+=== 2026-10-28T23:58:40Z launch com.xocialize.gaea.z-image 0.1.0 ===
+

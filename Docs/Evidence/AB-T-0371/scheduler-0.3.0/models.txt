@@ -1,0 +1,4 @@
+on  demo-matmul  Demo matmul (GPU smoke test)  [com.xocialize.gaea.demo 0.3.0] lanes: fp32* 2.37 GB
+on  demo-gradient  Demo gradient (image.generate smoke test)  [com.xocialize.gaea.demo 0.3.0] lanes: fp32* 0.20 GB
+on  z-image-turbo  Z-Image Turbo  [com.xocialize.gaea.z-image 0.1.0] lanes: int4* 39.90 GB, int8 43.00 GB, bf16 48.50 GB
+on  z-image  Z-Image  [com.xocialize.gaea.z-image 0.1.0] lanes: int4* 39.90 GB, int8 43.00 GB, bf16 48.50 GB

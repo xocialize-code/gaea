@@ -14,7 +14,7 @@ import PackageDescription
 //   GaeaCLI       `gaea`, the CLI: status, logs and plugin commands over the operator API.
 let package = Package(
     name: "gaea",
-    platforms: [.macOS(.v26)], // mlx-engine-swift 0.72.0's MLXToolKit requires macOS 26
+    platforms: [.macOS(.v26)], // mlx-engine-swift's MLXToolKit requires macOS 26
     products: [
         // The app's binary is GaeaApp: on a case-insensitive volume `Gaea` and `gaea` would be one file.
         .executable(name: "GaeaApp", targets: ["GaeaApp"]),
@@ -26,7 +26,7 @@ let package = Package(
         // GaeaProtocol only: the MLX-free manifest types and GPP vocabulary. Its MLXToolKit is the only engine code
         // the host links.
         .package(url: "https://github.com/xocialize/gaea-plugin-kit.git", from: "0.1.1"),
-        .package(url: "https://github.com/xocialize/mlx-engine-swift.git", from: "0.72.0"),
+        .package(url: "https://github.com/xocialize/mlx-engine-swift.git", from: "0.73.0"),
         .package(url: "https://github.com/groue/GRDB.swift.git", from: "7.0.0"),
     ],
     targets: [
@@ -37,6 +37,8 @@ let package = Package(
                 "GaeaOperator",
                 .product(name: "GaeaProtocol", package: "gaea-plugin-kit"),
                 .product(name: "MLXToolKit", package: "mlx-engine-swift"),
+                // The governor's admission and eviction rules, shared with MLXServeEngine (AB-D-0170), MLX-free.
+                .product(name: "MLXMemoryPolicy", package: "mlx-engine-swift"),
                 .product(name: "MESCore", package: "media-engine-spec"),
                 .product(name: "MESEngineKit", package: "media-engine-spec"),
                 .product(name: "MockEngineCore", package: "media-engine-spec"),

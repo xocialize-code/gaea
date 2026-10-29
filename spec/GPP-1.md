@@ -53,7 +53,8 @@ sequenceDiagram
    - `plugin`, `models` or `engine` differ from the verified manifest, or `manifest_sha256` isn't the digest of the
      bundle's `manifest.json`.
 3. **Configure.** The host sends `configure` once, before any other request: the memory budget (`WorkerBudget`, which
-   the kit passes to `MLXServeEngine(workerBudget:)`), `models_root` (the shared store, G-9), `cache_root`, and the
+   the kit passes to `MLXServeEngine(workerBudget:)`; Gaea sends its whole budget, since it admits every lane across
+   workers itself), `models_root` (the shared store, G-9), `cache_root`, and the
    operator's settings. It sends `configure` again only for settings whose `apply` is `live`.
 4. **Work.** `materialize`, `prepare`, `run`, `unload` and `memory.query` in any order the host's scheduler chooses.
    **One run at a time per worker**, and one GPU job at a time across Gaea in v1 (G-13): the host never sends a second

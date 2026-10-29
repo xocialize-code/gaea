@@ -1,0 +1,39 @@
+{
+  "budgetBytes" : 70000000000,
+  "hostFootprintBytes" : 16712520,
+  "queued" : 0,
+  "workers" : [
+    {
+      "busy" : false,
+      "chargedBytes" : 27448886528,
+      "declaredBytes" : 31600000000,
+      "lanes" : {
+        "qwen-image-flash" : "int8"
+      },
+      "overrun" : false,
+      "physFootprintBytes" : 27448886528,
+      "pid" : 78268,
+      "pluginID" : "com.xocialize.gaea.qwen-image",
+      "reportedDeclaredBytes" : 31600000000,
+      "reportedFootprintBytes" : 27448886528,
+      "title" : "Qwen-Image",
+      "version" : "0.1.1"
+    },
+    {
+      "busy" : false,
+      "chargedBytes" : 14096703816,
+      "declaredBytes" : 39900000000,
+      "lanes" : {
+        "z-image-turbo" : "int4"
+      },
+      "overrun" : false,
+      "physFootprintBytes" : 14096703816,
+      "pid" : 78168,
+      "pluginID" : "com.xocialize.gaea.z-image",
+      "reportedDeclaredBytes" : 39900000000,
+      "reportedFootprintBytes" : 14250991944,
+      "title" : "Z-Image",
+      "version" : "0.1.0"
+    }
+  ]
+}

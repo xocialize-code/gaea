@@ -51,6 +51,14 @@ should be charged its resident bytes. This test depends on the conservative rule
 here. It goes to the cross-process governor (AB-T-0371), which replaces this accounting with mlx-engine's shared
 policy.
 
+## Since Gaea 0.3.0
+
+AB-T-0371 moved admission and eviction onto MLXMemoryPolicy, which charges an idle worker its resident or measured
+bytes instead of its peak. At 44 GB nothing is evicted any more, so `tools/acceptance-scheduler.sh` now runs at
+43.1 GB, where int8 (43.0 GB) still can't fit beside the demo's measured 0.16 GB. Its reverse check now expects the
+idle Z-Image worker to be kept for demo-matmul. 19 of 19 pass on 0.3.0
+([AB-T-0371/scheduler-0.3.0](../AB-T-0371/scheduler-0.3.0/acceptance.log)).
+
 ## Not covered here
 
 - An eviction while the other plugin is **busy**, which must wait, not evict: the scheduler skips busy workers, but no

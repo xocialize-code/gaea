@@ -1,0 +1,2 @@
+budget 70.00 GB, charged 14.25 GB, free 55.75 GB; host 0.02 GB; 0 queued
+  com.xocialize.gaea.z-image 0.1.0 pid 78168: declared 39.90 GB, phys_footprint 14.25 GB, worker says 14.25 GB, charged 14.25 GB lanes ["z-image-turbo": "int4"]

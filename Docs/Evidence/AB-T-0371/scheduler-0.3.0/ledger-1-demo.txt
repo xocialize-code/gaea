@@ -1,0 +1,2 @@
+budget 43.10 GB, charged 0.16 GB, free 42.94 GB; host 0.03 GB; 0 queued
+  com.xocialize.gaea.demo 0.3.0 pid 75103: declared 2.37 GB, phys_footprint 0.16 GB, worker says 0.16 GB, charged 0.16 GB lanes ["demo-matmul": "fp32"]

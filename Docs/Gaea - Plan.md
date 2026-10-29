@@ -265,7 +265,7 @@ starts while the phase before it is being built.
   3. AB-T-0363 (P1): eviction, requeue-once and lane fallback, tested with Z-Image's lanes and the demo. **Done**
      (Gaea 0.2.1, under a 44 GB budget): an idle worker is evicted both ways; a SIGKILLed run is requeued on a new
      worker and gives the same bytes; a bf16 default falls back to int8 with `lane_fallback`, and a named bf16 is
-     refused `no_capacity`. Idle workers are charged their peak, which over-evicts (carried to AB-T-0371). See
+     refused `no_capacity`. Idle workers were charged their peak, which over-evicted (fixed in AB-T-0371). See
      [Evidence/AB-T-0363](Evidence/AB-T-0363/README.md).
   4. Plugins:
      - AB-T-0367: FLUX.2 Klein. **Done**
@@ -280,7 +280,10 @@ starts while the phase before it is being built.
      - AB-T-0369: the processing pack on ForgeCore;
      - AB-T-0370: the LLM prompt enhancer.
   5. AB-T-0366: the normalizer library (AB-T-0359) replaces the mock, and the Image conformance suite passes.
-  6. AB-T-0371: the cross-process governor, on mlx-engine's MLX-free policy (AB-T-0357).
+  6. AB-T-0371: the cross-process governor, on mlx-engine's MLX-free policy (AB-T-0357). **Done** (Gaea 0.3.0 on
+     mlx-engine-swift 0.73.0's `MLXMemoryPolicy`): idle workers are charged what they hold, not their peak; three
+     plugins (160 GB declared) under a 70 GB budget, with no OOM and every eviction logged with its reason. See
+     [Evidence/AB-T-0371](Evidence/AB-T-0371/README.md).
   7. AB-T-0372: Gaea Lab, which needs PixelAgencyRun's new package (AB-T-0360).
   8. AB-T-0373: TierBench parity with pixel-agency-image-engine v0.9.1.
   9. AB-T-0375: the exit gate, which gives AB-A-0208 the go for the retirements.

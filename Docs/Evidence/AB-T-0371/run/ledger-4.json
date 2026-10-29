@@ -1,0 +1,23 @@
+{
+  "budgetBytes" : 70000000000,
+  "hostFootprintBytes" : 16565064,
+  "queued" : 0,
+  "workers" : [
+    {
+      "busy" : false,
+      "chargedBytes" : 14251008328,
+      "declaredBytes" : 39900000000,
+      "lanes" : {
+        "z-image-turbo" : "int4"
+      },
+      "overrun" : false,
+      "physFootprintBytes" : 14251008328,
+      "pid" : 78168,
+      "pluginID" : "com.xocialize.gaea.z-image",
+      "reportedDeclaredBytes" : 39900000000,
+      "reportedFootprintBytes" : 14250991944,
+      "title" : "Z-Image",
+      "version" : "0.1.0"
+    }
+  ]
+}

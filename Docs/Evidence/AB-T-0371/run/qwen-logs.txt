@@ -1,0 +1,9 @@
+== events ==
+2026-10-29T00:04:14Z installed 0.1.1: added from xocialize/gaea-plugin-qwen-image (v0.1.1); Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea.qwen-image, notarized, hardened runtime
+== worker stderr (/tmp/g371r/main/Logs/plugins/com.xocialize.gaea.qwen-image.log) ==
+
+=== 2026-10-29T00:04:43Z launch com.xocialize.gaea.qwen-image 0.1.1 ===
+=== 2026-10-29T00:06:00Z exited (status 0) ===
+
+=== 2026-10-29T00:06:15Z launch com.xocialize.gaea.qwen-image 0.1.1 ===
+

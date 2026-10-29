@@ -1,0 +1,18 @@
+2026-10-29T00:04:17Z scheduler: launched com.xocialize.gaea.flux2-klein 0.1.0, pid 77449, hello after 0.305858958 seconds
+2026-10-29T00:04:26Z scheduler: launched com.xocialize.gaea.z-image 0.1.0, pid 77641, hello after 0.365119291 seconds
+2026-10-29T00:04:43Z scheduler: policy plan for qwen-image-edit bf16 on com.xocialize.gaea.qwen-image: needs 93.07 GB of 70.00 GB, evicting [com.xocialize.gaea.flux2-klein, com.xocialize.gaea.z-image]
+2026-10-29T00:04:43Z scheduler: evicting com.xocialize.gaea.flux2-klein to make room for qwen-image-edit bf16 (idle, least recently used; charged 15.97 GB)
+2026-10-29T00:04:43Z scheduler: stopped com.xocialize.gaea.flux2-klein 0.1.0 (shutdown)
+2026-10-29T00:04:43Z scheduler: evicting com.xocialize.gaea.z-image to make room for qwen-image-edit bf16 (idle, least recently used; charged 14.10 GB)
+2026-10-29T00:04:43Z scheduler: stopped com.xocialize.gaea.z-image 0.1.0 (shutdown)
+2026-10-29T00:04:44Z scheduler: launched com.xocialize.gaea.qwen-image 0.1.1, pid 77766, hello after 0.320879125 seconds
+2026-10-29T00:05:59Z scheduler: policy plan for z-image-turbo int4 on com.xocialize.gaea.z-image: needs 84.03 GB of 70.00 GB, evicting [com.xocialize.gaea.qwen-image]
+2026-10-29T00:05:59Z scheduler: evicting com.xocialize.gaea.qwen-image to make room for z-image-turbo int4 (idle, least recently used; charged 44.13 GB)
+2026-10-29T00:06:00Z scheduler: stopped com.xocialize.gaea.qwen-image 0.1.1 (shutdown)
+2026-10-29T00:06:00Z scheduler: launched com.xocialize.gaea.z-image 0.1.0, pid 78168, hello after 0.012890083 seconds
+2026-10-29T00:06:15Z scheduler: launched com.xocialize.gaea.qwen-image 0.1.1, pid 78268, hello after 0.011843333 seconds
+2026-10-29T00:06:33Z scheduler: unloading qwen-image-flash from com.xocialize.gaea.qwen-image's worker: qwen-image-edit bf16 fits only without it
+2026-10-29T00:06:33Z scheduler: policy plan for qwen-image-edit bf16 on com.xocialize.gaea.qwen-image: needs 77.10 GB of 70.00 GB, evicting [com.xocialize.gaea.z-image]
+2026-10-29T00:06:33Z scheduler: evicting com.xocialize.gaea.z-image to make room for qwen-image-edit bf16 (idle, least recently used; charged 14.10 GB)
+2026-10-29T00:06:33Z scheduler: stopped com.xocialize.gaea.z-image 0.1.0 (shutdown)
+2026-10-29T00:07:53Z scheduler: unloading qwen-image-edit from com.xocialize.gaea.qwen-image's worker: qwen-image-flash int8 fits only without it

@@ -1,0 +1,24 @@
+# manifest: /tmp/g371r/main/Plugins/com.xocialize.gaea.qwen-image/0.1.1/qwen-image.gaeaplugin/Contents/Resources/manifest.json
+# Gaea 0.3.0 session with com.xocialize.gaea.qwen-image 0.1.1
+W {"engine":{"contract":"1.57.0","version":"0.72.0"},"kit":{"version":"0.2.0"},"manifest_sha256":"cab8a9fe3e6515c341c735834b1f2388d8e3e8e536d7ed3a79c547a5df93031e","models":["qwen-image-edit","qwen-image-flash"],"pid":77766,"plugin":{"id":"com.xocialize.gaea.qwen-image","version":"0.1.1"},"protocol":1,"type":"hello"}
+H {"budget":{"ceilingBytes":70000000000,"wiresWeights":false},"cache_root":"/tmp/g371r/main/Caches/plugins/com.xocialize.gaea.qwen-image","id":"h1","models_root":"/Users/dustinnielson/Library/Application Support/MLXEngine/Models","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"bf16","model":"qwen-image-edit","type":"prepare"}
+W {"lane":"bf16","model":"qwen-image-edit","re":"h2","seconds":3.655,"type":"prepared"}
+W {"report":{"availableBytes":7000000000,"budgetBytes":70000000000,"date":814925087.928074,"gpuActiveBytes":41373016424,"gpuCacheBytes":284866956,"physFootprintBytes":44240910912,"residentBytes":42000000000,"residents":{"qwen-image-edit":42000000000},"running":[],"transientReserveBytes":21000000000},"type":"memory"}
+H {"id":"h3","inputs":{"images":"/tmp/g371r/main/Caches/spool/jobs/job_pv9p01rbes4wg146evfs/inputs/images-0.png","instruction":"/tmp/g371r/main/Caches/spool/jobs/job_pv9p01rbes4wg146evfs/outputs/worker-inputs/instruction-0.txt"},"job":"job_pv9p01rbes4wg146evfs","lane":"bf16","model":"qwen-image-edit","model_params":{"x-qwen.steps":4},"operation":"image.edit","output_dir":"/tmp/g371r/main/Caches/spool/jobs/job_pv9p01rbes4wg146evfs/outputs/worker","params":{"seed":7},"seed":7,"type":"run"}
+W {"job":"job_pv9p01rbes4wg146evfs","re":"h3","stage":"encode","type":"progress"}
+W {"job":"job_pv9p01rbes4wg146evfs","re":"h3","stage":"denoise","type":"progress"}
+W {"fraction":0.25,"job":"job_pv9p01rbes4wg146evfs","of":4,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.5,"job":"job_pv9p01rbes4wg146evfs","of":4,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.75,"job":"job_pv9p01rbes4wg146evfs","of":4,"re":"h3","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":1,"job":"job_pv9p01rbes4wg146evfs","of":4,"re":"h3","stage":"denoise","step":4,"type":"progress"}
+W {"job":"job_pv9p01rbes4wg146evfs","re":"h3","stage":"decode","type":"progress"}
+W {"job":"job_pv9p01rbes4wg146evfs","re":"h3","stage":"postprocess","type":"progress"}
+W {"effective":{"references":1,"seed":7,"size":{"height":1024,"width":1024},"x-qwen.guidance":4,"x-qwen.steps":4},"job":"job_pv9p01rbes4wg146evfs","outputs":[{"media_type":"image/png","name":"image","path":"/tmp/g371r/main/Caches/spool/jobs/job_pv9p01rbes4wg146evfs/outputs/worker/image-0.png"}],"re":"h3","seconds":71.546,"type":"result","warnings":[]}
+W {"report":{"availableBytes":7000000000,"budgetBytes":70000000000,"date":814925159.474226,"gpuActiveBytes":41381011848,"gpuCacheBytes":2422145032,"physFootprintBytes":44132530632,"residentBytes":42000000000,"residents":{"qwen-image-edit":42000000000},"running":[],"transientReserveBytes":21000000000},"type":"memory"}
+H {"id":"h4","model":"qwen-image-edit","type":"unload"}
+W {"model":"qwen-image-edit","re":"h4","type":"unloaded"}
+W {"report":{"availableBytes":70000000000,"budgetBytes":70000000000,"date":814925160.03151,"gpuActiveBytes":60,"gpuCacheBytes":0,"physFootprintBytes":2737653776,"residentBytes":0,"residents":{},"running":[],"transientReserveBytes":0},"type":"memory"}
+H {"id":"h5","type":"shutdown"}
+# exited: status 0

@@ -1,0 +1,3 @@
+budget 70.00 GB, charged 41.55 GB, free 28.45 GB; host 0.02 GB; 0 queued
+  com.xocialize.gaea.qwen-image 0.1.1 pid 78268: declared 31.60 GB, phys_footprint 27.45 GB, worker says 27.45 GB, charged 27.45 GB lanes ["qwen-image-flash": "int8"]
+  com.xocialize.gaea.z-image 0.1.0 pid 78168: declared 39.90 GB, phys_footprint 14.10 GB, worker says 14.25 GB, charged 14.10 GB lanes ["z-image-turbo": "int4"]

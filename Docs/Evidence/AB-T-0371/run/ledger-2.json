@@ -1,0 +1,39 @@
+{
+  "budgetBytes" : 70000000000,
+  "hostFootprintBytes" : 28214088,
+  "queued" : 0,
+  "workers" : [
+    {
+      "busy" : false,
+      "chargedBytes" : 15971068992,
+      "declaredBytes" : 25900000000,
+      "lanes" : {
+        "klein-4b" : "bf16"
+      },
+      "overrun" : false,
+      "physFootprintBytes" : 15971068992,
+      "pid" : 77449,
+      "pluginID" : "com.xocialize.gaea.flux2-klein",
+      "reportedDeclaredBytes" : 25900000000,
+      "reportedFootprintBytes" : 16124947520,
+      "title" : "FLUX.2 Klein",
+      "version" : "0.1.0"
+    },
+    {
+      "busy" : false,
+      "chargedBytes" : 14250664096,
+      "declaredBytes" : 39900000000,
+      "lanes" : {
+        "z-image-turbo" : "int4"
+      },
+      "overrun" : false,
+      "physFootprintBytes" : 14250664096,
+      "pid" : 77641,
+      "pluginID" : "com.xocialize.gaea.z-image",
+      "reportedDeclaredBytes" : 39900000000,
+      "reportedFootprintBytes" : 14250647712,
+      "title" : "Z-Image",
+      "version" : "0.1.0"
+    }
+  ]
+}

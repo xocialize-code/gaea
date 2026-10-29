@@ -1,0 +1,23 @@
+{
+  "budgetBytes" : 70000000000,
+  "hostFootprintBytes" : 31654728,
+  "queued" : 0,
+  "workers" : [
+    {
+      "busy" : false,
+      "chargedBytes" : 16124980288,
+      "declaredBytes" : 25900000000,
+      "lanes" : {
+        "klein-4b" : "bf16"
+      },
+      "overrun" : false,
+      "physFootprintBytes" : 16124980288,
+      "pid" : 77449,
+      "pluginID" : "com.xocialize.gaea.flux2-klein",
+      "reportedDeclaredBytes" : 25900000000,
+      "reportedFootprintBytes" : 16124947520,
+      "title" : "FLUX.2 Klein",
+      "version" : "0.1.0"
+    }
+  ]
+}

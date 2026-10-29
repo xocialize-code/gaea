@@ -1,0 +1,2 @@
+budget 70.00 GB, charged 44.09 GB, free 25.91 GB; host 0.02 GB; 0 queued
+  com.xocialize.gaea.qwen-image 0.1.1 pid 78268: declared 63.00 GB, phys_footprint 44.09 GB, worker says 44.09 GB, charged 44.09 GB lanes ["qwen-image-edit": "bf16"]

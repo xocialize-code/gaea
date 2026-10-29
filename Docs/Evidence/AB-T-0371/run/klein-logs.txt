@@ -1,0 +1,7 @@
+== events ==
+2026-10-29T00:04:17Z installed 0.1.0: added from xocialize/gaea-plugin-flux2-klein (v0.1.0); Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea.flux2-klein, notarized, hardened runtime
+== worker stderr (/tmp/g371r/main/Logs/plugins/com.xocialize.gaea.flux2-klein.log) ==
+
+=== 2026-10-29T00:04:17Z launch com.xocialize.gaea.flux2-klein 0.1.0 ===
+=== 2026-10-29T00:04:43Z exited (status 0) ===
+

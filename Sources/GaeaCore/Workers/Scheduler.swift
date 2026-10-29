@@ -1,6 +1,7 @@
 import Darwin
 import Foundation
 import GaeaProtocol
+import MLXMemoryPolicy
 import MLXToolKit
 
 /// One GPU job at a time across Gaea (G-13): a FIFO lock every job holds while it runs.
@@ -30,6 +31,8 @@ public enum LaneChoice {
         /// The request named this lane and it doesn't fit: never fall back.
         case namedDoesNotFit(String, need: UInt64, available: UInt64)
         case nothingFits(need: UInt64, available: UInt64)
+        /// The memory policy refused the admission (MLXMemoryPolicy's `AdmissionRefusal`), with its reason.
+        case policy(String)
 
         public var description: String {
             switch self {
@@ -37,6 +40,7 @@ public enum LaneChoice {
             case let .namedDoesNotFit(lane, need, available):
                 "Lane \(lane) needs \(need.gb) and \(available.gb) is free; a request that names a lane never falls back."
             case let .nothingFits(need, available): "No lane fits: the smallest needs \(need.gb) and \(available.gb) is free."
+            case let .policy(reason): reason
             }
         }
     }
@@ -129,7 +133,8 @@ public struct Ledger: Codable, Sendable {
         /// What the worker's own last memory report said.
         public var reportedFootprintBytes: UInt64?
         public var reportedDeclaredBytes: UInt64?
-        /// What the scheduler charges: the larger of declared and measured.
+        /// What the governor charges (MLXMemoryPolicy): an idle worker the larger of its resident bytes and what it
+        /// measures; a running one its resident bytes plus its run's peak.
         public var chargedBytes: UInt64
         public var busy: Bool
         public var overrun: Bool
@@ -145,13 +150,17 @@ public struct Ledger: Codable, Sendable {
 
 /// The queue and the governor (Plan §2.1): one GPU job at a time, workers launched on demand and kept warm, a ledger
 /// across processes, lane choice by memory, eviction through GPP's escalation ladder, and a run requeued once when its
-/// worker dies (SRV-8).
+/// worker dies (SRV-8). Admission and eviction are MLXMemoryPolicy's, the rule MLXServeEngine runs in-process
+/// (AB-D-0170, AB-T-0371): each worker is a tenant, and its job a run on it.
 public actor Scheduler: WorkerControl {
     let manager: PluginManager
     let database: GaeaDatabase
     let paths: GaeaPaths
     let log: HostLog
     public let budgetBytes: UInt64
+    /// MLXServeEngine's rules with two settings for one GPU job at a time across processes: only the job being admitted
+    /// reserves a peak, and an idle worker is charged the larger of its resident bytes and its measured footprint.
+    public let policy: MemoryPolicy
     /// The shared weights folder workers are configured with (G-9, MEM-8): `--models-root`, else the operator's
     /// `models.root` setting, else MLXEngine's store.
     public private(set) var modelsRoot: URL
@@ -170,9 +179,9 @@ public actor Scheduler: WorkerControl {
         var report: WorkerMemoryReportWire?
         var overrun = false
 
-        var declaredBytes: UInt64 {
-            prepared.values.reduce(0) { $0 + $1.resolved.persistentBytes } + (prepared.values.map(\.resolved.peakTransientBytes).max() ?? 0)
-        }
+        var persistentBytes: UInt64 { prepared.values.reduce(0) { $0 + $1.resolved.persistentBytes } }
+        var peakTransientBytes: UInt64 { prepared.values.map(\.resolved.peakTransientBytes).max() ?? 0 }
+        var declaredBytes: UInt64 { persistentBytes + peakTransientBytes }
     }
 
     var slots: [String: Slot] = [:]
@@ -191,7 +200,9 @@ public actor Scheduler: WorkerControl {
         self.modelsRoot = modelsRoot ?? stored ?? paths.modelsRoot
         // Three quarters of unified memory, unless the operator set a budget.
         let configured = (try? database.setting("memory.budget_bytes")).flatMap { $0 }.flatMap(UInt64.init)
-        self.budgetBytes = budgetBytes ?? configured ?? ProcessInfo.processInfo.physicalMemory / 4 * 3
+        let budget = budgetBytes ?? configured ?? ProcessInfo.processInfo.physicalMemory / 4 * 3
+        self.budgetBytes = budget
+        self.policy = MemoryPolicy(budgetBytes: budget, transientAccounting: .admittedRunsOnly, idleCharge: .largerOfDeclaredAndMeasured)
     }
 
     public func setWaits(_ waits: WorkerProcess.Waits) { self.waits = waits }
@@ -241,29 +252,49 @@ public actor Scheduler: WorkerControl {
 
     public func ledger() async -> Ledger {
         let host = ProcessFootprintReader.read(getpid()) ?? 0
+        let state = memoryState()
         let entries = slots.values.sorted { $0.plugin.id < $1.plugin.id }.map { slot in
             let measured = slot.worker.physFootprint
+            let running = busy.contains(slot.plugin.id)
+            let charge = state.tenants.first { $0.id == slot.plugin.id }.map { policy.charge($0, in: state) } ?? slot.persistentBytes
             return Ledger.Entry(
                 pluginID: slot.plugin.id, title: slot.plugin.title, version: slot.plugin.version, pid: slot.worker.pid,
                 lanes: slot.prepared.mapValues(\.id), declaredBytes: slot.declaredBytes, physFootprintBytes: measured,
                 reportedFootprintBytes: slot.report?.physFootprintBytes, reportedDeclaredBytes: slot.report?.declaredBytes,
-                chargedBytes: max(slot.declaredBytes, measured ?? 0), busy: busy.contains(slot.plugin.id), overrun: slot.overrun)
+                chargedBytes: charge + (running ? slot.peakTransientBytes : 0), busy: running, overrun: slot.overrun)
         }
         return Ledger(budgetBytes: budgetBytes, hostFootprintBytes: host, workers: entries, queued: await gpu.queued)
     }
 
-    /// What every other worker holds: the larger of its declared and measured memory.
-    func charged(excluding id: String?) -> UInt64 {
-        slots.values.filter { $0.plugin.id != id }.reduce(0) { $0 + max($1.declaredBytes, $1.worker.physFootprint ?? 0) }
+    /// The workers as MLXMemoryPolicy sees them: each a tenant with its prepared lanes' resident bytes, their largest peak
+    /// and its measured footprint, and each busy one with a run.
+    func memoryState() -> MemoryState {
+        let tenants = slots.values.sorted { $0.plugin.id < $1.plugin.id }.map { slot in
+            MemoryTenant(id: slot.plugin.id, persistentBytes: slot.persistentBytes, peakTransientBytes: slot.peakTransientBytes,
+                         measuredBytes: slot.worker.physFootprint,
+                         lastUsed: UInt64(max(0, slot.lastUsed.timeIntervalSinceReferenceDate) * 1000), evictable: slot.worker.isRunning)
+        }
+        let runs = slots.values.filter { busy.contains($0.plugin.id) }.map {
+            MemoryRun(token: "run:\($0.plugin.id)", tenant: $0.plugin.id, transientBytes: $0.peakTransientBytes)
+        }
+        return MemoryState(tenants: tenants, runs: runs)
     }
 
-    func available(for id: String, keeping model: String) -> UInt64 {
-        var used = charged(excluding: id)
-        if let own = slots[id] {
-            let others = own.prepared.filter { $0.key != model }.values
-            used += others.reduce(0) { $0 + $1.resolved.persistentBytes }
-        }
-        return budgetBytes > used ? budgetBytes - used : 0
+    /// What a job on worker `id` can have for one model's lane: the budget less what every other worker is charged (or,
+    /// `evictingIdle`, what the busy ones are, as if every idle one were stopped), less the resident bytes of `id`'s other
+    /// models when it keeps them.
+    func available(for id: String, keeping model: String, evictingIdle: Bool, keepingOwn: Bool = true) -> UInt64 {
+        var others = memoryState()
+        others.tenants.removeAll { $0.id == id }
+        others.runs.removeAll { $0.tenant == id }
+        let free = evictingIdle ? policy.availableBytes(others, afterEvictingIdleExcept: nil) : policy.availableBytes(others)
+        let own = keepingOwn ? ownBytes(id, except: model) : 0
+        return free > own ? free - own : 0
+    }
+
+    /// The resident bytes of the models worker `id` holds besides `model`.
+    func ownBytes(_ id: String, except model: String) -> UInt64 {
+        slots[id]?.prepared.filter { $0.key != model }.values.reduce(0) { $0 + $1.resolved.persistentBytes } ?? 0
     }
 
     // MARK: - Running
@@ -322,7 +353,8 @@ public actor Scheduler: WorkerControl {
         }
 
         let preferred = try? database.setting(Self.laneSetting(plugin: plugin.id, model: model.id))
-        let (lane, fellBackFrom) = try await chooseLane(model, plugin: plugin.id, named: job.namedLane, preferred: preferred ?? nil)
+        let (lane, fellBackFrom) = try await chooseLane(model, plugin: plugin.id, named: job.namedLane, preferred: preferred ?? nil,
+                                                        conduct: requeued ? .waiting : .preempting)
         var fallbackMessage: String?
         if let fellBackFrom {
             fallbackMessage = "Loaded \(model.id) lane \(lane.id) (\(LaneChoice.need(lane).gb)) instead of the default \(fellBackFrom.id) "
@@ -358,24 +390,75 @@ public actor Scheduler: WorkerControl {
                                requeued: requeued)
     }
 
-    /// Picks the lane after freeing what can be freed: idle workers go, least recently used first, until the default
-    /// lane fits or nothing idle is left; then the lane rules decide (G-23).
-    func chooseLane(_ model: PluginManifest.Model, plugin id: String, named: String?, preferred: String?) async throws
-        -> (PluginManifest.Lane, PluginManifest.Lane?)
+    /// Picks the lane (G-23) against what stopping every idle worker would free, then admits it under the memory policy.
+    /// A lane that fits only without the worker's own other models has them unloaded first: the policy sees workers,
+    /// not the models inside one.
+    func chooseLane(_ model: PluginManifest.Model, plugin id: String, named: String?, preferred: String?,
+                    conduct: AdmissionConduct) async throws -> (PluginManifest.Lane, PluginManifest.Lane?)
     {
-        let target: PluginManifest.Lane? = named.flatMap { n in model.lanes.first { $0.id == n } }
-            ?? preferred.flatMap { p in model.lanes.first { $0.id == p } } ?? model.lanes.first(where: \.default)
-        while let target, LaneChoice.need(target) > available(for: id, keeping: model.id) {
-            let idle = slots.values.filter { $0.plugin.id != id && !busy.contains($0.plugin.id) }.min { $0.lastUsed < $1.lastUsed }
-            guard let idle else { break }
-            log("scheduler: evicting \(idle.plugin.id) to make room for \(model.id) \(target.id)")
-            await retire(plugin: idle.plugin.id)
+        let keeping = available(for: id, keeping: model.id, evictingIdle: true)
+        var choice = try? LaneChoice.choose(model, named: named, preferred: preferred, available: keeping)
+        var dropOwn = false
+        if choice == nil || choice?.fellBackFrom != nil, ownBytes(id, except: model.id) > 0,
+           let better = try? LaneChoice.choose(model, named: named, preferred: preferred,
+                                               available: available(for: id, keeping: model.id, evictingIdle: true, keepingOwn: false)),
+           choice == nil || better.fellBackFrom == nil {
+            choice = better
+            dropOwn = true
         }
-        do {
-            let choice = try LaneChoice.choose(model, named: named, preferred: preferred, available: available(for: id, keeping: model.id))
-            return (choice.lane, choice.fellBackFrom)
-        } catch {
-            throw error
+        // Nothing fits either way: the refusal names what the worker keeping its models would have.
+        let chosen = try choice ?? LaneChoice.choose(model, named: named, preferred: preferred, available: keeping)
+        if dropOwn, let slot = slots[id] {
+            for other in slot.prepared.keys.sorted() where other != model.id {
+                log("scheduler: unloading \(other) from \(id)'s worker: \(model.id) \(chosen.lane.id) fits only without it")
+                try await slot.worker.unload(model: other)
+                slots[id]?.prepared[other] = nil
+            }
+        }
+        try await admit(chosen.lane, model: model.id, plugin: id, conduct: conduct)
+        return (chosen.lane, chosen.fellBackFrom)
+    }
+
+    /// Admits a lane under MLXMemoryPolicy and carries out its plan: the idle workers it evicts, least recently used
+    /// first, and those real pressure evicts, each logged with the policy's reason. A refusal is `no_capacity`.
+    func admit(_ lane: PluginManifest.Lane, model: String, plugin id: String, conduct: AdmissionConduct) async throws {
+        let state = memoryState()
+        let admission = MemoryAdmission(tenant: id, persistentBytes: ownBytes(id, except: model) + lane.resolved.persistentBytes,
+                                        transientBytes: lane.resolved.peakTransientBytes)
+        // R-MEM-1 reads what the other workers measure, plus what this one will hold.
+        let reading = state.tenants.filter { $0.id != id }.reduce(admission.persistentBytes) { $0 + ($1.measuredBytes ?? $1.persistentBytes) }
+        let plan = policy.plan(admission, in: state, conduct: conduct, measuredReading: reading)
+        let what = "\(model) \(lane.id)"
+        if case .refused(let refusal) = plan.outcome {
+            let reason = switch refusal {
+            case let .exceedsBudget(required, budget): "\(what) needs \(required.gb) and the budget is \(budget.gb)."
+            case let .externalTenantsHoldMemory(required, external, budget):
+                "\(what) needs \(required.gb) beside the \(external.gb) other processes hold, in a \(budget.gb) budget."
+            }
+            log("scheduler: policy refuses \(what): \(reason)")
+            throw LaneChoice.Refusal.policy(reason)
+        }
+        guard !plan.evictions.isEmpty || plan.outcome != .fits else { return }
+        let charges = Dictionary(uniqueKeysWithValues: state.tenants.map { ($0.id, policy.charge($0, in: state)) })
+        log("scheduler: policy plan for \(what) on \(id): needs \(policy.required(admission, in: state).gb) of \(budgetBytes.gb), "
+            + "evicting [\(plan.evictions.joined(separator: ", "))]")
+        for step in plan.steps {
+            switch step {
+            case .evict(let tenant):
+                log("scheduler: evicting \(tenant) to make room for \(what) (idle, least recently used; charged \((charges[tenant] ?? 0).gb))")
+                await retire(plugin: tenant)
+            case .preempt(_, let tenant), .awaitRun(_, let tenant), .endLiveSession(_, let tenant):
+                // One GPU job at a time: no other worker is mid-run while this job holds the lane.
+                log("scheduler: the policy would reclaim \(tenant) for \(what), but no other job runs while this one is admitted")
+            }
+        }
+        for tenant in plan.realPressureEvictions {
+            log("scheduler: evicting \(tenant) to make room for \(what) (real pressure: the measured footprints are past "
+                + "\(policy.realPressureCeiling.gb))")
+            await retire(plugin: tenant)
+        }
+        if case .overcommitted(let short) = plan.outcome {
+            log("scheduler: \(what) admitted over-committed by \(short.gb): no idle worker is left to stop")
         }
     }
 
@@ -404,8 +487,9 @@ public actor Scheduler: WorkerControl {
         log("scheduler: launched \(plugin.id) \(plugin.version), pid \(worker.pid), hello after \(helloAfter)")
         slots[plugin.id] = Slot(worker: worker, plugin: plugin)
         onWorkersChanged?()
-        let ceiling = max(available(for: plugin.id, keeping: ""), 1 << 30)
-        try await worker.configure(budget: WorkerBudgetWire(ceilingBytes: ceiling, wiresWeights: false), modelsRoot: modelsRoot,
+        // The whole budget: Gaea admits every lane across workers itself (`admit`), so a ceiling cut to what the others
+        // held at launch would go stale as soon as one of them stopped, and the worker would refuse what Gaea admitted.
+        try await worker.configure(budget: WorkerBudgetWire(ceilingBytes: budgetBytes, wiresWeights: false), modelsRoot: modelsRoot,
                                    cacheRoot: cache, settings: settings(for: plugin))
         return worker
     }

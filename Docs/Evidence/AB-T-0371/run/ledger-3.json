@@ -1,0 +1,23 @@
+{
+  "budgetBytes" : 70000000000,
+  "hostFootprintBytes" : 20628296,
+  "queued" : 0,
+  "workers" : [
+    {
+      "busy" : false,
+      "chargedBytes" : 44132530632,
+      "declaredBytes" : 63000000000,
+      "lanes" : {
+        "qwen-image-edit" : "bf16"
+      },
+      "overrun" : false,
+      "physFootprintBytes" : 44132530632,
+      "pid" : 77766,
+      "pluginID" : "com.xocialize.gaea.qwen-image",
+      "reportedDeclaredBytes" : 63000000000,
+      "reportedFootprintBytes" : 44132530632,
+      "title" : "Qwen-Image",
+      "version" : "0.1.1"
+    }
+  ]
+}

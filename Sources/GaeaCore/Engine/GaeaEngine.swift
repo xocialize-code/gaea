@@ -297,7 +297,7 @@ public struct GaeaEngine: MediaEngine {
         } catch let refusal as LaneChoice.Refusal {
             switch refusal {
             case .unknownLane: throw MESError(.unsupportedParameter, refusal.description, param: Self.laneExtension)
-            case .namedDoesNotFit, .nothingFits: throw MESError(.noCapacity, refusal.description)
+            case .namedDoesNotFit, .nothingFits, .policy: throw MESError(.noCapacity, refusal.description)
             }
         } catch let failure as WorkerFailure {
             if failure.code == "cancelled" || Task.isCancelled { throw CancellationError() }

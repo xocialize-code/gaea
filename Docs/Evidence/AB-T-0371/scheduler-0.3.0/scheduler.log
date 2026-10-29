@@ -1,0 +1,12 @@
+2026-10-28T23:58:24Z scheduler: launched com.xocialize.gaea.demo 0.3.0, pid 75103, hello after 0.424526208 seconds
+2026-10-28T23:58:24Z scheduler: policy plan for z-image-turbo int8 on com.xocialize.gaea.z-image: needs 43.16 GB of 43.10 GB, evicting [com.xocialize.gaea.demo]
+2026-10-28T23:58:24Z scheduler: evicting com.xocialize.gaea.demo to make room for z-image-turbo int8 (idle, least recently used; charged 0.16 GB)
+2026-10-28T23:58:24Z scheduler: stopped com.xocialize.gaea.demo 0.3.0 (shutdown)
+2026-10-28T23:58:24Z scheduler: launched com.xocialize.gaea.z-image 0.1.0, pid 75119, hello after 0.342430458 seconds
+2026-10-28T23:58:37Z scheduler: launched com.xocialize.gaea.demo 0.3.0, pid 75187, hello after 0.00946225 seconds
+2026-10-28T23:58:37Z scheduler: policy plan for z-image-turbo int8 on com.xocialize.gaea.z-image: needs 43.16 GB of 43.10 GB, evicting [com.xocialize.gaea.demo]
+2026-10-28T23:58:37Z scheduler: evicting com.xocialize.gaea.demo to make room for z-image-turbo int8 (idle, least recently used; charged 0.16 GB)
+2026-10-28T23:58:37Z scheduler: stopped com.xocialize.gaea.demo 0.3.0 (shutdown)
+2026-10-28T23:58:40Z scheduler: com.xocialize.gaea.z-image's worker died during job_4c1rvvzx1vh2veefnjbf (the worker exited (signal 9)); requeueing once
+2026-10-28T23:58:40Z scheduler: launched com.xocialize.gaea.z-image 0.1.0, pid 75281, hello after 0.010270042 seconds
+2026-10-28T23:58:53Z scheduler: lane_fallback z-image-turbo: bf16 → int8
