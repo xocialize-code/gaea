@@ -37,7 +37,7 @@ process of its own.
 | `../gaea-plugin-flux2-klein` ([xocialize-code/gaea-plugin-flux2-klein](https://github.com/xocialize-code/gaea-plugin-flux2-klein)) | FLUX.2 Klein 4B and 4B Base (AB-T-0367): generate and multi-reference edit, bf16/int8/int4 lanes; `klein-inproc` is its in-process reference |
 | `../gaea-plugin-qwen-image` ([xocialize-code/gaea-plugin-qwen-image](https://github.com/xocialize-code/gaea-plugin-qwen-image)) | Qwen-Image-Edit 2511 (bf16) and Qwen-Image Flash (int8, NVIDIA Open Model License) (AB-T-0368); `qwen-inproc` is its in-process reference |
 | `../gaea-plugin-boogu` ([xocialize-code/gaea-plugin-boogu](https://github.com/xocialize-code/gaea-plugin-boogu)) | Boogu-Image 0.1 (AB-T-0387, Apache-2.0): Base and Turbo generate and one-image edit on boogu-image-swift, bf16/int8/int4 lanes, no default offer; `boogu-inproc` and `scripts/golden.sh` check it against in-process |
-| `../gaea-plugin-ming-image` ([xocialize-code/gaea-plugin-ming-image](https://github.com/xocialize-code/gaea-plugin-ming-image)) | Ming-Image 0.1 Design (AB-T-0388, MIT): design-oriented `image.generate` on ming-image-swift, int8/bf16/int4 lanes, drawn in 1024² and 2048² buckets, no default offer; the first plugin to carry every SwiftPM resource bundle (AB-L-0318) |
+| `../gaea-plugin-ming-image` ([xocialize-code/gaea-plugin-ming-image](https://github.com/xocialize-code/gaea-plugin-ming-image)) | Ming-Image 0.1 Design (AB-T-0388, MIT): design-oriented `image.generate` on ming-image-swift, int8/bf16/int4 lanes, drawn in 1024² and 2048² buckets, no default offer |
 | `../gaea-plugin-forge` ([xocialize-code/gaea-plugin-forge](https://github.com/xocialize-code/gaea-plugin-forge)) | The processing pack (AB-T-0369): ForgeCore's inpaint, upscale, matte, segment and restore models in one worker; `forge-inproc` and `scripts/golden.sh` check it against ForgeCore in-process |
 | `../gaea-plugin-prompt-enhance` ([xocialize-code/gaea-plugin-prompt-enhance](https://github.com/xocialize-code/gaea-plugin-prompt-enhance)) | The LLM plugin (AB-T-0370): prompt-enhance-kit's profiles on Qwen3.5 4B and 9B as the `x-gaea.prompt.enhance` helper; `prompt-inproc` and `scripts/golden.sh` check it against in-process |
 | [Spikes/plugin-exec/](Spikes/plugin-exec/README.md) | The spike showing downloaded, signed executable plugins running MLX on the GPU, 13 of 13 checks passed |
@@ -85,3 +85,5 @@ Decisions G-1 to G-23 are filed as AB-D records. The plan's §1 maps each one to
   stores it.
 - **MLX in a plugin finds its metallib through the plugin's own main bundle**
   (`Contents/Resources/mlx-swift_Cmlx.bundle`). When testing, hide the build folder: MLX falls back to build paths.
+  `build-plugin.sh` builds the worker alone in `.build/plugin` and copies every SwiftPM resource bundle it links:
+  `Bundle.module` traps on a missing one (AB-L-0318).
