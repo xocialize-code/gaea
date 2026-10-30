@@ -365,7 +365,8 @@ starts while the phase before it is being built.
     Transparent backgrounds followed in AB-T-0389 (**done**,
     [v0.2.0](https://github.com/xocialize-code/gaea-plugin-ming-image/releases/tag/v0.2.0)): an `x-ming.background`
     extension through current MES, with `background_opaque` when the model still returns an opaque image. Layer
-    decomposition needs an Image-profile operation. See [Evidence/AB-T-0389](Evidence/AB-T-0389/README.md);
+    decomposition needs an Image-profile operation: proposed as `image.decompose` in media-engine-spec RFC 0004
+    (bc1a874), for mlx-apps to decide (AB-A-0228). See [Evidence/AB-T-0389](Evidence/AB-T-0389/README.md);
   - Anima: dropped everywhere (AB-D-0190) after its check returned explicit nudity of a youthful-looking character
     from a benign prompt.
 
