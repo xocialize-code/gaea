@@ -1,0 +1,6 @@
+int8 1024²: floor after prepare 7523 MB, peak 27959 MB, ran in 19.29 s
+int8 2048²: floor after prepare 7582 MB, peak 28018 MB, ran in 90.59 s
+bf16 1024²: floor after prepare 13219 MB, peak 49817 MB, ran in 17.01 s
+bf16 2048²: floor after prepare 13219 MB, peak 49818 MB, ran in 86.67 s
+int4 1024²: floor after prepare 7522 MB, peak 19443 MB, ran in 18.55 s
+int4 2048²: floor after prepare 7582 MB, peak 19959 MB, ran in 89.88 s

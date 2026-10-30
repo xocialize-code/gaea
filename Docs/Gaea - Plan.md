@@ -358,7 +358,11 @@ starts while the phase before it is being built.
     ([v0.1.0](https://github.com/xocialize-code/gaea-plugin-boogu/releases/tag/v0.1.0)): Base and Turbo generate and
     a one-image edit, bf16/int8/int4 lanes, no default offer; through Gaea the in-process images pixel for pixel,
     and conformance unchanged with it installed. See [Evidence/AB-T-0387](Evidence/AB-T-0387/README.md);
-  - AB-T-0388: Ming-Image Design, `image.generate`. Open;
+  - AB-T-0388: Ming-Image Design. **Done**
+    ([v0.1.0](https://github.com/xocialize-code/gaea-plugin-ming-image/releases/tag/v0.1.0)): `image.generate` in its
+    1024² and 2048² buckets, int8/bf16/int4 lanes each measured under its declaration, no default offer; through Gaea
+    the in-process images pixel for pixel, conformance unchanged. Transparent backgrounds and layer decomposition wait
+    on MES. See [Evidence/AB-T-0388](Evidence/AB-T-0388/README.md);
   - Anima: dropped everywhere (AB-D-0190) after its check returned explicit nudity of a youthful-looking character
     from a benign prompt.
 

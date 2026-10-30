@@ -1,0 +1,33 @@
+# Ming-Image plugin acceptance (AB-T-0388) 2026-10-30T05:22:33Z — Gaea 0.7.1, ming-image 0.1.0, z-image 0.1.0, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add by repo URL installs ming-image 0.1.0
+PASS  add by repo URL installs z-image 0.1.0
+PASS  image.generate offers Ming-Image Design, not a default
+PASS  image.generate naming no model still reaches Z-Image Turbo
+      cold: 20.35 s from submit to settled (launch, prepare int8, 12 steps)
+      warm: 17.55 s from submit to settled; worker run 17.489 s
+PASS  Ming-Image int8 1024² seed 42: one 1024² PNG, 12 steps, lane int8
+PASS  a warm run gives the same bytes again
+      768×512 was drawn at 1248 832
+PASS  768×512 is drawn in the 1024² bucket at 3:2, and Gaea returns the 768×512 asked
+PASS  count 2 gives two different images, seeds 7 and 8
+PASS  the negative prompt is reported ignored
+      int4: 19.21 s from submit to settled; worker run 18.517 s
+PASS  x-gaea.lane int4 runs lane int4
+      bf16: 20.51 s from submit to settled; worker run 19.404 s
+PASS  x-gaea.lane bf16 runs lane bf16
+4f785adffd26e8e775e7dc3a424810d725588a6d2ea605ba5c7364abcfddc2da f8292a438dd0561f3e891c54af3ffc812e36a6889103a2fdfdce507a54b73f9c
+1024x1024: 0 of 4194304 samples differ, max 0
+PASS  int8 through Gaea is the in-process image, pixel for pixel
+PASS  ming-inproc draws 768×512 at the size the worker reported
+73131b13ac939d7b3fd74ac6806989e86737cfc22a40cd4b995ddd2e7f999130 c21c0fcb77fdff7b23ae7ee103838c5c2750608b7130b218fe0862b9b9bcf046
+1024x1024: 0 of 4194304 samples differ, max 0
+PASS  int4 through Gaea is the in-process image, pixel for pixel
+e2f746abad1d351a17d7cd347f33b3078418b515f957b56b16af14d113137c2d 6a92e1e1739bf539aba5cb37ca02575a2057ff0d267c6d16816bf3baaed3ce2b
+1024x1024: 0 of 4194304 samples differ, max 0
+PASS  bf16 through Gaea is the in-process image, pixel for pixel
+OK
+PASS  transcript com.xocialize.gaea.ming-image-0.1.0-2026-10-30T052250Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.1.0-2026-10-30T052236Z.gpp passes validate.py
+== 17 passed, 0 failed
