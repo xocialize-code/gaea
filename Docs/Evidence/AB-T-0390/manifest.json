@@ -1,0 +1,610 @@
+{
+  "engine" : {
+    "contract" : "1.58.0",
+    "package" : "mlx-engine-swift",
+    "version" : "0.72.0"
+  },
+  "executable" : "gaea-ming-image-worker",
+  "helpers" : [
+
+  ],
+  "id" : "com.xocialize.gaea.ming-image",
+  "license" : "Apache-2.0",
+  "manifest_version" : 1,
+  "min_gaea" : "0.7.0",
+  "models" : [
+    {
+      "id" : "ming-image",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 24400000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 7900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "mllm/*",
+                  "connector/*",
+                  "mlp/*",
+                  "transformer/*",
+                  "vae/*",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Ming-Image-0.1-Design-8bit",
+                "role" : "snapshot"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 44100000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 13500000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "mllm/*",
+                  "connector/*",
+                  "mlp/*",
+                  "transformer/*",
+                  "vae/*",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Ming-Image-0.1-Design-bf16",
+                "role" : "snapshot"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int4",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int4",
+            "materialization" : "engine",
+            "peakTransientBytes" : 14600000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 7900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int4",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "mllm/*",
+                  "connector/*",
+                  "mlp/*",
+                  "transformer/*",
+                  "vae/*",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Ming-Image-0.1-Design-4bit",
+                "role" : "snapshot"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "MIT"
+          }
+        },
+        "provenance" : {
+          "revision" : "main",
+          "sourceRepo" : "inclusionAI/Ming-Image-0.1-Design",
+          "tier" : 1
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 44100000000,
+              "quant" : "bf16",
+              "residentBytes" : 13500000000
+            },
+            {
+              "peakActivationBytes" : 24400000000,
+              "quant" : "int8",
+              "residentBytes" : 7900000000
+            },
+            {
+              "peakActivationBytes" : 14600000000,
+              "quant" : "int4",
+              "residentBytes" : 7900000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "textToImage",
+            "controls" : {
+              "textToImage" : {
+                "_0" : {
+                  "supportsTransparentBackground" : true
+                }
+              }
+            },
+            "name" : "ming-image-design-t2i",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              },
+              {
+                "kind" : "string",
+                "name" : "background",
+                "required" : false,
+                "summary" : "\"transparent\" = native RGBA alpha (straight); \"opaque\" = the default."
+              }
+            ],
+            "summary" : "Ming-Image-0.1-Design (MIT): design/signage backings, layouts and native-alpha RGBA assets from natural-language or JSON layer-schema prompts; 1024²- and 2048²-class buckets. background: \"transparent\" generates native alpha (glass and other transparent materials are unreliable: check alpha on import or matte instead). metaData: \"resolution\" (1024|2048). Not for exact operational text.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "Ming-Image Design"
+    },
+    {
+      "id" : "ming-image-layer",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "layerDecompose"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 25100000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 7900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "mllm/*",
+                  "connector/*",
+                  "mlp/*",
+                  "transformer/*",
+                  "vae/*",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Ming-Image-0.1-Design-Layer-8bit",
+                "role" : "snapshot"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "layerDecompose"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 44700000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 13500000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "mllm/*",
+                  "connector/*",
+                  "mlp/*",
+                  "transformer/*",
+                  "vae/*",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Ming-Image-0.1-Design-Layer-bf16",
+                "role" : "snapshot"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int4",
+          "resolved" : {
+            "capabilities" : [
+              "layerDecompose"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int4",
+            "materialization" : "engine",
+            "peakTransientBytes" : 15600000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 7900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int4",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "mllm/*",
+                  "connector/*",
+                  "mlp/*",
+                  "transformer/*",
+                  "vae/*",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Ming-Image-0.1-Design-Layer-4bit",
+                "role" : "snapshot"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "MIT"
+          }
+        },
+        "provenance" : {
+          "revision" : "main",
+          "sourceRepo" : "inclusionAI/Ming-Image-0.1-Design-Layer",
+          "tier" : 1
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 44700000000,
+              "quant" : "bf16",
+              "residentBytes" : 13500000000
+            },
+            {
+              "peakActivationBytes" : 25100000000,
+              "quant" : "int8",
+              "residentBytes" : 7900000000
+            },
+            {
+              "peakActivationBytes" : 15600000000,
+              "quant" : "int4",
+              "residentBytes" : 7900000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "layerDecompose",
+            "name" : "ming-image-design-layer",
+            "parameters" : [
+              {
+                "kind" : "image",
+                "name" : "image",
+                "required" : true,
+                "summary" : "The flattened design to decompose."
+              },
+              {
+                "kind" : "string",
+                "name" : "spec",
+                "required" : false,
+                "summary" : "Per-layer specification (front-most first). Omit for the package default."
+              },
+              {
+                "kind" : "integer",
+                "name" : "layerCount",
+                "required" : false,
+                "summary" : "Layers to produce, excluding the composite."
+              },
+              {
+                "kind" : "integer",
+                "name" : "resolution",
+                "required" : false,
+                "summary" : "Working-resolution hint (long-side class, px); snapped to the package's buckets."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Ming-Image-0.1-Design-Layer (MIT): a flat design (signage, card, poster, UI) → editable straight-alpha RGBA layers, front-most first, plus the model's composite. Best with a per-layer spec (\"Layer 1: the headline text …\"); resolution buckets 512 (fast) | 1024 (default). Output keeps the input's aspect ratio at the bucket's size.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "Ming-Image Design-Layer"
+    }
+  ],
+  "offers" : [
+    {
+      "defaults" : {
+        "count" : 1
+      },
+      "limits" : {
+        "max_pixels" : 4194304,
+        "max_side" : 4096,
+        "min_side" : 64,
+        "size_multiple" : 1
+      },
+      "model" : {
+        "id" : "ming-image",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "MIT",
+          "terms_url" : "https://huggingface.co/inclusionAI/Ming-Image-0.1-Design"
+        },
+        "memory_class" : "large",
+        "notes" : "A design model: posters, signage, layouts and legible text, from natural language or a JSON layer schema. Drawn in its 1024² or 2048² bucket at the requested aspect (the size drawn is reported). x-ming.background: transparent gives native alpha; glass and see-through subjects may still come back opaque. Not for exact operational text; negative prompts do nothing.",
+        "quality_tiers" : [
+          "standard",
+          "best"
+        ],
+        "speed_class" : "standard",
+        "title" : "Ming-Image Design"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-ming.background" : {
+            "default" : "opaque",
+            "description" : "transparent draws the design on native alpha: a straight-alpha PNG, for stickers, logos and overlays. An image that still comes back opaque carries the warning background_opaque.",
+            "enum" : [
+              "opaque",
+              "transparent"
+            ],
+            "type" : "string",
+            "x-mes-ui" : {
+              "label" : "Background",
+              "widget" : "picker"
+            }
+          },
+          "x-ming.guidance" : {
+            "default" : 1,
+            "description" : "Classifier-free guidance. The Design profile runs without it (1).",
+            "maximum" : 10,
+            "minimum" : 1,
+            "type" : "number",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Guidance",
+              "widget" : "slider"
+            }
+          },
+          "x-ming.steps" : {
+            "default" : 12,
+            "description" : "Denoising steps. The Design profile uses 12.",
+            "maximum" : 50,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "limits" : {
+        "max_layer_count" : 12
+      },
+      "model" : {
+        "id" : "ming-image-layer",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "MIT",
+          "terms_url" : "https://huggingface.co/inclusionAI/Ming-Image-0.1-Design-Layer"
+        },
+        "memory_class" : "large",
+        "notes" : "Splits a flat design (a poster, a card, signage, a UI) into up to 12 editable RGBA layers, front-most first. Best with a plan, front-most first: \"Layer 1: the headline text … Layer 2: the red badge …\". draft works at 512, standard and best at 1024, at the input's aspect.",
+        "quality_tiers" : [
+          "draft",
+          "standard",
+          "best"
+        ],
+        "speed_class" : "standard",
+        "title" : "Ming-Image Design-Layer"
+      },
+      "operation" : "image.decompose",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-ming.guidance" : {
+            "default" : 2,
+            "description" : "Classifier-free guidance. The Layer profile uses 2.",
+            "maximum" : 10,
+            "minimum" : 1,
+            "type" : "number",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Guidance",
+              "widget" : "slider"
+            }
+          },
+          "x-ming.steps" : {
+            "default" : 12,
+            "description" : "Denoising steps. The Layer profile uses 12.",
+            "maximum" : 50,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image",
+      "supports" : {
+        "composite" : true
+      }
+    }
+  ],
+  "protocol" : 1,
+  "repo" : "https://github.com/xocialize-code/gaea-plugin-ming-image",
+  "settings" : [
+
+  ],
+  "summary" : "inclusionAI Ming-Image 0.1 Design and Design-Layer (MIT): a Ling-mini MoE MLLM conditioning a Z-Image-shaped DiT, for design work (posters, signage, layouts and text, in 1024² and 2048² buckets) and for splitting a flat design into editable layers.",
+  "team" : "CFZS6RXUCP",
+  "title" : "Ming-Image",
+  "version" : "0.3.0"
+}

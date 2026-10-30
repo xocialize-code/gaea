@@ -21,7 +21,7 @@ struct GaeaModelHost: ModelHost {
         .textToImage: "image.generate", .imageEdit: "image.edit", .imageInpaint: "image.fill",
         .imageUpscale: "image.upscale", .imageRestore: "image.restore", .imageRelight: "image.relight",
         .imageColorize: "image.colorize", .matting: "image.matte", .promptSegment: "image.segment",
-        .imageAnalysis: "image.describe", .imageQualityScore: "image.score",
+        .imageAnalysis: "image.describe", .imageQualityScore: "image.score", .layerDecompose: "image.decompose",
     ]
     static let capabilities = Dictionary(uniqueKeysWithValues: operations.map { ($0.value, $0.key) })
     /// The helper a plugin serves defect detection as (restore's scratches, then inpainting): Gaea calls it, and never
@@ -29,7 +29,7 @@ struct GaeaModelHost: ModelHost {
     static let defectsHelper = "x-gaea.image.defects"
     /// The text input an operation takes the model call's `prompt` as.
     static let textInputs = ["image.generate": "prompt", "image.edit": "instruction", "image.fill": "prompt",
-                             "image.describe": "question"]
+                             "image.describe": "question", "image.decompose": "prompt"]
 
     func models() async -> [ModelCard] {
         let routes = await offers.liveRoutes()
@@ -77,7 +77,9 @@ struct GaeaModelHost: ModelHost {
             license: .init(license.commercialUse == .yes ? .permissive : .restricted, weights: [license.spdx]),
             sourceRepo: route.model.sourceRepo, revision: route.plugin.version, envelope: envelope,
             defaults: .init(steps: param(all, suffix: ".steps")?.intValue, guidance: param(all, suffix: ".guidance")?.doubleValue),
-            footprintBytes: defaultLane?.resolved.persistentBytes, downloaded: true, adapters: adapters.map(\.card))
+            footprintBytes: defaultLane?.resolved.persistentBytes, downloaded: true, adapters: adapters.map(\.card),
+            maxLayerCount: limits.compactMap(\.maxLayerCount).max(),
+            producesComposite: all.contains { $0.operation == "image.decompose" && $0.manifestOffer.supports?["composite"] == true })
     }
 
     /// What the offer's surface accepts of adapters (GPP-1 §4.3), in the normalizer's terms.
@@ -183,7 +185,7 @@ struct GaeaModelHost: ModelHost {
         if let w = work.width, let h = work.height { asked = (w, h) }
         // An edit that asks no size sends none: the model chooses, as on v0.9.1 (Klein draws 1024²), and the normalizer
         // brings it back to the first image's size (AB-T-0383).
-        let run = work.route.capability == .imageEdit && asked == nil
+        let run = work.route.capability == .layerDecompose || (work.route.capability == .imageEdit && asked == nil)
             ? nil : Self.runSize(asked: asked, first: work.inputs["images"]?.first ?? work.inputs["image"]?.first, limits: limits)
         var params: [String: GPPValue] = call.defaults
         params["count"] = 1
@@ -193,6 +195,13 @@ struct GaeaModelHost: ModelHost {
         // `fast`) go as they are: the worker maps them onto its capability (GPP-1 §3.3).
         for (key, value) in work.params where key != "prompt" && key != "negativePrompt" { params[key] = value.gpp }
         if let mode = work.mode { params["mode"] = .string(mode) }
+        // A decompose call (Image §3.2): the worker takes the count by its vocabulary name, sends no size and no count of
+        // results, and returns the composite whenever its model makes one; the normalizer writes it only when asked.
+        if work.route.capability == .layerDecompose {
+            params["layer_count"] = params.removeValue(forKey: "layerCount")
+            params["count"] = nil
+            params["outputs"] = call.producesComposite ? ["layers", "composite"] : ["layers"]
+        }
 
         let names = Set(call.extensions)
         let modelParams = scope.extensions.filter { names.contains($0.key) }.mapValues(\.gpp)
@@ -223,15 +232,25 @@ struct GaeaModelHost: ModelHost {
                 throw MESError(.engineError, "\(call.plugin.title) returned no text.")
             }
             return .text(text)
+        case .layerDecompose:
+            // Every layer, front-most first, and the composite, at the worker's size: the normalizer scales them.
+            func image(_ output: GPPValue) throws -> ModelImage {
+                guard let path = output["path"]?.stringValue else { throw MESError(.engineError, "\(call.plugin.title) returned a layer with no file.") }
+                let source = try Self.contained(path, in: workerDirectory)
+                let size = GaeaEngine.pixelSize(source)
+                return ModelImage(format: .png, data: try Data(contentsOf: source), width: size?.width, height: size?.height)
+            }
+            let layers = try outputs.filter { $0["name"]?.stringValue == "layers" }.map(image)
+            guard !layers.isEmpty else { throw MESError(.engineError, "\(call.plugin.title) returned no layers.") }
+            let composite = try outputs.first { $0["name"]?.stringValue == "composite" }.map(image)
+            return .layers(layers, composite: composite)
         default:
             break
         }
         guard let output = outputs.first(where: { $0["path"] != nil }), let path = output["path"]?.stringValue else {
             throw MESError(.engineError, "\(call.plugin.title) returned no output.")
         }
-        let root = workerDirectory.resolvingSymlinksInPath().standardizedFileURL.path + "/"
-        let source = URL(fileURLWithPath: path).resolvingSymlinksInPath().standardizedFileURL
-        guard source.path.hasPrefix(root) else { throw MESError(.engineError, "The plugin wrote \(path), outside its output_dir.") }
+        let source = try Self.contained(path, in: workerDirectory)
         var data = try Data(contentsOf: source)
         var size = GaeaEngine.pixelSize(source)
         if let asked, let got = size, (got.width, got.height) != (asked.width, asked.height) {
@@ -281,17 +300,28 @@ struct GaeaModelHost: ModelHost {
         var defaults: [String: GPPValue]
         var lanes: [String]?
         var extensions: [String]
+        /// The offer says its model makes a composite (`supports.composite`, image.decompose).
+        var producesComposite = false
 
         init(_ route: PluginRoute) {
             plugin = route.plugin; model = route.model; operation = route.operation; self.route = route
             limits = route.manifestOffer.limits; defaults = route.manifestOffer.defaults?.objectValue ?? [:]
             lanes = route.manifestOffer.lanes; extensions = route.extensions.map(\.name)
+            producesComposite = route.manifestOffer.supports?["composite"] == true
         }
 
         init(_ helper: PluginOffers.Helper) {
             plugin = helper.plugin; model = helper.model; operation = helper.helper.operation; route = nil
             limits = nil; defaults = [:]; lanes = nil; extensions = []
         }
+    }
+
+    /// A worker's output file, refused when it lies outside the run's `output_dir`.
+    static func contained(_ path: String, in workerDirectory: URL) throws -> URL {
+        let root = workerDirectory.resolvingSymlinksInPath().standardizedFileURL.path + "/"
+        let source = URL(fileURLWithPath: path).resolvingSymlinksInPath().standardizedFileURL
+        guard source.path.hasPrefix(root) else { throw MESError(.engineError, "The plugin wrote \(path), outside its output_dir.") }
+        return source
     }
 
     /// The size to run at: the one asked, or for an image input without one, the first image's; scaled up, keeping the

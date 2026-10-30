@@ -1,0 +1,31 @@
+# Ming-Image Design-Layer acceptance (AB-T-0390) 2026-10-30T19:22:20Z — Gaea 0.8.0, ming-image 0.3.0, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add by repo URL installs ming-image 0.3.0
+PASS  image.decompose is offered with ming-image-layer, layer_count up to 12, composite an output
+      4 layers at 1024: 336.37 s from submit to settled (launch, prepare int8, decompose); worker run 335.503 s
+PASS  4 layers and the composite, each 1024², effective.layer_count 4
+      1280×720: worker drew {'height': 720, 'width': 1280}; outputs [('layers', 1280, 720), ('layers', 1280, 720), ('layers', 1280, 720), ('layers', 1280, 720)]
+PASS  the 1280×720 poster gives 4 layers at 1280×720, and no composite unless asked
+PASS  a 3-layer plan without layer_count gives 3 layers, effective.layer_count 3
+      draft: worker run 58.535 s, drew {'height': 512, 'width': 512}
+PASS  quality draft runs the 512 bucket and returns the input's size
+PASS  layer_count 13 is 422 out_of_limits
+PASS  a plan of 3 layers with layer_count 4 is 400 invalid_request
+PASS  outputs without layers is 400
+      transparent input: warnings ['alpha_reapplied']
+layers-0.png: 0 pixels above the input's alpha, by at most 0
+layers-1.png: 0 pixels above the input's alpha, by at most 0
+PASS  a transparent input's clear pixels stay clear in every layer
+1024x1024: 0 of 4194304 samples differ, max 0
+PASS  layers-0 through Gaea is the in-process one, pixel for pixel
+1024x1024: 0 of 4194304 samples differ, max 0
+PASS  layers-1 through Gaea is the in-process one, pixel for pixel
+1024x1024: 0 of 4194304 samples differ, max 0
+PASS  layers-2 through Gaea is the in-process one, pixel for pixel
+1024x1024: 0 of 4194304 samples differ, max 0
+PASS  layers-3 through Gaea is the in-process one, pixel for pixel
+1024x1024: 0 of 4194304 samples differ, max 0
+PASS  composite-0 through Gaea is the in-process one, pixel for pixel
+OK
+PASS  transcript com.xocialize.gaea.ming-image-0.3.0-2026-10-30T192222Z.gpp passes validate.py
+== 16 passed, 0 failed

@@ -366,7 +366,10 @@ starts while the phase before it is being built.
     [v0.2.0](https://github.com/xocialize-code/gaea-plugin-ming-image/releases/tag/v0.2.0)): an `x-ming.background`
     extension through current MES, with `background_opaque` when the model still returns an opaque image. Layer
     decomposition needs an Image-profile operation: proposed as `image.decompose` in media-engine-spec RFC 0004
-    (bc1a874), for mlx-apps to decide (AB-A-0228). See [Evidence/AB-T-0389](Evidence/AB-T-0389/README.md);
+    (bc1a874), accepted with amendments in MESKit v0.6.0 (AB-A-0228). AB-T-0390 (**done**, Gaea 0.8.0,
+    ming-image [v0.3.0](https://github.com/xocialize-code/gaea-plugin-ming-image/releases/tag/v0.3.0)) serves it with
+    `ming-image-layer` on pixel-agency-normalizer 0.2.0's route (AB-A-0229). See
+    [Evidence/AB-T-0390](Evidence/AB-T-0390/README.md); the conformance suite's 180 s job wait is AB-A-0231. See [Evidence/AB-T-0389](Evidence/AB-T-0389/README.md);
   - Anima: dropped everywhere (AB-D-0190) after its check returned explicit nudity of a youthful-looking character
     from a benign prompt.
 

@@ -1,5 +1,5 @@
 {
-  "originHash" : "42426e35a5f2537656a5bf8f9dfc330f7c5cceb7b238dcc671904dc4f5fd7681",
+  "originHash" : "bb2ba758579bbbf8a086d677348af60459bb1f96d7418c2d3e7ebd9f17d8ca3a",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xocialize-code/gaea-plugin-kit.git",
       "state" : {
-        "revision" : "00f8fd6b45bb3b56e3e9f9e078b4b2bf9d7182e0",
-        "version" : "0.4.0"
+        "revision" : "c7ed5e76e9a379e59d92ace61968fa378f128f19",
+        "version" : "0.6.0"
       }
     },
     {
@@ -78,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xocialize/media-engine-spec.git",
       "state" : {
-        "revision" : "7f25bbb8261d14efee9c5882eaec268d1a417813",
-        "version" : "0.5.0"
+        "revision" : "8a5c871673b164adcc52b579f696d4f55bd79ff2",
+        "version" : "0.6.0"
       }
     },
     {
@@ -105,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xocialize/pixel-agency-normalizer.git",
       "state" : {
-        "revision" : "da06896a5eda74f7f1990b7570e23549ee9710a0",
-        "version" : "0.1.0"
+        "revision" : "7bfd2a69b4c9c600aa3f5b305f0c5341978da911",
+        "version" : "0.2.0"
       }
     },
     {

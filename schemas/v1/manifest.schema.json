@@ -222,6 +222,16 @@
         "limits": {
           "$ref": "#/$defs/Limits"
         },
+        "supports": {
+          "description": "What the model can do beyond the operation's required behaviour, by key: composite (image.decompose). Absent keys are false.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "composite": {
+              "type": "boolean"
+            }
+          }
+        },
         "adapters_meta": {
           "description": "Host-side facts for each adapter in model.adapters, by adapter id.",
           "type": "object",
@@ -304,6 +314,12 @@
             "type": "integer",
             "minimum": 1
           }
+        },
+        "max_layer_count": {
+          "description": "image.decompose: the most layers the model returns (MES Image §3.2's layer_count).",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
         }
       }
     },

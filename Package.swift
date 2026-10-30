@@ -22,12 +22,12 @@ let package = Package(
         .library(name: "GaeaCore", targets: ["GaeaCore"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/xocialize/media-engine-spec.git", from: "0.5.0"),
+        .package(url: "https://github.com/xocialize/media-engine-spec.git", from: "0.6.0"),
         // The Image profile's host half, MLX-free: operation table, validation, plans (AB-T-0359, G-20).
-        .package(url: "https://github.com/xocialize/pixel-agency-normalizer.git", from: "0.1.0"),
+        .package(url: "https://github.com/xocialize/pixel-agency-normalizer.git", from: "0.2.0"),
         // GaeaProtocol only: the MLX-free manifest types and GPP vocabulary. Its MLXToolKit is the only engine code
         // the host links.
-        .package(url: "https://github.com/xocialize-code/gaea-plugin-kit.git", from: "0.4.0"),
+        .package(url: "https://github.com/xocialize-code/gaea-plugin-kit.git", from: "0.6.0"),
         .package(url: "https://github.com/xocialize/mlx-engine-swift.git", from: "0.73.0"),
         .package(url: "https://github.com/groue/GRDB.swift.git", from: "7.0.0"),
     ],

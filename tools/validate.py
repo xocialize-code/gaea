@@ -180,6 +180,7 @@ OPERATION_CAPABILITIES = {
     "image.segment": {"promptSegment"},
     "image.describe": {"imageAnalysis"},
     "image.score": {"imageQualityScore"},
+    "image.decompose": {"layerDecompose"},
 }
 
 

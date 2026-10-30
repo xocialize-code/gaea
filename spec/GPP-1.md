@@ -191,7 +191,10 @@ What Gaea advertises to MES clients. Each offer is one model for one operation:
 - `lanes` that may serve it (default: all);
 - `params`: the model's own options as `x-` extension parameters, rendered by MESFormsUI. Plugins ship no UI code;
 - `defaults` for profile-vocabulary params, and `limits` (pixels, sides, size multiple, images, seconds, frames,
-  sample rates);
+  sample rates, and `max_layer_count` for `image.decompose`);
+- `supports`: what the model does beyond the operation's required behaviour, by key, absent keys false. Today one key:
+  `composite`, for an `image.decompose` model that returns its own reconstruction of the canvas (MES Image §3.2). The
+  names follow MES RFC 0004's A5, so they carry over when MES offers gain `supports` and `limits` (RFC 0003);
 - `adapter_support`: which adapters the model takes for this operation, from its package's `AdapterSupport`:
   `base_model` (the package's adapter base id), `formats`, `kinds`, `max_count` and `strength {min, max}`. An offer
   without it takes no adapters, and Gaea attaches none of the operator's to it (§4.8);
