@@ -1,5 +1,5 @@
 #!/bin/zsh
-# AB-T-0388's acceptance: gaea-plugin-ming-image installed in Gaea by repo URL and run through MES.
+# AB-T-0388's and AB-T-0389's acceptance: gaea-plugin-ming-image installed in Gaea by repo URL and run through MES.
 #
 #   1. Gaea installs and enables the plugin beside Z-Image: image.generate offers Ming-Image Design, not as a default,
 #      so a request naming no model still reaches Z-Image Turbo (the normalizer's default routes don't change);
@@ -8,7 +8,10 @@
 #      the int4 and bf16 lanes;
 #   3. a 768×512 request is drawn in the 1024² bucket at 3:2 (the size the worker reports, and ming-inproc's) and
 #      returned at 768×512; count 2 gives two seeds; a negative prompt is reported ignored; a named lane runs that lane;
-#   4. every recorded GPP session passes the validator.
+#   4. x-ming.background: transparent (AB-T-0389) returns a PNG with native alpha, the in-process image pixel for pixel
+#      (premultiplied, as the normalizer works), effective says so, a size Gaea resizes keeps its alpha, and a full-bleed
+#      scene warns background_opaque exactly when the in-process image has no alpha;
+#   5. every recorded GPP session passes the validator.
 #
 #   tools/acceptance-ming-image.sh <short-work-dir> <evidence-dir>
 #
@@ -27,8 +30,12 @@ PLUGIN_MANIFEST=$PLUGIN_DIST/manifest.json
 POSTER='a minimalist poster for a jazz festival, deep blue background, a gold saxophone, the words \"BLUE NOTE NIGHTS\" in bold white type at the top'
 POSTER_PLAIN='a minimalist poster for a jazz festival, deep blue background, a gold saxophone, the words "BLUE NOTE NIGHTS" in bold white type at the top'
 SIGN='a hand-lettered wooden shop sign for a bakery called Rise and Shine, warm morning light'
+STICKER='a cute cartoon fox mascot sticker with a thick white outline, the word \"FOXY\" below it, isolated'
+STICKER_PLAIN='a cute cartoon fox mascot sticker with a thick white outline, the word "FOXY" below it, isolated'
+SCENE='a full-bleed landscape photograph of a mountain lake at sunrise, the scene filling the whole frame edge to edge'
 mkdir -p "$OUT"; rm -rf "$WORK"; mkdir -p "$WORK"
 PIXDIFF=$WORK/pixdiff; swiftc -O -o $PIXDIFF ../gaea-plugin-ming-image/scripts/pixdiff.swift
+ALPHA=$WORK/alpha; swiftc -O -o $ALPHA ../gaea-plugin-ming-image/scripts/alpha.swift
 LOG="$OUT/acceptance.log"; : > "$LOG"
 pass=0; fail=0
 say() { print -r -- "$*" | tee -a "$LOG" }
@@ -146,6 +153,25 @@ for lane in int4 bf16; do
 import json; j = json.load(open('$OUT/job-$lane.json')); assert j['outcome'] == 'succeeded', j
 assert j['plan']['effective']['model_params']['x-gaea.worker']['lane'] == '$lane'"
 done
+# 5. Transparent backgrounds (AB-T-0389).
+TBG='"extensions":{"x-ming.background":"transparent"}'
+job $P '{"operation":"image.generate","model":"ming-image","inputs":{"prompt":"'$STICKER'"},"params":{"size":{"width":1024,"height":1024},"seed":7},'$TBG'}' > "$OUT/job-alpha.json"
+fetch $P "$OUT/job-alpha.json" "$OUT/gaea-alpha"
+check "x-ming.background transparent: one 1024² PNG, the option in effective" py "
+import json; j = json.load(open('$OUT/job-alpha.json')); assert j['outcome'] == 'succeeded', j
+w = j['plan']['effective']['model_params']['x-gaea.worker']; assert w['effective'].get('x-ming.background') == 'transparent', w
+assert j['plan']['effective'].get('x-ming.background') == 'transparent', j['plan']['effective']"
+check "the PNG Gaea returns has native alpha" "$ALPHA" "$OUT/gaea-alpha-0.png"
+job $P '{"operation":"image.generate","model":"ming-image","inputs":{"prompt":"'$STICKER'"},"params":{"size":{"width":768,"height":512},"seed":8},'$TBG'}' > "$OUT/job-alpha-wide.json"
+fetch $P "$OUT/job-alpha-wide.json" "$OUT/gaea-alpha-wide"
+# Seed 8: at 3:2 this sticker comes back with alpha for seeds 8, 11 and 12, and opaque for 7 and 9 (ming-inproc).
+check "a transparent 768×512, drawn larger and resized by Gaea, keeps its alpha" zsh -c "
+python3 -c \"import json; j = json.load(open('$OUT/job-alpha-wide.json')); o = j['result']['outputs']; assert (o[0]['width'], o[0]['height']) == (768, 512), o; assert not any(w['code'] == 'background_opaque' for w in j.get('warnings', [])), j['warnings']\" && $ALPHA $OUT/gaea-alpha-wide-0.png"
+job $P '{"operation":"image.generate","model":"ming-image","inputs":{"prompt":"'$SCENE'"},"params":{"size":{"width":1024,"height":1024},"seed":7},'$TBG'}' > "$OUT/job-alpha-scene.json"
+fetch $P "$OUT/job-alpha-scene.json" "$OUT/gaea-alpha-scene"
+submit $P '{"operation":"image.generate","model":"ming-image","inputs":{"prompt":"'$STICKER'"},"params":{"size":{"width":1024,"height":1024},"seed":7},"extensions":{"x-ming.background":"checkerboard"}}' > "$OUT/job-alpha-bad.json"
+check "an unknown background is refused" py "
+import json; j = json.load(open('$OUT/job-alpha-bad.json')); assert j.get('outcome') != 'succeeded', j"
 $CLI ledger > "$OUT/ledger.txt"
 stop $P
 
@@ -160,6 +186,16 @@ for lane in int4 bf16; do
   "$INPROC" --lane $lane --prompt "$POSTER_PLAIN" --seed 42 --out "$OUT/inproc-$lane.png" > "$OUT/inproc-$lane.json" 2>> "$LOG"
   check "$lane through Gaea is the in-process image, pixel for pixel" same "$OUT/gaea-$lane-0.png" "$OUT/inproc-$lane.png"
 done
+
+"$INPROC" --lane int8 --prompt "$STICKER_PLAIN" --seed 7 --background transparent --out "$OUT/inproc-alpha.png" 2>> "$LOG" | tail -1 > "$OUT/inproc-alpha.json"
+check "transparent through Gaea is the in-process image, pixel for pixel (premultiplied)" same "$OUT/gaea-alpha-0.png" "$OUT/inproc-alpha.png"
+"$INPROC" --lane int8 --prompt "$SCENE" --seed 7 --background transparent --out "$OUT/inproc-alpha-scene.png" 2>> "$LOG" | tail -1 > "$OUT/inproc-alpha-scene.json"
+say "      scene: in-process alpha $(py "import json; print(json.load(open('$OUT/inproc-alpha-scene.json'))['transparent'])"), Gaea's warnings $(py "import json; print([w['code'] for w in json.load(open('$OUT/job-alpha-scene.json')).get('warnings', [])])")"
+check "the full-bleed scene warns background_opaque exactly when the in-process image has no alpha" py "
+import json; alpha = json.load(open('$OUT/inproc-alpha-scene.json'))['transparent']
+codes = [w['code'] for w in json.load(open('$OUT/job-alpha-scene.json')).get('warnings', [])]
+assert ('background_opaque' in codes) == (not alpha), (alpha, codes)"
+check "the scene through Gaea is the in-process image, pixel for pixel" same "$OUT/gaea-alpha-scene-0.png" "$OUT/inproc-alpha-scene.png"
 
 for s in $H/Logs/sessions/*.gpp; do
   check "transcript $(basename $s) passes validate.py" python3 tools/validate.py --transcript "$s"

@@ -361,8 +361,11 @@ starts while the phase before it is being built.
   - AB-T-0388: Ming-Image Design. **Done**
     ([v0.1.0](https://github.com/xocialize-code/gaea-plugin-ming-image/releases/tag/v0.1.0)): `image.generate` in its
     1024² and 2048² buckets, int8/bf16/int4 lanes each measured under its declaration, no default offer; through Gaea
-    the in-process images pixel for pixel, conformance unchanged. Transparent backgrounds and layer decomposition wait
-    on MES. See [Evidence/AB-T-0388](Evidence/AB-T-0388/README.md);
+    the in-process images pixel for pixel, conformance unchanged. See [Evidence/AB-T-0388](Evidence/AB-T-0388/README.md).
+    Transparent backgrounds followed in AB-T-0389 (**done**,
+    [v0.2.0](https://github.com/xocialize-code/gaea-plugin-ming-image/releases/tag/v0.2.0)): an `x-ming.background`
+    extension through current MES, with `background_opaque` when the model still returns an opaque image. Layer
+    decomposition needs an Image-profile operation. See [Evidence/AB-T-0389](Evidence/AB-T-0389/README.md);
   - Anima: dropped everywhere (AB-D-0190) after its check returned explicit nudity of a youthful-looking character
     from a benign prompt.
 
