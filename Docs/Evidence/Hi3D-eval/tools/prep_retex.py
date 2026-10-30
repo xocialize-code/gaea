@@ -54,6 +54,7 @@ def main() -> None:
         np.save(out / "faces_in.npy", f)
         subprocess.run([sys.argv[4], str(out)], check=True)
         vmap, f_uv, uv = (np.load(out / f"{n}.npy") for n in ("vmap", "faces_uv", "uv"))
+        v = np.load(out / "verts_clean.npy")  # vmap indexes the (possibly cleaned) mesh
     else:
         vmap, f_uv, uv = xatlas.parametrize(v, f)
     print(f"xatlas: {len(f)} faces -> {len(vmap)} verts in {time.time() - t:.1f}s")

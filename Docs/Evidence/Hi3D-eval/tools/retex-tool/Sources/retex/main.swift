@@ -51,11 +51,8 @@ let textures = try pipeline.run(pieces: [piece], cond: cond, negCond: negCond,
 let tex = textures[0]
 print(String(format: "coverage %.3f", tex.coverage))
 
-// bakeWithUVs writes texel row (1-v)·S; a glTF sampler reads row v·S, so export v flipped.
-let bakeUVs = try npy("uvs").asType(.float32)
-let exportUVs = MLX.concatenated([bakeUVs[0..., 0..<1], 1 - bakeUVs[0..., 1..<2]], axis: 1)
 try GLTFExport.writeGLB(to: URL(fileURLWithPath: outPath),
                         positions: try npy("verts_gltf").asType(.float32), indices: faces,
-                        uvs: exportUVs,
+                        uvs: try npy("uvs").asType(.float32),
                         baseColorRGBA: (tex.rgba, tex.atlasSize, tex.atlasSize))
 print(String(format: "wrote %@ in %.1fs", outPath, -t0.timeIntervalSinceNow))

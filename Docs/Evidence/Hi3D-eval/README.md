@@ -80,10 +80,12 @@ Verdicts (`screenshots/`):
 
 ### UV convention
 
-`MeshBake.bakeWithUVs` writes texel row `(1 − v)·S`. A glTF sampler reading the same UVs reads row `v·S`.
-Exporting the bake's UVs unchanged with `GLTFExport` therefore scrambles the texture across charts. The fix is
-to export `v' = 1 − v` (`tools/retex-tool/Sources/retex/main.swift`). Today nothing outside the `texturize` gate
-calls `TexturingPipeline`, but whoever wires it to a GLB will hit this.
+`MeshBake.bakeWithUVs` wrote texel row `(1 − v)·S`, while a glTF sampler reading the same UVs reads row `v·S`.
+Exporting the bake's UVs unchanged with `GLTFExport` therefore scrambled the texture across charts, and the
+first runs here exported `v' = 1 − v` to compensate.
+
+mlx-trellis2-swift 6037d1c (AB-A-0223) fixed the bake: it now takes glTF UVs (row `v·S`, like
+`MeshBake.run`). `tools/retex-tool` exports UVs unchanged and needs that commit.
 
 ## What it would take
 
@@ -96,6 +98,19 @@ calls `TexturingPipeline`, but whoever wires it to a GLB will hit this.
   order), FlexiCubes, the Heun scheduler, and the DINOv2 and CLIP conditioners.
 - **Open items:**
   - re-texture hair, top and skirt;
-  - run 1536³ (HF Jobs on an A100 80 GB is about $3 for all five);
-  - fix the sole blotching;
-  - close Hi3D's holes, or remesh, before texturing.
+  - run 1536³ (HF Jobs on an A100 80 GB is about $3 for all five).
+
+## Follow-up: AB-A-0223 (mlx-3d, same day)
+
+- **Decision (AB-D-0189):** spike Hi3D's 512³ pass as a Swift/MLX port (task AB-T-0385), gated against goldens
+  dumped on HF Jobs. Admit the license with attribution: mlx-engine is asked to allowlist it in AB-A-0226.
+- **Shoe sole blotches:** these are Hi3D geometry. The untextured mesh shows the same relief
+  (`screenshots/shoes-sole-textured-vs-geometry.jpg`).
+- **Dress streaks:** the skirt slits are already in TRELLIS.2's mesh, and Hi3D keeps them
+  (`screenshots/dress-slits-inherited-from-trellis2.jpg`).
+- **Holes:** 51–190 single missing triangles per mesh. `trimesh.fill_holes` closes them all
+  (`tools/holes.py`).
+- **MLXMesh cleanup:** `MLXMesh.fillHoles` *adds* boundary loops on these non-manifold meshes (190 → 1,782 on
+  the dress; task AB-T-0386). `removeSmallConnectedComponents` works: on the dress, 2,839 components → 1.
+  `tools/retex-tool`'s `unwrap` can run that chain via `CLEAN=<minArea>,<maxPerimeter>[,<repairNonManifold>]`.
+- **Receipt:** AB-R-0659.
