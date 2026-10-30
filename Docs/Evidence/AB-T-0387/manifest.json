@@ -1,0 +1,1158 @@
+{
+  "engine" : {
+    "contract" : "1.58.0",
+    "package" : "mlx-engine-swift",
+    "version" : "0.72.0"
+  },
+  "executable" : "gaea-boogu-worker",
+  "helpers" : [
+
+  ],
+  "id" : "com.xocialize.gaea.boogu",
+  "license" : "Apache-2.0",
+  "manifest_version" : 1,
+  "min_gaea" : "0.7.0",
+  "models" : [
+    {
+      "id" : "boogu",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "bf16",
+          "resolved" : {
+            "activationScaling" : {
+              "axis" : "outputPixels",
+              "baseBytes" : 16600000000,
+              "bytesPerUnit" : 3000,
+              "measuredCeiling" : 2359296
+            },
+            "capabilities" : [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 19800000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 21000000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "vae/*",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Boogu-Image-0.1-Base-bf16",
+                "role" : "snapshot"
+              },
+              {
+                "matching" : [
+                  "*.safetensors",
+                  "*.json",
+                  "merges.txt"
+                ],
+                "repo" : "Qwen/Qwen3-VL-8B-Instruct",
+                "revision" : "main",
+                "role" : "conditioner"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int8",
+          "resolved" : {
+            "activationScaling" : {
+              "axis" : "outputPixels",
+              "baseBytes" : 16600000000,
+              "bytesPerUnit" : 3000,
+              "measuredCeiling" : 2359296
+            },
+            "capabilities" : [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 19800000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 12900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "vae/*",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Boogu-Image-0.1-Base-8bit",
+                "role" : "snapshot"
+              },
+              {
+                "matching" : [
+                  "*.safetensors",
+                  "*.json",
+                  "merges.txt"
+                ],
+                "repo" : "Qwen/Qwen3-VL-8B-Instruct",
+                "revision" : "main",
+                "role" : "conditioner"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int4",
+          "resolved" : {
+            "activationScaling" : {
+              "axis" : "outputPixels",
+              "baseBytes" : 16600000000,
+              "bytesPerUnit" : 3000,
+              "measuredCeiling" : 2359296
+            },
+            "capabilities" : [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int4",
+            "materialization" : "engine",
+            "peakTransientBytes" : 19800000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 8300000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int4",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "vae/*",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Boogu-Image-0.1-Base-4bit",
+                "role" : "snapshot"
+              },
+              {
+                "matching" : [
+                  "*.safetensors",
+                  "*.json",
+                  "merges.txt"
+                ],
+                "repo" : "Qwen/Qwen3-VL-8B-Instruct",
+                "revision" : "main",
+                "role" : "conditioner"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "Apache-2.0"
+          },
+          "weightLicense" : {
+            "identifier" : "Apache-2.0"
+          }
+        },
+        "provenance" : {
+          "revision" : "main",
+          "sourceRepo" : "mlx-community/Boogu-Image-0.1-Base-4bit",
+          "tier" : 3
+        },
+        "requirements" : {
+          "chipFloor" : "max",
+          "footprints" : [
+            {
+              "activationScaling" : {
+                "axis" : "outputPixels",
+                "baseBytes" : 16600000000,
+                "bytesPerUnit" : 3000,
+                "measuredCeiling" : 2359296
+              },
+              "peakActivationBytes" : 19800000000,
+              "quant" : "int4",
+              "residentBytes" : 8300000000
+            },
+            {
+              "activationScaling" : {
+                "axis" : "outputPixels",
+                "baseBytes" : 16600000000,
+                "bytesPerUnit" : 3000,
+                "measuredCeiling" : 2359296
+              },
+              "peakActivationBytes" : 19800000000,
+              "quant" : "int8",
+              "residentBytes" : 12900000000
+            },
+            {
+              "activationScaling" : {
+                "axis" : "outputPixels",
+                "baseBytes" : 16600000000,
+                "bytesPerUnit" : 3000,
+                "measuredCeiling" : 2359296
+              },
+              "peakActivationBytes" : 19800000000,
+              "quant" : "bf16",
+              "residentBytes" : 21000000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "textToImage",
+            "name" : "boogu-image",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Boogu-Image-0.1 text-to-image (OmniGen2-lineage DiT + Qwen3-VL instruction conditioning + FLUX VAE): photorealistic generation, Base (30-step CFG) and Turbo (4-step distilled) tiers.",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "imageEdit",
+            "name" : "boogu-image-edit",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "images",
+                "required" : true,
+                "summary" : "Conditioning input image(s), in prompt order."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The edit instruction."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "True-CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Boogu-Image-0.1 instruction image editing (Edit variant): Qwen3-VL vision+text conditioning over the input image + a VAE ref-latent branch, structure-preserving edits at 50-step true CFG.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "Boogu Image"
+    },
+    {
+      "id" : "boogu-turbo",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "bf16",
+          "resolved" : {
+            "activationScaling" : {
+              "axis" : "outputPixels",
+              "baseBytes" : 16600000000,
+              "bytesPerUnit" : 3000,
+              "measuredCeiling" : 2359296
+            },
+            "capabilities" : [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 19800000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 21000000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "vae/*",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Boogu-Image-0.1-Turbo-bf16",
+                "role" : "snapshot"
+              },
+              {
+                "matching" : [
+                  "*.safetensors",
+                  "*.json",
+                  "merges.txt"
+                ],
+                "repo" : "Qwen/Qwen3-VL-8B-Instruct",
+                "revision" : "main",
+                "role" : "conditioner"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int8",
+          "resolved" : {
+            "activationScaling" : {
+              "axis" : "outputPixels",
+              "baseBytes" : 16600000000,
+              "bytesPerUnit" : 3000,
+              "measuredCeiling" : 2359296
+            },
+            "capabilities" : [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 19800000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 12900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "vae/*",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Boogu-Image-0.1-Turbo-8bit",
+                "role" : "snapshot"
+              },
+              {
+                "matching" : [
+                  "*.safetensors",
+                  "*.json",
+                  "merges.txt"
+                ],
+                "repo" : "Qwen/Qwen3-VL-8B-Instruct",
+                "revision" : "main",
+                "role" : "conditioner"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "Apache-2.0"
+          },
+          "weightLicense" : {
+            "identifier" : "Apache-2.0"
+          }
+        },
+        "provenance" : {
+          "revision" : "main",
+          "sourceRepo" : "mlx-community/Boogu-Image-0.1-Base-4bit",
+          "tier" : 3
+        },
+        "requirements" : {
+          "chipFloor" : "max",
+          "footprints" : [
+            {
+              "activationScaling" : {
+                "axis" : "outputPixels",
+                "baseBytes" : 16600000000,
+                "bytesPerUnit" : 3000,
+                "measuredCeiling" : 2359296
+              },
+              "peakActivationBytes" : 19800000000,
+              "quant" : "int4",
+              "residentBytes" : 8300000000
+            },
+            {
+              "activationScaling" : {
+                "axis" : "outputPixels",
+                "baseBytes" : 16600000000,
+                "bytesPerUnit" : 3000,
+                "measuredCeiling" : 2359296
+              },
+              "peakActivationBytes" : 19800000000,
+              "quant" : "int8",
+              "residentBytes" : 12900000000
+            },
+            {
+              "activationScaling" : {
+                "axis" : "outputPixels",
+                "baseBytes" : 16600000000,
+                "bytesPerUnit" : 3000,
+                "measuredCeiling" : 2359296
+              },
+              "peakActivationBytes" : 19800000000,
+              "quant" : "bf16",
+              "residentBytes" : 21000000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "textToImage",
+            "name" : "boogu-image",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Boogu-Image-0.1 text-to-image (OmniGen2-lineage DiT + Qwen3-VL instruction conditioning + FLUX VAE): photorealistic generation, Base (30-step CFG) and Turbo (4-step distilled) tiers.",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "imageEdit",
+            "name" : "boogu-image-edit",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "images",
+                "required" : true,
+                "summary" : "Conditioning input image(s), in prompt order."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The edit instruction."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "True-CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Boogu-Image-0.1 instruction image editing (Edit variant): Qwen3-VL vision+text conditioning over the input image + a VAE ref-latent branch, structure-preserving edits at 50-step true CFG.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "Boogu Image Turbo"
+    },
+    {
+      "id" : "boogu-edit",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "bf16",
+          "resolved" : {
+            "activationScaling" : {
+              "axis" : "outputPixels",
+              "baseBytes" : 16600000000,
+              "bytesPerUnit" : 3000,
+              "measuredCeiling" : 2359296
+            },
+            "capabilities" : [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 19800000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 21000000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "vae/*",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Boogu-Image-0.1-Edit-bf16",
+                "role" : "snapshot"
+              },
+              {
+                "matching" : [
+                  "*.safetensors",
+                  "*.json",
+                  "merges.txt"
+                ],
+                "repo" : "Qwen/Qwen3-VL-8B-Instruct",
+                "revision" : "main",
+                "role" : "conditioner"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int8",
+          "resolved" : {
+            "activationScaling" : {
+              "axis" : "outputPixels",
+              "baseBytes" : 16600000000,
+              "bytesPerUnit" : 3000,
+              "measuredCeiling" : 2359296
+            },
+            "capabilities" : [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 19800000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 12900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "vae/*",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Boogu-Image-0.1-Edit-8bit",
+                "role" : "snapshot"
+              },
+              {
+                "matching" : [
+                  "*.safetensors",
+                  "*.json",
+                  "merges.txt"
+                ],
+                "repo" : "Qwen/Qwen3-VL-8B-Instruct",
+                "revision" : "main",
+                "role" : "conditioner"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int4",
+          "resolved" : {
+            "activationScaling" : {
+              "axis" : "outputPixels",
+              "baseBytes" : 16600000000,
+              "bytesPerUnit" : 3000,
+              "measuredCeiling" : 2359296
+            },
+            "capabilities" : [
+              "textToImage",
+              "imageEdit"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 58,
+              "patch" : 0
+            },
+            "footprintQuant" : "int4",
+            "materialization" : "engine",
+            "peakTransientBytes" : 19800000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 8300000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int4",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "transformer/*",
+                  "vae/*",
+                  "scheduler/*"
+                ],
+                "repo" : "mlx-community/Boogu-Image-0.1-Edit-4bit",
+                "role" : "snapshot"
+              },
+              {
+                "matching" : [
+                  "*.safetensors",
+                  "*.json",
+                  "merges.txt"
+                ],
+                "repo" : "Qwen/Qwen3-VL-8B-Instruct",
+                "revision" : "main",
+                "role" : "conditioner"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 58,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "Apache-2.0"
+          },
+          "weightLicense" : {
+            "identifier" : "Apache-2.0"
+          }
+        },
+        "provenance" : {
+          "revision" : "main",
+          "sourceRepo" : "mlx-community/Boogu-Image-0.1-Base-4bit",
+          "tier" : 3
+        },
+        "requirements" : {
+          "chipFloor" : "max",
+          "footprints" : [
+            {
+              "activationScaling" : {
+                "axis" : "outputPixels",
+                "baseBytes" : 16600000000,
+                "bytesPerUnit" : 3000,
+                "measuredCeiling" : 2359296
+              },
+              "peakActivationBytes" : 19800000000,
+              "quant" : "int4",
+              "residentBytes" : 8300000000
+            },
+            {
+              "activationScaling" : {
+                "axis" : "outputPixels",
+                "baseBytes" : 16600000000,
+                "bytesPerUnit" : 3000,
+                "measuredCeiling" : 2359296
+              },
+              "peakActivationBytes" : 19800000000,
+              "quant" : "int8",
+              "residentBytes" : 12900000000
+            },
+            {
+              "activationScaling" : {
+                "axis" : "outputPixels",
+                "baseBytes" : 16600000000,
+                "bytesPerUnit" : 3000,
+                "measuredCeiling" : 2359296
+              },
+              "peakActivationBytes" : 19800000000,
+              "quant" : "bf16",
+              "residentBytes" : 21000000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "textToImage",
+            "name" : "boogu-image",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The text prompt."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Boogu-Image-0.1 text-to-image (OmniGen2-lineage DiT + Qwen3-VL instruction conditioning + FLUX VAE): photorealistic generation, Base (30-step CFG) and Turbo (4-step distilled) tiers.",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "imageEdit",
+            "name" : "boogu-image-edit",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "images",
+                "required" : true,
+                "summary" : "Conditioning input image(s), in prompt order."
+              },
+              {
+                "kind" : "string",
+                "name" : "prompt",
+                "required" : true,
+                "summary" : "The edit instruction."
+              },
+              {
+                "kind" : "string",
+                "name" : "negativePrompt",
+                "required" : false,
+                "summary" : "What to steer away from."
+              },
+              {
+                "kind" : "integer",
+                "name" : "width",
+                "required" : false,
+                "summary" : "Output width."
+              },
+              {
+                "kind" : "integer",
+                "name" : "height",
+                "required" : false,
+                "summary" : "Output height."
+              },
+              {
+                "kind" : "integer",
+                "name" : "steps",
+                "required" : false,
+                "summary" : "Denoising steps."
+              },
+              {
+                "kind" : "number",
+                "name" : "guidanceScale",
+                "required" : false,
+                "summary" : "True-CFG scale."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "Boogu-Image-0.1 instruction image editing (Edit variant): Qwen3-VL vision+text conditioning over the input image + a VAE ref-latent branch, structure-preserving edits at 50-step true CFG.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "Boogu Image Edit"
+    }
+  ],
+  "offers" : [
+    {
+      "defaults" : {
+        "count" : 1
+      },
+      "limits" : {
+        "max_pixels" : 2359296,
+        "max_side" : 2048,
+        "min_side" : 512,
+        "size_multiple" : 16
+      },
+      "model" : {
+        "id" : "boogu",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "memory_class" : "large",
+        "notes" : "Photorealistic generation with Qwen3-VL instruction conditioning: 30 steps with CFG, honours negative prompts. Up to 1536² in area.",
+        "quality_tiers" : [
+          "standard",
+          "best"
+        ],
+        "speed_class" : "slow",
+        "title" : "Boogu Image"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-boogu.guidance" : {
+            "default" : 3.5,
+            "description" : "Classifier-free guidance: how strongly the prompt (and against the negative prompt) steers. 1 turns CFG off.",
+            "maximum" : 20,
+            "minimum" : 1,
+            "type" : "number",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Guidance",
+              "widget" : "slider"
+            }
+          },
+          "x-boogu.steps" : {
+            "default" : 30,
+            "description" : "Denoising steps; more is slower and finer.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "defaults" : {
+        "count" : 1
+      },
+      "limits" : {
+        "max_pixels" : 2359296,
+        "max_side" : 2048,
+        "min_side" : 512,
+        "size_multiple" : 16
+      },
+      "model" : {
+        "id" : "boogu-turbo",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "memory_class" : "large",
+        "notes" : "Distilled to 4 steps without CFG: negative prompts do nothing. Up to 1536² in area.",
+        "quality_tiers" : [
+          "draft",
+          "standard"
+        ],
+        "speed_class" : "fast",
+        "title" : "Boogu Image Turbo"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-boogu.steps" : {
+            "default" : 4,
+            "description" : "Denoising steps. Boogu Turbo is distilled for 4.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "limits" : {
+        "max_images" : 1,
+        "max_pixels" : 1048576,
+        "max_side" : 2048,
+        "min_side" : 512,
+        "size_multiple" : 16
+      },
+      "model" : {
+        "id" : "boogu-edit",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "memory_class" : "large",
+        "notes" : "Structure-preserving instruction edits of one image (\"make it night with snow\"): 50 steps with true CFG. Drawn at 768² unless a size is asked, up to 1024², and returned at the image's size; strength does nothing.",
+        "quality_tiers" : [
+          "standard",
+          "best"
+        ],
+        "speed_class" : "slow",
+        "title" : "Boogu Image Edit"
+      },
+      "operation" : "image.edit",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-boogu.guidance" : {
+            "default" : 4,
+            "description" : "Classifier-free guidance: how strongly the prompt (and against the negative prompt) steers. 1 turns CFG off.",
+            "maximum" : 20,
+            "minimum" : 1,
+            "type" : "number",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Guidance",
+              "widget" : "slider"
+            }
+          },
+          "x-boogu.steps" : {
+            "default" : 50,
+            "description" : "Denoising steps; more is slower and finer.",
+            "maximum" : 100,
+            "minimum" : 1,
+            "type" : "integer",
+            "x-mes-ui" : {
+              "advanced" : true,
+              "label" : "Steps",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    }
+  ],
+  "protocol" : 1,
+  "repo" : "https://github.com/xocialize-code/gaea-plugin-boogu",
+  "settings" : [
+
+  ],
+  "summary" : "Boogu-Image 0.1 (Apache-2.0): an OmniGen2-lineage DiT conditioned by Qwen3-VL-8B, with the FLUX.1 VAE. Generation (Base, and the 4-step Turbo) and structure-preserving instruction editing.",
+  "team" : "CFZS6RXUCP",
+  "title" : "Boogu Image",
+  "version" : "0.1.0"
+}

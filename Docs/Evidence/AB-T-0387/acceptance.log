@@ -1,0 +1,40 @@
+# Boogu plugin acceptance (AB-T-0387) 2026-10-30T03:06:16Z — Gaea 0.7.1, boogu 0.1.0, z-image 0.1.0, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add by repo URL installs boogu 0.1.0
+PASS  add by repo URL installs z-image 0.1.0
+PASS  image.generate offers Boogu and Boogu Turbo, neither a default
+image.edit answers an unnamed request with ['boogu-edit']
+PASS  image.edit offers Boogu Edit; the plugin's manifest marks no offer default
+      image.edit's default here: ['boogu-edit'] (FLUX.2 Klein, the normalizer's first choice, isn't installed on this server)
+PASS  image.generate naming no model still reaches Z-Image Turbo
+      cold: 130.53 s from submit to settled (launch, prepare bf16, 30 steps)
+      warm: 128.66 s from submit to settled; worker run 128.573 s
+PASS  Boogu bf16 1024² seed 42: one 1024² PNG, 30 steps, guidance 3.5, the negative prompt honoured
+PASS  a warm run gives the same bytes again
+      turbo: 22.76 s from submit to settled (launch Turbo, prepare int8, two images)
+PASS  Boogu Turbo int8: count 2 gives two different 768² images, 4 steps, seeds 7 and 8
+PASS  Boogu Turbo reports the negative prompt as ignored
+      edit: 362.32 s from submit to settled (launch Edit, prepare bf16, 50 steps); worker run 360.582 s
+PASS  Boogu Edit bf16: one 768² image, 50 steps, guidance 4
+PASS  x-gaea.lane int4 runs lane int4, and 1000² snaps to 992²
+PASS  an edit asking 1536² is drawn at 1024² and reported size_snapped
+PASS  a 400² generate is drawn at Boogu's smallest 512² and returned at 400²
+{'code': 'out_of_limits', 'message': "Input 'images' takes at most 1.", 'param': 'images', 'request_id': 'req_ekvq400xez8h'}
+PASS  two images on a Boogu edit are refused
+d2781f9a7077852847c8ed3020792e0810bb0c7e5279dc2c5b15b9670e0d8e0a d229cee970c2bee61512e4d077d688cd7d64589edcd8130b22b9c0d48d829fa2
+1024x1024: 0 of 4194304 samples differ, max 0
+PASS  Boogu through Gaea is the in-process image, pixel for pixel
+fe1371db63ddbd5815059b696eef7786c25807849fa81c0c65538a412d099a92 ceaa69f91a7abca44368b45308c010031b714d6208e752a90b034dcbd875fb62
+768x768: 0 of 2359296 samples differ, max 0
+PASS  Boogu Turbo through Gaea is the in-process image, pixel for pixel
+941b1abedf09c1912ca8c442bf90d19ee187849c1f93cef7b4f4783360415c9d dfe186e6d79503c7fa8831ef0ca13146ed52cb97a57e9bb28912a4cfb3976f28
+768x768: 0 of 2359296 samples differ, max 0
+PASS  the edit through Gaea is the in-process image, pixel for pixel
+1772d106e5247164cd38ec9bc7d66e984de372f8695ce87b032a727574a145e0 134d78853807678cccaec77c5b7ea25923635c407e696e25de38b40a297e4f7e
+992x992: 0 of 3936256 samples differ, max 0
+PASS  the int4 lane through Gaea is the in-process image, pixel for pixel
+OK
+PASS  transcript com.xocialize.gaea.boogu-0.1.0-2026-10-30T030634Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.1.0-2026-10-30T030620Z.gpp passes validate.py
+== 20 passed, 0 failed

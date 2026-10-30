@@ -352,6 +352,15 @@ starts while the phase before it is being built.
   - Desktop's dependencies have homes first (G-20): AB-T-0358 to AB-T-0362 are done;
   - the old engine is frozen;
   - Lite is deprecated and ML[X] Image Server retired (G-15).
+- **After the exit: v0.9.1's wip models** (AB-T-0384, done 2026-10-30). Each became a plugin once its area finished
+  and promoted the port (AB-A-0224), or was dropped:
+  - AB-T-0387: Boogu Image. **Done**
+    ([v0.1.0](https://github.com/xocialize-code/gaea-plugin-boogu/releases/tag/v0.1.0)): Base and Turbo generate and
+    a one-image edit, bf16/int8/int4 lanes, no default offer; through Gaea the in-process images pixel for pixel,
+    and conformance unchanged with it installed. See [Evidence/AB-T-0387](Evidence/AB-T-0387/README.md);
+  - AB-T-0388: Ming-Image Design, `image.generate`. Open;
+  - Anima: dropped everywhere (AB-D-0190) after its check returned explicit nudity of a youthful-looking character
+    from a benign prompt.
 
 **G2. Audio**
 - Audio 0.1 published, with schemas and conformance tests.
