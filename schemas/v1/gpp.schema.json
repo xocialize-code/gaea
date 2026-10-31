@@ -698,6 +698,45 @@
         "seconds": {
           "type": "number",
           "minimum": 0
+        },
+        "storage": {
+          "description": "GPP-1 §3.2: what the engine measured about the volume the lane's weights are on (MLXEngine VolumeCharacterization and StorageAdvisory), when it measured it.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "volume": {
+              "type": "string"
+            },
+            "read_bytes_per_s": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "protocol": {
+              "type": "string"
+            },
+            "removable": {
+              "type": "boolean"
+            },
+            "advisories": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "kind",
+                  "message"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "kind": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -897,6 +936,25 @@
         },
         "message": {
           "type": "string"
+        },
+        "preview": {
+          "description": "GPP-1 §3.3: a preview the worker wrote under the run's output_dir (a frame, a draft). Gaea forwards it as the MES job's preview and deletes it.",
+          "type": "object",
+          "required": [
+            "path",
+            "media_type"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "media_type": {
+              "type": "string",
+              "pattern": "^image/"
+            }
+          }
         }
       }
     },
@@ -1083,6 +1141,7 @@
             "not_materialized",
             "materialize_failed",
             "out_of_memory",
+            "storage_below_floor",
             "model_error",
             "storage_failed",
             "busy",

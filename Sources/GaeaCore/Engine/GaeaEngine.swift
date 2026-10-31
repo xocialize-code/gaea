@@ -287,13 +287,29 @@ public struct GaeaEngine: MediaEngine {
     func schedule(_ job: WorkerJob, title: String, context: RunContext,
                   onLine: @escaping @Sendable ([String: GPPValue]) -> Void = { _ in }) async throws -> WorkerJobResult {
         let reporter = context.reporter
+        let root = job.outputDir.resolvingSymlinksInPath().standardizedFileURL.path + "/"
         return try await Self.schedule(job, scheduler: scheduler, title: title) { line in
             onLine(line)
             guard line["type"]?.stringValue == "progress" else { return }
             let step = line["step"]?.intValue, of = line["of"]?.intValue
             let stage = line["stage"]?.stringValue ?? "running"
-            Task { await reporter.progress(.running, step: step, steps: of, fraction: line["fraction"]?.doubleValue, message: stage) }
+            let preview = Self.preview(line, root: root)
+            Task {
+                await reporter.progress(.running, step: step, steps: of, fraction: line["fraction"]?.doubleValue, message: stage)
+                if let preview { await reporter.preview(preview.data, mediaType: preview.mediaType) }
+            }
         }
+    }
+
+    /// A `progress` line's preview (GPP-1 §3.3): an image the worker wrote under the run's `output_dir`, read and deleted.
+    /// One outside it, or that can't be read, is dropped: a preview is never worth failing a run for.
+    static func preview(_ line: [String: GPPValue], root: String) -> (data: Data, mediaType: String)? {
+        guard let preview = line["preview"]?.objectValue, let path = preview["path"]?.stringValue,
+              let mediaType = preview["media_type"]?.stringValue, mediaType.hasPrefix("image/") else { return nil }
+        let file = URL(fileURLWithPath: path).resolvingSymlinksInPath().standardizedFileURL
+        guard file.path.hasPrefix(root), let data = try? Data(contentsOf: file) else { return nil }
+        try? FileManager.default.removeItem(at: file)
+        return (data, mediaType)
     }
 
     /// Runs a job through the scheduler and turns its refusals into MES errors: a lane that doesn't fit is
@@ -306,7 +322,7 @@ public struct GaeaEngine: MediaEngine {
         } catch let refusal as LaneChoice.Refusal {
             switch refusal {
             case .unknownLane: throw MESError(.unsupportedParameter, refusal.description, param: Self.laneExtension)
-            case .namedDoesNotFit, .nothingFits, .policy: throw MESError(.noCapacity, refusal.description)
+            case .namedDoesNotFit, .nothingFits, .policy, .storageBelowFloor: throw MESError(.noCapacity, refusal.description)
             }
         } catch let failure as WorkerFailure {
             if failure.code == "cancelled" || Task.isCancelled { throw CancellationError() }

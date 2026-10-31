@@ -81,7 +81,7 @@ The schema is normative; this section says what each message means. H→W is hos
 | `materialize.progress` | W→H | `re`, `model`, `lane`, `fraction`, `bytes_done`, `bytes_total` | Byte-weighted across every source. Also sent during a `prepare` that has to download first. |
 | `materialize.done` | W→H | `re`, `model`, `lane`, `bytes`, `seconds` | Every source is on disk. |
 | `prepare` | H→W | `id`, `model`, `lane` | Load the lane to resident, downloading first if needed. |
-| `prepared` | W→H | `re`, `model`, `lane`, `seconds` | Resident. |
+| `prepared` | W→H | `re`, `model`, `lane`, `seconds`, `storage`? | Resident. `storage` is what the engine measured about the volume the lane's weights are on (§3.2.1). |
 | `unload` | H→W | `id`, `model`, `lane`? | Drop the model (every lane, without `lane`). |
 | `unloaded` | W→H | `re`, `model` | Gone. |
 | `memory.query` | H→W | `id` | Report now. |
@@ -96,12 +96,27 @@ The host compares `report.physFootprintBytes` with its own `proc_pid_rusage` rea
 charge (`residentBytes + transientReserveBytes`) with the lane's manifest figures. A worker whose measured footprint
 runs well past its declaration is a manifest bug, logged against the plugin version.
 
+#### 3.2.1 The weights' volume
+
+A lane that streams its weights from disk, or loads them lazily, can crash mid-run when the volume reads too slowly:
+MLXEngine declares that floor as the lane's `QuantFootprint.minSustainedReadBytesPerSecond` (manifest
+`resolved.minSustainedReadBytesPerSecond`), measures the volume at `prepare` with the page cache bypassed, and refuses
+the load below the floor.
+- **The measurement** comes back on `prepared` as `storage`: `volume` (its mount point), `read_bytes_per_s`, `protocol`?
+  and `removable`? when known, and the engine's `advisories` (`kind`, `message`), such as a projected I/O time.
+- **A refusal** is `error` code `storage_below_floor`, with `detail` `{volume, read_bytes_per_s, floor_bytes_per_s}`. It
+  isn't retryable on that lane. Gaea remembers the volume's speed for the lane, and the scheduler falls back to the
+  next lane that fits, with the `lane_fallback` warning (G-23). A lane named by the client is refused instead
+  (`no_capacity`, saying the volume is too slow).
+- Gaea also skips, before admitting a job, any lane whose floor is above a speed it has already measured for that
+  models root.
+
 ### 3.3 Jobs
 
 | Message | Dir | Fields | Meaning |
 |---|---|---|---|
 | `run` | H→W | `id`, `job`, `operation`, `model`, `lane`, `inputs {name: path or [paths]}`, `params`, `model_params`?, `adapters[]`?, `seed`?, `streams[]`?, `assets`?, `output_dir` | One job. `streams` names the outputs to stream (§3.3.1); `assets` gives the MES asset id behind each input value (§3.3.2). |
-| `progress` | W→H | `re`, `job`, `stage`, `step`?, `of`?, `fraction`?, `message`? | `stage` is the worker's own phase (`encode_prompt`, `denoise`, `decode`). Gaea reports MES stage `running` with this detail. |
+| `progress` | W→H | `re`, `job`, `stage`, `step`?, `of`?, `fraction`?, `message`?, `preview`? | `stage` is the worker's own phase (`encode_prompt`, `denoise`, `decode`). Gaea reports MES stage `running` with this detail. `preview` is `{path, media_type}`, an image the worker wrote under `output_dir` (a frame, a draft): Gaea sends it as the MES job's preview (Base §11) and deletes it. |
 | `chunk` | W→H | `re`, `job`, `output`, `index`, `path`, `media_type`, `final`?, `encoding`?, `sample_rate`?, `channels`? | One piece of a streamed output, already written. For a stream the run asked for, a PCM file (§3.3.1). `result` still follows. |
 | `result` | W→H | `re`, `job`, `outputs[]`, `effective`, `warnings[]`, `seconds` | Success. Each output has `path` and `media_type`, or a `value`. |
 | `cancel` | H→W | `id`, `job` | Stop cooperatively. The run ends with `error` code `cancelled`, or with its `result` if it finished first. Nothing answers `cancel` itself. |
@@ -152,6 +167,18 @@ under the file's bytes, and only while the asset exists (Base §13 rule 6). When
 its client unpairs, Gaea sends `asset_removed` to every running worker of a plugin with an Audio offer, and the
 worker drops the cache within 60 s. A value that isn't an asset is never cached past its job.
 
+#### 3.3.3 Video
+
+Video reaches a worker in one form, as audio does (canonical 16-bit PCM WAV, Gaea 0.9.1), so a worker never decodes
+what a client happened to send:
+- **Inputs** are MP4 files (`video/mp4`): H.264 or HEVC video, and AAC audio when the input has sound. Gaea passes one
+  already in that form through untouched, and converts anything else AVFoundation reads (QuickTime, ProRes, M4V, …)
+  without changing its frame rate, size or length.
+- **Outputs** are MP4 or QuickTime files (`video/mp4`, `video/quicktime`). Gaea reads their facts (duration, frame rate,
+  frames, width, height, whether there's audio and its rate and channels) from the file, and converts to the client's
+  `output` where the profile asks.
+- Frames as images, when a model works on them, travel as PNG files (`image/png`) in a list input or output, in order.
+
 ### 3.4 Stop
 
 | Message | Dir | Fields | Meaning |
@@ -172,6 +199,7 @@ Without `re` it is a protocol error about a line that couldn't be attributed.
 | `not_materialized` | A run on a lane whose weights are missing (deleted behind Gaea's back). Retryable after `prepare`. |
 | `materialize_failed` | A download failed. `detail` names the repo, revision and URL (MLXEngine's `MaterializeError.source`). |
 | `out_of_memory` | The engine refused the load or run within its budget. |
+| `storage_below_floor` | `prepare` refused: the weights' volume reads slower than the lane's floor (§3.2.1). `detail` has `volume`, `read_bytes_per_s` and `floor_bytes_per_s`. Not retryable on that lane. |
 | `model_error` | The model failed. |
 | `storage_failed` | A storage request failed (host to worker). |
 | `busy` | A second run arrived during the first. |

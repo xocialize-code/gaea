@@ -461,7 +461,7 @@ starts while the phase before it is being built.
   - **Media:** the engine takes video as MP4 or MOV files (`Video.Format`), so Gaea can hand workers one canonical
     form, as it does WAV for audio (0.9.1).
 - **Work orders** (proposed 2026-10-31; filed as each starts, in this order):
-  1. **Video 0.1 in MES** (media-engine-spec; mlx-apps, an ask and a chip, as Audio 0.1 was):
+  1. **Video 0.1 in MES** (media-engine-spec; mlx-apps, AB-A-0235, a chip started 2026-10-31):
      - **Evaluation first:** a short evaluation of the fleet's video models, so the profile fits what exists.
      - **Operations:** `video.generate` (text, a first or last frame, keyframes at times, an audio track),
        `video.extend`, `video.retake`, `video.upscale` and `video.interpolate`.
@@ -471,7 +471,7 @@ starts while the phase before it is being built.
      - **Licences:** a licence notice the client must show (VID-6), on Base's `license.notice` and
        `accepted_required`.
      - **Clients:** MESClientKit and MESFormsUI for video: a video input well, a player and frame previews.
-  2. **GPP-1 and GaeaPluginKit for video** (Gaea), alongside order 1:
+  2. **GPP-1 and GaeaPluginKit for video** (Gaea, AB-T-0400), alongside order 1. **Done** (Gaea 0.9.4, kit 0.9.0):
      - **Media:** video inputs reach workers as one canonical form (MP4, H.264 or HEVC, with AAC where there's audio).
        Outputs report frames, frame rate, size and audio facts.
      - **Previews:** frame previews through the existing preview path.
@@ -492,15 +492,15 @@ starts while the phase before it is being built.
        - LoRA and IC-LoRA as adapters, once mlx-ltx's typed adapters land (AB-A-0197);
      - **FlashVSR:** a second `video.upscale` offer, after mlx-video promotes it from WIP.
   5. **The governor on LTX's tiers:**
-     - every tier within its budget at 32, 64 and 128 GB, staged with `--budget-bytes` on this Mac (as AB-T-0363 did)
-       unless smaller Macs are at hand;
+     - every tier within its budget at 32, 64 and 128 GB, staged with `--budget-bytes` on the 128 GB Mac (as
+       AB-T-0363 did; the operator's call, 2026-10-31);
      - the disk floor on DEV_VOL1 against the internal SSD.
   6. **Gaea Lab on video:** pixel-agency-run's workflow gains video inputs, a player and previews (mlx-apps, as
      AB-A-0234), and `lab-run` runs every operation.
   7. **The exit:** Video conformance with every G3 plugin, the tier budgets, and the Lab.
 - **Open:**
-  - **The tier budgets:** are budgets staged on the 128 GB Mac enough for the 32 and 64 GB exit, or are real Macs
-    needed?
+  - **The tier budgets:** decided 2026-10-31 by the operator: budgets staged on the 128 GB Mac with `--budget-bytes`
+    are enough for the 32 and 64 GB exit.
   - **The licence:** LTX's weights are under the LTX-2 Community licence. Its terms go in the manifest, and the plugin
     shows them (VID-6).
 

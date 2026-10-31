@@ -33,6 +33,8 @@ public enum LaneChoice {
         case nothingFits(need: UInt64, available: UInt64)
         /// The memory policy refused the admission (MLXMemoryPolicy's `AdmissionRefusal`), with its reason.
         case policy(String)
+        /// The weights' volume reads slower than every remaining lane's floor, or than the named lane's (GPP-1 §3.2.1).
+        case storageBelowFloor(String, readBytesPerSecond: UInt64, floorBytesPerSecond: UInt64)
 
         public var description: String {
             switch self {
@@ -41,6 +43,8 @@ public enum LaneChoice {
                 "Lane \(lane) needs \(need.gb) and \(available.gb) is free; a request that names a lane never falls back."
             case let .nothingFits(need, available): "No lane fits: the smallest needs \(need.gb) and \(available.gb) is free."
             case let .policy(reason): reason
+            case let .storageBelowFloor(lane, read, floor):
+                "Lane \(lane)'s weights need a volume that reads \(floor.mbps); this one reads \(read.mbps)."
             }
         }
     }
@@ -70,6 +74,32 @@ public enum LaneChoice {
 
 extension UInt64 {
     var gb: String { String(format: "%.2f GB", Double(self) / 1e9) }
+    var mbps: String { String(format: "%.0f MB/s", Double(self) / 1e6) }
+}
+
+/// Lanes whose weights need a faster volume than the one measured (GPP-1 §3.2.1): a lane's
+/// `minSustainedReadBytesPerSecond` above what the engine read is a mid-run crash, so the lane isn't chosen.
+public enum StorageFloor {
+    /// `model` without the lanes `read` is too slow for. A named lane among them is a refusal; with no lane left,
+    /// so is the request. The default moves to the first lane left, reported as a fallback from the old one.
+    public static func filter(_ model: PluginManifest.Model, read: UInt64?, named: String?) throws(LaneChoice.Refusal)
+        -> (model: PluginManifest.Model, skipped: PluginManifest.Lane?)
+    {
+        guard let read else { return (model, nil) }
+        func tooSlow(_ lane: PluginManifest.Lane) -> Bool { (lane.resolved.minSustainedReadBytesPerSecond ?? 0) > read }
+        if let named, let lane = model.lanes.first(where: { $0.id == named }), tooSlow(lane) {
+            throw .storageBelowFloor(named, readBytesPerSecond: read, floorBytesPerSecond: lane.resolved.minSustainedReadBytesPerSecond ?? 0)
+        }
+        var kept = model
+        kept.lanes = model.lanes.filter { !tooSlow($0) }
+        guard let first = kept.lanes.first else {
+            let floor = model.lanes.compactMap(\.resolved.minSustainedReadBytesPerSecond).min() ?? 0
+            throw .storageBelowFloor(model.lanes.map(\.id).joined(separator: ", "), readBytesPerSecond: read, floorBytesPerSecond: floor)
+        }
+        let skipped = model.lanes.first(where: \.default).flatMap { tooSlow($0) ? $0 : nil }
+        if skipped != nil { kept.lanes = kept.lanes.map { var l = $0; l.default = l.id == first.id; return l } }
+        return (kept, skipped)
+    }
 }
 
 /// A run handed to a plugin worker.
@@ -189,6 +219,8 @@ public actor Scheduler: WorkerControl {
     }
 
     var slots: [String: Slot] = [:]
+    /// What the engine measured of each model's weights volume when it refused a lane (`plugin/model` → bytes per second).
+    var volumeReads: [String: UInt64] = [:]
     var busy: Set<String> = []
     /// Called whenever a worker starts or stops (the System page's process list).
     var onWorkersChanged: (@Sendable () -> Void)?
@@ -356,14 +388,24 @@ public actor Scheduler: WorkerControl {
             await retire(plugin: job.pluginID)
         }
 
-        let preferred = try? database.setting(Self.laneSetting(plugin: plugin.id, model: model.id))
-        let (lane, fellBackFrom) = try await chooseLane(model, plugin: plugin.id, named: job.namedLane, preferred: preferred ?? nil,
-                                                        conduct: requeued ? .waiting : .preempting)
+        // Lanes the weights' volume is already known to be too slow for are never chosen (GPP-1 §3.2.1).
+        let storageKey = "\(plugin.id)/\(model.id)"
+        let (fast, skipped) = try StorageFloor.filter(model, read: volumeReads[storageKey], named: job.namedLane)
+        let preferred = (try? database.setting(Self.laneSetting(plugin: plugin.id, model: model.id))) ?? nil
+        let (lane, memoryFallback) = try await chooseLane(fast, plugin: plugin.id, named: job.namedLane,
+                                                          preferred: preferred.flatMap { p in fast.lanes.contains { $0.id == p } ? p : nil },
+                                                          conduct: requeued ? .waiting : .preempting)
+        var fellBackFrom = memoryFallback
         var fallbackMessage: String?
-        if let fellBackFrom {
-            fallbackMessage = "Loaded \(model.id) lane \(lane.id) (\(LaneChoice.need(lane).gb)) instead of the default \(fellBackFrom.id) "
-                + "(\(LaneChoice.need(fellBackFrom).gb)), which doesn't fit in the memory free now."
-            log("scheduler: lane_fallback \(model.id): \(fellBackFrom.id) → \(lane.id)")
+        if let skipped, skipped.id != lane.id {
+            fellBackFrom = skipped
+            fallbackMessage = "Loaded \(model.id) lane \(lane.id) instead of the default \(skipped.id), whose weights need a volume "
+                + "that reads \((skipped.resolved.minSustainedReadBytesPerSecond ?? 0).mbps); this one reads \((volumeReads[storageKey] ?? 0).mbps)."
+            log("scheduler: lane_fallback \(model.id): \(skipped.id) → \(lane.id) (storage floor)")
+        } else if let memoryFallback {
+            fallbackMessage = "Loaded \(model.id) lane \(lane.id) (\(LaneChoice.need(lane).gb)) instead of the default \(memoryFallback.id) "
+                + "(\(LaneChoice.need(memoryFallback).gb)), which doesn't fit in the memory free now."
+            log("scheduler: lane_fallback \(model.id): \(memoryFallback.id) → \(lane.id)")
         }
 
         let worker = try await ensureWorker(plugin)
@@ -372,7 +414,17 @@ public actor Scheduler: WorkerControl {
                 try await worker.unload(model: model.id)
                 slots[plugin.id]?.prepared[model.id] = nil
             }
-            try await worker.prepare(model: model.id, lane: lane.id)
+            do {
+                try await worker.prepare(model: model.id, lane: lane.id)
+            } catch let failure as WorkerFailure where failure.code == "storage_below_floor" {
+                // Measured now: remember it, so the next choice skips every lane this volume can't feed, and choose again.
+                let read = failure.detail?["read_bytes_per_s"]?.intValue.map { UInt64(max(0, $0)) } ?? 0
+                volumeReads[storageKey] = read
+                log("scheduler: \(model.id) lane \(lane.id) refused: the weights' volume reads \(read.mbps) (\(failure.message))")
+                database.record("storage_below_floor", plugin: plugin.id, version: plugin.version,
+                                "\(model.id) \(lane.id): \(failure.message)")
+                return try await attempt(job, progress: progress, requeued: requeued)
+            }
             slots[plugin.id]?.prepared[model.id] = lane
         }
 

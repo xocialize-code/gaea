@@ -11,12 +11,16 @@ public struct WorkerFailure: Error, Sendable, CustomStringConvertible {
     public var retryable: Bool
     /// The worker exited or was killed while the request was open (SRV-8 requeues a run once).
     public var workerExited: Bool
+    /// The error line's `detail` (GPP-1 §3.5), e.g. a `storage_below_floor`'s measurement.
+    public var detail: [String: JSONValue]?
 
-    public init(code: String, message: String, retryable: Bool = false, workerExited: Bool = false) {
+    public init(code: String, message: String, retryable: Bool = false, workerExited: Bool = false,
+                detail: [String: JSONValue]? = nil) {
         self.code = code
         self.message = message
         self.retryable = retryable
         self.workerExited = workerExited
+        self.detail = detail
     }
 
     public var description: String { "\(code): \(message)" }
@@ -434,7 +438,7 @@ public final class WorkerProcess: @unchecked Sendable {
             } else if type == "error" {
                 pending.continuation.resume(throwing: WorkerFailure(
                     code: message["code"]?.stringValue ?? "internal", message: message["message"]?.stringValue ?? "",
-                    retryable: message["retryable"]?.boolValue ?? false))
+                    retryable: message["retryable"]?.boolValue ?? false, detail: message["detail"]?.objectValue))
             } else {
                 pending.continuation.resume(returning: message)
             }
