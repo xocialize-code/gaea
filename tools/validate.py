@@ -284,6 +284,7 @@ CONVERSATION = {
     "memory.query": (set(), {"memory", "error"}),
     "cancel": (set(), set()),
     "shutdown": (set(), set()),
+    "asset_removed": (set(), set()),
     "storage.get": (set(), {"storage.result", "error"}),
     "storage.put": (set(), {"storage.result", "error"}),
     "storage.delete": (set(), {"storage.result", "error"}),
@@ -322,6 +323,7 @@ def check_transcript(path, manifest_path=None):
     manifest = load(manifest_file) if manifest_file else None
     sent = {"H": {}, "W": {}}          # id -> request message, per sender
     ended = set()                      # (sender of request, id)
+    streamed = {}                      # run id -> {output: (next index, final seen)}
     jobs = {}                          # job -> run id
     hello = False
     shutdown = False
@@ -386,6 +388,7 @@ def check_transcript(path, manifest_path=None):
                 errs.append(f"{where}: cancel names job {msg['job']}, which never ran")
             if manifest is not None and "model" in msg and t in ("materialize", "prepare", "run", "unload"):
                 errs += check_against_manifest(msg, manifest, where)
+        errs += check_stream(msg, sent, streamed, where)
         if "re" in msg:
             other = "W" if sender == "H" else "H"
             req = sent[other].get(msg["re"])
@@ -421,6 +424,38 @@ def check_transcript(path, manifest_path=None):
                 died = exited is not None and not shutdown
                 if not cancelled and not died:
                     errs.append(f"{label}: {req['type']} {rid} never ended")
+    return errs
+
+
+def check_stream(msg, sent, streamed, where):
+    """A streamed output's chunks (§3.3): only for an output the run asked to stream, numbered from 0 with no gaps, one
+    final and it last; the result lists each streamed output with streamed=true and no path, and every one has ended."""
+    t, errs = msg["type"], []
+    req = sent["H"].get(msg.get("re"))
+    if req is None or req["type"] != "run":
+        return errs
+    asked = set(req.get("streams", []))
+    state = streamed.setdefault(req["id"], {})
+    if t == "chunk" and "encoding" in msg:
+        out = msg["output"]
+        if out not in asked:
+            return [f"{where}: a PCM chunk of {out}, which the run didn't ask to stream"]
+        index, final = state.get(out, (0, False))
+        if final:
+            errs.append(f"{where}: a chunk of {out} after its final chunk")
+        if msg["index"] != index:
+            errs.append(f"{where}: chunk {msg['index']} of {out}, expected {index}")
+        state[out] = (index + 1, bool(msg.get("final")))
+    elif t == "result":
+        listed = {o["name"] for o in msg["outputs"] if o.get("streamed")}
+        for o in msg["outputs"]:
+            if o.get("streamed") and ("path" in o or "value" in o):
+                errs.append(f"{where}: streamed output {o['name']} also has a path or a value")
+            if o.get("streamed") and o["name"] not in asked:
+                errs.append(f"{where}: output {o['name']} is streamed, but the run didn't ask to stream it")
+        for out in sorted(listed):
+            if not state.get(out, (0, False))[1]:
+                errs.append(f"{where}: the result lists {out} as streamed, but its final chunk never came")
     return errs
 
 

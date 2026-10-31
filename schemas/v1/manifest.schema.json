@@ -241,6 +241,14 @@
         },
         "adapter_support": {
           "$ref": "#/$defs/AdapterSupport"
+        },
+        "voices": {
+          "description": "The preset voices the model offers for this operation (MES Base §6.5), id first; Gaea serves them as the model's voice list, and the offer's model.supports.voices is their count.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "../vendor/mes-v0/voices.schema.json#/$defs/Voice"
+          }
         }
       }
     },

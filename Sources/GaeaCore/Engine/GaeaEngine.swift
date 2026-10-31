@@ -145,16 +145,53 @@ public struct GaeaEngine: MediaEngine {
             descriptor.extensions = extensions.isEmpty ? nil : extensions
             descriptors.append(descriptor)
         }
+        for var descriptor in audioDescriptors(routes) {
+            let served = routes.filter { $0.operation == descriptor.operation }
+            descriptor.extensions = Self.extensions(served)
+            descriptors.append(descriptor)
+        }
         return descriptors
     }
 
+    /// The lane extension (MEM-7) and the offers' own `x-` options (Base §6.2), for a descriptor whose offers run as
+    /// themselves.
+    static func extensions(_ served: [PluginRoute]) -> [ExtensionSpec]? {
+        var extensions: [ExtensionSpec] = []
+        var seen = Set<String>()
+        let lanes = Array(Set(served.flatMap { $0.allowedLanes.map(\.id) })).sorted()
+        if lanes.count > 1, seen.insert(laneExtension).inserted {
+            extensions.append(ExtensionSpec(name: laneExtension, title: "Lane", schema: [
+                "type": "string", "enum": .array(lanes.map { .string($0) }),
+                "x-mes-ui": ["label": "Lane", "widget": "picker", "advanced": true,
+                             "help": "Run this lane (quant) or refuse; without it Gaea picks the default lane, or a smaller one that fits."],
+            ]))
+        }
+        for route in served {
+            for (name, schema) in route.extensions where seen.insert(name).inserted {
+                let title = schema["x-mes-ui"]?["label"]?.stringValue ?? schema["title"]?.stringValue ?? name
+                extensions.append(ExtensionSpec(name: name, title: title, schema: schema.mes))
+            }
+        }
+        return extensions.isEmpty ? nil : extensions
+    }
+
     public func validate(_ request: JobRequest, descriptor: Descriptor) throws {
+        if descriptor.profile == AudioProfile.id { return try AudioProfileRules.validate(request, descriptor: descriptor) }
         try normalizer.validate(request, descriptor: descriptor)
     }
 
     public func defaultModel(for request: JobRequest, descriptor: Descriptor, kitChoice: ModelOffer,
                              candidates: [ModelOffer]) -> ModelOffer? {
-        normalizer.defaultModel(for: request, descriptor: descriptor, kitChoice: kitChoice, candidates: candidates)
+        guard descriptor.profile == ImageProfile.id else { return nil }
+        return normalizer.defaultModel(for: request, descriptor: descriptor, kitChoice: kitChoice, candidates: candidates)
+    }
+
+    public func voices(operation: String, model: String) async -> [Voice] {
+        await audioVoices(operation: operation, model: model)
+    }
+
+    public func assetRemoved(_ id: String) async {
+        await scheduler.assetRemoved(id)
     }
 
     /// The descriptor's limits from its offers' (GPP-1 §4.3): the largest each offer allows, when every offer says.
@@ -205,6 +242,7 @@ public struct GaeaEngine: MediaEngine {
         guard let route = await liveRoutes().first(where: { $0.operation == context.operation && $0.model.id == context.model.id }) else {
             throw MESError(.modelUnavailable, "\(context.model.id) isn't enabled for \(context.operation).")
         }
+        if context.descriptor.profile == AudioProfile.id { return try await runAudio(route, context) }
         return try await run(route, context)
     }
 
@@ -495,7 +533,9 @@ struct PluginOffers: Sendable {
         var routes: [PluginRoute] = []
         for plugin in await manager.installed() {
             for manifestOffer in plugin.manifest.offers {
-                guard manifestOffer.profile == ImageProfile.id, ImageProfile.operations.operations[manifestOffer.operation] != nil,
+                let known = manifestOffer.profile == ImageProfile.id ? ImageProfile.operations.operations[manifestOffer.operation] != nil
+                    : manifestOffer.profile == AudioProfile.id && AudioProfile.operations.operations[manifestOffer.operation] != nil
+                guard known,
                       let id = manifestOffer.modelID, let model = plugin.model(id),
                       var offer = try? JSONDecoder().decode(ModelOffer.self, from: JSONEncoder().encode(manifestOffer.model))
                 else { continue }

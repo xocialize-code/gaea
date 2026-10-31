@@ -4,7 +4,7 @@
 |---|---|
 | **Status** | Draft 1.0, 2026-10-28 (AB-T-0353) |
 | **Schemas** | [`schemas/v1/gpp.schema.json`](../schemas/v1/gpp.schema.json) (one line), [`schemas/v1/manifest.schema.json`](../schemas/v1/manifest.schema.json) (manifest.json) |
-| **Builds on** | mlx-engine-swift ≥ 0.72.0 (contract 1.57.0, AB-A-0206); MES Base 0.1 and MESKit 0.5.0 (vendored in [`schemas/vendor/mes-v0`](../schemas/vendor/mes-v0)) |
+| **Builds on** | mlx-engine-swift ≥ 0.72.0 (contract 1.57.0, AB-A-0206); MES Base 0.1, Image 0.1 and Audio 0.1, MESKit 0.7.0 (vendored in [`schemas/vendor/mes-v0`](../schemas/vendor/mes-v0)) |
 | **Plan** | [Gaea - Plan.md](../Docs/Gaea%20-%20Plan.md) §3; decisions G-2 to G-5 and G-18 (AB-D-0164 to AB-D-0167, AB-D-0180) |
 
 GPP is how the Gaea host talks to a plugin's worker process. The worker is a signed executable in a `.gaeaplugin`
@@ -100,11 +100,12 @@ runs well past its declaration is a manifest bug, logged against the plugin vers
 
 | Message | Dir | Fields | Meaning |
 |---|---|---|---|
-| `run` | H→W | `id`, `job`, `operation`, `model`, `lane`, `inputs {name: path or [paths]}`, `params`, `model_params`?, `adapters[]`?, `seed`?, `output_dir` | One job. |
+| `run` | H→W | `id`, `job`, `operation`, `model`, `lane`, `inputs {name: path or [paths]}`, `params`, `model_params`?, `adapters[]`?, `seed`?, `streams[]`?, `assets`?, `output_dir` | One job. `streams` names the outputs to stream (§3.3.1); `assets` gives the MES asset id behind each input value (§3.3.2). |
 | `progress` | W→H | `re`, `job`, `stage`, `step`?, `of`?, `fraction`?, `message`? | `stage` is the worker's own phase (`encode_prompt`, `denoise`, `decode`). Gaea reports MES stage `running` with this detail. |
-| `chunk` | W→H | `re`, `job`, `output`, `index`, `path`, `media_type`, `final`? | One piece of a streamed output (MES RFC 0002), already written. `result` still follows. |
+| `chunk` | W→H | `re`, `job`, `output`, `index`, `path`, `media_type`, `final`?, `encoding`?, `sample_rate`?, `channels`? | One piece of a streamed output, already written. For a stream the run asked for, a PCM file (§3.3.1). `result` still follows. |
 | `result` | W→H | `re`, `job`, `outputs[]`, `effective`, `warnings[]`, `seconds` | Success. Each output has `path` and `media_type`, or a `value`. |
 | `cancel` | H→W | `id`, `job` | Stop cooperatively. The run ends with `error` code `cancelled`, or with its `result` if it finished first. Nothing answers `cancel` itself. |
+| `asset_removed` | H→W | `id`, `asset` | An MES asset is gone (§3.3.2). Nothing answers. |
 
 `inputs` are paths even for text and data: Gaea writes a text input (an MES `prompt`, an `instruction`) to a UTF-8
 `.txt` file and a data input (`points`) to a `.json` file in the job's spool, one file per value, and sends a list
@@ -119,6 +120,37 @@ the offer's `adapters_meta` or from the operator's registration (§4.8). Trigger
 been applied to the text inputs. The worker owns the
 model-specific mapping (size grid, steps, masks, tiling) and reports what it actually used in `effective`, which
 Gaea merges into the MES result along with provenance and licences.
+
+#### 3.3.1 Streamed outputs
+
+An MES client may ask for an output as a stream (MES Base §7.2, RFC 0002): its samples arrive as `job.output_chunk`
+events while the job runs, and MESKit writes the output's file from them. Gaea asks the worker with `run.streams`, the
+names of the outputs to stream, and only for an offer whose `model.supports.stream` is true.
+
+- **Each chunk is a file.** The worker writes the samples to a file under `output_dir` and sends `chunk` with its
+  `path`, `media_type` `audio/pcm`, `encoding` `pcm_f32le` (32-bit float) or `pcm_s16le` (16-bit integer, for samples
+  a model already made as integers), little-endian and interleaved, the model's own `sample_rate` and `channels`, and an `index` counted from 0 per output with no gaps. The last chunk has `final`, and
+  an empty final chunk is allowed. Media still never travels in JSON (§1).
+- **Gaea converts, forwards and deletes.** It converts each chunk to the client's stream format (encoding, rate,
+  channels), forwards it, and deletes the file. A `pcm_s16le` chunk already in the client's format passes through
+  untouched. MESKit splits and numbers what the client sees, and holds the final
+  chunk until the job succeeds.
+- **The result lists the output as `streamed`.** `{name, streamed: true}`, with no path or value. A worker that can't
+  stream an output it was asked for returns it as a file instead, and Gaea sends that file's samples as the stream.
+- **Cancelling.** A client that releases a streaming job (barge-in) has it cancelled. The worker must stop within one
+  chunk.
+
+`GaeaPluginKit` emits chunks with `RunContext.emit` and `EngineSession.emit`, and `EngineSession.stream` runs a
+`StreamEmitting` package (MLXEngine contract 1.25) and sends each of its chunks as it arrives.
+
+#### 3.3.2 Assets
+
+An MES input may name an asset, a file a client keeps on the engine for reuse (Base §8.1): a voice reference cloned
+from again and again. `run.assets` gives the asset id behind each input value, by input name, with `null` for a value
+that isn't an asset. A worker may cache what it derives from an input (an encoded reference) only under that id, never
+under the file's bytes, and only while the asset exists (Base §13 rule 6). When the asset is deleted or expires, or
+its client unpairs, Gaea sends `asset_removed` to every running worker of a plugin with an Audio offer, and the
+worker drops the cache within 60 s. A value that isn't an asset is never cached past its job.
 
 ### 3.4 Stop
 
@@ -193,8 +225,14 @@ What Gaea advertises to MES clients. Each offer is one model for one operation:
 - `defaults` for profile-vocabulary params, and `limits` (pixels, sides, size multiple, images, seconds, frames,
   sample rates, and `max_layer_count` for `image.decompose`);
 - `supports`: what the model does beyond the operation's required behaviour, by key, absent keys false. Today one key:
-  `composite`, for an `image.decompose` model that returns its own reconstruction of the canvas (MES Image §3.2). The
-  names follow MES RFC 0004's A5, so they carry over when MES offers gain `supports` and `limits` (RFC 0003);
+  `composite`, for an `image.decompose` model that returns its own reconstruction of the canvas (MES Image §3.2);
+- **the MES offer's own `supports` and `limits`** (Base §6.4, RFC 0003) go inside `model`, which is an MES
+  `ModelOffer`, and Gaea serves them as given. An Audio offer declares there the facts and gates its profile names
+  (Audio §4): `sample_rate` and `channels`, `languages`, `stream`, `seed: false` for an unseeded model, `voices` (a
+  count), the per-operation keys (`voice_ref`, `emotions`, `cues`, `edits`, …), and limits such as `max_text_chars`
+  and `max_duration_s`. MESKit gates, routes and warns from them;
+- `voices`: the model's preset voices for this operation, MES `Voice` objects (`id`, `title`, `languages`, `tags`,
+  `notes`, `sample`, `license`). Gaea serves them as the model's voice list (Base §6.5), and routes `voice` by it;
 - `adapter_support`: which adapters the model takes for this operation, from its package's `AdapterSupport`:
   `base_model` (the package's adapter base id), `formats`, `kinds`, `max_count` and `strength {min, max}`. An offer
   without it takes no adapters, and Gaea attaches none of the operator's to it (§4.8);

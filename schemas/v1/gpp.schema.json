@@ -32,7 +32,8 @@
         "storage.put",
         "storage.delete",
         "storage.query",
-        "storage.result"
+        "storage.result",
+        "asset_removed"
       ]
     }
   },
@@ -395,6 +396,21 @@
       },
       "then": {
         "$ref": "#/$defs/storage.result"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "asset_removed"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/asset_removed"
       }
     }
   ],
@@ -800,6 +816,45 @@
         },
         "output_dir": {
           "$ref": "common.schema.json#/$defs/Path"
+        },
+        "streams": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "description": "The outputs to stream (MES Base §7.2, GPP-1 §3.3): the worker sends their samples as pcm_f32le chunk files and lists each in the result with streamed=true. Sent only for an offer whose model supports stream."
+        },
+        "assets": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "description": "The MES asset id behind each input value, by input name, null for a value that isn't an asset (MES Base §13 rule 6): a worker keys what it caches from an input by it."
         }
       }
     },
@@ -846,7 +901,7 @@
       }
     },
     "chunk": {
-      "description": "W→H. One piece of a streamed output (MES RFC 0002), already written to path. The last piece has final=true; the result still follows.",
+      "description": "W→H. One piece of a streamed output, already written to path. A stream the host asked for (run.streams) is raw PCM: encoding pcm_f32le (32-bit float) or pcm_s16le (16-bit integer), little-endian, interleaved, at sample_rate and channels, numbered from 0, the last with final=true; the host forwards it to the client and deletes the file. The result still follows.",
       "type": "object",
       "required": [
         "type",
@@ -884,7 +939,34 @@
         },
         "final": {
           "type": "boolean"
+        },
+        "encoding": {
+          "enum": [
+            "pcm_f32le",
+            "pcm_s16le"
+          ]
+        },
+        "sample_rate": {
+          "type": "integer",
+          "minimum": 8000,
+          "maximum": 192000
+        },
+        "channels": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2
         }
+      },
+      "if": {
+        "required": [
+          "encoding"
+        ]
+      },
+      "then": {
+        "required": [
+          "sample_rate",
+          "channels"
+        ]
       }
     },
     "result": {
@@ -930,7 +1012,11 @@
               "media_type": {
                 "$ref": "../vendor/mes-v0/common.schema.json#/$defs/MediaType"
               },
-              "value": {}
+              "value": {},
+              "streamed": {
+                "const": true,
+                "description": "The output went to the host as chunks (run.streams); it has no path."
+              }
             },
             "anyOf": [
               {
@@ -942,6 +1028,11 @@
               {
                 "required": [
                   "value"
+                ]
+              },
+              {
+                "required": [
+                  "streamed"
                 ]
               }
             ]
@@ -1280,6 +1371,28 @@
           "type": "boolean"
         }
       }
+    },
+    "asset_removed": {
+      "description": "H→W. An MES asset was deleted or expired, or its client unpaired (MES Base §8.1, §13 rule 6): drop anything cached from it within 60 s. Nothing replies.",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "asset"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "asset_removed"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/RequestId"
+        },
+        "asset": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
     }
   },
   "x-gaea-direction": {
@@ -1306,6 +1419,7 @@
     "storage.put": "W→H",
     "storage.delete": "W→H",
     "storage.query": "W→H",
-    "storage.result": "H→W"
+    "storage.result": "H→W",
+    "asset_removed": "H→W"
   }
 }

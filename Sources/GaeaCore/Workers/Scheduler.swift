@@ -88,6 +88,10 @@ public struct WorkerJob: Sendable {
     public var adapters: [JSONValue]
     public var seed: Int?
     public var outputDir: URL
+    /// The outputs the worker streams (GPP-1 §3.3.1). A run that streams is never requeued: its client has chunks already.
+    public var streams: [String] = []
+    /// The MES asset id behind each input value (GPP-1 §3.3.2).
+    public var assets: [String: JSONValue] = [:]
 
     public init(job: String, pluginID: String, model: String, operation: String, namedLane: String? = nil, lanes: [String]? = nil,
                 params: [String: JSONValue] = [:], inputs: [String: JSONValue] = [:], modelParams: [String: JSONValue]? = nil,
@@ -307,7 +311,7 @@ public actor Scheduler: WorkerControl {
         let outcome: Result<WorkerJobResult, Error>
         do {
             outcome = .success(try await attempt(job, progress: progress, requeued: false))
-        } catch let failure as WorkerFailure where failure.workerExited && !Task.isCancelled {
+        } catch let failure as WorkerFailure where failure.workerExited && !Task.isCancelled && job.streams.isEmpty {
             log("scheduler: \(job.pluginID)'s worker died during \(job.job) (\(failure.message)); requeueing once")
             database.record("worker_died", plugin: job.pluginID, version: slots[job.pluginID]?.plugin.version, "during \(job.job): \(failure.message)")
             slots[job.pluginID] = nil
@@ -379,6 +383,8 @@ public actor Scheduler: WorkerControl {
         if let modelParams = job.modelParams, !modelParams.isEmpty { fields["model_params"] = .object(modelParams) }
         if !job.adapters.isEmpty { fields["adapters"] = .array(job.adapters) }
         if let seed = job.seed { fields["seed"] = .int(Int64(seed)) }
+        if !job.streams.isEmpty { fields["streams"] = .array(job.streams.map(JSONValue.string)) }
+        if !job.assets.isEmpty { fields["assets"] = .object(job.assets) }
         try FileManager.default.createDirectory(at: job.outputDir, withIntermediateDirectories: true)
 
         let result = try await withTaskCancellationHandler {
@@ -551,6 +557,14 @@ public actor Scheduler: WorkerControl {
     }
 
     /// Releases a model from memory if no job is using it: `unload` to its worker, which stops once nothing is left.
+    /// An MES asset is gone (GPP-1 §3.3.2): every running worker of a plugin with an Audio offer drops what it cached from
+    /// it. Nothing answers.
+    public func assetRemoved(_ asset: String) {
+        for slot in slots.values where slot.worker.isRunning && slot.plugin.manifest.offers.contains(where: { $0.profile == "audio" }) {
+            slot.worker.send(["type": "asset_removed", "id": .string(UUID().uuidString), "asset": .string(asset)])
+        }
+    }
+
     public func unload(model id: String) async {
         guard let slot = slots.values.first(where: { $0.prepared[id] != nil }), !busy.contains(slot.plugin.id) else { return }
         if slot.prepared.count == 1 {
