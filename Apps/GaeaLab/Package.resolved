@@ -1,5 +1,5 @@
 {
-  "originHash" : "db7964b58ace3ba51cccfaa455ad1ca2f741c9c668aa42713a68f1afe102535e",
+  "originHash" : "0d8f419ca7f0e4ad153127fe07b52d0dd5b4aa97ccbe05dfd6718c78416151ee",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -69,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xocialize/pixel-agency-run.git",
       "state" : {
-        "revision" : "bba75ed373f3598a8d8ee627b5363cec6c0e6c7f",
-        "version" : "0.1.0"
+        "revision" : "b70fb99278727312986fd461853718c2af5933bb",
+        "version" : "0.2.0"
       }
     },
     {

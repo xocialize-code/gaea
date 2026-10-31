@@ -428,8 +428,13 @@ starts while the phase before it is being built.
          pass. See [Evidence/AB-T-0399](Evidence/AB-T-0399/README.md).
      - With AB-T-0399 every Audio 0.1 operation has a plugin, which is AB-T-0394's Done. VoxCPM2, MOSS-TTS, AuK, YuE2 and
        MiniMax Music 3 would add more offers, one order each if wanted.
-  5. AB-T-0395: the exit. It needs Gaea Lab on audio, on MESClientKit's assets, voices and chunks, released in
-     media-engine-spec v0.8.0.
+  5. AB-T-0395: the exit. **Done** (2026-10-31):
+     - **Conformance:** Audio 0.1 conforms with every G2 plugin (65/0/10, all 14 Audio tests run).
+     - **Gaea Lab:** it runs speak (streamed), design_voice, edit_speech, generate and compose against Gaea, through
+       `lab-run` and the app. It's built on pixel-agency-run 0.2.0 (audio in the shared run workflow, AB-A-0234) and
+       media-engine-spec 0.8.0, with the pool's assets and voices.
+     - See [Evidence/AB-T-0395](Evidence/AB-T-0395/README.md).
+- **G2 exited 2026-10-31.**
 
 **G3. Video**
 - Base time conventions, then Video 0.1.

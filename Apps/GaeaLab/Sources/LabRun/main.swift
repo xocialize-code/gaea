@@ -30,6 +30,9 @@ struct LabRun: AsyncParsableCommand {
     @Option(help: "An adapter (LoRA) as id or id=strength. Repeatable.") var adapter: [String] = []
     @Option(help: "Where to save the results.") var out: String
     @Option(help: "Also write where the job ran, and its provenance, as JSON here.") var report: String?
+    @Option(help: "Stream this output as it's made (e.g. audio): write the chunks, then the final file.") var stream: String?
+    @Flag(help: "List --model's voices for --operation through the pool, save the first one's sample in --out, and stop.")
+    var voices = false
 
     @MainActor
     func run() async throws {
@@ -57,6 +60,20 @@ struct LabRun: AsyncParsableCommand {
             return AdapterRequest(id: String(pair[..<eq]), strength: strength)
         }, for: operation)
 
+        if voices {
+            guard let model else { throw ValidationError("--voices needs --model.") }
+            let list = try await pool.voices(operation: operation, model: model)
+            print("\(list.voices.count) voices: \(list.voices.map(\.id).joined(separator: ", "))")
+            if let first = list.voices.first(where: { $0.sample != nil }) {
+                let folder = URL(fileURLWithPath: (out as NSString).expandingTildeInPath, isDirectory: true)
+                try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+                let file = folder.appending(path: "\(first.id)-sample.wav")
+                try await pool.sample(of: first).write(to: file)
+                print("saved \(file.path)")
+            }
+            return
+        }
+
         let session = SessionLog()
         defer { session.clear() }
         let run = RunSession(engine: pool, engineInfo: info, descriptor: descriptor, folder: session.folder)
@@ -81,13 +98,45 @@ struct LabRun: AsyncParsableCommand {
         }
         run.form.model = model
         if let missing = run.missingInputs.first { throw ValidationError("\(operation) needs input '\(missing.name)'.") }
+        let folder = URL(fileURLWithPath: (out as NSString).expandingTildeInPath, isDirectory: true)
+
+        // Streaming, as pa-run does it: only when asked for here (the workflow's default doesn't apply to a command). The
+        // chunks are written to <out>/<output>-stream.wav as they arrive; the finished file is saved as usual.
+        run.form.stream = stream != nil
+        var writer: WAVStreamWriter?
+        var problem: (any Error)?
+        if let stream {
+            guard run.form.streamableOutputs.contains(where: { $0.name == stream }) else {
+                throw ValidationError("\(operation) has no output \(stream) that streams.")
+            }
+            guard run.form.canStream else { throw ValidationError("\(run.form.effectiveModel?.title ?? "No model") doesn't stream.") }
+            try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+            run.onChunk = { chunk in
+                guard chunk.output == stream, problem == nil else { return }
+                do {
+                    if writer == nil, let format = chunk.format {
+                        writer = try WAVStreamWriter(url: folder.appendingPathComponent("\(stream)-stream.wav"), format: format)
+                    }
+                    if let samples = chunk.samples { try writer?.append(samples) }
+                } catch { problem = error }
+            }
+        }
 
         await run.run()
         let route = run.job.flatMap { pool.route(of: $0.id) }
         if let route { print("ran on \(route.engineName)\(route.model.map { " · picked for \($0)" } ?? "")") }
+        if let stream {
+            if let problem { FileHandle.standardError.write(Data("couldn't write the stream: \(problem)\n".utf8)) }
+            if let s = run.streamed {
+                if let after = s.firstChunkAfter { print("first chunk after \(Int((after * 1000).rounded())) ms") }
+                print("streamed \(s.chunks) chunk\(s.chunks == 1 ? "" : "s"), \(String(format: "%.2f", s.seconds)) s\(s.finished ? "" : " (no final chunk)")")
+            } else {
+                print("no chunks of \(stream) arrived")
+            }
+            if let url = try writer?.finish() { print("saved \(url.path)") }
+        }
         switch run.phase {
         case .finished:
-            let folder = URL(fileURLWithPath: (out as NSString).expandingTildeInPath, isDirectory: true)
             try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
             for result in run.results { print("saved \(try ResultExporter.save(result, to: folder).path)") }
             let provenance = run.results.first?.provenance

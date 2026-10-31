@@ -8,18 +8,22 @@ import SwiftUI
 // Gaea Lab.
 //
 //   GaeaLab                                   the app
-//   GaeaLab --snapshot <dir> --engine <url>…  add those servers, choose image.generate on Qwen-Image Flash with a LoRA,
-//                                             run it on "Every server", and render the window before and after to PNGs
-//                                             (light and dark), then quit
+//   GaeaLab --snapshot <dir> --engine <url>… [--operation image.generate | audio.speak | audio.compose]
+//                                             add those servers, choose the operation with a preset (image.generate on
+//                                             Qwen-Image Flash with a LoRA; audio.speak on Kokoro with a voice, streamed;
+//                                             audio.compose on ACE-Step with lyrics and timestamps), run it on "Every
+//                                             server", and render the window before and after to PNGs (light and dark),
+//                                             then quit
 let arguments = CommandLine.arguments
 if let i = arguments.firstIndex(of: "--snapshot"), i + 1 < arguments.count {
     let directory = URL(fileURLWithPath: arguments[i + 1], isDirectory: true)
     let engines = arguments.indices.filter { arguments[$0] == "--engine" && $0 + 1 < arguments.count }.compactMap { URL(string: arguments[$0 + 1]) }
+    let operation = arguments.firstIndex(of: "--operation").flatMap { $0 + 1 < arguments.count ? arguments[$0 + 1] : nil } ?? "image.generate"
     MainActor.assumeIsolated {
         let app = NSApplication.shared
         app.setActivationPolicy(.prohibited)
         Task { @MainActor in
-            await Snapshot.render(to: directory, engines: engines)
+            await Snapshot.render(to: directory, engines: engines, operation: operation)
             exit(0)
         }
         app.run()
@@ -30,31 +34,52 @@ if let i = arguments.firstIndex(of: "--snapshot"), i + 1 < arguments.count {
 
 @MainActor
 enum Snapshot {
-    static func render(to directory: URL, engines: [URL]) async {
+    static func render(to directory: URL, engines: [URL], operation: String) async {
         try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         let lab = LabModel.shared
         for url in engines { _ = try? await lab.directory.add(url: url) }
         await lab.refreshPool()
-        guard let run = lab.workflow.operations.first(where: { $0.operation == "image.generate" }).map({ descriptor -> RunSession? in
+        guard let run = lab.workflow.operations.first(where: { $0.operation == operation }).map({ descriptor -> RunSession? in
             lab.workflow.choose(descriptor)
             return lab.workflow.current
         }) ?? nil else {
-            print("no image.generate on the pool")
+            print("no \(operation) on the pool")
             return
         }
-        run.form.model = "qwen-image-flash"
-        run.form.text["prompt"] = "a lighthouse on a cliff at dusk"
-        run.form.setValue(.number(7), at: ["seed"])
-        if let adapter = AdapterChoices.offered(by: run.descriptor, model: "qwen-image-flash").first?.adapter {
-            lab.choices.choose(adapter.id, strength: 0.8, on: true, for: "image.generate")
+        switch operation {
+        case "audio.speak":
+            run.form.model = "kokoro-82m"
+            run.streamByDefault()
+            run.form.text["text"] = "Gaea Lab speaks through Kokoro, streamed as it is made. [pause 0.5s] Then the whole take plays back."
+            run.form.setValue(.string("af_heart"), at: ["voice"])
+            run.form.setValue(.number(1), at: ["seed"])
+        case "audio.compose":
+            run.form.model = "ace-step-1.5"
+            run.form.text["caption"] = "Upbeat synth-pop with a bright female vocal and a driving beat."
+            run.form.text["lyrics"] = "[verse]\nLights on the water\nWe follow the line\n[chorus]\nRun all night"
+            run.form.setValue(.number(10), at: ["duration_s"])
+            run.form.setValue(.string("en"), at: ["language"])
+            run.form.setValue(.bool(true), at: ["timestamps"])
+            run.form.setValue(.number(5), at: ["seed"])
+        default:
+            run.form.model = "qwen-image-flash"
+            run.form.text["prompt"] = "a lighthouse on a cliff at dusk"
+            run.form.setValue(.number(7), at: ["seed"])
+            if let adapter = AdapterChoices.offered(by: run.descriptor, model: "qwen-image-flash").first?.adapter {
+                lab.choices.choose(adapter.id, strength: 0.8, on: true, for: "image.generate")
+            }
         }
         let save = directory.appending(path: "saved", directoryHint: .isDirectory)
         try? FileManager.default.createDirectory(at: save, withIntermediateDirectories: true)
-        await capture(lab, save: save, to: directory, name: "before")
+        await capture(lab, save: save, to: directory, name: "\(operation)-before")
         lab.workflow.start()
         while run.phase.isActive || run.phase == .editing { try? await Task.sleep(for: .milliseconds(500)) }
         print("run: \(run.phase); route: \(lab.currentRoute.map { "\($0.engineName)" } ?? "none")")
-        await capture(lab, save: save, to: directory, name: "after")
+        if let s = run.streamed {
+            print("streamed \(s.chunks) chunks, \(String(format: "%.2f", s.seconds)) s; first after \(s.firstChunkAfter.map { "\(Int($0 * 1000)) ms" } ?? "-")")
+        }
+        print("results: \(run.results.map { $0.output.name + ($0.isAudio ? " (audio)" : $0.isText ? " (text)" : "") }.joined(separator: ", "))")
+        await capture(lab, save: save, to: directory, name: "\(operation)-after")
         lab.end()
     }
 

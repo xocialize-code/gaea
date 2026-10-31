@@ -1,0 +1,117 @@
+# Gaea Lab on audio (AB-T-0395) 2026-10-31T17:50:52Z — Gaea 0.9.3, pixel-agency-run 0.2.0, media-engine-spec 0.8.0
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add gaea-plugin-kokoro by repo URL
+PASS  add gaea-plugin-qwen3-tts by repo URL
+PASS  add gaea-plugin-step-audio-editx by repo URL
+PASS  add gaea-plugin-moss-soundeffect by repo URL
+PASS  add gaea-plugin-ace-step by repo URL
+      ran on Gaea (127.0.0.1:17693) · picked for kokoro-82m
+      first chunk after 1023 ms
+      streamed 2 chunks, 5.47 s
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/speak-stream/audio-stream.wav
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/speak-stream/speak-20261031-105100.wav
+      model kokoro-82m · Apache-2.0
+      ran on Gaea (127.0.0.1:17693) · picked for kokoro-82m
+      first chunk after 1023 ms
+      streamed 2 chunks, 5.47 s
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/speak-stream/audio-stream.wav
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/speak-stream/speak-20261031-105100.wav
+      model kokoro-82m · Apache-2.0
+PASS  speak on Kokoro, streamed
+PASS  the streamed chunks are the final file's samples
+PASS  the first chunk came before the job ended
+      ran on Gaea (127.0.0.1:17693) · picked for qwen3-tts
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/speak-qwen/speak-20261031-105104.wav
+      model qwen3-tts · Apache-2.0
+      ran on Gaea (127.0.0.1:17693) · picked for qwen3-tts
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/speak-qwen/speak-20261031-105104.wav
+      model qwen3-tts · Apache-2.0
+PASS  speak on Qwen3-TTS with a voice and an emotion
+      ran on Gaea (127.0.0.1:17693) · picked for qwen3-tts-design
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/design/design_voice-20261031-105109.wav
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/design/design_voice-20261031-105109-1.wav
+      model qwen3-tts-design · Apache-2.0
+      ran on Gaea (127.0.0.1:17693) · picked for qwen3-tts-design
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/design/design_voice-20261031-105109.wav
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/design/design_voice-20261031-105109-1.wav
+      model qwen3-tts-design · Apache-2.0
+PASS  design_voice: two samples
+      ran on Gaea (127.0.0.1:17693) · picked for step-audio-editx
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/edit/edit_speech-20261031-105114.wav
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/edit/edit_speech-20261031-105114-1.json
+      model step-audio-editx · Apache-2.0
+      ran on Gaea (127.0.0.1:17693) · picked for step-audio-editx
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/edit/edit_speech-20261031-105114.wav
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/edit/edit_speech-20261031-105114-1.json
+      model step-audio-editx · Apache-2.0
+PASS  edit_speech: a laugh added, with the new transcript
+PASS  edit_speech saved the transcript output
+      ran on Gaea (127.0.0.1:17693) · picked for moss-soundeffect
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/generate/generate-20261031-105135.wav
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/generate/generate-20261031-105135-1.wav
+      model moss-soundeffect · Apache-2.0
+      ran on Gaea (127.0.0.1:17693) · picked for moss-soundeffect
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/generate/generate-20261031-105135.wav
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/generate/generate-20261031-105135-1.wav
+      model moss-soundeffect · Apache-2.0
+PASS  generate: two sounds of 1.5 s
+PASS  generate saved two WAVs of 72 000 frames
+      ran on Gaea (127.0.0.1:17693) · picked for ace-step-1.5
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/compose/compose-20261031-105142.wav
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/compose/compose-20261031-105142-1.json
+      model ace-step-1.5 · MIT
+      ran on Gaea (127.0.0.1:17693) · picked for ace-step-1.5
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/compose/compose-20261031-105142.wav
+      saved /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/compose/compose-20261031-105142-1.json
+      model ace-step-1.5 · MIT
+PASS  compose: a 10 s song with timestamps
+PASS  compose saved the song and its timed lines
+      speak-stream: Gaea (127.0.0.1:17693) · kokoro-82m
+      speak-qwen: Gaea (127.0.0.1:17693) · qwen3-tts
+      design: Gaea (127.0.0.1:17693) · qwen3-tts-design
+      edit: Gaea (127.0.0.1:17693) · step-audio-editx
+      generate: Gaea (127.0.0.1:17693) · moss-soundeffect
+      compose: Gaea (127.0.0.1:17693) · ace-step-1.5
+      28 voices: af_alloy, af_aoede, af_bella, af_heart, af_jessica, af_kore, af_nicole, af_nova, af_river, af_sarah, af_sky, am_adam, am_echo, am_eric, am_fenrir, am_liam, am_michael, am_onyx, am_puck, am_santa, bf_alice, bf_emma, bf_isabella, bf_lily, bm_daniel, bm_fable, bm_george, bm_lewis
+      28 voices: af_alloy, af_aoede, af_bella, af_heart, af_jessica, af_kore, af_nicole, af_nova, af_river, af_sarah, af_sky, am_adam, am_echo, am_eric, am_fenrir, am_liam, am_michael, am_onyx, am_puck, am_santa, bf_alice, bf_emma, bf_isabella, bf_lily, bm_daniel, bm_fable, bm_george, bm_lewis
+PASS  the pool lists Kokoro's 28 voices
+      9 voices: vivian, serena, uncle_fu, dylan, eric, ryan, aiden, ono_anna, sohee
+      9 voices: vivian, serena, uncle_fu, dylan, eric, ryan, aiden, ono_anna, sohee
+PASS  the pool lists Qwen3-TTS's 9 voices
+PASS  28 and 9 voices
+PASS  a voice's sample came from the server that lists it, when it has one
+      wrote /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/app/lab-audio.speak-before-light.png
+      wrote /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/app/lab-audio.speak-before-dark.png
+      run: finished; route: Gaea (127.0.0.1:17693)
+      streamed 3 chunks, 6.42 s; first after 749 ms
+      results: audio (audio)
+      wrote /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/app/lab-audio.speak-after-light.png
+      wrote /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/app/lab-audio.speak-after-dark.png
+/Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/app/lab-audio.speak-after-dark.png
+/Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/app/lab-audio.speak-after-light.png
+PASS  the Lab app ran audio.speak on Every server and rendered it
+      wrote /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/app/lab-audio.compose-before-light.png
+      wrote /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/app/lab-audio.compose-before-dark.png
+      run: finished; route: Gaea (127.0.0.1:17693)
+      results: song (audio), timestamps (text)
+      wrote /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/app/lab-audio.compose-after-light.png
+      wrote /Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/app/lab-audio.compose-after-dark.png
+/Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/app/lab-audio.compose-after-dark.png
+/Volumes/DEV_VOL1/Evidence/gaea/AB-T-0395/app/lab-audio.compose-after-light.png
+PASS  the Lab app ran audio.compose on Every server and rendered it
+PASS  the app's speak streamed
+OK
+PASS  transcript com.xocialize.gaea.ace-step-0.1.0-2026-10-31T175135Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.ace-step-0.1.0-2026-10-31T175154Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.kokoro-0.1.0-2026-10-31T175059Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.kokoro-0.1.0-2026-10-31T175146Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.moss-soundeffect-0.1.1-2026-10-31T175114Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.qwen3-tts-0.2.0-2026-10-31T175100Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.step-audio-editx-0.1.0-2026-10-31T175109Z.gpp passes validate.py
+== 30 passed, 0 failed
