@@ -20,7 +20,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/xocialize/pixel-agency-run.git", from: "0.1.0"),
-        .package(url: "https://github.com/xocialize/media-engine-spec.git", from: "0.5.0"),
+        .package(url: "https://github.com/xocialize/media-engine-spec.git", from: "0.8.0"),
         .package(url: "https://github.com/xocialize/DesignScaffold.git", from: "0.25.0"),
         .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.5.0"),
     ],
@@ -43,6 +43,7 @@ let package = Package(
         ]),
         .testTarget(name: "GaeaLabCoreTests", dependencies: [
             "GaeaLabCore",
+            .product(name: "MESClientKit", package: "media-engine-spec"),
             .product(name: "MESCore", package: "media-engine-spec"),
         ]),
     ]

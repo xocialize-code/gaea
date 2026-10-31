@@ -38,6 +38,14 @@ public final class EnginePool: EngineConnection, Sendable {
         var jobs: [String: String] = [:]                        // job id → member id
         var routes: [String: Route] = [:]
         var pending: [String: (file: URL, mediaType: String)] = [:]
+        var samples: [String: String] = [:]                     // a voice's sample href → member id
+        var assets: [String: PoolAsset] = [:]                   // pool asset id → its copies
+    }
+
+    /// One asset as the pool knows it: a copy on every server that keeps assets, since any of them may run the job.
+    struct PoolAsset {
+        var asset: Asset
+        var copies: [String: String]                            // member id → that server's asset id
     }
 
     public let id: String
@@ -48,6 +56,7 @@ public final class EnginePool: EngineConnection, Sendable {
     private let adapterChoice: @Sendable (JobRequest) -> [AdapterRequest]?
 
     static let pendingPrefix = "lab-pending-"
+    static let assetPrefix = "lab-asset-"
 
     public init(id: String = "eng_gaea_lab_pool", name: String = "Every server",
                 adapters: @escaping @Sendable (JobRequest) -> [AdapterRequest]? = { _ in nil }) {
@@ -147,6 +156,11 @@ public final class EnginePool: EngineConnection, Sendable {
             for (name, input) in inputs { sent[name] = try await resolve(input, on: connection) }
             request.inputs = sent
         }
+        if let inputs = request.inputs {
+            var mapped: [String: RequestInput] = [:]
+            for (name, input) in inputs { mapped[name] = try asset(input, on: choice.candidate.id) }
+            request.inputs = mapped
+        }
         let job = try await connection.submit(request, idempotencyKey: idempotencyKey)
         state.withLock {
             $0.jobs[job.id] = choice.candidate.id
@@ -173,6 +187,84 @@ public final class EnginePool: EngineConnection, Sendable {
             throw MESClientError.unexpected("Gaea Lab lost the file for upload \(id).")
         }
         return .upload(try await connection.upload(contentsOf: pending.file, mediaType: pending.mediaType).uploadID)
+    }
+
+    /// A pool asset as the chosen server's own copy.
+    func asset(_ input: RequestInput, on member: String) throws -> RequestInput {
+        func one(_ value: InputValue) throws -> InputValue {
+            guard case .asset(let id) = value, id.hasPrefix(Self.assetPrefix) else { return value }
+            guard let copy = state.withLock({ $0.assets[id]?.copies[member] }) else {
+                throw MESClientError.unexpected("Asset \(id) isn't on the server chosen for this job.")
+            }
+            return .asset(copy)
+        }
+        switch input {
+        case .text: return input
+        case .one(let value): return .one(try one(value))
+        case .many(let values): return .many(try values.map(one))
+        }
+    }
+
+    // MARK: - Assets and voices (Audio 0.1)
+
+    /// Keeps the file on every server that keeps assets, so the asset is there wherever its jobs go, and answers with one
+    /// id for all of them. A server without assets is skipped; with none, the call fails as a server's would.
+    public func createAsset(contentsOf file: URL, mediaType: String, ttlSeconds: Int) async throws -> Asset {
+        var copies: [String: String] = [:]
+        var first: Asset?
+        var last: (any Error)?
+        for member in members {
+            do {
+                let asset = try await member.connection.createAsset(contentsOf: file, mediaType: mediaType, ttlSeconds: ttlSeconds)
+                copies[member.id] = asset.assetID
+                if first == nil { first = asset }
+            } catch { last = error }
+        }
+        guard var asset = first else { throw last ?? MESClientError.unexpected("No server in Gaea Lab keeps assets.") }
+        asset.assetID = Self.assetPrefix + UUID().uuidString.lowercased()
+        // The earliest expiry of its copies: past it, some server no longer has it.
+        state.withLock { $0.assets[asset.assetID] = PoolAsset(asset: asset, copies: copies) }
+        return asset
+    }
+
+    public func assets() async throws -> [Asset] {
+        let now = Date()
+        return state.withLock { s in s.assets.values.map(\.asset).filter { $0.expiresAt > now }.sorted { $0.createdAt < $1.createdAt } }
+    }
+
+    public func asset(_ id: String) async throws -> Asset {
+        guard let asset = state.withLock({ $0.assets[id]?.asset }) else { throw MESClientError.unexpected("No asset \(id) in Gaea Lab.") }
+        return asset
+    }
+
+    /// Deletes every copy.
+    public func deleteAsset(_ id: String) async throws {
+        guard let pooled = state.withLock({ $0.assets.removeValue(forKey: id) }) else { return }
+        for member in members {
+            guard let copy = pooled.copies[member.id] else { continue }
+            try? await member.connection.deleteAsset(copy)
+        }
+    }
+
+    /// The voices of the first server that lists them for this model, remembered so their samples come from it.
+    public func voices(operation: String, model: String) async throws -> VoiceList {
+        var last: (any Error)?
+        for member in members {
+            do {
+                let list = try await member.connection.voices(operation: operation, model: model)
+                state.withLock { s in for voice in list.voices { if let href = voice.sample { s.samples[href] = member.id } } }
+                return list
+            } catch { last = error }
+        }
+        throw last ?? MESClientError.unexpected("No server in Gaea Lab lists voices for that model.")
+    }
+
+    public func sample(of voice: Voice) async throws -> Data {
+        let owner = voice.sample.flatMap { href in state.withLock { $0.samples[href] } }
+        guard let member = members.first(where: { $0.id == owner }) else {
+            throw MESClientError.unexpected("Gaea Lab doesn't know which server lists voice \(voice.id).")
+        }
+        return try await member.connection.sample(of: voice)
     }
 
     public func job(_ id: String, wait: Int) async throws -> Job { try await member(for: id).job(id, wait: wait) }
