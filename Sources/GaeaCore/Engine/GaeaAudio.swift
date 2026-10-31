@@ -136,7 +136,8 @@ extension GaeaEngine {
                 return .file(try Self.workerAudio(url, name: "\(name)-\(i)", into: inputDirectory), mediaType: "audio/wav")
             }
         }
-        try Self.checkInputLengths(route.operation, inputs: audioInputs, limits: route.offer.limits)
+        try Self.checkInputLengths(route.operation, inputs: audioInputs, limits: route.offer.limits,
+                                   edit: context.param(AudioProfile.Param.edit)?.objectValue)
         let inputs = try Self.inputPaths(audioInputs, writingTextTo: inputDirectory)
         var params = route.manifestOffer.defaults?.objectValue ?? [:]
         for (key, value) in context.params { params[key] = value.gpp }
@@ -227,8 +228,16 @@ extension GaeaEngine {
 
     /// The input lengths an offer's limits bound (Audio §4.2): `edit_speech`'s take (`max_duration_s`), and `compose`'s
     /// source and reference. MESKit reads the request, not its media, so the engine measures them; longer is 422
-    /// `out_of_limits`, never trimmed.
-    static func checkInputLengths(_ operation: String, inputs: [String: [RunInput]], limits: Descriptor.Limits?) throws {
+    /// `out_of_limits`, never trimmed. A `compose` repaint must also lie inside its source (§3.5), which only the source's
+    /// length can tell.
+    static func checkInputLengths(_ operation: String, inputs: [String: [RunInput]], limits: Descriptor.Limits?,
+                                  edit: [String: MESValue]? = nil) throws {
+        if operation == "audio.compose", edit?["kind"]?.stringValue == "repaint", let end = edit?["end_s"]?.numberValue,
+           case .file(let url, _)? = inputs[AudioProfile.Input.source]?.first, let wav = try? WAVFile(Data(contentsOf: url)),
+           end > wav.durationSeconds + 0.0005 || (edit?["start_s"]?.numberValue ?? 0) < 0 {
+            throw MESError(.outOfLimits, String(format: "A repaint ending at %g s is outside the %.1f s source.", end, wav.durationSeconds),
+                           param: AudioProfile.Param.edit)
+        }
         guard let limits else { return }
         let bounds: [(input: String, seconds: Double?)] = switch operation {
         case "audio.edit_speech": [(AudioProfile.Input.audio, limits.maxDurationSeconds)]

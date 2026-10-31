@@ -144,6 +144,12 @@ struct AudioTests {
         try GaeaEngine.checkInputLengths("audio.compose", inputs: ["source": take["audio"]!], limits: limits)
         limits.profile["max_source_s"] = 1
         #expect(throws: MESError.self) { try GaeaEngine.checkInputLengths("audio.compose", inputs: ["source": take["audio"]!], limits: limits) }
+        // A repaint must lie inside its 3 s source.
+        let source = ["source": take["audio"]!]
+        try GaeaEngine.checkInputLengths("audio.compose", inputs: source, limits: nil, edit: ["kind": "repaint", "start_s": 1, "end_s": 3])
+        #expect(throws: MESError.self) {
+            try GaeaEngine.checkInputLengths("audio.compose", inputs: source, limits: nil, edit: ["kind": "repaint", "start_s": 1, "end_s": 3.5])
+        }
     }
 
     @Test func chunksAreConvertedForwardedInOrderAndDeleted() async throws {
