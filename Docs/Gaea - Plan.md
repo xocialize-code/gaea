@@ -446,6 +446,63 @@ starts while the phase before it is being built.
   weight streaming.
 - **Exit:** the Video conformance suite passes, and every LTX tier stays within its budget on 32, 64 and 128 GB
   Macs.
+- **What exists** (surveyed 2026-10-31):
+  - **The spec:** Base already has the time conventions Audio needed (`duration_s`, `media_s`, sample rates,
+    streamed chunks; media-engine-spec v0.7.0). Video 0.1 isn't drafted, and no Pixel Agency Video Engine was ever
+    built, so Gaea is the first video server.
+  - **The packages,** each an MLXEngine `ModelPackage`:
+    - **LTX 2.5** (mlx-ltx): `MLXLTX25Package` in ltx-2-mlx-swift v0.20.0. Text-, image- and audio-to-video with
+      48 kHz audio in the MP4, and the video-edit modes. All four tiers (AB-D-0035): the low tiers fall back to the
+      int8 encoder and a streamed DiT. bf16 carries a 1 GB/s `minSustainedReadBytesPerSecond` floor. The weights and
+      the streaming granules are on DEV_VOL1. Typed adapters (L2, AB-A-0197) are still open with mlx-ltx.
+    - **SeedVR2** (mlx-video): mlx-seedvr2-swift v0.10.1, `videoUpscale`.
+    - **RIFE** (mlx-video): mlx-rife-swift v0.8.0, `frameInterpolate`.
+    - **FlashVSR** (mlx-video): mlx-flashvsr-swift v0.2.0, `videoUpscale`, still in WIP.
+  - **Media:** the engine takes video as MP4 or MOV files (`Video.Format`), so Gaea can hand workers one canonical
+    form, as it does WAV for audio (0.9.1).
+- **Work orders** (proposed 2026-10-31; filed as each starts, in this order):
+  1. **Video 0.1 in MES** (media-engine-spec; mlx-apps, an ask and a chip, as Audio 0.1 was):
+     - **Evaluation first:** a short evaluation of the fleet's video models, so the profile fits what exists.
+     - **Operations:** `video.generate` (text, a first or last frame, keyframes at times, an audio track),
+       `video.extend`, `video.retake`, `video.upscale` and `video.interpolate`.
+     - **Vocabulary:** duration, frame rate, size or aspect, seed, quality and output format, and whether the output
+       carries audio.
+     - **Rules:** supports keys and limits, warnings, and VIDEO-nnn conformance tests sized to fit `--job-timeout`.
+     - **Licences:** a licence notice the client must show (VID-6), on Base's `license.notice` and
+       `accepted_required`.
+     - **Clients:** MESClientKit and MESFormsUI for video: a video input well, a player and frame previews.
+  2. **GPP-1 and GaeaPluginKit for video** (Gaea), alongside order 1:
+     - **Media:** video inputs reach workers as one canonical form (MP4, H.264 or HEVC, with AAC where there's audio).
+       Outputs report frames, frame rate, size and audio facts.
+     - **Previews:** frame previews through the existing preview path.
+     - **Disk speed:** weight-streaming plugins get the models root's measured read speed in `configure`, so the kit
+       can apply a lane's `minSustainedReadBytesPerSecond`. A lane below its floor isn't offered.
+  3. **Gaea serves Video 0.1 over plugin offers** (`GaeaVideo`, as `GaeaAudio`):
+     - descriptors, routing and the output's facts;
+     - input lengths and sizes measured against the offers' limits;
+     - VID-6: the LTX licence is shown and accepted when the plugin is first enabled, and outputs keep their
+       AI-content disclosure.
+  4. **The plugins,** one order each, on the Kokoro pattern (an in-process reference, golden byte for byte over GPP,
+     acceptance by repo URL, conformance):
+     - **RIFE first:** `video.interpolate`, the smallest model, to prove the video path end to end;
+     - **SeedVR2:** `video.upscale`, `content` required and a refused tier never swapped (VID-4);
+     - **LTX 2.5:**
+       - `video.generate`, `video.extend` and `video.retake`;
+       - its tiers as lanes, chosen by memory, with weight streaming;
+       - LoRA and IC-LoRA as adapters, once mlx-ltx's typed adapters land (AB-A-0197);
+     - **FlashVSR:** a second `video.upscale` offer, after mlx-video promotes it from WIP.
+  5. **The governor on LTX's tiers:**
+     - every tier within its budget at 32, 64 and 128 GB, staged with `--budget-bytes` on this Mac (as AB-T-0363 did)
+       unless smaller Macs are at hand;
+     - the disk floor on DEV_VOL1 against the internal SSD.
+  6. **Gaea Lab on video:** pixel-agency-run's workflow gains video inputs, a player and previews (mlx-apps, as
+     AB-A-0234), and `lab-run` runs every operation.
+  7. **The exit:** Video conformance with every G3 plugin, the tier budgets, and the Lab.
+- **Open:**
+  - **The tier budgets:** are budgets staged on the 128 GB Mac enough for the 32 and 64 GB exit, or are real Macs
+    needed?
+  - **The licence:** LTX's weights are under the LTX-2 Community licence. Its terms go in the manifest, and the plugin
+    shows them (VID-6).
 
 **G4. Production**
 - Gaea updates itself (Sparkle, or the same GitHub release path).
