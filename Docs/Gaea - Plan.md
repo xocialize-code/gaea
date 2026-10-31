@@ -477,14 +477,18 @@ starts while the phase before it is being built.
      - **Previews:** frame previews through the existing preview path.
      - **Disk speed:** weight-streaming plugins get the models root's measured read speed in `configure`, so the kit
        can apply a lane's `minSustainedReadBytesPerSecond`. A lane below its floor isn't offered.
-  3. **Gaea serves Video 0.1 over plugin offers** (`GaeaVideo`, as `GaeaAudio`):
+  3. **Gaea serves Video 0.1 over plugin offers** (`GaeaVideo`, as `GaeaAudio`; AB-T-0401). **Done** for transformations
+     (Gaea 0.10.0); generate's disclosure and LTX's acceptance come with LTX:
      - descriptors, routing and the output's facts;
      - input lengths and sizes measured against the offers' limits;
      - VID-6: the LTX licence is shown and accepted when the plugin is first enabled, and outputs keep their
        AI-content disclosure.
   4. **The plugins,** one order each, on the Kokoro pattern (an in-process reference, golden byte for byte over GPP,
      acceptance by repo URL, conformance):
-     - **RIFE first:** `video.interpolate`, the smallest model, to prove the video path end to end;
+     - **RIFE first:** `video.interpolate`, the smallest model, to prove the video path end to end. **Done** (AB-T-0402,
+       gaea-plugin-rife [v0.1.0](https://github.com/xocialize-code/gaea-plugin-rife/releases/tag/v0.1.0)): golden 8/8,
+       acceptance 18/18, and conformance with 12 plugins 72/0/19, with Video 0.1 conforming. See
+       [Evidence/AB-T-0402](Evidence/AB-T-0402/README.md);
      - **SeedVR2:** `video.upscale`, `content` required and a refused tier never swapped (VID-4);
      - **LTX 2.5:**
        - `video.generate`, `video.extend` and `video.retake`;

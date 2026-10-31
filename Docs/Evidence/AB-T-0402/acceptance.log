@@ -1,0 +1,32 @@
+# RIFE acceptance (AB-T-0401, AB-T-0402) 2026-10-31T20:37:55Z — Gaea 0.10.0, rife 0.1.0, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add by repo URL installs rife 0.1.0
+PASS  the handshake lists video 0.1
+PASS  video.interpolate lists rife-4.25: max_factor 8, 4K, 300 s, no seed, deterministic
+      x2, cold: 1.35 s from submit to settled (launch, prepare, interpolate, finish)
+PASS  x2: 33 frames at 48 fps, 128×96, with its sound's facts; effective factor, fps, size and frames
+PASS  x2's file agrees: hevc 33 frames at exactly 48/1, an AAC track at 48 kHz stereo
+PASS  x2 kept the source's comment (Video §1.9)
+PASS  x4: 65 frames at exactly 96 fps (Gaea retimed the 1/600 time base)
+PASS  fps 48 is factor 2, with no warning
+PASS  fps 60 is the nearest factor, 3 (72 fps), with fps_adjusted
+PASS  output.codec h264 gives H.264, still 33 frames with sound
+PASS  a ProRes QuickTime input is converted and accepted: 33 frames
+PASS  factor 9 is 422
+PASS  factor with fps is 400
+PASS  a 301 s source is 422 out_of_limits on video
+PASS  a 4096-pixel-wide source is 422 out_of_limits on video
+      r-both: 400 invalid_request fps - factor and fps are mutually exclusive.
+      r-factor: 422 out_of_limits factor - $.factor: above 8.0
+      r-long:  out_of_limits video - The video is 301.00 s; this model takes at most 300 s.
+      r-wide:  out_of_limits video - The video is 4096 pixels wide; this model takes at most 3840.
+PASS  x2's frames through Gaea are rife-inproc's (decoded, byte for byte)
+PASS  x4's frames through Gaea, retimed, are rife-inproc's
+      in-process x2: {"applied_factor":2,"factor":2,"fps":48,"max_rss_gb":0.10554572800000001,"model":"rife-4.25","prepare_s":0.35912316700000002,"run_s":0.37853575}
+      x2 through Gaea: worker 0.44 s
+      x4 through Gaea: worker 0.47 s
+      h264 through Gaea: worker 0.183 s
+      prores through Gaea: worker 0.159 s
+OK
+PASS  transcript com.xocialize.gaea.rife-0.1.0-2026-10-31T203757Z.gpp passes validate.py
+== 18 passed, 0 failed
