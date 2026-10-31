@@ -7,8 +7,9 @@ import Testing
 
 /// AB-T-0400: video media for workers (GPP-1 §3.3.3), lanes a slow volume can't feed (§3.2.1), and previews (§3.3).
 @Suite struct VideoTests {
-    /// A `frames`-frame clip at 24 fps, `width`×`height`, in `codec` inside a QuickTime file.
-    func clip(_ url: URL, codec: AVVideoCodecType, frames: Int = 24, width: Int = 64, height: Int = 48) async throws {
+    /// A `frames`-frame clip at 24 fps (or `fps` placed on a 1/600 time base, as frame-stream-native writes), `width`×`height`,
+    /// in `codec` inside a QuickTime file.
+    func clip(_ url: URL, codec: AVVideoCodecType, frames: Int = 24, width: Int = 64, height: Int = 48, fps600: Double? = nil) async throws {
         let writer = try AVAssetWriter(outputURL: url, fileType: .mov)
         let input = AVAssetWriterInput(mediaType: .video, outputSettings: [
             AVVideoCodecKey: codec, AVVideoWidthKey: width, AVVideoHeightKey: height])
@@ -25,7 +26,9 @@ import Testing
             CVPixelBufferLockBaseAddress(buffer!, [])
             memset(CVPixelBufferGetBaseAddress(buffer!), Int32(i * 10 % 255), CVPixelBufferGetDataSize(buffer!))
             CVPixelBufferUnlockBaseAddress(buffer!, [])
-            adaptor.append(buffer!, withPresentationTime: CMTime(value: CMTimeValue(i), timescale: 24))
+            let time = fps600.map { CMTime(value: CMTimeValue((Double(i) * 600 / $0).rounded()), timescale: 600) }
+                ?? CMTime(value: CMTimeValue(i), timescale: 24)
+            adaptor.append(buffer!, withPresentationTime: time)
         }
         input.markAsFinished()
         await writer.finishWriting()
@@ -114,5 +117,113 @@ import Testing
         // Outside the run's folder: dropped.
         let outside: [String: GPPValue] = ["type": "progress", "preview": ["path": "/etc/hosts", "media_type": "image/png"]]
         #expect(GaeaEngine.preview(outside, root: root) == nil)
+    }
+
+    // MARK: The Video profile (AB-T-0401)
+
+    @Test func fpsBecomesTheNearestFactorItAdmits() {
+        var limits = Descriptor.Limits()
+        limits.profile["max_factor"] = 4
+        #expect(GaeaEngine.interpolationFactor(fps: nil, factor: nil, sourceFPS: 24, limits: limits).0 == 2)
+        #expect(GaeaEngine.interpolationFactor(fps: nil, factor: 3, sourceFPS: 24, limits: limits).0 == 3)
+        let exact = GaeaEngine.interpolationFactor(fps: 48, factor: nil, sourceFPS: 24, limits: limits)
+        #expect(exact.0 == 2 && exact.1 == nil)
+        let near = GaeaEngine.interpolationFactor(fps: 60, factor: nil, sourceFPS: 24, limits: limits)
+        #expect(near.0 == 3 && near.1?.code == "fps_adjusted")
+        #expect(GaeaEngine.interpolationFactor(fps: 240, factor: nil, sourceFPS: 24, limits: limits).0 == 4)
+    }
+
+    @Test func aSourceOverTheLimitsIsOutOfLimits() throws {
+        let facts = GaeaEngine.VideoFacts(durationSeconds: 70, frameRate: 24, frames: 1680, width: 3840, height: 2160, codec: "avc1",
+                                          audio: nil, container: "mp4")
+        var limits = Descriptor.Limits(maxWidth: 3840, maxHeight: 2160)
+        try GaeaEngine.checkVideoSource(facts, operation: "video.interpolate", limits: limits)
+        limits.profile["max_source_s"] = 60
+        #expect(throws: MESError.self) { try GaeaEngine.checkVideoSource(facts, operation: "video.interpolate", limits: limits) }
+        limits = Descriptor.Limits(maxWidth: 1920, maxHeight: 1080)
+        #expect(throws: MESError.self) { try GaeaEngine.checkVideoSource(facts, operation: "video.interpolate", limits: limits) }
+    }
+
+    /// A 1 s source with an AAC track and a comment, as a client might send.
+    func sourceWithSound(_ dir: URL) async throws -> URL {
+        let picture = dir.appending(path: "picture.mov")
+        try await clip(picture, codec: .h264)
+        let sound = dir.appending(path: "sound.m4a")
+        do {   // The file is finished when the writer is released.
+            let format = AVAudioFormat(standardFormatWithSampleRate: 48000, channels: 2)!
+            let file = try AVAudioFile(forWriting: sound, settings: [AVFormatIDKey: kAudioFormatMPEG4AAC, AVSampleRateKey: 48000,
+                                                                     AVNumberOfChannelsKey: 2])
+            let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: 48000)!
+            buffer.frameLength = 48000
+            for c in 0..<2 { for i in 0..<48000 { buffer.floatChannelData![c][i] = Float(sin(Double(i) * 0.05)) * 0.3 } }
+            try file.write(from: buffer)
+        }
+        let composition = AVMutableComposition()
+        let pictureAsset = AVURLAsset(url: picture), soundAsset = AVURLAsset(url: sound)
+        defer { withExtendedLifetime((pictureAsset, soundAsset)) {} }
+        let v = try await pictureAsset.loadTracks(withMediaType: .video)[0]
+        let a = try await soundAsset.loadTracks(withMediaType: .audio)[0]
+        try composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)!
+            .insertTimeRange(try await v.load(.timeRange), of: v, at: .zero)
+        try composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)!
+            .insertTimeRange(try await a.load(.timeRange), of: a, at: .zero)
+        let comment = AVMutableMetadataItem()
+        comment.identifier = .iTunesMetadataUserComment
+        comment.value = "AI-generated by Test Model" as NSString
+        comment.extendedLanguageTag = "und"
+        let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetPassthrough)!
+        export.metadata = [comment]
+        let out = dir.appending(path: "source.mp4")
+        try await export.export(to: out, as: .mp4)
+        return out
+    }
+
+    @Test func aTransformationKeepsTheSourcesSoundAndMarking() async throws {
+        let dir = try folder()
+        let source = try await sourceWithSound(dir)
+        let sourceFacts = try await GaeaEngine.videoFacts(source)
+        #expect(sourceFacts.audio?.codec == "aac " && sourceFacts.isCanonical)
+        // What a frame-stream model writes: the picture alone, in HEVC.
+        let mov = dir.appending(path: "model.mov")
+        try await clip(mov, codec: .hevc, frames: 47)
+        let made = try await GaeaEngine.workerVideo(mov, name: "made", into: dir)
+        #expect(try await GaeaEngine.videoFacts(made).audio == nil)
+        try await GaeaEngine.finishVideo(made, keeping: source, codec: nil)
+        let facts = try await GaeaEngine.videoFacts(made)
+        #expect(facts.frames == 47 && facts.codec == "hvc1", "\(facts)")
+        #expect(facts.audio?.sampleRate == 48000 && facts.audio?.channels == 2 && facts.audio?.codec == "aac ")
+        let comments = try await AVURLAsset(url: made).load(.metadata).filter { $0.identifier == .iTunesMetadataUserComment }
+        #expect(try await comments.first?.load(.stringValue) == "AI-generated by Test Model")
+    }
+
+    @Test func theCodecAskedForIsWritten() async throws {
+        let dir = try folder()
+        let mov = dir.appending(path: "hevc.mov")
+        try await clip(mov, codec: .hevc, frames: 12)
+        let made = try await GaeaEngine.workerVideo(mov, name: "made", into: dir)
+        try await GaeaEngine.finishVideo(made, keeping: nil, codec: "h264")
+        let facts = try await GaeaEngine.videoFacts(made)
+        #expect(facts.codec == "avc1" && facts.frames == 12 && facts.isCanonical, "\(facts)")
+        // Already in the codec asked for, and nothing to keep: untouched.
+        let before = try Data(contentsOf: made)
+        try await GaeaEngine.finishVideo(made, keeping: nil, codec: "h264")
+        #expect(try Data(contentsOf: made) == before)
+    }
+
+    @Test func aClipOffItsRateIsRetimedWithoutReencoding() async throws {
+        let dir = try folder()
+        let mov = dir.appending(path: "uneven.mov")
+        try await clip(mov, codec: .hevc, frames: 65, fps600: 96)
+        let file = try await GaeaEngine.workerVideo(mov, name: "uneven", into: dir)
+        let before = try await GaeaEngine.videoFacts(file)
+        #expect(abs(before.frameRate - 96) > 0.001, "\(before)")
+        try await GaeaEngine.retime(file, fps: 96)
+        let after = try await GaeaEngine.videoFacts(file)
+        #expect(abs(after.frameRate - 96) < 0.001 && after.frames == 65 && after.codec == before.codec, "\(after)")
+        #expect(abs(after.durationSeconds - 65.0 / 96) < 0.0005)
+        // Already exact: untouched.
+        let data = try Data(contentsOf: file)
+        try await GaeaEngine.retime(file, fps: 96)
+        #expect(try Data(contentsOf: file) == data)
     }
 }

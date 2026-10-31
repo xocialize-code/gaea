@@ -1,5 +1,5 @@
 {
-  "originHash" : "2899de5956fa7e2638b9db13aa52e44e9e95429a91987ed6639b453d025714fd",
+  "originHash" : "7498a301a3b2fd12ebe2f695ca0b2def1e2177af593f9c1cae74fda14bd86ac4",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xocialize-code/gaea-plugin-kit.git",
       "state" : {
-        "revision" : "1faae0fe9776b9a9fcc909cdb15673499e5b599d",
-        "version" : "0.7.1"
+        "revision" : "0067767b4193ea898c1e100c02b0910c8f308652",
+        "version" : "0.9.0"
       }
     },
     {
@@ -78,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xocialize/media-engine-spec.git",
       "state" : {
-        "revision" : "2cc4d855dafe60049a345da20e401e8acdb84dc3",
-        "version" : "0.7.0"
+        "revision" : "67d6967a804309fbc43dcb0210cf1c76c03e08b3",
+        "version" : "0.9.0"
       }
     },
     {

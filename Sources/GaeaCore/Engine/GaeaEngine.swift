@@ -145,7 +145,7 @@ public struct GaeaEngine: MediaEngine {
             descriptor.extensions = extensions.isEmpty ? nil : extensions
             descriptors.append(descriptor)
         }
-        for var descriptor in audioDescriptors(routes) {
+        for var descriptor in audioDescriptors(routes) + videoDescriptors(routes) {
             let served = routes.filter { $0.operation == descriptor.operation }
             descriptor.extensions = Self.extensions(served)
             descriptors.append(descriptor)
@@ -177,6 +177,7 @@ public struct GaeaEngine: MediaEngine {
 
     public func validate(_ request: JobRequest, descriptor: Descriptor) throws {
         if descriptor.profile == AudioProfile.id { return try AudioProfileRules.validate(request, descriptor: descriptor) }
+        if descriptor.profile == VideoProfile.id { return try VideoProfileRules.validate(request, descriptor: descriptor) }
         try normalizer.validate(request, descriptor: descriptor)
     }
 
@@ -243,6 +244,7 @@ public struct GaeaEngine: MediaEngine {
             throw MESError(.modelUnavailable, "\(context.model.id) isn't enabled for \(context.operation).")
         }
         if context.descriptor.profile == AudioProfile.id { return try await runAudio(route, context) }
+        if context.descriptor.profile == VideoProfile.id { return try await runVideo(route, context) }
         return try await run(route, context)
     }
 
@@ -550,7 +552,8 @@ struct PluginOffers: Sendable {
         for plugin in await manager.installed() {
             for manifestOffer in plugin.manifest.offers {
                 let known = manifestOffer.profile == ImageProfile.id ? ImageProfile.operations.operations[manifestOffer.operation] != nil
-                    : manifestOffer.profile == AudioProfile.id && AudioProfile.operations.operations[manifestOffer.operation] != nil
+                    : manifestOffer.profile == AudioProfile.id ? AudioProfile.operations.operations[manifestOffer.operation] != nil
+                    : manifestOffer.profile == VideoProfile.id && VideoProfile.operations.operations[manifestOffer.operation] != nil
                 guard known,
                       let id = manifestOffer.modelID, let model = plugin.model(id),
                       var offer = try? JSONDecoder().decode(ModelOffer.self, from: JSONEncoder().encode(manifestOffer.model))
