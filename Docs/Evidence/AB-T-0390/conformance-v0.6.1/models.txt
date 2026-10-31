@@ -1,0 +1,33 @@
+on  klein-4b  FLUX.2 Klein 4B  [com.xocialize.gaea.flux2-klein 0.2.1] lanes: bf16* 25.90 GB, int8 22.70 GB, int4 20.50 GB
+on  klein-4b-base  FLUX.2 Klein 4B Base  [com.xocialize.gaea.flux2-klein 0.2.1] lanes: bf16* 27.10 GB, int8 23.90 GB, int4 21.70 GB
+on  lama-inpaint  LaMa inpaint  [com.xocialize.gaea.forge 0.2.0] lanes: fp16* 4.50 GB
+on  nerve-upscale  NERVE upscale  [com.xocialize.gaea.forge 0.2.0] lanes: fp16* 6.16 GB
+on  realplksr-upscale  RealPLKSR upscale  [com.xocialize.gaea.forge 0.2.0] lanes: fp32* 8.70 GB
+on  heart-upscale  HEART upscale  [com.xocialize.gaea.forge 0.2.0] lanes: fp16* 8.66 GB
+on  birefnet-matte  BiRefNet matte  [com.xocialize.gaea.forge 0.2.0] lanes: fp16* 14.90 GB
+on  edgetam-segment  EdgeTAM segment  [com.xocialize.gaea.forge 0.2.0] lanes: fp16* 1.50 GB
+on  sam21-segment  SAM 2.1 segment  [com.xocialize.gaea.forge 0.2.0] lanes: fp16* 2.85 GB
+on  nafnet-restore  NAFNet restore  [com.xocialize.gaea.forge 0.2.0] lanes: fp16* 5.86 GB
+on  restormer-motion  Restormer motion deblur  [com.xocialize.gaea.forge 0.2.0] lanes: fp32* 5.68 GB
+on  restormer-defocus  Restormer defocus deblur  [com.xocialize.gaea.forge 0.2.0] lanes: fp32* 5.68 GB
+on  restormer-denoise  Restormer denoise  [com.xocialize.gaea.forge 0.2.0] lanes: fp32* 5.68 GB
+on  drunet-denoise  DRUNet denoise  [com.xocialize.gaea.forge 0.2.0] lanes: fp32* 7.20 GB
+on  scunet-denoise  SCUNet denoise  [com.xocialize.gaea.forge 0.2.0] lanes: fp32* 5.18 GB
+on  gfpgan-face  GFPGAN face restore  [com.xocialize.gaea.forge 0.2.0] lanes: fp32* 2.40 GB
+on  restoreformer-face  RestoreFormer++ face restore  [com.xocialize.gaea.forge 0.2.0] lanes: fp32* 2.35 GB
+on  cidnet-relight  HVI-CIDNet relight  [com.xocialize.gaea.forge 0.2.0] lanes: fp32* 6.58 GB
+on  ddcolor-colorize  DDColor colorize  [com.xocialize.gaea.forge 0.2.0] lanes: fp16* 5.05 GB
+on  siglip2-quality  SigLIP2 quality score  [com.xocialize.gaea.forge 0.2.0] lanes: int8* 1.20 GB
+on  anime4k-upscale  Anime4K VL  [com.xocialize.gaea.forge 0.2.0] lanes: fp32* 1.02 GB
+on  vosr2-upscale  VOSR2 upscale  [com.xocialize.gaea.forge 0.2.0] lanes: fp16* 10.00 GB
+on  nacre-upscale  Nacre upscale  [com.xocialize.gaea.forge 0.2.0] lanes: fp16* 5.80 GB
+on  bopbtl-defects  BOPBTL defect detection  [com.xocialize.gaea.forge 0.2.0] lanes: fp32* 4.10 GB
+on  mage-vl  Mage-VL  [com.xocialize.gaea.mage-vl 0.1.0] lanes: int8* 12.00 GB
+on  ming-image  Ming-Image Design  [com.xocialize.gaea.ming-image 0.3.0] lanes: int8* 32.30 GB, bf16 57.60 GB, int4 22.50 GB
+on  ming-image-layer  Ming-Image Design-Layer  [com.xocialize.gaea.ming-image 0.3.0] lanes: int8* 33.00 GB, bf16 58.20 GB, int4 23.50 GB
+on  qwen3.5-4b  Qwen3.5 4B  [com.xocialize.gaea.prompt-enhance 0.1.0] lanes: int4* 7.57 GB
+on  qwen3.5-9b  Qwen3.5 9B  [com.xocialize.gaea.prompt-enhance 0.1.0] lanes: int4* 13.37 GB
+on  qwen-image-edit  Qwen-Image-Edit 2511  [com.xocialize.gaea.qwen-image 0.2.0] lanes: bf16* 63.00 GB
+on  qwen-image-flash  Qwen-Image Flash  [com.xocialize.gaea.qwen-image 0.2.0] lanes: int8* 31.60 GB
+on  z-image-turbo  Z-Image Turbo  [com.xocialize.gaea.z-image 0.1.0] lanes: int4* 39.90 GB, int8 43.00 GB, bf16 48.50 GB
+on  z-image  Z-Image  [com.xocialize.gaea.z-image 0.1.0] lanes: int4* 39.90 GB, int8 43.00 GB, bf16 48.50 GB

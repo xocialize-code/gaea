@@ -1,0 +1,7 @@
+Installed Z-Image 0.1.0 (com.xocialize.gaea.z-image), enabled.
+Installed FLUX.2 Klein 0.2.1 (com.xocialize.gaea.flux2-klein), enabled.
+Installed Qwen-Image 0.2.0 (com.xocialize.gaea.qwen-image), enabled.
+Installed Forge processing pack 0.2.0 (com.xocialize.gaea.forge), enabled.
+Installed Prompt enhancer 0.1.0 (com.xocialize.gaea.prompt-enhance), enabled.
+Installed Mage-VL 0.1.0 (com.xocialize.gaea.mage-vl), enabled.
+Installed Ming-Image 0.3.0 (com.xocialize.gaea.ming-image), enabled.

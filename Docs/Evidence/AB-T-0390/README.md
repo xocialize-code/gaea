@@ -25,7 +25,7 @@
 |---|---|
 | Over GPP, byte for byte | **Pass, 13 of 13** ([golden.log](golden.log)): the 8 Design cases as before, and 5 decompose cases where every layer and the composite match `ming-inproc --decompose` file by file. The cases cover 4 layers at 1024 and at 512, int4 at 512, a 3-layer plan, and the 1280×720 poster |
 | Through Gaea, installed from GitHub | **Pass, 16 of 16** ([acceptance.log](acceptance.log), `tools/acceptance-ming-layer.sh`, `REPO_FROM=github`): see the list below |
-| Conformance | **Conforms with the suite's job timeout raised to 900 s: 43 passed, 0 failed, 4 skipped** ([report](conformance-900s/report.md)). IMAGE-014 and 015 pass, and IMAGE-016 reports the 4 layers recompose to the input within 2.29/255 per channel (the composite, 2.49/255). With v0.6.0's suite as shipped it fails 4 on time alone ([report](conformance/report.md)), asked of mlx-apps as AB-A-0231 |
+| Conformance | **Conforms with media-engine-spec v0.6.1's suite as shipped: 43 passed, 0 failed, 4 skipped, Base 0.1 and Image 0.1 conform** ([report](conformance-v0.6.1/conformance-open/report.md)). v0.6.1 (AB-A-0231) asks decompose at `draft` where offered, so IMAGE-003, 014 and 016 finish in 61–103 s within the default 180 s. IMAGE-016 reports the 4 layers recompose to the input within 2.52/255 per channel (the composite, 2.53/255). Before it: v0.6.0's suite failed 4 on time alone ([report](conformance/report.md)), and a scratch copy at 900 s conformed at 1024 ([report](conformance-900s/report.md), 2.29/255 and 2.49/255) |
 
 What the 16 acceptance checks cover:
 - **The offer:** `image.decompose` lists `ming-image-layer`, with `layer_count` up to 12 and `composite` among the outputs.
@@ -63,7 +63,8 @@ saxophone appears in two layers, and one layer is the whole background.
   parity checks failed with layer differences up to 217. The acceptance now decomposes a poster Gaea wrote
   (`fixtures/poster-gaea-1024.png`), which matches exactly.
 - **Decomposition is slow:** about 6 minutes for 4 layers at 1024 and 1 minute at 512, which agrees with the port's
-  131–137 s at 512. The conformance suite waits 180 s per job (AB-A-0231).
+  131–137 s at 512. The conformance suite waited 180 s per job; v0.6.1 added `--job-timeout` and draft decompose probes
+  (AB-A-0231).
 - **Without a plan the layers are poor.** A plan matters more here than a prompt does for generation. A prompt-enhance
   profile that writes the plan from the image would fit Image §1.9 (the reference uses a vision-language model for it),
   and the normalizer leaves `prompt_enhance` undeclared on decompose until one exists.
