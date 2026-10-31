@@ -383,6 +383,25 @@ starts while the phase before it is being built.
   - ACE-Step 1.5 (compose), with YuE2 and MiniMax Music 3 as further offers.
 - Streamed output (RFC 0002) runs end to end through GPP `chunk`.
 - **Exit:** the Audio conformance suite passes, and Gaea Lab covers audio.
+- **Work orders** (filed 2026-10-31, after media-engine-spec v0.7.0 published Audio 0.1, AB-A-0232):
+  1. AB-T-0391: GPP-1 and GaeaPluginKit for audio. **Done** (kit 0.7.0 and 0.7.1):
+     - `run.streams` and `run.assets`, and `asset_removed` (GPP-1 §3.3.1, §3.3.2);
+     - a streamed output's chunks are PCM files, `pcm_f32le` or `pcm_s16le`, and the result lists it as `streamed`;
+     - an offer's MES `supports` and `limits` go in its `model`, and its preset voices in `voices` (§4.3);
+     - the kit emits with `RunContext.emit` and `EngineSession.emit`, and streams a `StreamEmitting` package with
+       `EngineSession.stream`.
+  2. AB-T-0392: Gaea serves Audio 0.1 over plugin offers. **Done** (Gaea 0.9.0, 35de472):
+     - every audio offer runs as itself, gated and routed by MESKit's `AudioProfileRules` from the offers' own keys;
+     - Gaea converts each chunk and each file to the client's format, and passes 16-bit chunks already in it through;
+     - a streaming run is never requeued: its client has chunks already.
+  3. AB-T-0393: Kokoro-82M, the first audio plugin. See [Evidence/AB-T-0393](Evidence/AB-T-0393/README.md).
+     - **Plugin:** [gaea-plugin-kokoro](https://github.com/xocialize-code/gaea-plugin-kokoro), `audio.speak` with 28
+       English voices, streamed piece by piece.
+     - **Parity:** byte for byte against in-process, streamed or not.
+     - **Conformance:** with it installed, Audio 0.1 conforms under the stock v0.7.0 suite.
+  4. AB-T-0394: the remaining plugins, one order each when started.
+  5. AB-T-0395: the exit. It needs Gaea Lab on audio, which waits on MESClientKit's assets, voices and chunks (owed by
+     mlx-apps).
 
 **G3. Video**
 - Base time conventions, then Video 0.1.

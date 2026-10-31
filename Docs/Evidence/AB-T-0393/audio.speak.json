@@ -1,0 +1,265 @@
+{
+  "inputs": [
+    {
+      "kind": "text",
+      "name": "text",
+      "required": true
+    },
+    {
+      "kind": "audio",
+      "max": 1,
+      "media_types": [
+        "audio/wav"
+      ],
+      "name": "voice_ref",
+      "required": false
+    },
+    {
+      "kind": "text",
+      "name": "voice_ref_text",
+      "required": false
+    }
+  ],
+  "limits": {
+    "max_text_chars": 4000
+  },
+  "models": [
+    {
+      "default": true,
+      "id": "kokoro-82m",
+      "license": {
+        "commercial_use": true,
+        "spdx": "Apache-2.0",
+        "terms_url": "https://huggingface.co/hexgrad/Kokoro-82M"
+      },
+      "limits": {
+        "max_text_chars": 4000
+      },
+      "memory_class": "small",
+      "notes": "Fast English text-to-speech with 28 preset voices (American and British). Write plain sentences; [pause 1s] adds silence. It doesn't clone voices or act emotions.",
+      "quality_tiers": [
+        "draft",
+        "standard",
+        "best"
+      ],
+      "speed_class": "fast",
+      "supports": {
+        "channels": 1,
+        "cues": [
+          "pause"
+        ],
+        "default_voice": true,
+        "languages": [
+          "en-US",
+          "en-GB"
+        ],
+        "sample_rate": 24000,
+        "stream": true,
+        "voices": 28
+      },
+      "title": "Kokoro-82M"
+    }
+  ],
+  "operation": "audio.speak",
+  "outputs": [
+    {
+      "kind": "audio",
+      "max": 1,
+      "media_types": [
+        "audio/wav"
+      ],
+      "min": 1,
+      "name": "audio",
+      "stream": {
+        "encodings": [
+          "pcm_s16le",
+          "pcm_f32le"
+        ]
+      }
+    }
+  ],
+  "params": {
+    "additionalProperties": false,
+    "properties": {
+      "emotion": {
+        "additionalProperties": false,
+        "description": "speak: how the line should feel (\u00a72.1). label, description, or both.",
+        "minProperties": 1,
+        "properties": {
+          "description": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          },
+          "intensity": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "label": {
+            "enum": [
+              "neutral",
+              "happy",
+              "sad",
+              "angry",
+              "afraid",
+              "disgusted",
+              "surprised",
+              "calm",
+              "melancholic",
+              "excited",
+              "humorous",
+              "confused",
+              "empathetic",
+              "embarrassed",
+              "depressed",
+              "cold",
+              "admiring"
+            ]
+          }
+        },
+        "type": "object",
+        "x-mes-ui": {
+          "label": "Emotion",
+          "order": 2
+        }
+      },
+      "language": {
+        "description": "A BCP 47 tag. Absent: the model detects or infers it, and reports it as effective.language.",
+        "pattern": "^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$",
+        "type": "string",
+        "x-mes-ui": {
+          "label": "Language",
+          "order": 1,
+          "widget": "text"
+        }
+      },
+      "output": {
+        "additionalProperties": false,
+        "description": "The output encoding (\u00a71.2).",
+        "minProperties": 1,
+        "properties": {
+          "bit_depth": {
+            "enum": [
+              16,
+              24,
+              32
+            ]
+          },
+          "channels": {
+            "maximum": 2,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "media_type": {
+            "enum": [
+              "audio/wav"
+            ]
+          },
+          "sample_rate": {
+            "maximum": 192000,
+            "minimum": 8000,
+            "type": "integer"
+          }
+        },
+        "type": "object",
+        "x-mes-ui": {
+          "advanced": true,
+          "label": "Output",
+          "order": 8
+        }
+      },
+      "quality": {
+        "default": "standard",
+        "enum": [
+          "draft",
+          "standard",
+          "best"
+        ],
+        "x-mes-ui": {
+          "label": "Quality",
+          "order": 7,
+          "widget": "picker"
+        }
+      },
+      "seed": {
+        "description": "Repeatability, 0 \u2013 2^32\u22121 (\u00a71.8). Absent: the engine picks one and reports it.",
+        "maximum": 4294967295,
+        "minimum": 0,
+        "type": "integer",
+        "x-mes-ui": {
+          "advanced": true,
+          "label": "Seed",
+          "order": 6,
+          "widget": "seed"
+        }
+      },
+      "speed": {
+        "default": 1,
+        "description": "speak: speaking rate, 1 = the model's natural pace.",
+        "maximum": 2,
+        "minimum": 0.5,
+        "type": "number",
+        "x-mes-ui": {
+          "label": "Speed",
+          "order": 4,
+          "widget": "slider"
+        }
+      },
+      "style": {
+        "description": "speak: delivery rather than feeling (\u00a72.1).",
+        "enum": [
+          "normal",
+          "whisper",
+          "shout",
+          "gentle",
+          "serious",
+          "warm",
+          "narration",
+          "conversational",
+          "news"
+        ],
+        "x-mes-ui": {
+          "label": "Style",
+          "order": 3,
+          "widget": "picker"
+        }
+      },
+      "target_duration_s": {
+        "description": "speak: how long the take should be (dub timing).",
+        "exclusiveMinimum": 0,
+        "maximum": 600,
+        "type": "number",
+        "x-mes-ui": {
+          "label": "Target Duration S",
+          "order": 5,
+          "widget": "slider"
+        }
+      },
+      "voice": {
+        "description": "speak: a preset voice, by id from the named model's list (Base \u00a76.5).",
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9_.:-]+$",
+        "type": "string",
+        "x-mes-ui": {
+          "label": "Voice",
+          "order": 0,
+          "widget": "voice"
+        }
+      }
+    },
+    "type": "object"
+  },
+  "profile": "audio",
+  "profile_version": "0.1",
+  "quality_tiers": [
+    "draft",
+    "standard",
+    "best"
+  ],
+  "remote": {
+    "possible": false
+  },
+  "title": "Speak"
+}

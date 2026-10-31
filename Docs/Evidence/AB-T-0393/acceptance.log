@@ -1,0 +1,50 @@
+# Kokoro acceptance (AB-T-0393) 2026-10-31T03:20:29Z — Gaea 0.9.0, kokoro 0.1.0, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add by repo URL installs kokoro 0.1.0
+PASS  audio.speak offers kokoro-82m: stream, 28 voices, max_text_chars 4000, audio streamable
+PASS  GET …/voices lists the 28 voices, af_heart the default
+PASS  the engine reports Audio 0.1 and the streaming and assets features
+      af_heart, cold: 1.43 s from submit to settled (launch, prepare, speak)
+PASS  af_heart seed 42: a 24 kHz mono 16-bit WAV, effective seed 42 and voice af_heart
+PASS  four voices, four different recordings
+PASS  every one of the 28 voices speaks (28 of 28)
+PASS  streamed: chunks numbered in order, the last final, offsets rising, before job.ended
+PASS  streamed: the chunks rebuild the job's WAV exactly
+      streamed: 5 chunks; audio 10.696 s + (3 pieces)
+PASS  the same request unstreamed is the streamed WAV, byte for byte
+PASS  a pcm_f32le stream at 48 kHz stereo: a 32-bit float WAV, as long as the 24 kHz one, with audio_resampled
+PASS  a 16 kHz 24-bit file, with audio_resampled
+longest silence 2.409875 s
+PASS  [pause 2s] adds two seconds of digital silence between the words
+PASS  an unsupported cue is dropped with cue_unsupported
+PASS  a 2,000-character text is drawn in pieces
+PASS  a different seed gives different audio
+PASS  a job without a seed reports the one it used
+PASS  a voice reference is 422 unsupported_parameter (Kokoro doesn't clone)
+PASS  an unknown voice is 422 unsupported_parameter
+PASS  an emotion is 422 unsupported_parameter
+PASS  French is 422 unsupported_parameter
+PASS  4,001 characters is 422 out_of_limits
+PASS  no text is 400 invalid_request
+      r-emotion: 422 unsupported_parameter emotion - Model kokoro-82m doesn't support the emotion 'angry'.
+      r-fr: 422 unsupported_parameter language - No model of audio.speak this request may use at the standard tier supports the language 'f
+      r-long: 422 out_of_limits text - Model kokoro-82m doesn't support 4001 characters of text.
+      r-none: 400 invalid_request text - Input 'text' is required.
+      r-ref: 422 unsupported_parameter voice_ref - Model kokoro-82m doesn't support a cloned voice (voice_ref).
+      r-voice: 422 unsupported_parameter voice - Model kokoro-82m doesn't support the voice 'nope'.
+      barge-in: settled 0.05 s after DELETE
+PASS  the deleted job ended cancelled
+PASS  the worker's run ended cancelled
+PASS  the next job runs, and is the first af_heart WAV again
+PASS  af_heart through Gaea is kokoro-inproc's WAV, byte for byte
+PASS  am_adam through Gaea is kokoro-inproc's WAV, byte for byte
+PASS  bf_emma through Gaea is kokoro-inproc's WAV, byte for byte
+PASS  bm_lewis through Gaea is kokoro-inproc's WAV, byte for byte
+PASS  the streamed job's WAV is kokoro-inproc's, byte for byte
+PASS  the pause job is kokoro-inproc's, byte for byte
+PASS  the long text is kokoro-inproc's, byte for byte
+      in-process af_heart: {"audio_s":5.3499999999999996,"max_rss_gb":0.50372607999999996,"model":"kokoro-82m","pieces":1,"prepare_s":0.23431991599999999,"run1_s":0.39912087499999999,"seed":42,"voice":"af_heart"}
+      in-process long text: {"audio_s":121.72499999999999,"max_rss_gb":0.50867404800000005,"model":"kokoro-82m","pieces":9,"prepare_s":0.233685792,"run1_s":2.82292875,"seed":3,"voice":"bf_emma"}
+OK
+PASS  transcript com.xocialize.gaea.kokoro-0.1.0-2026-10-31T032031Z.gpp passes validate.py
+== 34 passed, 0 failed

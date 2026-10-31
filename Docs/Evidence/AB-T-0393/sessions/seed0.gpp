@@ -1,0 +1,14 @@
+# manifest: /Volumes/Satechi/Development/gaea-plugin-kokoro/dist/kokoro.gaeaplugin/Contents/Resources/manifest.json
+# gaea-plugin-check session against kokoro.gaeaplugin
+W {"engine":{"contract":"1.58.0","version":"0.72.0"},"kit":{"version":"0.7.1"},"manifest_sha256":"3f8a6bf65fb57b6c2907d58c4a212d927d418670e2a6343aa6303fbb798354eb","models":["kokoro-82m"],"pid":20869,"plugin":{"id":"com.xocialize.gaea.kokoro","version":"0.1.0"},"protocol":1,"type":"hello"}
+H {"budget":{"ceilingBytes":64000000000,"wiresWeights":false},"cache_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-C1C3CA14-5690-48A9-9AD0-46BD86636B37/cache","id":"h1","models_root":"/Users/dustinnielson/Library/Application Support/MLXEngine/Models","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"bf16","model":"kokoro-82m","type":"prepare"}
+W {"lane":"bf16","model":"kokoro-82m","re":"h2","seconds":0.262,"type":"prepared"}
+W {"report":{"availableBytes":63500000000,"budgetBytes":64000000000,"date":815108651.796863,"gpuActiveBytes":327250256,"gpuCacheBytes":4884,"physFootprintBytes":360318056,"residentBytes":500000000,"residents":{"kokoro-82m":500000000},"running":[],"transientReserveBytes":0},"type":"memory"}
+H {"id":"h3","inputs":{"text":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-C1C3CA14-5690-48A9-9AD0-46BD86636B37/spool/job_check/in/text-0.txt"},"job":"job_check","lane":"bf16","model":"kokoro-82m","operation":"audio.speak","output_dir":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-C1C3CA14-5690-48A9-9AD0-46BD86636B37/spool/job_check/out","params":{"voice":"am_adam"},"seed":0,"type":"run"}
+W {"effective":{"language":"en-US","seed":0,"voice":"am_adam","x-kokoro.pieces":1},"job":"job_check","outputs":[{"media_type":"audio/wav","name":"audio","path":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-C1C3CA14-5690-48A9-9AD0-46BD86636B37/spool/job_check/out/audio-0.wav"}],"re":"h3","seconds":0.367,"type":"result","warnings":[]}
+W {"report":{"availableBytes":63500000000,"budgetBytes":64000000000,"date":815108652.166795,"gpuActiveBytes":330819172,"gpuCacheBytes":2151788440,"physFootprintBytes":2890859888,"residentBytes":500000000,"residents":{"kokoro-82m":500000000},"running":[],"transientReserveBytes":0},"type":"memory"}
+H {"id":"h4","type":"memory.query"}
+W {"re":"h4","report":{"availableBytes":63500000000,"budgetBytes":64000000000,"date":815108652.167064,"gpuActiveBytes":330819172,"gpuCacheBytes":2151788440,"physFootprintBytes":2890859888,"residentBytes":500000000,"residents":{"kokoro-82m":500000000},"running":[],"transientReserveBytes":0},"type":"memory"}
+H {"id":"h5","type":"shutdown"}

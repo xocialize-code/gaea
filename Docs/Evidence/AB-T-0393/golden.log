@@ -1,0 +1,14 @@
+# Kokoro golden check 2026-10-31T03:04:01Z: com.xocialize.gaea.kokoro 0.1.0
+PASS  one (af_heart, seed 42): byte-identical, sha256 9455e29796daa1bc…; over GPP ran in 0.35 s; in-process {"audio_s":5.3499999999999996,"max_rss_gb":0.50703564800000001,"model":"kokoro-82m","pieces":1,"prepare_s":0.27099591699999998,"run1_s":0.37914733299999998,"seed":42,"voice":"af_heart"}
+PASS  pause (bm_lewis, seed 7): byte-identical, sha256 b7c74e42e3275951…; over GPP ran in 0.78 s; in-process {"audio_s":10.824999999999999,"max_rss_gb":0.50914918399999998,"model":"kokoro-82m","pieces":3,"prepare_s":0.25709445800000003,"run1_s":0.471637792,"seed":7,"voice":"bm_lewis"}
+PASS  long (bf_emma, seed 3): byte-identical, sha256 4f76fcd65224c508…; over GPP ran in 2.72 s; in-process {"audio_s":121.72499999999999,"max_rss_gb":0.51319603199999997,"model":"kokoro-82m","pieces":9,"prepare_s":0.26186512499999998,"run1_s":2.7413953329999998,"seed":3,"voice":"bf_emma"}
+PASS  seed0 (am_adam, seed 0): byte-identical, sha256 bae662105ad8f2e9…; over GPP ran in 0.37 s; in-process {"audio_s":5.2000000000000002,"max_rss_gb":0.50228428800000002,"model":"kokoro-82m","pieces":1,"prepare_s":0.25654154099999998,"run1_s":0.35775383300000002,"seed":0,"voice":"am_adam"}
+OK
+PASS  long.gpp passes validate.py
+OK
+PASS  one.gpp passes validate.py
+OK
+PASS  pause.gpp passes validate.py
+OK
+PASS  seed0.gpp passes validate.py
+== 8 passed, 0 failed
