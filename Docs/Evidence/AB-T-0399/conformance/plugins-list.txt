@@ -1,0 +1,11 @@
+on  com.xocialize.gaea.ace-step 0.1.0  ACE-Step 1.5  https://github.com/xocialize-code/gaea-plugin-ace-step
+on  com.xocialize.gaea.flux2-klein 0.2.1  FLUX.2 Klein  https://github.com/xocialize-code/gaea-plugin-flux2-klein
+on  com.xocialize.gaea.forge 0.2.0  Forge processing pack  https://github.com/xocialize-code/gaea-plugin-forge
+on  com.xocialize.gaea.kokoro 0.1.0  Kokoro  https://github.com/xocialize-code/gaea-plugin-kokoro
+on  com.xocialize.gaea.moss-soundeffect 0.1.1  MOSS-SoundEffect  https://github.com/xocialize-code/gaea-plugin-moss-soundeffect
+on  com.xocialize.gaea.mage-vl 0.1.0  Mage-VL  https://github.com/xocialize-code/gaea-plugin-mage-vl
+on  com.xocialize.gaea.prompt-enhance 0.1.0  Prompt enhancer  https://github.com/xocialize-code/gaea-plugin-prompt-enhance
+on  com.xocialize.gaea.qwen-image 0.2.0  Qwen-Image  https://github.com/xocialize-code/gaea-plugin-qwen-image
+on  com.xocialize.gaea.qwen3-tts 0.2.0  Qwen3-TTS  https://github.com/xocialize-code/gaea-plugin-qwen3-tts
+on  com.xocialize.gaea.step-audio-editx 0.1.0  Step-Audio-EditX  https://github.com/xocialize-code/gaea-plugin-step-audio-editx
+on  com.xocialize.gaea.z-image 0.1.0  Z-Image  https://github.com/xocialize-code/gaea-plugin-z-image

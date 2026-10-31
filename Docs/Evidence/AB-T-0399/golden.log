@@ -1,0 +1,35 @@
+# ACE-Step golden check 2026-10-31T16:49:18Z: com.xocialize.gaea.ace-step 0.1.0
+      song10: over GPP ran in 6.06 s; in-process {"effective":{"anchors":{"bpm":125,"key":"E major","time_signature":"4\/4"},"duration_s":10,"language":"en","seed":5},"frames":480000,"lane":"int8","max_rss_gb":9.3478584320000007,"model":"ace-step-1.5","model_frames":480000,"prepare_s":1.5094880000000002,"run_s":5.7472609170000002,"timestamp_lines":5,"truncated":false}
+PASS  song10: byte-identical, 480000 frames, sha256 1ddf90104f1824fb…
+      anchored: over GPP ran in 5.70 s; in-process {"effective":{"anchors":{"bpm":96,"key":"F# minor","time_signature":"3\/4"},"duration_s":30,"language":"en","seed":9},"frames":1440000,"lane":"int8","max_rss_gb":9.3583441920000006,"model":"ace-step-1.5","model_frames":1440000,"prepare_s":1.5356886250000001,"run_s":5.6601315840000002,"timestamp_lines":5,"truncated":false}
+PASS  anchored: byte-identical, 1440000 frames, sha256 0ee22e5fbca1a67d…
+      instrumental: over GPP ran in 6.61 s; in-process {"effective":{"anchors":{"bpm":70,"key":"D major","time_signature":"4\/4"},"duration_s":15,"seed":3},"frames":720000,"lane":"int8","max_rss_gb":9.3460725759999992,"model":"ace-step-1.5","model_frames":720000,"prepare_s":1.5924550829999999,"run_s":6.5199646250000001,"timestamp_lines":1,"truncated":false}
+PASS  instrumental: byte-identical, 720000 frames, sha256 f184c00d68f4091e…
+      chinese: over GPP ran in 6.25 s; in-process {"effective":{"anchors":{"bpm":73,"key":"C# minor","time_signature":"4\/4"},"duration_s":12,"language":"zh","seed":2},"frames":576000,"lane":"int8","max_rss_gb":9.3464657920000001,"model":"ace-step-1.5","model_frames":576000,"prepare_s":1.56584725,"run_s":6.1678567920000003,"timestamp_lines":5,"truncated":false}
+PASS  chinese: byte-identical, 576000 frames, sha256 4e352b98ffd39942…
+      reference: over GPP ran in 6.26 s; in-process {"effective":{"anchors":{"bpm":125,"key":"A major","time_signature":"4\/4"},"duration_s":10,"language":"en","seed":4},"frames":480000,"lane":"int8","max_rss_gb":9.3422387199999992,"model":"ace-step-1.5","model_frames":480000,"prepare_s":1.635803041,"run_s":5.9222866659999998,"timestamp_lines":5,"truncated":false}
+PASS  reference: byte-identical, 480000 frames, sha256 75d76b6eadfa115b…
+      cover: over GPP ran in 1.79 s; in-process {"effective":{"duration_s":2,"language":"en","seed":6},"frames":96000,"lane":"int8","max_rss_gb":9.3362749439999995,"model":"ace-step-1.5","model_frames":245760,"prepare_s":1.562697333,"run_s":0.79791162500000001,"timestamp_lines":5,"truncated":false}
+PASS  cover: byte-identical, 96000 frames, sha256 795ab90895ea8dd3…
+      repaint: over GPP ran in 0.54 s; in-process {"effective":{"duration_s":2,"language":"en","seed":7},"frames":96000,"lane":"int8","max_rss_gb":9.3328179200000001,"model":"ace-step-1.5","model_frames":245760,"prepare_s":1.5534911249999999,"run_s":0.42617258299999999,"timestamp_lines":5,"truncated":false}
+PASS  repaint: byte-identical, 96000 frames, sha256 d1b890aee44d0a3e…
+      extend: over GPP ran in 0.49 s; in-process {"effective":{"duration_s":4.5,"language":"en","seed":8},"frames":216000,"lane":"int8","max_rss_gb":9.3328506880000006,"model":"ace-step-1.5","model_frames":245760,"prepare_s":1.6784680409999999,"run_s":0.44249187499999998,"timestamp_lines":5,"truncated":false}
+PASS  extend: byte-identical, 216000 frames, sha256 030f3f24e1221202…
+PASS  anchored reports the pinned anchors (96 bpm, F# minor, 3/4)
+OK
+PASS  anchored.gpp passes validate.py
+OK
+PASS  chinese.gpp passes validate.py
+OK
+PASS  cover.gpp passes validate.py
+OK
+PASS  extend.gpp passes validate.py
+OK
+PASS  instrumental.gpp passes validate.py
+OK
+PASS  reference.gpp passes validate.py
+OK
+PASS  repaint.gpp passes validate.py
+OK
+PASS  song10.gpp passes validate.py
+== 17 passed, 0 failed

@@ -419,6 +419,15 @@ starts while the phase before it is being built.
        - **Sounds:** 0.5 to 30 s at 48 kHz, exact to the frame; count at seed + i; quality as 25, 50 or 100 steps.
        - **Results:** golden 13/13, acceptance 23/23, and conformance with 10 plugins 62/0/13, with AUDIO-010 running.
          See [Evidence/AB-T-0398](Evidence/AB-T-0398/README.md).
+     - AB-T-0399: ACE-Step 1.5, the first `audio.compose`. **Done** (gaea-plugin-ace-step
+       [v0.1.0](https://github.com/xocialize-code/gaea-plugin-ace-step/releases/tag/v0.1.0), Gaea 0.9.3):
+       - **Songs:** caption and lyrics, instrumentals, 50 languages, anchors, timestamps, a reference, and cover, repaint
+         and extend at their MES lengths.
+       - **Host:** a repaint outside its source is 422 `out_of_limits`.
+       - **Results:** golden 17/17, acceptance 21/21, and conformance with 11 plugins 65/0/10. All 14 Audio tests run and
+         pass. See [Evidence/AB-T-0399](Evidence/AB-T-0399/README.md).
+     - With AB-T-0399 every Audio 0.1 operation has a plugin, which is AB-T-0394's Done. VoxCPM2, MOSS-TTS, AuK, YuE2 and
+       MiniMax Music 3 would add more offers, one order each if wanted.
   5. AB-T-0395: the exit. It needs Gaea Lab on audio, on MESClientKit's assets, voices and chunks, released in
      media-engine-spec v0.8.0.
 

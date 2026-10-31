@@ -1,0 +1,39 @@
+# ACE-Step acceptance (AB-T-0399) 2026-10-31T17:01:07Z — Gaea 0.9.3, ace-step 0.1.0, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add by repo URL installs ace-step 0.1.0
+PASS  audio.compose lists ace-step-1.5: 50 languages, instrumental, reference, 3 edits, anchors, timestamps, 8 sections, 48 kHz stereo, 10–600 s
+      song, cold: 7.76 s from submit to settled (launch, prepare int8, plan, 8 steps, decode)
+PASS  the song: ace-step-1.5, 48 kHz stereo 16-bit, 10 s; effective seed, duration, language and anchors
+PASS  timestamps: true returns the sung lines, timed in order
+PASS  no lyrics make a 15 s instrumental
+PASS  pinned anchors come back as effective.anchors (96 bpm, F# minor, 3/4)
+PASS  a reference from an asset lends its timbre (the job runs)
+PASS  an unknown section tag is dropped with section_unsupported
+PASS  extend: 1 s + the 2 s source + 1.5 s is 216 000 frames
+PASS  repaint and cover keep the source's 2 s (96 000 frames)
+PASS  a score is 422 unsupported_parameter
+PASS  planning is 422 unsupported_parameter
+PASS  a 5 s song is 422 out_of_limits
+PASS  Klingon is 422 unsupported_parameter
+PASS  an edit without a source is 400
+PASS  a source without an edit is 400
+PASS  a repaint past the 2 s source's end is 422 out_of_limits on edit
+      r-noedit: 400 invalid_request source - A source is reworked by an edit; say which with 'edit'.
+      r-nosource: 400 invalid_request edit - An edit reworks a source; send the source input.
+      r-past:  out_of_limits edit - A repaint ending at 3 s is outside the 2.0 s source.
+      r-planning: 422 unsupported_parameter planning - No model of audio.compose this request may use at the standard tier supports a score.
+      r-score: 422 unsupported_parameter score - No model of audio.compose this request may use at the standard tier supports a score.
+      r-short: 422 out_of_limits duration_s - No model of audio.compose this request may use at the standard tier supports a 5.0 s song.
+      r-tlh: 422 unsupported_parameter language - No model of audio.compose this request may use at the standard tier supports the language 'tlh'.
+PASS  the song through Gaea is ace-step-inproc's WAV, byte for byte
+PASS  the extend through Gaea is ace-step-inproc's, byte for byte
+PASS  the repaint through Gaea is ace-step-inproc's, byte for byte
+      in-process song: {"effective":{"anchors":{"bpm":125,"key":"E major","time_signature":"4\/4"},"duration_s":10,"language":"en","seed":5},"frames":480000,"lane":"int8","max_rss_gb":9.3457776639999999,"model":"ace-step-1.5","model_frames":480000,"prepare_s":1.5005945000000001,"run_s":5.6711618750000001,"timestamp_lines":5,"truncated":false}
+      song through Gaea: worker 5.802 s
+      instrumental through Gaea: worker 6.415 s
+      anchored through Gaea: worker 5.547 s
+      extend through Gaea: worker 0.409 s
+      cover through Gaea: worker 0.353 s
+OK
+PASS  transcript com.xocialize.gaea.ace-step-0.1.0-2026-10-31T170110Z.gpp passes validate.py
+== 21 passed, 0 failed
