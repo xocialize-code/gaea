@@ -407,8 +407,15 @@ starts while the phase before it is being built.
          (AB-A-0233).
        - **Results:** golden 15/15, acceptance 39/39, and conformance with 8 plugins 60/0/15, with AUDIO-004, 005, 006
          and 008 running. See [Evidence/AB-T-0396](Evidence/AB-T-0396/README.md).
-  5. AB-T-0395: the exit. It needs Gaea Lab on audio, which waits on MESClientKit's assets, voices and chunks (owed by
-     mlx-apps).
+     - AB-T-0397: Step-Audio-EditX, the first `audio.edit_speech`. **Done** (gaea-plugin-step-audio-editx
+       [v0.1.0](https://github.com/xocialize-code/gaea-plugin-step-audio-editx/releases/tag/v0.1.0), Gaea 0.9.2):
+       - **Edits:** emotion, style, add_cue (with the new transcript as an output), denoise and trim_silence, MES's
+         labels mapped onto upstream's.
+       - **Host:** Gaea measures audio inputs against the offer's limits; a take over 90 s is 422 `out_of_limits`.
+       - **Results:** golden 21/21, acceptance 31/31, and conformance with 9 plugins 61/0/14, with AUDIO-009
+         running. See [Evidence/AB-T-0397](Evidence/AB-T-0397/README.md).
+  5. AB-T-0395: the exit. It needs Gaea Lab on audio, on MESClientKit's assets, voices and chunks, released in
+     media-engine-spec v0.8.0.
 
 **G3. Video**
 - Base time conventions, then Video 0.1.

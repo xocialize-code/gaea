@@ -1,0 +1,41 @@
+# Step-Audio-EditX golden check 2026-10-31T14:30:26Z: com.xocialize.gaea.step-audio-editx 0.1.0
+      angry: over GPP ran in 2.19 s; in-process {"audio_s":3.7200000000000002,"edit":"emotion:angry","lane":"int8","max_rss_gb":6.0933079040000004,"model":"step-audio-editx","prepare_s":1.972518792,"run_s":2.1979822499999999,"seed":42}
+PASS  angry: byte-identical, sha256 d7f1ef486d409346…
+      afraid: over GPP ran in 2.10 s; in-process {"audio_s":3.48,"edit":"emotion:fear","lane":"int8","max_rss_gb":6.0924067839999996,"model":"step-audio-editx","prepare_s":1.9638895409999999,"run_s":2.0722838750000001,"seed":7}
+PASS  afraid: byte-identical, sha256 33a780d316c35716…
+      whisper: over GPP ran in 2.55 s; in-process {"audio_s":3.8399999999999999,"edit":"style:whisper","lane":"int8","max_rss_gb":6.0815769599999996,"model":"step-audio-editx","prepare_s":1.987018709,"run_s":2.2494347920000002,"seed":42}
+PASS  whisper: byte-identical, sha256 70c220f16b19375b…
+      narration: over GPP ran in 2.19 s; in-process {"audio_s":3.48,"edit":"style:story","lane":"int8","max_rss_gb":6.0750561279999999,"model":"step-audio-editx","prepare_s":1.947181042,"run_s":2.1903613329999998,"seed":3}
+PASS  narration: byte-identical, sha256 2d501dede49a7326…
+      laugh: over GPP ran in 3.37 s; in-process {"audio_s":4.2000000000000002,"edit":"paralinguistic:The weather is lovely today, and I think we should go outside.[Laughter]","lane":"int8","max_rss_gb":6.0628664319999999,"model":"step-audio-editx","prepare_s":1.9683169579999999,"run_s":2.4628437500000002,"seed":42,"transcript":"The weather is lovely today, and I think we should go outside. [laugh]"}
+PASS  laugh: byte-identical, sha256 62f73c9431d12b45…
+PASS  laugh returns the transcript "The weather is lovely today, and I think we should go outside. [laugh]"
+      breath: over GPP ran in 2.32 s; in-process {"audio_s":3.96,"edit":"paralinguistic:We don't have much time, [Breathing] so listen carefully to what I say.","lane":"int8","max_rss_gb":6.0857057279999998,"model":"step-audio-editx","prepare_s":1.971924625,"run_s":2.3249638749999999,"seed":5,"transcript":"We don't have much time, [breath] so listen carefully to what I say."}
+PASS  breath: byte-identical, sha256 0a5bc6f54db3a5f8…
+PASS  breath returns the transcript "We don't have much time, [breath] so listen carefully to what I say."
+      sigh: over GPP ran in 2.12 s; in-process {"audio_s":3.48,"edit":"paralinguistic:[Sigh]We don't have much time, so listen carefully to what I say.","lane":"int8","max_rss_gb":6.0828385279999999,"model":"step-audio-editx","prepare_s":2.0377321670000001,"run_s":2.1127516669999999,"seed":9,"transcript":"[sigh] We don't have much time, so listen carefully to what I say."}
+PASS  sigh: byte-identical, sha256 7128a3052690b4ff…
+PASS  sigh returns the transcript "[sigh] We don't have much time, so listen carefully to what I say."
+      denoise: over GPP ran in 2.45 s; in-process {"audio_s":3.96,"edit":"denoise","lane":"int8","max_rss_gb":6.0504965119999996,"model":"step-audio-editx","prepare_s":1.979932292,"run_s":2.4622727910000002,"seed":42}
+PASS  denoise: byte-identical, sha256 ef102ddd5f78702b…
+      trim: over GPP ran in 2.10 s; in-process {"audio_s":3.2400000000000002,"edit":"vad","lane":"int8","max_rss_gb":6.0973547520000002,"model":"step-audio-editx","prepare_s":1.969984792,"run_s":2.0044584159999999,"seed":42}
+PASS  trim: byte-identical, sha256 d4267ce8b9f7fa6b…
+OK
+PASS  afraid.gpp passes validate.py
+OK
+PASS  angry.gpp passes validate.py
+OK
+PASS  breath.gpp passes validate.py
+OK
+PASS  denoise.gpp passes validate.py
+OK
+PASS  laugh.gpp passes validate.py
+OK
+PASS  narration.gpp passes validate.py
+OK
+PASS  sigh.gpp passes validate.py
+OK
+PASS  trim.gpp passes validate.py
+OK
+PASS  whisper.gpp passes validate.py
+== 21 passed, 0 failed

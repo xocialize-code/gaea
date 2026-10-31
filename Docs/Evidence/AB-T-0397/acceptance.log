@@ -1,0 +1,50 @@
+# Step-Audio-EditX acceptance (AB-T-0397) 2026-10-31T14:47:36Z — Gaea 0.9.2, step-audio-editx 0.1.0, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add by repo URL installs kokoro
+PASS  add by repo URL installs step-audio-editx 0.1.0
+PASS  audio.edit_speech lists step-audio-editx: 5 kinds, 15 emotions, 9 styles, 4 cues, transcript required, 90 s
+      angry, cold: 4.84 s from submit to settled (launch, prepare int8 with its warm-up, edit)
+PASS  angry: step-audio-editx, a 24 kHz mono 16-bit WAV, effective seed, edit and upstream's emotion:angry
+PASS  fearful is resolved to afraid, and runs as upstream's fear
+PASS  the laugh returns the new transcript as the transcript output
+PASS  an emotion edit returns no transcript
+PASS  trim_silence shortens the padded 7.4 s take
+PASS  Kokoro's take, kept as an asset, edited sad twice at seed 4: the same WAV
+PASS  a take24.wav take is accepted
+PASS  a takef32.wav take is accepted
+PASS  a take.flac take is accepted
+PASS  a takestereo.wav take is accepted
+PASS  output at 48 kHz 24-bit is converted, with audio_resampled
+PASS  an unlisted kind (speed) is 422
+PASS  an unlisted emotion (calm) is 422
+PASS  an unlisted cue (cough) is 422
+PASS  no transcript is 422
+PASS  an emotion edit without its emotion is 400
+PASS  a denoise edit with an emotion is 400
+PASS  a 95 s take is 422 out_of_limits on audio
+PASS  an add_cue whose text lacks the cue is refused by the worker (invalid_request)
+      r-cue: 422 unsupported_parameter edit - Model step-audio-editx doesn't support the cue 'cough'.
+      r-emotion: 422 unsupported_parameter edit - Model step-audio-editx doesn't support the emotion 'calm'.
+      r-extra: 400 invalid_request edit - A denoise edit takes no 'emotion'.
+      r-kind: 422 unsupported_parameter edit - Model step-audio-editx doesn't support a speed edit.
+      r-long:  out_of_limits audio - The audio is 96.2 s; this model takes at most 90 s.
+      r-missing: 400 invalid_request edit - A emotion edit needs 'emotion'.
+      r-nocue:  invalid_request None - Step-Audio-EditX: An add_cue edit's text is the transcript with [laugh] inline.
+      r-notext: 422 unsupported_parameter transcript - Model step-audio-editx doesn't support an edit without a transcript.
+PASS  angry through Gaea is editx-inproc's WAV, byte for byte
+PASS  afraid through Gaea is editx-inproc's WAV, byte for byte
+PASS  whisper through Gaea is editx-inproc's WAV, byte for byte
+PASS  laugh through Gaea is editx-inproc's WAV, byte for byte
+PASS  denoise through Gaea is editx-inproc's WAV, byte for byte
+PASS  trim through Gaea is editx-inproc's WAV, byte for byte
+PASS  the asset's edit through Gaea is editx-inproc's, byte for byte
+      in-process angry: {"audio_s":3.7200000000000002,"edit":"emotion:angry","lane":"int8","max_rss_gb":6.0943564800000001,"model":"step-audio-editx","prepare_s":2.0242756659999999,"run_s":2.242044667,"seed":42}
+      angry through Gaea: worker 2.207 s
+      laugh through Gaea: worker 2.49 s
+      denoise through Gaea: worker 2.501 s
+      trim through Gaea: worker 2.035 s
+OK
+PASS  transcript com.xocialize.gaea.kokoro-0.1.0-2026-10-31T144758Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.step-audio-editx-0.1.0-2026-10-31T144741Z.gpp passes validate.py
+== 31 passed, 0 failed
