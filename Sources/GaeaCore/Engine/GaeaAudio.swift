@@ -1,3 +1,4 @@
+import AVFoundation
 import Foundation
 import GaeaProtocol
 import MESCore
@@ -9,8 +10,9 @@ import Synchronization
 /// plugin's worker does the model-specific mapping (labels, cues, the model's syntax), and Gaea gives the client the
 /// format it asked for (`output`, a stream plan), streaming the worker's chunks as they arrive (GPP-1 §3.3.1).
 extension GaeaEngine {
-    /// The media types an audio input takes. Workers read WAV; other containers come with the plugins that need them.
-    static let audioInputTypes = ["audio/wav"]
+    /// The media types an audio input takes: Audio §1.1's MUST formats (WAV at any depth, FLAC) and MP3 and AAC, which
+    /// AVFoundation reads too. Workers get every one as a canonical 16-bit PCM WAV (`workerAudio`).
+    static let audioInputTypes = ["audio/wav", "audio/flac", "audio/mpeg", "audio/mp4"]
 
     /// One descriptor per Audio operation some enabled plugin offers.
     func audioDescriptors(_ routes: [PluginRoute]) -> [Descriptor] {
@@ -126,8 +128,15 @@ extension GaeaEngine {
     /// converts every output to the client's format.
     func runAudio(_ route: PluginRoute, _ context: RunContext) async throws -> RunOutput {
         let workerDirectory = context.outputDirectory.appending(path: "worker", directoryHint: .isDirectory)
-        let inputs = try Self.inputPaths(context.inputs, writingTextTo: context.outputDirectory.appending(path: "worker-inputs",
-                                                                                                          directoryHint: .isDirectory))
+        let inputDirectory = context.outputDirectory.appending(path: "worker-inputs", directoryHint: .isDirectory)
+        var audioInputs = context.inputs
+        for (name, values) in audioInputs {
+            audioInputs[name] = try values.enumerated().map { i, value in
+                guard case .file(let url, let mediaType) = value, mediaType.hasPrefix("audio/") else { return value }
+                return .file(try Self.workerAudio(url, name: "\(name)-\(i)", into: inputDirectory), mediaType: "audio/wav")
+            }
+        }
+        let inputs = try Self.inputPaths(audioInputs, writingTextTo: inputDirectory)
         var params = route.manifestOffer.defaults?.objectValue ?? [:]
         for (key, value) in context.params { params[key] = value.gpp }
         let names = Set(route.extensions.map(\.name))
@@ -213,6 +222,36 @@ extension GaeaEngine {
         let written = try WAVFile(Data(contentsOf: file))
         return (.audio(file, name: name, durationSeconds: written.durationSeconds, sampleRate: written.sampleRate,
                        channels: written.channels, bitDepth: written.bitsPerSample), warnings)
+    }
+
+    /// An audio input as workers read it: a canonical 16-bit PCM WAV (a 44-byte header, `fmt ` then `data`), at the
+    /// input's own rate and channels. One already in that form is passed as it is; anything else AVFoundation reads
+    /// (WAV at 24 or 32 bits, float, extensible, FLAC, MP3, AAC) is decoded and written as one.
+    static func workerAudio(_ url: URL, name: String, into directory: URL) throws -> URL {
+        let data = try Data(contentsOf: url)
+        if data.count >= 44, let wav = try? WAVFile(data), wav.format == .int, wav.bitsPerSample == 16,
+           data[data.startIndex + 12..<data.startIndex + 16] == Data("fmt ".utf8),
+           data[data.startIndex + 16..<data.startIndex + 20] == Data([16, 0, 0, 0]),
+           data[data.startIndex + 36..<data.startIndex + 40] == Data("data".utf8) {
+            return url
+        }
+        let file: AVAudioFile
+        do { file = try AVAudioFile(forReading: url) } catch {
+            throw MESError(.inputInvalid, "Input \(name) isn't audio Gaea can read.", param: name.components(separatedBy: "-").first)
+        }
+        let format = file.processingFormat
+        let frames = AVAudioFrameCount(file.length)
+        guard let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: max(1, frames)) else {
+            throw MESError(.inputInvalid, "Input \(name) is too long to read.")
+        }
+        try file.read(into: buffer)
+        let channels = Int(format.channelCount), n = Int(buffer.frameLength)
+        var samples = [Float](repeating: 0, count: n * channels)
+        for c in 0..<channels { let ch = buffer.floatChannelData![c]; for f in 0..<n { samples[f * channels + c] = ch[f] } }
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        let out = directory.appending(path: "\(name).wav")
+        try AudioPCM.wav(samples, sampleRate: Int(format.sampleRate), channels: channels, bitDepth: 16).write(to: out)
+        return out
     }
 
     /// A file's samples sent as one stream: passed through when they are already in the plan's format.

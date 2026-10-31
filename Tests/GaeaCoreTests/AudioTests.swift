@@ -59,7 +59,7 @@ struct AudioTests {
         #expect(descriptor.limits?.profile["max_text_chars"] == 4000)
         #expect(descriptor.limits?.maxDurationSeconds == nil)
         #expect(descriptor.inputs.contains { $0.name == "text" && $0.required })
-        #expect(descriptor.inputs.first { $0.name == "voice_ref" }?.mediaTypes == ["audio/wav"])
+        #expect(descriptor.inputs.first { $0.name == "voice_ref" }?.mediaTypes == ["audio/wav", "audio/flac", "audio/mpeg", "audio/mp4"])
         let properties = descriptor.params["properties"]
         #expect(properties?["output"]?["properties"]?["bit_depth"]?["enum"] == [16, 24, 32])
         #expect(properties?["voice"] != nil)
@@ -104,6 +104,26 @@ struct AudioTests {
         let (converted, warnings) = try GaeaEngine.audioOutput(file, name: "audio", format: ["sample_rate": 48000, "channels": 2])
         #expect(converted.sampleRate == 48000 && converted.channels == 2)
         #expect(warnings.map(\.code) == ["audio_resampled"])
+    }
+
+    @Test func workersGetCanonicalSixteenBitWAVs() throws {
+        let dir = FileManager.default.temporaryDirectory.appending(path: "gaea-inputs-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        let tone = (0..<4800).map { Float(sin(Double($0) * 0.05)) * 0.5 }
+        let canonical = dir.appending(path: "in16.wav")
+        try AudioPCM.wav(tone, sampleRate: 24000, channels: 1, bitDepth: 16).write(to: canonical)
+        #expect(try GaeaEngine.workerAudio(canonical, name: "voice_ref-0", into: dir) == canonical)
+        for depth in [24, 32] {
+            let file = dir.appending(path: "in\(depth).wav")
+            try AudioPCM.wav(tone, sampleRate: 24000, channels: 1, bitDepth: depth).write(to: file)
+            let out = try GaeaEngine.workerAudio(file, name: "voice_ref-\(depth)", into: dir)
+            let wav = try WAVFile(Data(contentsOf: out))
+            #expect(out != file && wav.bitsPerSample == 16 && wav.format == .int && wav.sampleRate == 24000 && wav.frames == 4800)
+            #expect(zip(wav.floatSamples, tone).allSatisfy { abs($0 - $1) < 0.001 })
+        }
+        let junk = dir.appending(path: "junk.wav")
+        try Data("not audio".utf8).write(to: junk)
+        #expect(throws: MESError.self) { try GaeaEngine.workerAudio(junk, name: "voice_ref-0", into: dir) }
     }
 
     @Test func chunksAreConvertedForwardedInOrderAndDeleted() async throws {
