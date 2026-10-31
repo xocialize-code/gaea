@@ -1,0 +1,30 @@
+# Qwen3-TTS golden check 2026-10-31T03:59:35Z: com.xocialize.gaea.qwen3-tts 0.2.0
+      ryan: over GPP ran in 2.11 s; in-process {"audio_s":6.6799999999999997,"lane":"int8","max_rss_gb":3.0490787840000002,"model":"qwen3-tts","prepare_s":1.2659336670000001,"run_s":2.1534081249999999,"seed":42,"voice":"ryan"}
+PASS  ryan: byte-identical, sha256 6945433a77d067f1…
+      angry: over GPP ran in 1.54 s; in-process {"audio_s":4.5499999999999998,"lane":"int8","max_rss_gb":3.0470799359999998,"model":"qwen3-tts","prepare_s":1.274203875,"run_s":1.5357628330000002,"seed":42,"voice":"ryan"}
+PASS  angry: byte-identical, sha256 1808fae86986566d…
+      described: over GPP ran in 1.04 s; in-process {"audio_s":3.0750000000000002,"lane":"int8","max_rss_gb":3.054452736,"model":"qwen3-tts","prepare_s":1.2838177909999999,"run_s":1.040521834,"seed":3,"voice":"aiden"}
+PASS  described: byte-identical, sha256 51be9fbd04832921…
+      vivian: over GPP ran in 1.28 s; in-process {"audio_s":4.8399999999999999,"lane":"int8","max_rss_gb":3.0469160959999999,"model":"qwen3-tts","prepare_s":1.278665084,"run_s":1.289634416,"seed":1,"voice":"vivian"}
+PASS  vivian: byte-identical, sha256 d028bb53ef8a0f95…
+      design: over GPP ran in 2.98 s; in-process {"count":2,"lane":"int8","max_rss_gb":3.049291776,"model":"qwen3-tts-design","prepare_s":1.256991,"run_s":3.0118666670000001,"seed":7,"text":"Hello! This is how I sound when I read a sentence aloud."}
+PASS  design sample 0 (seed 7): byte-identical, sha256 9e7046941db80276…
+PASS  design sample 1 (seed 8): byte-identical, sha256 7acbd4322e4daf19…
+      clone (icl): over GPP ran in 5.12 s; in-process {"audio_s":4.4258333333333333,"clone":"icl","lane":"int8","max_rss_gb":3.2696401919999998,"model":"qwen3-tts-clone","prepare_s":1.329094167,"run_s":1.4042343749999999,"seed":9}
+PASS  clone of the designed voice, with its text (icl): byte-identical, sha256 4af984c9a4d1e171…
+PASS  clone of the designed voice, without its text (x-vector): byte-identical, sha256 2e871c5af8933b7e…
+OK
+PASS  angry.gpp passes validate.py
+OK
+PASS  clone-icl.gpp passes validate.py
+OK
+PASS  clone-xvector.gpp passes validate.py
+OK
+PASS  described.gpp passes validate.py
+OK
+PASS  design.gpp passes validate.py
+OK
+PASS  ryan.gpp passes validate.py
+OK
+PASS  vivian.gpp passes validate.py
+== 15 passed, 0 failed

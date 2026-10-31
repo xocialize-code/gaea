@@ -1,0 +1,14 @@
+# manifest: /Volumes/Satechi/Development/gaea-plugin-qwen3-tts/dist/qwen3-tts.gaeaplugin/Contents/Resources/manifest.json
+# gaea-plugin-check session against qwen3-tts.gaeaplugin
+W {"engine":{"contract":"1.58.0","version":"0.72.0"},"kit":{"version":"0.8.0"},"manifest_sha256":"78cf26ae86d293782c4ca78f11d2d4f11d703471bfc62aaa9711a11ca712ff68","models":["qwen3-tts","qwen3-tts-clone","qwen3-tts-design"],"pid":45009,"plugin":{"id":"com.xocialize.gaea.qwen3-tts","version":"0.2.0"},"protocol":1,"type":"hello"}
+H {"budget":{"ceilingBytes":64000000000,"wiresWeights":false},"cache_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-AB4C266E-DE3F-4E74-9EC3-1DE675D14AEC/cache","id":"h1","models_root":"/Users/dustinnielson/Library/Application Support/MLXEngine/Models","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"int8","model":"qwen3-tts-clone","type":"prepare"}
+W {"lane":"int8","model":"qwen3-tts-clone","re":"h2","seconds":1.28,"type":"prepared"}
+W {"report":{"availableBytes":56198000000,"budgetBytes":64000000000,"date":815112018.162237,"gpuActiveBytes":2723796012,"gpuCacheBytes":2147483648,"physFootprintBytes":5181918616,"residentBytes":3002000000,"residents":{"qwen3-tts-clone":3002000000},"running":[],"transientReserveBytes":4800000000},"type":"memory"}
+H {"id":"h3","inputs":{"text":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-AB4C266E-DE3F-4E74-9EC3-1DE675D14AEC/spool/job_check/in/text-0.txt","voice_ref":"/tmp/qw-golden2/design-gpp-0.wav"},"job":"job_check","lane":"int8","model":"qwen3-tts-clone","operation":"audio.speak","output_dir":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-AB4C266E-DE3F-4E74-9EC3-1DE675D14AEC/spool/job_check/out","params":{},"seed":9,"type":"run"}
+W {"effective":{"language":"en","seed":9,"x-qwen3.clone":"xvector","x-qwen3.voice_ref_s":4.9},"job":"job_check","outputs":[{"media_type":"audio/wav","name":"audio","path":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-AB4C266E-DE3F-4E74-9EC3-1DE675D14AEC/spool/job_check/out/audio-0.wav"}],"re":"h3","seconds":2.192,"type":"result","warnings":[]}
+W {"report":{"availableBytes":56198000000,"budgetBytes":64000000000,"date":815112020.355293,"gpuActiveBytes":2873881736,"gpuCacheBytes":2182540563,"physFootprintBytes":5723426344,"residentBytes":3002000000,"residents":{"qwen3-tts-clone":3002000000},"running":[],"transientReserveBytes":4800000000},"type":"memory"}
+H {"id":"h4","type":"memory.query"}
+W {"re":"h4","report":{"availableBytes":56198000000,"budgetBytes":64000000000,"date":815112020.355509,"gpuActiveBytes":2873881736,"gpuCacheBytes":2182540563,"physFootprintBytes":5723442728,"residentBytes":3002000000,"residents":{"qwen3-tts-clone":3002000000},"running":[],"transientReserveBytes":4800000000},"type":"memory"}
+H {"id":"h5","type":"shutdown"}

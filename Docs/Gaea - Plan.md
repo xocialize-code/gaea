@@ -399,7 +399,14 @@ starts while the phase before it is being built.
        English voices, streamed piece by piece.
      - **Parity:** byte for byte against in-process, streamed or not.
      - **Conformance:** with it installed, Audio 0.1 conforms under the stock v0.7.0 suite.
-  4. AB-T-0394: the remaining plugins, one order each when started.
+  4. AB-T-0394: the remaining plugins, one order each when started:
+     - AB-T-0396: Qwen3-TTS. **Done** (gaea-plugin-qwen3-tts
+       [v0.2.0](https://github.com/xocialize-code/gaea-plugin-qwen3-tts/releases/tag/v0.2.0), Gaea 0.9.1, kit 0.8.0):
+       - **Models:** speak with 9 voices and emotions, clone from `voice_ref`, and `design_voice`.
+       - **Assets:** the clone's cache is keyed by the MES asset and evicted on `asset_removed`, with mlx-audio's fix
+         (AB-A-0233).
+       - **Results:** golden 15/15, acceptance 39/39, and conformance with 8 plugins 60/0/15, with AUDIO-004, 005, 006
+         and 008 running. See [Evidence/AB-T-0396](Evidence/AB-T-0396/README.md).
   5. AB-T-0395: the exit. It needs Gaea Lab on audio, which waits on MESClientKit's assets, voices and chunks (owed by
      mlx-apps).
 
