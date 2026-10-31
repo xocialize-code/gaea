@@ -1,0 +1,27 @@
+# MOSS-SoundEffect golden check 2026-10-31T15:38:29Z: com.xocialize.gaea.moss-soundeffect 0.1.1
+      rain: over GPP ran in 9.20 s; in-process {"duration_s":1.5,"frames":72000,"lane":"bf16","max_rss_gb":7.9207792640000001,"model":"moss-soundeffect","prepare_s":0.86900374999999996,"run_s":[9.1812666669999992],"seed":11,"steps":25}
+PASS  rain sound 0 (seed 11): byte-identical, 72000 frames, sha256 e8ca415c0f55cd52…
+      door: over GPP ran in 17.35 s; in-process {"duration_s":2.2999999999999998,"frames":110400,"lane":"bf16","max_rss_gb":7.9206645760000001,"model":"moss-soundeffect","prepare_s":0.87042649999999999,"run_s":[17.336869792000002],"seed":3,"steps":50}
+PASS  door sound 0 (seed 3): byte-identical, 110400 frames, sha256 3b0ee71537f5ba3a…
+      barks: over GPP ran in 18.31 s; in-process {"duration_s":1.2,"frames":57600,"lane":"bf16","max_rss_gb":7.9205662720000003,"model":"moss-soundeffect","prepare_s":0.872269709,"run_s":[9.1533193750000006,9.1739568330000001],"seed":7,"steps":25}
+PASS  barks sound 0 (seed 7): byte-identical, 57600 frames, sha256 b0217bf95a8a9e73…
+PASS  barks sound 1 (seed 8): byte-identical, 57600 frames, sha256 da69189866abaf96…
+      street: over GPP ran in 9.19 s; in-process {"duration_s":2,"frames":96000,"lane":"bf16","max_rss_gb":7.9204188159999998,"model":"moss-soundeffect","prepare_s":0.87617750000000005,"run_s":[9.1700472919999996],"seed":5,"steps":25}
+PASS  street sound 0 (seed 5): byte-identical, 96000 frames, sha256 5ef09edf741890a5…
+      glass: over GPP ran in 34.33 s; in-process {"duration_s":1,"frames":48000,"lane":"bf16","max_rss_gb":7.9207956480000004,"model":"moss-soundeffect","prepare_s":1.0466345829999999,"run_s":[34.705589332999999],"seed":9,"steps":100}
+PASS  glass sound 0 (seed 9): byte-identical, 48000 frames, sha256 f453b6036f7ed9d1…
+      thunder: over GPP ran in 9.19 s; in-process {"duration_s":1.55,"frames":74400,"lane":"bf16","max_rss_gb":7.9209267199999998,"model":"moss-soundeffect","prepare_s":0.883622833,"run_s":[9.1904370419999992],"seed":2,"steps":25}
+PASS  thunder sound 0 (seed 2): byte-identical, 74400 frames, sha256 328c8d151d371f75…
+OK
+PASS  barks.gpp passes validate.py
+OK
+PASS  door.gpp passes validate.py
+OK
+PASS  glass.gpp passes validate.py
+OK
+PASS  rain.gpp passes validate.py
+OK
+PASS  street.gpp passes validate.py
+OK
+PASS  thunder.gpp passes validate.py
+== 13 passed, 0 failed

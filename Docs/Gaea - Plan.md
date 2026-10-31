@@ -414,6 +414,11 @@ starts while the phase before it is being built.
        - **Host:** Gaea measures audio inputs against the offer's limits; a take over 90 s is 422 `out_of_limits`.
        - **Results:** golden 21/21, acceptance 31/31, and conformance with 9 plugins 61/0/14, with AUDIO-009
          running. See [Evidence/AB-T-0397](Evidence/AB-T-0397/README.md).
+     - AB-T-0398: MOSS-SoundEffect, the first `audio.generate`. **Done** (gaea-plugin-moss-soundeffect
+       [v0.1.1](https://github.com/xocialize-code/gaea-plugin-moss-soundeffect/releases/tag/v0.1.1)):
+       - **Sounds:** 0.5 to 30 s at 48 kHz, exact to the frame; count at seed + i; quality as 25, 50 or 100 steps.
+       - **Results:** golden 13/13, acceptance 23/23, and conformance with 10 plugins 62/0/13, with AUDIO-010 running.
+         See [Evidence/AB-T-0398](Evidence/AB-T-0398/README.md).
   5. AB-T-0395: the exit. It needs Gaea Lab on audio, on MESClientKit's assets, voices and chunks, released in
      media-engine-spec v0.8.0.
 
