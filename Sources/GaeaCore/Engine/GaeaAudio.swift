@@ -136,6 +136,7 @@ extension GaeaEngine {
                 return .file(try Self.workerAudio(url, name: "\(name)-\(i)", into: inputDirectory), mediaType: "audio/wav")
             }
         }
+        try Self.checkInputLengths(route.operation, inputs: audioInputs, limits: route.offer.limits)
         let inputs = try Self.inputPaths(audioInputs, writingTextTo: inputDirectory)
         var params = route.manifestOffer.defaults?.objectValue ?? [:]
         for (key, value) in context.params { params[key] = value.gpp }
@@ -222,6 +223,29 @@ extension GaeaEngine {
         let written = try WAVFile(Data(contentsOf: file))
         return (.audio(file, name: name, durationSeconds: written.durationSeconds, sampleRate: written.sampleRate,
                        channels: written.channels, bitDepth: written.bitsPerSample), warnings)
+    }
+
+    /// The input lengths an offer's limits bound (Audio §4.2): `edit_speech`'s take (`max_duration_s`), and `compose`'s
+    /// source and reference. MESKit reads the request, not its media, so the engine measures them; longer is 422
+    /// `out_of_limits`, never trimmed.
+    static func checkInputLengths(_ operation: String, inputs: [String: [RunInput]], limits: Descriptor.Limits?) throws {
+        guard let limits else { return }
+        let bounds: [(input: String, seconds: Double?)] = switch operation {
+        case "audio.edit_speech": [(AudioProfile.Input.audio, limits.maxDurationSeconds)]
+        case "audio.compose": [(AudioProfile.Input.source, limits.profile[AudioProfile.LimitField.maxSourceSeconds]),
+                               (AudioProfile.Input.reference, limits.profile[AudioProfile.LimitField.maxReferenceSeconds])]
+        default: []
+        }
+        for (input, most) in bounds {
+            guard let most else { continue }
+            for value in inputs[input] ?? [] {
+                guard case .file(let url, _) = value, let wav = try? WAVFile(Data(contentsOf: url)) else { continue }
+                if wav.durationSeconds > most + 0.0005 {
+                    throw MESError(.outOfLimits, String(format: "The %@ is %.1f s; this model takes at most %g s.", input,
+                                                        wav.durationSeconds, most), param: input)
+                }
+            }
+        }
     }
 
     /// An audio input as workers read it: a canonical 16-bit PCM WAV (a 44-byte header, `fmt ` then `data`), at the

@@ -126,6 +126,26 @@ struct AudioTests {
         #expect(throws: MESError.self) { try GaeaEngine.workerAudio(junk, name: "voice_ref-0", into: dir) }
     }
 
+    @Test func aTakeLongerThanTheOffersLimitIsOutOfLimits() throws {
+        let file = FileManager.default.temporaryDirectory.appending(path: "gaea-take-\(UUID().uuidString).wav")
+        try AudioPCM.wav([Float](repeating: 0, count: 24000 * 3), sampleRate: 24000, channels: 1, bitDepth: 16).write(to: file)
+        let take: [String: [RunInput]] = ["audio": [.file(file, mediaType: "audio/wav")]]
+        var limits = Descriptor.Limits()
+        limits.maxDurationSeconds = 3
+        try GaeaEngine.checkInputLengths("audio.edit_speech", inputs: take, limits: limits)
+        limits.maxDurationSeconds = 2
+        do {
+            try GaeaEngine.checkInputLengths("audio.edit_speech", inputs: take, limits: limits)
+            Issue.record("a 3 s take passed a 2 s limit")
+        } catch let error as MESError {
+            #expect(error.code == MESErrorCode.outOfLimits.rawValue && error.param == "audio")
+        }
+        // Compose bounds its source by max_source_s, not max_duration_s (the song's length).
+        try GaeaEngine.checkInputLengths("audio.compose", inputs: ["source": take["audio"]!], limits: limits)
+        limits.profile["max_source_s"] = 1
+        #expect(throws: MESError.self) { try GaeaEngine.checkInputLengths("audio.compose", inputs: ["source": take["audio"]!], limits: limits) }
+    }
+
     @Test func chunksAreConvertedForwardedInOrderAndDeleted() async throws {
         let root = FileManager.default.temporaryDirectory.appending(path: "gaea-chunks-\(UUID().uuidString)")
         try FileManager.default.createDirectory(at: root.appending(path: "stream"), withIntermediateDirectories: true)
