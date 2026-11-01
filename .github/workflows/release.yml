@@ -1,0 +1,105 @@
+# Builds, checks, notarizes and publishes Gaea when a v<version> tag is pushed (or on demand for an existing tag), with
+# scripts/release.sh (G4 order 1, AB-T-0409). The four signing and notary secrets are organization secrets on
+# xocialize-code (Docs/Signing secrets.md).
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag or branch to build, e.g. v0.11.3 (default: the branch dispatched from)"
+        required: false
+      publish:
+        description: "Publish a GitHub Release for that tag (otherwise build, check and notarize only)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-26
+    timeout-minutes: 60
+    steps:
+      # Fail loudly, before anything is built, when a secret is missing: a release that skipped notarization must never
+      # look green.
+      - name: Check the secrets are set
+        env:
+          DEVELOPER_ID_P12_BASE64: ${{ secrets.DEVELOPER_ID_P12_BASE64 }}
+          DEVELOPER_ID_P12_PASSWORD: ${{ secrets.DEVELOPER_ID_P12_PASSWORD }}
+          NOTARY_APPLE_ID: ${{ secrets.NOTARY_APPLE_ID }}
+          NOTARY_APP_PASSWORD: ${{ secrets.NOTARY_APP_PASSWORD }}
+        run: |
+          missing=()
+          for name in DEVELOPER_ID_P12_BASE64 DEVELOPER_ID_P12_PASSWORD NOTARY_APPLE_ID NOTARY_APP_PASSWORD; do
+            [ -n "${!name}" ] || missing+=("$name")
+          done
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "::error::Missing secrets: ${missing[*]} (Docs/Signing secrets.md)"
+            exit 1
+          fi
+
+      - name: Name the temporary keychain
+        run: echo "KEYCHAIN=$RUNNER_TEMP/gaea-signing.keychain-db" >> "$GITHUB_ENV"
+
+      # The whole history and its tags, so the release notes can link the changes since the previous release.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+          fetch-depth: 0
+
+      - name: Select the newest Xcode
+        run: |
+          sudo xcode-select -s "$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)"
+          xcrun swift --version
+
+      - name: Import the Developer ID certificate into a temporary keychain
+        env:
+          P12_BASE64: ${{ secrets.DEVELOPER_ID_P12_BASE64 }}
+          P12_PASSWORD: ${{ secrets.DEVELOPER_ID_P12_PASSWORD }}
+        run: |
+          KEYCHAIN_PASSWORD=$(uuidgen)
+          echo "$P12_BASE64" | base64 --decode > "$RUNNER_TEMP/developer-id.p12"
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security set-keychain-settings -lut 3600 "$KEYCHAIN"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security import "$RUNNER_TEMP/developer-id.p12" -k "$KEYCHAIN" -P "$P12_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
+          rm "$RUNNER_TEMP/developer-id.p12"
+          security find-identity -v -p codesigning "$KEYCHAIN"
+
+      - name: Store the notary credentials in the same keychain
+        env:
+          NOTARY_APPLE_ID: ${{ secrets.NOTARY_APPLE_ID }}
+          NOTARY_APP_PASSWORD: ${{ secrets.NOTARY_APP_PASSWORD }}
+        run: |
+          xcrun notarytool store-credentials mlx-notary \
+            --apple-id "$NOTARY_APPLE_ID" --team-id CFZS6RXUCP --password "$NOTARY_APP_PASSWORD" \
+            --keychain "$KEYCHAIN"
+
+      - name: Build, check, notarize, release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NOTARIZE: "yes"
+          PUBLISH: ${{ (github.event_name == 'push' || inputs.publish) && 'yes' || 'no' }}
+        run: NOTARY_KEYCHAIN="$KEYCHAIN" scripts/release.sh
+
+      - name: Keep the build's evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: |
+            dist/Gaea-*.zip
+            dist/*.sha256
+            dist/release.json
+            dist/smoke*
+            dist/notary*.json
+
+      - name: Remove the temporary keychain
+        if: always()
+        run: security delete-keychain "$KEYCHAIN" || true
