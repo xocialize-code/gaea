@@ -1,0 +1,775 @@
+# Update acceptance (AB-T-0410) 2026-11-01T20:34:00Z: Gaea 0.12.1 → 0.12.2-rc.1, releases from GitHub
+host: Mac17,14, macOS 27.2; app copied to /tmp/gaea-up.9Zs9/Applications/Gaea.app
+headless Gaea 0.12.1 pid 60730 on 17761
+{"gpp":[1],"manifest":[1],"version":"0.12.1"}
+PASS  Gaea --version names its protocols
+Installed Z-Image 0.1.0 (com.xocialize.gaea.z-image), enabled.
+Gaea 0.12.1: up to date
+App:       /tmp/gaea-up.9Zs9/Applications/Gaea.app
+Releases:  https://github.com/xocialize-code/gaea/releases, pre-releases skipped, checked 2026-11-01T20:34:03Z
+PASS  pre-releases skipped: up to date
+Gaea 0.12.1: 0.12.2-rc.1 (pre-release) is available: gaea update
+App:       /tmp/gaea-up.9Zs9/Applications/Gaea.app
+Releases:  https://github.com/xocialize-code/gaea/releases, pre-releases included, checked 2026-11-01T20:34:03Z
+PASS  pre-releases on: 0.12.2-rc.1 offered
+Installing Gaea 0.12.2-rc.1 once no job is running or waiting (now: 1 running); Gaea relaunches itself. gaea update --cancel stops it.
+PASS  gaea update waits for the running job
+Gaea 0.12.1: installing 0.12.2-rc.1 once quiet (1 running)
+App:       /tmp/gaea-up.9Zs9/Applications/Gaea.app
+Releases:  https://github.com/xocialize-code/gaea/releases, pre-releases included, checked 2026-11-01T20:34:07Z
+PASS  status says what it waits for
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769 (busy)
+Memory:    39.90 GB charged of 103.08 GB budget; host 0.05 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 running)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60791, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+PASS  still 0.12.1 while jobs run
+PASS  the running job finished
+PASS  the job queued during the update finished
+PASS  its output was fetched (PNG)
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.24 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60822, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.24 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60826, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.09 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60831, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60835, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60839, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60843, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60847, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60851, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60855, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60859, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60864, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60868, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60872, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60876, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60880, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (2 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60884, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60890, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60894, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60898, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60769
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60903, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   none
+Memory:    0.00 GB charged of 103.08 GB budget; host 0.01 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    not checked yet
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60907, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+PASS  Gaea relaunched as 0.12.2-rc.1
+  relaunched 10s after the jobs settled (10 s grace)
+/tmp/gaea-up.9Zs9/Applications/Gaea.app/Contents/MacOS/Gaea --headless --port 17761 --no-advertise --update-grace 10
+PASS  in place: the same pid 60730
+PASS  the same port answers as 0.12.2-rc.1
+Gaea 0.12.2-rc.1: up to date
+App:       /tmp/gaea-up.9Zs9/Applications/Gaea.app
+Kept:      0.12.1, for gaea update --rollback
+Releases:  https://github.com/xocialize-code/gaea/releases, pre-releases included, checked 2026-11-01T20:34:22Z
+PASS  0.12.1 is kept for rollback
+on  com.xocialize.gaea.z-image 0.1.0  Z-Image  https://github.com/xocialize-code/gaea-plugin-z-image
+PASS  the plugin is still installed
+PASS  Z-Image runs on 0.12.2-rc.1
+PASS  the app on disk is 0.12.2-rc.1, signed and notarized
+Rolling back to Gaea 0.12.1 once no job is running or waiting (now: 1 just finished, held for its client); Gaea relaunches itself. gaea update --cancel stops it.
+PASS  gaea update --rollback goes back
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.24 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60967, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.24 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60971, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60975, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60980, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60984, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60988, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60992, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 60996, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61000, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61004, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61008, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61012, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61016, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61020, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61024, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61028, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61032, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61036, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61040, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 60946
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61046, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   none
+Memory:    0.00 GB charged of 103.08 GB budget; host 0.02 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1, relaunching
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61050, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17761/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   none
+Memory:    0.00 GB charged of 103.08 GB budget; host 0.01 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    not checked yet
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61054, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+PASS  Gaea relaunched as 0.12.1
+PASS  still pid 60730
+Gaea 0.12.1: 0.12.2-rc.1 (pre-release) is available: gaea update
+App:       /tmp/gaea-up.9Zs9/Applications/Gaea.app
+Kept:      0.12.2-rc.1, for gaea update --rollback
+Releases:  https://github.com/xocialize-code/gaea/releases, pre-releases included, checked 2026-11-01T20:34:40Z
+PASS  0.12.2-rc.1 is kept in turn
+app Gaea 0.12.1 pid 61072 on 17762
+Gaea 0.12.1: up to date
+App:       /tmp/gaea-up.9Zs9/Applications/Gaea.app
+Kept:      0.12.2-rc.1, for gaea update --rollback
+Releases:  https://github.com/xocialize-code/gaea/releases, pre-releases skipped, checked 2026-11-01T20:34:44Z
+Installing Gaea 0.12.2-rc.1 once no job is running or waiting (now: 1 running); Gaea relaunches itself. gaea update --cancel stops it.
+PASS  gaea update 0.12.2-rc.1 by version, pre-releases off, waits for the job
+PASS  the job during the app's update finished
+PASS  its output was fetched
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.24 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 running)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61111, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.24 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 running)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61115, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.09 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61119, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61123, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61127, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61131, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61135, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61140, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61144, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61148, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61152, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61156, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61160, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61164, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61168, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61172, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61176, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61180, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61184, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61188, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1 once quiet (1 just finished, held for its client)
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61192, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   com.xocialize.gaea.z-image pid 61086
+Memory:    14.08 GB charged of 103.08 GB budget; host 0.09 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    installing 0.12.2-rc.1, relaunching
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61196, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   none
+Memory:    0.00 GB charged of 103.08 GB budget; host 0.05 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    not checked yet
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61205, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+PASS  the app relaunched as 0.12.2-rc.1
+/tmp/gaea-up.9Zs9/Applications/Gaea.app/Contents/MacOS/Gaea --port 17762 --no-advertise --update-grace 10
+PASS  a new process (61072 → 61200), the app, not headless
+PASS  the app answers MES on 17762 as 0.12.2-rc.1
+Rolling back to Gaea 0.12.1; Gaea relaunches itself. gaea update --cancel stops it.
+PASS  the app rolls back
+Gaea 0.12.2-rc.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   none
+Memory:    0.00 GB charged of 103.08 GB budget; host 0.05 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    rolling back to 0.12.1, relaunching
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61233, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+Gaea 0.12.1
+MES:       http://127.0.0.1:17762/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Workers:   none
+Memory:    0.00 GB charged of 103.08 GB budget; host 0.05 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    not checked yet
+Operator:  /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team); you are pid 61239, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-up.9Zs9/h/gaea.sqlite
+PASS  the app relaunched as 0.12.1
+app pids: 61072 → 61200 → 61236
+== events ==
+2026-11-01T20:34:03Z installed 0.1.0: added from xocialize-code/gaea-plugin-z-image (v0.1.0); Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea.z-image, notarized, hardened runtime
+== worker stderr (/tmp/gaea-up.9Zs9/h/Logs/plugins/com.xocialize.gaea.z-image.log) ==
+
+2026-11-01T20:34:03Z update: pre-releases included
+2026-11-01T20:34:03Z update: Gaea 0.12.2-rc.1 (pre-release) is available
+2026-11-01T20:34:04Z update: Gaea 0.12.2-rc.1 (pre-release) is available
+2026-11-01T20:34:07Z update: verified Gaea 0.12.2-rc.1: sha256 9d695b9656d2…, Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea, notarized, hardened runtime
+2026-11-01T20:34:07Z update: Gaea 0.12.2-rc.1 downloaded and verified; installing when no job is running or waiting
+2026-11-01T20:34:07Z update: Gaea 0.12.2-rc.1 (pre-release) is available
+2026-11-01T20:34:21Z update: Gaea 0.12.2-rc.1 is in place (kept 0.12.1); relaunching
+2026-11-01T20:34:29Z update: rolling back to Gaea 0.12.1 when no job is running or waiting
+2026-11-01T20:34:40Z update: Gaea 0.12.1 is in place (kept 0.12.2-rc.1); relaunching
+2026-11-01T20:34:43Z update: Gaea 0.12.2-rc.1 (pre-release) is available
+2026-11-01T20:34:44Z update: pre-releases skipped
+2026-11-01T20:34:47Z update: verified Gaea 0.12.2-rc.1: sha256 9d695b9656d2…, Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea, notarized, hardened runtime
+2026-11-01T20:34:47Z update: Gaea 0.12.2-rc.1 downloaded and verified; installing when no job is running or waiting
+2026-11-01T20:34:59Z update: Gaea 0.12.2-rc.1 is in place (kept 0.12.1); relaunching
+2026-11-01T20:35:00Z update: rolling back to Gaea 0.12.1 when no job is running or waiting
+2026-11-01T20:35:00Z update: Gaea 0.12.1 is in place (kept 0.12.2-rc.1); relaunching
+== 28 passed, 0 failed ==

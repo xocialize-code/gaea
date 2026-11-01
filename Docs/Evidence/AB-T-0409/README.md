@@ -1,7 +1,13 @@
 # AB-T-0409: Gaea's release pipeline (G4 order 1)
 
-Gaea 0.11.3 is the first release built by CI: <https://github.com/xocialize-code/gaea/releases/tag/v0.11.3>, published
-2026-11-01T19:21:09Z, not a pre-release.
+Gaea 0.11.3 is the first release built by CI: `v0.11.3`, published 2026-11-01T19:21:09Z, not a pre-release.
+
+**Withdrawn the same day.** AB-T-0410's run from GitHub found that 0.11.3 traps on MESCore's first bundled table on any
+Mac but the runner (AB-L-0322): CI's Swift 6.3 built with the native build system, whose `Bundle.module` falls back to
+the runner's `.build` folder, which the smoke test below had beside it. With the operator's agreement, 0.11.3 and 0.12.0
+were deleted with their tags (nothing had installed them). 0.12.1 is the first good CI release
+(`Docs/Evidence/AB-T-0410/`). The pipeline below is unchanged except for `--build-system swiftbuild`, a check of the
+binary, and a smoke test with `.build` hidden.
 
 ## What ships it
 

@@ -580,8 +580,12 @@ starts while the phase before it is being built.
      - installs when the queue is idle, keeps the version it replaces, and relaunches. Headless Gaea comes back
        headless, on the same port and folder; `gaea update --rollback` goes back;
      - refuses an update that drops a GPP or manifest version an installed plugin uses, and says which plugin.
-     - **Done =** 0.11.3 updates itself to a test release from CI and back, from the app and from `--headless`, with
-       a job queued during the update finishing.
+     - **Done =** 0.12.0 (the first release with the updater; 0.11.3 has none) updates itself to a test release from
+       CI and back, from the app and from `--headless`, with a job queued during the update finishing.
+     - **Done 2026-11-01 (AB-T-0410):** v0.12.1 updated itself to the CI pre-release v0.12.2-rc.1 and back, headless
+       (exec in place, same pid and port) and as the app, with queued jobs finishing first: 28/28 from GitHub. The
+       first try found that v0.11.3 and v0.12.0 trapped off the runner (Swift 6.3's native build system; AB-L-0322).
+       Both were withdrawn, and 0.12.1 builds with Swift Build. Evidence: `Docs/Evidence/AB-T-0410/`.
   3. **The trust list** (PLG-3, UI-3, G-22): teams in `gaea.sqlite`, our own always trusted.
      - **Install:** a release from an unknown team is held, not refused. The console's Plugins page (and `gaea trust`)
        shows the certificate's name, team id, notarization and repo, and the operator approves or declines.

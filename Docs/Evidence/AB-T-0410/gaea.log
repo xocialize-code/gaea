@@ -1,0 +1,42 @@
+2026-11-01T20:34:00Z operator: listening on /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team)
+2026-11-01T20:34:00Z gaea 0.12.1 starting: /tmp/gaea-up.9Zs9/h, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-01T20:34:00Z gaea: serving MES at http://127.0.0.1:17761/mes/v0
+2026-11-01T20:34:03Z plugins: xocialize/gaea-plugin-z-image and xocialize-code/gaea-plugin-z-image are the same repo, now xocialize-code/gaea-plugin-z-image
+2026-11-01T20:34:03Z plugins: added com.xocialize.gaea.z-image 0.1.0 from xocialize-code/gaea-plugin-z-image
+2026-11-01T20:34:03Z update: pre-releases included
+2026-11-01T20:34:03Z update: Gaea 0.12.2-rc.1 (pre-release) is available
+2026-11-01T20:34:03Z scheduler: launched com.xocialize.gaea.z-image 0.1.0, pid 60769, hello after 0.346015834 seconds
+2026-11-01T20:34:04Z update: Gaea 0.12.2-rc.1 (pre-release) is available
+2026-11-01T20:34:07Z update: verified Gaea 0.12.2-rc.1: sha256 9d695b9656d2…, Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea, notarized, hardened runtime
+2026-11-01T20:34:07Z update: Gaea 0.12.2-rc.1 downloaded and verified; installing when no job is running or waiting
+2026-11-01T20:34:07Z update: Gaea 0.12.2-rc.1 (pre-release) is available
+2026-11-01T20:34:21Z update: Gaea 0.12.2-rc.1 is in place (kept 0.12.1); relaunching
+2026-11-01T20:34:21Z scheduler: stopped com.xocialize.gaea.z-image 0.1.0 (sigterm)
+2026-11-01T20:34:21Z operator: listening on /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team)
+2026-11-01T20:34:21Z gaea 0.12.2-rc.1 starting: /tmp/gaea-up.9Zs9/h, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-01T20:34:21Z gaea: serving MES at http://127.0.0.1:17761/mes/v0
+2026-11-01T20:34:25Z scheduler: launched com.xocialize.gaea.z-image 0.1.0, pid 60946, hello after 0.012608959 seconds
+2026-11-01T20:34:29Z update: rolling back to Gaea 0.12.1 when no job is running or waiting
+2026-11-01T20:34:40Z update: Gaea 0.12.1 is in place (kept 0.12.2-rc.1); relaunching
+2026-11-01T20:34:40Z scheduler: stopped com.xocialize.gaea.z-image 0.1.0 (sigterm)
+2026-11-01T20:34:40Z operator: listening on /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team)
+2026-11-01T20:34:40Z gaea 0.12.1 starting: /tmp/gaea-up.9Zs9/h, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-01T20:34:40Z gaea: serving MES at http://127.0.0.1:17761/mes/v0
+2026-11-01T20:34:43Z update: Gaea 0.12.2-rc.1 (pre-release) is available
+2026-11-01T20:34:44Z operator: listening on /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team)
+2026-11-01T20:34:44Z gaea 0.12.1 starting: /tmp/gaea-up.9Zs9/h, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-01T20:34:44Z gaea: serving MES at http://127.0.0.1:17762/mes/v0
+2026-11-01T20:34:44Z update: pre-releases skipped
+2026-11-01T20:34:44Z scheduler: launched com.xocialize.gaea.z-image 0.1.0, pid 61086, hello after 0.012786959 seconds
+2026-11-01T20:34:47Z update: verified Gaea 0.12.2-rc.1: sha256 9d695b9656d2…, Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea, notarized, hardened runtime
+2026-11-01T20:34:47Z update: Gaea 0.12.2-rc.1 downloaded and verified; installing when no job is running or waiting
+2026-11-01T20:34:59Z update: Gaea 0.12.2-rc.1 is in place (kept 0.12.1); relaunching
+2026-11-01T20:34:59Z scheduler: stopped com.xocialize.gaea.z-image 0.1.0 (sigterm)
+2026-11-01T20:34:59Z operator: listening on /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team)
+2026-11-01T20:34:59Z gaea 0.12.2-rc.1 starting: /tmp/gaea-up.9Zs9/h, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-01T20:34:59Z gaea: serving MES at http://127.0.0.1:17762/mes/v0
+2026-11-01T20:35:00Z update: rolling back to Gaea 0.12.1 when no job is running or waiting
+2026-11-01T20:35:00Z update: Gaea 0.12.1 is in place (kept 0.12.2-rc.1); relaunching
+2026-11-01T20:35:00Z operator: listening on /tmp/gaea-up.9Zs9/h/operator.sock (same user, Developer ID team)
+2026-11-01T20:35:00Z gaea 0.12.1 starting: /tmp/gaea-up.9Zs9/h, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-01T20:35:00Z gaea: serving MES at http://127.0.0.1:17762/mes/v0
