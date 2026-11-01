@@ -19,7 +19,7 @@
 set -uo pipefail
 cd ${0:A:h:h}
 FROM=${FROM:-dist/Gaea.app}; TO=${TO:?TO names the release to update to}
-FROM_VERSION=$(defaults read "$PWD/$FROM/Contents/Info" CFBundleShortVersionString)
+FROM_VERSION=$(defaults read "${FROM:A}/Contents/Info" CFBundleShortVersionString)
 OUT=${OUT:-Docs/Evidence/AB-T-0410}; mkdir -p "$OUT"
 LOG=$OUT/acceptance${STANDIN_ZIP:+-standin}.log; : > "$LOG"
 WORK=$(mktemp -d /tmp/gaea-up.XXXX)

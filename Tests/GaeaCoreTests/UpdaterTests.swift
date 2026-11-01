@@ -91,6 +91,26 @@ import Testing
         return app
     }
 
+    /// A staged app that crashes saying what it is (as v0.12.0 from CI did, missing its resources) is refused; one that
+    /// doesn't know `--version` (before 0.12.0) is taken at its Info.plist's word.
+    @Test func anAppThatCrashesAtStartIsRefused() throws {
+        let dir = try scratch()
+        let updater = GaeaUpdater(database: try GaeaDatabase(), paths: GaeaPaths(root: dir.appending(path: "home")),
+                                  log: HostLog(file: dir.appending(path: "log"), echo: false), appBundle: nil)
+        for (name, script, crashes) in [("crashes", "kill -TRAP $$", true), ("old", "echo unknown argument >&2; exit 2", false)] {
+            let app = try fakeApp(in: dir.appending(path: name), version: "0.11.3")
+            let executable = app.appending(path: "Contents/MacOS/Gaea")
+            try FileManager.default.createDirectory(at: executable.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try "#!/bin/sh\n\(script)\n".write(to: executable, atomically: true, encoding: .utf8)
+            try FileManager.default.setAttributes([.posixPermissions: 0o755], ofItemAtPath: executable.path)
+            if crashes {
+                #expect(throws: GaeaUpdater.UpdateError.self) { try updater.buildInfo(of: app) }
+            } else {
+                #expect(try updater.buildInfo(of: app) == .init(version: "0.11.3", gpp: [1], manifest: [1]))
+            }
+        }
+    }
+
     /// Releases served from memory: `StubProtocol.files` maps a URL's path to its bytes.
     final class StubProtocol: URLProtocol, @unchecked Sendable {
         nonisolated(unsafe) static var files: [String: Data] = [:]
@@ -191,7 +211,7 @@ import Testing
         #expect(try FileManager.default.contentsOfDirectory(atPath: paths.updates.path) == ["Gaea-\(version).app"])
 
         // The built app answers --version (0.12.0 and later).
-        let info = updater.buildInfo(of: target)
+        let info = try updater.buildInfo(of: target)
         #expect(info.version == version && info.gpp == [1] && info.manifest == [1])
     }
 }

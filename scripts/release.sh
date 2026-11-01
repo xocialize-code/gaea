@@ -33,8 +33,12 @@ ZIP=$DIST/Gaea-$VERSION.zip
 [[ $(defaults read $APP/Contents/Info CFBundleShortVersionString) == $VERSION ]] || { print -u2 "Info.plist isn't $VERSION"; exit 1 }
 
 # The built app runs: headless, in a fresh folder, it answers the MES handshake and the operator socket. GAEA_HOME is
-# short, since the socket's path is at most 103 bytes.
-step "smoke: Gaea --headless, the MES handshake and gaea status"
+# short, since the socket's path is at most 103 bytes. The build folder is hidden meanwhile, so nothing the app needs
+# can be found there instead of in the app (AB-T-0410); `Gaea --version` loads MESCore's bundled tables.
+step "smoke: Gaea --version and --headless with .build hidden, the MES handshake and gaea status"
+mv .build .build-hidden
+trap '[[ -d .build-hidden ]] && mv .build-hidden .build' EXIT
+$APP/Contents/MacOS/Gaea --version || { print -u2 "Gaea --version failed"; exit 1 }
 SMOKE=$(mktemp -d /tmp/gaea-rel.XXXX)
 PORT=17799
 GAEA_HOME=$SMOKE $APP/Contents/MacOS/Gaea --headless --port $PORT --no-advertise > $DIST/smoke.log 2>&1 &
@@ -45,6 +49,7 @@ curl -sf -H 'MES-Version: 0.1' http://127.0.0.1:$PORT/mes/v0/engine | tee $DIST/
 GAEA_HOME=$SMOKE $APP/Contents/Helpers/gaea status | tee -a $DIST/smoke.log | grep -q "Gaea $VERSION" || smoke_ok=no
 kill $pid; wait $pid 2>/dev/null || true
 rm -rf $SMOKE
+mv .build-hidden .build
 [[ $smoke_ok == yes ]] || { print -u2 "smoke failed (dist/smoke.log)"; exit 1 }
 
 ditto -c -k --keepParent $APP $ZIP

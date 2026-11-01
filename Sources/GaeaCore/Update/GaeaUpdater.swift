@@ -220,7 +220,7 @@ public actor GaeaUpdater {
         // The kept app ran here before; it must still be ours and unbroken, notarized or not (a local build).
         let signature = try PluginVerifier.verify(kept.app)
         guard signature.identifier == Gaea.bundleIdentifier else { throw UpdateError.refused("\(kept.app.path) is \(signature.identifier)") }
-        let info = buildInfo(of: kept.app)
+        let info = try buildInfo(of: kept.app)
         try await compatible(info)
         log("update: rolling back to Gaea \(kept.version) when no job is running or waiting")
         database.record("update", version: kept.version, "rolling back from \(Gaea.version)")
@@ -343,7 +343,7 @@ public actor GaeaUpdater {
             guard bundleVersion.flatMap(SemVer.init) == release.version else {
                 throw UpdateError.refused("the app is version \(bundleVersion ?? "?"), not \(release.version)")
             }
-            let info = buildInfo(of: app)
+            let info = try buildInfo(of: app)
             guard SemVer(info.version) == release.version else {
                 throw UpdateError.refused("the app says it is \(info.version), not \(release.version)")
             }
@@ -376,20 +376,23 @@ public actor GaeaUpdater {
         }
     }
 
-    /// What a Gaea.app says it is (`Gaea --version`). A Gaea from before 0.12.0 doesn't answer, and spoke GPP 1 and
-    /// manifest version 1.
-    nonisolated func buildInfo(of app: URL) -> Gaea.BuildInfo {
+    /// What a Gaea.app says it is (`Gaea --version`, which loads its bundled resources first). A Gaea from before
+    /// 0.12.0 doesn't answer (it exits 2 on an unknown argument), and spoke GPP 1 and manifest version 1. An app that
+    /// crashes answering is refused: it would crash serving too.
+    nonisolated func buildInfo(of app: URL) throws -> Gaea.BuildInfo {
         let process = Process()
         process.executableURL = app.appending(path: "Contents/MacOS/Gaea")
         process.arguments = ["--version"]
         let pipe = Pipe()
         process.standardOutput = pipe
         process.standardError = FileHandle.nullDevice
-        if (try? process.run()) != nil {
-            let data = pipe.fileHandleForReading.readDataToEndOfFile()
-            process.waitUntilExit()
-            if process.terminationStatus == 0, let info = try? JSONDecoder().decode(Gaea.BuildInfo.self, from: data) { return info }
+        try process.run()
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        process.waitUntilExit()
+        if process.terminationReason == .uncaughtSignal {
+            throw UpdateError.refused("Gaea \(Self.version(of: app) ?? "?") crashes at start (signal \(process.terminationStatus))")
         }
+        if process.terminationStatus == 0, let info = try? JSONDecoder().decode(Gaea.BuildInfo.self, from: data) { return info }
         return Gaea.BuildInfo(version: Self.version(of: app) ?? "?", gpp: [1], manifest: [1])
     }
 

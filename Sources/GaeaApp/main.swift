@@ -1,6 +1,7 @@
 import AppKit
 import Foundation
 import GaeaCore
+import MESCore
 
 // Gaea — the MES media server whose models are plugins.
 //
@@ -19,6 +20,8 @@ import GaeaCore
 setvbuf(stdout, nil, _IOLBF, 0)
 
 if CommandLine.arguments.dropFirst().first == "--version" {
+    // MESCore's bundled tables first: an app whose resources can't be found traps here, before it can be installed.
+    _ = (ImageProfile.vocabulary, AudioProfile.vocabulary, VideoProfile.vocabulary)
     let encoder = JSONEncoder()
     encoder.outputFormatting = .sortedKeys
     print(String(decoding: try! encoder.encode(Gaea.buildInfo), as: UTF8.self))
