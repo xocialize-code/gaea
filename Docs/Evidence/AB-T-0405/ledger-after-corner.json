@@ -1,0 +1,24 @@
+{
+  "budgetBytes" : 103079215104,
+  "hostFootprintBytes" : 51594176,
+  "queued" : 0,
+  "workers" : [
+    {
+      "busy" : false,
+      "chargedBytes" : 12540987312,
+      "declaredBytes" : 90909067064,
+      "lanes" : {
+        "ltx-2.5-max128" : "bf16"
+      },
+      "overrun" : false,
+      "peakFootprintBytes" : 90909067064,
+      "physFootprintBytes" : 12540987312,
+      "pid" : 16342,
+      "pluginID" : "com.xocialize.gaea.ltx",
+      "reportedDeclaredBytes" : 75300000000,
+      "reportedFootprintBytes" : 13751355312,
+      "title" : "LTX 2.5",
+      "version" : "0.1.1"
+    }
+  ]
+}

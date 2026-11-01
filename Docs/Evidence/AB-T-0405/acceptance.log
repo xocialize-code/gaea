@@ -1,0 +1,62 @@
+# LTX tiers under the governor (AB-T-0405) 2026-11-01T07:47:35Z — Gaea 0.11.2, models /Volumes/DEV_VOL1/Models/Models
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+      32GB: budget ; generate offers: compact24 balanced32
+PASS  32GB: generate offers exactly the tiers that fit (compact24 balanced32)
+PASS  32GB: gaea models says ltx-2.5-standard64 isn't offered, no lane fitting the budget
+PASS  32GB: gaea models says ltx-2.5-max128 isn't offered, no lane fitting the budget
+PASS  32GB: quality best, which only the larger tiers give, is refused at submit (4xx)
+PASS  32GB: a last frame, which only the two-stage tiers take, is 422 at submit
+PASS  32GB: 704×512×121 on compact24, past its measured 17.8 M pixel-frames, is out_of_limits on duration_s
+      32GB t2v-wide (compact24): 704,512,49 in 46.5 s; peak 14.65 GB, lane need 16.2 GB, now charged 16.2 GB, budget 25.77 GB
+PASS  32GB: t2v-wide on compact24 makes 704,512,49, its peak under the budget, and Gaea charging the lane at least what it held
+      32GB t2v-long (compact24): 512,288,121 in 50.1 s; peak 14.65 GB, lane need 16.2 GB, now charged 16.2 GB, budget 25.77 GB
+PASS  32GB: t2v-long on compact24 makes 512,288,121, its peak under the budget, and Gaea charging the lane at least what it held
+      32GB i2v (compact24): 512,288,121 in 49.6 s; peak 14.65 GB, lane need 16.2 GB, now charged 16.2 GB, budget 25.77 GB
+PASS  32GB: i2v on compact24 makes 512,288,121, its peak under the budget, and Gaea charging the lane at least what it held
+      32GB extend (compact24): 512,288,121 in 51.7 s; peak 18.55 GB, lane need 16.2 GB, now charged 18.55 GB, budget 25.77 GB
+PASS  32GB: extend on compact24 makes 512,288,121, its peak under the budget, and Gaea charging the lane at least what it held
+      32GB retake (compact24): 512,288,105 in 51.0 s; peak 18.56 GB, lane need 16.2 GB, now charged 18.56 GB, budget 25.77 GB
+PASS  32GB: retake on compact24 makes 512,288,105, its peak under the budget, and Gaea charging the lane at least what it held
+      32GB t2v (balanced32): 576,320,161 in 52.3 s; peak 14.64 GB, lane need 18.0 GB, now charged 18.0 GB, budget 25.77 GB
+PASS  32GB: t2v on balanced32 makes 576,320,161, its peak under the budget, and Gaea charging the lane at least what it held
+      64GB: budget ; generate offers: compact24 balanced32 standard64
+PASS  64GB: generate offers exactly the tiers that fit (compact24 balanced32 standard64)
+PASS  64GB: gaea models says ltx-2.5-max128 isn't offered, no lane fitting the budget
+PASS  64GB: max128 by name, which no lane of fits, is refused at submit (4xx)
+      64GB t2v (standard64): 1280,704,161 in 316.3 s; peak 44.04 GB, lane need 34.8 GB, now charged 44.04 GB, budget 51.54 GB
+PASS  64GB: t2v on standard64 makes 1280,704,161, its peak under the budget, and Gaea charging the lane at least what it held
+      64GB a2v (standard64): 704,512,121 in 71.5 s; peak 29.04 GB, lane need 34.8 GB, now charged 44.04 GB, budget 51.54 GB
+PASS  64GB: a2v on standard64 makes 704,512,121, its peak under the budget, and Gaea charging the lane at least what it held
+      128GB: budget ; generate offers: compact24 balanced32 standard64 max128
+PASS  128GB: generate offers exactly the tiers that fit (compact24 balanced32 standard64 max128)
+      128GB t2v (max128): 1920,1088,121 in 392.0 s; peak 63.83 GB, lane need 75.3 GB, now charged 75.3 GB, budget 103.08 GB
+PASS  128GB: t2v on max128 makes 1920,1088,121, its peak under the budget, and Gaea charging the lane at least what it held
+      128GB corner (max128): 1920,1088,481 in 4051.6 s; peak 90.91 GB, lane need 75.3 GB, now charged 90.91 GB, budget 103.08 GB
+PASS  128GB: corner on max128 makes 1920,1088,481, its peak under the budget, and Gaea charging the lane at least what it held
+      r-32-best: 422 unsupported_parameter quality - video.generate offers draft, standard.
+      r-32-ceiling:  out_of_limits duration_s - LTX 2.5: At 704×512 LTX 2.5 (compact24) makes at most 49 frames (2.04 s at 24.0 fps): its measured ceiling is 17 million pixel-frames.
+      r-32-last: 422 unsupported_parameter last_frame - No model of video.generate this request may use at the standard tier supports a last frame.
+      r-64-max: 422 model_unavailable model - video.generate offers no model ltx-2.5-max128.
+OK
+PASS  transcript com.xocialize.gaea.ltx-0.1.1-2026-11-01T075919Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.ltx-0.1.1-2026-11-01T080551Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.ltx-0.1.1-2026-11-01T074737Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.ltx-0.1.1-2026-11-01T074744Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.ltx-0.1.1-2026-11-01T074831Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.ltx-0.1.1-2026-11-01T074921Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.ltx-0.1.1-2026-11-01T075011Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.ltx-0.1.1-2026-11-01T075103Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.ltx-0.1.1-2026-11-01T075154Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.ltx-0.1.1-2026-11-01T075248Z.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.ltx-0.1.1-2026-11-01T075805Z.gpp passes validate.py
+== 31 passed, 0 failed

@@ -508,6 +508,12 @@ starts while the phase before it is being built.
      - every tier within its budget at 32, 64 and 128 GB, staged with `--budget-bytes` on the 128 GB Mac (as
        AB-T-0363 did; the operator's call, 2026-10-31);
      - the disk floor on DEV_VOL1 against the internal SSD.
+     - **Done** (AB-T-0405, Gaea 0.11.2, gaea-plugin-ltx
+       [v0.1.1](https://github.com/xocialize-code/gaea-plugin-ltx/releases/tag/v0.1.1)): 31 of 31. Offers follow the
+       budget (compact24 and balanced32 at 25.77 GB, standard64 too at 51.54 GB, all four at 103.08 GB), and every
+       envelope job, max128's 1920×1088×481 corner included (90.9 GB), stays within it. Three lanes held more than they
+       declare; Gaea learns each worker's peak and charges it. DEV_VOL1 reads 4.2 GB/s, four times max128's 1 GB/s
+       floor (the internal SSD 10.2). See [Evidence/AB-T-0405](Evidence/AB-T-0405/README.md);
   6. **Gaea Lab on video:** pixel-agency-run's workflow gains video inputs, a player and previews (mlx-apps, as
      AB-A-0234), and `lab-run` runs every operation.
   7. **The exit:** Video conformance with every G3 plugin, the tier budgets, and the Lab.

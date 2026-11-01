@@ -1,0 +1,12 @@
+on  ltx-2.5-compact24  LTX 2.5 (compact24)  [com.xocialize.gaea.ltx 0.1.1] lanes: int8* 16.20 GB
+on  ltx-2.5-balanced32  LTX 2.5 (balanced32)  [com.xocialize.gaea.ltx 0.1.1] lanes: int8* 18.00 GB
+on  ltx-2.5-standard64  LTX 2.5 (standard64)  [com.xocialize.gaea.ltx 0.1.1] lanes: int8* 34.80 GB  (not offered: no lane fits the 25.77 GB budget)
+on  ltx-2.5-max128  LTX 2.5 (max128)  [com.xocialize.gaea.ltx 0.1.1] lanes: bf16* 75.30 GB  (not offered: no lane fits the 25.77 GB budget)
+on  ltx-2.5-compact24  LTX 2.5 (compact24)  [com.xocialize.gaea.ltx 0.1.1] lanes: int8* 16.20 GB
+on  ltx-2.5-balanced32  LTX 2.5 (balanced32)  [com.xocialize.gaea.ltx 0.1.1] lanes: int8* 18.00 GB
+on  ltx-2.5-standard64  LTX 2.5 (standard64)  [com.xocialize.gaea.ltx 0.1.1] lanes: int8* 34.80 GB
+on  ltx-2.5-max128  LTX 2.5 (max128)  [com.xocialize.gaea.ltx 0.1.1] lanes: bf16* 75.30 GB  (not offered: no lane fits the 51.54 GB budget)
+on  ltx-2.5-compact24  LTX 2.5 (compact24)  [com.xocialize.gaea.ltx 0.1.1] lanes: int8* 16.20 GB
+on  ltx-2.5-balanced32  LTX 2.5 (balanced32)  [com.xocialize.gaea.ltx 0.1.1] lanes: int8* 18.00 GB
+on  ltx-2.5-standard64  LTX 2.5 (standard64)  [com.xocialize.gaea.ltx 0.1.1] lanes: int8* 34.80 GB
+on  ltx-2.5-max128  LTX 2.5 (max128)  [com.xocialize.gaea.ltx 0.1.1] lanes: bf16* 75.30 GB
