@@ -182,7 +182,7 @@ public final class GaeaHost: Sendable {
             case .modelsList:
                 let catalog = await engine.catalog()
                 let lines = catalog.map { c in
-                    let optIn = c.offer.namedOnly == true
+                    let optIn = c.offer.isOptIn
                     let on = c.plugin.enabled && enablement.isEnabled(c.model.id, optIn: optIn)
                     let chosen = defaultLane(c.model, plugin: c.plugin.id)
                     return "\(on ? "on " : "off") \(c.model.id)  \(c.model.title)  [\(c.plugin.id) \(c.plugin.version)] lanes: "
@@ -193,7 +193,7 @@ public final class GaeaHost: Sendable {
                 let id = try arg("id")
                 guard let model = await engine.catalog().first(where: { $0.model.id == id }) else { throw OperatorError("no model \(id)") }
                 let on = request.command == OperatorAPI.Command.modelsEnable.rawValue
-                try enablement.set(id, enabled: on, optIn: model.offer.namedOnly == true)
+                try enablement.set(id, enabled: on, optIn: model.offer.isOptIn)
                 await server.reloadDescriptors()
                 return OperatorResponse(id: request.id, ok: true, text: "\(id) \(on ? "enabled" : "disabled").")
             case .modelsRoot:

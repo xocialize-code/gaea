@@ -193,7 +193,7 @@ Without `re` it is a protocol error about a line that couldn't be attributed.
 | Code | Meaning |
 |---|---|
 | `cancelled` | The run was cancelled or the worker is shutting down. |
-| `invalid_request` | The message was well formed but its fields don't make sense to this worker. |
+| `invalid_request` | The message was well formed but its fields don't make sense to this worker. For a `run`, `detail` may name the MES refusal: `mes_code` (`out_of_limits`, `input_invalid` or `unsupported_parameter`) and `param`. Gaea fails the job with that code; without one it is 400 `invalid_request`. |
 | `unsupported_operation` | The model doesn't do that operation. |
 | `unknown_model` | No such model or lane. A host that reads the manifest never causes this. |
 | `not_materialized` | A run on a lane whose weights are missing (deleted behind Gaea's back). Retryable after `prepare`. |

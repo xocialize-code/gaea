@@ -20,6 +20,12 @@ extension MESValue {
 }
 
 /// A model an enabled plugin provides, as the normalizer offers it.
+extension ModelOffer {
+    /// Whether the model starts off and the operator turns it on, accepting its terms: a named-only model (its weights'
+    /// licence isn't permissive), or one whose licence asks for the operator's acceptance.
+    public var isOptIn: Bool { namedOnly == true || license.acceptedRequired == true }
+}
+
 public struct PluginModelOffer: Sendable {
     public var plugin: InstalledPlugin
     public var model: PluginManifest.Model
@@ -87,6 +93,21 @@ public struct GaeaEngine: MediaEngine {
     }
     /// Every model of every installed plugin, on or off, with the offer the console lists it under.
     public func catalog() async -> [PluginModelOffer] { await offers.catalog() }
+
+    /// The catalog's offer for a model: `offer(_:)`, carrying the operator's acceptance its manifest offers ask for. An
+    /// offer whose licence says `accepted_required` (the LTX-2 Community licence, VID-6) is opt-in even when MLXEngine
+    /// counts the weights' licence as permissive: the operator accepts its terms by enabling it.
+    static func offer(_ model: PluginManifest.Model, in plugin: InstalledPlugin) -> ModelOffer {
+        var offer = offer(model)
+        let licenses = plugin.manifest.offers.filter { $0.modelID == model.id }
+            .compactMap { try? JSONDecoder().decode(License.self, from: JSONEncoder().encode($0.model["license"] ?? .null)) }
+        if let asked = licenses.first(where: { $0.acceptedRequired == true }) {
+            offer.license.acceptedRequired = true
+            offer.license.notice = offer.license.notice ?? asked.notice
+            offer.license.termsURL = offer.license.termsURL ?? asked.termsURL
+        }
+        return offer
+    }
 
     static func offer(_ model: PluginManifest.Model) -> ModelOffer { PluginOffers.offer(model) }
 
@@ -329,7 +350,10 @@ public struct GaeaEngine: MediaEngine {
         } catch let failure as WorkerFailure {
             if failure.code == "cancelled" || Task.isCancelled { throw CancellationError() }
             if failure.code == "invalid_request" || failure.code == "unsupported_parameter" {
-                throw MESError(.invalidRequest, "\(title): \(failure.message)")
+                // A refusal of what the request asked of the media (GPP-1 §3.5): the MES code the plugin names.
+                let code = failure.detail?["mes_code"]?.stringValue.flatMap(MESErrorCode.init(rawValue:))
+                    .flatMap { [.outOfLimits, .inputInvalid, .unsupportedParameter].contains($0) ? $0 : nil } ?? .invalidRequest
+                throw MESError(code, "\(title): \(failure.message)", param: failure.detail?["param"]?.stringValue)
             }
             throw MESError(.engineError, "\(title): \(failure.message)")
         } catch let refusal as PluginVerifier.Refusal {
@@ -520,11 +544,26 @@ struct PluginOffers: Sendable {
                 let helper = plugin.manifest.helpers?.first { $0.model == model.id }
                 let manifestOffer = plugin.manifest.offers.first { $0.modelID == model.id }
                 guard let operation = helper?.operation ?? manifestOffer?.operation else { continue }
-                offers.append(PluginModelOffer(plugin: plugin, model: model, offer: Self.offer(model), operation: operation,
+                offers.append(PluginModelOffer(plugin: plugin, model: model, offer: Self.offer(model, in: plugin), operation: operation,
                                                params: helper?.params ?? manifestOffer?.params))
             }
         }
         return offers
+    }
+
+    /// The catalog's offer for a model: `offer(_:)`, carrying the operator's acceptance its manifest offers ask for. An
+    /// offer whose licence says `accepted_required` (the LTX-2 Community licence, VID-6) is opt-in even when MLXEngine
+    /// counts the weights' licence as permissive: the operator accepts its terms by enabling it.
+    static func offer(_ model: PluginManifest.Model, in plugin: InstalledPlugin) -> ModelOffer {
+        var offer = offer(model)
+        let licenses = plugin.manifest.offers.filter { $0.modelID == model.id }
+            .compactMap { try? JSONDecoder().decode(License.self, from: JSONEncoder().encode($0.model["license"] ?? .null)) }
+        if let asked = licenses.first(where: { $0.acceptedRequired == true }) {
+            offer.license.acceptedRequired = true
+            offer.license.notice = offer.license.notice ?? asked.notice
+            offer.license.termsURL = offer.license.termsURL ?? asked.termsURL
+        }
+        return offer
     }
 
     static func offer(_ model: PluginManifest.Model) -> ModelOffer {
@@ -566,7 +605,7 @@ struct PluginOffers: Sendable {
     }
 
     func isLive(_ plugin: InstalledPlugin, _ model: PluginManifest.Model) -> Bool {
-        plugin.enabled && enablement.isEnabled(model.id, optIn: Self.offer(model).namedOnly == true)
+        plugin.enabled && enablement.isEnabled(model.id, optIn: Self.offer(model, in: plugin).isOptIn)
     }
 
     func liveRoutes() async -> [PluginRoute] {

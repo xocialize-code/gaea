@@ -27,7 +27,7 @@ public struct GaeaConsoleBackend: EngineConsoleBackend {
             live.first { $0.operation == operation }?.models.contains { $0.id == model && $0.isDefault == true } ?? false
         }
         return catalog.map { entry in
-            let optIn = entry.offer.namedOnly == true
+            let optIn = entry.offer.isOptIn
             let lane = entry.model.lanes.first(where: \.default)
             let row = rows[entry.plugin.id]
             let bundled = lane.map { $0.resolved.materialization == .bundled || $0.resolved.weightSources.isEmpty } ?? true
@@ -65,7 +65,7 @@ public struct GaeaConsoleBackend: EngineConsoleBackend {
         guard let entry = await host.engine.catalog().first(where: { $0.model.id == id }) else {
             throw MESError(.notFound, "No model \(id).")
         }
-        try host.enablement.set(id, enabled: enabled, optIn: entry.offer.namedOnly == true)
+        try host.enablement.set(id, enabled: enabled, optIn: entry.offer.isOptIn)
         await host.server.reloadDescriptors()
     }
 
