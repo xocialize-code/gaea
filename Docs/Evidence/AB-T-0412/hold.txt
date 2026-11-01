@@ -1,0 +1,23 @@
+Held h-7b11f629: Ripple 0.1.0 (com.xocialize.gaea.guide-test) is signed by a team Gaea doesn't trust yet.
+  Signed by:  Developer ID Application: Dustin Nielson (CFZS6RXUCP)
+  Team:       CFZS6RXUCP
+  Notarized:  yes
+  Repo:       https://github.com/xocialize-code/gaea-plugin-guide-test (v0.1.0)
+  Models:     ripple
+Trusting the team lets Gaea run any plugin it signs, including later updates.
+  Approve: gaea trust approve h-7b11f629
+  Decline: gaea trust decline h-7b11f629
+Trusted teams:
+  (Gaea's own team is treated as unknown for this run: GAEA_UNTRUST_OWN_TEAM)
+Held:
+  Held h-7b11f629: Ripple 0.1.0 (com.xocialize.gaea.guide-test) is signed by a team Gaea doesn't trust yet.
+    Signed by:  Developer ID Application: Dustin Nielson (CFZS6RXUCP)
+    Team:       CFZS6RXUCP
+    Notarized:  yes
+    Repo:       https://github.com/xocialize-code/gaea-plugin-guide-test (v0.1.0)
+    Models:     ripple
+  Trusting the team lets Gaea run any plugin it signs, including later updates.
+    Approve: gaea trust approve h-7b11f629
+    Decline: gaea trust decline h-7b11f629
+--- approve
+Trusted its team. Installed Ripple 0.1.0 (com.xocialize.gaea.guide-test), enabled.

@@ -1,0 +1,20 @@
+release	Check the secrets are set	2026-11-01T23:43:46.7980870Z ^[[36;1mfor name in DEVELOPER_ID_P12_BASE64 DEVELOPER_ID_P12_PASSWORD NOTARY_APPLE_ID NOTARY_APP_PASSWORD; do^[[0m
+release	Check the secrets are set	2026-11-01T23:43:46.8047870Z   DEVELOPER_ID_P12_PASSWORD: ***
+release	Check the secrets are set	2026-11-01T23:43:46.8048610Z   NOTARY_APP_PASSWORD: ***
+release	Import the Developer ID certificate into a temporary keychain	﻿2026-11-01T23:43:57.3517160Z ##[group]Run KEYCHAIN_PASSWORD=$(uuidgen)
+release	Import the Developer ID certificate into a temporary keychain	2026-11-01T23:43:57.3517540Z ^[[36;1mKEYCHAIN_PASSWORD=$(uuidgen)^[[0m
+release	Import the Developer ID certificate into a temporary keychain	2026-11-01T23:43:57.3518330Z ^[[36;1msecurity create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"^[[0m
+release	Import the Developer ID certificate into a temporary keychain	2026-11-01T23:43:57.3519260Z ^[[36;1msecurity unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"^[[0m
+release	Import the Developer ID certificate into a temporary keychain	2026-11-01T23:43:57.3519840Z ^[[36;1msecurity import "$RUNNER_TEMP/developer-id.p12" -k "$KEYCHAIN" -P "$P12_PASSWORD" -T /usr/bin/codesign^[[0m
+release	Import the Developer ID certificate into a temporary keychain	2026-11-01T23:43:57.3520560Z ^[[36;1msecurity set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN"^[[0m
+release	Import the Developer ID certificate into a temporary keychain	2026-11-01T23:43:57.3580720Z   P12_PASSWORD: ***
+release	Store the notary credentials in the same keychain	2026-11-01T23:43:57.8040820Z ^[[36;1m  --apple-id "$NOTARY_APPLE_ID" --team-id "$TEAM" --password "$NOTARY_APP_PASSWORD" \^[[0m
+release	Store the notary credentials in the same keychain	2026-11-01T23:43:57.8075480Z   NOTARY_APP_PASSWORD: ***
+release	Build, sign, check, notarize, release	2026-11-01T23:46:36.7310410Z PASS manifest com.xocialize.gaea.guide-test 0.1.0, sha256 18a90c283d9b…
+release	Build, sign, check, notarize, release	2026-11-01T23:46:36.7311790Z PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.guide-test, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+release	Build, sign, check, notarize, release	2026-11-01T23:46:36.7313410Z PASS launched gaea-guide-test-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 11423
+release	Build, sign, check, notarize, release	2026-11-01T23:46:36.7315490Z PASS hello after 21 ms
+release	Build, sign, check, notarize, release	2026-11-01T23:46:36.7315830Z PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+release	Build, sign, check, notarize, release	2026-11-01T23:46:36.7318690Z PASS --no-run: no prepare or run
+release	Build, sign, check, notarize, release	2026-11-01T23:46:36.7320670Z PASS memory report: worker says phys_footprint 4228608 B; host read 4277760 B now, peak 4228608 B
+release	Build, sign, check, notarize, release	2026-11-01T23:46:36.7321320Z PASS shutdown: exit 0

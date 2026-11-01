@@ -611,6 +611,13 @@ starts while the phase before it is being built.
      - releasing, and what an operator sees when approving a new team.
      - **Done =** someone following only the guide makes, releases and runs a plugin. The test is a fresh session
        given only the guide.
+     - **Done 2026-11-01 (AB-T-0412):** a fresh session made a plugin following only the guide, released it from CI
+       (private repo, notarized), and ran it in Gaea 0.13.0 after the hold and approval: 5/5. Two changes came first:
+       - GaeaPluginKit 0.10.0, which accepts the author's team;
+       - the template, which now signs and notarizes for the manifest's team.
+
+       The run's 13 findings are fixed in the guide, and the MES server's silent top-level field went to mlx-apps
+       (AB-A-0245). Evidence: `Docs/Evidence/AB-T-0412/`.
   5. **Crash and requeue reporting** (SRV-8):
      - **Each worker death is recorded:** the plugin and version, the model and lane, the job, the exit signal or
        code, the last stderr lines, whether the job was requeued or failed, and the macOS crash report if one was
