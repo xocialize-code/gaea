@@ -19,7 +19,7 @@ plugins do the generating.
 
 G-1 to G-19 were agreed on 2026-10-27: G-1 to G-9 came from the proposal, and G-10 to G-19 are the answers to the
 open questions. G-20 was agreed on 2026-10-28 from mlx-apps' reply on AB-A-0208, and G-21 to G-23 answer the PRD's open
-questions. Each is filed on the bridge under
+questions. G-24 to G-26 are G4's decisions, taken on 2026-11-01. Each is filed on the bridge under
 the `gaea` area; the Record column gives its id.
 
 | ID | Decision | Why | Record |
@@ -47,6 +47,9 @@ the `gaea` area; the Record column gives its id.
 | G-21 | **Apache-2.0** for Gaea, GaeaPluginKit and our plugins; each model keeps its own weight licence. | PRD OQ-1; as the engines were (D-2). | AB-D-0183 |
 | G-22 | **v1 runs only plugins signed by our own team.** Other teams wait for G4's trust list; G-7's design stands. | PRD OQ-2 | AB-D-0184 |
 | G-23 | **Lane fallback with a warning:** the default lane when it fits, else the largest smaller lane that fits, with a `lane_fallback` warning. A request naming a lane (`x-gaea.lane`) never falls back. | PRD OQ-3 | AB-D-0185 |
+| G-24 | **Gaea updates itself by its own GitHub release path,** not Sparkle: the plugin installer's download, Developer ID check, sha256 and swap when idle, with rollback. Stable releases only; pre-releases are opt-in. | Plan G4 decision 1 (2026-11-01) | AB-D-0196 |
+| G-25 | **The trust list is tested with an injected trust set;** a plugin from a real second team is the 1.0 exit's test. | Plan G4 decision 2 (2026-11-01) | AB-D-0197 |
+| G-26 | **Quarantine after three crashes in ten minutes; 1.0 is a 24-hour soak** with hourly injected crashes and an update, and doesn't wait for MES 1.0. | Plan G4 decisions 3 and 4 (2026-11-01) | AB-D-0198 |
 
 ## 2. Architecture
 
@@ -543,6 +546,86 @@ starts while the phase before it is being built.
 - A guide for plugin authors.
 - Crash and requeue reporting.
 - Releases 1.0.
+- **Exit:** Gaea 1.0.0 is released from CI on GitHub, installs on a clean Mac, updates itself to a newer release and
+  back, runs a plugin from a team the operator approved, and survives a soak with injected crashes. The requirements
+  this closes are DST-3, DST-4, PLG-3's trust list, UI-3's approval of a new team, and SRV-8's reporting.
+- **What exists** (surveyed 2026-11-01):
+  - **Releases:** Gaea's repo (`xocialize-code/gaea`, public) has GitHub releases only for 0.1.0 and 0.1.1, both
+    pre-releases from G0. Every version since, up to 0.11.3, was built on this Mac by `scripts/build-app.sh`, which
+    signs with Developer ID but doesn't notarize. The repo has no CI. The plugins have release CI from the template
+    (`gaea-plugin-demo/.github/workflows/release.yml`: build, sign, notarize, staple, release), with the signing secrets
+    at the organization level.
+  - **Plugin updates:** `PluginManager` already installs a newer release beside the current one, switches when the
+    plugin is idle, and keeps the previous version for `gaea plugins rollback` (PLG-4). Gaea's own update can reuse
+    this path: the GitHub Releases API, a download, the Developer ID check pinned to our team, and a swap.
+  - **Trust:** `PluginVerifier` checks every bundle against a requirement built from one team, `GPP.trustedTeam`, at
+    install and again at launch (`Process.launchRequirement`). Another team is refused as `untrustedTeam`, with
+    "third-party plugins come with the trust list" (G-22). `PluginManager` also checks the manifest's team.
+  - **Crashes:** the scheduler requeues a job once when its worker dies (AB-T-0363) and marks `requeued` in the job's
+    effective parameters. Gaea records nothing else: no crash list, no exit signal, no macOS crash report (`.ips`),
+    and no notice in the console. `gaea logs` and `gaea plugins logs` show stderr.
+  - **The guide:** the template's README (147 lines) covers its layout, making a plugin from it, building and checking,
+    and notarization. GPP-1 and the manifest schema are the reference. There is no guide for another team.
+- **Work orders** (proposed 2026-11-01; filed as each starts, in this order):
+  1. **Gaea's release pipeline:** CI in `xocialize-code/gaea`, on the plugins' pattern. A tag builds Gaea.app (the CLI
+     in `Contents/Helpers`), signs it with Developer ID and hardened runtime, notarizes and staples it, and publishes a
+     GitHub release with the zip, its sha256 and release notes. The first CI release is 0.11.3, and every version
+     after it ships this way (DST-1, DST-2).
+  2. **Gaea updates itself** (DST-3), by its own GitHub path (G-24):
+     - checks the newest release, on a schedule and on demand (`gaea update --check`, Settings);
+     - verifies the download as plugins are verified (Developer ID, our team, notarized) plus the release's sha256;
+     - installs when the queue is idle, keeps the version it replaces, and relaunches. Headless Gaea comes back
+       headless, on the same port and folder; `gaea update --rollback` goes back;
+     - refuses an update that drops a GPP or manifest version an installed plugin uses, and says which plugin.
+     - **Done =** 0.11.3 updates itself to a test release from CI and back, from the app and from `--headless`, with
+       a job queued during the update finishing.
+  3. **The trust list** (PLG-3, UI-3, G-22): teams in `gaea.sqlite`, our own always trusted.
+     - **Install:** a release from an unknown team is held, not refused. The console's Plugins page (and `gaea trust`)
+       shows the certificate's name, team id, notarization and repo, and the operator approves or declines.
+     - **Requirement:** the verifier builds its requirement from the trusted teams, at install and at launch.
+     - **Removing a team** stops and disables its plugins, and they stay installed until the team is approved again.
+     - **Done =** with our own team treated as unknown in a test build (G-25), a plugin is held, approved, run, and
+       stopped when its team is removed.
+  4. **A guide for plugin authors** (DST-4), shipping with the trust list. It lives in the template repo, linked from
+     Gaea's README:
+     - making a plugin from the template;
+     - GPP-1 and the manifest, with the kit's worker;
+     - lanes and declared footprints, and how Gaea learns peaks;
+     - signing with the author's own Developer ID, and notarizing in CI;
+     - `gaea-plugin-check`, and a golden against an in-process reference;
+     - releasing, and what an operator sees when approving a new team.
+     - **Done =** someone following only the guide makes, releases and runs a plugin. The test is a fresh session
+       given only the guide.
+  5. **Crash and requeue reporting** (SRV-8):
+     - **Each worker death is recorded:** the plugin and version, the model and lane, the job, the exit signal or
+       code, the last stderr lines, whether the job was requeued or failed, and the macOS crash report if one was
+       written (`~/Library/Logs/DiagnosticReports`, matched by process and pid).
+     - **Where it shows:** `gaea crashes`, a Crashes list in the console, and a notice on the plugin's row.
+     - **Repeated crashes** quarantine the plugin: three within ten minutes (G-26), until the operator re-enables it.
+     - **Done =** an injected crash (SIGKILL, and a trap in a test plugin) is recorded with its report, the job is
+       requeued once and then fails with the crash named, and the quarantine trips and clears.
+  6. **Before 1.0:**
+     - every plugin rebuilt and released on mlx-engine-swift v0.73.1 (the probe fix, AB-A-0242). Gaea then updates
+       them through `gaea plugins update`, which tests PLG-4 on real releases;
+     - the wired limit in workers (AB-T-0380, owed since G1) decided: done or parked;
+     - an operator's guide in the README: install, models root, budgets, plugins, trust, updates, crashes.
+  7. **The exit, 1.0.0:**
+     - a clean install on a fresh macOS user account from the GitHub release;
+     - a 24-hour soak of mixed jobs, with a crash injected every hour and an update during it (G-26);
+     - a plugin signed by a real second team, approved and run (G-25);
+     - conformance with every plugin;
+     - 1.0.0 tagged and released by CI.
+- **Decided** (the operator, 2026-11-01):
+  1. **The update path** (G-24): Gaea's own GitHub path, not Sparkle. It reuses the plugin installer's download,
+     signature check and swap, works headless, and adds no dependency or keys.
+  2. **Another team** (G-25): the trust-list order tests the approval flow with our own team treated as unknown in a
+     test build, and checks a second team's requirement as text. A plugin signed by a real second team is part of the
+     1.0 exit.
+  3. **Quarantine** (G-26): three crashes of one plugin within ten minutes disable it until the operator re-enables
+     it, with a notice. A requeued job's crash counts.
+  4. **The 1.0 bar** (G-26): a 24-hour soak of mixed image, audio and video jobs on this Mac, with a crash injected
+     every hour and one update. Gaea 1.0 doesn't wait for MES 1.0.
+  5. **Update channels** (G-24): stable only, with GitHub pre-releases opt-in in Settings.
 
 ## 6. Risks
 
