@@ -1,0 +1,2 @@
+budget 103.08 GB, charged 17.07 GB, free 86.01 GB; host 0.03 GB; 0 queued
+  com.xocialize.gaea.seedvr2 0.1.0 pid 8446: declared 16.80 GB, phys_footprint 17.07 GB, worker says 17.26 GB, charged 17.07 GB lanes ["seedvr2-fp16": "fp16", "seedvr2-int8": "int8"]

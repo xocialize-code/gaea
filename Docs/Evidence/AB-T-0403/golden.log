@@ -1,0 +1,18 @@
+# SeedVR2 golden check 2026-11-01T00:05:21Z: com.xocialize.gaea.seedvr2 0.1.0
+      int8-x2: over GPP ran in 3.48 s; in-process {"applied_scale":2,"max_rss_gb":4.8797122560000004,"model":"seedvr2-int8","prepare_s":0.213074333,"run_s":6.9447590420000003,"scale":2}
+PASS  int8-x2: the same decoded frames, hevc,256,192,17, framemd5 sha256 6fb9e2caa98dad36…
+      int8-x4: over GPP ran in 19.19 s; in-process {"applied_scale":4,"max_rss_gb":4.934238208,"model":"seedvr2-int8","prepare_s":0.207131167,"run_s":19.092186208000001,"scale":4}
+PASS  int8-x4: the same decoded frames, hevc,512,384,17, framemd5 sha256 922695ea3d6fa55f…
+      int8-x2-180p: over GPP ran in 56.91 s; in-process {"applied_scale":2,"max_rss_gb":4.9492951039999999,"model":"seedvr2-int8","prepare_s":0.197634375,"run_s":53.670088667000002,"scale":2}
+PASS  int8-x2-180p: the same decoded frames, hevc,640,360,48, framemd5 sha256 86a88730dafc4f31…
+      fp16-x2: over GPP ran in 4.71 s; in-process {"applied_scale":2,"max_rss_gb":8.5902131199999996,"model":"seedvr2-fp16","prepare_s":0.27681545800000001,"run_s":4.7167929170000003,"scale":2}
+PASS  fp16-x2: the same decoded frames, hevc,256,192,17, framemd5 sha256 17a4d9b7d1a17a3a…
+OK
+PASS  fp16-x2.gpp passes validate.py
+OK
+PASS  int8-x2-180p.gpp passes validate.py
+OK
+PASS  int8-x2.gpp passes validate.py
+OK
+PASS  int8-x4.gpp passes validate.py
+== 8 passed, 0 failed

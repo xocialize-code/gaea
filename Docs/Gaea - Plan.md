@@ -489,7 +489,11 @@ starts while the phase before it is being built.
        gaea-plugin-rife [v0.1.0](https://github.com/xocialize-code/gaea-plugin-rife/releases/tag/v0.1.0)): golden 8/8,
        acceptance 18/18, and conformance with 12 plugins 72/0/19, with Video 0.1 conforming. See
        [Evidence/AB-T-0402](Evidence/AB-T-0402/README.md);
-     - **SeedVR2:** `video.upscale`, `content` required and a refused tier never swapped (VID-4);
+     - **SeedVR2:** `video.upscale`, `content` required and a refused tier never swapped (VID-4). **Done** (AB-T-0403,
+       gaea-plugin-seedvr2 [v0.1.0](https://github.com/xocialize-code/gaea-plugin-seedvr2/releases/tag/v0.1.0), Gaea
+       0.10.1): `seedvr2-int8` for draft and standard and `seedvr2-fp16` for best, one lane each. Golden 8/8, acceptance
+       18/18, and conformance with 13 plugins 73/0/18, with VIDEO-011 passing. See
+       [Evidence/AB-T-0403](Evidence/AB-T-0403/README.md);
      - **LTX 2.5:**
        - `video.generate`, `video.extend` and `video.retake`;
        - its tiers as lanes, chosen by memory, with weight streaming;

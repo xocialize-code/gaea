@@ -1,0 +1,34 @@
+# SeedVR2 acceptance (AB-T-0403) 2026-11-01T00:16:58Z — Gaea 0.10.1, seedvr2 0.1.0, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add by repo URL installs seedvr2 0.1.0
+PASS  video.upscale lists seedvr2-int8 (draft, standard) and seedvr2-fp16 (best): scales, contents, no seed, limits
+      x2, cold: 4.85 s from submit to settled (launch, prepare, upscale, finish)
+PASS  x2: seedvr2-int8, 256×192, 17 frames at 24 fps, with its sound's facts; effective scale, fps, size and frames
+PASS  x2's file agrees: hevc 256×192, 17 frames at exactly 24/1, an AAC track at 48 kHz stereo
+PASS  x2 kept the source's comment (Video §1.9)
+PASS  x4 (drawn): 512×384, 17 frames, effective scale 4
+PASS  quality best runs on seedvr2-fp16: 256×192, 17 frames
+PASS  quality draft runs on seedvr2-int8
+PASS  320×180, 48 frames ×2: 640×360, 48 frames at 24 fps
+PASS  output.codec h264 gives H.264, still 17 frames with sound
+PASS  no content is 400
+PASS  scale 3 is refused (4xx)
+PASS  1280×720 ×2 (2560×1440) is 422 out_of_limits on video
+PASS  a 61 s source is 422 out_of_limits on video
+      r-hd:  out_of_limits video - Upscaled 2×, the 1280-pixel-wide video would be 2560 pixels wide; this model makes at most 1920.
+      r-long:  out_of_limits video - The video is 61.00 s; this model takes at most 60 s.
+      r-nocontent: 400 invalid_request content - video.upscale needs 'content'.
+      r-scale: 422 out_of_limits scale - $.scale: not one of the allowed values
+PASS  x2's frames through Gaea are seedvr2-inproc's (decoded, byte for byte)
+PASS  x4's frames through Gaea are seedvr2-inproc's
+PASS  best's frames through Gaea are seedvr2-inproc's fp16 frames
+      in-process x2: {"applied_scale":2,"max_rss_gb":4.8778117119999997,"model":"seedvr2-int8","prepare_s":0.19593425,"run_s":3.4027310829999999,"scale":2}
+      x2 through Gaea: worker 4.071 s
+      x4 through Gaea: worker 19.507 s
+      best through Gaea: worker 3.631 s
+      draft through Gaea: worker 3.794 s
+      180p through Gaea: worker 54.648 s
+      h264 through Gaea: worker 3.546 s
+OK
+PASS  transcript com.xocialize.gaea.seedvr2-0.1.0-2026-11-01T001701Z.gpp passes validate.py
+== 18 passed, 0 failed
