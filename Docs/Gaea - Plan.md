@@ -515,7 +515,12 @@ starts while the phase before it is being built.
        declare; Gaea learns each worker's peak and charges it. DEV_VOL1 reads 4.2 GB/s, four times max128's 1 GB/s
        floor (the internal SSD 10.2). See [Evidence/AB-T-0405](Evidence/AB-T-0405/README.md);
   6. **Gaea Lab on video:** pixel-agency-run's workflow gains video inputs, a player and previews (mlx-apps, as
-     AB-A-0234), and `lab-run` runs every operation.
+     AB-A-0234), and `lab-run` runs every operation. **Done** (AB-T-0406, Gaea 0.11.3, pixel-agency-run
+     [v0.3.0](https://github.com/xocialize/pixel-agency-run/releases/tag/v0.3.0) via AB-A-0243): 28 of 28. `lab-run`
+     runs generate (refused without the users' acceptance, then with a first frame, and with a keyframe on standard64),
+     extend, retake, upscale and interpolate, each clip the next one's input; the app shows LTX's terms before a run
+     and the clip after. Gaea 0.11.3 names the editing model in the comment when another model made the source. See
+     [Evidence/AB-T-0406](Evidence/AB-T-0406/README.md);
   7. **The exit:** Video conformance with every G3 plugin, the tier budgets, and the Lab.
 - **Open:**
   - **The tier budgets:** decided 2026-10-31 by the operator: budgets staged on the 128 GB Mac with `--budget-bytes`

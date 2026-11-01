@@ -90,7 +90,10 @@ read-bound. A volume under the floor wasn't tried, since none of these is one.
 
 **Caveat:** `F_NOCACHE` stops new pages being cached but still serves cached ones. A re-read of the same file gave
 12.52 GB/s, and the engine's own probe reported 13.5–16.3 GB/s from the worker, which is the cache, not the disk. A
-volume under the floor could pass the probe after a recent read. Asked of mlx-engine as AB-A-0242.
+volume under the floor could pass the probe after a recent read. Asked of mlx-engine as AB-A-0242, and fixed in
+mlx-engine-swift v0.73.1 (AB-R-0697): the probe reads a window `mincore` shows cold, evicts one when every window is
+warm, and reports the floor unverifiable when it can't. Its warm-volume reads came within 25 % of uncached ones (3.8–5.8
+GB/s). A plugin picks it up when it is rebuilt against v0.73.1; gaea-plugin-ltx 0.1.1 resolved v0.73.0.
 
 ## Found on the way
 
