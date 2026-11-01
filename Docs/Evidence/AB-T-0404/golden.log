@@ -1,0 +1,34 @@
+# LTX golden check 2026-11-01T01:33:08Z: com.xocialize.gaea.ltx 0.1.0
+      compact24: over GPP ran in 39.70 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":24.772771840000001,"model":"ltx-2.5-compact24","operation":"video.generate","prepare_s":6.2077931660000001,"run_s":39.80120075,"warnings":[]}
+PASS  compact24: the same decoded frames, h264,256,256,9 aac,48000,2, framemd5 sha256 c5fd2ae5b6b9cc70…
+      balanced32: over GPP ran in 40.01 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":24.770838527999999,"model":"ltx-2.5-balanced32","operation":"video.generate","prepare_s":6.168578041,"run_s":39.725439332999997,"warnings":[]}
+PASS  balanced32: the same decoded frames, h264,256,256,9 aac,48000,2, framemd5 sha256 c5fd2ae5b6b9cc70…
+      standard64: over GPP ran in 50.64 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":24.770920447999998,"model":"ltx-2.5-standard64","operation":"video.generate","prepare_s":6.243672417,"run_s":51.097625041999997,"warnings":[]}
+PASS  standard64: the same decoded frames, h264,256,256,9 aac,48000,2, framemd5 sha256 87e58fd09b904a6e…
+      max128: over GPP ran in 94.53 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":24.217288704000001,"model":"ltx-2.5-max128","operation":"video.generate","prepare_s":9.9177226249999997,"run_s":94.153927499999995,"warnings":[]}
+PASS  max128: the same decoded frames, h264,256,256,9 aac,48000,2, framemd5 sha256 77edd71febeb6536…
+      compact24-first: over GPP ran in 39.74 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":24.773771264000001,"model":"ltx-2.5-compact24","operation":"video.generate","prepare_s":6.2683865829999998,"run_s":39.634970750000001,"warnings":[]}
+PASS  compact24-first: the same decoded frames, h264,256,256,9 aac,48000,2, framemd5 sha256 56c43ef33ebbdab4…
+      standard64-last: over GPP ran in 51.77 s; in-process {"effective":{"duration_s":0.70833333333333337,"fps":24,"frames":17,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":24.770510848000001,"model":"ltx-2.5-standard64","operation":"video.generate","prepare_s":13.022373209,"run_s":53.129488000000002,"warnings":[]}
+PASS  standard64-last: within 50 dB on every frame (int8, deterministic: false), h264,256,256,17 aac,48000,2
+      compact24-extend: over GPP ran in 40.39 s; in-process {"effective":{"after_s":0.33333333333333331,"before_s":0,"frames":25,"seed":7},"max_rss_gb":27.291254783999999,"model":"ltx-2.5-compact24","operation":"video.extend","prepare_s":12.656713792,"run_s":38.316723500000002,"warnings":[]}
+PASS  compact24-extend: within 32 dB on every frame (int8, deterministic: false), h264,128,96,25 aac,48000,2
+      compact24-retake: over GPP ran in 38.31 s; in-process {"effective":{"end_s":0.70833333333333337,"frames":17,"retake":"both","seed":7,"start_s":0.375},"max_rss_gb":27.295170559999999,"model":"ltx-2.5-compact24","operation":"video.retake","prepare_s":8.0302461669999996,"run_s":45.185685208000002,"warnings":["span_snapped"]}
+PASS  compact24-retake: within 35 dB on every frame (int8, deterministic: false), h264,128,96,17 aac,48000,2
+OK
+PASS  balanced32.gpp passes validate.py
+OK
+PASS  compact24-extend.gpp passes validate.py
+OK
+PASS  compact24-first.gpp passes validate.py
+OK
+PASS  compact24-retake.gpp passes validate.py
+OK
+PASS  compact24.gpp passes validate.py
+OK
+PASS  max128.gpp passes validate.py
+OK
+PASS  standard64-last.gpp passes validate.py
+OK
+PASS  standard64.gpp passes validate.py
+== 16 passed, 0 failed

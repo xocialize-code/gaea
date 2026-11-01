@@ -497,7 +497,12 @@ starts while the phase before it is being built.
      - **LTX 2.5:**
        - `video.generate`, `video.extend` and `video.retake`;
        - its tiers as lanes, chosen by memory, with weight streaming;
-       - LoRA and IC-LoRA as adapters, once mlx-ltx's typed adapters land (AB-A-0197);
+       - LoRA and IC-LoRA as adapters, once mlx-ltx's typed adapters land (AB-A-0197).
+       - **Done** (AB-T-0404, gaea-plugin-ltx [v0.1.0](https://github.com/xocialize-code/gaea-plugin-ltx/releases/tag/v0.1.0),
+         Gaea 0.11.0, GaeaPluginKit 0.9.1): one model per tier, each one lane, every DiT streamed; the AI-generated
+         disclosure, `audio: false`, the source's frames kept by edits, the operator's and users' acceptance. Golden
+         16/16, acceptance 22/22, and conformance with 14 plugins 80/0/11, with BASE-019 and VIDEO-005 to 010
+         passing. Adapters still wait on AB-A-0197. See [Evidence/AB-T-0404](Evidence/AB-T-0404/README.md);
      - **FlashVSR:** a second `video.upscale` offer, after mlx-video promotes it from WIP.
   5. **The governor on LTX's tiers:**
      - every tier within its budget at 32, 64 and 128 GB, staged with `--budget-bytes` on the 128 GB Mac (as

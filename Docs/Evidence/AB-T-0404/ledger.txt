@@ -1,0 +1,2 @@
+budget 103.08 GB, charged 1.60 GB, free 101.48 GB; host 0.02 GB; 0 queued
+  com.xocialize.gaea.ltx 0.1.0 pid 35557: declared 35.60 GB, phys_footprint 1.15 GB, worker says 2.00 GB, charged 1.60 GB lanes ["ltx-2.5-compact24": "int8", "ltx-2.5-standard64": "int8"]

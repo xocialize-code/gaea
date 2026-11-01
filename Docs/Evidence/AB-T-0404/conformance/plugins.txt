@@ -1,0 +1,18 @@
+Installed Z-Image 0.1.0 (com.xocialize.gaea.z-image), enabled.
+Installed FLUX.2 Klein 0.2.1 (com.xocialize.gaea.flux2-klein), enabled.
+Installed Qwen-Image 0.2.0 (com.xocialize.gaea.qwen-image), enabled.
+Installed Forge processing pack 0.2.0 (com.xocialize.gaea.forge), enabled.
+Installed Prompt enhancer 0.1.0 (com.xocialize.gaea.prompt-enhance), enabled.
+Installed Mage-VL 0.1.0 (com.xocialize.gaea.mage-vl), enabled.
+Installed Kokoro 0.1.0 (com.xocialize.gaea.kokoro), enabled.
+Installed Qwen3-TTS 0.2.0 (com.xocialize.gaea.qwen3-tts), enabled.
+Installed Step-Audio-EditX 0.1.0 (com.xocialize.gaea.step-audio-editx), enabled.
+Installed MOSS-SoundEffect 0.1.1 (com.xocialize.gaea.moss-soundeffect), enabled.
+Installed ACE-Step 1.5 0.1.0 (com.xocialize.gaea.ace-step), enabled.
+Installed RIFE 0.1.0 (com.xocialize.gaea.rife), enabled.
+Installed SeedVR2 0.1.0 (com.xocialize.gaea.seedvr2), enabled.
+Installed LTX 2.5 0.1.0 (com.xocialize.gaea.ltx), enabled.
+ltx-2.5-compact24 enabled.
+ltx-2.5-balanced32 enabled.
+ltx-2.5-standard64 enabled.
+ltx-2.5-max128 enabled.

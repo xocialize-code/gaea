@@ -5,7 +5,8 @@
 #
 #   tools/conformance-with.sh <short-work-dir> <evidence-dir> [gaea-plugin-<name> ...]
 #
-# Needs: dist/Gaea.app; MES_CONFORMANCE (default ../media-engine-spec/.build/release/mes-conformance).
+# Needs: dist/Gaea.app; MES_CONFORMANCE (default ../media-engine-spec/.build/release/mes-conformance). ENABLE lists opt-in
+# models to turn on before the run.
 set -uo pipefail
 cd "${0:A:h}/.."
 WORK=${1:?work dir}; OUT=${2:?evidence dir}; shift 2
@@ -22,6 +23,8 @@ for _ in {1..50}; do [[ -S $GAEA_HOME/operator.sock ]] && break; sleep 0.2; done
 for repo in $G1 "$@"; do
   "$CLI" plugins add "https://github.com/xocialize-code/$repo" | tee -a "$OUT/plugins.txt"
 done
+# Opt-in models the run should offer (an accepted_required licence, such as LTX 2.5's tiers): ENABLE="<id> …".
+for id in ${=ENABLE:-}; do "$CLI" models enable $id | tee -a "$OUT/plugins.txt"; done
 "$CLI" plugins > "$OUT/plugins-list.txt"
 "$CLI" models > "$OUT/models.txt"
 "$CONFORMANCE" engine "http://127.0.0.1:$P/mes/v0" --out "$OUT/conformance-open" > "$OUT/conformance-open.txt" 2>&1
