@@ -106,6 +106,13 @@ import Testing
         #expect(try StorageFloor.filter(m, read: 2_000_000_000, named: nil).skipped == nil)
     }
 
+    @Test func aModelNoLaneOfWhichFitsTheBudgetIsntOffered() throws {
+        let m = try model(bf16Floor: 1_000_000_000)
+        let smallest = m.lanes.map(LaneChoice.need).min()!
+        #expect(PluginOffers.fits(m, budget: smallest))
+        #expect(!PluginOffers.fits(m, budget: smallest - 1))
+    }
+
     @Test func aPreviewIsReadFromTheRunAndDeleted() throws {
         let dir = try folder()
         let frame = dir.appending(path: "preview-1.png")

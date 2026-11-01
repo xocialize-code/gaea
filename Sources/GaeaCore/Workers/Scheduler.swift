@@ -164,6 +164,8 @@ public struct Ledger: Codable, Sendable {
         public var declaredBytes: UInt64
         /// `proc_pid_rusage` `ri_phys_footprint`, read by the host.
         public var physFootprintBytes: UInt64?
+        /// `ri_lifetime_max_phys_footprint`: the most the worker has held since it started.
+        public var peakFootprintBytes: UInt64?
         /// What the worker's own last memory report said.
         public var reportedFootprintBytes: UInt64?
         public var reportedDeclaredBytes: UInt64?
@@ -296,6 +298,7 @@ public actor Scheduler: WorkerControl {
             return Ledger.Entry(
                 pluginID: slot.plugin.id, title: slot.plugin.title, version: slot.plugin.version, pid: slot.worker.pid,
                 lanes: slot.prepared.mapValues(\.id), declaredBytes: slot.declaredBytes, physFootprintBytes: measured,
+                peakFootprintBytes: slot.worker.peakFootprint,
                 reportedFootprintBytes: slot.report?.physFootprintBytes, reportedDeclaredBytes: slot.report?.declaredBytes,
                 chargedBytes: charge + (running ? slot.peakTransientBytes : 0), busy: running, overrun: slot.overrun)
         }

@@ -108,13 +108,19 @@ public final class WorkerProcess: @unchecked Sendable {
     public var isRunning: Bool { !state.withLock { $0.exited } }
 
     /// `ri_phys_footprint`, read from outside (MEM-4).
-    public var physFootprint: UInt64? {
+    public var physFootprint: UInt64? { usage?.ri_phys_footprint }
+
+    /// `ri_lifetime_max_phys_footprint`: the most the worker has held since it started, read from outside. Unlike a
+    /// sample, it can't miss a short peak.
+    public var peakFootprint: UInt64? { usage?.ri_lifetime_max_phys_footprint }
+
+    private var usage: rusage_info_v4? {
         guard isRunning else { return nil }
         var info = rusage_info_v4()
         let r = withUnsafeMutablePointer(to: &info) {
             $0.withMemoryRebound(to: rusage_info_t?.self, capacity: 1) { proc_pid_rusage(pid, RUSAGE_INFO_V4, $0) }
         }
-        return r == 0 ? info.ri_phys_footprint : nil
+        return r == 0 ? info : nil
     }
 
     // MARK: - Launch

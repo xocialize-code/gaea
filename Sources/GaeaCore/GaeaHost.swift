@@ -185,8 +185,10 @@ public final class GaeaHost: Sendable {
                     let optIn = c.offer.isOptIn
                     let on = c.plugin.enabled && enablement.isEnabled(c.model.id, optIn: optIn)
                     let chosen = defaultLane(c.model, plugin: c.plugin.id)
+                    let fits = PluginOffers.fits(c.model, budget: scheduler.budgetBytes)
                     return "\(on ? "on " : "off") \(c.model.id)  \(c.model.title)  [\(c.plugin.id) \(c.plugin.version)] lanes: "
                         + c.model.lanes.map { "\($0.id)\($0.id == chosen ? "*" : "") \(LaneChoice.need($0).gb)" }.joined(separator: ", ")
+                        + (fits ? "" : "  (not offered: no lane fits the \(scheduler.budgetBytes.gb) budget)")
                 }
                 return OperatorResponse(id: request.id, ok: true, text: lines.isEmpty ? "No models: add a plugin." : lines.joined(separator: "\n"))
             case .modelsEnable, .modelsDisable:
@@ -333,7 +335,7 @@ public final class GaeaHost: Sendable {
             + "host \(ledger.hostFootprintBytes.gb); \(ledger.queued) queued"]
         for w in ledger.workers {
             lines.append("  \(w.pluginID) \(w.version) pid \(w.pid)\(w.busy ? " busy" : ""): declared \(w.declaredBytes.gb), "
-                + "phys_footprint \(w.physFootprintBytes?.gb ?? "?"), worker says \(w.reportedFootprintBytes?.gb ?? "?"), "
+                + "phys_footprint \(w.physFootprintBytes?.gb ?? "?") (peak \(w.peakFootprintBytes?.gb ?? "?")), worker says \(w.reportedFootprintBytes?.gb ?? "?"), "
                 + "charged \(w.chargedBytes.gb)\(w.overrun ? " — OVER its declaration" : "") lanes \(w.lanes)")
         }
         return lines.joined(separator: "\n")

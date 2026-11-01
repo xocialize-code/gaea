@@ -82,7 +82,7 @@ public struct GaeaEngine: MediaEngine {
         self.manager = manager
         self.scheduler = scheduler
         self.enablement = enablement
-        let offers = PluginOffers(manager: manager, enablement: enablement)
+        let offers = PluginOffers(manager: manager, enablement: enablement, budgetBytes: scheduler.budgetBytes)
         self.offers = offers
         // Gaea's scheduler owns memory, so the host keeps the normalizer's residency hooks at their defaults. The prompt
         // enhancer is the LLM plugin's helper (AB-T-0370).
@@ -515,6 +515,14 @@ extension PluginRoute {
 struct PluginOffers: Sendable {
     let manager: PluginManager
     let enablement: ModelEnablement
+    /// The scheduler's whole budget: a model whose smallest lane needs more can never run on this Mac, so it isn't
+    /// offered (LTX's max128 on a 32 or 64 GB Mac, AB-T-0405).
+    var budgetBytes: UInt64 = .max
+
+    /// Whether some lane of `model` fits the budget with nothing else loaded.
+    static func fits(_ model: PluginManifest.Model, budget: UInt64) -> Bool {
+        (model.lanes.map(LaneChoice.need).min() ?? 0) <= budget
+    }
 
     /// A helper an enabled plugin model serves (GPP-1 §4.4): an operation Gaea calls itself, such as the prompt rewrite.
     struct Helper: Sendable {
@@ -606,6 +614,7 @@ struct PluginOffers: Sendable {
 
     func isLive(_ plugin: InstalledPlugin, _ model: PluginManifest.Model) -> Bool {
         plugin.enabled && enablement.isEnabled(model.id, optIn: Self.offer(model, in: plugin).isOptIn)
+            && Self.fits(model, budget: budgetBytes)
     }
 
     func liveRoutes() async -> [PluginRoute] {
