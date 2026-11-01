@@ -1,0 +1,24 @@
+== 0.12.1 pid 82055
+Gaea 0.12.1
+Installed Gaea demo worker 0.3.1 (com.xocialize.gaea.demo), enabled.
+job on 0.12.1: succeeded 0.3.1
+Gaea 0.12.1: 0.13.0 is available: gaea update
+App:       /private/tmp/gaea-v13.WyqH/Applications/Gaea.app
+Releases:  https://github.com/xocialize-code/gaea/releases, pre-releases skipped, checked 2026-11-01T23:28:18Z
+Installing Gaea 0.13.0; Gaea relaunches itself. gaea update --cancel stops it.
+== after update: Gaea 0.13.0, pid 82055 (was 82055)
+Trust:     no team
+on  com.xocialize.gaea.demo 0.3.1  Gaea demo worker  https://github.com/xocialize-code/gaea-plugin-demo
+      stopped: its team CFZS6RXUCP isn't trusted (gaea trust approve CFZS6RXUCP)
+job with the team untrusted: REFUSED:{"error": {"code": "unknown_operation", "message": "No operation image.generate on this engine.", "param": "operation", "request_id": "req_n5jv5m2e7x2b"}}
+Trusted teams:
+  (Gaea's own team is treated as unknown for this run: GAEA_UNTRUST_OWN_TEAM)
+Not trusted, installed and stopped:
+  CFZS6RXUCP  plugins: com.xocialize.gaea.demo  (gaea trust approve CFZS6RXUCP)
+Held: none
+Trusted CFZS6RXUCP. Its plugins run again: com.xocialize.gaea.demo.
+job after approving: succeeded 0.3.1
+Gaea 0.13.0: up to date
+App:       /private/tmp/gaea-v13.WyqH/Applications/Gaea.app
+Kept:      0.12.1, for gaea update --rollback
+Releases:  https://github.com/xocialize-code/gaea/releases, pre-releases skipped, checked 2026-11-01T23:28:22Z

@@ -73,6 +73,22 @@ The console's Plugins page was rendered with `Gaea --snapshot` at two points:
 - a stubbed GitHub serving the demo's local release, held, declined, approved, removed and trusted again;
 - the built-in team refused.
 
+## Released
+
+[v0.13.0](https://github.com/xocialize-code/gaea/releases/tag/v0.13.0) was released from CI: run 41360587983, tag at
+51fa9d9, 18.5 minutes ([release-0.13.0.json](release-0.13.0.json)). It was downloaded to `/tmp` and checked:
+- the sha256 matched;
+- `codesign --strict --deep` passed;
+- `spctl` gave `source=Notarized Developer ID`, and the staple validated;
+- `Gaea --version` ran off the runner;
+- the binary names no `.build` bundle path.
+
+Then a downloaded v0.12.1 was started headless with `GAEA_UNTRUST_OWN_TEAM=1` ([release-update.log](release-update.log)):
+1. It added the demo, which 0.12.1 trusts, and ran a job.
+2. `gaea update --check` offered 0.13.0. `gaea update` installed it in place (same pid 82055) and kept 0.12.1.
+3. On 0.13.0 the existing gaea.sqlite gained the trust tables. The installed demo was stopped and a job was refused.
+4. `gaea trust approve CFZS6RXUCP` brought the demo back, and a job ran on it.
+
 ## Left
 
 - **The console's trust prompt sheet** is MESEngineUI's own. Gaea answers it through `needsTrust`, `trust` and
