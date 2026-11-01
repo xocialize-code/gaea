@@ -436,7 +436,7 @@ starts while the phase before it is being built.
      - See [Evidence/AB-T-0395](Evidence/AB-T-0395/README.md).
 - **G2 exited 2026-10-31.**
 
-**G3. Video**
+**G3. Video** (exited 2026-11-01, AB-T-0407)
 - Base time conventions, then Video 0.1.
 - Plugins, all local (G-12):
   - LTX 2.5: tiers from compact24 to max128, weight streaming, LoRA and IC-LoRA;
@@ -503,7 +503,8 @@ starts while the phase before it is being built.
          disclosure, `audio: false`, the source's frames kept by edits, the operator's and users' acceptance. Golden
          16/16, acceptance 22/22, and conformance with 14 plugins 80/0/11, with BASE-019 and VIDEO-005 to 010
          passing. Adapters still wait on AB-A-0197. See [Evidence/AB-T-0404](Evidence/AB-T-0404/README.md);
-     - **FlashVSR:** a second `video.upscale` offer, after mlx-video promotes it from WIP.
+     - **FlashVSR:** a second `video.upscale` offer, after mlx-video promotes it from WIP. **Deferred** past the exit
+       (the operator, 2026-11-01): AB-T-0408, parked until mlx-video releases mlx-flashvsr-swift.
   5. **The governor on LTX's tiers:**
      - every tier within its budget at 32, 64 and 128 GB, staged with `--budget-bytes` on the 128 GB Mac (as
        AB-T-0363 did; the operator's call, 2026-10-31);
@@ -521,12 +522,20 @@ starts while the phase before it is being built.
      extend, retake, upscale and interpolate, each clip the next one's input; the app shows LTX's terms before a run
      and the clip after. Gaea 0.11.3 names the editing model in the comment when another model made the source. See
      [Evidence/AB-T-0406](Evidence/AB-T-0406/README.md);
-  7. **The exit:** Video conformance with every G3 plugin, the tier budgets, and the Lab.
-- **Open:**
-  - **The tier budgets:** decided 2026-10-31 by the operator: budgets staged on the 128 GB Mac with `--budget-bytes`
-    are enough for the 32 and 64 GB exit.
-  - **The licence:** LTX's weights are under the LTX-2 Community licence. Its terms go in the manifest, and the plugin
-    shows them (VID-6).
+  7. AB-T-0407: the exit, Video conformance with every G3 plugin, the tier budgets, and the Lab. **Done** (2026-11-01,
+     Gaea 0.11.3):
+     - **Conformance:** with all 14 plugins from GitHub and every LTX tier enabled, 80/0/11 under v0.9.0's suite as
+       shipped; Base, Image, Audio and Video 0.1 conform, 14 of 15 Video tests running (VIDEO-014, previews, skips).
+     - **The tier budgets:** AB-T-0405, 31/31. **The Lab:** AB-T-0406, 28/28, and the client suite 11/11 on
+       pixel-agency-run 0.3.0.
+     - See [Evidence/AB-T-0407](Evidence/AB-T-0407/README.md).
+- **Decided:**
+  - **The tier budgets** (the operator, 2026-10-31): budgets staged on the 128 GB Mac with `--budget-bytes` are enough
+    for the 32 and 64 GB exit.
+  - **FlashVSR** (the operator, 2026-11-01): the exit goes without it (AB-T-0408, parked).
+  - **The licence:** LTX's weights are under the LTX-2 Community licence. Its terms are in the manifest, the offers are
+    opt-in for the operator, and users accept them through `policy.accepted` (VID-6).
+- **G3 exited 2026-11-01.**
 
 **G4. Production**
 - Gaea updates itself (Sparkle, or the same GitHub release path).
