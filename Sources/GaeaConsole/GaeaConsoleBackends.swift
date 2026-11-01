@@ -88,7 +88,7 @@ public struct GaeaPluginBackend: EnginePluginBackend {
 
     public func plugins() async -> [EnginePlugin] {
         let installed = Dictionary(uniqueKeysWithValues: await host.manager.installed().map { ($0.id, $0) })
-        let ownTeam = ownTeam()
+        let ownTeam = self.ownTeam()
         return ((try? host.database.plugins()) ?? []).map { row in
             let state: EnginePlugin.State = if let failure = row.failure {
                 .failed(failure)

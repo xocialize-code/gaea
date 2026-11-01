@@ -65,7 +65,7 @@ struct GaeaModelHost: ModelHost {
     }
 
     static func card(_ route: PluginRoute, all: [PluginRoute], adapters: [ModelAdapter] = []) -> ModelCard {
-        let capabilities = all.compactMap { capabilities[$0.operation] }
+        let capabilities = all.compactMap { Self.capabilities[$0.operation] }
         let license = route.offer.license
         let limits = all.compactMap(\.manifestOffer.limits)
         let envelope = ModelCard.Envelope(maxPixels: limits.compactMap(\.maxPixels).max() ?? 1024 * 1024,

@@ -98,7 +98,7 @@ public struct GaeaEngine: MediaEngine {
     /// offer whose licence says `accepted_required` (the LTX-2 Community licence, VID-6) is opt-in even when MLXEngine
     /// counts the weights' licence as permissive: the operator accepts its terms by enabling it.
     static func offer(_ model: PluginManifest.Model, in plugin: InstalledPlugin) -> ModelOffer {
-        var offer = offer(model)
+        var offer = Self.offer(model)
         let licenses = plugin.manifest.offers.filter { $0.modelID == model.id }
             .compactMap { try? JSONDecoder().decode(License.self, from: JSONEncoder().encode($0.model["license"] ?? .null)) }
         if let asked = licenses.first(where: { $0.acceptedRequired == true }) {
@@ -563,7 +563,7 @@ struct PluginOffers: Sendable {
     /// offer whose licence says `accepted_required` (the LTX-2 Community licence, VID-6) is opt-in even when MLXEngine
     /// counts the weights' licence as permissive: the operator accepts its terms by enabling it.
     static func offer(_ model: PluginManifest.Model, in plugin: InstalledPlugin) -> ModelOffer {
-        var offer = offer(model)
+        var offer = Self.offer(model)
         let licenses = plugin.manifest.offers.filter { $0.modelID == model.id }
             .compactMap { try? JSONDecoder().decode(License.self, from: JSONEncoder().encode($0.model["license"] ?? .null)) }
         if let asked = licenses.first(where: { $0.acceptedRequired == true }) {
