@@ -113,6 +113,17 @@ import Testing
         #expect(!PluginOffers.fits(m, budget: smallest - 1))
     }
 
+    @Test func aLaneMeasuredHoldingMoreThanItDeclaresIsAdmittedAtWhatItHeld() throws {
+        let m = try model(bf16Floor: 1_000_000_000)
+        let lane = m.lanes[0], need = LaneChoice.need(lane)
+        let learned = LaneChoice.learned(m, measured: [lane.id: need + 9_000_000_000])
+        #expect(LaneChoice.need(learned.lanes[0]) == need + 9_000_000_000)
+        #expect(learned.lanes[0].resolved.persistentBytes == lane.resolved.persistentBytes)
+        #expect(learned.lanes.dropFirst().map(LaneChoice.need) == m.lanes.dropFirst().map(LaneChoice.need))
+        // Less than declared changes nothing: the declaration stays the floor.
+        #expect(LaneChoice.need(LaneChoice.learned(m, measured: [lane.id: need / 2]).lanes[0]) == need)
+    }
+
     @Test func aPreviewIsReadFromTheRunAndDeleted() throws {
         let dir = try folder()
         let frame = dir.appending(path: "preview-1.png")

@@ -52,6 +52,24 @@ public enum LaneChoice {
     /// Persistent weights plus the peak transient: what a lane needs while it runs.
     public static func need(_ lane: PluginManifest.Lane) -> UInt64 { lane.resolved.persistentBytes &+ lane.resolved.peakTransientBytes }
 
+    /// `model` with each lane's need raised to what that lane was measured holding, where that's more than it declares
+    /// (`measured` by lane id). The persistent part stays declared; the transient takes the rest.
+    public static func learned(_ model: PluginManifest.Model, measured: [String: UInt64]) -> PluginManifest.Model {
+        var model = model
+        for i in model.lanes.indices {
+            let r = model.lanes[i].resolved
+            guard let peak = measured[model.lanes[i].id], peak > need(model.lanes[i]) else { continue }
+            model.lanes[i].resolved = ResolvedLane(
+                contractVersion: r.contractVersion, quant: r.quant, footprintQuant: r.footprintQuant,
+                persistentBytes: r.persistentBytes, persistentSource: r.persistentSource,
+                peakTransientBytes: peak - r.persistentBytes, peakTransientSource: r.peakTransientSource,
+                activationScaling: r.activationScaling, expectedWeightReadBytesPerRun: r.expectedWeightReadBytesPerRun,
+                minSustainedReadBytesPerSecond: r.minSustainedReadBytesPerSecond, materialization: r.materialization,
+                weightSources: r.weightSources, selfMaterializing: r.selfMaterializing, capabilities: r.capabilities)
+        }
+        return model
+    }
+
     /// The operator's default lane when it fits, else the largest smaller lane that fits (reported as `fellBackFrom`).
     /// A named lane is that lane or a refusal.
     public static func choose(_ model: PluginManifest.Model, named: String?, preferred: String?, available: UInt64) throws(Refusal)
@@ -214,6 +232,9 @@ public actor Scheduler: WorkerControl {
         var lastUsed = Date()
         var report: WorkerMemoryReportWire?
         var overrun = false
+        /// Every `model/lane` this worker has prepared since it started: its lifetime peak is a lane's own only while
+        /// this holds one.
+        var everPrepared: Set<String> = []
 
         var persistentBytes: UInt64 { prepared.values.reduce(0) { $0 + $1.resolved.persistentBytes } }
         var peakTransientBytes: UInt64 { prepared.values.map(\.resolved.peakTransientBytes).max() ?? 0 }
@@ -385,6 +406,8 @@ public actor Scheduler: WorkerControl {
             guard !model.lanes.isEmpty else { throw WorkerFailure(code: "unknown_model", message: "no lane of \(model.id) serves this offer") }
             if !model.lanes.contains(where: \.default) { model.lanes[0].default = true }
         }
+        // A lane measured holding more than it declares is admitted at what it held (AB-T-0405).
+        model = LaneChoice.learned(model, measured: measuredPeaks(plugin: plugin, model: model.id))
 
         // A worker on another version (an update switched in) is replaced.
         if let slot = slots[job.pluginID], slot.plugin.version != plugin.version || !slot.worker.isRunning {
@@ -429,6 +452,7 @@ public actor Scheduler: WorkerControl {
                 return try await attempt(job, progress: progress, requeued: requeued)
             }
             slots[plugin.id]?.prepared[model.id] = lane
+            slots[plugin.id]?.everPrepared.insert("\(model.id)/\(lane.id)")
         }
 
         var fields: [String: JSONValue] = [
@@ -447,6 +471,7 @@ public actor Scheduler: WorkerControl {
         } onCancel: {
             worker.cancel(job: job.job)
         }
+        learnPeak(plugin: plugin, model: model.id, lane: lane, worker: worker)
         return WorkerJobResult(result: result, lane: lane.id, fellBackFrom: fellBackFrom?.id, fallbackMessage: fallbackMessage,
                                requeued: requeued)
     }
@@ -577,6 +602,40 @@ public actor Scheduler: WorkerControl {
             try database.setStoreSchema(plugin: plugin.id, version: storage.schemaVersion, migrations: storage.migrations)
             database.record("store_migrated", plugin: plugin.id, version: plugin.version,
                             "store schema \(current?.version ?? 0) → \(storage.schemaVersion)")
+        }
+    }
+
+    /// The setting that keeps what a lane was measured holding, per plugin version.
+    static func peakSetting(plugin: InstalledPlugin, model: String, lane: String) -> String {
+        "measured-peak/\(plugin.id)@\(plugin.version)/\(model)/\(lane)"
+    }
+
+    /// What each lane of `model` was measured holding, by lane id.
+    func measuredPeaks(plugin: InstalledPlugin, model: String) -> [String: UInt64] {
+        var out: [String: UInt64] = [:]
+        for lane in plugin.model(model)?.lanes ?? [] {
+            if let v = (try? database.setting(Self.peakSetting(plugin: plugin, model: model, lane: lane.id))) ?? nil, let bytes = UInt64(v) {
+                out[lane.id] = bytes
+            }
+        }
+        return out
+    }
+
+    /// After a run on a worker that has held only this lane, its lifetime peak is the lane's: kept when it's past what
+    /// the lane declares and what was measured before, so the next admission charges it.
+    func learnPeak(plugin: InstalledPlugin, model: String, lane: PluginManifest.Lane, worker: WorkerProcess) {
+        guard slots[plugin.id]?.everPrepared == ["\(model)/\(lane.id)"], let peak = worker.peakFootprint else { return }
+        let key = Self.peakSetting(plugin: plugin, model: model, lane: lane.id)
+        let known = ((try? database.setting(key)) ?? nil).flatMap(UInt64.init) ?? 0
+        guard peak > max(known, LaneChoice.need(lane)) else { return }
+        try? database.setSetting(key, String(peak))
+        database.record("memory_learned", plugin: plugin.id, version: plugin.version,
+                        "\(model) lane \(lane.id) held \(peak.gb), past its declared \(LaneChoice.need(lane).gb); admitted at that from now on")
+        log("scheduler: \(model) lane \(lane.id) held \(peak.gb), past \(LaneChoice.need(lane).gb); admitting it at that from now on")
+        // The worker's own charge follows at once.
+        if let current = slots[plugin.id]?.prepared[model], current.id == lane.id, let learned = plugin.model(model).map({
+            LaneChoice.learned($0, measured: [lane.id: peak]) })?.lanes.first(where: { $0.id == lane.id }) {
+            slots[plugin.id]?.prepared[model] = learned
         }
     }
 
