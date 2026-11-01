@@ -142,6 +142,13 @@ import Testing
         #expect(throws: MESError.self) { try GaeaEngine.checkVideoSource(facts, operation: "video.interpolate", limits: limits) }
         limits = Descriptor.Limits(maxWidth: 1920, maxHeight: 1080)
         #expect(throws: MESError.self) { try GaeaEngine.checkVideoSource(facts, operation: "video.interpolate", limits: limits) }
+
+        // upscale bounds the output: 960×540 × 2 fits 1920×1080, × 4 doesn't.
+        let small = GaeaEngine.VideoFacts(durationSeconds: 1, frameRate: 24, frames: 24, width: 960, height: 540, codec: "avc1",
+                                          audio: nil, container: "mp4")
+        try GaeaEngine.checkVideoSource(small, operation: "video.upscale", limits: limits, scale: 2)
+        #expect(throws: MESError.self) { try GaeaEngine.checkVideoSource(small, operation: "video.upscale", limits: limits, scale: 4) }
+        #expect(throws: MESError.self) { try GaeaEngine.checkVideoSource(facts, operation: "video.upscale", limits: limits, scale: 2) }
     }
 
     /// A 1 s source with an AAC track and a comment, as a client might send.

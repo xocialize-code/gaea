@@ -243,11 +243,13 @@ extension GaeaEngine {
             }
             inputs[name] = converted
         }
-        let source = sources[VideoProfile.Input.video]
-        if let source { try Self.checkVideoSource(source.facts, operation: route.operation, limits: route.offer.limits) }
-
         var params = route.manifestOffer.defaults?.objectValue ?? [:]
         for (key, value) in context.params { params[key] = value.gpp }
+        let source = sources[VideoProfile.Input.video]
+        if let source {
+            try Self.checkVideoSource(source.facts, operation: route.operation, limits: route.offer.limits,
+                                      scale: params[VideoProfile.Param.scale]?.intValue)
+        }
         var warnings: [Warning] = []
         if route.operation == "video.interpolate", let source {
             let (factor, warning) = Self.interpolationFactor(fps: context.param(VideoProfile.Param.fps)?.numberValue,
@@ -306,13 +308,25 @@ extension GaeaEngine {
                                 param: VideoProfile.Param.fps))
     }
 
-    /// The source's length and, where the output keeps its size, its size, against the offer's limits: 422
-    /// `out_of_limits`, never trimmed (Video §4.2; the kit can't read media).
-    static func checkVideoSource(_ facts: VideoFacts, operation: String, limits: Descriptor.Limits?) throws {
+    /// The source's length and the output's size against the offer's limits: 422 `out_of_limits`, never trimmed (Video
+    /// §4.2; the kit can't read media). `interpolate` keeps the source's size; `upscale`'s output is the source's × `scale`
+    /// (the request's, else the offer's default), which `max_width` and `max_height` bound (§3.4).
+    static func checkVideoSource(_ facts: VideoFacts, operation: String, limits: Descriptor.Limits?, scale: Int? = nil) throws {
         guard let limits else { return }
         if let most = limits.value(VideoProfile.LimitField.maxSourceSeconds), facts.durationSeconds > most + 0.0005 {
             throw MESError(.outOfLimits, String(format: "The video is %.2f s; this model takes at most %g s.", facts.durationSeconds, most),
                            param: VideoProfile.Input.video)
+        }
+        if operation == "video.upscale", let scale {
+            let (w, h) = (facts.width * scale, facts.height * scale)
+            if let most = limits.maxWidth, w > most {
+                throw MESError(.outOfLimits, "Upscaled \(scale)×, the \(facts.width)-pixel-wide video would be \(w) pixels wide; this model makes at most \(most).",
+                               param: VideoProfile.Input.video)
+            }
+            if let most = limits.maxHeight, h > most {
+                throw MESError(.outOfLimits, "Upscaled \(scale)×, the \(facts.height)-pixel-high video would be \(h) pixels high; this model makes at most \(most).",
+                               param: VideoProfile.Input.video)
+            }
         }
         if operation == "video.interpolate" {
             if let w = limits.maxWidth, facts.width > w {
