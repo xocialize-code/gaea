@@ -25,6 +25,12 @@ import GaeaOperator
 //                                       add a LoRA by its Hugging Face repo URL for one model (GPP-1 §4.8)
 //   gaea adapters enable|disable <id>   an opt-in adapter starts off; enabling it accepts its terms
 //   gaea adapters remove <id>           an added one (its weights stay in the models root)
+//   gaea update --check                 read Gaea's releases: what's available, what's kept for rollback
+//   gaea update [<version>]             download and verify the newest release (or that version, a pre-release too),
+//                                       install it once no job is running or waiting, and relaunch (G-24)
+//   gaea update --rollback              back to the version the last update replaced
+//   gaea update --cancel                drop an update that is still waiting
+//   gaea update --prereleases [on|off]  include pre-releases in checks and updates
 //
 // --json prints the JSON answer instead of the text. GAEA_HOME points at another Gaea folder.
 
@@ -35,6 +41,7 @@ let usage = """
            gaea models [list | enable <id> | disable <id> | root [<folder> | default] | lane <id> [<lane> | default]]
            gaea adapters [list | add <hf-url> --model <id> [--file f] [--id id] [--title t] [--trigger t] [--format f]
                           [--strength s] | enable <id> | disable <id> | remove <id>]
+           gaea update [<version> | --check | --rollback | --cancel | --prereleases [on|off]]
            (--json for JSON)
     """
 
@@ -107,6 +114,14 @@ func fail(_ message: String) -> Never {
     case ("adapters", "enable"): return OperatorRequest(command: .adaptersEnable, args: ["id": operand()])
     case ("adapters", "disable"): return OperatorRequest(command: .adaptersDisable, args: ["id": operand()])
     case ("adapters", "remove"): return OperatorRequest(command: .adaptersRemove, args: ["id": operand()])
+    case ("update", "--check"): return OperatorRequest(command: .updateCheck)
+    case ("update", "--rollback"): return OperatorRequest(command: .updateRollback)
+    case ("update", "--cancel"): return OperatorRequest(command: .updateCancel)
+    case ("update", "--prereleases"):
+        return OperatorRequest(command: .updatePrereleases, args: args.count >= 3 ? ["value": args[2]] : [:])
+    case ("update", nil): return OperatorRequest(command: .updateInstall)
+    case ("update", let version?) where !version.hasPrefix("-"):
+        return OperatorRequest(command: .updateInstall, args: ["version": version])
     case ("-h", _), ("--help", _), ("help", _):
         print(usage)
         exit(0)

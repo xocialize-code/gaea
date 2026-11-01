@@ -6,15 +6,24 @@ import GaeaCore
 //
 //   Gaea                       the menu bar item and console, serving MES (UI-1, UI-2)
 //   Gaea --headless            the server alone, for a studio Mac at login (SRV-10)
-//   Gaea --snapshot <dir>      render the console's Plugins, Models and System pages and Settings' Adapters tab to PNGs, then quit
+//   Gaea --snapshot <dir>      render the console's Plugins, Models and System pages and Settings' Adapters and Updates tabs to PNGs, then quit
+//   Gaea --version             print {"version", "gpp", "manifest"} as JSON and quit (the updater asks a staged app this)
 //
 //   --port N (17630)  --paired [--host 0.0.0.0] [--approve-pairings]  --no-advertise  --budget-bytes N
 //   --outputs-ttl S  --idle-seconds S  --models-root <folder> (this launch only; `gaea models root` keeps one)
+//   --update-grace S (60): how long an update waits after a job finishes, so its client can fetch the outputs
 //
 // Configuration happens here, in Gaea's own UI, or with the `gaea` CLI on this Mac (G-17). MES clients can't
 // configure it. GAEA_HOME moves Gaea's folder; GAEA_GITHUB_TOKEN reads private plugin repos (never stored).
 
 setvbuf(stdout, nil, _IOLBF, 0)
+
+if CommandLine.arguments.dropFirst().first == "--version" {
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = .sortedKeys
+    print(String(decoding: try! encoder.encode(Gaea.buildInfo), as: UTF8.self))
+    exit(0)
+}
 
 struct Launch {
     var options = GaeaHost.Options()
@@ -36,6 +45,7 @@ struct Launch {
             case "--models-root": options.modelsRoot = args.next().map { URL(fileURLWithPath: ($0 as NSString).expandingTildeInPath, isDirectory: true) }
             case "--idle-seconds": options.idleTimeout = .seconds(Int(args.next() ?? "") ?? 900)
             case "--outputs-ttl": options.outputsTTLSeconds = args.next().flatMap(Int.init)
+            case "--update-grace": options.updateGrace = args.next().flatMap(TimeInterval.init) ?? options.updateGrace
             // Headless only: pre-approve every pairing (development, unattended hosts). The app asks its operator.
             case "--approve-pairings":
                 approvePairings = true
@@ -61,12 +71,19 @@ if launch.headless {
         do {
             try await host.run { _ in print("gaea \(Gaea.version) serving MES at \(host.endpoint ?? "?"); operator API at \(host.paths.socket.path)") }
         } catch is CancellationError {
+        } catch where host.relaunchTarget != nil {
         } catch {
             FileHandle.standardError.write(Data("Gaea: \(error)\n".utf8))
             exit(1)
         }
+        // An update is in place: the new Gaea takes over this process, headless, with the same arguments (G-24).
+        if let app = host.relaunchTarget {
+            print("gaea \(Gaea.version) stopped; relaunching \(app.path)")
+            Relaunch.exec(app, arguments: Relaunch.arguments(Array(CommandLine.arguments.dropFirst()), servedPort: host.servedPort))
+        }
         exit(0)
     }
+    host.onRelaunch { serving.cancel() }
     signal(SIGTERM, SIG_IGN)
     signal(SIGINT, SIG_IGN)
     var sources: [DispatchSourceSignal] = []

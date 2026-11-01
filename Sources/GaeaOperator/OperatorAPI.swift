@@ -42,6 +42,15 @@ public enum OperatorAPI {
         case adaptersEnable = "adapters.enable"
         case adaptersDisable = "adapters.disable"
         case ledger
+        /// Gaea's own updates (G-24): read the releases and say what's available.
+        case updateCheck = "update.check"
+        /// Download, verify and install the newest release, or `version`, once no job is running or waiting.
+        case updateInstall = "update.install"
+        /// Back to the version the last update replaced.
+        case updateRollback = "update.rollback"
+        case updateCancel = "update.cancel"
+        /// `value` on or off: include pre-releases in checks and `update.install`. None reads it.
+        case updatePrereleases = "update.prereleases"
     }
 }
 

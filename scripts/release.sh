@@ -77,13 +77,18 @@ fi
 SHA=$(cut -d' ' -f1 $ZIP.sha256)
 
 # What the updater needs before it downloads (G-24): the version, the zip and its digest, the macOS it needs, and the
-# plugin protocol it runs, so an update that would drop a protocol an installed plugin uses is refused.
-GPP_VERSION=$(sed -n 's/.*public static let version = \([0-9]*\).*/\1/p' .build/checkouts/gaea-plugin-kit/Sources/GaeaProtocol/GPP.swift)
-python3 - $DIST/release.json <<EOF
+# GPP and manifest versions it runs (from the built app itself), so an update that would drop one an installed plugin
+# uses is refused.
+BUILD_INFO=$($APP/Contents/MacOS/Gaea --version)
+GPP_VERSIONS=$(python3 -c 'import json,sys; print(", ".join(map(str, json.loads(sys.argv[1])["gpp"])))' $BUILD_INFO)
+python3 - $DIST/release.json $BUILD_INFO <<EOF
 import json, sys
+info = json.loads(sys.argv[2])
+assert info["version"] == "$VERSION", info
 json.dump({"name": "Gaea", "version": "$VERSION", "tag": "$TAG", "zip": "${ZIP:t}", "sha256": "$SHA",
-           "minimum_macos": "$(defaults read $APP/Contents/Info LSMinimumSystemVersion)", "gpp": [int("$GPP_VERSION")],
-           "team": "CFZS6RXUCP", "notarized": "$notarized" == "yes"}, open(sys.argv[1], "w"), indent=2)
+           "minimum_macos": "$(defaults read $APP/Contents/Info LSMinimumSystemVersion)", "gpp": info["gpp"],
+           "manifest": info["manifest"], "team": "CFZS6RXUCP", "notarized": "$notarized" == "yes",
+           "prerelease": "$VERSION".find("-") >= 0}, open(sys.argv[1], "w"), indent=2)
 EOF
 cat $DIST/release.json
 
@@ -94,6 +99,11 @@ assets=($ZIP $ZIP.sha256 $DIST/release.json)
 if [[ $notarized == yes ]]; then
   state="Signed with Developer ID (hardened runtime, secure timestamp), notarized and stapled."
   pre=()
+  # A version with a suffix (0.12.1-rc.1) is a pre-release: Gaea's updater skips it unless the operator opts in.
+  if [[ $VERSION == *-* ]]; then
+    pre=(--prerelease)
+    state+=" A pre-release: Gaea installs it only when asked for by version or with pre-releases on."
+  fi
 else
   state="Signed with Developer ID (hardened runtime, secure timestamp). **Not notarized**: Gatekeeper stops it when downloaded through a browser."
   pre=(--prerelease)
@@ -102,7 +112,7 @@ previous=$(git tag --list 'v*' --sort=-v:refname | grep -vx $TAG | head -1 || tr
 notes="$state
 
 - \`${ZIP:t}\` sha256 \`$SHA\`: Gaea.app, with the \`gaea\` command line in \`Contents/Helpers\`
-- \`release.json\`: the version, digest, minimum macOS ($(defaults read $APP/Contents/Info LSMinimumSystemVersion)) and plugin protocol (GPP $GPP_VERSION), for Gaea's updater
+- \`release.json\`: the version, digest, minimum macOS ($(defaults read $APP/Contents/Info LSMinimumSystemVersion)) and plugin protocol (GPP $GPP_VERSIONS), for Gaea's updater
 
 Checked before publishing: \`codesign --verify --strict --deep\`, the app headless answering the MES handshake and \`gaea status\`$([[ $notarized == yes ]] && print ', `stapler validate` and `spctl --assess`')."
 [[ -n $previous ]] && notes+="

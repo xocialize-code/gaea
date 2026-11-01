@@ -26,6 +26,10 @@ public final class GaeaHost: Sendable {
         public var idleTimeout: Duration = .seconds(900)
         /// How long held outputs stay (Base §13); the MES default is an hour.
         public var outputsTTLSeconds: Int?
+        /// How long an update waits after a job finishes, so its client can fetch the outputs (G-24).
+        public var updateGrace: TimeInterval = 60
+        /// The app bundle an update replaces; nil when this process can't update itself (tests).
+        public var appBundle: URL? = Bundle.main.bundleURL
         public init() {}
     }
 
@@ -39,7 +43,10 @@ public final class GaeaHost: Sendable {
     public let engine: GaeaEngine
     public let server: MESEngineServer
     public let operatorServer: OperatorServer
+    public let updater: GaeaUpdater
     private let port = Mutex<Int?>(nil)
+    private let latestActivity = Mutex<EngineActivity?>(nil)
+    private let relaunching = Mutex<(target: URL?, stop: (@Sendable () -> Void)?)>((nil, nil))
 
     public init(paths: GaeaPaths = GaeaPaths(), options: Options = Options()) throws {
         self.paths = paths
@@ -53,6 +60,7 @@ public final class GaeaHost: Sendable {
                               modelsRoot: options.modelsRoot, idleTimeout: options.idleTimeout)
         enablement = try ModelEnablement(store: DatabaseEnablementStore(database))
         engine = GaeaEngine(manager: manager, scheduler: scheduler, enablement: enablement)
+        updater = GaeaUpdater(database: database, paths: paths, log: log, appBundle: options.appBundle, grace: options.updateGrace)
 
         var config = EngineConfiguration(id: Self.engineID(database, installed: installed), name: "Gaea",
                                          implementationName: "gaea", implementationVersion: Gaea.version,
@@ -101,6 +109,18 @@ public final class GaeaHost: Sendable {
         String(name.lowercased().map { $0.isLetter || $0.isNumber ? $0 : "_" }.prefix(24))
     }
 
+    /// The port MES is served on, once it serves.
+    public var servedPort: Int? { port.withLock { $0 } }
+
+    /// The app an update put in place, once Gaea has stopped serving to relaunch it. The launcher starts it.
+    public var relaunchTarget: URL? { relaunching.withLock { $0.target } }
+
+    /// How the launcher stops serving when an update is in place: it cancels the task running `run`, then starts
+    /// `relaunchTarget`.
+    public func onRelaunch(_ stop: @escaping @Sendable () -> Void) {
+        relaunching.withLock { $0.stop = stop }
+    }
+
     /// Where MES clients reach Gaea, once it serves.
     public var endpoint: String? {
         port.withLock { $0 }.map { "\(options.paired ? "https" : "http")://\(server.configuration.host):\($0)\(server.configuration.basePath)" }
@@ -109,17 +129,33 @@ public final class GaeaHost: Sendable {
     /// Starts the operator API and background chores, then serves MES until the task is cancelled.
     public func run(onRunning: @escaping @Sendable (Int) async -> Void = { _ in }) async throws {
         await manager.attach(workers: scheduler) { [server] in await server.reloadDescriptors() }
+        await updater.attach(
+            plugins: { [manager] in await manager.installed() },
+            activity: { [self] in latestActivity.withLock { $0 } },
+            relaunch: { [self] app in
+                let stop = relaunching.withLock { state -> (@Sendable () -> Void)? in
+                    state.target = app
+                    return state.stop
+                }
+                if let stop { stop() } else { log("update: \(app.path) is in place; restart Gaea to run it") }
+            })
         try operatorServer.start()
         defer { operatorServer.stop() }
         log("gaea \(Gaea.version) starting: \(paths.root.path), budget \(scheduler.budgetBytes.gb), models \(await scheduler.modelsRoot.path)")
-        let chores = Task { [manager, scheduler] in
+        let chores = Task { [manager, scheduler, updater] in
             await manager.checkForUpdates()
             while !Task.isCancelled {
+                await updater.checkIfDue()
                 try? await Task.sleep(for: .seconds(30))
                 await scheduler.sweepIdle()
             }
         }
         defer { chores.cancel() }
+        // The jobs every client has, which an update waits on.
+        let watching = Task { [self] in
+            for await activity in server.activity() { latestActivity.withLock { $0 = activity } }
+        }
+        defer { watching.cancel() }
         do {
             try await server.run { [self] port in
                 self.port.withLock { $0 = port }
@@ -256,6 +292,23 @@ public final class GaeaHost: Sendable {
                 try await engine.setAdapter(try arg("id"), enabled: on)
                 await server.reloadDescriptors()
                 return OperatorResponse(id: request.id, ok: true, text: "\(try arg("id")) \(on ? "enabled" : "disabled").")
+            case .updateCheck:
+                await updater.check()
+                return try await updateStatus(request.id)
+            case .updateInstall:
+                let text = try await updater.install(version: args["version"])
+                return OperatorResponse(id: request.id, ok: true, text: text)
+            case .updateRollback:
+                return OperatorResponse(id: request.id, ok: true, text: try await updater.rollBack())
+            case .updateCancel:
+                return OperatorResponse(id: request.id, ok: true, text: await updater.cancel())
+            case .updatePrereleases:
+                if let value = args["value"], !value.isEmpty {
+                    guard ["on", "off"].contains(value) else { throw OperatorError("pre-releases: on or off") }
+                    try await updater.setPrereleases(value == "on")
+                    await updater.check()
+                }
+                return try await updateStatus(request.id)
             case .ledger:
                 let ledger = await scheduler.ledger()
                 return OperatorResponse(id: request.id, ok: true, text: Self.describe(ledger), json: Self.json(ledger))
@@ -285,6 +338,7 @@ public final class GaeaHost: Sendable {
             Workers:   \(ledger.workers.map { "\($0.pluginID) pid \($0.pid)\($0.busy ? " (busy)" : "")" }.joined(separator: ", ").ifEmpty("none"))
             Memory:    \(ledger.chargedBytes.gb) charged of \(ledger.budgetBytes.gb) budget; host \(ledger.hostFootprintBytes.gb)
             Models:    \(await scheduler.modelsRoot.path)
+            Update:    \(Self.describe(await updater.status()))
             Operator:  \(paths.socket.path) (\(operatorServer.policy.rawValue)); you are \(peer)
             Database:  \(paths.database.path)
             """
@@ -328,6 +382,30 @@ public final class GaeaHost: Sendable {
         case .switched(let version): "\(id) now runs \(version)."
         case .pending(let version): "\(id) \(version) is installed; Gaea switches to it when the plugin is idle."
         }
+    }
+
+    func updateStatus(_ id: String) async throws -> OperatorResponse {
+        let status = await updater.status()
+        var lines = ["Gaea \(status.current): \(Self.describe(status))"]
+        if let app = status.app { lines.append("App:       \(app)") }
+        if let why = status.cannotUpdate { lines.append("Can't update itself: \(why)") }
+        if let kept = status.kept { lines.append("Kept:      \(kept), for gaea update --rollback") }
+        lines.append("Releases:  \(Gaea.releases.url.absoluteString)/releases, pre-releases \(status.prereleases ? "included" : "skipped")"
+            + (status.lastChecked.map { ", checked \($0.formatted(.iso8601))" } ?? ""))
+        if let failure = status.lastFailure { lines.append("Last failure: \(failure)") }
+        return OperatorResponse(id: id, ok: true, text: lines.joined(separator: "\n"), json: Self.json(status))
+    }
+
+    public static func describe(_ status: GaeaUpdater.Status) -> String {
+        if let staged = status.staged {
+            return "\(status.rollingBack ? "rolling back to" : "installing") \(staged)"
+                + (status.waitingFor.map { " once quiet (\($0))" } ?? ", relaunching")
+        }
+        if let latest = status.latest {
+            return "\(latest)\(status.latestPrerelease == true ? " (pre-release)" : "") is available: gaea update"
+        }
+        if let error = status.checkError { return "couldn't check (\(error))" }
+        return status.lastChecked == nil ? "not checked yet" : "up to date"
     }
 
     static func describe(_ ledger: Ledger) -> String {

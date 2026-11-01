@@ -3,7 +3,8 @@ import GaeaCore
 import SwiftUI
 
 /// Gaea's own settings (G-17: a server is configured in its own UI): the shared weights folder (G-9, MEM-8), the same
-/// setting as `gaea models root`, and adapters (GPP-1 §4.8), the same as `gaea adapters`. Both are kept in gaea.sqlite.
+/// setting as `gaea models root`; adapters (GPP-1 §4.8), the same as `gaea adapters`; and Gaea's own updates (G-24),
+/// the same as `gaea update`.
 @MainActor
 final class SettingsWindowController {
     private let window: NSWindow
@@ -12,6 +13,7 @@ final class SettingsWindowController {
         let view = TabView {
             SettingsView(host: host).tabItem { Label("General", systemImage: "gearshape") }
             AdaptersView(host: host).tabItem { Label("Adapters", systemImage: "square.stack.3d.up") }
+            UpdatesView(host: host).tabItem { Label("Updates", systemImage: "arrow.down.circle") }
         }
         .frame(minWidth: 640, minHeight: 420)
         window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 720, height: 520), styleMask: [.titled, .closable, .resizable],
@@ -192,6 +194,80 @@ struct AdaptersView: View {
                 message = "\(error)"
             }
             await reload()
+        }
+    }
+}
+
+/// Gaea's own updates (G-24): the newest release, installing it once no job is running or waiting, and going back.
+struct UpdatesView: View {
+    let host: GaeaHost
+    @State private var status: GaeaUpdater.Status?
+    @State private var working = false
+    @State private var message: String?
+    @State private var failed = false
+
+    var body: some View {
+        Form {
+            Section("Gaea \(Gaea.version)") {
+                LabeledContent("Status") { Text(status.map(GaeaHost.describe) ?? "…") }
+                if let checked = status?.lastChecked {
+                    LabeledContent("Checked") { Text(checked.formatted(date: .abbreviated, time: .shortened)) }
+                }
+                if let kept = status?.kept {
+                    LabeledContent("Kept for rollback") { Text(kept) }
+                }
+                if let why = status?.cannotUpdate {
+                    Text(why).font(.callout).foregroundStyle(.orange)
+                }
+                HStack {
+                    Button("Check Now") { act { await host.updater.check(); return nil } }
+                    if let latest = status?.latest, status?.staged == nil {
+                        Button("Install \(latest)") { act { try await host.updater.install() } }
+                            .buttonStyle(.borderedProminent)
+                            .disabled(status?.cannotUpdate != nil)
+                    }
+                    if let kept = status?.kept, status?.staged == nil {
+                        Button("Roll Back to \(kept)") { act { try await host.updater.rollBack() } }
+                            .disabled(status?.cannotUpdate != nil)
+                    }
+                    if status?.staged != nil {
+                        Button("Cancel Update") { act { await host.updater.cancel() } }
+                    }
+                }
+                .disabled(working)
+                Toggle("Include pre-releases", isOn: Binding(
+                    get: { status?.prereleases ?? false },
+                    set: { on in act { try await host.updater.setPrereleases(on); await host.updater.check(); return nil } }))
+                Text("Gaea checks \(Gaea.releases.description)'s releases every six hours. An update is verified (Developer ID, "
+                     + "notarized, sha256) before anything changes, installs when no job is running or waiting, and relaunches "
+                     + "Gaea. The version it replaces is kept.")
+                    .font(.callout).foregroundStyle(.secondary)
+                if let message {
+                    Text(message).font(.callout).foregroundStyle(failed ? .red : .secondary).textSelection(.enabled)
+                }
+            }
+        }
+        .formStyle(.grouped)
+        .task {
+            while !Task.isCancelled {
+                status = await host.updater.status()
+                try? await Task.sleep(for: .seconds(1))
+            }
+        }
+    }
+
+    private func act(_ work: @escaping @MainActor () async throws -> String?) {
+        working = true
+        Task {
+            do {
+                message = try await work()
+                failed = false
+            } catch {
+                message = "\(error)"
+                failed = true
+            }
+            status = await host.updater.status()
+            working = false
         }
     }
 }

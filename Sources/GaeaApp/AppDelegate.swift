@@ -73,10 +73,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                     }
                 }
             } catch is CancellationError {
+            } catch where host.relaunchTarget != nil {
             } catch {
                 await MainActor.run { self.fail("\(error)") }
             }
+            // An update is in place (G-24): this Gaea has stopped serving; the new one starts once this one exits.
+            if let app = host.relaunchTarget {
+                await host.scheduler.stopAll()
+                host.operatorServer.stop()
+                do {
+                    try Relaunch.afterExit(app, arguments: Relaunch.arguments(Array(CommandLine.arguments.dropFirst()),
+                                                                              servedPort: host.servedPort))
+                } catch {
+                    FileHandle.standardError.write(Data("Gaea: couldn't relaunch \(app.path): \(error)\n".utf8))
+                }
+                exit(0)
+            }
         }
+        let serving = self.serving
+        host.onRelaunch { serving?.cancel() }
     }
 
     private func fail(_ message: String) {
@@ -146,24 +161,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 print("wrote \(file.path)")
             }
         }
-        // Gaea's own Settings: the adapters tab (GPP-1 §4.8).
+        // Gaea's own Settings: the adapters tab (GPP-1 §4.8) and the updates tab (G-24).
         if let host {
-            for appearance in [NSAppearance.Name.aqua, .darkAqua] {
-                let view = NSHostingView(rootView: AdaptersView(host: host).frame(width: 720, height: 760)
-                    .background(Color(nsColor: .windowBackgroundColor)))
-                view.appearance = NSAppearance(named: appearance)
-                view.frame = NSRect(x: 0, y: 0, width: 720, height: 760)
-                let window = NSWindow(contentRect: view.frame, styleMask: [.borderless], backing: .buffered, defer: false)
-                window.appearance = NSAppearance(named: appearance)
-                window.contentView = view
-                view.layoutSubtreeIfNeeded()
-                try? await Task.sleep(for: .milliseconds(1200))
-                view.layoutSubtreeIfNeeded()
-                guard let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { continue }
-                view.cacheDisplay(in: view.bounds, to: rep)
-                let file = directory.appendingPathComponent("settings-adapters-\(appearance == .aqua ? "light" : "dark").png")
-                try? rep.representation(using: .png, properties: [:])?.write(to: file)
-                print("wrote \(file.path)")
+            await host.updater.check()
+            let tabs: [(String, AnyView)] = [("adapters", AnyView(AdaptersView(host: host))), ("updates", AnyView(UpdatesView(host: host)))]
+            for (tab, content) in tabs {
+                for appearance in [NSAppearance.Name.aqua, .darkAqua] {
+                    let view = NSHostingView(rootView: content.frame(width: 720, height: 760)
+                        .background(Color(nsColor: .windowBackgroundColor)))
+                    view.appearance = NSAppearance(named: appearance)
+                    view.frame = NSRect(x: 0, y: 0, width: 720, height: 760)
+                    let window = NSWindow(contentRect: view.frame, styleMask: [.borderless], backing: .buffered, defer: false)
+                    window.appearance = NSAppearance(named: appearance)
+                    window.contentView = view
+                    view.layoutSubtreeIfNeeded()
+                    try? await Task.sleep(for: .milliseconds(1200))
+                    view.layoutSubtreeIfNeeded()
+                    guard let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { continue }
+                    view.cacheDisplay(in: view.bounds, to: rep)
+                    let file = directory.appendingPathComponent("settings-\(tab)-\(appearance == .aqua ? "light" : "dark").png")
+                    try? rep.representation(using: .png, properties: [:])?.write(to: file)
+                    print("wrote \(file.path)")
+                }
             }
         }
         // Not NSApp.terminate: called from this main-actor task, its terminateLater reply would wait on another main-actor

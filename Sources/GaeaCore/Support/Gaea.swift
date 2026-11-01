@@ -4,9 +4,28 @@ import GaeaOperator
 /// Gaea's identity and the folders it uses.
 public enum Gaea {
     /// This build's version, compared with a plugin manifest's `min_gaea`.
-    public static let version = "0.11.3"
+    public static let version = "0.12.0"
     /// GPP protocol versions this host speaks (GPP-1 §6).
     public static let protocols: ClosedRange<Int> = 1...1
+    /// The `manifest_version`s this host reads.
+    public static let manifestVersions: ClosedRange<Int> = 1...1
+    /// Gaea.app's bundle identifier, which an update must carry.
+    public static let bundleIdentifier = "com.xocialize.gaea"
+    /// Where Gaea's own releases are published (G-24). `GAEA_UPDATE_REPO` points the updater at another repo (tests).
+    public static var releases: PluginRepository {
+        ProcessInfo.processInfo.environment["GAEA_UPDATE_REPO"].flatMap(PluginRepository.init) ?? PluginRepository("xocialize-code/gaea")!
+    }
+
+    /// What `Gaea --version` prints, and what the updater reads from a staged app before it installs it.
+    public struct BuildInfo: Codable, Sendable, Equatable {
+        public var version: String
+        public var gpp: [Int]
+        public var manifest: [Int]
+    }
+
+    public static var buildInfo: BuildInfo {
+        BuildInfo(version: version, gpp: Array(protocols), manifest: Array(manifestVersions))
+    }
 }
 
 /// Every path Gaea reads or writes. Only Gaea opens `gaea.sqlite` (G-16).
@@ -33,6 +52,8 @@ public struct GaeaPaths: Sendable {
     public var database: URL { root.appending(path: "gaea.sqlite") }
     public var plugins: URL { root.appending(path: "Plugins", directoryHint: .isDirectory) }
     public var socket: URL { root.appending(path: "operator.sock") }
+    /// The Gaea.app an update replaced, kept for `gaea update --rollback`.
+    public var updates: URL { root.appending(path: "Updates", directoryHint: .isDirectory) }
     /// MES pairing and TLS state (never the spool, which is wiped at start).
     public var serverState: URL { root.appending(path: "Server", directoryHint: .isDirectory) }
     public var spool: URL { caches.appending(path: "spool", directoryHint: .isDirectory) }
