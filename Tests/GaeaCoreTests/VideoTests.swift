@@ -9,7 +9,8 @@ import Testing
 @Suite struct VideoTests {
     /// A `frames`-frame clip at 24 fps (or `fps` placed on a 1/600 time base, as frame-stream-native writes), `width`×`height`,
     /// in `codec` inside a QuickTime file.
-    func clip(_ url: URL, codec: AVVideoCodecType, frames: Int = 24, width: Int = 64, height: Int = 48, fps600: Double? = nil) async throws {
+    func clip(_ url: URL, codec: AVVideoCodecType, frames: Int = 24, width: Int = 64, height: Int = 48, fps600: Double? = nil,
+              base: Int = 0) async throws {
         let writer = try AVAssetWriter(outputURL: url, fileType: .mov)
         let input = AVAssetWriterInput(mediaType: .video, outputSettings: [
             AVVideoCodecKey: codec, AVVideoWidthKey: width, AVVideoHeightKey: height])
@@ -24,7 +25,7 @@ import Testing
             var buffer: CVPixelBuffer?
             CVPixelBufferPoolCreatePixelBuffer(nil, adaptor.pixelBufferPool!, &buffer)
             CVPixelBufferLockBaseAddress(buffer!, [])
-            memset(CVPixelBufferGetBaseAddress(buffer!), Int32(i * 10 % 255), CVPixelBufferGetDataSize(buffer!))
+            memset(CVPixelBufferGetBaseAddress(buffer!), Int32((base + i * 10) % 255), CVPixelBufferGetDataSize(buffer!))
             CVPixelBufferUnlockBaseAddress(buffer!, [])
             let time = fps600.map { CMTime(value: CMTimeValue((Double(i) * 600 / $0).rounded()), timescale: 600) }
                 ?? CMTime(value: CMTimeValue(i), timescale: 24)
@@ -251,6 +252,44 @@ import Testing
         refused(.outOfLimits, "after_s") { try GaeaEngine.checkVideoSource(clip, operation: "video.extend", limits: limits, grid: grid, after: 5) }
         var wide = clip; wide.width = 1280
         refused(.outOfLimits, "video") { try GaeaEngine.checkVideoSource(wide, operation: "video.extend", limits: limits, grid: grid, after: 1) }
+    }
+
+    /// Each frame's brightness (the blue byte at the centre), in display order.
+    func shades(_ url: URL) async throws -> [Int] {
+        let asset = AVURLAsset(url: url)
+        let track = try await asset.loadTracks(withMediaType: .video)[0]
+        let reader = try AVAssetReader(asset: asset)
+        let output = AVAssetReaderTrackOutput(track: track, outputSettings: [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA])
+        reader.add(output)
+        reader.startReading()
+        var out: [Int] = []
+        while let sample = output.copyNextSampleBuffer(), let buffer = CMSampleBufferGetImageBuffer(sample) {
+            CVPixelBufferLockBaseAddress(buffer, .readOnly)
+            let row = CVPixelBufferGetBytesPerRow(buffer), base = CVPixelBufferGetBaseAddress(buffer)!.assumingMemoryBound(to: UInt8.self)
+            out.append(Int(base[row * (CVPixelBufferGetHeight(buffer) / 2) + 4 * (CVPixelBufferGetWidth(buffer) / 2)]))
+            CVPixelBufferUnlockBaseAddress(buffer, .readOnly)
+        }
+        return out
+    }
+
+    @Test func anEditKeepsTheSourcesOwnFramesOutsideWhatItRemade() async throws {
+        let dir = try folder()
+        let sourceMov = dir.appending(path: "source.mov"), madeMov = dir.appending(path: "made.mov")
+        try await clip(sourceMov, codec: .h264, frames: 17)
+        try await clip(madeMov, codec: .h264, frames: 17, base: 7)
+        let source = try await GaeaEngine.workerVideo(sourceMov, name: "source", into: dir)
+        let made = try await GaeaEngine.workerVideo(madeMov, name: "made", into: dir)
+        // A retake of 9–16 (0.375–0.708 s): frames 0–8 are the source's.
+        let kept = GaeaEngine.keptFrames(operation: "video.retake", effective: ["start_s": .number(9.0 / 24), "end_s": .number(17.0 / 24)],
+                                         sourceFrames: 17, fps: 24, overlap: 0)
+        #expect(kept == [0..<9])
+        try await GaeaEngine.keepSourceFrames(made, source: source, kept: kept)
+        let got = try await shades(made), want = (0..<17).map { ($0 < 9 ? 0 : 7) + $0 * 10 }
+        #expect(got.count == 17)
+        for (g, w) in zip(got, want) { #expect(abs(g - w) <= 4, "\(got) vs \(want)") }
+        // An extend reworks overlap_s before the join; a sound retake keeps every frame.
+        #expect(GaeaEngine.keptFrames(operation: "video.extend", effective: [:], sourceFrames: 17, fps: 24, overlap: 0.5) == [0..<5])
+        #expect(GaeaEngine.keptFrames(operation: "video.retake", effective: ["retake": "sound"], sourceFrames: 17, fps: 24, overlap: 0) == [0..<17])
     }
 
     @Test func anOfferAskingForTheOperatorsAcceptanceIsOptIn() {

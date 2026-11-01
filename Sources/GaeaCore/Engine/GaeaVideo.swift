@@ -134,6 +134,96 @@ extension GaeaEngine {
         _ = try FileManager.default.replaceItemAt(file, withItemAt: temporary)
     }
 
+    /// The source's own frames where an edit didn't make them again (Video §1.8, §3.2, §3.3): the frames in `kept` are
+    /// the source's, re-encoded, and the rest the model's. A model like LTX decodes the whole clip from latents, so a
+    /// frame it held comes back near the source but not as it was. The picture is written in H.264 at the model's
+    /// timing, and the model's sound is kept. Nothing changes when the sizes differ or nothing is kept.
+    static func keepSourceFrames(_ file: URL, source: URL, kept: [Range<Int>]) async throws {
+        guard kept.contains(where: { !$0.isEmpty }) else { return }
+        let made = AVURLAsset(url: file), original = AVURLAsset(url: source)
+        defer { withExtendedLifetime((made, original)) {} }
+        guard let madeTrack = try await made.loadTracks(withMediaType: .video).first,
+              let sourceTrack = try await original.loadTracks(withMediaType: .video).first,
+              try await madeTrack.load(.naturalSize) == (try await sourceTrack.load(.naturalSize)) else { return }
+        let size = try await madeTrack.load(.naturalSize)
+        let pixels: [String: Any] = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
+        func reader(_ asset: AVAsset, _ track: AVAssetTrack) throws -> (AVAssetReader, AVAssetReaderTrackOutput) {
+            let reader = try AVAssetReader(asset: asset)
+            let output = AVAssetReaderTrackOutput(track: track, outputSettings: pixels)
+            reader.add(output)
+            guard reader.startReading() else { throw reader.error ?? MESError(.engineError, "Gaea can't read the video.") }
+            return (reader, output)
+        }
+        let (madeReader, madeFrames) = try reader(made, madeTrack)
+        let (sourceReader, sourceFrames) = try reader(original, sourceTrack)
+        defer { madeReader.cancelReading(); sourceReader.cancelReading() }
+
+        let picture = file.deletingLastPathComponent().appending(path: ".kept-\(UUID().uuidString).mp4")
+        defer { try? FileManager.default.removeItem(at: picture) }
+        let writer = try AVAssetWriter(outputURL: picture, fileType: .mp4)
+        let input = AVAssetWriterInput(mediaType: .video, outputSettings: [
+            AVVideoCodecKey: AVVideoCodecType.h264, AVVideoWidthKey: Int(size.width), AVVideoHeightKey: Int(size.height),
+            AVVideoCompressionPropertiesKey: [AVVideoAverageBitRateKey: max(2_000_000, Int(size.width * size.height) * 24)],
+        ])
+        let adaptor = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: input, sourcePixelBufferAttributes: nil)
+        writer.add(input)
+        guard writer.startWriting() else { throw writer.error ?? MESError(.engineError, "Gaea can't write the video.") }
+        var index = 0, started = false
+        while let sample = madeFrames.copyNextSampleBuffer() {
+            let theirs = sourceFrames.copyNextSampleBuffer()
+            guard var buffer = CMSampleBufferGetImageBuffer(sample) else { continue }
+            if kept.contains(where: { $0.contains(index) }), let theirs, let own = CMSampleBufferGetImageBuffer(theirs) { buffer = own }
+            let time = CMSampleBufferGetPresentationTimeStamp(sample)
+            if !started { writer.startSession(atSourceTime: time); started = true }
+            while !input.isReadyForMoreMediaData { try await Task.sleep(for: .milliseconds(2)) }
+            guard adaptor.append(buffer, withPresentationTime: time) else {
+                throw writer.error ?? MESError(.engineError, "Gaea can't write the video.")
+            }
+            index += 1
+        }
+        input.markAsFinished()
+        await writer.finishWriting()
+        guard writer.status == .completed else { throw writer.error ?? MESError(.engineError, "Gaea can't write the video.") }
+
+        // The new picture with the model's sound.
+        let written = AVURLAsset(url: picture)
+        defer { withExtendedLifetime(written) {} }
+        let composition = AVMutableComposition()
+        guard let video = try await written.loadTracks(withMediaType: .video).first,
+              let track = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid) else { return }
+        try track.insertTimeRange(try await video.load(.timeRange), of: video, at: .zero)
+        if let sound = try await made.loadTracks(withMediaType: .audio).first,
+           let audio = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid) {
+            try audio.insertTimeRange(try await sound.load(.timeRange), of: sound, at: .zero)
+        }
+        guard let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetPassthrough) else {
+            throw MESError(.engineError, "Gaea can't write the video's final file.")
+        }
+        export.metadata = try await made.load(.metadata)
+        let temporary = file.deletingLastPathComponent().appending(path: ".kept-final-\(UUID().uuidString).mp4")
+        try await export.export(to: temporary, as: .mp4)
+        _ = try FileManager.default.replaceItemAt(file, withItemAt: temporary)
+    }
+
+    /// The frames an edit keeps from its source (Video §3.2, §3.3), outside what it made again and the offer's
+    /// `overlap_s` around a join: before an extend's added part, and outside a retake's reported span.
+    static func keptFrames(operation: String, effective: [String: MESValue], sourceFrames: Int, fps: Double,
+                           overlap: Double) -> [Range<Int>] {
+        let reworked = Int((overlap * fps).rounded())
+        switch operation {
+        case "video.extend":
+            return [0..<max(0, sourceFrames - reworked)]
+        case "video.retake":
+            if effective["retake"]?.stringValue == "sound" { return [0..<sourceFrames] }
+            guard let start = effective[VideoProfile.Param.start]?.numberValue, let end = effective[VideoProfile.Param.end]?.numberValue
+            else { return [] }
+            let first = Int((start * fps).rounded()) - reworked, last = Int((end * fps).rounded()) + reworked
+            return [0..<max(0, first), min(sourceFrames, last)..<sourceFrames].filter { !$0.isEmpty }
+        default:
+            return []
+        }
+    }
+
     static func fourCC(_ code: FourCharCode) -> String {
         String(bytes: [24, 16, 8, 0].map { UInt8((code >> $0) & 0xff) }, encoding: .macOSRoman) ?? "????"
     }
@@ -288,6 +378,11 @@ extension GaeaEngine {
             // A generative operation's is the rate the plugin made it at: LTX writes on a 1/600 time base, so 30 fps
             // and other rates whose frame isn't a whole 1/600 come out uneven.
             let rate = keepsSource ? source.map { $0.facts.frameRate * Double(factor) } : effective[VideoProfile.Param.fps]?.numberValue
+            if edits, let source {
+                let kept = Self.keptFrames(operation: route.operation, effective: effective, sourceFrames: source.facts.frames,
+                                           fps: source.facts.frameRate, overlap: route.offer.supports(VideoProfile.SupportsKey.overlap)?.numberValue ?? 0)
+                try await Self.keepSourceFrames(file, source: source.url, kept: kept)
+            }
             try await Self.finishVideo(file, keeping: keepsSource ? source?.url : nil, codec: codec, fps: rate,
                                        markings: edits ? source?.url : nil, disclosure: disclosure, sound: sound)
             let facts = try await Self.videoFacts(file, name: output.name)
