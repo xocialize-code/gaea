@@ -1,0 +1,15 @@
+2026-11-01T19:11:02.0091280Z Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)
+2026-11-01T19:11:04.8967420Z ==> build Gaea.app 0.11.3
+2026-11-01T19:20:30.7053320Z ==> smoke: Gaea --headless, the MES handshake and gaea status
+2026-11-01T19:20:32.9925230Z ==> notarize Gaea-0.11.3.zip
+2026-11-01T19:21:00.6242680Z {"message":"Processing complete","status":"Accepted","id":"7119e698-c9b1-4651-b00e-10f3766a7907"}
+2026-11-01T19:21:01.9525830Z ==> staple Gaea.app
+2026-11-01T19:21:03.6444490Z The staple and validate action worked!
+2026-11-01T19:21:03.8998570Z The validate action worked!
+2026-11-01T19:21:05.5280000Z ==> Gatekeeper: spctl --assess --type execute
+2026-11-01T19:21:05.8691100Z /Users/runner/work/gaea/gaea/dist/Gaea.app: accepted
+2026-11-01T19:21:05.8691830Z source=Notarized Developer ID
+2026-11-01T19:21:05.8692500Z origin=Developer ID Application: Dustin Nielson (CFZS6RXUCP)
+2026-11-01T19:21:06.0627990Z ==> GitHub Release v0.11.3
+2026-11-01T19:21:09.8083040Z https://github.com/xocialize-code/gaea/releases/tag/v0.11.3
+2026-11-01T19:21:10.3068650Z https://github.com/xocialize-code/gaea/releases/tag/v0.11.3

@@ -571,6 +571,9 @@ starts while the phase before it is being built.
      in `Contents/Helpers`), signs it with Developer ID and hardened runtime, notarizes and staples it, and publishes a
      GitHub release with the zip, its sha256 and release notes. The first CI release is 0.11.3, and every version
      after it ships this way (DST-1, DST-2).
+     **Done 2026-11-01 (AB-T-0409):** `scripts/release.sh` and `.github/workflows/release.yml` released v0.11.3 from
+     a pushed tag: notarized, stapled, Gatekeeper-accepted, with `release.json` for the updater. Building on GitHub's
+     Xcode 26 (Swift 6.3) needed media-engine-spec 0.9.1 (AB-A-0244). Evidence: `Docs/Evidence/AB-T-0409/`.
   2. **Gaea updates itself** (DST-3), by its own GitHub path (G-24):
      - checks the newest release, on a schedule and on demand (`gaea update --check`, Settings);
      - verifies the download as plugins are verified (Developer ID, our team, notarized) plus the release's sha256;
