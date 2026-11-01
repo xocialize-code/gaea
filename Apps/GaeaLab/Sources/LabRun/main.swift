@@ -3,6 +3,7 @@ import Foundation
 import GaeaLabCore
 import MESClientKit
 import MESCore
+import MESFormsUI
 import PixelAgencyRun
 
 /// `lab-run`: Gaea Lab's run workflow without a window (CLI-3). It does what a person does in Lab (pick an operation,
@@ -31,6 +32,8 @@ struct LabRun: AsyncParsableCommand {
     @Option(help: "Where to save the results.") var out: String
     @Option(help: "Also write where the job ran, and its provenance, as JSON here.") var report: String?
     @Option(help: "Stream this output as it's made (e.g. audio): write the chunks, then the final file.") var stream: String?
+    @Option(help: "Accept a licence's terms (its spdx id), sent in policy.accepted. Repeatable.") var accept: [String] = []
+    @Flag(help: "Write the stills the engine sends while it runs (job.preview) to <out>/previews/.") var previews = false
     @Flag(help: "List --model's voices for --operation through the pool, save the first one's sample in --out, and stop.")
     var voices = false
 
@@ -83,7 +86,8 @@ struct LabRun: AsyncParsableCommand {
         }
         for pair in file {
             let (name, path) = try Self.split(pair)
-            run.media[name, default: []].append(MediaItem(file: URL(fileURLWithPath: (path as NSString).expandingTildeInPath)))
+            guard !path.isEmpty else { throw ValidationError("--file \(name)= has no path.") }
+            run.media[name, default: []].append(await MediaItem.reading(URL(fileURLWithPath: (path as NSString).expandingTildeInPath)))
         }
         for pair in data {
             let (name, value) = try Self.split(pair)
@@ -97,6 +101,13 @@ struct LabRun: AsyncParsableCommand {
             run.form.setValue((try? MESJSON.decoder.decode(JSONValue.self, from: Data(value.utf8))) ?? .string(value), at: [name])
         }
         run.form.model = model
+        // Users' acceptance (Video §1.7, Base §10.2 rule 4), as pa-run does it but kept to this run: what's given here is
+        // sent, and nothing is remembered in the user's defaults.
+        run.acceptances = LicenseAcceptances()
+        if !accept.isEmpty {
+            for license in run.form.licencesNeedingAcceptance where accept.contains(license.spdx) { run.acceptances.accept(license) }
+            run.form.policy.accepted = accept.sorted()
+        }
         if let missing = run.missingInputs.first { throw ValidationError("\(operation) needs input '\(missing.name)'.") }
         let folder = URL(fileURLWithPath: (out as NSString).expandingTildeInPath, isDirectory: true)
 
@@ -135,15 +146,31 @@ struct LabRun: AsyncParsableCommand {
             }
             if let url = try writer?.finish() { print("saved \(url.path)") }
         }
+        if previews, !run.framePreviews.frames.isEmpty {
+            let dir = folder.appendingPathComponent("previews", isDirectory: true)
+            try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+            for frame in run.framePreviews.frames {
+                let name = String(format: "preview-%08.3fs", frame.atSeconds) + (frame.frame.map { "-frame\($0)" } ?? "")
+                let file = dir.appendingPathComponent("\(name).\(MediaType.fileExtension(frame.mediaType))")
+                try frame.image.write(to: file)
+                print("preview \(String(format: "%.3f", frame.atSeconds)) s\(frame.frame.map { " (frame \($0))" } ?? "") \(file.path)")
+            }
+        } else if previews {
+            print("no previews arrived")
+        }
         switch run.phase {
         case .finished:
             try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
-            for result in run.results { print("saved \(try ResultExporter.save(result, to: folder).path)") }
+            for result in run.results {
+                print("saved \(try ResultExporter.save(result, to: folder).path)")
+                if let facts = result.videoFacts { print("video \(facts.line)") }
+            }
             let provenance = run.results.first?.provenance
             if let p = provenance {
                 print("model \(p.model.id) · \(p.model.license.spdx)"
                       + (p.adapters ?? []).map { " · adapter \($0.id) \($0.strength) @\($0.revision?.prefix(12) ?? "")" }.joined())
             }
+            for warning in run.results.first?.job.warnings ?? [] { print("warning \(warning.code): \(warning.message)") }
             if let report {
                 let record: [String: JSONValue] = [
                     "operation": .string(operation),
@@ -158,6 +185,10 @@ struct LabRun: AsyncParsableCommand {
             }
         case .failed(let message):
             FileHandle.standardError.write(Data("failed: \(message)\n".utf8))
+            if !run.refusedTerms.isEmpty {
+                let flags = run.refusedTerms.map { "--accept \($0.spdx)" }.joined(separator: " ")
+                FileHandle.standardError.write(Data("needs acceptance: read the terms (\(run.refusedTerms.compactMap(\.termsURL).joined(separator: ", "))), then add \(flags)\n".utf8))
+            }
             throw ExitCode.failure
         case .cancelled:
             FileHandle.standardError.write(Data("cancelled\n".utf8))

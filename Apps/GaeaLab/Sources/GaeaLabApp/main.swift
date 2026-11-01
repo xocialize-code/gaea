@@ -2,24 +2,27 @@ import AppKit
 import Foundation
 import GaeaLabCore
 import MESCore
+import MESFormsUI
 import PixelAgencyRun
 import SwiftUI
 
 // Gaea Lab.
 //
 //   GaeaLab                                   the app
-//   GaeaLab --snapshot <dir> --engine <url>… [--operation image.generate | audio.speak | audio.compose]
+//   GaeaLab --snapshot <dir> --engine <url>… [--operation image.generate | audio.speak | audio.compose | video.generate]
 //                                             add those servers, choose the operation with a preset (image.generate on
 //                                             Qwen-Image Flash with a LoRA; audio.speak on Kokoro with a voice, streamed;
-//                                             audio.compose on ACE-Step with lyrics and timestamps), run it on "Every
-//                                             server", and render the window before and after to PNGs (light and dark),
-//                                             then quit
+//                                             audio.compose on ACE-Step with lyrics and timestamps; video.generate on
+//                                             LTX 2.5 compact24, its terms shown, then accepted for this run only), run it
+//                                             on "Every server", and render the window before and after to PNGs (light
+//                                             and dark), then quit
 let arguments = CommandLine.arguments
 if let i = arguments.firstIndex(of: "--snapshot"), i + 1 < arguments.count {
     let directory = URL(fileURLWithPath: arguments[i + 1], isDirectory: true)
     let engines = arguments.indices.filter { arguments[$0] == "--engine" && $0 + 1 < arguments.count }.compactMap { URL(string: arguments[$0 + 1]) }
     let operation = arguments.firstIndex(of: "--operation").flatMap { $0 + 1 < arguments.count ? arguments[$0 + 1] : nil } ?? "image.generate"
     MainActor.assumeIsolated {
+        LabModel.acceptances = LicenseAcceptances()
         let app = NSApplication.shared
         app.setActivationPolicy(.prohibited)
         Task { @MainActor in
@@ -61,6 +64,12 @@ enum Snapshot {
             run.form.setValue(.string("en"), at: ["language"])
             run.form.setValue(.bool(true), at: ["timestamps"])
             run.form.setValue(.number(5), at: ["seed"])
+        case "video.generate":
+            run.form.model = "ltx-2.5-compact24"
+            run.form.text["prompt"] = "A red kite flies over a green hill on a sunny day, the camera slowly following it."
+            run.form.setValue(.number(1), at: ["duration_s"])
+            run.form.setValue(.object(["width": .number(256), "height": .number(256)]), at: ["size"])
+            run.form.setValue(.number(7), at: ["seed"])
         default:
             run.form.model = "qwen-image-flash"
             run.form.text["prompt"] = "a lighthouse on a cliff at dusk"
@@ -72,13 +81,17 @@ enum Snapshot {
         let save = directory.appending(path: "saved", directoryHint: .isDirectory)
         try? FileManager.default.createDirectory(at: save, withIntermediateDirectories: true)
         await capture(lab, save: save, to: directory, name: "\(operation)-before")
+        if !run.needsAcceptance.isEmpty {
+            print("needs acceptance: \(run.needsAcceptance.map(\.spdx).joined(separator: ", "))")
+            for license in run.needsAcceptance { run.acceptances.accept(license) }
+        }
         lab.workflow.start()
         while run.phase.isActive || run.phase == .editing { try? await Task.sleep(for: .milliseconds(500)) }
         print("run: \(run.phase); route: \(lab.currentRoute.map { "\($0.engineName)" } ?? "none")")
         if let s = run.streamed {
             print("streamed \(s.chunks) chunks, \(String(format: "%.2f", s.seconds)) s; first after \(s.firstChunkAfter.map { "\(Int($0 * 1000)) ms" } ?? "-")")
         }
-        print("results: \(run.results.map { $0.output.name + ($0.isAudio ? " (audio)" : $0.isText ? " (text)" : "") }.joined(separator: ", "))")
+        print("results: \(run.results.map { $0.output.name + ($0.isVideo ? " (video \($0.videoFacts?.line ?? ""))" : $0.isAudio ? " (audio)" : $0.isText ? " (text)" : "") }.joined(separator: ", "))")
         await capture(lab, save: save, to: directory, name: "\(operation)-after")
         lab.end()
     }

@@ -2,6 +2,7 @@ import Foundation
 import GaeaLabCore
 import MESClientKit
 import MESCore
+import MESFormsUI
 import Observation
 import PixelAgencyRun
 
@@ -11,6 +12,9 @@ import PixelAgencyRun
 @MainActor @Observable
 final class LabModel {
     static let shared = LabModel()
+    /// Whose acceptances of licence terms the workflow sends (Base §10.2 rule 4): the user's, kept in their defaults,
+    /// unless set before `shared` is first used (`--snapshot` keeps its own, so a recorded run accepts nothing for them).
+    static var acceptances = LicenseAcceptances.shared
 
     let folder = WorkingFolder(key: "Gaea.Lab.workingFolder", appName: "Gaea Lab")
     let log = SessionLog()
@@ -25,7 +29,7 @@ final class LabModel {
     private init() {
         directory = EngineDirectory(credentials: KeychainCredentialStore(prefix: "Gaea.Lab"),
                                     clientName: "Gaea Lab on \(Host.current().localizedName ?? "a Mac")")
-        workflow = RunWorkflow(directory: directory, log: log)
+        workflow = RunWorkflow(directory: directory, log: log, acceptances: LabModel.acceptances)
         pool = EnginePool(adapters: choices.provider)
     }
 

@@ -19,8 +19,8 @@ let package = Package(
         .executable(name: "lab-run", targets: ["LabRun"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/xocialize/pixel-agency-run.git", from: "0.2.0"),
-        .package(url: "https://github.com/xocialize/media-engine-spec.git", from: "0.8.0"),
+        .package(url: "https://github.com/xocialize/pixel-agency-run.git", from: "0.3.0"),
+        .package(url: "https://github.com/xocialize/media-engine-spec.git", from: "0.9.0"),
         .package(url: "https://github.com/xocialize/DesignScaffold.git", from: "0.25.0"),
         .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.5.0"),
     ],
@@ -39,6 +39,7 @@ let package = Package(
         .executableTarget(name: "LabRun", dependencies: [
             "GaeaLabCore",
             .product(name: "PixelAgencyRun", package: "pixel-agency-run"),
+            .product(name: "MESFormsUI", package: "media-engine-spec"),
             .product(name: "ArgumentParser", package: "swift-argument-parser"),
         ]),
         .testTarget(name: "GaeaLabCoreTests", dependencies: [

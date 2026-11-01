@@ -569,7 +569,10 @@ extension GaeaEngine {
         let comment = AVMutableMetadataItem()
         comment.identifier = .iTunesMetadataUserComment
         comment.extendedLanguageTag = "und"
-        comment.value = (old.map { $0.contains("AI-generated") ? $0 : "\($0) — \(disclosure)" } ?? disclosure) as NSString
+        // Video §1.9: the comment names the model that made this output. A source that already says so (a clip this model
+        // made, edited again) keeps its comment as it is; any other gets the disclosure after its own.
+        let model = disclosure.components(separatedBy: " by ").last ?? disclosure
+        comment.value = (old.map { $0.contains("AI-generated") && $0.contains(model) ? $0 : "\($0) — \(disclosure)" } ?? disclosure) as NSString
         return kept + [comment]
     }
 }
