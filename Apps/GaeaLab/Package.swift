@@ -20,7 +20,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/xocialize/pixel-agency-run.git", from: "0.3.0"),
-        .package(url: "https://github.com/xocialize/media-engine-spec.git", from: "0.9.0"),
+        .package(url: "https://github.com/xocialize/media-engine-spec.git", from: "0.9.1"),
         .package(url: "https://github.com/xocialize/DesignScaffold.git", from: "0.25.0"),
         .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.5.0"),
     ],
