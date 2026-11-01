@@ -72,25 +72,36 @@ public struct GaeaConsoleBackend: EngineConsoleBackend {
     public func unload(model id: String) async { await host.scheduler.unload(model: id) }
 }
 
-/// The Plugins page (UI-3) over Gaea's plugin manager. v1 trusts only Gaea's own team and has no trust list (G-22):
-/// another team's plugin is refused with that reason rather than asking.
+/// The Plugins page (UI-3) over Gaea's plugin manager and its trust list (AB-T-0411): a release signed by a team that
+/// isn't trusted comes back as a trust question, and the operator's answer approves the team or drops the download.
 public struct GaeaPluginBackend: EnginePluginBackend {
     let host: GaeaHost
 
     public init(host: GaeaHost) { self.host = host }
 
-    /// Gaea's own team, named as on the certificate of a plugin it installed (the signature recorded at install).
-    func ownTeam() -> EngineTeam {
-        let signatures = ((try? host.database.plugins()) ?? []).compactMap { try? host.database.version($0.id, $0.activeVersion)?.signature }
-        let holder = signatures.lazy.compactMap { PluginVerifier.Signature.holder($0.components(separatedBy: ", id ").first ?? "") }.first
-        return EngineTeam(id: GPP.trustedTeam, name: holder ?? "Gaea's own team")
+    /// Each team as its certificate names it: the operator's approved name, else the holder on a signature recorded at
+    /// install, else the team id.
+    func teams() async -> [String: EngineTeam] {
+        var names: [String: String] = [:]
+        for row in (try? host.database.plugins()) ?? [] where names[row.team] == nil {
+            let signature = try? host.database.version(row.id, row.activeVersion)?.signature
+            names[row.team] = signature.flatMap { PluginVerifier.Signature.holder($0.components(separatedBy: ", id ").first ?? "") }
+        }
+        for team in (try? host.database.trustedTeams()) ?? [] { names[team.team] = team.name }
+        var teams = Dictionary(uniqueKeysWithValues: names.map { ($0.key, EngineTeam(id: $0.key, name: $0.value)) })
+        if teams[GPP.trustedTeam] == nil { teams[GPP.trustedTeam] = EngineTeam(id: GPP.trustedTeam, name: "Gaea's own team") }
+        return teams
     }
 
     public func plugins() async -> [EnginePlugin] {
         let installed = Dictionary(uniqueKeysWithValues: await host.manager.installed().map { ($0.id, $0) })
-        let ownTeam = self.ownTeam()
+        let teams = await self.teams()
+        let trusted = await host.manager.trustedTeams()
         return ((try? host.database.plugins()) ?? []).map { row in
-            let state: EnginePlugin.State = if let failure = row.failure {
+            let team = teams[row.team] ?? EngineTeam(id: row.team, name: row.team)
+            let state: EnginePlugin.State = if !trusted.contains(row.team) {
+                .failed("Signed by \(team.name) (\(row.team)), a team this server doesn't trust. It runs again when you trust the team.")
+            } else if let failure = row.failure {
                 .failed(failure)
             } else if let pending = row.pendingVersion {
                 .pendingSwitch(version: pending)
@@ -102,26 +113,49 @@ public struct GaeaPluginBackend: EnginePluginBackend {
                 version: row.activeVersion, rollbackVersion: row.previousVersion,
                 update: row.latestVersion.map { EngineUpdate(version: $0, notes: row.latestNotes, publishedAt: row.latestPublishedAt,
                                                              url: row.latestURL.flatMap(URL.init(string:))) },
-                team: row.team == GPP.trustedTeam ? ownTeam : EngineTeam(id: row.team, name: row.team), enabled: row.enabled,
-                state: state, models: installed[row.id]?.manifest.models.map(\.id) ?? [], lastChecked: row.lastChecked)
+                team: team, enabled: row.enabled, state: state, models: installed[row.id]?.manifest.models.map(\.id) ?? [],
+                lastChecked: row.lastChecked)
         }
     }
 
-    public func trustedTeams() async -> [EngineTrustedTeam] { [EngineTrustedTeam(team: ownTeam(), builtIn: true)] }
+    public func trustedTeams() async -> [EngineTrustedTeam] {
+        let teams = await self.teams()
+        let builtIn = host.manager.builtInTeams.sorted().map { EngineTrustedTeam(team: teams[$0] ?? EngineTeam(id: $0, name: $0), builtIn: true) }
+        let approved = ((try? host.database.trustedTeams()) ?? []).filter { !host.manager.builtInTeams.contains($0.team) }
+            .map { EngineTrustedTeam(team: EngineTeam(id: $0.team, name: $0.name), addedAt: $0.addedAt) }
+        return builtIn + approved
+    }
+
+    static func request(_ held: HeldRelease) -> PluginTrustRequest {
+        PluginTrustRequest(id: held.id, team: EngineTeam(id: held.team, name: held.teamName), pluginID: held.pluginID,
+                           pluginTitle: held.title, version: held.version,
+                           repository: URL(string: held.repo) ?? URL(string: "https://github.com")!,
+                           signingIdentity: held.signingIdentity, notarized: held.notarized, models: held.models)
+    }
 
     public func add(repository: URL, progress: @escaping @Sendable (Double) -> Void) async throws -> PluginInstallOutcome {
-        let plugin = try await host.manager.add(repository: repository.absoluteString, progress: progress)
-        guard let shown = await plugins().first(where: { $0.id == plugin.id }) else { throw MESError(.engineError, "Installed, but not listed.") }
-        return .installed(shown)
+        switch try await host.manager.add(repository: repository.absoluteString, progress: progress) {
+        case .installed(let plugin):
+            guard let shown = await plugins().first(where: { $0.id == plugin.id }) else { throw MESError(.engineError, "Installed, but not listed.") }
+            return .installed(shown)
+        case .held(let held):
+            return .needsTrust(Self.request(held))
+        }
     }
 
     public func trust(_ request: PluginTrustRequest, progress: @escaping @Sendable (Double) -> Void) async throws {
-        throw MESError(.forbidden, "Gaea v1 runs only plugins signed by \(GPP.trustedTeam); the trust list comes later (G-22).")
+        progress(0.5)
+        _ = try await host.manager.approve(request.id)
+        progress(1)
     }
+
+    public func decline(_ request: PluginTrustRequest) async { _ = try? await host.manager.decline(request.id) }
 
     public func update(plugin id: String, to update: EngineUpdate,
                        progress: @escaping @Sendable (Double) -> Void) async throws -> PluginInstallOutcome {
-        _ = try await host.manager.update(plugin: id, to: update.version, progress: progress)
+        if case .held(let held) = try await host.manager.update(plugin: id, to: update.version, progress: progress) {
+            return .needsTrust(Self.request(held))
+        }
         guard let shown = await plugins().first(where: { $0.id == id }) else { throw MESError(.notFound, "No plugin \(id).") }
         return .installed(shown)
     }
@@ -130,10 +164,7 @@ public struct GaeaPluginBackend: EnginePluginBackend {
     public func setEnabled(_ enabled: Bool, plugin id: String) async throws { try await host.manager.setEnabled(enabled, plugin: id) }
     public func checkForUpdates() async throws { await host.manager.checkForUpdates() }
     public func remove(plugin id: String) async throws { try await host.manager.remove(plugin: id) }
-
-    public func revokeTrust(team id: String) async throws {
-        throw MESError(.forbidden, "Gaea v1 trusts only its own team, which can't be removed (G-22).")
-    }
+    public func revokeTrust(team id: String) async throws { try await host.manager.revoke(team: id) }
 }
 
 extension GaeaHost {

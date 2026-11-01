@@ -55,6 +55,7 @@ process of its own.
 | [Apps/Gaea/](Apps/Gaea), [scripts/build-app.sh](scripts/build-app.sh) | `Gaea.app`'s Info.plist, and the Release build that signs it with Developer ID (the CLI ships in `Contents/Helpers/gaea`) |
 | [scripts/release.sh](scripts/release.sh), [.github/workflows/release.yml](.github/workflows/release.yml) | AB-T-0409's release pipeline (G4 order 1): a pushed `v<version>` tag builds, smoke-tests, notarizes, staples and publishes `Gaea-<version>.zip`, its sha256 and `release.json` (the updater's facts); CI runs on `macos-26` (Swift 6.3), so code must build there too; `PUBLISH=no` checks without releasing |
 | [Sources/GaeaCore/Update/](Sources/GaeaCore/Update/GaeaUpdater.swift), [tools/acceptance-update.sh](tools/acceptance-update.sh) | AB-T-0410's self-update (G4 order 2, G-24): `gaea update [version] \| --check \| --rollback \| --cancel \| --prereleases on\|off` and Settings' Updates tab; verified like a plugin plus notarized and both digests; waits until no job runs or waits (`--update-grace`); swaps the bundle, keeps the old one in `Updates/`, and relaunches (headless execs in place). The acceptance runs headless and the app, from GitHub or the stand-in (`STANDIN_ZIP`) |
+| [Sources/GaeaCore/Plugins/PluginManager.swift](Sources/GaeaCore/Plugins/PluginManager.swift), [tools/acceptance-trust.sh](tools/acceptance-trust.sh) | AB-T-0411's trust list (G4 order 3, PLG-3, UI-3): teams in gaea.sqlite, ours built in; another team's release is held in `Held/` for `gaea trust approve \| decline` or the console's trust prompt; `gaea trust remove <team>` stops its plugins and keeps them installed. `GAEA_UNTRUST_OWN_TEAM=1` treats our team as unknown, so the acceptance (from GitHub) can test it (G-25) |
 | [tools/acceptance-g0.sh](tools/acceptance-g0.sh), [tools/release-standin.py](tools/release-standin.py) | G0's exit tests against a built app, and a local stand-in for GitHub's Releases API |
 | [tools/acceptance-offers.sh](tools/acceptance-offers.sh), [tools/gpp-run.py](tools/gpp-run.py) | AB-T-0364's acceptance (offers run as themselves, the models root), and one run sent straight to a worker for comparison |
 | [tools/acceptance-z-image.sh](tools/acceptance-z-image.sh) | AB-T-0365's acceptance: the Z-Image plugin by repo URL, parity with in-process z-image-swift, routing, count, lanes, edit |
@@ -91,7 +92,8 @@ Decisions G-1 to G-26 are filed as AB-D records. The plan's §1 maps each one to
 - **The repos live in the xocialize-code organization** (moved from `xocialize` on 2026-10-29; GitHub redirects the old
   URLs). Create new plugin repos there.
 - **Trust comes from the signature, never the URL** (G-7, G-18). Verify the bundle with a Developer ID requirement
-  pinned to a trusted team, and launch with `Process.launchRequirement`.
+  built from the trusted teams (the trust list), and launch with `Process.launchRequirement` pinned to the plugin's
+  team. Gaea itself, its updates and the operator CLI stay pinned to our team alone.
 - **Adapters (LoRAs) are not plugins** (GPP-1 §4.8). Plugins ship catalogs in their manifests; the operator adds one by
   Hugging Face URL (`gaea adapters add <url> --model <id>`), registered plain, pinned to a commit and sha256.
 - **Plugins ship no UI code.** Their settings forms come from manifest descriptors, rendered by MESFormsUI.

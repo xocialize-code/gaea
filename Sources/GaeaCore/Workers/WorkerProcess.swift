@@ -29,7 +29,7 @@ public struct WorkerFailure: Error, Sendable, CustomStringConvertible {
 /// One plugin worker process, driven over GPP v1 (spec/GPP-1.md) from the host side.
 ///
 /// Launch: the bundle was verified just before (PLG-3), the executable runs with `Process.launchRequirement` pinned
-/// to the trusted team, and the first line must be a `hello` that matches the verified manifest. A worker that exits
+/// to its plugin's team (which the launch check found trusted), and the first line must be a `hello` that matches the verified manifest. A worker that exits
 /// before its hello (a refused launch requirement is a SIGKILL) fails the launch at once through `terminationHandler`,
 /// not after the 10 s wait (GPP-1 §2).
 ///
@@ -127,7 +127,7 @@ public final class WorkerProcess: @unchecked Sendable {
 
     /// Starts the worker and waits for a hello that matches the manifest. Returns how long hello took.
     public func start(helloTimeout: Duration = .seconds(10)) async throws -> Duration {
-        process.launchRequirement = try PluginVerifier.launchRequirement()
+        process.launchRequirement = try PluginVerifier.launchRequirement(team: manifest.team)
         HostLog.append("\n=== \(Date().formatted(.iso8601)) launch \(pluginID) \(version) ===\n", to: log)
         let logURL = log
         stdout.fileHandleForReading.readabilityHandler = { [weak self] handle in

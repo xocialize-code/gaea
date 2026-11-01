@@ -159,7 +159,7 @@ import Testing
         let dir = try scratch()
         let updater = try stubbedUpdater(dir, facts: facts("99.0.0", gpp: [2], sha256: "x"), zip: Data("zip".utf8), checksum: "x")
         let manifest = try JSONDecoder().decode(PluginManifest.self, from: Data(contentsOf: repoRoot.appending(path: "examples/v1/manifest/demo.json")))
-        let plugin = InstalledPlugin(id: manifest.id, version: manifest.version, title: manifest.title, repo: manifest.repo, enabled: true,
+        let plugin = InstalledPlugin(id: manifest.id, version: manifest.version, title: manifest.title, repo: manifest.repo, enabled: true, trusted: true,
                                      bundle: dir, manifest: manifest, manifestData: Data())
         await updater.attach(plugins: { [plugin] }, activity: { nil }, relaunch: { _ in })
         await #expect { _ = try await updater.install() } throws: { error in
@@ -199,7 +199,7 @@ import Testing
         let updater = GaeaUpdater(database: try GaeaDatabase(), paths: paths, log: HostLog(file: paths.hostLog, echo: false), appBundle: target)
 
         #expect(try await updater.swap(staged, replacing: target, rollback: false) == version)
-        #expect(try PluginVerifier.verify(target).identifier == Gaea.bundleIdentifier)
+        #expect(try PluginVerifier.verify(target, trusting: [GPP.trustedTeam]).identifier == Gaea.bundleIdentifier)
         #expect(!FileManager.default.fileExists(atPath: paths.staging.appending(path: "gaea-test").path))
         let kept = try #require(await updater.keptBundle())
         #expect(kept.version == version && kept.app.lastPathComponent == "Gaea-\(version).app")
@@ -207,7 +207,7 @@ import Testing
 
         // Back: the kept app goes in, and the one it leaves is kept in turn.
         #expect(try await updater.swap(kept.app, replacing: target, rollback: true) == version)
-        #expect(try PluginVerifier.verify(target).identifier == Gaea.bundleIdentifier)
+        #expect(try PluginVerifier.verify(target, trusting: [GPP.trustedTeam]).identifier == Gaea.bundleIdentifier)
         #expect(try FileManager.default.contentsOfDirectory(atPath: paths.updates.path) == ["Gaea-\(version).app"])
 
         // The built app answers --version (0.12.0 and later).

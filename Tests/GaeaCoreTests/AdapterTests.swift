@@ -54,7 +54,7 @@ import Testing
         json["offers"] = offers
         let data = try JSONSerialization.data(withJSONObject: json)
         let manifest = try JSONDecoder().decode(PluginManifest.self, from: data)
-        let plugin = InstalledPlugin(id: manifest.id, version: manifest.version, title: manifest.title, repo: manifest.repo, enabled: true,
+        let plugin = InstalledPlugin(id: manifest.id, version: manifest.version, title: manifest.title, repo: manifest.repo, enabled: true, trusted: true,
                                      bundle: URL(fileURLWithPath: "/nonexistent"), manifest: manifest, manifestData: data)
         return try manifest.offers.map { offer in
             let id = try #require(offer.modelID)

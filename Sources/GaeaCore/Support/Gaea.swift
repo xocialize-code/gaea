@@ -4,7 +4,7 @@ import GaeaOperator
 /// Gaea's identity and the folders it uses.
 public enum Gaea {
     /// This build's version, compared with a plugin manifest's `min_gaea`.
-    public static let version = "0.12.1"
+    public static let version = "0.13.0"
     /// GPP protocol versions this host speaks (GPP-1 §6).
     public static let protocols: ClosedRange<Int> = 1...1
     /// The `manifest_version`s this host reads.
@@ -54,6 +54,8 @@ public struct GaeaPaths: Sendable {
     public var socket: URL { root.appending(path: "operator.sock") }
     /// The Gaea.app an update replaced, kept for `gaea update --rollback`.
     public var updates: URL { root.appending(path: "Updates", directoryHint: .isDirectory) }
+    /// Releases held for the operator's answer because their team isn't trusted (AB-T-0411).
+    public var held: URL { root.appending(path: "Held", directoryHint: .isDirectory) }
     /// MES pairing and TLS state (never the spool, which is wiped at start).
     public var serverState: URL { root.appending(path: "Server", directoryHint: .isDirectory) }
     public var spool: URL { caches.appending(path: "spool", directoryHint: .isDirectory) }
@@ -72,7 +74,7 @@ public struct GaeaPaths: Sendable {
     /// Creates every folder, owner-only where it holds state.
     public func create() throws {
         let fm = FileManager.default
-        for url in [root, plugins, serverState, caches, spool, staging, logs, sessions, logs.appending(path: "plugins")] {
+        for url in [root, plugins, held, serverState, caches, spool, staging, logs, sessions, logs.appending(path: "plugins")] {
             try fm.createDirectory(at: url, withIntermediateDirectories: true)
         }
         try fm.setAttributes([.posixPermissions: 0o700], ofItemAtPath: root.path)

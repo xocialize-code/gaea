@@ -30,6 +30,9 @@ public final class GaeaHost: Sendable {
         public var updateGrace: TimeInterval = 60
         /// The app bundle an update replaces; nil when this process can't update itself (tests).
         public var appBundle: URL? = Bundle.main.bundleURL
+        /// Whether Gaea's own team is trusted without asking. `GAEA_UNTRUST_OWN_TEAM=1` treats it as unknown, so a run
+        /// can test the trust list with Gaea's own plugins (G-25). It only ever narrows trust.
+        public var ownTeamTrusted = ProcessInfo.processInfo.environment["GAEA_UNTRUST_OWN_TEAM"] != "1"
         public init() {}
     }
 
@@ -55,7 +58,7 @@ public final class GaeaHost: Sendable {
         try paths.create()
         log = HostLog(file: paths.hostLog, echo: options.echoLog)
         database = try GaeaDatabase(path: paths.database)
-        manager = PluginManager(database: database, paths: paths, log: log)
+        manager = PluginManager(database: database, paths: paths, log: log, ownTeamTrusted: options.ownTeamTrusted)
         scheduler = Scheduler(manager: manager, database: database, paths: paths, log: log, budgetBytes: options.budgetBytes,
                               modelsRoot: options.modelsRoot, idleTimeout: options.idleTimeout)
         enablement = try ModelEnablement(store: DatabaseEnablementStore(database))
@@ -187,9 +190,13 @@ public final class GaeaHost: Sendable {
             case .pluginsList:
                 return try await pluginList(request.id)
             case .pluginsAdd:
-                let plugin = try await manager.add(repository: try arg("repo"), version: args["version"])
-                return OperatorResponse(id: request.id, ok: true, text: "Installed \(plugin.title) \(plugin.version) (\(plugin.id)), enabled.",
-                                        json: Self.json(["id": plugin.id, "version": plugin.version]))
+                switch try await manager.add(repository: try arg("repo"), version: args["version"]) {
+                case .installed(let plugin):
+                    return OperatorResponse(id: request.id, ok: true, text: "Installed \(plugin.title) \(plugin.version) (\(plugin.id)), enabled.",
+                                            json: Self.json(["id": plugin.id, "version": plugin.version]))
+                case .held(let held):
+                    return OperatorResponse(id: request.id, ok: true, text: Self.describe(held), json: Self.json(held))
+                }
             case .pluginsCheck:
                 await manager.checkForUpdates()
                 return try await pluginList(request.id)
@@ -206,6 +213,25 @@ public final class GaeaHost: Sendable {
             case .pluginsRemove:
                 try await manager.remove(plugin: try arg("id"))
                 return OperatorResponse(id: request.id, ok: true, text: "Removed \(try arg("id")).")
+            case .trustList:
+                return trustList(request.id)
+            case .trustApprove:
+                let text = switch try await manager.approve(try arg("id")) {
+                case .added(let plugin): "Trusted its team. Installed \(plugin.title) \(plugin.version) (\(plugin.id)), enabled."
+                case let .updated(id, outcome): "Trusted its team. " + Self.describe(outcome, id: id)
+                case let .team(team, plugins):
+                    "Trusted \(team)." + (plugins.isEmpty ? "" : " Its plugins run again: \(plugins.joined(separator: ", ")).")
+                }
+                return OperatorResponse(id: request.id, ok: true, text: text)
+            case .trustDecline:
+                let held = try await manager.decline(try arg("id"))
+                return OperatorResponse(id: request.id, ok: true,
+                                        text: "Declined \(held.title) \(held.version) from \(held.teamName) (\(held.team)); the download is gone.")
+            case .trustRemove:
+                let team = try arg("team")
+                let stopped = try await manager.revoke(team: team)
+                return OperatorResponse(id: request.id, ok: true, text: "No longer trusting \(team.uppercased())."
+                    + (stopped.isEmpty ? "" : " Stopped, and kept installed until it's trusted again: \(stopped.joined(separator: ", "))."))
             case .pluginsLogs:
                 let id = try arg("id")
                 let lines = Int(args["lines"] ?? "") ?? 80
@@ -335,6 +361,7 @@ public final class GaeaHost: Sendable {
             MES:       \(endpoint ?? "starting") (\(options.paired ? "paired" : "open, this Mac only"))
             Operations: \(descriptors.map { "\($0.operation) [\($0.models.map(\.id).joined(separator: ", "))]" }.joined(separator: "; "))
             Plugins:   \(plugins.count) installed, \(plugins.filter(\.enabled).count) enabled
+            Trust:     \(await trustSummary())
             Workers:   \(ledger.workers.map { "\($0.pluginID) pid \($0.pid)\($0.busy ? " (busy)" : "")" }.joined(separator: ", ").ifEmpty("none"))
             Memory:    \(ledger.chargedBytes.gb) charged of \(ledger.budgetBytes.gb) budget; host \(ledger.hostFootprintBytes.gb)
             Models:    \(await scheduler.modelsRoot.path)
@@ -360,12 +387,14 @@ public final class GaeaHost: Sendable {
 
     func pluginList(_ id: String) async throws -> OperatorResponse {
         let rows = try database.plugins()
+        let trusted = await manager.trustedTeams()
         let text = rows.isEmpty ? "No plugins. Add one: gaea plugins add https://github.com/owner/repo" : rows.map { row in
             var line = "\(row.enabled ? "on " : "off") \(row.id) \(row.activeVersion)  \(row.title)  \(row.repo)"
             if let previous = row.previousVersion { line += "\n      rollback: \(previous)" }
             if let pending = row.pendingVersion { line += "\n      switching to \(pending) when idle" }
             if let latest = row.latestVersion { line += "\n      update available: \(latest)" }
             if let failure = row.failure { line += "\n      failed: \(failure)" }
+            if !trusted.contains(row.team) { line += "\n      stopped: its team \(row.team) isn't trusted (gaea trust approve \(row.team))" }
             return line
         }.joined(separator: "\n")
         struct Row: Encodable {
@@ -381,7 +410,64 @@ public final class GaeaHost: Sendable {
         switch outcome {
         case .switched(let version): "\(id) now runs \(version)."
         case .pending(let version): "\(id) \(version) is installed; Gaea switches to it when the plugin is idle."
+        case .held(let held): describe(held)
         }
+    }
+
+    /// What the operator needs to answer a held release (UI-3): who signed it, notarization, the repo and the models.
+    static func describe(_ held: HeldRelease) -> String {
+        """
+        Held \(held.id): \(held.title) \(held.version) (\(held.pluginID)) is signed by a team Gaea doesn't trust yet.
+          Signed by:  \(held.signingIdentity ?? held.team)
+          Team:       \(held.team)
+          Notarized:  \(held.notarized ? "yes" : "no, Apple hasn't notarized this build")
+          Repo:       \(held.repo) (\(held.tag))
+          Models:     \(held.models.joined(separator: ", ").ifEmpty("none"))
+        Trusting the team lets Gaea run any plugin it signs, including later updates.
+          Approve: gaea trust approve \(held.id)
+          Decline: gaea trust decline \(held.id)
+        """
+    }
+
+    func trustSummary() async -> String {
+        let teams = await manager.trustedTeams().sorted()
+        let held = await manager.held().count
+        return (teams.isEmpty ? "no team" : teams.joined(separator: ", ")) + (held > 0 ? "; \(held) held: gaea trust" : "")
+    }
+
+    func trustList(_ id: String) -> OperatorResponse {
+        let builtIn = manager.builtInTeams
+        let approved = (try? database.trustedTeams()) ?? []
+        let plugins = (try? database.plugins()) ?? []
+        let held = (try? database.held()) ?? []
+        func using(_ team: String) -> String {
+            let ids = plugins.filter { $0.team == team }.map(\.id)
+            return ids.isEmpty ? "" : "  plugins: \(ids.joined(separator: ", "))"
+        }
+        var lines = ["Trusted teams:"]
+        for team in builtIn.sorted() { lines.append("  \(team)  Gaea's own team (built in)" + using(team)) }
+        for t in approved where !builtIn.contains(t.team) {
+            lines.append("  \(t.team)  \(t.name), approved \(t.addedAt.formatted(.iso8601))" + using(t.team))
+        }
+        if builtIn.isEmpty { lines.append("  (Gaea's own team is treated as unknown for this run: GAEA_UNTRUST_OWN_TEAM)") }
+        let trusted = builtIn.union(approved.map(\.team))
+        let untrusted = Dictionary(grouping: plugins.filter { !trusted.contains($0.team) }, by: \.team)
+        if !untrusted.isEmpty {
+            lines.append("Not trusted, installed and stopped:")
+            for (team, rows) in untrusted.sorted(by: { $0.key < $1.key }) {
+                lines.append("  \(team)  plugins: \(rows.map(\.id).joined(separator: ", "))  (gaea trust approve \(team))")
+            }
+        }
+        lines.append(held.isEmpty ? "Held: none" : "Held:")
+        for h in held { lines.append(Self.describe(h).split(separator: "\n").map { "  " + $0 }.joined(separator: "\n")) }
+        struct List: Encodable {
+            struct Team: Encodable { var team: String, name: String, builtIn: Bool, addedAt: Date? }
+            var trusted: [Team], held: [HeldRelease], untrustedPlugins: [String]
+        }
+        let list = List(trusted: builtIn.sorted().map { .init(team: $0, name: "Gaea's own team", builtIn: true, addedAt: nil) }
+                            + approved.filter { !builtIn.contains($0.team) }.map { .init(team: $0.team, name: $0.name, builtIn: false, addedAt: $0.addedAt) },
+                        held: held, untrustedPlugins: untrusted.values.flatMap { $0.map(\.id) }.sorted())
+        return OperatorResponse(id: id, ok: true, text: lines.joined(separator: "\n"), json: Self.json(list))
     }
 
     func updateStatus(_ id: String) async throws -> OperatorResponse {

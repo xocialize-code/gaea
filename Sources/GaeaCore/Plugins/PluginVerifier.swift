@@ -3,9 +3,9 @@ import GaeaProtocol
 import LightweightCodeRequirements
 import Security
 
-/// Trust comes from the signature, never the URL (G-7, G-18). v1 trusts one team, ours (G-22): `GPP.trustedTeam`.
-/// The check runs at install and again before every launch (PLG-3), and the launch itself carries a
-/// `launchRequirement` the kernel enforces at exec.
+/// Trust comes from the signature, never the URL (G-7, G-18). A plugin runs only when it's signed by a team on the trust
+/// list (`TrustList`): Gaea's own, `GPP.trustedTeam`, and the teams the operator approved. The check runs at install and
+/// again before every launch (PLG-3), and the launch itself carries a `launchRequirement` the kernel enforces at exec.
 public enum PluginVerifier {
     public struct Signature: Sendable, Equatable, CustomStringConvertible {
         public var team: String
@@ -29,37 +29,61 @@ public enum PluginVerifier {
         case notDeveloperID(String)
         /// The seal is broken: something in the bundle changed after signing.
         case invalid(String)
-        /// A valid Developer ID signature from a team v1 doesn't run (G-22).
-        case untrustedTeam(String)
+        /// A valid Developer ID signature, with hardened runtime, from a team that isn't on the trust list. An install
+        /// holds the release for the operator's answer instead of refusing it.
+        case untrustedTeam(Signature)
         case noHardenedRuntime
+
+        public var isUntrustedTeam: Bool { if case .untrustedTeam = self { true } else { false } }
 
         public var description: String {
             switch self {
             case .notDeveloperID(let why): "Refused: the bundle isn't signed with a Developer ID (\(why))."
             case .invalid(let why): "Refused: the bundle's signature is invalid (\(why))."
-            case .untrustedTeam(let team):
-                "Refused: the bundle is signed by team \(team). Gaea v1 runs only plugins signed by \(GPP.trustedTeam); "
-                    + "third-party plugins come with the trust list in a later release (G-22)."
+            case .untrustedTeam(let signature):
+                "Refused: the bundle is signed by \(signature.commonName.flatMap(Signature.holder) ?? "team \(signature.team)") "
+                    + "(\(signature.team)), a team this Gaea doesn't trust. Approve the team to run it: gaea trust."
             case .noHardenedRuntime: "Refused: the bundle's signature has no hardened runtime."
             }
         }
     }
 
-    /// The requirement every plugin must meet: Apple-anchored Developer ID, leaf issued to the trusted team.
+    static let developerID = "anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists "
+        + "and certificate leaf[field.1.2.840.113635.100.6.1.13] exists"
+
+    /// The requirement a team's code must meet: Apple-anchored Developer ID, leaf issued to that team. Gaea itself and
+    /// the operator CLI are held to Gaea's own team, whatever the trust list says.
     public static func requirementText(team: String = GPP.trustedTeam) -> String {
-        "anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists "
-            + "and certificate leaf[field.1.2.840.113635.100.6.1.13] exists "
-            + "and certificate leaf[subject.OU] = \"\(team)\""
+        requirementText(teams: [team])
     }
 
-    /// Checks the bundle statically: every architecture, strict, nested code, then the team requirement.
-    public static func verify(_ bundle: URL) throws -> Signature {
+    /// Developer ID, leaf issued to any one of `teams`.
+    public static func requirementText(teams: some Collection<String>) -> String {
+        let leaf = teams.sorted().map { "certificate leaf[subject.OU] = \"\($0)\"" }.joined(separator: " or ")
+        return developerID + " and (\(leaf))"
+    }
+
+    /// Checks the bundle statically (every architecture, strict, nested code), then that a team in `teams` signed it.
+    public static func verify(_ bundle: URL, trusting teams: Set<String>) throws -> Signature {
+        let (code, signature) = try check(bundle)
+        guard !teams.isEmpty else { throw Refusal.untrustedTeam(signature) }
+        var requirement: SecRequirement?
+        SecRequirementCreateWithString(requirementText(teams: teams) as CFString, [], &requirement)
+        guard SecStaticCodeCheckValidity(code, flags, requirement) == errSecSuccess else {
+            throw Refusal.untrustedTeam(signature)
+        }
+        return signature
+    }
+
+    static let flags = SecCSFlags(rawValue: kSecCSCheckAllArchitectures | kSecCSStrictValidate | kSecCSCheckNestedCode)
+
+    /// The checks that don't depend on the trust list: the seal, a Developer ID Application certificate, hardened
+    /// runtime, and whether Apple notarized it.
+    static func check(_ bundle: URL) throws -> (SecStaticCode, Signature) {
         var code: SecStaticCode?
         guard SecStaticCodeCreateWithPath(bundle as CFURL, [], &code) == errSecSuccess, let code else {
             throw Refusal.notDeveloperID("not code")
         }
-        let flags = SecCSFlags(rawValue: kSecCSCheckAllArchitectures | kSecCSStrictValidate | kSecCSCheckNestedCode)
-
         // First the seal alone, so a broken seal reads as tampering rather than a team problem.
         var error: Unmanaged<CFError>?
         let sealed = SecStaticCodeCheckValidityWithErrors(code, flags, nil, &error)
@@ -83,17 +107,10 @@ public enum PluginVerifier {
         }
         guard let team, !certificates.isEmpty else { throw Refusal.notDeveloperID("ad hoc signature, no team") }
 
-        var requirement: SecRequirement?
-        SecRequirementCreateWithString(requirementText() as CFString, [], &requirement)
-        let developerID = "anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists "
-            + "and certificate leaf[field.1.2.840.113635.100.6.1.13] exists"
         var developerIDRequirement: SecRequirement?
         SecRequirementCreateWithString(developerID as CFString, [], &developerIDRequirement)
         guard SecStaticCodeCheckValidity(code, flags, developerIDRequirement) == errSecSuccess else {
             throw Refusal.notDeveloperID("signed by \(commonName ?? team), not a Developer ID Application certificate")
-        }
-        guard SecStaticCodeCheckValidity(code, flags, requirement) == errSecSuccess else {
-            throw Refusal.untrustedTeam(team)
         }
         let codeFlags = (dict[kSecCodeInfoFlags as String] as? UInt32) ?? 0
         guard codeFlags & 0x10000 != 0 else { throw Refusal.noHardenedRuntime } // CS_RUNTIME
@@ -101,13 +118,14 @@ public enum PluginVerifier {
         var notarizedRequirement: SecRequirement?
         SecRequirementCreateWithString("notarized" as CFString, [], &notarizedRequirement)
         let notarized = SecStaticCodeCheckValidity(code, flags, notarizedRequirement) == errSecSuccess
-        return Signature(team: team, identifier: identifier, commonName: commonName, notarized: notarized)
+        return (code, Signature(team: team, identifier: identifier, commonName: commonName, notarized: notarized))
     }
 
-    /// The requirement a worker launch carries: the kernel kills an executable that doesn't meet it (spike check 11).
-    public static func launchRequirement() throws -> LaunchCodeRequirement {
+    /// The requirement a worker launch carries, pinned to the plugin's team, which the launch check just found trusted:
+    /// the kernel kills an executable that doesn't meet it (spike check 11).
+    public static func launchRequirement(team: String) throws -> LaunchCodeRequirement {
         try LaunchCodeRequirement.allOf {
-            TeamIdentifier(GPP.trustedTeam)
+            TeamIdentifier(team)
             ValidationCategory(.developerID)
         }
     }

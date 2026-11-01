@@ -25,6 +25,14 @@ public enum OperatorAPI {
         case pluginsDisable = "plugins.disable"
         case pluginsRemove = "plugins.remove"
         case pluginsLogs = "plugins.logs"
+        /// The trust list (AB-T-0411): the trusted teams and the releases held for an answer.
+        case trustList = "trust.list"
+        /// `id` a held release (its team is trusted and the install finishes) or a team id (trusted again).
+        case trustApprove = "trust.approve"
+        /// `id` a held release, dropped.
+        case trustDecline = "trust.decline"
+        /// `team`: its plugins stop and stay installed until it's trusted again.
+        case trustRemove = "trust.remove"
         case modelsList = "models.list"
         case modelsEnable = "models.enable"
         case modelsDisable = "models.disable"

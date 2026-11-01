@@ -9,7 +9,10 @@ public struct InstalledPlugin: Sendable {
     public var version: String
     public var title: String
     public var repo: String
+    /// On, and signed by a trusted team: what offers and runs.
     public var enabled: Bool
+    /// Its team is on the trust list. A plugin whose team was removed stays installed, and off, until it's trusted again.
+    public var trusted: Bool
     public var bundle: URL
     public var manifest: PluginManifest
     public var manifestData: Data
@@ -37,6 +40,9 @@ public actor PluginManager {
         case extract(String)
         case noRollback(String)
         case noUpdate(String)
+        case unknownHold(String)
+        case builtInTeam(String)
+        case unknownTeam(String)
 
         public var description: String {
             switch self {
@@ -50,6 +56,10 @@ public actor PluginManager {
             case .extract(let why): "Couldn't unpack the release: \(why)"
             case .noRollback(let id): "\(id) has no previous version kept to roll back to."
             case .noUpdate(let id): "\(id) has no newer compatible release."
+            case .unknownHold(let id): "Nothing is held as \(id): gaea trust lists what is."
+            case .builtInTeam(let team): "\(team) is Gaea's own team, trusted always."
+            case .unknownTeam(let team):
+                "No installed or held plugin is signed by \(team). A team is approved from one of its releases: add the plugin first."
             }
         }
     }
@@ -60,10 +70,14 @@ public actor PluginManager {
     let log: HostLog
     var workers: (any WorkerControl)?
     var cache: [String: InstalledPlugin] = [:]
+    /// The teams trusted without the operator: Gaea's own, unless a test run treats it as unknown (G-25).
+    public nonisolated let builtInTeams: Set<String>
     /// Called after anything that changes what Gaea offers (the server reloads its descriptors).
     var onChange: (@Sendable () async -> Void)?
 
-    public init(database: GaeaDatabase, paths: GaeaPaths, source: GitHubReleaseSource = GitHubReleaseSource(), log: HostLog) {
+    public init(database: GaeaDatabase, paths: GaeaPaths, source: GitHubReleaseSource = GitHubReleaseSource(), log: HostLog,
+                ownTeamTrusted: Bool = true) {
+        builtInTeams = ownTeamTrusted ? [GPP.trustedTeam] : []
         self.database = database
         self.paths = paths
         self.source = source
@@ -79,13 +93,21 @@ public actor PluginManager {
 
     public func rows() throws -> [GaeaDatabase.PluginRow] { try database.plugins() }
 
+    /// Every team whose plugins run: the built-in ones and the ones the operator approved.
+    public func trustedTeams() -> Set<String> {
+        builtInTeams.union(((try? database.trustedTeams()) ?? []).map(\.team))
+    }
+
     /// Every installed plugin's active version, on or off, with its manifest. A version whose bundle can't be read is
     /// left out and marked failed.
     public func installed() -> [InstalledPlugin] {
-        ((try? database.plugins()) ?? []).compactMap { row in
+        let teams = trustedTeams()
+        return ((try? database.plugins()) ?? []).compactMap { row in
+            let trusted = teams.contains(row.team)
             if let cached = cache[row.id], cached.version == row.activeVersion {
                 var plugin = cached
-                plugin.enabled = row.enabled
+                plugin.enabled = row.enabled && trusted
+                plugin.trusted = trusted
                 return plugin
             }
             guard let version = try? database.version(row.id, row.activeVersion) else { return nil }
@@ -95,19 +117,23 @@ public actor PluginManager {
                 try? database.updatePlugin(row.id) { $0.failure = "Its manifest can't be read." }
                 return nil
             }
-            let plugin = InstalledPlugin(id: row.id, version: row.activeVersion, title: row.title, repo: row.repo, enabled: row.enabled,
-                                         bundle: bundle, manifest: manifest, manifestData: data)
+            let plugin = InstalledPlugin(id: row.id, version: row.activeVersion, title: row.title, repo: row.repo,
+                                         enabled: row.enabled && trusted, trusted: trusted, bundle: bundle, manifest: manifest,
+                                         manifestData: data)
             cache[row.id] = plugin
             return plugin
         }
     }
 
-    /// The active version, checked again before a launch (PLG-3). A signature that no longer verifies marks the plugin
-    /// failed and throws.
+    /// The active version, checked again before a launch (PLG-3) against the trust list as it is now. A signature that no
+    /// longer verifies marks the plugin failed and throws; a team that is no longer trusted throws.
     public func launchable(_ id: String) throws -> InstalledPlugin {
         guard let plugin = installed().first(where: { $0.id == id }) else { throw ManagerError.unknownPlugin(id) }
         do {
-            _ = try PluginVerifier.verify(plugin.bundle)
+            _ = try PluginVerifier.verify(plugin.bundle, trusting: trustedTeams())
+        } catch let refusal as PluginVerifier.Refusal where refusal.isUntrustedTeam {
+            database.record("refused", plugin: id, version: plugin.version, "launch check: \(refusal)")
+            throw refusal
         } catch {
             try? database.updatePlugin(id) { $0.failure = "\(error)" }
             database.record("refused", plugin: id, version: plugin.version, "launch check: \(error)")
@@ -119,12 +145,18 @@ public actor PluginManager {
 
     // MARK: - Adding
 
+    public enum AddOutcome: Sendable {
+        case installed(InstalledPlugin)
+        /// Signed by a team that isn't trusted: downloaded and checked, waiting for `approve` or `decline`.
+        case held(HeldRelease)
+    }
+
     /// Adds a plugin from its repo: the newest compatible release (or the release `version` names, a pre-release
-    /// included), downloaded, checked (sha256, signature, manifest) and installed enabled. Another team's release is
-    /// refused (G-22): v1 has no trust list.
+    /// included), downloaded, checked (sha256, signature, manifest) and installed enabled. A release signed by a team
+    /// that isn't trusted is held for the operator (AB-T-0411).
     @discardableResult
     public func add(repository text: String, version: String? = nil,
-                    progress: @escaping @Sendable (Double) -> Void = { _ in }) async throws -> InstalledPlugin {
+                    progress: @escaping @Sendable (Double) -> Void = { _ in }) async throws -> AddOutcome {
         guard let repo = PluginRepository(text) else { throw ManagerError.badRepository(text) }
         progress(0.02)
         let (release, releaseManifest) = if let version {
@@ -135,7 +167,13 @@ public actor PluginManager {
         if let existing = try database.plugin(releaseManifest.id) {
             throw ManagerError.alreadyAdded("\(existing.title) (\(existing.id))")
         }
-        let record = try await install(release, expected: releaseManifest, repo: repo, progress: progress)
+        let record: GaeaDatabase.VersionRecord
+        switch try await install(release, expected: releaseManifest, repo: repo, kind: .add, progress: progress) {
+        case .verified(let verified): record = verified
+        case .held(let held):
+            progress(1)
+            return .held(held)
+        }
         try database.insertPlugin(id: releaseManifest.id, repo: repo.url.absoluteString, title: releaseManifest.title,
                                   summary: releaseManifest.summary ?? "", team: releaseManifest.team, version: record)
         database.record("installed", plugin: releaseManifest.id, version: record.version,
@@ -143,7 +181,7 @@ public actor PluginManager {
         log("plugins: added \(releaseManifest.id) \(record.version) from \(repo)")
         progress(1)
         await onChange?()
-        return try launchable(releaseManifest.id)
+        return .installed(try launchable(releaseManifest.id))
     }
 
     /// The newest release whose manifest this Gaea can run (`compatibility`), newer than `current` when given.
@@ -184,8 +222,8 @@ public actor PluginManager {
 
     struct Incompatible: Error, CustomStringConvertible { let description: String }
 
-    /// Whether this Gaea can run a release, from its published manifest: the three assets, GPP protocol, `min_gaea`, and
-    /// the trusted team (G-22).
+    /// Whether this Gaea can run a release, from its published manifest: the three assets, GPP protocol and `min_gaea`.
+    /// The team is decided by the signature after download: trusted, or held for the operator.
     func compatibility(_ release: PluginRelease) async -> Result<PluginManifest, Incompatible> {
         guard release.zip != nil, release.checksum != nil, let manifestAsset = release.manifest else {
             return .failure(Incompatible(description: "\(release.tag) lacks the .gaeaplugin.zip, its .sha256 or manifest.json"))
@@ -202,17 +240,18 @@ public actor PluginManager {
         guard let minGaea = SemVer(manifest.minGaea), minGaea <= SemVer(Gaea.version)! else {
             return .failure(Incompatible(description: "\(release.tag) needs Gaea \(manifest.minGaea)"))
         }
-        guard manifest.team == GPP.trustedTeam else {
-            return .failure(Incompatible(description: "\(release.tag) is from team \(manifest.team); Gaea v1 runs only plugins signed by "
-                + "\(GPP.trustedTeam), and third-party plugins come with the trust list later (G-22)"))
-        }
         return .success(manifest)
     }
 
+    enum Installed {
+        case verified(GaeaDatabase.VersionRecord)
+        case held(HeldRelease)
+    }
+
     /// Downloads, checks and installs one release beside any versions already there. Nothing reaches the plugin folder
-    /// unless every check passes.
-    func install(_ release: PluginRelease, expected: PluginManifest, repo: PluginRepository,
-                 progress: @escaping @Sendable (Double) -> Void) async throws -> GaeaDatabase.VersionRecord {
+    /// unless every check passes. A release that passes every check but the team's is held in `paths.held` instead.
+    func install(_ release: PluginRelease, expected: PluginManifest, repo: PluginRepository, kind: HeldRelease.Kind,
+                 progress: @escaping @Sendable (Double) -> Void) async throws -> Installed {
         let fm = FileManager.default
         let staging = paths.staging.appending(path: UUID().uuidString, directoryHint: .isDirectory)
         try fm.createDirectory(at: staging, withIntermediateDirectories: true)
@@ -245,8 +284,12 @@ public actor PluginManager {
         progress(0.75)
 
         let signature: PluginVerifier.Signature
+        var untrusted = false
         do {
-            signature = try PluginVerifier.verify(staged)
+            signature = try PluginVerifier.verify(staged, trusting: trustedTeams())
+        } catch PluginVerifier.Refusal.untrustedTeam(let found) {
+            signature = found
+            untrusted = true
         } catch {
             database.record("refused", plugin: expected.id, version: release.version.description, "\(error)")
             log("plugins: refused \(expected.id) \(release.tag): \(error)")
@@ -263,17 +306,22 @@ public actor PluginManager {
             throw error
         }
 
+        let manifestDigest = SHA256.hash(data: manifestData).map { String(format: "%02x", $0) }.joined()
+        if untrusted {
+            return .held(try hold(staged, manifest: manifest, release: release, repo: repo, kind: kind, signature: signature,
+                                  zipSHA256: digest, manifestSHA256: manifestDigest))
+        }
+
         let destination = paths.installDirectory(plugin: manifest.id, version: manifest.version)
         try? fm.removeItem(at: destination)
         try fm.createDirectory(at: destination, withIntermediateDirectories: true)
         let bundle = destination.appending(path: staged.lastPathComponent)
         try fm.moveItem(at: staged, to: bundle)
-        _ = try PluginVerifier.verify(bundle)
+        _ = try PluginVerifier.verify(bundle, trusting: trustedTeams())
         progress(0.95)
-        return GaeaDatabase.VersionRecord(
-            version: manifest.version, bundlePath: bundle.path, zipSHA256: digest,
-            manifestSHA256: SHA256.hash(data: manifestData).map { String(format: "%02x", $0) }.joined(),
-            signature: signature.description, notarized: signature.notarized)
+        return .verified(GaeaDatabase.VersionRecord(
+            version: manifest.version, bundlePath: bundle.path, zipSHA256: digest, manifestSHA256: manifestDigest,
+            signature: signature.description, notarized: signature.notarized))
     }
 
     /// The repo a manifest is checked against: the one it was added from, or the manifest's own when GitHub says both
@@ -368,6 +416,8 @@ public actor PluginManager {
         case switched(String)
         /// `version` is installed; Gaea switches to it when the plugin's models are idle.
         case pending(String)
+        /// The release is signed by a team that isn't trusted: held for `approve` or `decline`.
+        case held(HeldRelease)
     }
 
     /// Installs a newer release beside the current one, then switches to it when the plugin is idle, keeping the version
@@ -393,7 +443,12 @@ public actor PluginManager {
                                                 manifestSHA256: existing.manifestSHA256, signature: existing.signature,
                                                 notarized: existing.notarized)
         } else {
-            record = try await install(release, expected: manifest, repo: repo, progress: progress)
+            switch try await install(release, expected: manifest, repo: repo, kind: .update, progress: progress) {
+            case .verified(let verified): record = verified
+            case .held(let held):
+                progress(1)
+                return .held(held)
+            }
             try database.insertVersion(record, plugin: id)
         }
         database.record("staged", plugin: id, version: record.version, "installed beside \(row.activeVersion) from \(release.tag)")
@@ -457,6 +512,148 @@ public actor PluginManager {
         database.record("switched", plugin: id, version: version, "now runs \(version); kept \(from) for rollback")
         log("plugins: \(id) switched \(from) → \(version)")
         await onChange?()
+    }
+
+    // MARK: - The trust list (AB-T-0411)
+
+    /// Keeps a checked release aside for the operator. A release already held for the same plugin and version is
+    /// replaced.
+    func hold(_ staged: URL, manifest: PluginManifest, release: PluginRelease, repo: PluginRepository, kind: HeldRelease.Kind,
+              signature: PluginVerifier.Signature, zipSHA256: String, manifestSHA256: String) throws -> HeldRelease {
+        let fm = FileManager.default
+        for old in try database.held() where old.pluginID == manifest.id && old.version == manifest.version {
+            try? fm.removeItem(at: paths.held.appending(path: old.id))
+            try database.deleteHeld(old.id)
+        }
+        let id = "h-" + UUID().uuidString.lowercased().prefix(8)
+        let folder = paths.held.appending(path: id, directoryHint: .isDirectory)
+        try fm.createDirectory(at: folder, withIntermediateDirectories: true)
+        let bundle = folder.appending(path: staged.lastPathComponent)
+        try fm.moveItem(at: staged, to: bundle)
+        let held = HeldRelease(
+            id: id, kind: kind, pluginID: manifest.id, title: manifest.title, summary: manifest.summary ?? "",
+            version: manifest.version, repo: repo.url.absoluteString, tag: release.tag, team: signature.team,
+            signingIdentity: signature.commonName, notarized: signature.notarized, models: manifest.models.map(\.id),
+            record: GaeaDatabase.VersionRecord(version: manifest.version, bundlePath: bundle.path, zipSHA256: zipSHA256,
+                                               manifestSHA256: manifestSHA256, signature: signature.description,
+                                               notarized: signature.notarized))
+        try database.insertHeld(held)
+        database.record("held", plugin: manifest.id, version: manifest.version,
+                        "\(release.tag) from \(repo) is signed by \(held.teamName) (\(signature.team)), a team Gaea doesn't trust; held as \(id)")
+        log("plugins: held \(manifest.id) \(manifest.version) as \(id): team \(signature.team) isn't trusted")
+        return held
+    }
+
+    public func held() -> [HeldRelease] { (try? database.held()) ?? [] }
+
+    public enum Approved: Sendable {
+        /// The held release was a new plugin, now installed.
+        case added(InstalledPlugin)
+        /// The held release was an update, now installed beside the current version.
+        case updated(String, SwitchOutcome)
+        /// A team approved by its id: its installed plugins run again.
+        case team(String, plugins: [String])
+    }
+
+    /// The operator trusts a held release's team, by the hold's id, and the install or update it held finishes. Given
+    /// a team id instead, the team is trusted again from one of its installed or held plugins.
+    public func approve(_ handle: String) async throws -> Approved {
+        if let held = try database.held(handle) { return try await approve(held) }
+        let team = handle.uppercased()
+        guard !builtInTeams.contains(team) else { throw ManagerError.builtInTeam(team) }
+        let rows = try database.plugins().filter { $0.team == team }
+        if let held = try database.held().first(where: { $0.team == team }) {
+            try trust(team: team, name: held.teamName)
+            await onChange?()
+            return .team(team, plugins: rows.map(\.id))
+        }
+        guard let row = rows.first else { throw ManagerError.unknownTeam(team) }
+        let signature = try database.version(row.id, row.activeVersion)?.signature
+        let name = signature.flatMap { PluginVerifier.Signature.holder($0.components(separatedBy: ", id ").first ?? "") } ?? team
+        try trust(team: team, name: name)
+        await onChange?()
+        return .team(team, plugins: rows.map(\.id))
+    }
+
+    func trust(team: String, name: String) throws {
+        guard !trustedTeams().contains(team) else { return }
+        try database.trust(team: team, name: name)
+        cache = [:]
+        database.record("trusted", "team \(team) (\(name)) approved by the operator")
+        log("plugins: trusted team \(team) (\(name))")
+    }
+
+    func approve(_ held: HeldRelease) async throws -> Approved {
+        let fm = FileManager.default
+        let folder = paths.held.appending(path: held.id)
+        let staged = URL(fileURLWithPath: held.bundlePath)
+        try trust(team: held.team, name: held.teamName)
+        // The held bundle is checked again now that its team is trusted: nothing in it may have changed.
+        do {
+            _ = try PluginVerifier.verify(staged, trusting: trustedTeams())
+        } catch {
+            database.record("refused", plugin: held.pluginID, version: held.version, "held \(held.id): \(error)")
+            throw error
+        }
+        if held.kind == .add, let existing = try database.plugin(held.pluginID) {
+            throw ManagerError.alreadyAdded("\(existing.title) (\(existing.id))")
+        }
+        let destination = paths.installDirectory(plugin: held.pluginID, version: held.version)
+        try? fm.removeItem(at: destination)
+        try fm.createDirectory(at: destination, withIntermediateDirectories: true)
+        let bundle = destination.appending(path: staged.lastPathComponent)
+        try fm.moveItem(at: staged, to: bundle)
+        var record = held.record
+        record.bundlePath = bundle.path
+        try database.deleteHeld(held.id)
+        try? fm.removeItem(at: folder)
+        switch held.kind {
+        case .add:
+            try database.insertPlugin(id: held.pluginID, repo: held.repo, title: held.title, summary: held.summary, team: held.team,
+                                      version: record)
+            database.record("installed", plugin: held.pluginID, version: held.version,
+                            "added from \(held.repo) (\(held.tag)) after its team was approved; \(held.signature)")
+            log("plugins: added \(held.pluginID) \(held.version), approved from \(held.id)")
+            await onChange?()
+            return .added(try launchable(held.pluginID))
+        case .update:
+            try database.insertVersion(record, plugin: held.pluginID)
+            database.record("staged", plugin: held.pluginID, version: held.version, "approved from \(held.id) (\(held.tag))")
+            let outcome = try await switchWhenIdle(held.pluginID, to: held.version)
+            await onChange?()
+            return .updated(held.pluginID, outcome)
+        }
+    }
+
+    /// The operator declined a held release: what was downloaded goes.
+    public func decline(_ id: String) throws -> HeldRelease {
+        guard let held = try database.held(id) else { throw ManagerError.unknownHold(id) }
+        try? FileManager.default.removeItem(at: paths.held.appending(path: id))
+        try database.deleteHeld(id)
+        database.record("declined", plugin: held.pluginID, version: held.version,
+                        "the operator didn't trust \(held.teamName) (\(held.team)); \(held.id) dropped")
+        log("plugins: declined \(held.id) (\(held.pluginID) \(held.version), team \(held.team))")
+        return held
+    }
+
+    /// Stops trusting a team: its plugins' workers stop and their models leave the offers. They stay installed, with
+    /// the operator's on and off kept, and run again when the team is approved again. Returns their ids.
+    @discardableResult
+    public func revoke(team: String) async throws -> [String] {
+        let team = team.uppercased()
+        guard !builtInTeams.contains(team) else { throw ManagerError.builtInTeam(team) }
+        guard try database.trustedTeams().contains(where: { $0.team == team }) else { throw ManagerError.unknownTeam(team) }
+        try database.untrust(team: team)
+        cache = [:]
+        let affected = try database.plugins().filter { $0.team == team }.map(\.id)
+        for id in affected {
+            await workers?.retire(plugin: id)
+            database.record("untrusted", plugin: id, "its team \(team) was removed from the trust list; stopped until it's trusted again")
+        }
+        database.record("untrusted", "team \(team) removed from the trust list")
+        log("plugins: no longer trusting team \(team); stopped \(affected.isEmpty ? "nothing" : affected.joined(separator: ", "))")
+        await onChange?()
+        return affected
     }
 
     // MARK: - Enabling and removing

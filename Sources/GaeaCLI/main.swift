@@ -15,6 +15,10 @@ import GaeaOperator
 //   gaea plugins enable|disable <id>
 //   gaea plugins remove <id>
 //   gaea plugins logs <id> [-n 80]      a plugin's events and its worker's stderr (UI-6)
+//   gaea trust [list]                   the trusted teams, and releases held because their team isn't (AB-T-0411)
+//   gaea trust approve <held-id | team> trust a held release's team and finish its install, or trust a team again
+//   gaea trust decline <held-id>        drop a held release
+//   gaea trust remove <team>            stop trusting a team: its plugins stop and stay installed
 //   gaea models [list]                  every plugin model, on or off
 //   gaea models enable|disable <id>
 //   gaea models root [<folder> | default]  the shared weights folder: read it, set it, or go back to MLXEngine's store
@@ -38,6 +42,7 @@ let usage = """
     usage: gaea status | logs [-n N] | ledger
            gaea plugins [list | add <repo-url> [version] | check | update <id> [version] | rollback <id>
                          | enable <id> | disable <id> | remove <id> | logs <id> [-n N]]
+           gaea trust [list | approve <held-id | team> | decline <held-id> | remove <team>]
            gaea models [list | enable <id> | disable <id> | root [<folder> | default] | lane <id> [<lane> | default]]
            gaea adapters [list | add <hf-url> --model <id> [--file f] [--id id] [--title t] [--trigger t] [--format f]
                           [--strength s] | enable <id> | disable <id> | remove <id>]
@@ -84,6 +89,10 @@ func fail(_ message: String) -> Never {
     case ("plugins", "enable"): return OperatorRequest(command: .pluginsEnable, args: ["id": operand()])
     case ("plugins", "disable"): return OperatorRequest(command: .pluginsDisable, args: ["id": operand()])
     case ("plugins", "remove"): return OperatorRequest(command: .pluginsRemove, args: ["id": operand()])
+    case ("trust", nil), ("trust", "list"): return OperatorRequest(command: .trustList)
+    case ("trust", "approve"): return OperatorRequest(command: .trustApprove, args: ["id": operand()])
+    case ("trust", "decline"): return OperatorRequest(command: .trustDecline, args: ["id": operand()])
+    case ("trust", "remove"): return OperatorRequest(command: .trustRemove, args: ["team": operand()])
     case ("plugins", "logs"):
         var a = ["id": operand()]
         if let lines { a["lines"] = lines }

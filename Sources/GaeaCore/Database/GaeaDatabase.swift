@@ -117,6 +117,34 @@ public final class GaeaDatabase: Sendable {
                 t.column("added_at", .datetime).notNull()
             }
         }
+        migrator.registerMigration("v3") { db in
+            // The teams the operator trusts besides Gaea's own (G-7, PLG-3, AB-T-0411). Gaea's own team is built in.
+            try db.create(table: "trusted_team") { t in
+                t.primaryKey("team", .text)
+                t.column("name", .text).notNull()
+                t.column("added_at", .datetime).notNull()
+            }
+            // Releases signed by a team that isn't trusted, downloaded and checked, waiting for the operator's answer.
+            try db.create(table: "held_release") { t in
+                t.primaryKey("id", .text)
+                t.column("kind", .text).notNull() // "add" or "update"
+                t.column("plugin_id", .text).notNull()
+                t.column("title", .text).notNull()
+                t.column("summary", .text).notNull().defaults(to: "")
+                t.column("version", .text).notNull()
+                t.column("repo", .text).notNull()
+                t.column("tag", .text).notNull()
+                t.column("team", .text).notNull()
+                t.column("signing_identity", .text)
+                t.column("notarized", .boolean).notNull()
+                t.column("models", .text).notNull() // JSON array of model ids
+                t.column("bundle_path", .text).notNull()
+                t.column("zip_sha256", .text).notNull()
+                t.column("manifest_sha256", .text).notNull()
+                t.column("signature", .text).notNull()
+                t.column("held_at", .datetime).notNull()
+            }
+        }
         return migrator
     }
 
@@ -245,6 +273,60 @@ public final class GaeaDatabase: Sendable {
         try queue.write { db in try db.execute(sql: "DELETE FROM plugin WHERE id = ?", arguments: [id]) }
     }
 
+    // MARK: - Trust list
+
+    public struct TrustedTeam: Sendable, Equatable {
+        public var team: String
+        /// The holder on the certificate the operator approved, e.g. "Jane Doe".
+        public var name: String
+        public var addedAt: Date
+    }
+
+    public func trustedTeams() throws -> [TrustedTeam] {
+        try queue.read { db in
+            try Row.fetchAll(db, sql: "SELECT * FROM trusted_team ORDER BY added_at").map {
+                TrustedTeam(team: $0["team"], name: $0["name"], addedAt: $0["added_at"])
+            }
+        }
+    }
+
+    public func trust(team: String, name: String) throws {
+        try queue.write { db in
+            try db.execute(sql: "INSERT OR IGNORE INTO trusted_team (team, name, added_at) VALUES (?, ?, ?)", arguments: [team, name, Date()])
+        }
+    }
+
+    public func untrust(team: String) throws {
+        try queue.write { db in try db.execute(sql: "DELETE FROM trusted_team WHERE team = ?", arguments: [team]) }
+    }
+
+    public func held() throws -> [HeldRelease] {
+        try queue.read { db in try Row.fetchAll(db, sql: "SELECT * FROM held_release ORDER BY held_at").map(HeldRelease.init) }
+    }
+
+    public func held(_ id: String) throws -> HeldRelease? {
+        try queue.read { db in
+            try Row.fetchOne(db, sql: "SELECT * FROM held_release WHERE id = ?", arguments: [id]).map(HeldRelease.init)
+        }
+    }
+
+    public func insertHeld(_ h: HeldRelease) throws {
+        let models = String(decoding: try JSONEncoder().encode(h.models), as: UTF8.self)
+        try queue.write { db in
+            try db.execute(sql: """
+                INSERT INTO held_release (id, kind, plugin_id, title, summary, version, repo, tag, team, signing_identity, notarized, models,
+                  bundle_path, zip_sha256, manifest_sha256, signature, held_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, arguments: [h.id, h.kind.rawValue, h.pluginID, h.title, h.summary, h.version, h.repo, h.tag, h.team, h.signingIdentity,
+                                 h.notarized, models, h.bundlePath, h.zipSHA256, h.manifestSHA256, h.signature,
+                                 h.heldAt])
+        }
+    }
+
+    public func deleteHeld(_ id: String) throws {
+        try queue.write { db in try db.execute(sql: "DELETE FROM held_release WHERE id = ?", arguments: [id]) }
+    }
+
     // MARK: - Events
 
     public struct Event: Sendable {
@@ -353,6 +435,58 @@ public final class GaeaDatabase: Sendable {
             try db.execute(sql: "INSERT OR REPLACE INTO plugin_store_schema (plugin_id, schema_version, migrations) VALUES (?, ?, ?)",
                            arguments: [plugin, version, text])
         }
+    }
+}
+
+/// A release signed by a team that isn't trusted (AB-T-0411): downloaded, its checksum, seal, Developer ID, hardened
+/// runtime and manifest checked, and kept aside until the operator approves the team or declines.
+public struct HeldRelease: Sendable, Equatable, Codable {
+    public enum Kind: String, Sendable, Codable { case add, update }
+
+    /// The operator's handle, e.g. `h-3f9a2c1d`.
+    public var id: String
+    public var kind: Kind
+    public var pluginID: String
+    public var title: String
+    public var summary: String
+    public var version: String
+    public var repo: String
+    public var tag: String
+    public var team: String
+    /// The certificate's common name, e.g. "Developer ID Application: Jane Doe (ABCDE12345)".
+    public var signingIdentity: String?
+    public var notarized: Bool
+    public var models: [String]
+    public var bundlePath: String
+    public var zipSHA256: String
+    public var manifestSHA256: String
+    public var signature: String
+    public var heldAt: Date
+
+    /// The team as the certificate names it: "Jane Doe", else the team id.
+    public var teamName: String { signingIdentity.flatMap(PluginVerifier.Signature.holder) ?? team }
+
+    /// The version it becomes once approved.
+    var record: GaeaDatabase.VersionRecord {
+        GaeaDatabase.VersionRecord(version: version, bundlePath: bundlePath, zipSHA256: zipSHA256, manifestSHA256: manifestSHA256,
+                                   signature: signature, notarized: notarized)
+    }
+
+    init(_ row: Row) {
+        id = row["id"]; kind = Kind(rawValue: row["kind"]) ?? .add; pluginID = row["plugin_id"]; title = row["title"]
+        summary = row["summary"]; version = row["version"]; repo = row["repo"]; tag = row["tag"]; team = row["team"]
+        signingIdentity = row["signing_identity"]; notarized = row["notarized"]
+        models = (try? JSONDecoder().decode([String].self, from: Data((row["models"] as String).utf8))) ?? []
+        bundlePath = row["bundle_path"]; zipSHA256 = row["zip_sha256"]; manifestSHA256 = row["manifest_sha256"]
+        signature = row["signature"]; heldAt = row["held_at"]
+    }
+
+    init(id: String, kind: Kind, pluginID: String, title: String, summary: String, version: String, repo: String, tag: String,
+         team: String, signingIdentity: String?, notarized: Bool, models: [String], record: GaeaDatabase.VersionRecord) {
+        self.id = id; self.kind = kind; self.pluginID = pluginID; self.title = title; self.summary = summary; self.version = version
+        self.repo = repo; self.tag = tag; self.team = team; self.signingIdentity = signingIdentity; self.notarized = notarized
+        self.models = models; bundlePath = record.bundlePath; zipSHA256 = record.zipSHA256; manifestSHA256 = record.manifestSHA256
+        signature = record.signature; heldAt = Date()
     }
 }
 

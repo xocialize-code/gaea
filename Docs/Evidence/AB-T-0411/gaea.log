@@ -1,0 +1,35 @@
+2026-11-01T22:41:45Z operator: listening on /tmp/gaea-trust.tHAw/h/operator.sock (same user, Developer ID team)
+2026-11-01T22:41:45Z gaea 0.13.0 starting: /tmp/gaea-trust.tHAw/h, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-01T22:41:45Z gaea: serving MES at http://127.0.0.1:17771/mes/v0
+2026-11-01T22:41:48Z plugins: held com.xocialize.gaea.demo 0.3.1 as h-640490b4: team CFZS6RXUCP isn't trusted
+2026-11-01T22:41:48Z plugins: declined h-640490b4 (com.xocialize.gaea.demo 0.3.1, team CFZS6RXUCP)
+2026-11-01T22:41:48Z operator: trust.approve failed: No installed or held plugin is signed by H-00000000. A team is approved from one of its releases: add the plugin first.
+2026-11-01T22:41:49Z plugins: xocialize/gaea-plugin-demo and xocialize-code/gaea-plugin-demo are the same repo, now xocialize-code/gaea-plugin-demo
+2026-11-01T22:41:49Z plugins: held com.xocialize.gaea.demo 0.3.0 as h-06d0df71: team CFZS6RXUCP isn't trusted
+2026-11-01T22:41:49Z plugins: trusted team CFZS6RXUCP (Dustin Nielson)
+2026-11-01T22:41:49Z plugins: added com.xocialize.gaea.demo 0.3.0, approved from h-06d0df71
+2026-11-01T22:41:50Z scheduler: launched com.xocialize.gaea.demo 0.3.0, pid 75810, hello after 0.314920458 seconds
+2026-11-01T22:41:52Z plugins: xocialize/gaea-plugin-z-image and xocialize-code/gaea-plugin-z-image are the same repo, now xocialize-code/gaea-plugin-z-image
+2026-11-01T22:41:52Z plugins: added com.xocialize.gaea.z-image 0.1.0 from xocialize-code/gaea-plugin-z-image
+2026-11-01T22:41:53Z scheduler: stopped com.xocialize.gaea.demo 0.3.0 (shutdown)
+2026-11-01T22:41:53Z plugins: no longer trusting team CFZS6RXUCP; stopped com.xocialize.gaea.demo, com.xocialize.gaea.z-image
+2026-11-01T22:41:53Z operator: listening on /tmp/gaea-trust.tHAw/h/operator.sock (same user, Developer ID team)
+2026-11-01T22:41:53Z gaea 0.13.0 starting: /tmp/gaea-trust.tHAw/h, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-01T22:41:53Z gaea: serving MES at http://127.0.0.1:17630/mes/v0
+2026-11-01T22:42:08Z operator: listening on /tmp/gaea-trust.tHAw/h/operator.sock (same user, Developer ID team)
+2026-11-01T22:42:08Z gaea 0.13.0 starting: /tmp/gaea-trust.tHAw/h, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-01T22:42:08Z gaea: serving MES at http://127.0.0.1:17771/mes/v0
+2026-11-01T22:42:09Z plugins: held com.xocialize.gaea.demo 0.3.1 as h-f83fdeef: team CFZS6RXUCP isn't trusted
+2026-11-01T22:42:09Z plugins: trusted team CFZS6RXUCP (Dustin Nielson)
+2026-11-01T22:42:09Z plugins: com.xocialize.gaea.demo switched 0.3.0 → 0.3.1
+2026-11-01T22:42:09Z scheduler: launched com.xocialize.gaea.demo 0.3.1, pid 75987, hello after 0.300203708 seconds
+2026-11-01T22:42:09Z operator: trust.remove failed: No installed or held plugin is signed by ABCDE12345. A team is approved from one of its releases: add the plugin first.
+2026-11-01T22:42:09Z operator: trust.approve failed: No installed or held plugin is signed by ABCDE12345. A team is approved from one of its releases: add the plugin first.
+2026-11-01T22:42:09Z scheduler: stopped com.xocialize.gaea.demo 0.3.1 (shutdown)
+2026-11-01T22:42:09Z plugins: no longer trusting team CFZS6RXUCP; stopped com.xocialize.gaea.demo, com.xocialize.gaea.z-image
+2026-11-01T22:42:09Z plugins: trusted team CFZS6RXUCP (Dustin Nielson)
+2026-11-01T22:42:10Z operator: listening on /tmp/gaea-trust.tHAw/h/operator.sock (same user, Developer ID team)
+2026-11-01T22:42:10Z gaea 0.13.0 starting: /tmp/gaea-trust.tHAw/h, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-01T22:42:10Z gaea: serving MES at http://127.0.0.1:17630/mes/v0
+2026-11-01T22:42:10Z scheduler: launched com.xocialize.gaea.demo 0.3.1, pid 76028, hello after 0.009873666 seconds
+2026-11-01T22:42:24Z scheduler: stopped com.xocialize.gaea.demo 0.3.1 (shutdown)

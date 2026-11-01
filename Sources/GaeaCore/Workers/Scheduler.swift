@@ -399,6 +399,9 @@ public actor Scheduler: WorkerControl {
         } else {
             plugin = try await manager.launchable(job.pluginID)
         }
+        guard plugin.trusted else {
+            throw WorkerFailure(code: "unknown_model", message: "\(plugin.title)'s team \(plugin.manifest.team) isn't trusted")
+        }
         guard plugin.enabled else { throw WorkerFailure(code: "unknown_model", message: "\(plugin.title) is disabled") }
         guard var model = plugin.model(job.model) else { throw WorkerFailure(code: "unknown_model", message: "no model \(job.model)") }
         if let allowed = job.lanes {

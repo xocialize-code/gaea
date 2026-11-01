@@ -122,8 +122,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// Renders the Plugins, Models and System pages, light and dark, the way MESKit's console gallery does.
     private func renderSnapshots(to directory: URL) async {
         try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
-        // One run on the first enabled plugin model, so the System page has a live worker to show.
-        if let host, let first = await host.engine.catalog().first(where: { $0.plugin.enabled }) {
+        // One run of the demo's GPU loop, when it's on, so the System page has a live worker to show.
+        if let host, let first = await host.engine.catalog().first(where: { $0.plugin.enabled && $0.model.id == "demo-matmul" }) {
             let job = WorkerJob(job: "job_snapshot", pluginID: first.plugin.id, model: first.model.id, operation: first.operation,
                                 params: ["n": 4096, "iterations": 20, "holdBytes": 1_000_000_000],
                                 outputDir: host.paths.spool.appending(path: "snapshot"))

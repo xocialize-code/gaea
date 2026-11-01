@@ -218,7 +218,7 @@ public actor GaeaUpdater {
         let target = try bundleToReplace()
         guard let kept = keptBundle() else { throw UpdateError.noRollback }
         // The kept app ran here before; it must still be ours and unbroken, notarized or not (a local build).
-        let signature = try PluginVerifier.verify(kept.app)
+        let signature = try PluginVerifier.verify(kept.app, trusting: [GPP.trustedTeam])
         guard signature.identifier == Gaea.bundleIdentifier else { throw UpdateError.refused("\(kept.app.path) is \(signature.identifier)") }
         let info = try buildInfo(of: kept.app)
         try await compatible(info)
@@ -334,7 +334,7 @@ public actor GaeaUpdater {
             let apps = try fm.contentsOfDirectory(at: unpacked, includingPropertiesForKeys: nil).filter { $0.pathExtension == "app" }
             guard apps.count == 1, let app = apps.first else { throw UpdateError.assets("expected one .app in the zip, found \(apps.count)") }
 
-            let signature = try PluginVerifier.verify(app)
+            let signature = try PluginVerifier.verify(app, trusting: [GPP.trustedTeam])
             guard signature.identifier == Gaea.bundleIdentifier else {
                 throw UpdateError.refused("the app is signed as \(signature.identifier), not \(Gaea.bundleIdentifier)")
             }
@@ -433,7 +433,7 @@ public actor GaeaUpdater {
         try fm.moveItem(at: app, to: beside)
         if !rollback { try? fm.removeItem(at: Self.stagingFolder(of: app)) }
         do {
-            let signature = try PluginVerifier.verify(beside)
+            let signature = try PluginVerifier.verify(beside, trusting: [GPP.trustedTeam])
             guard signature.identifier == Gaea.bundleIdentifier else { throw UpdateError.refused("the moved app is \(signature.identifier)") }
             guard renamex_np(beside.path, target.path, UInt32(RENAME_SWAP)) == 0 else {
                 throw UpdateError.refused("couldn't exchange \(target.lastPathComponent): \(String(cString: strerror(errno)))")

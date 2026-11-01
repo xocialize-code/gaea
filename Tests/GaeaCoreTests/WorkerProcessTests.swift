@@ -41,7 +41,7 @@ import Testing
         let dir = try scratch()
         let manifestData = try Data(contentsOf: Self.demo.appending(path: "Contents/Resources/manifest.json"))
         let manifest = try JSONDecoder().decode(PluginManifest.self, from: manifestData)
-        _ = try PluginVerifier.verify(Self.demo)
+        _ = try PluginVerifier.verify(Self.demo, trusting: [GPP.trustedTeam])
         let worker = WorkerProcess(pluginID: manifest.id, version: manifest.version, bundle: Self.demo, manifest: manifest,
                                    manifestData: manifestData, cacheRoot: dir, log: dir.appending(path: "w.log"), sessions: dir)
         _ = try await worker.start()
@@ -86,7 +86,7 @@ import Testing
         try FileManager.default.copyItem(at: Self.demo, to: tampered)
         let manifest = tampered.appending(path: "Contents/Resources/manifest.json")
         try (Data(contentsOf: manifest) + Data(" ".utf8)).write(to: manifest)
-        #expect { try PluginVerifier.verify(tampered) } throws: {
+        #expect { try PluginVerifier.verify(tampered, trusting: [GPP.trustedTeam]) } throws: {
             if case .invalid = $0 as? PluginVerifier.Refusal { true } else { false }
         }
 
@@ -98,9 +98,9 @@ import Testing
         codesign.standardError = FileHandle.nullDevice
         try codesign.run()
         codesign.waitUntilExit()
-        #expect { try PluginVerifier.verify(adhoc) } throws: {
+        #expect { try PluginVerifier.verify(adhoc, trusting: [GPP.trustedTeam]) } throws: {
             if case .notDeveloperID = $0 as? PluginVerifier.Refusal { true } else { false }
         }
-        #expect(try PluginVerifier.verify(Self.demo).team == GPP.trustedTeam)
+        #expect(try PluginVerifier.verify(Self.demo, trusting: [GPP.trustedTeam]).team == GPP.trustedTeam)
     }
 }

@@ -1,0 +1,17 @@
+2026-11-01 22:41:48.053|com.xocialize.gaea.demo|0.3.1|held|v0.3.1 from xocialize-code/gaea-plugin-demo is signed by Dustin Nielson (CFZS6RXUCP), a team Gaea doesn't trust; held as h-640490b4
+2026-11-01 22:41:48.187|com.xocialize.gaea.demo|0.3.1|declined|the operator didn't trust Dustin Nielson (CFZS6RXUCP); h-640490b4 dropped
+2026-11-01 22:41:49.917|com.xocialize.gaea.demo|0.3.0|held|v0.3.0 from xocialize-code/gaea-plugin-demo is signed by Dustin Nielson (CFZS6RXUCP), a team Gaea doesn't trust; held as h-06d0df71
+2026-11-01 22:41:49.971|||trusted|team CFZS6RXUCP (Dustin Nielson) approved by the operator
+2026-11-01 22:41:49.995|com.xocialize.gaea.demo|0.3.0|installed|added from https://github.com/xocialize-code/gaea-plugin-demo (v0.3.0) after its team was approved; Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea.demo, notarized, hardened runtime
+2026-11-01 22:41:52.981|com.xocialize.gaea.z-image|0.1.0|installed|added from xocialize-code/gaea-plugin-z-image (v0.1.0); Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea.z-image, notarized, hardened runtime
+2026-11-01 22:41:53.061|com.xocialize.gaea.demo||untrusted|its team CFZS6RXUCP was removed from the trust list; stopped until it's trusted again
+2026-11-01 22:41:53.062|com.xocialize.gaea.z-image||untrusted|its team CFZS6RXUCP was removed from the trust list; stopped until it's trusted again
+2026-11-01 22:41:53.062|||untrusted|team CFZS6RXUCP removed from the trust list
+2026-11-01 22:42:09.310|com.xocialize.gaea.demo|0.3.1|held|v0.3.1 from xocialize-code/gaea-plugin-demo is signed by Dustin Nielson (CFZS6RXUCP), a team Gaea doesn't trust; held as h-f83fdeef
+2026-11-01 22:42:09.345|||trusted|team CFZS6RXUCP (Dustin Nielson) approved by the operator
+2026-11-01 22:42:09.368|com.xocialize.gaea.demo|0.3.1|staged|approved from h-f83fdeef (v0.3.1)
+2026-11-01 22:42:09.370|com.xocialize.gaea.demo|0.3.1|switched|now runs 0.3.1; kept 0.3.0 for rollback
+2026-11-01 22:42:09.886|com.xocialize.gaea.demo||untrusted|its team CFZS6RXUCP was removed from the trust list; stopped until it's trusted again
+2026-11-01 22:42:09.886|com.xocialize.gaea.z-image||untrusted|its team CFZS6RXUCP was removed from the trust list; stopped until it's trusted again
+2026-11-01 22:42:09.886|||untrusted|team CFZS6RXUCP removed from the trust list
+2026-11-01 22:42:09.913|||trusted|team CFZS6RXUCP (Dustin Nielson) approved by the operator

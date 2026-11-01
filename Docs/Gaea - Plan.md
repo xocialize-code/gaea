@@ -593,6 +593,14 @@ starts while the phase before it is being built.
      - **Removing a team** stops and disables its plugins, and they stay installed until the team is approved again.
      - **Done =** with our own team treated as unknown in a test build (G-25), a plugin is held, approved, run, and
        stopped when its team is removed.
+     - **Done 2026-11-01 (AB-T-0411):** Gaea 0.13.0 with `GAEA_UNTRUST_OWN_TEAM=1`, plugins from GitHub, 42/42:
+       - the demo was held, declined, held again and approved, and it ran;
+       - Z-Image followed without asking;
+       - removing the team stopped both and kept them installed through a restart;
+       - an update was held while the team was untrusted, and approving it brought both back.
+
+       Holds live in `Held/` and `held_release`, and teams in `trusted_team`. The console answers through
+       MESEngineUI's trust prompt. Evidence: `Docs/Evidence/AB-T-0411/`.
   4. **A guide for plugin authors** (DST-4), shipping with the trust list. It lives in the template repo, linked from
      Gaea's README:
      - making a plugin from the template;
@@ -644,7 +652,7 @@ starts while the phase before it is being built.
 | **One GPU job at a time limits throughput** (G-13) | Measure in G1 before letting small jobs run alongside a heavy one. Spread work across servers (G-19). |
 | **Harder debugging across processes** | Logs per plugin (stderr) in the console, `gaea plugins logs`, and job ids in every message |
 | **Our Developer ID is a single point of trust** | Notarization in CI, a pinned requirement, and a rollback version kept on disk |
-| **A repo URL that points at someone else's code** (G-18) | The signature, not the URL, decides: an unknown team is refused until the user adds it to the trust list. |
+| **A repo URL that points at someone else's code** (G-18) | The signature, not the URL, decides: an unknown team's release is held until the operator approves the team, which shows its certificate's name, team id and notarization (AB-T-0411). |
 | **Spec work gates audio and video** | Run the spec work in parallel with the previous phase. The mock engine and conformance suite come first, as in R0. |
 | **MES loses its reference client while Lite is deprecated** | Gaea Lab takes over the client conformance role before Lite is deprecated, not after. |
 

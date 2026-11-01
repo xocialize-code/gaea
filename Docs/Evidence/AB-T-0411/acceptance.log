@@ -1,0 +1,148 @@
+# Trust-list acceptance (AB-T-0411) 2026-11-01T22:41:45Z: Gaea 0.13.0, plugins from GitHub
+host: Mac17,14, macOS 27.2; GAEA_HOME /tmp/gaea-trust.tHAw/h
+Gaea 0.13.0
+MES:       http://127.0.0.1:17771/mes/v0 (open, this Mac only)
+Operations: 
+Plugins:   0 installed, 0 enabled
+Trust:     no team
+Workers:   none
+Memory:    0.00 GB charged of 103.08 GB budget; host 0.01 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    up to date
+Operator:  /tmp/gaea-trust.tHAw/h/operator.sock (same user, Developer ID team); you are pid 75625, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-trust.tHAw/h/gaea.sqlite
+PASS  status says no team is trusted
+$ gaea trust
+Trusted teams:
+  (Gaea's own team is treated as unknown for this run: GAEA_UNTRUST_OWN_TEAM)
+Held: none
+$ gaea plugins add https://github.com/xocialize-code/gaea-plugin-demo
+Held h-640490b4: Gaea demo worker 0.3.1 (com.xocialize.gaea.demo) is signed by a team Gaea doesn't trust yet.
+  Signed by:  Developer ID Application: Dustin Nielson (CFZS6RXUCP)
+  Team:       CFZS6RXUCP
+  Notarized:  yes
+  Repo:       https://github.com/xocialize-code/gaea-plugin-demo (v0.3.1)
+  Models:     demo-matmul, demo-gradient
+Trusting the team lets Gaea run any plugin it signs, including later updates.
+  Approve: gaea trust approve h-640490b4
+  Decline: gaea trust decline h-640490b4
+PASS  adding the demo holds it instead of installing
+PASS  the hold names the certificate, team, notarization, repo and models
+PASS  nothing is installed
+PASS  nothing is offered
+{"error":{"code":"unknown_operation","message":"No operation image.generate on this engine.","param":"operation","request_id":"req_8a61ychjgqv8"}}
+PASS  a job for its model is refused
+PASS  the held bundle is kept aside in Held/h-640490b4
+$ gaea trust decline h-640490b4
+Declined Gaea demo worker 0.3.1 from Dustin Nielson (CFZS6RXUCP); the download is gone.
+PASS  declining drops the download
+== events ==
+2026-11-01T22:41:48Z held 0.3.1: v0.3.1 from xocialize-code/gaea-plugin-demo is signed by Dustin Nielson (CFZS6RXUCP), a team Gaea doesn't trust; held as h-640490b4
+2026-11-01T22:41:48Z declined 0.3.1: the operator didn't trust Dustin Nielson (CFZS6RXUCP); h-640490b4 dropped
+== worker stderr (/tmp/gaea-trust.tHAw/h/Logs/plugins/com.xocialize.gaea.demo.log) ==
+
+PASS  the events record the hold and the decline
+No installed or held plugin is signed by H-00000000. A team is approved from one of its releases: add the plugin first.
+PASS  an unknown hold can't be approved
+$ gaea plugins add https://github.com/xocialize-code/gaea-plugin-demo 0.3.0
+Held h-06d0df71: Gaea demo worker 0.3.0 (com.xocialize.gaea.demo) is signed by a team Gaea doesn't trust yet.
+  Signed by:  Developer ID Application: Dustin Nielson (CFZS6RXUCP)
+  Team:       CFZS6RXUCP
+  Notarized:  yes
+  Repo:       https://github.com/xocialize-code/gaea-plugin-demo (v0.3.0)
+  Models:     demo-matmul, demo-gradient
+Trusting the team lets Gaea run any plugin it signs, including later updates.
+  Approve: gaea trust approve h-06d0df71
+  Decline: gaea trust decline h-06d0df71
+PASS  0.3.0, named, is held as h-06d0df71
+Trusted teams:
+  (Gaea's own team is treated as unknown for this run: GAEA_UNTRUST_OWN_TEAM)
+Held:
+  Held h-06d0df71: Gaea demo worker 0.3.0 (com.xocialize.gaea.demo) is signed by a team Gaea doesn't trust yet.
+    Signed by:  Developer ID Application: Dustin Nielson (CFZS6RXUCP)
+    Team:       CFZS6RXUCP
+    Notarized:  yes
+    Repo:       https://github.com/xocialize-code/gaea-plugin-demo (v0.3.0)
+    Models:     demo-matmul, demo-gradient
+  Trusting the team lets Gaea run any plugin it signs, including later updates.
+    Approve: gaea trust approve h-06d0df71
+    Decline: gaea trust decline h-06d0df71
+PASS  trust lists it
+Trusted its team. Installed Gaea demo worker 0.3.0 (com.xocialize.gaea.demo), enabled.
+PASS  approving it trusts the team and installs the demo
+Trusted teams:
+  CFZS6RXUCP  Dustin Nielson, approved 2026-11-01T22:41:49Z  plugins: com.xocialize.gaea.demo
+  (Gaea's own team is treated as unknown for this run: GAEA_UNTRUST_OWN_TEAM)
+Held: none
+PASS  the team is on the list, approved by the operator
+PASS  demo-gradient is offered
+{'effective': {'count': 1, 'seed': 11, 'size': {'height': 384, 'width': 512}, 'x-gaea.gradient_angle': 45}, 'lane': 'fp32', 'operation': 'image.generate', 'outputs': [{'media_type': 'image/png', 'name': 'images', 'path': '/tmp/gaea-trust.tHAw/h/Caches/spool/jobs/job_4dw08msb8wv3wxytqnam/outputs/worker/worker-1/out/image-0.png'}], 'plugin': 'com.xocialize.gaea.demo', 'seconds': 0.649, 'version': '0.3.0'}
+PASS  a job runs on demo 0.3.0
+Installed Z-Image 0.1.0 (com.xocialize.gaea.z-image), enabled.
+PASS  Z-Image from the same team installs without asking
+PASS  z-image-turbo is offered
+budget 103.08 GB, charged 0.02 GB, free 103.06 GB; host 0.03 GB; 0 queued
+  com.xocialize.gaea.demo 0.3.0 pid 75810: declared 0.20 GB, phys_footprint 0.02 GB (peak 0.14 GB), worker says 0.14 GB, charged 0.02 GB lanes ["demo-gradient": "fp32"]
+PASS  a worker is running before
+No longer trusting CFZS6RXUCP. Stopped, and kept installed until it's trusted again: com.xocialize.gaea.demo, com.xocialize.gaea.z-image.
+PASS  removing the team stops both plugins and keeps them
+budget 103.08 GB, charged 0.00 GB, free 103.08 GB; host 0.03 GB; 0 queued
+PASS  no worker runs
+PASS  neither is offered
+{"error":{"code":"unknown_operation","message":"No operation image.generate on this engine.","param":"operation","request_id":"req_dwhjrjf8wwrd"}}
+PASS  a job for demo-gradient is refused
+on  com.xocialize.gaea.demo 0.3.0  Gaea demo worker  https://github.com/xocialize-code/gaea-plugin-demo
+      stopped: its team CFZS6RXUCP isn't trusted (gaea trust approve CFZS6RXUCP)
+on  com.xocialize.gaea.z-image 0.1.0  Z-Image  https://github.com/xocialize-code/gaea-plugin-z-image
+      stopped: its team CFZS6RXUCP isn't trusted (gaea trust approve CFZS6RXUCP)
+PASS  both stay installed, marked stopped
+Trusted teams:
+  (Gaea's own team is treated as unknown for this run: GAEA_UNTRUST_OWN_TEAM)
+Not trusted, installed and stopped:
+  CFZS6RXUCP  plugins: com.xocialize.gaea.demo, com.xocialize.gaea.z-image  (gaea trust approve CFZS6RXUCP)
+Held: none
+PASS  trust lists them as not trusted
+PASS  the events record the removal
+PASS  after a restart, still not offered
+PASS  after a restart, still marked stopped
+$ gaea plugins update com.xocialize.gaea.demo
+Held h-f83fdeef: Gaea demo worker 0.3.1 (com.xocialize.gaea.demo) is signed by a team Gaea doesn't trust yet.
+  Signed by:  Developer ID Application: Dustin Nielson (CFZS6RXUCP)
+  Team:       CFZS6RXUCP
+  Notarized:  yes
+  Repo:       https://github.com/xocialize-code/gaea-plugin-demo (v0.3.1)
+  Models:     demo-matmul, demo-gradient
+Trusting the team lets Gaea run any plugin it signs, including later updates.
+  Approve: gaea trust approve h-f83fdeef
+  Decline: gaea trust decline h-f83fdeef
+PASS  an update (0.3.1) while the team is untrusted is held too
+Trusted its team. com.xocialize.gaea.demo now runs 0.3.1.
+PASS  approving the update trusts the team again and switches the demo
+PASS  the demo is offered again
+PASS  Z-Image is offered again
+PASS  a job runs on demo 0.3.1
+PASS  0.3.0 is kept for rollback
+No installed or held plugin is signed by ABCDE12345. A team is approved from one of its releases: add the plugin first.
+PASS  removing a team that isn't trusted is refused
+No installed or held plugin is signed by ABCDE12345. A team is approved from one of its releases: add the plugin first.
+PASS  approving a team with nothing installed or held is refused
+$ gaea trust
+Trusted teams:
+  CFZS6RXUCP  Dustin Nielson, approved 2026-11-01T22:42:09Z  plugins: com.xocialize.gaea.demo, com.xocialize.gaea.z-image
+  (Gaea's own team is treated as unknown for this run: GAEA_UNTRUST_OWN_TEAM)
+Held: none
+No longer trusting CFZS6RXUCP. Stopped, and kept installed until it's trusted again: com.xocialize.gaea.demo, com.xocialize.gaea.z-image.
+Trusted CFZS6RXUCP. Its plugins run again: com.xocialize.gaea.demo, com.xocialize.gaea.z-image.
+PASS  trust remove, then approve by team id, runs them again
+PASS  the console rendered the Plugins page, untrusted and trusted
+PASS  nothing is left held
+Trusted teams:
+  CFZS6RXUCP  Gaea's own team (built in)
+Held: none
+PASS  Gaea's own team is built in
+Installed Gaea demo worker 0.3.1 (com.xocialize.gaea.demo), enabled.
+PASS  the demo installs at once
+CFZS6RXUCP is Gaea's own team, trusted always.
+PASS  the built-in team can't be removed
+
+42 passed, 0 failed
