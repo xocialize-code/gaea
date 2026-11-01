@@ -1,0 +1,52 @@
+{
+  "item": "hair",
+  "resolution": 1536,
+  "passes": [
+    {
+      "structure": 64,
+      "budget": 80000,
+      "voxels": 21863,
+      "sample_s": 13.2,
+      "decode_s": 0.8,
+      "decoded_rows": 2568973,
+      "extracted_faces": 5049754
+    },
+    {
+      "structure": 128,
+      "budget": 90000,
+      "voxels": 89872,
+      "sample_s": 50.5,
+      "decode_s": 3.6,
+      "decoded_rows": 8249746,
+      "extracted_faces": 16361644
+    },
+    {
+      "structure": 192,
+      "budget": 110000,
+      "voxels": 101110,
+      "sample_s": 58.7,
+      "decode_s": 4.1,
+      "decoded_rows": 9149856,
+      "extracted_faces": 18187272
+    }
+  ],
+  "steps_per_pass": 25,
+  "seed": 0,
+  "refine_s": 229.4,
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "peak_gpu_memory_gb": 31.5,
+  "warnings": [
+    "adaptive_vox settled at resolution 109 instead of the requested 128 to fit target_num=90000; the returned coordinates are on the coarser grid",
+    "adaptive_vox settled at resolution 114 instead of the requested 192 to fit target_num=110000; the returned coordinates are on the coarser grid"
+  ],
+  "refined_faces": 1999999,
+  "refined_vertices": 996704,
+  "coarse_faces": 295684,
+  "background": "kept existing alpha",
+  "golden": false,
+  "stack": {
+    "torch": "2.8.0+cu128",
+    "hi3d_weights": "705fc0901c5d896cdcbf1dbf1feaa173e62bdd3a",
+    "sparc3d": "23dcc684bc6e1fab86ecafb99ec5270edad122f9"
+  }
+}

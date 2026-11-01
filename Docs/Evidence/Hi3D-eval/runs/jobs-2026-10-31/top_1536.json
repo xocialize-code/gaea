@@ -1,0 +1,51 @@
+{
+  "item": "top",
+  "resolution": 1536,
+  "passes": [
+    {
+      "structure": 64,
+      "budget": 80000,
+      "voxels": 11393,
+      "sample_s": 10.5,
+      "decode_s": 0.4,
+      "decoded_rows": 1093000,
+      "extracted_faces": 2166208
+    },
+    {
+      "structure": 128,
+      "budget": 90000,
+      "voxels": 66467,
+      "sample_s": 38.5,
+      "decode_s": 2.1,
+      "decoded_rows": 4907921,
+      "extracted_faces": 9718762
+    },
+    {
+      "structure": 192,
+      "budget": 110000,
+      "voxels": 107989,
+      "sample_s": 66.4,
+      "decode_s": 5.0,
+      "decoded_rows": 7464901,
+      "extracted_faces": 14750596
+    }
+  ],
+  "steps_per_pass": 25,
+  "seed": 0,
+  "refine_s": 184.4,
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "peak_gpu_memory_gb": 26.57,
+  "warnings": [
+    "adaptive_vox settled at resolution 156 instead of the requested 192 to fit target_num=110000; the returned coordinates are on the coarser grid"
+  ],
+  "refined_faces": 1999999,
+  "refined_vertices": 999916,
+  "coarse_faces": 286144,
+  "background": "kept existing alpha",
+  "golden": false,
+  "stack": {
+    "torch": "2.8.0+cu128",
+    "hi3d_weights": "705fc0901c5d896cdcbf1dbf1feaa173e62bdd3a",
+    "sparc3d": "23dcc684bc6e1fab86ecafb99ec5270edad122f9"
+  }
+}

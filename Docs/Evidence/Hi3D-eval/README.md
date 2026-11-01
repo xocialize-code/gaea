@@ -98,7 +98,7 @@ mlx-trellis2-swift 6037d1c (AB-A-0223) fixed the bake: it now takes glTF UVs (ro
   order), FlexiCubes, the Heun scheduler, and the DINOv2 and CLIP conditioners.
 - **Open items:**
   - re-texture hair, top and skirt;
-  - run 1536³ (HF Jobs on an A100 80 GB is about $3 for all five).
+  - ~~run 1536³~~: done 2026-10-31, see below.
 
 ## Follow-up: AB-A-0223 (mlx-3d, same day)
 
@@ -114,3 +114,66 @@ mlx-trellis2-swift 6037d1c (AB-A-0223) fixed the bake: it now takes glTF UVs (ro
   the dress; task AB-T-0386). `removeSmallConnectedComponents` works: on the dress, 2,839 components → 1.
   `tools/retex-tool`'s `unwrap` can run that chain via `CLEAN=<minArea>,<maxPerimeter>[,<repairNonManifold>]`.
 - **Receipt:** AB-R-0659.
+
+## 1536³, and goldens for AB-T-0385 (HF Jobs, 2026-10-31)
+
+One HF Job ([`tools/hi3d_job.py`](tools/hi3d_job.py)) ran in the Space's own image
+(`hf.co/spaces/townbox/hi3d10-zerogpu`, so the same stack as the 1024³ runs: torch 2.8.0+cu128, flash-attn
+2.8.3, spconv 2.3.6, sparc3d @ `23dcc68`, weights @ `705fc09`) on one full RTX PRO 6000 (96 GB):
+- **Cost:** 24.4 minutes of GPU time (`rtx-pro-6000`, $2.75 an hour), about **$1.12**.
+- **What ran:** the same five inputs as before, 25 Heun steps per pass, seed 0. Two goldens, dress and shoes
+  at 512³. A 1024³ dress as a same-GPU control. All five garments at 1536³.
+- **Where the outputs are:** the private bucket `xocialize/hi3d-eval` (`run-2026-10-31/`), copied to
+  `/Volumes/DEV_VOL1/Evidence/hi3d-eval-2026-10-31/` (7.2 GB). Each run's info is in `runs/jobs-2026-10-31/`,
+  and the job's log is `job.log` beside the outputs.
+
+### 1536³ is not worth it at the release's budgets
+
+| Item | 1024³ (Space) | 1536³ (Jobs) | Grid of pass 2 / pass 3 | Verdict |
+|---|---|---|---|---|
+| dress | 238 s, 31.4 GB | 272 s, 35.1 GB | 109 / 121 | **Moderate.** Eyelets get real grommet holes; waistband and bow crisper; gathers tighter |
+| shoes | 139 s, 24.3 GB | 198 s, 29.2 GB | 128 / 156 | **Moderate, and a step back.** Laces, eyelet rims and the tongue's stitch seam cleaner, but the sole's blotchy relief gets stronger |
+| top | 138 s, 23.3 GB | 184 s, 26.6 GB | 128 / 156 | **Small.** Crisper tie knot and stripes; fine noise spreads over the plain cloth |
+| skirt | 226 s, 31.0 GB | 250 s, 32.9 GB | 115 / 121 | **None** |
+| hair | 224 s, 30.3 GB | 229 s, 31.5 GB | 109 / 114 | **Small.** Cleaner edges inside; the strand tips still fray |
+
+The 1024³ column is the Space: half a GPU (MIG 48 GB), default allocator. The 1536³ column is a full GPU. On
+the full GPU, the dress control at 1024³ took 157 s and 27.6 GB.
+
+- **Why the gain is small.** The third pass is meant to sample a 192³ structure, but the adaptive voxelizer
+  must fit `PASS_BUDGETS[2]` = 110k occupied voxels. It settles at 114–121 on the dress, skirt and hair and at 156 on the
+  shoes and top (the runs' `warnings`). Pass 2 already settles at 109–128. On large garments "1536³" is
+  5–11% finer than 1024³, and on the shoes and top 22%. Raising the budgets would leave the training
+  distribution and is untested.
+- **Cost of a third pass.** Twice the faces (the 2M target). On the same GPU the dress went from 157 s and
+  27.6 GB to 272 s and 35.1 GB (+73% time, +7.5 GB). The job ran with `expandable_segments`, which the Space
+  doesn't use, so the Space's 1024³ peaks aren't directly comparable. Peak memory at 1536³ is 26.6–35.1 GB:
+  it fits 48 GB, and the earlier 40 GB guess was high.
+- **Meshes** (`runs/mesh-stats-1536.txt`, `tools/mesh_stats_1536.py`): 2M faces. The open edges are about the
+  same (165–618; at 1024³, 153–600). Shards go up on the dress, shoes and top and down on the skirt and hair.
+- **Run to run.** The same input decodes to 2,713,802 rows in the golden run and 2,709,940 in the control (pass
+  1). GPU sparse conv and attention aren't deterministic, as AB-T-0385 assumed.
+
+**For the Mac port:** two passes (1024³) stay the target. 1536³ is worth another look only if the budgets
+are raised. Screenshots are `screenshots/1536-*.png`, with 1024³ on the left in each.
+
+### Goldens for the 512³ spike
+
+These are in `golden_dress_512/golden/` (4.7 GB) and `golden_shoes_512/golden/` (2.2 GB). Each holds 42
+`.npz` stages and a `manifest.json` with every array's shape and dtype. Float tensors over 20M elements are
+float16; everything else is float32 or int.
+
+| Stage | Files |
+|---|---|
+| Inputs | `input.coarse` (the PLY as loaded) and `input.prepared.png` (after `prepare_image`) |
+| Conditioner | `cond.dino` and `cond.clip` (their `pixel_values` and outputs), `cond.tokens` [1, 2917, 2048] |
+| Voxelize | `p0.voxelize` (input mesh and coords; dress 21,816 voxels, shoes 10,492) |
+| Sampling | `p0.noise` (noise, coords, the 25 timesteps); `p0.step00`, `step12`, `step24` (x, sigma, next sigma, both Heun slopes with their positive and negative outputs, prediction, update); `p0.latents` (normalized, denormalized, mean, std) |
+| Transformer at step 0, positive call | `t512.input_layer`, `t512.input_blocks.0` and `.1`, `t512.blocks.0`, `.12` and `.23` (inputs and outputs, 4,275 tokens × 2112 for the dress), `t512.out_blocks.*`, `t512.out_layer`, `t512.t_embedder`, `t512.adaLN_modulation` |
+| VAE decoder (outputs; it updates the Point in place) | `dec.z_to_f`, `dec.mid.*`, `dec.dec.dec3` to `dec0`, `dec.conv_out`, and `p0.decoded` (dress: 2.71M rows) |
+| Extraction | `p0.mesh_raw` (FlexiCubes, 5.39M faces), `p0.mesh_filled` (after the ear-clip fill), `final.mesh` (postprocessed, 1M faces) |
+
+Run on 512³ alone, the goldens took 74 s and 14.5 GB for the dress and 20 s and 11.6 GB for the shoes.
+**Deviation from AB-T-0385's plan:** the task named torch 2.5 / cu124 and flash-attn 2.7.4 on an A100. These
+goldens use the Space's torch 2.8 stack on Blackwell, the same stack as every eval run here. The math is the
+same; only kernel-level rounding differs.

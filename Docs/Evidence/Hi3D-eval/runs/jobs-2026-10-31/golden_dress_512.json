@@ -1,0 +1,31 @@
+{
+  "item": "dress",
+  "resolution": 512,
+  "passes": [
+    {
+      "structure": 64,
+      "budget": 80000,
+      "voxels": 21816,
+      "sample_s": 42.0,
+      "decode_s": 10.6,
+      "decoded_rows": 2713802,
+      "extracted_faces": 5389120
+    }
+  ],
+  "steps_per_pass": 25,
+  "seed": 0,
+  "refine_s": 74.0,
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "peak_gpu_memory_gb": 14.5,
+  "warnings": [],
+  "refined_faces": 999999,
+  "refined_vertices": 488579,
+  "coarse_faces": 298646,
+  "background": "kept existing alpha",
+  "golden": true,
+  "stack": {
+    "torch": "2.8.0+cu128",
+    "hi3d_weights": "705fc0901c5d896cdcbf1dbf1feaa173e62bdd3a",
+    "sparc3d": "23dcc684bc6e1fab86ecafb99ec5270edad122f9"
+  }
+}

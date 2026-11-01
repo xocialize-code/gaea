@@ -1,0 +1,16 @@
+dress
+  1024 Space   999,999 faces  2839 comps  2838 shards  571 open edges | 238 s, 31.4 GB
+  1024 Jobs  1,000,000 faces  2626 comps  2625 shards  600 open edges | 157 s, 27.57 GB, voxels 21816/79118, warnings 1
+  1536 Jobs  2,000,000 faces  3312 comps  3311 shards  618 open edges | 272 s, 35.13 GB, voxels 21816/79135/102390, warnings 2
+shoes
+  1024 Space 1,000,000 faces   415 comps   413 shards  162 open edges | 139 s, 24.33 GB
+  1536 Jobs  2,000,000 faces   900 comps   898 shards  232 open edges | 198 s, 29.23 GB, voxels 10492/65554/106159, warnings 1
+top
+  1024 Space   999,999 faces    37 comps    36 shards  153 open edges | 138 s, 23.25 GB
+  1536 Jobs  1,999,999 faces    78 comps    77 shards  165 open edges | 184 s, 26.57 GB, voxels 11393/66467/107989, warnings 1
+skirt
+  1024 Space   999,999 faces   310 comps   309 shards  223 open edges | 226 s, 31.0 GB
+  1536 Jobs  1,999,999 faces   153 comps   152 shards  279 open edges | 250 s, 32.89 GB, voxels 20724/88653/101823, warnings 2
+hair
+  1024 Space 1,000,000 faces   682 comps   681 shards  250 open edges | 224 s, 30.31 GB
+  1536 Jobs  1,999,999 faces   569 comps   568 shards  297 open edges | 229 s, 31.5 GB, voxels 21863/89872/101110, warnings 2

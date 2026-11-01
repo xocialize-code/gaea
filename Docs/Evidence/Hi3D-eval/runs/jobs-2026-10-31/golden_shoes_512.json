@@ -1,0 +1,31 @@
+{
+  "item": "shoes",
+  "resolution": 512,
+  "passes": [
+    {
+      "structure": 64,
+      "budget": 80000,
+      "voxels": 10492,
+      "sample_s": 9.7,
+      "decode_s": 1.9,
+      "decoded_rows": 1142507,
+      "extracted_faces": 2251782
+    }
+  ],
+  "steps_per_pass": 25,
+  "seed": 0,
+  "refine_s": 20.4,
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "peak_gpu_memory_gb": 11.61,
+  "warnings": [],
+  "refined_faces": 1000000,
+  "refined_vertices": 498044,
+  "coarse_faces": 266310,
+  "background": "kept existing alpha",
+  "golden": true,
+  "stack": {
+    "torch": "2.8.0+cu128",
+    "hi3d_weights": "705fc0901c5d896cdcbf1dbf1feaa173e62bdd3a",
+    "sparc3d": "23dcc684bc6e1fab86ecafb99ec5270edad122f9"
+  }
+}
