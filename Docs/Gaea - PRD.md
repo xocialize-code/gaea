@@ -70,7 +70,7 @@ and video generation and processing on the Mac.
 | SRV-5 | **Helper sequencing:** Gaea runs multi-step plans itself, such as a prompt rewrite by the LLM plugin before a generate. | A | G-10; plan §3.3 |
 | SRV-6 | **The spool is private and swept:** per-job folders, deleted on completion or TTL, and swept at launch after a crash. | A | ENG-7 |
 | SRV-7 | **Pairing by default; open mode on loopback** for development and for clients on the same Mac. | A | ENG-8 |
-| SRV-8 | **Crash-safe:** if a worker dies, its job fails or is requeued once and the client is told; if Gaea dies, in-flight jobs fail on reconnect. Client media is never lost, because the client holds it. | A | ENG-10 |
+| SRV-8 | **Crash-safe:** if a worker dies, its job fails or is requeued once and the client is told, the crash named; if Gaea dies, in-flight jobs fail on reconnect. Client media is never lost, because the client holds it. Every crash is recorded with its stderr and macOS's crash report (`gaea crashes`), and three in ten minutes quarantine the plugin until the operator switches it on (G-26). | A | ENG-10 |
 | SRV-9 | **Several servers on a LAN,** each advertising only the operations and models its enabled plugins offer. Servers don't coordinate. | N | G-19 |
 | SRV-10 | **Headless or menu bar.** The server runs without its UI, for example at login on a studio Mac. | P | ENG-9 |
 

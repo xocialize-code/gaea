@@ -73,7 +73,8 @@ public struct GaeaConsoleBackend: EngineConsoleBackend {
 }
 
 /// The Plugins page (UI-3) over Gaea's plugin manager and its trust list (AB-T-0411): a release signed by a team that
-/// isn't trusted comes back as a trust question, and the operator's answer approves the team or drops the download.
+/// isn't trusted comes back as a trust question, and the operator's answer approves the team or drops the download. A
+/// quarantined plugin (G-26, AB-T-0417) shows why, and switching it on clears it.
 public struct GaeaPluginBackend: EnginePluginBackend {
     let host: GaeaHost
 
@@ -101,6 +102,9 @@ public struct GaeaPluginBackend: EnginePluginBackend {
             let team = teams[row.team] ?? EngineTeam(id: row.team, name: row.team)
             let state: EnginePlugin.State = if !trusted.contains(row.team) {
                 .failed("Signed by \(team.name) (\(row.team)), a team this server doesn't trust. It runs again when you trust the team.")
+            } else if let reason = row.quarantineReason {
+                // G-26, until MESEngineUI has a quarantined state of its own (AB-A-0247): the On toggle clears it.
+                .failed("Quarantined after \(reason). Turn it on to clear the quarantine; gaea crashes shows each crash.")
             } else if let failure = row.failure {
                 .failed(failure)
             } else if let pending = row.pendingVersion {

@@ -4,7 +4,7 @@ import GaeaOperator
 /// Gaea's identity and the folders it uses.
 public enum Gaea {
     /// This build's version, compared with a plugin manifest's `min_gaea`.
-    public static let version = "0.13.0"
+    public static let version = "0.14.0"
     /// GPP protocol versions this host speaks (GPP-1 §6).
     public static let protocols: ClosedRange<Int> = 1...1
     /// The `manifest_version`s this host reads.
@@ -56,6 +56,8 @@ public struct GaeaPaths: Sendable {
     public var updates: URL { root.appending(path: "Updates", directoryHint: .isDirectory) }
     /// Releases held for the operator's answer because their team isn't trusted (AB-T-0411).
     public var held: URL { root.appending(path: "Held", directoryHint: .isDirectory) }
+    /// The macOS crash reports of crashed workers, copied as `<crash id>-<report>.ips` (SRV-8).
+    public var crashes: URL { root.appending(path: "Crashes", directoryHint: .isDirectory) }
     /// MES pairing and TLS state (never the spool, which is wiped at start).
     public var serverState: URL { root.appending(path: "Server", directoryHint: .isDirectory) }
     public var spool: URL { caches.appending(path: "spool", directoryHint: .isDirectory) }

@@ -213,6 +213,13 @@ public final class GaeaHost: Sendable {
             case .pluginsRemove:
                 try await manager.remove(plugin: try arg("id"))
                 return OperatorResponse(id: request.id, ok: true, text: "Removed \(try arg("id")).")
+            case .crashesList:
+                return try crashList(request.id, plugin: args["plugin"], limit: Int(args["lines"] ?? "") ?? 50)
+            case .crashesShow:
+                let text = try arg("id")
+                guard let number = Int64(text.trimmingCharacters(in: CharacterSet(charactersIn: "#"))),
+                      let crash = try database.crash(number) else { throw OperatorError("No crash \(text): gaea crashes lists them.") }
+                return OperatorResponse(id: request.id, ok: true, text: Self.describe(crash), json: Self.json(crash))
             case .trustList:
                 return trustList(request.id)
             case .trustApprove:
@@ -362,6 +369,7 @@ public final class GaeaHost: Sendable {
             Operations: \(descriptors.map { "\($0.operation) [\($0.models.map(\.id).joined(separator: ", "))]" }.joined(separator: "; "))
             Plugins:   \(plugins.count) installed, \(plugins.filter(\.enabled).count) enabled
             Trust:     \(await trustSummary())
+            Crashes:   \(try crashSummary(plugins))
             Workers:   \(ledger.workers.map { "\($0.pluginID) pid \($0.pid)\($0.busy ? " (busy)" : "")" }.joined(separator: ", ").ifEmpty("none"))
             Memory:    \(ledger.chargedBytes.gb) charged of \(ledger.budgetBytes.gb) budget; host \(ledger.hostFootprintBytes.gb)
             Models:    \(await scheduler.modelsRoot.path)
@@ -395,15 +403,72 @@ public final class GaeaHost: Sendable {
             if let latest = row.latestVersion { line += "\n      update available: \(latest)" }
             if let failure = row.failure { line += "\n      failed: \(failure)" }
             if !trusted.contains(row.team) { line += "\n      stopped: its team \(row.team) isn't trusted (gaea trust approve \(row.team))" }
+            if let reason = row.quarantineReason {
+                line += "\n      quarantined \(row.quarantinedAt?.formatted(.iso8601) ?? ""): \(reason) (gaea plugins enable \(row.id) clears it)"
+            }
+            let recent = (try? database.crashes(plugin: row.id, since: Date().addingTimeInterval(-86_400))) ?? []
+            if let last = recent.first {
+                line += "\n      crashed \(recent.count == 1 ? "once" : "\(recent.count) times") in 24 h, last \(last.how) at "
+                    + "\(last.at.formatted(.iso8601)) (gaea crashes show \(last.id ?? 0))"
+            }
             return line
         }.joined(separator: "\n")
         struct Row: Encodable {
             var id: String, version: String, enabled: Bool, previous: String?, pending: String?, latest: String?, failure: String?, repo: String
+            var quarantined: String?
         }
         return OperatorResponse(id: id, ok: true, text: text, json: Self.json(rows.map {
             Row(id: $0.id, version: $0.activeVersion, enabled: $0.enabled, previous: $0.previousVersion, pending: $0.pendingVersion,
-                latest: $0.latestVersion, failure: $0.failure, repo: $0.repo)
+                latest: $0.latestVersion, failure: $0.failure, repo: $0.repo, quarantined: $0.quarantineReason)
         }))
+    }
+
+    /// The last day's crashes, and the plugins quarantined now.
+    func crashSummary(_ plugins: [GaeaDatabase.PluginRow]) throws -> String {
+        let day = try database.crashes(since: Date().addingTimeInterval(-86_400), limit: 1000).count
+        let quarantined = plugins.filter { $0.quarantinedAt != nil }.map(\.id)
+        return "\(day == 0 ? "none" : "\(day)") in the last 24 h"
+            + (quarantined.isEmpty ? "" : "; quarantined: \(quarantined.joined(separator: ", ")) (gaea plugins)")
+    }
+
+    func crashList(_ id: String, plugin: String?, limit: Int) throws -> OperatorResponse {
+        let crashes = try database.crashes(plugin: plugin, limit: limit)
+        let titles = Dictionary(uniqueKeysWithValues: try database.plugins().map { ($0.id, $0.title) })
+        let text = crashes.isEmpty ? "No crashes\(plugin.map { " of \($0)" } ?? "")." : crashes.map { crash in
+            var line = "#\(crash.id ?? 0)  \(crash.at.formatted(.iso8601))  \(titles[crash.pluginID] ?? crash.pluginID) \(crash.version)  "
+                + "\(crash.how)  \(crash.outcome.rawValue)"
+            line += crash.model.map { "\n      running \($0)\(crash.lane.map { " \($0)" } ?? "") for \(crash.job ?? "?")" } ?? "\n      while idle"
+            if let fault = crash.fault { line += "; \(fault)" }
+            if let first = crash.reportSummary?.split(separator: "\n").first { line += "\n      report: \(first)" }
+            else if let note = crash.reportNote { line += "\n      report: \(note)" }
+            if crash.quarantined { line += "\n      quarantined \(crash.pluginID)" }
+            return line
+        }.joined(separator: "\n")
+        return OperatorResponse(id: id, ok: true, text: text, json: Self.json(crashes))
+    }
+
+    /// One crash in full: what ran, how it ended, stderr's last lines and macOS's report.
+    static func describe(_ crash: CrashRecord) -> String {
+        let job = switch crash.outcome {
+        case .requeued: "requeued once"
+        case .failed: "failed"
+        case .idle: "none"
+        }
+        var lines = [
+            "Crash #\(crash.id ?? 0) at \(crash.at.formatted(.iso8601))",
+            "  Plugin:   \(crash.pluginID) \(crash.version), pid \(crash.pid)",
+            "  Running:  " + (crash.model.map { "\($0)\(crash.lane.map { " lane \($0)" } ?? "") for job \(crash.job ?? "?")" } ?? "nothing (idle)"),
+            "  Ended by: \(crash.how)\(crash.fault.map { " (\($0))" } ?? "")",
+            "  The job:  \(job)",
+        ]
+        if crash.quarantined { lines.append("  This crash quarantined the plugin (G-26).") }
+        lines.append("  Report:   " + (crash.reportPath ?? crash.reportNote ?? "none"))
+        if let summary = crash.reportSummary {
+            lines += summary.split(separator: "\n").map { "    \($0)" }
+        }
+        lines.append("  stderr's last lines:")
+        lines += crash.stderrTail.isEmpty ? ["    (nothing)"] : crash.stderrTail.map { "    \($0)" }
+        return lines.joined(separator: "\n")
     }
 
     static func describe(_ outcome: PluginManager.SwitchOutcome, id: String) -> String {

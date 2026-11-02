@@ -659,13 +659,38 @@ public actor PluginManager {
     // MARK: - Enabling and removing
 
     /// Switches a whole plugin on or off (PLG-5). Off, its models leave the descriptors and its worker stops.
+    /// Switching a quarantined plugin on clears its quarantine, and its crashes so far stop counting toward the next (G-26).
     public func setEnabled(_ enabled: Bool, plugin id: String) async throws {
-        guard try database.plugin(id) != nil else { throw ManagerError.unknownPlugin(id) }
-        try database.updatePlugin(id) { $0.enabled = enabled }
+        guard let row = try database.plugin(id) else { throw ManagerError.unknownPlugin(id) }
+        let clears = enabled && row.quarantinedAt != nil
+        try database.updatePlugin(id) {
+            $0.enabled = enabled
+            if clears {
+                $0.quarantinedAt = nil
+                $0.quarantineReason = nil
+                $0.crashesClearedAt = Date()
+            }
+        }
         cache[id]?.enabled = enabled
         if !enabled { await workers?.retire(plugin: id) }
+        if clears { database.record("quarantine_cleared", plugin: id, "the operator switched it on; its crash count starts again") }
         database.record(enabled ? "enabled" : "disabled", plugin: id, enabled ? "switched on" : "switched off")
         log("plugins: \(id) \(enabled ? "enabled" : "disabled")")
+        await onChange?()
+    }
+
+    /// Switches a plugin off after repeated crashes (G-26): its models leave the offers and its worker stops, until the
+    /// operator switches it on.
+    public func quarantine(_ id: String, reason: String) async {
+        try? database.updatePlugin(id) {
+            $0.enabled = false
+            $0.quarantinedAt = Date()
+            $0.quarantineReason = reason
+        }
+        cache[id]?.enabled = false
+        await workers?.retire(plugin: id)
+        database.record("quarantined", plugin: id, "\(reason); switched off until the operator switches it on")
+        log("plugins: quarantined \(id): \(reason)")
         await onChange?()
     }
 

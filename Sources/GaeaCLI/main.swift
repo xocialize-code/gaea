@@ -15,6 +15,8 @@ import GaeaOperator
 //   gaea plugins enable|disable <id>
 //   gaea plugins remove <id>
 //   gaea plugins logs <id> [-n 80]      a plugin's events and its worker's stderr (UI-6)
+//   gaea crashes [<plugin>] [-n 50]     worker crashes, newest first, and quarantines (SRV-8, G-26)
+//   gaea crashes show <id>              one crash: what ran, how it ended, stderr's last lines, macOS's crash report
 //   gaea trust [list]                   the trusted teams, and releases held because their team isn't (AB-T-0411)
 //   gaea trust approve <held-id | team> trust a held release's team and finish its install, or trust a team again
 //   gaea trust decline <held-id>        drop a held release
@@ -42,6 +44,7 @@ let usage = """
     usage: gaea status | logs [-n N] | ledger
            gaea plugins [list | add <repo-url> [version] | check | update <id> [version] | rollback <id>
                          | enable <id> | disable <id> | remove <id> | logs <id> [-n N]]
+           gaea crashes [<plugin> | show <id>]
            gaea trust [list | approve <held-id | team> | decline <held-id> | remove <team>]
            gaea models [list | enable <id> | disable <id> | root [<folder> | default] | lane <id> [<lane> | default]]
            gaea adapters [list | add <hf-url> --model <id> [--file f] [--id id] [--title t] [--trigger t] [--format f]
@@ -89,6 +92,12 @@ func fail(_ message: String) -> Never {
     case ("plugins", "enable"): return OperatorRequest(command: .pluginsEnable, args: ["id": operand()])
     case ("plugins", "disable"): return OperatorRequest(command: .pluginsDisable, args: ["id": operand()])
     case ("plugins", "remove"): return OperatorRequest(command: .pluginsRemove, args: ["id": operand()])
+    case ("crashes", "show"): return OperatorRequest(command: .crashesShow, args: ["id": operand()])
+    case ("crashes", let plugin):
+        var a: [String: String] = [:]
+        if let plugin, plugin != "list" { a["plugin"] = plugin }
+        if let lines { a["lines"] = lines }
+        return OperatorRequest(command: .crashesList, args: a)
     case ("trust", nil), ("trust", "list"): return OperatorRequest(command: .trustList)
     case ("trust", "approve"): return OperatorRequest(command: .trustApprove, args: ["id": operand()])
     case ("trust", "decline"): return OperatorRequest(command: .trustDecline, args: ["id": operand()])

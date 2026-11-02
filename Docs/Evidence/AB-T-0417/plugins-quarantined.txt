@@ -1,0 +1,3 @@
+off com.xocialize.gaea.demo 0.3.2  Gaea demo worker  https://github.com/xocialize-code/gaea-plugin-demo
+      quarantined 2026-11-02T05:09:05Z: 3 crashes in 10 minutes, the last SIGTRAP running demo-gradient (crash #3) (gaea plugins enable com.xocialize.gaea.demo clears it)
+      crashed 3 times in 24 h, last SIGTRAP at 2026-11-02T05:09:05Z (gaea crashes show 3)

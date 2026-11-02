@@ -1,0 +1,136 @@
+# Crash acceptance (AB-T-0417) 2026-11-02T05:08:52Z: Gaea 0.14.0, the demo from GitHub
+host: Mac17,14, macOS 27.2; GAEA_HOME /tmp/gaea-crash.4mIg/h; GAEA_DEMO_TRAP_SEED=666
+Installed Gaea demo worker 0.3.2 (com.xocialize.gaea.demo), enabled.
+PASS  the demo installs from GitHub
+PASS  a job runs, and nothing has crashed
+      killed the demo's worker, pid 58932, mid-job job_ecg9x9n4mct25rf8bv3m
+{'calls': 4, 'effective': {'count': 1, 'seed': 2, 'size': {'height': 2048, 'width': 2048}, 'x-gaea.gradient_angle': 45}, 'lane': 'fp32', 'operation': 'image.generate', 'outputs': [{'media_type': 'image/png', 'name': 'images', 'path': '/tmp/gaea-crash.4mIg/h/Caches/spool/jobs/job_ecg9x9n4mct25rf8bv3m/outputs/worker/worker-1/out/image-0.png'}], 'plugin': 'com.xocialize.gaea.demo', 'requeued': True, 'seconds': 0.274, 'version': '0.3.2'}
+PASS  the job is requeued once and succeeds
+PASS  crash #1: SIGKILL, requeued, with the job, model, lane and pid
+PASS  …and no crash report, since SIGKILL writes none
+$ gaea crashes show 1
+Crash #1 at 2026-11-02T05:09:04Z
+  Plugin:   com.xocialize.gaea.demo 0.3.2, pid 58932
+  Running:  demo-gradient lane fp32 for job job_ecg9x9n4mct25rf8bv3m-1
+  Ended by: SIGKILL
+  The job:  requeued once
+  Report:   none: SIGKILL writes no crash report
+  stderr's last lines:
+    (nothing)
+Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #2) then SIGTRAP (crash #3); it was requeued once. The plugin is quarantined after 3 crashes in 10 minutes, the last SIGTRAP running demo-gradient (crash #3), until the operator switches it on. gaea crashes shows them.
+PASS  the trapped job fails with both crashes named
+PASS  …and the quarantine it caused
+      reports collected 1 s after the job
+PASS  crash #2: SIGTRAP, requeued; crash #3: SIGTRAP, failed, and it quarantined the demo
+PASS  each has the worker's Fatal error line
+PASS  each has macOS's crash report, copied into Crashes/ and summarised
+PASS  …whose pid is the crashed worker's
+$ gaea crashes show 3
+Crash #3 at 2026-11-02T05:09:05Z
+  Plugin:   com.xocialize.gaea.demo 0.3.2, pid 58991
+  Running:  demo-gradient lane fp32 for job job_q87dz09vxjxc6mpa8ehj-1
+  Ended by: SIGTRAP
+  The job:  failed
+  This crash quarantined the plugin (G-26).
+  Report:   /tmp/gaea-crash.4mIg/h/Crashes/3-gaea-demo-worker-2026-11-01-210905.000.ips
+    EXC_BREAKPOINT (SIGTRAP)
+    0  libswiftCore.dylib  _assertionFailure(_:_:file:line:flags:)
+    1  gaea-demo-worker  specialized GradientModel.run(_:context:)
+    2  gaea-demo-worker  protocol witness for PluginModel.run(_:context:) in conformance GradientModel
+    3  gaea-demo-worker  GPPWorker.execute(_:model:lane:context:)
+    4  gaea-demo-worker  closure #1 in GPPWorker.startRun(_:id:)
+    5  gaea-demo-worker  partial apply for closure #1 in GPPWorker.startRun(_:id:)
+  stderr's last lines:
+    gaea_demo_worker/main.swift:116: Fatal error: demo-gradient: a trap on seed 666, asked for by GAEA_DEMO_TRAP_SEED
+$ gaea crashes
+#3  2026-11-02T05:09:05Z  Gaea demo worker 0.3.2  SIGTRAP  failed
+      running demo-gradient fp32 for job_q87dz09vxjxc6mpa8ehj-1
+      report: EXC_BREAKPOINT (SIGTRAP)
+      quarantined com.xocialize.gaea.demo
+#2  2026-11-02T05:09:04Z  Gaea demo worker 0.3.2  SIGTRAP  requeued
+      running demo-gradient fp32 for job_q87dz09vxjxc6mpa8ehj-1
+      report: EXC_BREAKPOINT (SIGTRAP)
+#1  2026-11-02T05:09:04Z  Gaea demo worker 0.3.2  SIGKILL  requeued
+      running demo-gradient fp32 for job_ecg9x9n4mct25rf8bv3m-1
+      report: none: SIGKILL writes no crash report
+PASS  gaea crashes lists all three, newest first, the third quarantining
+PASS  the demo is switched off and marked quarantined
+$ gaea plugins
+off com.xocialize.gaea.demo 0.3.2  Gaea demo worker  https://github.com/xocialize-code/gaea-plugin-demo
+      quarantined 2026-11-02T05:09:05Z: 3 crashes in 10 minutes, the last SIGTRAP running demo-gradient (crash #3) (gaea plugins enable com.xocialize.gaea.demo clears it)
+      crashed 3 times in 24 h, last SIGTRAP at 2026-11-02T05:09:05Z (gaea crashes show 3)
+PASS  gaea plugins says how to clear it
+Gaea 0.14.0
+MES:       http://127.0.0.1:17781/mes/v0 (open, this Mac only)
+Operations: 
+Plugins:   1 installed, 0 enabled
+Trust:     CFZS6RXUCP
+Crashes:   3 in the last 24 h; quarantined: com.xocialize.gaea.demo (gaea plugins)
+Workers:   none
+Memory:    0.00 GB charged of 103.08 GB budget; host 0.06 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    up to date
+Operator:  /tmp/gaea-crash.4mIg/h/operator.sock (same user, Developer ID team); you are pid 59081, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-crash.4mIg/h/gaea.sqlite
+PASS  gaea status counts the crashes and names the quarantine
+PASS  demo-gradient isn't offered
+PASS  a job for it is refused
+== events ==
+2026-11-02T05:09:03Z installed 0.3.2: added from xocialize-code/gaea-plugin-demo (v0.3.2); Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea.demo, notarized, hardened runtime
+2026-11-02T05:09:04Z worker_died 0.3.2: during job_ecg9x9n4mct25rf8bv3m-1: the worker exited (signal 9)
+2026-11-02T05:09:04Z crashed 0.3.2: crash #1: SIGKILL running demo-gradient for job_ecg9x9n4mct25rf8bv3m-1; requeued
+2026-11-02T05:09:04Z memory_learned 0.3.2: demo-gradient lane fp32 held 0.28 GB, past its declared 0.20 GB; admitted at that from now on
+2026-11-02T05:09:04Z memory_learned 0.3.2: demo-gradient lane fp32 held 0.28 GB, past its declared 0.28 GB; admitted at that from now on
+2026-11-02T05:09:04Z memory_learned 0.3.2: demo-gradient lane fp32 held 0.28 GB, past its declared 0.28 GB; admitted at that from now on
+2026-11-02T05:09:04Z worker_died 0.3.2: during job_q87dz09vxjxc6mpa8ehj-1: the worker exited (signal 5)
+2026-11-02T05:09:04Z crashed 0.3.2: crash #2: SIGTRAP running demo-gradient for job_q87dz09vxjxc6mpa8ehj-1; requeued
+2026-11-02T05:09:05Z crashed 0.3.2: crash #3: SIGTRAP running demo-gradient for job_q87dz09vxjxc6mpa8ehj-1; failed
+2026-11-02T05:09:05Z quarantined: 3 crashes in 10 minutes, the last SIGTRAP running demo-gradient (crash #3); switched off until the operator switches it on
+== worker stderr (/tmp/gaea-crash.4mIg/h/Logs/plugins/com.xocialize.gaea.demo.log) ==
+
+=== 2026-11-02T05:09:03Z launch com.xocialize.gaea.demo 0.3.2 ===
+=== 2026-11-02T05:09:04Z exited (signal 9) ===
+
+=== 2026-11-02T05:09:04Z launch com.xocialize.gaea.demo 0.3.2 ===
+gaea_demo_worker/main.swift:116: Fatal error: demo-gradient: a trap on seed 666, asked for by GAEA_DEMO_TRAP_SEED
+=== 2026-11-02T05:09:04Z exited (signal 5) ===
+
+=== 2026-11-02T05:09:04Z launch com.xocialize.gaea.demo 0.3.2 ===
+gaea_demo_worker/main.swift:116: Fatal error: demo-gradient: a trap on seed 666, asked for by GAEA_DEMO_TRAP_SEED
+=== 2026-11-02T05:09:05Z exited (signal 5) ===
+
+PASS  the events record each crash and the quarantine
+PASS  the console rendered the quarantined plugin
+PASS  after a restart, still quarantined
+com.xocialize.gaea.demo enabled.
+PASS  the operator switches it on
+PASS  the quarantine is cleared and demo-gradient is offered again
+{'effective': {'count': 1, 'seed': 1, 'size': {'height': 512, 'width': 512}, 'x-gaea.gradient_angle': 45}, 'lane': 'fp32', 'operation': 'image.generate', 'outputs': [{'media_type': 'image/png', 'name': 'images', 'path': '/tmp/gaea-crash.4mIg/h/Caches/spool/jobs/job_2ga4ghd7fggg70zgg15m/outputs/worker/worker-1/out/image-0.png'}], 'plugin': 'com.xocialize.gaea.demo', 'seconds': 0.013, 'version': '0.3.2'}
+PASS  a job runs
+PASS  a crash after clearing (#4, idle) is recorded
+PASS  …and doesn't quarantine it: the count started again
+PASS  the events record the clearing
+$ gaea crashes
+#4  2026-11-02T05:09:21Z  Gaea demo worker 0.3.2  SIGKILL  idle
+      while idle
+      report: none: SIGKILL writes no crash report
+#3  2026-11-02T05:09:05Z  Gaea demo worker 0.3.2  SIGTRAP  failed
+      running demo-gradient fp32 for job_q87dz09vxjxc6mpa8ehj-1
+      report: EXC_BREAKPOINT (SIGTRAP)
+      quarantined com.xocialize.gaea.demo
+#2  2026-11-02T05:09:04Z  Gaea demo worker 0.3.2  SIGTRAP  requeued
+      running demo-gradient fp32 for job_q87dz09vxjxc6mpa8ehj-1
+      report: EXC_BREAKPOINT (SIGTRAP)
+#1  2026-11-02T05:09:04Z  Gaea demo worker 0.3.2  SIGKILL  requeued
+      running demo-gradient fp32 for job_ecg9x9n4mct25rf8bv3m-1
+      report: none: SIGKILL writes no crash report
+OK
+PASS  transcript com.xocialize.gaea.demo-0.3.2-2026-11-02T050903Z-946b72c4.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.demo-0.3.2-2026-11-02T050904Z-0d98f901.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.demo-0.3.2-2026-11-02T050904Z-9e37ad68.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.demo-0.3.2-2026-11-02T050921Z-5c4be109.gpp passes validate.py
+PASS  the killed and trapped workers' transcripts end at their exits
+31 passed, 0 failed

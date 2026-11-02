@@ -626,6 +626,14 @@ starts while the phase before it is being built.
      - **Repeated crashes** quarantine the plugin: three within ten minutes (G-26), until the operator re-enables it.
      - **Done =** an injected crash (SIGKILL, and a trap in a test plugin) is recorded with its report, the job is
        requeued once and then fails with the crash named, and the quarantine trips and clears.
+     - **Done 2026-11-01 (AB-T-0417):** Gaea 0.14.0 with the demo's 0.3.2 release from GitHub, 31/31:
+       - a SIGKILL mid-job was recorded and the job requeued;
+       - the demo's trap (`GAEA_DEMO_TRAP_SEED`) crashed both tries, and the job failed naming both;
+       - each trap's record has macOS's report, copied and summarised, and the worker's `Fatal error:` line;
+       - the third crash quarantined the demo, and switching it on cleared it.
+
+       Crashes live in `crash` (migration v4), with `gaea crashes`. The console shows the quarantine on the plugin's
+       row; its crash list waits on MESEngineUI (AB-A-0247). Evidence: `Docs/Evidence/AB-T-0417/`.
   6. **Before 1.0:**
      - every plugin rebuilt and released on mlx-engine-swift v0.73.1 (the probe fix, AB-A-0242). Gaea then updates
        them through `gaea plugins update`, which tests PLG-4 on real releases;

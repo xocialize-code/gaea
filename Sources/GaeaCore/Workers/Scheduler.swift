@@ -204,7 +204,7 @@ public struct Ledger: Codable, Sendable {
 
 /// The queue and the governor (Plan §2.1): one GPU job at a time, workers launched on demand and kept warm, a ledger
 /// across processes, lane choice by memory, eviction through GPP's escalation ladder, and a run requeued once when its
-/// worker dies (SRV-8). Admission and eviction are MLXMemoryPolicy's, the rule MLXServeEngine runs in-process
+/// worker dies (SRV-8), every such death recorded as a crash and a plugin quarantined on its third in ten minutes (G-26). Admission and eviction are MLXMemoryPolicy's, the rule MLXServeEngine runs in-process
 /// (AB-D-0170, AB-T-0371): each worker is a tenant, and its job a run on it.
 public actor Scheduler: WorkerControl {
     let manager: PluginManager
@@ -247,10 +247,29 @@ public actor Scheduler: WorkerControl {
     var busy: Set<String> = []
     /// Called whenever a worker starts or stops (the System page's process list).
     var onWorkersChanged: (@Sendable () -> Void)?
+    /// Where macOS writes crash reports.
+    let crashReports: CrashReports
+
+    /// What each busy plugin is running, for its crash record.
+    struct Running {
+        var job: String
+        var model: String
+        var lane: String?
+        var version: String?
+    }
+    var running: [String: Running] = [:]
+    /// The worker launches whose exits are already recorded as crashes, newest last.
+    var recordedExits: [UUID] = []
+
+    /// This many crashes of one plugin within `quarantineWindow` quarantine it (G-26).
+    public static let quarantineCrashes = 3
+    public static let quarantineWindow: TimeInterval = 600
 
     public init(manager: PluginManager, database: GaeaDatabase, paths: GaeaPaths, log: HostLog,
-                budgetBytes: UInt64? = nil, modelsRoot: URL? = nil, idleTimeout: Duration = .seconds(900)) {
+                budgetBytes: UInt64? = nil, modelsRoot: URL? = nil, idleTimeout: Duration = .seconds(900),
+                crashReports: CrashReports = CrashReports()) {
         self.manager = manager
+        self.crashReports = crashReports
         self.database = database
         self.paths = paths
         self.log = log
@@ -364,6 +383,7 @@ public actor Scheduler: WorkerControl {
     public func run(_ job: WorkerJob, progress: @escaping @Sendable ([String: JSONValue]) -> Void) async throws -> WorkerJobResult {
         await gpu.acquire()
         busy.insert(job.pluginID)
+        running[job.pluginID] = Running(job: job.job, model: job.model)
         let outcome: Result<WorkerJobResult, Error>
         do {
             outcome = .success(try await attempt(job, progress: progress, requeued: false))
@@ -372,14 +392,27 @@ public actor Scheduler: WorkerControl {
             database.record("worker_died", plugin: job.pluginID, version: slots[job.pluginID]?.plugin.version, "during \(job.job): \(failure.message)")
             slots[job.pluginID] = nil
             onWorkersChanged?()
+            let first = await crashed(failure.exit, plugin: job.pluginID, outcome: .requeued)
             do {
                 outcome = .success(try await attempt(job, progress: progress, requeued: true))
+            } catch let again as WorkerFailure where again.workerExited && !Task.isCancelled {
+                slots[job.pluginID] = nil
+                onWorkersChanged?()
+                let second = await crashed(again.exit, plugin: job.pluginID, outcome: .failed)
+                outcome = .failure(crashFailure(again, crashes: [first, second], plugin: job.pluginID))
             } catch {
                 outcome = .failure(error)
             }
+        } catch let failure as WorkerFailure where failure.workerExited && !Task.isCancelled {
+            // A streamed run is never requeued: its client has chunks already.
+            slots[job.pluginID] = nil
+            onWorkersChanged?()
+            let crash = await crashed(failure.exit, plugin: job.pluginID, outcome: .failed)
+            outcome = .failure(crashFailure(failure, crashes: [crash], plugin: job.pluginID))
         } catch {
             outcome = .failure(error)
         }
+        running[job.pluginID] = nil
         busy.remove(job.pluginID)
         slots[job.pluginID]?.lastUsed = Date()
         if restartWhenIdle.remove(job.pluginID) != nil { await retire(plugin: job.pluginID) }
@@ -402,7 +435,13 @@ public actor Scheduler: WorkerControl {
         guard plugin.trusted else {
             throw WorkerFailure(code: "unknown_model", message: "\(plugin.title)'s team \(plugin.manifest.team) isn't trusted")
         }
-        guard plugin.enabled else { throw WorkerFailure(code: "unknown_model", message: "\(plugin.title) is disabled") }
+        guard plugin.enabled else {
+            if let reason = ((try? database.plugin(plugin.id)) ?? nil)?.quarantineReason {
+                throw WorkerFailure(code: "unknown_model", message: "\(plugin.title) is quarantined after \(reason), until the operator switches it on")
+            }
+            throw WorkerFailure(code: "unknown_model", message: "\(plugin.title) is disabled")
+        }
+        running[plugin.id]?.version = plugin.version
         guard var model = plugin.model(job.model) else { throw WorkerFailure(code: "unknown_model", message: "no model \(job.model)") }
         if let allowed = job.lanes {
             model.lanes = model.lanes.filter { allowed.contains($0.id) }
@@ -437,6 +476,7 @@ public actor Scheduler: WorkerControl {
             log("scheduler: lane_fallback \(model.id): \(memoryFallback.id) → \(lane.id)")
         }
 
+        running[plugin.id]?.lane = lane.id
         let worker = try await ensureWorker(plugin)
         if slots[plugin.id]?.prepared[model.id]?.id != lane.id {
             if slots[plugin.id]?.prepared[model.id] != nil {
@@ -657,11 +697,88 @@ public actor Scheduler: WorkerControl {
         slots[id] = slot
     }
 
-    func exited(_ id: String, worker: WorkerProcess, status: Int32, reason: Process.TerminationReason) {
-        guard slots[id]?.worker === worker else { return }
-        slots[id] = nil
-        log("scheduler: \(id)'s worker exited (\(reason == .uncaughtSignal ? "signal" : "status") \(status))")
-        onWorkersChanged?()
+    func exited(_ id: String, worker: WorkerProcess, status: Int32, reason: Process.TerminationReason) async {
+        if slots[id]?.worker === worker {
+            slots[id] = nil
+            log("scheduler: \(id)'s worker exited (\(reason == .uncaughtSignal ? "signal" : "status") \(status))")
+            onWorkersChanged?()
+        }
+        // A death during a job is `run`'s to record, since it knows what became of the job.
+        if !busy.contains(id) { await crashed(worker.exitInfo, plugin: id, version: worker.version, outcome: .idle) }
+    }
+
+    // MARK: - Crashes (SRV-8, G-26)
+
+    /// Records a worker death Gaea didn't ask for, looks for macOS's crash report, and quarantines the plugin on its third
+    /// crash in ten minutes. Nil for an exit Gaea asked for, or one already recorded.
+    @discardableResult
+    func crashed(_ exit: WorkerExit?, plugin id: String, version: String? = nil, outcome: CrashRecord.Outcome) async -> CrashRecord? {
+        guard let exit, !exit.expected, !recordedExits.contains(exit.worker) else { return nil }
+        recordedExits.append(exit.worker)
+        if recordedExits.count > 64 { recordedExits.removeFirst() }
+        let context = outcome == .idle ? nil : running[id]
+        let version = version ?? context?.version ?? "?"
+        var crash = CrashRecord(
+            at: exit.at, pluginID: id, version: version, pid: exit.pid, how: exit.how, signal: exit.signalled ? exit.status : nil,
+            status: exit.signalled ? nil : exit.status, fault: exit.fault, model: context?.model, lane: context?.lane, job: context?.job,
+            outcome: outcome, stderrTail: exit.stderrTail,
+            reportNote: exit.writesCrashReport ? "looking for macOS's crash report" : "none: \(exit.how) writes no crash report")
+        do {
+            crash.id = try database.insertCrash(crash)
+        } catch {
+            log("scheduler: couldn't record \(id)'s crash: \(error)")
+            return nil
+        }
+        let doing = context.map { " running \($0.model) for \($0.job)" } ?? " while idle"
+        log("scheduler: crash #\(crash.id!): \(id) \(version) pid \(exit.pid) ended by \(exit.how)\(doing); \(outcome.rawValue)")
+        database.record("crashed", plugin: id, version: version, "crash #\(crash.id!): \(exit.how)\(doing); \(outcome.rawValue)")
+        if exit.writesCrashReport { collectReport(crash.id!, exit: exit) }
+        crash.quarantined = await quarantineIfRepeated(id, crash: crash)
+        return crash
+    }
+
+    /// Copies macOS's crash report into Gaea's Crashes folder once ReportCrash has written it, and summarises it.
+    nonisolated func collectReport(_ id: Int64, exit: WorkerExit) {
+        let (reports, database, folder, log) = (crashReports, self.database, paths.crashes, self.log)
+        Task.detached {
+            guard let found = await reports.wait(process: exit.process, pid: exit.pid, after: exit.at) else {
+                try? database.updateCrash(id) { $0.reportNote = "none found: macOS wrote no crash report within 20 s" }
+                return
+            }
+            let copy = folder.appending(path: "\(id)-\(found.lastPathComponent)")
+            try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+            try? FileManager.default.removeItem(at: copy)
+            let kept = (try? FileManager.default.copyItem(at: found, to: copy)) != nil ? copy : found
+            let summary = CrashReports.Report(kept)?.summary
+            try? database.updateCrash(id) { $0.reportPath = kept.path; $0.reportSummary = summary; $0.reportNote = nil }
+            log("scheduler: crash #\(id)'s report: \(kept.path)")
+        }
+    }
+
+    /// G-26: a plugin's third crash within ten minutes (since the operator last switched it on) switches it off.
+    func quarantineIfRepeated(_ id: String, crash: CrashRecord) async -> Bool {
+        guard let crashID = crash.id, let row = (try? database.plugin(id)) ?? nil, row.quarantinedAt == nil else { return false }
+        let since = max(crash.at.addingTimeInterval(-Self.quarantineWindow), row.crashesClearedAt ?? .distantPast)
+        let recent = (try? database.crashes(plugin: id, since: since, limit: Self.quarantineCrashes)) ?? []
+        guard recent.count >= Self.quarantineCrashes else { return false }
+        let doing = crash.model.map { " running \($0)" } ?? " while idle"
+        let reason = "\(recent.count) crashes in \(Int(Self.quarantineWindow / 60)) minutes, the last \(crash.how)\(doing) (crash #\(crashID))"
+        try? database.updateCrash(crashID) { $0.quarantined = true }
+        await manager.quarantine(id, reason: reason)
+        return true
+    }
+
+    /// What a job's client is told when its worker crashed: each crash named, and the quarantine if one followed.
+    func crashFailure(_ failure: WorkerFailure, crashes: [CrashRecord?], plugin id: String) -> WorkerFailure {
+        let named = crashes.compactMap { $0 }.map { "\($0.how) (crash #\($0.id ?? 0))" }
+        guard !named.isEmpty else { return failure }
+        var message = crashes.count > 1
+            ? "the worker crashed twice running this job, \(named.joined(separator: " then ")); it was requeued once"
+            : "the worker crashed during this streamed run, \(named[0]), which is never requeued"
+        if let reason = ((try? database.plugin(id)) ?? nil)?.quarantineReason {
+            message += ". The plugin is quarantined after \(reason), until the operator switches it on"
+        }
+        return WorkerFailure(code: "internal", message: message + ". gaea crashes shows them.", workerExited: true, exit: failure.exit)
     }
 
     /// Shuts down workers idle longer than the idle timeout.

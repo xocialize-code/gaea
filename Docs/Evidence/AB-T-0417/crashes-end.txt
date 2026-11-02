@@ -1,0 +1,13 @@
+#4  2026-11-02T05:09:21Z  Gaea demo worker 0.3.2  SIGKILL  idle
+      while idle
+      report: none: SIGKILL writes no crash report
+#3  2026-11-02T05:09:05Z  Gaea demo worker 0.3.2  SIGTRAP  failed
+      running demo-gradient fp32 for job_q87dz09vxjxc6mpa8ehj-1
+      report: EXC_BREAKPOINT (SIGTRAP)
+      quarantined com.xocialize.gaea.demo
+#2  2026-11-02T05:09:04Z  Gaea demo worker 0.3.2  SIGTRAP  requeued
+      running demo-gradient fp32 for job_q87dz09vxjxc6mpa8ehj-1
+      report: EXC_BREAKPOINT (SIGTRAP)
+#1  2026-11-02T05:09:04Z  Gaea demo worker 0.3.2  SIGKILL  requeued
+      running demo-gradient fp32 for job_ecg9x9n4mct25rf8bv3m-1
+      report: none: SIGKILL writes no crash report

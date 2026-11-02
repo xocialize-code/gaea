@@ -7,7 +7,10 @@ import Testing
 /// removal stopping its plugins. Tested with Gaea's own team treated as unknown (G-25).
 @Suite(.serialized) struct TrustTests {
     static let dist = repoRoot.deletingLastPathComponent().appending(path: "gaea-plugin-demo/dist")
-    static let demoZip = dist.appending(path: "demo-0.3.0.gaeaplugin.zip")
+    /// The version built in `dist`, whichever it is.
+    static let version = (try? Data(contentsOf: dist.appending(path: "manifest.json")))
+        .flatMap { try? JSONDecoder().decode(PluginManifest.self, from: $0) }?.version ?? "none"
+    static let demoZip = dist.appending(path: "demo-\(version).gaeaplugin.zip")
 
     func scratch() throws -> URL {
         let url = FileManager.default.temporaryDirectory.appending(path: "gaea-tests-\(UUID().uuidString)")
@@ -57,9 +60,9 @@ import Testing
 
     func manager(_ dir: URL, ownTeamTrusted: Bool) throws -> PluginManager {
         let base = "https://api.stub.test/dl/"
-        let names = ["demo-0.3.0.gaeaplugin.zip", "demo-0.3.0.gaeaplugin.zip.sha256", "manifest.json"]
+        let names = ["demo-\(Self.version).gaeaplugin.zip", "demo-\(Self.version).gaeaplugin.zip.sha256", "manifest.json"]
         let releases: [[String: Any]] = [[
-            "tag_name": "v0.3.0", "draft": false, "prerelease": false,
+            "tag_name": "v\(Self.version)", "draft": false, "prerelease": false,
             "assets": names.enumerated().map { i, name in
                 ["id": i + 1, "name": name, "size": 1, "url": base + name, "browser_download_url": base + name] as [String: Any]
             },

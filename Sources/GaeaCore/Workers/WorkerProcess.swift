@@ -13,17 +13,61 @@ public struct WorkerFailure: Error, Sendable, CustomStringConvertible {
     public var workerExited: Bool
     /// The error line's `detail` (GPP-1 §3.5), e.g. a `storage_below_floor`'s measurement.
     public var detail: [String: JSONValue]?
+    /// How the worker ended, when it did (SRV-8's crash record).
+    public var exit: WorkerExit?
 
     public init(code: String, message: String, retryable: Bool = false, workerExited: Bool = false,
-                detail: [String: JSONValue]? = nil) {
+                detail: [String: JSONValue]? = nil, exit: WorkerExit? = nil) {
         self.code = code
         self.message = message
         self.retryable = retryable
         self.workerExited = workerExited
         self.detail = detail
+        self.exit = exit
     }
 
     public var description: String { "\(code): \(message)" }
+}
+
+/// How a worker process ended, as the host saw it (SRV-8).
+public struct WorkerExit: Sendable, Equatable {
+    /// The launch it ended: one per worker process.
+    public var worker: UUID
+    /// The executable's name, which macOS names its crash report after.
+    public var process: String
+    public var pid: Int32
+    /// The exit status, or the signal when `signalled`.
+    public var status: Int32
+    public var signalled: Bool
+    public var at: Date
+    /// Gaea asked for it: `shutdown`, or the escalation ladder. Not a crash.
+    public var expected: Bool
+    /// Gaea killed it for a fault of its own, e.g. a line past GPP's limit.
+    public var fault: String?
+    /// stderr's last lines before the exit.
+    public var stderrTail: [String]
+
+    /// `SIGTRAP`, `exit 3`.
+    public var how: String { signalled ? Self.signalName(status) : "exit \(status)" }
+
+    /// The signals that make macOS write a crash report: everything that dumps core. A SIGKILL or SIGTERM writes none.
+    public var writesCrashReport: Bool { signalled && [SIGTRAP, SIGSEGV, SIGBUS, SIGABRT, SIGILL, SIGFPE, SIGSYS].contains(status) }
+
+    public static func signalName(_ signal: Int32) -> String {
+        switch signal {
+        case SIGKILL: "SIGKILL"
+        case SIGTERM: "SIGTERM"
+        case SIGTRAP: "SIGTRAP"
+        case SIGSEGV: "SIGSEGV"
+        case SIGBUS: "SIGBUS"
+        case SIGABRT: "SIGABRT"
+        case SIGILL: "SIGILL"
+        case SIGFPE: "SIGFPE"
+        case SIGSYS: "SIGSYS"
+        case SIGPIPE: "SIGPIPE"
+        default: "signal \(signal)"
+        }
+    }
 }
 
 /// One plugin worker process, driven over GPP v1 (spec/GPP-1.md) from the host side.
@@ -38,6 +82,8 @@ public struct WorkerFailure: Error, Sendable, CustomStringConvertible {
 public final class WorkerProcess: @unchecked Sendable {
     public let pluginID: String
     public let version: String
+    /// This launch, among every worker Gaea has run.
+    public let serial = UUID()
     public let manifest: PluginManifest
     public let bundle: URL
     let manifestDigest: String
@@ -45,6 +91,8 @@ public final class WorkerProcess: @unchecked Sendable {
     private let stdin = Pipe(), stdout = Pipe(), stderr = Pipe()
     private let state = Mutex(State())
     private let writeLock = Mutex(())
+    /// Signalled when stderr closes, so an exit's record has the last lines (a `Fatal error:` comes just before the trap).
+    private let stderrClosed = DispatchSemaphore(value: 0)
     private let transcript: FileHandle?
     public let transcriptURL: URL?
     private let log: URL
@@ -73,7 +121,17 @@ public final class WorkerProcess: @unchecked Sendable {
         var shutdownSent = false
         var memoryReports = 0
         var memoryWaiters: [CheckedContinuation<Void, Never>] = []
+        /// Gaea is stopping it, so its exit isn't a crash.
+        var stopping = false
+        var fault: String?
+        /// stderr's last bytes, for the crash record.
+        var stderrTail = Data()
+        var exit: WorkerExit?
     }
+
+    /// The most of stderr a crash record keeps.
+    static let stderrTailBytes = 16 << 10
+    static let stderrTailLines = 40
 
     public init(pluginID: String, version: String, bundle: URL, manifest: PluginManifest, manifestData: Data,
                 cacheRoot: URL, log: URL, sessions: URL?) {
@@ -90,7 +148,8 @@ public final class WorkerProcess: @unchecked Sendable {
         process.standardError = stderr
         if let sessions {
             let stamp = Date().formatted(.iso8601).replacingOccurrences(of: ":", with: "")
-            let url = sessions.appending(path: "\(pluginID)-\(version)-\(stamp).gpp")
+            // The launch's id too: a worker relaunched within the second (a requeue after a crash) keeps its own transcript.
+            let url = sessions.appending(path: "\(pluginID)-\(version)-\(stamp)-\(serial.uuidString.prefix(8).lowercased()).gpp")
             FileManager.default.createFile(atPath: url.path, contents: Data(
                 "# manifest: \(bundle.appending(path: "Contents/Resources/manifest.json").path)\n# Gaea \(Gaea.version) session with \(pluginID) \(version)\n".utf8))
             transcript = try? FileHandle(forWritingTo: url)
@@ -134,9 +193,19 @@ public final class WorkerProcess: @unchecked Sendable {
             let data = handle.availableData
             if data.isEmpty { handle.readabilityHandler = nil } else { self?.ingest(data) }
         }
-        stderr.fileHandleForReading.readabilityHandler = { handle in
+        let closed = stderrClosed
+        stderr.fileHandleForReading.readabilityHandler = { [weak self] handle in
             let data = handle.availableData
-            if data.isEmpty { handle.readabilityHandler = nil } else { HostLog.append(String(decoding: data, as: UTF8.self), to: logURL) }
+            if data.isEmpty {
+                handle.readabilityHandler = nil
+                closed.signal()
+            } else {
+                HostLog.append(String(decoding: data, as: UTF8.self), to: logURL)
+                self?.state.withLock { s in
+                    s.stderrTail.append(data)
+                    if s.stderrTail.count > Self.stderrTailBytes { s.stderrTail.removeFirst(s.stderrTail.count - Self.stderrTailBytes) }
+                }
+            }
         }
         process.terminationHandler = { [weak self] process in
             self?.exited(status: process.terminationStatus, reason: process.terminationReason)
@@ -150,7 +219,7 @@ public final class WorkerProcess: @unchecked Sendable {
                 try await withCheckedThrowingContinuation { continuation in
                     let ready = self.state.withLock { state -> Result<[String: JSONValue], Error>? in
                         if let hello = state.hello { return .success(hello) }
-                        if state.exited { return .failure(self.exitFailure()) }
+                        if state.exited { return .failure(self.exitFailure(state.exit)) }
                         state.helloWaiter = continuation
                         return nil
                     }
@@ -168,18 +237,24 @@ public final class WorkerProcess: @unchecked Sendable {
         do {
             try check(hello)
         } catch {
+            // Refused at launch (recorded as `launch_failed`), not a crash.
+            state.withLock { $0.stopping = true }
             kill(SIGKILL)
             throw error
         }
         return elapsed
     }
 
-    private func exitFailure() -> WorkerFailure {
+    private func exitFailure(_ exit: WorkerExit?) -> WorkerFailure {
         let reason = process.terminationReason == .uncaughtSignal ? "signal \(process.terminationStatus)" : "status \(process.terminationStatus)"
         let hint = process.terminationReason == .uncaughtSignal && process.terminationStatus == SIGKILL
             ? " (a refused launch requirement is a SIGKILL)" : ""
-        return WorkerFailure(code: "internal", message: "the worker exited before its hello: \(reason)\(hint)", workerExited: true)
+        return WorkerFailure(code: "internal", message: "the worker exited before its hello: \(reason)\(hint)", workerExited: true,
+                             exit: exit)
     }
+
+    /// How it ended, once it has.
+    public var exitInfo: WorkerExit? { state.withLock { $0.exit } }
 
     /// GPP-1 §2 step 2: `plugin`, `models` and `engine` match the verified manifest, and `manifest_sha256` is its digest.
     func check(_ hello: [String: JSONValue]) throws {
@@ -215,7 +290,8 @@ public final class WorkerProcess: @unchecked Sendable {
                 return false
             }
             if refused {
-                continuation.resume(throwing: WorkerFailure(code: "internal", message: "the worker isn't running", workerExited: true))
+                continuation.resume(throwing: WorkerFailure(code: "internal", message: "the worker isn't running", workerExited: true,
+                                                            exit: exitInfo))
                 return
             }
             send(message)
@@ -290,6 +366,7 @@ public final class WorkerProcess: @unchecked Sendable {
     /// `shutdown`: the worker ends any run with `cancelled`, flushes and exits 0. Nothing answers.
     public func shutdown() {
         let first = state.withLock { s -> Bool in
+            s.stopping = true
             defer { s.shutdownSent = true }
             return !s.shutdownSent && !s.exited
         }
@@ -338,6 +415,7 @@ public final class WorkerProcess: @unchecked Sendable {
     /// then `shutdown` (5 s for exit), then SIGTERM (5 s), then SIGKILL. Returns the rung that ended it.
     @discardableResult
     public func stop(unloading models: [String], waits: Waits = Waits()) async -> Rung {
+        state.withLock { $0.stopping = true }
         if !models.isEmpty, isRunning {
             let unloaded = await withTaskGroup(of: Bool.self) { group in
                 group.addTask {
@@ -395,6 +473,7 @@ public final class WorkerProcess: @unchecked Sendable {
         }
         if state.withLock({ $0.buffer.count }) > GPP.maxLineBytes {
             HostLog.append("protocol: a line longer than \(GPP.maxLineBytes) bytes; killing the worker\n", to: log)
+            state.withLock { $0.fault = "Gaea killed it: a line longer than \(GPP.maxLineBytes) bytes" }
             kill(SIGKILL)
             return
         }
@@ -470,17 +549,23 @@ public final class WorkerProcess: @unchecked Sendable {
     }
 
     private func exited(status: Int32, reason: Process.TerminationReason) {
-        let (pending, helloWaiter, exitWaiters) = state.withLock { s in
+        let pid = process.processIdentifier
+        _ = stderrClosed.wait(timeout: .now() + .milliseconds(500))
+        let (pending, helloWaiter, exitWaiters, exit) = state.withLock { s in
             s.exited = true
+            let lines = String(decoding: s.stderrTail, as: UTF8.self).split(separator: "\n", omittingEmptySubsequences: true)
+            s.exit = WorkerExit(worker: serial, process: manifest.executable, pid: pid, status: status, signalled: reason == .uncaughtSignal, at: Date(),
+                                expected: s.stopping, fault: s.fault, stderrTail: lines.suffix(Self.stderrTailLines).map(String.init))
             defer { s.pending = [:]; s.helloWaiter = nil; s.exitWaiters = []; s.memoryWaiters = [] }
-            return (Array(s.pending.values), s.helloWaiter, s.exitWaiters + s.memoryWaiters)
+            return (Array(s.pending.values), s.helloWaiter, s.exitWaiters + s.memoryWaiters, s.exit)
         }
         let how = reason == .uncaughtSignal ? "signal \(status)" : "status \(status)"
         HostLog.append("=== \(Date().formatted(.iso8601)) exited (\(how)) ===\n", to: log)
         writeLock.withLock { _ in try? transcript?.write(contentsOf: Data("# exited: \(how)\n".utf8)) }
-        helloWaiter?.resume(throwing: exitFailure())
+        helloWaiter?.resume(throwing: exitFailure(exit))
         for p in pending {
-            p.continuation.resume(throwing: WorkerFailure(code: "internal", message: "the worker exited (\(how))", workerExited: true))
+            p.continuation.resume(throwing: WorkerFailure(code: "internal", message: "the worker exited (\(how))", workerExited: true,
+                                                          exit: exit))
         }
         for w in exitWaiters { w.resume() }
         onExit?(status, reason)

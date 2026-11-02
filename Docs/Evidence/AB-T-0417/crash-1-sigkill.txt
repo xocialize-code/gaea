@@ -1,0 +1,8 @@
+Crash #1 at 2026-11-02T05:09:04Z
+  Plugin:   com.xocialize.gaea.demo 0.3.2, pid 58932
+  Running:  demo-gradient lane fp32 for job job_ecg9x9n4mct25rf8bv3m-1
+  Ended by: SIGKILL
+  The job:  requeued once
+  Report:   none: SIGKILL writes no crash report
+  stderr's last lines:
+    (nothing)

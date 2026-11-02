@@ -1,0 +1,16 @@
+Crash #3 at 2026-11-02T05:09:05Z
+  Plugin:   com.xocialize.gaea.demo 0.3.2, pid 58991
+  Running:  demo-gradient lane fp32 for job job_q87dz09vxjxc6mpa8ehj-1
+  Ended by: SIGTRAP
+  The job:  failed
+  This crash quarantined the plugin (G-26).
+  Report:   /tmp/gaea-crash.4mIg/h/Crashes/3-gaea-demo-worker-2026-11-01-210905.000.ips
+    EXC_BREAKPOINT (SIGTRAP)
+    0  libswiftCore.dylib  _assertionFailure(_:_:file:line:flags:)
+    1  gaea-demo-worker  specialized GradientModel.run(_:context:)
+    2  gaea-demo-worker  protocol witness for PluginModel.run(_:context:) in conformance GradientModel
+    3  gaea-demo-worker  GPPWorker.execute(_:model:lane:context:)
+    4  gaea-demo-worker  closure #1 in GPPWorker.startRun(_:id:)
+    5  gaea-demo-worker  partial apply for closure #1 in GPPWorker.startRun(_:id:)
+  stderr's last lines:
+    gaea_demo_worker/main.swift:116: Fatal error: demo-gradient: a trap on seed 666, asked for by GAEA_DEMO_TRAP_SEED

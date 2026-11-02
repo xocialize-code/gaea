@@ -145,6 +145,37 @@ public final class GaeaDatabase: Sendable {
                 t.column("held_at", .datetime).notNull()
             }
         }
+        migrator.registerMigration("v4") { db in
+            // Every worker death Gaea didn't ask for (SRV-8, AB-T-0417).
+            try db.create(table: "crash") { t in
+                t.autoIncrementedPrimaryKey("id")
+                t.column("at", .datetime).notNull()
+                t.column("plugin_id", .text).notNull()
+                t.column("version", .text).notNull()
+                t.column("pid", .integer).notNull()
+                t.column("how", .text).notNull() // "SIGTRAP", "exit 3"
+                t.column("signal", .integer)
+                t.column("status", .integer)
+                t.column("fault", .text)
+                t.column("model", .text)
+                t.column("lane", .text)
+                t.column("job", .text)
+                t.column("outcome", .text).notNull() // "requeued", "failed" or "idle"
+                t.column("stderr_tail", .text).notNull().defaults(to: "")
+                t.column("report_path", .text)
+                t.column("report_summary", .text)
+                t.column("report_note", .text) // why there's no report, or that it's being looked for
+                t.column("quarantined", .boolean).notNull().defaults(to: false) // this crash quarantined the plugin
+            }
+            try db.create(index: "crash_plugin_at", on: "crash", columns: ["plugin_id", "at"])
+            // Quarantine (G-26): three crashes in ten minutes switch a plugin off until the operator switches it on, which
+            // starts its count again.
+            try db.alter(table: "plugin") { t in
+                t.add(column: "quarantined_at", .datetime)
+                t.add(column: "quarantine_reason", .text)
+                t.add(column: "crashes_cleared_at", .datetime)
+            }
+        }
         return migrator
     }
 
@@ -167,6 +198,11 @@ public final class GaeaDatabase: Sendable {
         public var lastChecked: Date?
         public var failure: String?
         public var addedAt: Date
+        /// Switched off after repeated crashes (G-26), until the operator switches it on.
+        public var quarantinedAt: Date?
+        public var quarantineReason: String?
+        /// Crashes before this don't count toward a quarantine: the operator switched it on after one.
+        public var crashesClearedAt: Date?
 
         init(_ row: Row) {
             id = row["id"]; repo = row["repo"]; title = row["title"]; summary = row["summary"]; team = row["team"]
@@ -174,6 +210,7 @@ public final class GaeaDatabase: Sendable {
             pendingVersion = row["pending_version"]; latestVersion = row["latest_version"]; latestNotes = row["latest_notes"]
             latestURL = row["latest_url"]; latestPublishedAt = row["latest_published_at"]; lastChecked = row["last_checked"]
             failure = row["failure"]; addedAt = row["added_at"]
+            quarantinedAt = row["quarantined_at"]; quarantineReason = row["quarantine_reason"]; crashesClearedAt = row["crashes_cleared_at"]
         }
     }
 
@@ -262,10 +299,10 @@ public final class GaeaDatabase: Sendable {
             try db.execute(sql: """
                 UPDATE plugin SET repo = ?, title = ?, summary = ?, team = ?, enabled = ?, active_version = ?, previous_version = ?,
                   pending_version = ?, latest_version = ?, latest_notes = ?, latest_url = ?, latest_published_at = ?, last_checked = ?,
-                  failure = ? WHERE id = ?
+                  failure = ?, quarantined_at = ?, quarantine_reason = ?, crashes_cleared_at = ? WHERE id = ?
                 """, arguments: [row.repo, row.title, row.summary, row.team, row.enabled, row.activeVersion, row.previousVersion,
                                  row.pendingVersion, row.latestVersion, row.latestNotes, row.latestURL, row.latestPublishedAt,
-                                 row.lastChecked, row.failure, id])
+                                 row.lastChecked, row.failure, row.quarantinedAt, row.quarantineReason, row.crashesClearedAt, id])
         }
     }
 
@@ -353,6 +390,50 @@ public final class GaeaDatabase: Sendable {
             }
             return rows.reversed().map { Event(at: $0["at"], pluginID: $0["plugin_id"], version: $0["version"], kind: $0["kind"],
                                                message: $0["message"]) }
+        }
+    }
+
+    // MARK: - Crashes (SRV-8)
+
+    public func insertCrash(_ crash: CrashRecord) throws -> Int64 {
+        try queue.write { db in
+            try db.execute(sql: """
+                INSERT INTO crash (at, plugin_id, version, pid, how, signal, status, fault, model, lane, job, outcome, stderr_tail,
+                  report_path, report_summary, report_note, quarantined)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, arguments: [crash.at, crash.pluginID, crash.version, crash.pid, crash.how, crash.signal, crash.status, crash.fault,
+                                 crash.model, crash.lane, crash.job, crash.outcome.rawValue, crash.stderrTail.joined(separator: "\n"),
+                                 crash.reportPath, crash.reportSummary, crash.reportNote, crash.quarantined])
+            return db.lastInsertedRowID
+        }
+    }
+
+    public func updateCrash(_ id: Int64, _ change: @escaping @Sendable (inout CrashRecord) -> Void) throws {
+        try queue.write { db in
+            guard var crash = try Row.fetchOne(db, sql: "SELECT * FROM crash WHERE id = ?", arguments: [id]).map(CrashRecord.init) else { return }
+            change(&crash)
+            try db.execute(sql: """
+                UPDATE crash SET outcome = ?, report_path = ?, report_summary = ?, report_note = ?, quarantined = ? WHERE id = ?
+                """, arguments: [crash.outcome.rawValue, crash.reportPath, crash.reportSummary, crash.reportNote, crash.quarantined, id])
+        }
+    }
+
+    public func crash(_ id: Int64) throws -> CrashRecord? {
+        try queue.read { db in try Row.fetchOne(db, sql: "SELECT * FROM crash WHERE id = ?", arguments: [id]).map(CrashRecord.init) }
+    }
+
+    /// Newest first: one plugin's, or every one's, since `since`.
+    public func crashes(plugin: String? = nil, since: Date? = nil, limit: Int = 50) throws -> [CrashRecord] {
+        try queue.read { db in
+            var sql = "SELECT * FROM crash WHERE at >= ?"
+            var arguments: StatementArguments = [since ?? .distantPast]
+            if let plugin {
+                sql += " AND plugin_id = ?"
+                arguments += [plugin]
+            }
+            sql += " ORDER BY id DESC LIMIT ?"
+            arguments += [limit]
+            return try Row.fetchAll(db, sql: sql, arguments: arguments).map(CrashRecord.init)
         }
     }
 
@@ -523,5 +604,63 @@ public struct DatabaseEnablementStore: ModelEnablementStore {
                                arguments: [id, choices.accepted[id]])
             }
         }
+    }
+}
+
+/// A worker that died without Gaea asking it to (SRV-8): who, what it was running, how it ended, what it printed last, and
+/// the crash report macOS wrote, if any.
+public struct CrashRecord: Sendable, Equatable, Codable {
+    public enum Outcome: String, Sendable, Codable {
+        /// Its job was tried once more on a new worker.
+        case requeued
+        /// Its job failed: the second crash, or a streamed run, which is never requeued.
+        case failed
+        /// It ran no job.
+        case idle
+    }
+
+    public var id: Int64?
+    public var at: Date
+    public var pluginID: String
+    public var version: String
+    public var pid: Int32
+    /// `SIGTRAP`, `exit 3`.
+    public var how: String
+    public var signal: Int32?
+    public var status: Int32?
+    /// Gaea killed it for a fault: why.
+    public var fault: String?
+    public var model: String?
+    public var lane: String?
+    public var job: String?
+    public var outcome: Outcome
+    public var stderrTail: [String]
+    /// The macOS crash report, copied into Gaea's Crashes folder.
+    public var reportPath: String?
+    /// The report's exception and the faulting thread's first frames.
+    public var reportSummary: String?
+    /// Why there's no report: SIGKILL writes none, or none was found.
+    public var reportNote: String?
+    /// This crash was the one that quarantined its plugin (G-26).
+    public var quarantined: Bool
+
+    public init(at: Date, pluginID: String, version: String, pid: Int32, how: String, signal: Int32?, status: Int32?,
+                fault: String? = nil, model: String? = nil, lane: String? = nil, job: String? = nil, outcome: Outcome,
+                stderrTail: [String] = [], reportPath: String? = nil, reportSummary: String? = nil, reportNote: String? = nil,
+                quarantined: Bool = false) {
+        self.at = at; self.pluginID = pluginID; self.version = version; self.pid = pid; self.how = how; self.signal = signal
+        self.status = status; self.fault = fault; self.model = model; self.lane = lane; self.job = job; self.outcome = outcome
+        self.stderrTail = stderrTail; self.reportPath = reportPath; self.reportSummary = reportSummary; self.reportNote = reportNote
+        self.quarantined = quarantined
+    }
+
+    init(_ row: Row) {
+        id = row["id"]; at = row["at"]; pluginID = row["plugin_id"]; version = row["version"]; pid = row["pid"]; how = row["how"]
+        signal = row["signal"]; status = row["status"]; fault = row["fault"]; model = row["model"]; lane = row["lane"]; job = row["job"]
+        outcome = Outcome(rawValue: row["outcome"]) ?? .failed
+        let tail: String = row["stderr_tail"]
+        stderrTail = tail.isEmpty ? [] : tail.components(separatedBy: "\n")
+        reportPath = row["report_path"]; reportSummary = row["report_summary"]; reportNote = row["report_note"]
+        quarantined = row["quarantined"]
     }
 }

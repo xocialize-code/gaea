@@ -1,0 +1,13 @@
+2026-11-02 05:09:03.812|com.xocialize.gaea.demo|0.3.2|installed|added from xocialize-code/gaea-plugin-demo (v0.3.2); Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea.demo, notarized, hardened runtime
+2026-11-02 05:09:04.344|com.xocialize.gaea.demo|0.3.2|worker_died|during job_ecg9x9n4mct25rf8bv3m-1: the worker exited (signal 9)
+2026-11-02 05:09:04.345|com.xocialize.gaea.demo|0.3.2|crashed|crash #1: SIGKILL running demo-gradient for job_ecg9x9n4mct25rf8bv3m-1; requeued
+2026-11-02 05:09:04.473|com.xocialize.gaea.demo|0.3.2|memory_learned|demo-gradient lane fp32 held 0.28 GB, past its declared 0.20 GB; admitted at that from now on
+2026-11-02 05:09:04.577|com.xocialize.gaea.demo|0.3.2|memory_learned|demo-gradient lane fp32 held 0.28 GB, past its declared 0.28 GB; admitted at that from now on
+2026-11-02 05:09:04.684|com.xocialize.gaea.demo|0.3.2|memory_learned|demo-gradient lane fp32 held 0.28 GB, past its declared 0.28 GB; admitted at that from now on
+2026-11-02 05:09:04.964|com.xocialize.gaea.demo|0.3.2|worker_died|during job_q87dz09vxjxc6mpa8ehj-1: the worker exited (signal 5)
+2026-11-02 05:09:04.965|com.xocialize.gaea.demo|0.3.2|crashed|crash #2: SIGTRAP running demo-gradient for job_q87dz09vxjxc6mpa8ehj-1; requeued
+2026-11-02 05:09:05.020|com.xocialize.gaea.demo|0.3.2|crashed|crash #3: SIGTRAP running demo-gradient for job_q87dz09vxjxc6mpa8ehj-1; failed
+2026-11-02 05:09:05.022|com.xocialize.gaea.demo||quarantined|3 crashes in 10 minutes, the last SIGTRAP running demo-gradient (crash #3); switched off until the operator switches it on
+2026-11-02 05:09:20.942|com.xocialize.gaea.demo||quarantine_cleared|the operator switched it on; its crash count starts again
+2026-11-02 05:09:20.943|com.xocialize.gaea.demo||enabled|switched on
+2026-11-02 05:09:21.159|com.xocialize.gaea.demo|0.3.2|crashed|crash #4: SIGKILL while idle; idle

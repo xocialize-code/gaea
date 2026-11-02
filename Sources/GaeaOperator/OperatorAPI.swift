@@ -25,6 +25,10 @@ public enum OperatorAPI {
         case pluginsDisable = "plugins.disable"
         case pluginsRemove = "plugins.remove"
         case pluginsLogs = "plugins.logs"
+        /// Worker crashes, newest first (SRV-8): optional `plugin`, and `lines` the most to list.
+        case crashesList = "crashes.list"
+        /// `id` one crash: its stderr's last lines and macOS's crash report.
+        case crashesShow = "crashes.show"
         /// The trust list (AB-T-0411): the trusted teams and the releases held for an answer.
         case trustList = "trust.list"
         /// `id` a held release (its team is trusted and the install finishes) or a team id (trusted again).

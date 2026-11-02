@@ -1,0 +1,6 @@
+2026-11-02T05:09:04Z scheduler: crash #1: com.xocialize.gaea.demo 0.3.2 pid 58932 ended by SIGKILL running demo-gradient for job_ecg9x9n4mct25rf8bv3m-1; requeued
+2026-11-02T05:09:04Z scheduler: crash #2: com.xocialize.gaea.demo 0.3.2 pid 58956 ended by SIGTRAP running demo-gradient for job_q87dz09vxjxc6mpa8ehj-1; requeued
+2026-11-02T05:09:05Z scheduler: crash #3: com.xocialize.gaea.demo 0.3.2 pid 58991 ended by SIGTRAP running demo-gradient for job_q87dz09vxjxc6mpa8ehj-1; failed
+2026-11-02T05:09:05Z scheduler: crash #3's report: /tmp/gaea-crash.4mIg/h/Crashes/3-gaea-demo-worker-2026-11-01-210905.000.ips
+2026-11-02T05:09:05Z scheduler: crash #2's report: /tmp/gaea-crash.4mIg/h/Crashes/2-gaea-demo-worker-2026-11-01-210905.ips
+2026-11-02T05:09:21Z scheduler: crash #4: com.xocialize.gaea.demo 0.3.2 pid 59171 ended by SIGKILL while idle; idle

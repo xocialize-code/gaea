@@ -1,0 +1,52 @@
+2026-11-02T05:08:53Z operator: listening on /tmp/gaea-crash.4mIg/h/operator.sock (same user, Developer ID team)
+2026-11-02T05:08:53Z gaea 0.14.0 starting: /tmp/gaea-crash.4mIg/h, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-01T21:08:53-0800 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17781
+2026-11-02T05:08:53Z gaea: serving MES at http://127.0.0.1:17781/mes/v0
+gaea 0.14.0 serving MES at http://127.0.0.1:17781/mes/v0; operator API at /tmp/gaea-crash.4mIg/h/operator.sock
+2026-11-02T05:09:03Z plugins: added com.xocialize.gaea.demo 0.3.2 from xocialize-code/gaea-plugin-demo
+2026-11-02T05:09:04Z scheduler: launched com.xocialize.gaea.demo 0.3.2, pid 58932, hello after 0.25598675 seconds
+2026-11-02T05:09:04Z scheduler: com.xocialize.gaea.demo's worker died during job_ecg9x9n4mct25rf8bv3m-1 (the worker exited (signal 9)); requeueing once
+2026-11-02T05:09:04Z scheduler: crash #1: com.xocialize.gaea.demo 0.3.2 pid 58932 ended by SIGKILL running demo-gradient for job_ecg9x9n4mct25rf8bv3m-1; requeued
+2026-11-02T05:09:04Z scheduler: launched com.xocialize.gaea.demo 0.3.2, pid 58956, hello after 0.012304458 seconds
+2026-11-02T05:09:04Z scheduler: demo-gradient lane fp32 held 0.28 GB, past 0.20 GB; admitting it at that from now on
+2026-11-02T05:09:04Z scheduler: demo-gradient lane fp32 held 0.28 GB, past 0.28 GB; admitting it at that from now on
+2026-11-02T05:09:04Z scheduler: demo-gradient lane fp32 held 0.28 GB, past 0.28 GB; admitting it at that from now on
+2026-11-02T05:09:04Z scheduler: com.xocialize.gaea.demo's worker died during job_q87dz09vxjxc6mpa8ehj-1 (the worker exited (signal 5)); requeueing once
+2026-11-02T05:09:04Z scheduler: crash #2: com.xocialize.gaea.demo 0.3.2 pid 58956 ended by SIGTRAP running demo-gradient for job_q87dz09vxjxc6mpa8ehj-1; requeued
+2026-11-02T05:09:05Z scheduler: launched com.xocialize.gaea.demo 0.3.2, pid 58991, hello after 0.011474417 seconds
+2026-11-02T05:09:05Z scheduler: crash #3: com.xocialize.gaea.demo 0.3.2 pid 58991 ended by SIGTRAP running demo-gradient for job_q87dz09vxjxc6mpa8ehj-1; failed
+2026-11-02T05:09:05Z plugins: quarantined com.xocialize.gaea.demo: 3 crashes in 10 minutes, the last SIGTRAP running demo-gradient (crash #3)
+job job_q87dz09vxjxc6mpa8ehj (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #2) then SIGTRAP (crash #3); it was requeued once. The plugin is quarantined after 3 crashes in 10 minutes, the last SIGTRAP running demo-gradient (crash #3), until the operator switches it on. gaea crashes shows them.
+2026-11-02T05:09:05Z scheduler: crash #3's report: /tmp/gaea-crash.4mIg/h/Crashes/3-gaea-demo-worker-2026-11-01-210905.000.ips
+2026-11-02T05:09:05Z scheduler: crash #2's report: /tmp/gaea-crash.4mIg/h/Crashes/2-gaea-demo-worker-2026-11-01-210905.ips
+2026-11-01T21:09:06-0800 error mes-engine: [HummingbirdCore] Server shutdown error: Already closed
+2026-11-01T21:09:06-0800 error mes-engine: [HummingbirdCore] Waiting on child channel: CancellationError()
+2026-11-02T05:09:06Z operator: listening on /tmp/gaea-crash.4mIg/h/operator.sock (same user, Developer ID team)
+2026-11-02T05:09:06Z gaea 0.14.0 starting: /tmp/gaea-crash.4mIg/h, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-01T21:09:06-0800 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17630
+2026-11-02T05:09:06Z gaea: serving MES at http://127.0.0.1:17630/mes/v0
+wrote /tmp/gaea-crash.4mIg/snap/console-plugins-light.png
+wrote /tmp/gaea-crash.4mIg/snap/console-models-light.png
+wrote /tmp/gaea-crash.4mIg/snap/console-system-memory-light.png
+wrote /tmp/gaea-crash.4mIg/snap/console-system-overview-light.png
+wrote /tmp/gaea-crash.4mIg/snap/console-plugins-dark.png
+wrote /tmp/gaea-crash.4mIg/snap/console-models-dark.png
+wrote /tmp/gaea-crash.4mIg/snap/console-system-memory-dark.png
+wrote /tmp/gaea-crash.4mIg/snap/console-system-overview-dark.png
+wrote /tmp/gaea-crash.4mIg/snap/settings-adapters-light.png
+wrote /tmp/gaea-crash.4mIg/snap/settings-adapters-dark.png
+wrote /tmp/gaea-crash.4mIg/snap/settings-updates-light.png
+wrote /tmp/gaea-crash.4mIg/snap/settings-updates-dark.png
+2026-11-01T21:09:20-0800 error mes-engine: [HummingbirdCore] Server shutdown error: Already closed
+2026-11-01T21:09:20-0800 error mes-engine: [HummingbirdCore] Waiting on child channel: CancellationError()
+2026-11-02T05:09:20Z operator: listening on /tmp/gaea-crash.4mIg/h/operator.sock (same user, Developer ID team)
+2026-11-02T05:09:20Z gaea 0.14.0 starting: /tmp/gaea-crash.4mIg/h, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-01T21:09:20-0800 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17781
+2026-11-02T05:09:20Z gaea: serving MES at http://127.0.0.1:17781/mes/v0
+gaea 0.14.0 serving MES at http://127.0.0.1:17781/mes/v0; operator API at /tmp/gaea-crash.4mIg/h/operator.sock
+2026-11-02T05:09:20Z plugins: com.xocialize.gaea.demo enabled
+2026-11-02T05:09:21Z scheduler: launched com.xocialize.gaea.demo 0.3.2, pid 59171, hello after 0.010361334 seconds
+2026-11-02T05:09:21Z scheduler: com.xocialize.gaea.demo's worker exited (signal 9)
+2026-11-02T05:09:21Z scheduler: crash #4: com.xocialize.gaea.demo 0.3.2 pid 59171 ended by SIGKILL while idle; idle
+2026-11-01T21:09:23-0800 error mes-engine: [HummingbirdCore] Server shutdown error: Already closed
+2026-11-01T21:09:23-0800 error mes-engine: [HummingbirdCore] Waiting on child channel: CancellationError()
