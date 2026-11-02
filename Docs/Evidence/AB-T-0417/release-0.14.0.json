@@ -1,0 +1,17 @@
+{
+  "name": "Gaea",
+  "version": "0.14.0",
+  "tag": "v0.14.0",
+  "zip": "Gaea-0.14.0.zip",
+  "sha256": "8a83b819c7d31e2a3411ea4bcf54dbafe0bdb4c302709502071525ea10b742e1",
+  "minimum_macos": "26.0",
+  "gpp": [
+    1
+  ],
+  "manifest": [
+    1
+  ],
+  "team": "CFZS6RXUCP",
+  "notarized": true,
+  "prerelease": false
+}

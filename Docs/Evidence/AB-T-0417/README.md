@@ -79,6 +79,18 @@ started with that variable is affected. AUTHORING.md now says:
 - what Gaea does when a worker crashes, and what three crashes cost;
 - that a plugin made from the template deletes the hook.
 
+## Released
+
+[v0.14.0](https://github.com/xocialize-code/gaea/releases/tag/v0.14.0) was released from CI: run 41392542919, tag at
+c683608, 10.5 minutes ([release-0.14.0.json](release-0.14.0.json)). It was downloaded and checked:
+- the sha256 matched;
+- `codesign --strict --deep` passed;
+- `spctl` gave `source=Notarized Developer ID`, and the staple validated;
+- the binary names no `.build` bundle path. The `.build` strings it does carry are source paths from the
+  swift-nio-ssl and swift-crypto checkouts.
+- `Gaea --version` said 0.14.0. Started headless off the runner, its `gaea status` had the `Crashes:` line, and
+  `gaea crashes` answered.
+
 ## Left
 
 - **The console's crash list:** MESEngineUI has no surface for one, nor a notice for a plugin that crashed but isn't
