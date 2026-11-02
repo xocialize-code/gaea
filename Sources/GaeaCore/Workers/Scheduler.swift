@@ -224,6 +224,11 @@ public actor Scheduler: WorkerControl {
     var waits = WorkerProcess.Waits()
     /// Workers idle this long are shut down.
     var idleTimeout: Duration
+    /// Whether workers keep their weights wired while they run (AB-T-0380). MLX's wired limit is per process, and a worker
+    /// raises its own only for its run, to its resident weights and that run's transient, then drops it to 0. With one
+    /// GPU job at a time that wires at most the one job the governor admitted. `GAEA_UNWIRED=1` leaves it at 0, for
+    /// measuring the difference.
+    let wiresWeights = ProcessInfo.processInfo.environment["GAEA_UNWIRED"] != "1"
 
     struct Slot {
         var worker: WorkerProcess
@@ -618,7 +623,7 @@ public actor Scheduler: WorkerControl {
         onWorkersChanged?()
         // The whole budget: Gaea admits every lane across workers itself (`admit`), so a ceiling cut to what the others
         // held at launch would go stale as soon as one of them stopped, and the worker would refuse what Gaea admitted.
-        try await worker.configure(budget: WorkerBudgetWire(ceilingBytes: budgetBytes, wiresWeights: false), modelsRoot: modelsRoot,
+        try await worker.configure(budget: WorkerBudgetWire(ceilingBytes: budgetBytes, wiresWeights: wiresWeights), modelsRoot: modelsRoot,
                                    cacheRoot: cache, settings: settings(for: plugin))
         return worker
     }

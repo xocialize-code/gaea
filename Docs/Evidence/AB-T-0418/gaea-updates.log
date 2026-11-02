@@ -1,0 +1,192 @@
+2026-11-02T16:12:10Z operator: listening on /tmp/gaea-upd.KTJq/h/operator.sock (same user, Developer ID team)
+2026-11-02T16:12:10Z gaea 0.15.0 starting: /tmp/gaea-upd.KTJq/h, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-02T16:12:10Z gaea: serving MES at http://127.0.0.1:17783/mes/v0
+2026-11-02T16:12:13Z plugins: added com.xocialize.gaea.ace-step 0.1.0 from xocialize-code/gaea-plugin-ace-step
+2026-11-02T16:12:15Z plugins: added com.xocialize.gaea.boogu 0.1.0 from xocialize-code/gaea-plugin-boogu
+2026-11-02T16:12:16Z plugins: added com.xocialize.gaea.demo 0.3.2 from xocialize-code/gaea-plugin-demo
+2026-11-02T16:12:17Z plugins: added com.xocialize.gaea.flux2-klein 0.2.1 from xocialize-code/gaea-plugin-flux2-klein
+2026-11-02T16:12:20Z plugins: xocialize/gaea-plugin-flux3-klein and xocialize-code/gaea-plugin-flux3-klein are the same repo, now xocialize-code/gaea-plugin-flux3-klein
+2026-11-02T16:12:20Z plugins: added com.xocialize.gaea.flux3-klein 0.1.0 from xocialize-code/gaea-plugin-flux3-klein
+2026-11-02T16:12:25Z plugins: xocialize/gaea-plugin-forge and xocialize-code/gaea-plugin-forge are the same repo, now xocialize-code/gaea-plugin-forge
+2026-11-02T16:12:25Z plugins: added com.xocialize.gaea.forge 0.2.0 from xocialize-code/gaea-plugin-forge
+2026-11-02T16:12:26Z plugins: added com.xocialize.gaea.kokoro 0.1.0 from xocialize-code/gaea-plugin-kokoro
+2026-11-02T16:12:28Z plugins: added com.xocialize.gaea.ltx 0.1.1 from xocialize-code/gaea-plugin-ltx
+2026-11-02T16:12:31Z plugins: xocialize/gaea-plugin-mage-flow and xocialize-code/gaea-plugin-mage-flow are the same repo, now xocialize-code/gaea-plugin-mage-flow
+2026-11-02T16:12:31Z plugins: added com.xocialize.gaea.mage-flow 0.1.0 from xocialize-code/gaea-plugin-mage-flow
+2026-11-02T16:12:34Z plugins: xocialize/gaea-plugin-mage-vl and xocialize-code/gaea-plugin-mage-vl are the same repo, now xocialize-code/gaea-plugin-mage-vl
+2026-11-02T16:12:34Z plugins: added com.xocialize.gaea.mage-vl 0.1.0 from xocialize-code/gaea-plugin-mage-vl
+2026-11-02T16:12:36Z plugins: added com.xocialize.gaea.ming-image 0.3.0 from xocialize-code/gaea-plugin-ming-image
+2026-11-02T16:12:39Z plugins: xocialize/gaea-plugin-moss-image and xocialize-code/gaea-plugin-moss-image are the same repo, now xocialize-code/gaea-plugin-moss-image
+2026-11-02T16:12:39Z plugins: added com.xocialize.gaea.moss-image 0.1.0 from xocialize-code/gaea-plugin-moss-image
+2026-11-02T16:12:40Z plugins: added com.xocialize.gaea.moss-soundeffect 0.1.1 from xocialize-code/gaea-plugin-moss-soundeffect
+2026-11-02T16:12:43Z plugins: xocialize/gaea-plugin-prompt-enhance and xocialize-code/gaea-plugin-prompt-enhance are the same repo, now xocialize-code/gaea-plugin-prompt-enhance
+2026-11-02T16:12:43Z plugins: added com.xocialize.gaea.prompt-enhance 0.1.0 from xocialize-code/gaea-plugin-prompt-enhance
+2026-11-02T16:12:44Z plugins: added com.xocialize.gaea.qwen-image 0.2.0 from xocialize-code/gaea-plugin-qwen-image
+2026-11-02T16:12:47Z plugins: xocialize/gaea-plugin-qwen-image-21 and xocialize-code/gaea-plugin-qwen-image-21 are the same repo, now xocialize-code/gaea-plugin-qwen-image-21
+2026-11-02T16:12:47Z plugins: added com.xocialize.gaea.qwen-image-21 0.1.0 from xocialize-code/gaea-plugin-qwen-image-21
+2026-11-02T16:12:49Z plugins: added com.xocialize.gaea.qwen3-tts 0.2.0 from xocialize-code/gaea-plugin-qwen3-tts
+2026-11-02T16:12:51Z plugins: added com.xocialize.gaea.rife 0.1.0 from xocialize-code/gaea-plugin-rife
+2026-11-02T16:12:52Z plugins: added com.xocialize.gaea.seedvr2 0.1.0 from xocialize-code/gaea-plugin-seedvr2
+2026-11-02T16:12:55Z plugins: xocialize/gaea-plugin-sensenova and xocialize-code/gaea-plugin-sensenova are the same repo, now xocialize-code/gaea-plugin-sensenova
+2026-11-02T16:12:55Z plugins: added com.xocialize.gaea.sensenova 0.1.0 from xocialize-code/gaea-plugin-sensenova
+2026-11-02T16:12:57Z plugins: added com.xocialize.gaea.step-audio-editx 0.1.0 from xocialize-code/gaea-plugin-step-audio-editx
+2026-11-02T16:13:00Z plugins: xocialize/gaea-plugin-z-image and xocialize-code/gaea-plugin-z-image are the same repo, now xocialize-code/gaea-plugin-z-image
+2026-11-02T16:13:00Z plugins: added com.xocialize.gaea.z-image 0.1.0 from xocialize-code/gaea-plugin-z-image
+2026-11-02T16:13:10Z scheduler: launched com.xocialize.gaea.z-image 0.1.0, pid 75129, hello after 0.427360292 seconds
+2026-11-02T16:13:11Z plugins: staged com.xocialize.gaea.z-image 0.1.2 beside 0.1.0
+2026-11-02T16:13:11Z plugins: com.xocialize.gaea.z-image is busy; switching to 0.1.2 when idle
+2026-11-02T16:13:23Z scheduler: stopped com.xocialize.gaea.z-image 0.1.0 (shutdown)
+2026-11-02T16:13:23Z plugins: com.xocialize.gaea.z-image switched 0.1.0 → 0.1.2
+2026-11-02T16:13:24Z scheduler: launched com.xocialize.gaea.z-image 0.1.2, pid 75158, hello after 0.32098225 seconds
+2026-11-02T16:14:00Z plugins: staged com.xocialize.gaea.ace-step 0.1.1 beside 0.1.0
+2026-11-02T16:14:00Z plugins: com.xocialize.gaea.ace-step switched 0.1.0 → 0.1.1
+2026-11-02T16:14:02Z plugins: staged com.xocialize.gaea.boogu 0.1.1 beside 0.1.0
+2026-11-02T16:14:02Z plugins: com.xocialize.gaea.boogu switched 0.1.0 → 0.1.1
+2026-11-02T16:14:04Z plugins: staged com.xocialize.gaea.demo 0.3.3 beside 0.3.2
+2026-11-02T16:14:04Z plugins: com.xocialize.gaea.demo switched 0.3.2 → 0.3.3
+2026-11-02T16:14:05Z plugins: staged com.xocialize.gaea.flux2-klein 0.2.3 beside 0.2.1
+2026-11-02T16:14:05Z plugins: com.xocialize.gaea.flux2-klein switched 0.2.1 → 0.2.3
+2026-11-02T16:14:07Z plugins: staged com.xocialize.gaea.flux3-klein 0.1.1 beside 0.1.0
+2026-11-02T16:14:07Z plugins: com.xocialize.gaea.flux3-klein switched 0.1.0 → 0.1.1
+2026-11-02T16:14:10Z plugins: staged com.xocialize.gaea.forge 0.2.1 beside 0.2.0
+2026-11-02T16:14:10Z plugins: com.xocialize.gaea.forge switched 0.2.0 → 0.2.1
+2026-11-02T16:14:11Z plugins: staged com.xocialize.gaea.kokoro 0.1.1 beside 0.1.0
+2026-11-02T16:14:11Z plugins: com.xocialize.gaea.kokoro switched 0.1.0 → 0.1.1
+2026-11-02T16:14:13Z plugins: staged com.xocialize.gaea.ltx 0.1.2 beside 0.1.1
+2026-11-02T16:14:13Z plugins: com.xocialize.gaea.ltx switched 0.1.1 → 0.1.2
+2026-11-02T16:14:14Z plugins: staged com.xocialize.gaea.mage-flow 0.1.1 beside 0.1.0
+2026-11-02T16:14:14Z plugins: com.xocialize.gaea.mage-flow switched 0.1.0 → 0.1.1
+2026-11-02T16:14:16Z plugins: staged com.xocialize.gaea.mage-vl 0.1.1 beside 0.1.0
+2026-11-02T16:14:16Z plugins: com.xocialize.gaea.mage-vl switched 0.1.0 → 0.1.1
+2026-11-02T16:14:17Z plugins: staged com.xocialize.gaea.ming-image 0.3.1 beside 0.3.0
+2026-11-02T16:14:17Z plugins: com.xocialize.gaea.ming-image switched 0.3.0 → 0.3.1
+2026-11-02T16:14:19Z plugins: staged com.xocialize.gaea.moss-image 0.1.1 beside 0.1.0
+2026-11-02T16:14:19Z plugins: com.xocialize.gaea.moss-image switched 0.1.0 → 0.1.1
+2026-11-02T16:14:21Z plugins: staged com.xocialize.gaea.moss-soundeffect 0.1.2 beside 0.1.1
+2026-11-02T16:14:21Z plugins: com.xocialize.gaea.moss-soundeffect switched 0.1.1 → 0.1.2
+2026-11-02T16:14:22Z plugins: staged com.xocialize.gaea.prompt-enhance 0.1.1 beside 0.1.0
+2026-11-02T16:14:22Z plugins: com.xocialize.gaea.prompt-enhance switched 0.1.0 → 0.1.1
+2026-11-02T16:14:24Z plugins: staged com.xocialize.gaea.qwen-image 0.2.1 beside 0.2.0
+2026-11-02T16:14:24Z plugins: com.xocialize.gaea.qwen-image switched 0.2.0 → 0.2.1
+2026-11-02T16:14:25Z plugins: staged com.xocialize.gaea.qwen-image-21 0.1.1 beside 0.1.0
+2026-11-02T16:14:25Z plugins: com.xocialize.gaea.qwen-image-21 switched 0.1.0 → 0.1.1
+2026-11-02T16:14:27Z plugins: staged com.xocialize.gaea.qwen3-tts 0.2.1 beside 0.2.0
+2026-11-02T16:14:27Z plugins: com.xocialize.gaea.qwen3-tts switched 0.2.0 → 0.2.1
+2026-11-02T16:14:29Z plugins: staged com.xocialize.gaea.rife 0.1.1 beside 0.1.0
+2026-11-02T16:14:29Z plugins: com.xocialize.gaea.rife switched 0.1.0 → 0.1.1
+2026-11-02T16:14:30Z plugins: staged com.xocialize.gaea.seedvr2 0.1.1 beside 0.1.0
+2026-11-02T16:14:30Z plugins: com.xocialize.gaea.seedvr2 switched 0.1.0 → 0.1.1
+2026-11-02T16:14:32Z plugins: staged com.xocialize.gaea.sensenova 0.1.1 beside 0.1.0
+2026-11-02T16:14:32Z plugins: com.xocialize.gaea.sensenova switched 0.1.0 → 0.1.1
+2026-11-02T16:14:34Z plugins: staged com.xocialize.gaea.step-audio-editx 0.1.1 beside 0.1.0
+2026-11-02T16:14:34Z plugins: com.xocialize.gaea.step-audio-editx switched 0.1.0 → 0.1.1
+2026-11-02T16:14:39Z plugins: com.xocialize.gaea.ace-step switched 0.1.1 → 0.1.0
+2026-11-02T16:14:39Z plugins: com.xocialize.gaea.ace-step switched 0.1.0 → 0.1.1
+2026-11-02T16:14:39Z plugins: com.xocialize.gaea.boogu switched 0.1.1 → 0.1.0
+2026-11-02T16:14:39Z plugins: com.xocialize.gaea.boogu switched 0.1.0 → 0.1.1
+2026-11-02T16:14:39Z plugins: com.xocialize.gaea.demo switched 0.3.3 → 0.3.2
+2026-11-02T16:14:39Z plugins: com.xocialize.gaea.demo switched 0.3.2 → 0.3.3
+2026-11-02T16:14:39Z plugins: com.xocialize.gaea.flux2-klein switched 0.2.3 → 0.2.1
+2026-11-02T16:14:39Z plugins: com.xocialize.gaea.flux2-klein switched 0.2.1 → 0.2.3
+2026-11-02T16:14:39Z plugins: com.xocialize.gaea.flux3-klein switched 0.1.1 → 0.1.0
+2026-11-02T16:14:39Z plugins: com.xocialize.gaea.flux3-klein switched 0.1.0 → 0.1.1
+2026-11-02T16:14:39Z plugins: com.xocialize.gaea.forge switched 0.2.1 → 0.2.0
+2026-11-02T16:14:39Z plugins: com.xocialize.gaea.forge switched 0.2.0 → 0.2.1
+2026-11-02T16:14:39Z plugins: com.xocialize.gaea.kokoro switched 0.1.1 → 0.1.0
+2026-11-02T16:14:39Z plugins: com.xocialize.gaea.kokoro switched 0.1.0 → 0.1.1
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.ltx switched 0.1.2 → 0.1.1
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.ltx switched 0.1.1 → 0.1.2
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.mage-flow switched 0.1.1 → 0.1.0
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.mage-flow switched 0.1.0 → 0.1.1
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.mage-vl switched 0.1.1 → 0.1.0
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.mage-vl switched 0.1.0 → 0.1.1
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.ming-image switched 0.3.1 → 0.3.0
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.ming-image switched 0.3.0 → 0.3.1
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.moss-image switched 0.1.1 → 0.1.0
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.moss-image switched 0.1.0 → 0.1.1
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.moss-soundeffect switched 0.1.2 → 0.1.1
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.moss-soundeffect switched 0.1.1 → 0.1.2
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.prompt-enhance switched 0.1.1 → 0.1.0
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.prompt-enhance switched 0.1.0 → 0.1.1
+2026-11-02T16:14:40Z plugins: com.xocialize.gaea.qwen-image switched 0.2.1 → 0.2.0
+2026-11-02T16:14:41Z plugins: com.xocialize.gaea.qwen-image switched 0.2.0 → 0.2.1
+2026-11-02T16:14:41Z plugins: com.xocialize.gaea.qwen-image-21 switched 0.1.1 → 0.1.0
+2026-11-02T16:14:41Z plugins: com.xocialize.gaea.qwen-image-21 switched 0.1.0 → 0.1.1
+2026-11-02T16:14:41Z plugins: com.xocialize.gaea.qwen3-tts switched 0.2.1 → 0.2.0
+2026-11-02T16:14:41Z plugins: com.xocialize.gaea.qwen3-tts switched 0.2.0 → 0.2.1
+2026-11-02T16:14:41Z plugins: com.xocialize.gaea.rife switched 0.1.1 → 0.1.0
+2026-11-02T16:14:41Z plugins: com.xocialize.gaea.rife switched 0.1.0 → 0.1.1
+2026-11-02T16:14:41Z plugins: com.xocialize.gaea.seedvr2 switched 0.1.1 → 0.1.0
+2026-11-02T16:14:41Z plugins: com.xocialize.gaea.seedvr2 switched 0.1.0 → 0.1.1
+2026-11-02T16:14:41Z plugins: com.xocialize.gaea.sensenova switched 0.1.1 → 0.1.0
+2026-11-02T16:14:41Z plugins: com.xocialize.gaea.sensenova switched 0.1.0 → 0.1.1
+2026-11-02T16:14:41Z plugins: com.xocialize.gaea.step-audio-editx switched 0.1.1 → 0.1.0
+2026-11-02T16:14:41Z plugins: com.xocialize.gaea.step-audio-editx switched 0.1.0 → 0.1.1
+2026-11-02T16:14:42Z scheduler: stopped com.xocialize.gaea.z-image 0.1.2 (shutdown)
+2026-11-02T16:14:42Z plugins: com.xocialize.gaea.z-image switched 0.1.2 → 0.1.0
+2026-11-02T16:14:42Z plugins: com.xocialize.gaea.z-image switched 0.1.0 → 0.1.2
+2026-11-02T16:14:42Z scheduler: launched com.xocialize.gaea.ace-step 0.1.1, pid 75879, hello after 0.400598583 seconds
+2026-11-02T16:14:49Z scheduler: launched com.xocialize.gaea.boogu 0.1.1, pid 75895, hello after 0.491200167 seconds
+2026-11-02T16:15:00Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 75919, hello after 0.335273 seconds
+2026-11-02T16:15:01Z scheduler: launched com.xocialize.gaea.flux2-klein 0.2.3, pid 75932, hello after 0.377982167 seconds
+2026-11-02T16:15:05Z scheduler: launched com.xocialize.gaea.forge 0.2.1, pid 75952, hello after 0.455239916 seconds
+2026-11-02T16:15:05Z scheduler: launched com.xocialize.gaea.kokoro 0.1.1, pid 75965, hello after 0.3637045 seconds
+2026-11-02T16:15:06Z scheduler: kokoro-82m lane bf16 held 1.86 GB, past 0.50 GB; admitting it at that from now on
+2026-11-02T16:15:06Z scheduler: launched com.xocialize.gaea.ltx 0.1.2, pid 75978, hello after 0.415861125 seconds
+2026-11-02T16:16:12Z scheduler: launched com.xocialize.gaea.mage-vl 0.1.1, pid 76044, hello after 0.540243292 seconds
+2026-11-02T16:16:19Z scheduler: launched com.xocialize.gaea.ming-image 0.3.1, pid 76060, hello after 0.486494708 seconds
+2026-11-02T16:16:39Z scheduler: launched com.xocialize.gaea.moss-soundeffect 0.1.2, pid 76081, hello after 0.476426458 seconds
+2026-11-02T16:16:51Z scheduler: launched com.xocialize.gaea.prompt-enhance 0.1.1, pid 76101, hello after 0.503426042 seconds
+2026-11-02T16:16:54Z scheduler: launched com.xocialize.gaea.qwen-image 0.2.1, pid 76115, hello after 0.476449 seconds
+2026-11-02T16:17:17Z scheduler: policy plan for qwen3-tts int8 on com.xocialize.gaea.qwen3-tts: needs 97.32 GB of 103.08 GB, evicting [com.xocialize.gaea.ace-step]
+2026-11-02T16:17:17Z scheduler: evicting com.xocialize.gaea.ace-step to make room for qwen3-tts int8 (real pressure: the measured footprints are past 87.62 GB)
+2026-11-02T16:17:17Z scheduler: stopped com.xocialize.gaea.ace-step 0.1.1 (shutdown)
+2026-11-02T16:17:18Z scheduler: launched com.xocialize.gaea.qwen3-tts 0.2.1, pid 76161, hello after 0.557044084 seconds
+2026-11-02T16:17:21Z scheduler: qwen3-tts lane int8 held 8.83 GB, past 7.80 GB; admitting it at that from now on
+2026-11-02T16:17:21Z scheduler: launched com.xocialize.gaea.rife 0.1.1, pid 76183, hello after 0.421753375 seconds
+2026-11-02T16:17:22Z scheduler: policy plan for seedvr2-int8 int8 on com.xocialize.gaea.seedvr2: needs 94.30 GB of 103.08 GB, evicting [com.xocialize.gaea.boogu]
+2026-11-02T16:17:22Z scheduler: evicting com.xocialize.gaea.boogu to make room for seedvr2-int8 int8 (real pressure: the measured footprints are past 87.62 GB)
+2026-11-02T16:17:22Z scheduler: stopped com.xocialize.gaea.boogu 0.1.1 (shutdown)
+2026-11-02T16:17:23Z scheduler: launched com.xocialize.gaea.seedvr2 0.1.1, pid 76203, hello after 0.377264375 seconds
+2026-11-02T16:17:26Z scheduler: seedvr2-int8 lane int8 held 17.46 GB, past 9.30 GB; admitting it at that from now on
+2026-11-02T16:17:26Z scheduler: policy plan for step-audio-editx int8 on com.xocialize.gaea.step-audio-editx: needs 91.18 GB of 103.08 GB, evicting [com.xocialize.gaea.demo, com.xocialize.gaea.flux2-klein]
+2026-11-02T16:17:26Z scheduler: evicting com.xocialize.gaea.demo to make room for step-audio-editx int8 (real pressure: the measured footprints are past 87.62 GB)
+2026-11-02T16:17:26Z scheduler: stopped com.xocialize.gaea.demo 0.3.3 (shutdown)
+2026-11-02T16:17:26Z scheduler: evicting com.xocialize.gaea.flux2-klein to make room for step-audio-editx int8 (real pressure: the measured footprints are past 87.62 GB)
+2026-11-02T16:17:27Z scheduler: stopped com.xocialize.gaea.flux2-klein 0.2.3 (shutdown)
+2026-11-02T16:17:27Z scheduler: launched com.xocialize.gaea.step-audio-editx 0.1.1, pid 76225, hello after 0.41896225 seconds
+2026-11-02T16:17:31Z scheduler: policy plan for z-image-turbo int4 on com.xocialize.gaea.z-image: needs 113.57 GB of 103.08 GB, evicting [com.xocialize.gaea.forge, com.xocialize.gaea.kokoro, com.xocialize.gaea.ltx, com.xocialize.gaea.mage-vl, com.xocialize.gaea.ming-image]
+2026-11-02T16:17:31Z scheduler: evicting com.xocialize.gaea.forge to make room for z-image-turbo int4 (idle, least recently used; charged 0.40 GB)
+2026-11-02T16:17:31Z scheduler: stopped com.xocialize.gaea.forge 0.2.1 (shutdown)
+2026-11-02T16:17:31Z scheduler: evicting com.xocialize.gaea.kokoro to make room for z-image-turbo int4 (idle, least recently used; charged 1.70 GB)
+2026-11-02T16:17:32Z scheduler: stopped com.xocialize.gaea.kokoro 0.1.1 (shutdown)
+2026-11-02T16:17:32Z scheduler: evicting com.xocialize.gaea.ltx to make room for z-image-turbo int4 (idle, least recently used; charged 0.80 GB)
+2026-11-02T16:17:32Z scheduler: stopped com.xocialize.gaea.ltx 0.1.2 (shutdown)
+2026-11-02T16:17:32Z scheduler: evicting com.xocialize.gaea.mage-vl to make room for z-image-turbo int4 (idle, least recently used; charged 6.12 GB)
+2026-11-02T16:17:32Z scheduler: stopped com.xocialize.gaea.mage-vl 0.1.1 (shutdown)
+2026-11-02T16:17:32Z scheduler: evicting com.xocialize.gaea.ming-image to make room for z-image-turbo int4 (idle, least recently used; charged 7.90 GB)
+2026-11-02T16:17:32Z scheduler: stopped com.xocialize.gaea.ming-image 0.3.1 (shutdown)
+2026-11-02T16:17:32Z scheduler: launched com.xocialize.gaea.z-image 0.1.2, pid 76240, hello after 0.018851792 seconds
+2026-11-02T16:17:37Z scheduler: models root /Users/dustinnielson/Library/Application Support/MLXEngine/Models → /Volumes/DEV_VOL1/Models/gaea-research-store
+2026-11-02T16:17:37Z scheduler: stopped com.xocialize.gaea.qwen3-tts 0.2.1 (shutdown)
+2026-11-02T16:17:37Z scheduler: stopped com.xocialize.gaea.seedvr2 0.1.1 (shutdown)
+2026-11-02T16:17:37Z scheduler: stopped com.xocialize.gaea.step-audio-editx 0.1.1 (shutdown)
+2026-11-02T16:17:37Z scheduler: stopped com.xocialize.gaea.qwen-image 0.2.1 (shutdown)
+2026-11-02T16:17:38Z scheduler: stopped com.xocialize.gaea.prompt-enhance 0.1.1 (shutdown)
+2026-11-02T16:17:38Z scheduler: stopped com.xocialize.gaea.rife 0.1.1 (shutdown)
+2026-11-02T16:17:38Z scheduler: stopped com.xocialize.gaea.moss-soundeffect 0.1.2 (shutdown)
+2026-11-02T16:17:38Z scheduler: stopped com.xocialize.gaea.z-image 0.1.2 (shutdown)
+2026-11-02T16:17:39Z scheduler: launched com.xocialize.gaea.mage-flow 0.1.1, pid 76281, hello after 0.431868166 seconds
+2026-11-02T16:17:41Z scheduler: launched com.xocialize.gaea.sensenova 0.1.1, pid 76294, hello after 0.451674417 seconds
+2026-11-02T16:17:48Z scheduler: launched com.xocialize.gaea.moss-image 0.1.1, pid 76311, hello after 0.444731 seconds
+2026-11-02T16:18:20Z scheduler: policy plan for qwen-image-2.1 bf16 on com.xocialize.gaea.qwen-image-21: needs 110.37 GB of 103.08 GB, evicting [com.xocialize.gaea.mage-flow]
+2026-11-02T16:18:20Z scheduler: evicting com.xocialize.gaea.mage-flow to make room for qwen-image-2.1 bf16 (idle, least recently used; charged 19.07 GB)
+2026-11-02T16:18:20Z scheduler: stopped com.xocialize.gaea.mage-flow 0.1.1 (shutdown)
+2026-11-02T16:18:20Z scheduler: launched com.xocialize.gaea.qwen-image-21 0.1.1, pid 76359, hello after 0.471602291 seconds
+2026-11-02T16:18:30Z scheduler: launched com.xocialize.gaea.flux3-klein 0.1.1, pid 76376, hello after 0.463286291 seconds
+2026-11-02T16:18:46Z scheduler: flux-3-klein lane bf16 held 24.17 GB, past 23.70 GB; admitting it at that from now on
+2026-11-02T16:18:46Z scheduler: models root /Volumes/DEV_VOL1/Models/gaea-research-store → /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-02T16:18:46Z scheduler: stopped com.xocialize.gaea.moss-image 0.1.1 (shutdown)
+2026-11-02T16:18:46Z scheduler: stopped com.xocialize.gaea.sensenova 0.1.1 (shutdown)
+2026-11-02T16:18:46Z scheduler: stopped com.xocialize.gaea.qwen-image-21 0.1.1 (shutdown)
+2026-11-02T16:18:46Z scheduler: stopped com.xocialize.gaea.flux3-klein 0.1.1 (shutdown)

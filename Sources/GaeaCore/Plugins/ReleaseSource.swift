@@ -92,6 +92,21 @@ public struct GitHubReleaseSource: Sendable {
         }
     }
 
+    /// Keeps the token on a redirect within the API: a renamed or transferred repo answers 301 to `repositories/<id>`, and
+    /// URLSession drops `Authorization` on every redirect, which turns the follow-up into an anonymous call (60 an hour).
+    /// A redirect to another host, such as an asset's storage, goes without it.
+    final class KeepsTokenWithinAPI: NSObject, URLSessionTaskDelegate, Sendable {
+        func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse,
+                        newRequest request: URLRequest) async -> URLRequest? {
+            guard let original = task.originalRequest, original.url?.host == request.url?.host,
+                  let token = original.value(forHTTPHeaderField: "Authorization") else { return request }
+            var request = request
+            request.setValue(token, forHTTPHeaderField: "Authorization")
+            return request
+        }
+    }
+    static let redirects = KeepsTokenWithinAPI()
+
     func request(_ url: URL, accept: String) -> URLRequest {
         var request = URLRequest(url: url)
         request.setValue(accept, forHTTPHeaderField: "Accept")
@@ -104,7 +119,7 @@ public struct GitHubReleaseSource: Sendable {
     /// Every published release, newest first as GitHub lists them. Drafts are skipped.
     public func releases(_ repo: PluginRepository) async throws -> [PluginRelease] {
         let url = apiRoot.appending(path: "repos/\(repo.owner)/\(repo.name)/releases").appending(queryItems: [.init(name: "per_page", value: "50")])
-        let (data, response) = try await session.data(for: request(url, accept: "application/vnd.github+json"))
+        let (data, response) = try await session.data(for: request(url, accept: "application/vnd.github+json"), delegate: Self.redirects)
         let status = (response as? HTTPURLResponse)?.statusCode ?? 0
         if status == 404 { throw SourceError.notFound(repo) }
         guard status == 200 else { throw SourceError.http(status, url.absoluteString) }
@@ -132,7 +147,7 @@ public struct GitHubReleaseSource: Sendable {
     /// Downloads an asset to a file. With a token it goes through the API (private repos); without, the public link.
     public func download(_ asset: PluginRelease.Asset, to file: URL) async throws {
         let url = Self.token != nil ? asset.apiURL : asset.downloadURL
-        let (temporary, response) = try await session.download(for: request(url, accept: "application/octet-stream"))
+        let (temporary, response) = try await session.download(for: request(url, accept: "application/octet-stream"), delegate: Self.redirects)
         let status = (response as? HTTPURLResponse)?.statusCode ?? 0
         guard status == 200 else {
             try? FileManager.default.removeItem(at: temporary)
@@ -146,7 +161,7 @@ public struct GitHubReleaseSource: Sendable {
     /// `full_name` gives the new one.
     public func canonical(_ repo: PluginRepository) async throws -> PluginRepository {
         let url = apiRoot.appending(path: "repos/\(repo.owner)/\(repo.name)")
-        let (data, response) = try await session.data(for: request(url, accept: "application/vnd.github+json"))
+        let (data, response) = try await session.data(for: request(url, accept: "application/vnd.github+json"), delegate: Self.redirects)
         let status = (response as? HTTPURLResponse)?.statusCode ?? 0
         if status == 404 { throw SourceError.notFound(repo) }
         guard status == 200 else { throw SourceError.http(status, url.absoluteString) }
@@ -160,7 +175,7 @@ public struct GitHubReleaseSource: Sendable {
     /// A small asset's bytes (the manifest, the checksum).
     public func data(_ asset: PluginRelease.Asset) async throws -> Data {
         let url = Self.token != nil ? asset.apiURL : asset.downloadURL
-        let (data, response) = try await session.data(for: request(url, accept: "application/octet-stream"))
+        let (data, response) = try await session.data(for: request(url, accept: "application/octet-stream"), delegate: Self.redirects)
         let status = (response as? HTTPURLResponse)?.statusCode ?? 0
         guard status == 200 else { throw SourceError.http(status, url.absoluteString) }
         return data

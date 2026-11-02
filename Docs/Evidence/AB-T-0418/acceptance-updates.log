@@ -1,0 +1,443 @@
+# Plugin updates (AB-T-0418) 2026-11-02T16:12:10Z: Gaea 0.15.0, 22 plugins from GitHub
+host: Mac17,14, macOS 27.2; GAEA_HOME /tmp/gaea-upd.KTJq/h
+Installed ACE-Step 1.5 0.1.0 (com.xocialize.gaea.ace-step), enabled.
+PASS  ace-step 0.1.0 installs from GitHub
+Installed Boogu Image 0.1.0 (com.xocialize.gaea.boogu), enabled.
+PASS  boogu 0.1.0 installs from GitHub
+Installed Gaea demo worker 0.3.2 (com.xocialize.gaea.demo), enabled.
+PASS  demo 0.3.2 installs from GitHub
+Installed FLUX.2 Klein 0.2.1 (com.xocialize.gaea.flux2-klein), enabled.
+PASS  flux2-klein 0.2.1 installs from GitHub
+Installed FLUX 3 Klein 0.1.0 (com.xocialize.gaea.flux3-klein), enabled.
+PASS  flux3-klein 0.1.0 installs from GitHub
+Installed Forge processing pack 0.2.0 (com.xocialize.gaea.forge), enabled.
+PASS  forge 0.2.0 installs from GitHub
+Installed Kokoro 0.1.0 (com.xocialize.gaea.kokoro), enabled.
+PASS  kokoro 0.1.0 installs from GitHub
+Installed LTX 2.5 0.1.1 (com.xocialize.gaea.ltx), enabled.
+PASS  ltx 0.1.1 installs from GitHub
+Installed Mage-Flow 0.1.0 (com.xocialize.gaea.mage-flow), enabled.
+PASS  mage-flow 0.1.0 installs from GitHub
+Installed Mage-VL 0.1.0 (com.xocialize.gaea.mage-vl), enabled.
+PASS  mage-vl 0.1.0 installs from GitHub
+Installed Ming-Image 0.3.0 (com.xocialize.gaea.ming-image), enabled.
+PASS  ming-image 0.3.0 installs from GitHub
+Installed MOSS-Image 0.1.0 (com.xocialize.gaea.moss-image), enabled.
+PASS  moss-image 0.1.0 installs from GitHub
+Installed MOSS-SoundEffect 0.1.1 (com.xocialize.gaea.moss-soundeffect), enabled.
+PASS  moss-soundeffect 0.1.1 installs from GitHub
+Installed Prompt enhancer 0.1.0 (com.xocialize.gaea.prompt-enhance), enabled.
+PASS  prompt-enhance 0.1.0 installs from GitHub
+Installed Qwen-Image 0.2.0 (com.xocialize.gaea.qwen-image), enabled.
+PASS  qwen-image 0.2.0 installs from GitHub
+Installed Qwen-Image-2.1 0.1.0 (com.xocialize.gaea.qwen-image-21), enabled.
+PASS  qwen-image-21 0.1.0 installs from GitHub
+Installed Qwen3-TTS 0.2.0 (com.xocialize.gaea.qwen3-tts), enabled.
+PASS  qwen3-tts 0.2.0 installs from GitHub
+Installed RIFE 0.1.0 (com.xocialize.gaea.rife), enabled.
+PASS  rife 0.1.0 installs from GitHub
+Installed SeedVR2 0.1.0 (com.xocialize.gaea.seedvr2), enabled.
+PASS  seedvr2 0.1.0 installs from GitHub
+Installed SenseNova-U1.5 0.1.0 (com.xocialize.gaea.sensenova), enabled.
+PASS  sensenova 0.1.0 installs from GitHub
+Installed Step-Audio-EditX 0.1.0 (com.xocialize.gaea.step-audio-editx), enabled.
+PASS  step-audio-editx 0.1.0 installs from GitHub
+Installed Z-Image 0.1.0 (com.xocialize.gaea.z-image), enabled.
+PASS  z-image 0.1.0 installs from GitHub
+$ gaea plugins check
+on  com.xocialize.gaea.ace-step 0.1.0  ACE-Step 1.5  https://github.com/xocialize-code/gaea-plugin-ace-step
+      update available: 0.1.1
+on  com.xocialize.gaea.boogu 0.1.0  Boogu Image  https://github.com/xocialize-code/gaea-plugin-boogu
+      update available: 0.1.1
+on  com.xocialize.gaea.flux3-klein 0.1.0  FLUX 3 Klein  https://github.com/xocialize-code/gaea-plugin-flux3-klein
+      update available: 0.1.1
+on  com.xocialize.gaea.flux2-klein 0.2.1  FLUX.2 Klein  https://github.com/xocialize-code/gaea-plugin-flux2-klein
+      update available: 0.2.3
+on  com.xocialize.gaea.forge 0.2.0  Forge processing pack  https://github.com/xocialize-code/gaea-plugin-forge
+      update available: 0.2.1
+on  com.xocialize.gaea.demo 0.3.2  Gaea demo worker  https://github.com/xocialize-code/gaea-plugin-demo
+      update available: 0.3.3
+on  com.xocialize.gaea.kokoro 0.1.0  Kokoro  https://github.com/xocialize-code/gaea-plugin-kokoro
+      update available: 0.1.1
+on  com.xocialize.gaea.ltx 0.1.1  LTX 2.5  https://github.com/xocialize-code/gaea-plugin-ltx
+      update available: 0.1.2
+on  com.xocialize.gaea.moss-image 0.1.0  MOSS-Image  https://github.com/xocialize-code/gaea-plugin-moss-image
+      update available: 0.1.1
+on  com.xocialize.gaea.moss-soundeffect 0.1.1  MOSS-SoundEffect  https://github.com/xocialize-code/gaea-plugin-moss-soundeffect
+      update available: 0.1.2
+on  com.xocialize.gaea.mage-flow 0.1.0  Mage-Flow  https://github.com/xocialize-code/gaea-plugin-mage-flow
+      update available: 0.1.1
+on  com.xocialize.gaea.mage-vl 0.1.0  Mage-VL  https://github.com/xocialize-code/gaea-plugin-mage-vl
+      update available: 0.1.1
+on  com.xocialize.gaea.ming-image 0.3.0  Ming-Image  https://github.com/xocialize-code/gaea-plugin-ming-image
+      update available: 0.3.1
+on  com.xocialize.gaea.prompt-enhance 0.1.0  Prompt enhancer  https://github.com/xocialize-code/gaea-plugin-prompt-enhance
+      update available: 0.1.1
+on  com.xocialize.gaea.qwen-image 0.2.0  Qwen-Image  https://github.com/xocialize-code/gaea-plugin-qwen-image
+      update available: 0.2.1
+on  com.xocialize.gaea.qwen-image-21 0.1.0  Qwen-Image-2.1  https://github.com/xocialize-code/gaea-plugin-qwen-image-21
+      update available: 0.1.1
+on  com.xocialize.gaea.qwen3-tts 0.2.0  Qwen3-TTS  https://github.com/xocialize-code/gaea-plugin-qwen3-tts
+      update available: 0.2.1
+on  com.xocialize.gaea.rife 0.1.0  RIFE  https://github.com/xocialize-code/gaea-plugin-rife
+      update available: 0.1.1
+on  com.xocialize.gaea.seedvr2 0.1.0  SeedVR2  https://github.com/xocialize-code/gaea-plugin-seedvr2
+      update available: 0.1.1
+on  com.xocialize.gaea.sensenova 0.1.0  SenseNova-U1.5  https://github.com/xocialize-code/gaea-plugin-sensenova
+      update available: 0.1.1
+on  com.xocialize.gaea.step-audio-editx 0.1.0  Step-Audio-EditX  https://github.com/xocialize-code/gaea-plugin-step-audio-editx
+      update available: 0.1.1
+on  com.xocialize.gaea.z-image 0.1.0  Z-Image  https://github.com/xocialize-code/gaea-plugin-z-image
+      update available: 0.1.2
+PASS  gaea plugins check finds ace-step 0.1.1
+PASS  gaea plugins check finds boogu 0.1.1
+PASS  gaea plugins check finds demo 0.3.3
+PASS  gaea plugins check finds flux2-klein 0.2.3
+PASS  gaea plugins check finds flux3-klein 0.1.1
+PASS  gaea plugins check finds forge 0.2.1
+PASS  gaea plugins check finds kokoro 0.1.1
+PASS  gaea plugins check finds ltx 0.1.2
+PASS  gaea plugins check finds mage-flow 0.1.1
+PASS  gaea plugins check finds mage-vl 0.1.1
+PASS  gaea plugins check finds ming-image 0.3.1
+PASS  gaea plugins check finds moss-image 0.1.1
+PASS  gaea plugins check finds moss-soundeffect 0.1.2
+PASS  gaea plugins check finds prompt-enhance 0.1.1
+PASS  gaea plugins check finds qwen-image 0.2.1
+PASS  gaea plugins check finds qwen-image-21 0.1.1
+PASS  gaea plugins check finds qwen3-tts 0.2.1
+PASS  gaea plugins check finds rife 0.1.1
+PASS  gaea plugins check finds seedvr2 0.1.1
+PASS  gaea plugins check finds sensenova 0.1.1
+PASS  gaea plugins check finds step-audio-editx 0.1.1
+PASS  gaea plugins check finds z-image 0.1.2
+com.xocialize.gaea.z-image 0.1.2 is installed; Gaea switches to it when the plugin is idle.
+PASS  updating the busy Z-Image waits for its job
+PASS    and its row says so
+PASS    the job finishes on 0.1.0
+PASS    then Z-Image runs 0.1.2, keeping 0.1.0
+com.xocialize.gaea.ace-step now runs 0.1.1.
+PASS  ace-step updates to 0.1.1
+com.xocialize.gaea.boogu now runs 0.1.1.
+PASS  boogu updates to 0.1.1
+com.xocialize.gaea.demo now runs 0.3.3.
+PASS  demo updates to 0.3.3
+com.xocialize.gaea.flux2-klein now runs 0.2.3.
+PASS  flux2-klein updates to 0.2.3
+com.xocialize.gaea.flux3-klein now runs 0.1.1.
+PASS  flux3-klein updates to 0.1.1
+com.xocialize.gaea.forge now runs 0.2.1.
+PASS  forge updates to 0.2.1
+com.xocialize.gaea.kokoro now runs 0.1.1.
+PASS  kokoro updates to 0.1.1
+com.xocialize.gaea.ltx now runs 0.1.2.
+PASS  ltx updates to 0.1.2
+com.xocialize.gaea.mage-flow now runs 0.1.1.
+PASS  mage-flow updates to 0.1.1
+com.xocialize.gaea.mage-vl now runs 0.1.1.
+PASS  mage-vl updates to 0.1.1
+com.xocialize.gaea.ming-image now runs 0.3.1.
+PASS  ming-image updates to 0.3.1
+com.xocialize.gaea.moss-image now runs 0.1.1.
+PASS  moss-image updates to 0.1.1
+com.xocialize.gaea.moss-soundeffect now runs 0.1.2.
+PASS  moss-soundeffect updates to 0.1.2
+com.xocialize.gaea.prompt-enhance now runs 0.1.1.
+PASS  prompt-enhance updates to 0.1.1
+com.xocialize.gaea.qwen-image now runs 0.2.1.
+PASS  qwen-image updates to 0.2.1
+com.xocialize.gaea.qwen-image-21 now runs 0.1.1.
+PASS  qwen-image-21 updates to 0.1.1
+com.xocialize.gaea.qwen3-tts now runs 0.2.1.
+PASS  qwen3-tts updates to 0.2.1
+com.xocialize.gaea.rife now runs 0.1.1.
+PASS  rife updates to 0.1.1
+com.xocialize.gaea.seedvr2 now runs 0.1.1.
+PASS  seedvr2 updates to 0.1.1
+com.xocialize.gaea.sensenova now runs 0.1.1.
+PASS  sensenova updates to 0.1.1
+com.xocialize.gaea.step-audio-editx now runs 0.1.1.
+PASS  step-audio-editx updates to 0.1.1
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  ace-step 0.1.1 keeps 0.1.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  boogu 0.1.1 keeps 0.1.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  demo 0.3.3 keeps 0.3.2, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  flux2-klein 0.2.3 keeps 0.2.1, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  flux3-klein 0.1.1 keeps 0.1.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  forge 0.2.1 keeps 0.2.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  kokoro 0.1.1 keeps 0.1.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  ltx 0.1.2 keeps 0.1.1, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  mage-flow 0.1.1 keeps 0.1.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  mage-vl 0.1.1 keeps 0.1.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  ming-image 0.3.1 keeps 0.3.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  moss-image 0.1.1 keeps 0.1.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  moss-soundeffect 0.1.2 keeps 0.1.1, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  prompt-enhance 0.1.1 keeps 0.1.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  qwen-image 0.2.1 keeps 0.2.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  qwen-image-21 0.1.1 keeps 0.1.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  qwen3-tts 0.2.1 keeps 0.2.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  rife 0.1.1 keeps 0.1.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  seedvr2 0.1.1 keeps 0.1.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  sensenova 0.1.1 keeps 0.1.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  step-audio-editx 0.1.1 keeps 0.1.0, and links mlx-engine-swift 0.73.1's probe
+{'contract': '1.58.0', 'package': 'mlx-engine-swift', 'version': '0.72.0'}
+PASS  z-image 0.1.2 keeps 0.1.0, and links mlx-engine-swift 0.73.1's probe
+com.xocialize.gaea.ace-step now runs 0.1.0.
+PASS  ace-step rolls back to 0.1.0
+com.xocialize.gaea.ace-step now runs 0.1.1.
+PASS    and forward to 0.1.1
+com.xocialize.gaea.boogu now runs 0.1.0.
+PASS  boogu rolls back to 0.1.0
+com.xocialize.gaea.boogu now runs 0.1.1.
+PASS    and forward to 0.1.1
+com.xocialize.gaea.demo now runs 0.3.2.
+PASS  demo rolls back to 0.3.2
+com.xocialize.gaea.demo now runs 0.3.3.
+PASS    and forward to 0.3.3
+com.xocialize.gaea.flux2-klein now runs 0.2.1.
+PASS  flux2-klein rolls back to 0.2.1
+com.xocialize.gaea.flux2-klein now runs 0.2.3.
+PASS    and forward to 0.2.3
+com.xocialize.gaea.flux3-klein now runs 0.1.0.
+PASS  flux3-klein rolls back to 0.1.0
+com.xocialize.gaea.flux3-klein now runs 0.1.1.
+PASS    and forward to 0.1.1
+com.xocialize.gaea.forge now runs 0.2.0.
+PASS  forge rolls back to 0.2.0
+com.xocialize.gaea.forge now runs 0.2.1.
+PASS    and forward to 0.2.1
+com.xocialize.gaea.kokoro now runs 0.1.0.
+PASS  kokoro rolls back to 0.1.0
+com.xocialize.gaea.kokoro now runs 0.1.1.
+PASS    and forward to 0.1.1
+com.xocialize.gaea.ltx now runs 0.1.1.
+PASS  ltx rolls back to 0.1.1
+com.xocialize.gaea.ltx now runs 0.1.2.
+PASS    and forward to 0.1.2
+com.xocialize.gaea.mage-flow now runs 0.1.0.
+PASS  mage-flow rolls back to 0.1.0
+com.xocialize.gaea.mage-flow now runs 0.1.1.
+PASS    and forward to 0.1.1
+com.xocialize.gaea.mage-vl now runs 0.1.0.
+PASS  mage-vl rolls back to 0.1.0
+com.xocialize.gaea.mage-vl now runs 0.1.1.
+PASS    and forward to 0.1.1
+com.xocialize.gaea.ming-image now runs 0.3.0.
+PASS  ming-image rolls back to 0.3.0
+com.xocialize.gaea.ming-image now runs 0.3.1.
+PASS    and forward to 0.3.1
+com.xocialize.gaea.moss-image now runs 0.1.0.
+PASS  moss-image rolls back to 0.1.0
+com.xocialize.gaea.moss-image now runs 0.1.1.
+PASS    and forward to 0.1.1
+com.xocialize.gaea.moss-soundeffect now runs 0.1.1.
+PASS  moss-soundeffect rolls back to 0.1.1
+com.xocialize.gaea.moss-soundeffect now runs 0.1.2.
+PASS    and forward to 0.1.2
+com.xocialize.gaea.prompt-enhance now runs 0.1.0.
+PASS  prompt-enhance rolls back to 0.1.0
+com.xocialize.gaea.prompt-enhance now runs 0.1.1.
+PASS    and forward to 0.1.1
+com.xocialize.gaea.qwen-image now runs 0.2.0.
+PASS  qwen-image rolls back to 0.2.0
+com.xocialize.gaea.qwen-image now runs 0.2.1.
+PASS    and forward to 0.2.1
+com.xocialize.gaea.qwen-image-21 now runs 0.1.0.
+PASS  qwen-image-21 rolls back to 0.1.0
+com.xocialize.gaea.qwen-image-21 now runs 0.1.1.
+PASS    and forward to 0.1.1
+com.xocialize.gaea.qwen3-tts now runs 0.2.0.
+PASS  qwen3-tts rolls back to 0.2.0
+com.xocialize.gaea.qwen3-tts now runs 0.2.1.
+PASS    and forward to 0.2.1
+com.xocialize.gaea.rife now runs 0.1.0.
+PASS  rife rolls back to 0.1.0
+com.xocialize.gaea.rife now runs 0.1.1.
+PASS    and forward to 0.1.1
+com.xocialize.gaea.seedvr2 now runs 0.1.0.
+PASS  seedvr2 rolls back to 0.1.0
+com.xocialize.gaea.seedvr2 now runs 0.1.1.
+PASS    and forward to 0.1.1
+com.xocialize.gaea.sensenova now runs 0.1.0.
+PASS  sensenova rolls back to 0.1.0
+com.xocialize.gaea.sensenova now runs 0.1.1.
+PASS    and forward to 0.1.1
+com.xocialize.gaea.step-audio-editx now runs 0.1.0.
+PASS  step-audio-editx rolls back to 0.1.0
+com.xocialize.gaea.step-audio-editx now runs 0.1.1.
+PASS    and forward to 0.1.1
+com.xocialize.gaea.z-image now runs 0.1.0.
+PASS  z-image rolls back to 0.1.0
+com.xocialize.gaea.z-image now runs 0.1.2.
+PASS    and forward to 0.1.2
+$ gaea models enable ltx-2.5-compact24
+ltx-2.5-compact24 enabled.
+{'id': 'ace-step-1.5', 'license': {'commercial_use': True, 'spdx': 'MIT', 'terms_url': 'https://github.com/ace-step/ACE-Step-1.5/blob/main/LICENSE'}, 'revision': '0.1.1', 'title': 'ACE-Step 1.5'} int8 0.1.1
+PASS  a job on ace-step runs on 0.1.1
+{'id': 'boogu', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://www.apache.org/licenses/LICENSE-2.0'}, 'revision': '0.1.1', 'title': 'Boogu Image'} int4 0.1.1
+PASS  a job on boogu runs on 0.1.1
+{'id': 'demo-gradient', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://www.apache.org/licenses/LICENSE-2.0'}, 'revision': '0.3.3', 'title': 'Demo gradient (image.generate smoke test)'} fp32 0.3.3
+PASS  a job on demo runs on 0.3.3
+{'id': 'klein-4b', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://www.apache.org/licenses/LICENSE-2.0'}, 'revision': '0.2.3', 'title': 'FLUX.2 Klein 4B'} bf16 0.2.3
+PASS  a job on flux2-klein runs on 0.2.3
+{'id': 'nafnet-restore', 'license': {'commercial_use': True, 'spdx': 'MIT'}, 'revision': '0.2.1', 'title': 'NAFNet restore'} fp16 0.2.1
+PASS  a job on forge runs on 0.2.1
+{'id': 'kokoro-82m', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://huggingface.co/hexgrad/Kokoro-82M'}, 'revision': '0.1.1', 'title': 'Kokoro-82M'} bf16 0.1.1
+PASS  a job on kokoro runs on 0.1.1
+{'id': 'ltx-2.5-compact24', 'license': {'accepted_required': True, 'commercial_use': True, 'notice': "LTX 2.5's weights are under the LTX-2 Community License (Lightricks). By using them you accept its terms, including its use restrictions (Attachment A), that an entity with US$10 million or more in annual revenue needs a commercial licence from Lightricks, and that what it makes must not be presented without saying it is machine-generated. Gaea marks every clip it makes as AI-generated.", 'spdx': 'LicenseRef-LTX-2-Community', 'terms_url': 'https://github.com/Lightricks/LTX-2/blob/main/LICENSE', 'user_accept_required': True}, 'revision': '0.1.2', 'title': 'LTX 2.5 (compact24)'} int8 0.1.2
+PASS  a job on ltx runs on 0.1.2
+{'id': 'mage-vl', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0'}, 'revision': '0.1.1', 'title': 'Mage-VL'} int8 0.1.1
+PASS  a job on mage-vl runs on 0.1.1
+{'id': 'ming-image', 'license': {'commercial_use': True, 'spdx': 'MIT', 'terms_url': 'https://huggingface.co/inclusionAI/Ming-Image-0.1-Design'}, 'revision': '0.3.1', 'title': 'Ming-Image Design'} int8 0.3.1
+PASS  a job on ming-image runs on 0.3.1
+{'id': 'moss-soundeffect', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://huggingface.co/OpenMOSS-Team/MOSS-SoundEffect'}, 'revision': '0.1.2', 'title': 'MOSS-SoundEffect'} bf16 0.1.2
+PASS  a job on moss-soundeffect runs on 0.1.2
+{'id': 'qwen3.5-4b', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://huggingface.co/mlx-community/Qwen3.5-4B-MLX-4bit'}, 'title': 'Qwen3.5 4B'} None None
+PASS  a job on prompt-enhance runs on 0.1.1
+{'id': 'qwen-image-flash', 'license': {'commercial_use': True, 'notice': 'Licensed by NVIDIA Corporation under the NVIDIA Open Model License', 'spdx': 'LicenseRef-NVIDIA-Open-Model', 'terms_url': 'https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/'}, 'revision': '0.2.1', 'title': 'Qwen-Image Flash'} int8 0.2.1
+PASS  a job on qwen-image runs on 0.2.1
+{'id': 'qwen3-tts', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base'}, 'revision': '0.2.1', 'title': 'Qwen3-TTS'} int8 0.2.1
+PASS  a job on qwen3-tts runs on 0.2.1
+{'id': 'rife-4.25', 'license': {'commercial_use': True, 'spdx': 'MIT', 'terms_url': 'https://github.com/hzwer/Practical-RIFE'}, 'revision': '0.1.1', 'title': 'RIFE 4.25'} fp32 0.1.1
+PASS  a job on rife runs on 0.1.1
+{'id': 'seedvr2-int8', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://huggingface.co/ByteDance-Seed/SeedVR2-3B'}, 'revision': '0.1.1', 'title': 'SeedVR2 3B'} int8 0.1.1
+PASS  a job on seedvr2 runs on 0.1.1
+{'id': 'step-audio-editx', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://huggingface.co/stepfun-ai/Step-Audio-EditX'}, 'revision': '0.1.1', 'title': 'Step-Audio-EditX'} int8 0.1.1
+PASS  a job on step-audio-editx runs on 0.1.1
+{'id': 'z-image-turbo', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://www.apache.org/licenses/LICENSE-2.0'}, 'revision': '0.1.2', 'title': 'Z-Image Turbo'} int4 0.1.2
+PASS  a job on z-image runs on 0.1.2
+$ gaea models root /Volumes/DEV_VOL1/Models/gaea-research-store
+/Volumes/DEV_VOL1/Models/gaea-research-store (set by the operator)
+$ gaea models enable flux-3-klein
+flux-3-klein enabled.
+$ gaea models enable qwen-image-2.1
+qwen-image-2.1 enabled.
+{'id': 'mage-flow-turbo', 'license': {'commercial_use': True, 'spdx': 'MIT', 'terms_url': 'https://huggingface.co/mage-flow-community/Mage-Flow/blob/main/LICENSE'}, 'revision': '0.1.1', 'title': 'Mage-Flow Turbo'} bf16 0.1.1
+PASS  a job on mage-flow runs on 0.1.1 (research store)
+{'id': 'sensenova-u1-fast', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://huggingface.co/sensenova/SenseNova-U1.5-8B-MoT'}, 'revision': '0.1.1', 'title': 'SenseNova-U1.5 8-step'} int8 0.1.1
+PASS  a job on sensenova runs on 0.1.1 (research store)
+{'id': 'moss-image-base', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://huggingface.co/OpenMOSS-Team/MOSS-Image-SFT'}, 'revision': '0.1.1', 'title': 'MOSS-Image Base'} bf16 0.1.1
+PASS  a job on moss-image runs on 0.1.1 (research store)
+{'id': 'qwen-image-2.1', 'license': {'commercial_use': False, 'notice': 'Qwen Research License: non-commercial research and evaluation use only. Built with Qwen.', 'spdx': 'LicenseRef-Qwen-Research', 'terms_url': 'https://huggingface.co/Qwen/Qwen-Image-2.1/blob/main/LICENSE'}, 'revision': '0.1.1', 'title': 'Qwen-Image-2.1'} bf16 0.1.1
+PASS  a job on qwen-image-21 runs on 0.1.1 (research store)
+{'id': 'flux-3-klein', 'license': {'accepted_required': True, 'commercial_use': False, 'notice': 'FLUX Kommunity licence: non-commercial use; commercial use of outputs only for businesses under US$5M revenue that filter content and disclose AI generation; never use outputs to train another image model. Read the terms before you use or share results.', 'spdx': 'LicenseRef-FLUX-Kommunity-1.0', 'terms_url': 'https://huggingface.co/black-forest-labs/flux-3-image-klein/blob/main/LICENSE.md'}, 'revision': '0.1.1', 'title': 'FLUX 3 Klein'} bf16 0.1.1
+PASS  a job on flux3-klein runs on 0.1.1 (research store)
+$ gaea models root default
+/Users/dustinnielson/Library/Application Support/MLXEngine/Models (MLXEngine's store, the default)
+OK
+PASS  transcript com.xocialize.gaea.ace-step-0.1.1-2026-11-02T161442Z-bdfd4c44.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.boogu-0.1.1-2026-11-02T161449Z-878a9cd6.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.demo-0.3.3-2026-11-02T161500Z-364ed0dc.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.2.3-2026-11-02T161500Z-d43573cb.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.flux3-klein-0.1.1-2026-11-02T161830Z-610de20f.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.forge-0.2.1-2026-11-02T161504Z-44dd53b5.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.kokoro-0.1.1-2026-11-02T161505Z-01ba20f5.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.ltx-0.1.2-2026-11-02T161506Z-ec3fa898.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.mage-flow-0.1.1-2026-11-02T161738Z-e1b9f5d8.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.mage-vl-0.1.1-2026-11-02T161612Z-14c1a00a.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.ming-image-0.3.1-2026-11-02T161618Z-3b5d77c7.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.moss-image-0.1.1-2026-11-02T161747Z-63a9892a.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.moss-soundeffect-0.1.2-2026-11-02T161639Z-a88a17e7.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.prompt-enhance-0.1.1-2026-11-02T161650Z-d33ff106.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.qwen-image-0.2.1-2026-11-02T161654Z-5b04e3da.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.qwen-image-21-0.1.1-2026-11-02T161820Z-9254bb6e.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.qwen3-tts-0.2.1-2026-11-02T161717Z-cbbb16d4.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.rife-0.1.1-2026-11-02T161721Z-7b26f535.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.seedvr2-0.1.1-2026-11-02T161722Z-9d058573.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.sensenova-0.1.1-2026-11-02T161741Z-f2c854f2.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.step-audio-editx-0.1.1-2026-11-02T161727Z-dedf7463.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.1.0-2026-11-02T161309Z-8085d557.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.1.2-2026-11-02T161323Z-eaaad8ae.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.1.2-2026-11-02T161732Z-978e21b5.gpp passes validate.py
+$ gaea plugins
+on  com.xocialize.gaea.ace-step 0.1.1  ACE-Step 1.5  https://github.com/xocialize-code/gaea-plugin-ace-step
+      rollback: 0.1.0
+on  com.xocialize.gaea.boogu 0.1.1  Boogu Image  https://github.com/xocialize-code/gaea-plugin-boogu
+      rollback: 0.1.0
+on  com.xocialize.gaea.flux3-klein 0.1.1  FLUX 3 Klein  https://github.com/xocialize-code/gaea-plugin-flux3-klein
+      rollback: 0.1.0
+on  com.xocialize.gaea.flux2-klein 0.2.3  FLUX.2 Klein  https://github.com/xocialize-code/gaea-plugin-flux2-klein
+      rollback: 0.2.1
+on  com.xocialize.gaea.forge 0.2.1  Forge processing pack  https://github.com/xocialize-code/gaea-plugin-forge
+      rollback: 0.2.0
+on  com.xocialize.gaea.demo 0.3.3  Gaea demo worker  https://github.com/xocialize-code/gaea-plugin-demo
+      rollback: 0.3.2
+on  com.xocialize.gaea.kokoro 0.1.1  Kokoro  https://github.com/xocialize-code/gaea-plugin-kokoro
+      rollback: 0.1.0
+on  com.xocialize.gaea.ltx 0.1.2  LTX 2.5  https://github.com/xocialize-code/gaea-plugin-ltx
+      rollback: 0.1.1
+on  com.xocialize.gaea.moss-image 0.1.1  MOSS-Image  https://github.com/xocialize-code/gaea-plugin-moss-image
+      rollback: 0.1.0
+on  com.xocialize.gaea.moss-soundeffect 0.1.2  MOSS-SoundEffect  https://github.com/xocialize-code/gaea-plugin-moss-soundeffect
+      rollback: 0.1.1
+on  com.xocialize.gaea.mage-flow 0.1.1  Mage-Flow  https://github.com/xocialize-code/gaea-plugin-mage-flow
+      rollback: 0.1.0
+on  com.xocialize.gaea.mage-vl 0.1.1  Mage-VL  https://github.com/xocialize-code/gaea-plugin-mage-vl
+      rollback: 0.1.0
+on  com.xocialize.gaea.ming-image 0.3.1  Ming-Image  https://github.com/xocialize-code/gaea-plugin-ming-image
+      rollback: 0.3.0
+on  com.xocialize.gaea.prompt-enhance 0.1.1  Prompt enhancer  https://github.com/xocialize-code/gaea-plugin-prompt-enhance
+      rollback: 0.1.0
+on  com.xocialize.gaea.qwen-image 0.2.1  Qwen-Image  https://github.com/xocialize-code/gaea-plugin-qwen-image
+      rollback: 0.2.0
+on  com.xocialize.gaea.qwen-image-21 0.1.1  Qwen-Image-2.1  https://github.com/xocialize-code/gaea-plugin-qwen-image-21
+      rollback: 0.1.0
+on  com.xocialize.gaea.qwen3-tts 0.2.1  Qwen3-TTS  https://github.com/xocialize-code/gaea-plugin-qwen3-tts
+      rollback: 0.2.0
+on  com.xocialize.gaea.rife 0.1.1  RIFE  https://github.com/xocialize-code/gaea-plugin-rife
+      rollback: 0.1.0
+on  com.xocialize.gaea.seedvr2 0.1.1  SeedVR2  https://github.com/xocialize-code/gaea-plugin-seedvr2
+      rollback: 0.1.0
+on  com.xocialize.gaea.sensenova 0.1.1  SenseNova-U1.5  https://github.com/xocialize-code/gaea-plugin-sensenova
+      rollback: 0.1.0
+on  com.xocialize.gaea.step-audio-editx 0.1.1  Step-Audio-EditX  https://github.com/xocialize-code/gaea-plugin-step-audio-editx
+      rollback: 0.1.0
+on  com.xocialize.gaea.z-image 0.1.2  Z-Image  https://github.com/xocialize-code/gaea-plugin-z-image
+      rollback: 0.1.0
+$ gaea crashes
+No crashes.
+
+181 passed, 0 failed

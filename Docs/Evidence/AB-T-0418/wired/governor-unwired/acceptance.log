@@ -1,0 +1,39 @@
+# Governor acceptance (AB-T-0371) 2026-11-02T15:14:56Z — Gaea 0.14.0, budget 70000000000, plugins from GitHub
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.2
+PASS  add Qwen-Image, Z-Image and FLUX.2 Klein by repo URL
+      1 Klein bf16: succeeded klein-4b; workers now: com.xocialize.gaea.flux2-klein
+      2 Z-Image Turbo int4: succeeded z-image-turbo; workers now: com.xocialize.gaea.flux2-klein com.xocialize.gaea.z-image
+PASS  1. Klein, then Z-Image: both fit, Klein charged what it holds
+      3 Qwen-Image-Edit bf16, 4 steps: succeeded qwen-image-edit; workers now: com.xocialize.gaea.qwen-image
+PASS  2. Qwen-Image-Edit: the policy evicts Klein, then Z-Image (least recently used first), with its reason
+      4 Z-Image Turbo int4 again: succeeded z-image-turbo; workers now: com.xocialize.gaea.z-image
+PASS  3. Z-Image again: the idle Qwen worker is evicted
+      5 Qwen-Image Flash int8: succeeded qwen-image-flash; workers now: com.xocialize.gaea.qwen-image com.xocialize.gaea.z-image
+      6 Qwen-Image-Edit beside Flash: succeeded qwen-image-edit; workers now: com.xocialize.gaea.qwen-image
+PASS  4a. Edit in Flash's worker: Flash is unloaded from it, and the idle Z-Image worker evicted
+      7 Qwen-Image Flash again: succeeded qwen-image-flash; workers now: com.xocialize.gaea.qwen-image
+PASS  4b. Flash again: Edit is unloaded from the worker
+PASS  5a. no OOM: every job succeeded, no worker died
+peak 60.89 GB at 1793633195.4 60891587312 qwen-image
+PASS  5b. the sampled sum of the workers' phys_footprint stayed under the budget
+1 flux2-klein host 16.12 worker 16.12 charged 16.12 declared 28.21
+2 flux2-klein host 15.97 worker 16.12 charged 15.97 declared 28.21
+2 z-image host 14.24 worker 14.28 charged 14.24 declared 39.9
+3 qwen-image host 44.13 worker 46.61 charged 44.13 declared 63.0
+4 z-image host 14.24 worker 14.28 charged 14.24 declared 39.9
+5 qwen-image host 27.45 worker 27.45 charged 27.45 declared 31.6
+5 z-image host 14.1 worker 14.28 charged 14.1 declared 39.9
+6 qwen-image host 45.37 worker 45.37 charged 45.37 declared 63.0
+7 qwen-image host 27.16 worker 27.16 charged 27.16 declared 31.6
+PASS  5c. each ledger: what the workers report is what the host reads
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.2.3-2026-11-02T152239Z-45e4d37c.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.qwen-image-0.2.0-2026-11-02T152331Z-5fdcc8ce.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.qwen-image-0.2.0-2026-11-02T152551Z-b255706d.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.1.2-2026-11-02T152259Z-3f63bfaa.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.1.2-2026-11-02T152524Z-9d6b00bc.gpp passes validate.py
+== 14 passed, 0 failed

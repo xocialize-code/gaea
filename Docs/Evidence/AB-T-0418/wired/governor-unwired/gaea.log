@@ -1,0 +1,26 @@
+2026-11-02T15:14:56Z operator: listening on /tmp/ggov/main/operator.sock (same user, Developer ID team)
+2026-11-02T15:14:56Z gaea 0.14.0 starting: /tmp/ggov/main, budget 70.00 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-02T15:14:56Z gaea: serving MES at http://127.0.0.1:17700/mes/v0
+2026-11-02T15:17:54Z plugins: added com.xocialize.gaea.qwen-image 0.2.0 from xocialize-code/gaea-plugin-qwen-image
+2026-11-02T15:20:09Z plugins: added com.xocialize.gaea.z-image 0.1.2 from xocialize-code/gaea-plugin-z-image
+2026-11-02T15:22:39Z plugins: added com.xocialize.gaea.flux2-klein 0.2.3 from xocialize-code/gaea-plugin-flux2-klein
+2026-11-02T15:22:39Z scheduler: launched com.xocialize.gaea.flux2-klein 0.2.3, pid 42493, hello after 0.383679458 seconds
+2026-11-02T15:22:58Z scheduler: klein-4b lane bf16 held 28.21 GB, past 25.90 GB; admitting it at that from now on
+2026-11-02T15:22:59Z scheduler: launched com.xocialize.gaea.z-image 0.1.2, pid 42813, hello after 0.469776291 seconds
+2026-11-02T15:23:31Z scheduler: policy plan for qwen-image-edit bf16 on com.xocialize.gaea.qwen-image: needs 93.07 GB of 70.00 GB, evicting [com.xocialize.gaea.flux2-klein, com.xocialize.gaea.z-image]
+2026-11-02T15:23:31Z scheduler: evicting com.xocialize.gaea.flux2-klein to make room for qwen-image-edit bf16 (idle, least recently used; charged 15.97 GB)
+2026-11-02T15:23:31Z scheduler: stopped com.xocialize.gaea.flux2-klein 0.2.3 (shutdown)
+2026-11-02T15:23:31Z scheduler: evicting com.xocialize.gaea.z-image to make room for qwen-image-edit bf16 (idle, least recently used; charged 14.10 GB)
+2026-11-02T15:23:31Z scheduler: stopped com.xocialize.gaea.z-image 0.1.2 (shutdown)
+2026-11-02T15:23:32Z scheduler: launched com.xocialize.gaea.qwen-image 0.2.0, pid 43504, hello after 0.535859584 seconds
+2026-11-02T15:25:23Z scheduler: policy plan for z-image-turbo int4 on com.xocialize.gaea.z-image: needs 84.03 GB of 70.00 GB, evicting [com.xocialize.gaea.qwen-image]
+2026-11-02T15:25:23Z scheduler: evicting com.xocialize.gaea.qwen-image to make room for z-image-turbo int4 (idle, least recently used; charged 44.13 GB)
+2026-11-02T15:25:24Z scheduler: stopped com.xocialize.gaea.qwen-image 0.2.0 (shutdown)
+2026-11-02T15:25:24Z scheduler: launched com.xocialize.gaea.z-image 0.1.2, pid 45818, hello after 0.023678375 seconds
+2026-11-02T15:25:51Z scheduler: launched com.xocialize.gaea.qwen-image 0.2.0, pid 46374, hello after 0.01471125 seconds
+2026-11-02T15:26:22Z scheduler: unloading qwen-image-flash from com.xocialize.gaea.qwen-image's worker: qwen-image-edit bf16 fits only without it
+2026-11-02T15:26:23Z scheduler: policy plan for qwen-image-edit bf16 on com.xocialize.gaea.qwen-image: needs 77.10 GB of 70.00 GB, evicting [com.xocialize.gaea.z-image]
+2026-11-02T15:26:23Z scheduler: evicting com.xocialize.gaea.z-image to make room for qwen-image-edit bf16 (idle, least recently used; charged 14.10 GB)
+2026-11-02T15:26:23Z scheduler: stopped com.xocialize.gaea.z-image 0.1.2 (shutdown)
+2026-11-02T15:28:00Z scheduler: unloading qwen-image-edit from com.xocialize.gaea.qwen-image's worker: qwen-image-flash int8 fits only without it
+2026-11-02T15:28:26Z scheduler: stopped com.xocialize.gaea.qwen-image 0.2.0 (sigterm)

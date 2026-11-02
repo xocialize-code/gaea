@@ -639,6 +639,19 @@ starts while the phase before it is being built.
        them through `gaea plugins update`, which tests PLG-4 on real releases;
      - the wired limit in workers (AB-T-0380, owed since G1) decided: done or parked;
      - an operator's guide in the README: install, models root, budgets, plugins, trust, updates, crashes.
+     - **Done 2026-11-02 (AB-T-0418):**
+       - **Plugins:** all 22 released from CI on mlx-engine-swift v0.73.1, and Gaea 0.15.0 took each from its previous
+         release through `gaea plugins update`, rollback and forward, and a job: 181/181. One was updated mid-job and
+         switched when it ended.
+       - **Xcode 27 for plugins:** Swift 6.3.3 (the `macos-26` runner) built Z-Image and Klein workers that segfault
+         on macOS 27 pushing their own task-local value (AB-L-0324). Those releases were withdrawn, and plugin CI
+         now builds on the `xcode-27` runner.
+       - **The wired limit (AB-T-0380): done.** Workers keep their weights wired while they run. Nacre and DRUNet are
+         back within 3 % of v0.9.1, with identical outputs, and the governor's three-plugin run passes wired.
+       - **The guide** is README's "Running a server".
+       - **Fixed on the way:** a token now survives GitHub's redirect for a renamed repo.
+
+       Evidence: `Docs/Evidence/AB-T-0418/`.
   7. **The exit, 1.0.0:**
      - a clean install on a fresh macOS user account from the GitHub release;
      - a 24-hour soak of mixed jobs, with a crash injected every hour and an update during it (G-26);
