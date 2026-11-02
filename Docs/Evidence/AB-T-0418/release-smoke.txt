@@ -1,0 +1,18 @@
+Installed Z-Image 0.1.2 (com.xocialize.gaea.z-image), enabled.
+job: succeeded com.xocialize.gaea.z-image 0.1.2 int4 0.15.0 13935 ms
+Gaea 0.15.0
+MES:       http://127.0.0.1:17793/mes/v0 (open, this Mac only)
+Operations: image.generate [z-image-turbo, z-image]; image.edit [z-image, z-image-turbo]; image.fill [z-image, z-image-turbo]; image.extend [z-image, z-image-turbo]
+Plugins:   1 installed, 1 enabled
+Trust:     CFZS6RXUCP
+Crashes:   none in the last 24 h
+Workers:   com.xocialize.gaea.z-image pid 79518
+Memory:    14.25 GB charged of 103.08 GB budget; host 0.04 GB
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    up to date
+Operator:  /tmp/gsm.ybP6/operator.sock (same user, Developer ID team); you are pid 79542, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gsm.ybP6/gaea.sqlite
+No crashes.
+Gaea 0.15.0: up to date
+App:       <download>/Gaea.app
+Releases:  https://github.com/xocialize-code/gaea/releases, pre-releases skipped, checked 2026-11-02T16:41:16Z

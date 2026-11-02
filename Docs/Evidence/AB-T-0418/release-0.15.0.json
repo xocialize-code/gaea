@@ -1,0 +1,17 @@
+{
+  "name": "Gaea",
+  "version": "0.15.0",
+  "tag": "v0.15.0",
+  "zip": "Gaea-0.15.0.zip",
+  "sha256": "06e637f03c0ad023b347d07ebc2fb6445b3eaf5da27fffc14183d288d7aef366",
+  "minimum_macos": "26.0",
+  "gpp": [
+    1
+  ],
+  "manifest": [
+    1
+  ],
+  "team": "CFZS6RXUCP",
+  "notarized": true,
+  "prerelease": false
+}

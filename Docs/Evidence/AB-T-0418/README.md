@@ -147,3 +147,18 @@ updates, and crashes, including macOS's own "quit unexpectedly" dialog for a wor
 - **GitHub's anonymous answers:** without a token, GitHub served a release list for LTX without 0.1.2 (whose tag had
   been moved) while the authenticated list had it, and 60 calls an hour don't cover 22 plugins. The acceptance runs with
   `GAEA_GITHUB_TOKEN`, and the guide says a server with many plugins should set it.
+
+## Released
+
+[v0.15.0](https://github.com/xocialize-code/gaea/releases/tag/v0.15.0) was released from CI: run 41480855178, tag at
+506234c, 17.5 minutes ([release-0.15.0.json](release-0.15.0.json)). It was downloaded and checked:
+- the sha256 matched;
+- `codesign --strict --deep` passed;
+- `spctl` gave `source=Notarized Developer ID`, and the staple validated;
+- the binary names no `.build` bundle path;
+- `Gaea --version` said 0.15.0. Started headless off the runner, it installed Z-Image 0.1.2 from GitHub and drew a
+  1024² image on the int4 lane, wired, in 13.9 s. `gaea status` showed no crashes, and `gaea update --check` said it
+  was up to date ([release-smoke.txt](release-smoke.txt)).
+
+Gaea itself still builds on the `macos-26` runner (Swift 6.3.3). It links no model package, and this release ran off
+the runner as above, but moving it to `xcode-27` with the plugins would keep one toolchain.
