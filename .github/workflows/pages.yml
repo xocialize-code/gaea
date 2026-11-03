@@ -1,4 +1,4 @@
-# Publishes site/ (the landing page) to GitHub Pages: https://xocialize-code.github.io/gaea/
+# Publishes site/ (the landing page) to GitHub Pages: https://gaea.xocialize.com/
 # Needs Settings → Pages → Build and deployment → Source: "GitHub Actions".
 name: Pages
 
