@@ -6,6 +6,10 @@ models come as plugins:
 - Gaea does the MES front end, the queue, memory across processes, the plugins' lifecycle and the UI;
 - the plugins do the generating.
 
+> [!IMPORTANT]
+> **Gaea is alpha software in active development.** Releases can still change how it behaves, so try it before you
+> build on it, and read each release's notes before you update.
+
 ## Install
 
 Download `Gaea-<version>.zip` from [Releases](https://github.com/xocialize-code/gaea/releases), unzip it, and move
