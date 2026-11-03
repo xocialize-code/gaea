@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <style>.s{stroke:#0c1a1d}.f{fill:#0c1a1d}@media (prefers-color-scheme: dark){.s{stroke:#e4ede8}.f{fill:#e4ede8}}</style>
+  <circle class="s" cx="16" cy="16" r="9" stroke-width="2"/>
+  <path class="s" d="M7.5 13.5c4 1.6 12.6 1.6 17 0M7.5 18.5c4 1.6 12.6 1.6 17 0M16 7c-3.4 4.6-3.4 13.4 0 18" stroke-width="1.4" opacity=".6"/>
+  <ellipse class="s" cx="16" cy="16" rx="15" ry="5.2" transform="rotate(-18 16 16)" stroke-width="1.3" opacity=".5"/>
+  <circle cx="28.6" cy="11.4" r="2.2" fill="#f0ae78"/>
+</svg>
