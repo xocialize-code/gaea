@@ -156,6 +156,11 @@ code, kbd, pre { font-family: var(--mono); }
   text-decoration: none; font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.01em;
 }
 .brand svg { width: 26px; height: 26px; }
+.stage-chip {
+  font-family: var(--mono); font-size: 0.5625rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 999px; padding: 3px 7px 2px;
+  transform: translateY(-1px);
+}
 .nav-links { display: flex; gap: 22px; margin-left: 12px; }
 .nav-links a {
   text-decoration: none; color: var(--ink-2); font-size: 0.9375rem;
@@ -243,7 +248,9 @@ code, kbd, pre { font-family: var(--mono); }
 }
 .hero-lede { font-size: var(--step-1); line-height: 1.55; color: var(--ink-2); max-width: 34rem; margin: 0 0 32px; text-wrap: pretty; }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-.hero-meta { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.alpha-note { margin: 18px 0 0; max-width: 34rem; font-size: 0.875rem; line-height: 1.5; color: var(--ink-3); }
+.alpha-note strong { color: var(--ink-2); font-weight: 600; }
+.hero-meta { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px 18px; }
 .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
 .hero-meta span::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--ink-3); }
 
@@ -255,7 +262,7 @@ code, kbd, pre { font-family: var(--mono); }
   text-decoration: none;
 }
 .release-pill b {
-  font-weight: 500; color: var(--on-ink); background: var(--leaf);
+  font-weight: 500; color: var(--on-ink); background: var(--ink);
   padding: 3px 8px; border-radius: 999px; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.625rem;
 }
 .release-pill:hover { border-color: var(--ink-3); }
