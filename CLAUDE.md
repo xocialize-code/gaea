@@ -81,6 +81,7 @@ process of its own.
 | [tools/acceptance-ming-layer.sh](tools/acceptance-ming-layer.sh) | AB-T-0390's acceptance: `image.decompose` through Gaea with `ming-image-layer` from GitHub: layers at the input's size, pixel for pixel against `ming-inproc --decompose` on a Gaea-written poster, plan, draft, refusals, a transparent input |
 | [tools/parity-run.sh](tools/parity-run.sh), [tools/parity-compare.swift](tools/parity-compare.swift), [tools/parity-seeded.py](tools/parity-seeded.py) | AB-T-0373's G1 parity: one TierBench run against Gaea or pixel-agency-image-engine, two runs paired output by output (bytes, pixels, median warm times, routing), and seeded jobs for what TierBench sends unseeded |
 | [tools/adapters-e2e.py](tools/adapters-e2e.py), [tools/parity-adapters.py](tools/parity-adapters.py) | AB-T-0378's adapters: one registered LoRA through MES (offer, run, refusals), and every offered adapter once, seeded, against Gaea or v0.9.1 (`--compare`) |
+| [site/](site/index.html), [.github/workflows/pages.yml](.github/workflows/pages.yml) | The landing page on GitHub Pages (https://xocialize-code.github.io/gaea/): static HTML, CSS and canvas JS with no build step; the hero is `site/hero.js`. A push to `main` touching `site/` deploys it (Pages source: GitHub Actions) |
 | [Docs/Evidence/AB-T-0355/](Docs/Evidence/AB-T-0355/README.md) | The host's acceptance: conformance reports, a recorded GPP session, console screenshots |
 
 Decisions G-1 to G-26 are filed as AB-D records. The plan's §1 maps each one to its id.

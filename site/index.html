@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Gaea Media Server</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Gaea is an open-source media server for Apple silicon. It runs open MLX models for image, audio and video as signed plugins and serves them to every app on your network through one API.">
+<meta name="theme-color" content="#060d12">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gaea: open generative media, served from your Mac">
+<meta property="og:description" content="Image, audio and video from open MLX models, installed as signed plugins and served to every app through one API.">
+<meta property="og:image" content="https://xocialize-code.github.io/gaea/assets/og.png">
+<meta property="og:url" content="https://xocialize-code.github.io/gaea/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script>try{var t=localStorage.getItem('gaea-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Gaea home">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="9" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M7.5 13.5c4 1.6 12.6 1.6 17 0M7.5 18.5c4 1.6 12.6 1.6 17 0M16 7c-3.4 4.6-3.4 13.4 0 18" stroke="currentColor" stroke-width="1.2" opacity=".6"/>
+        <ellipse cx="16" cy="16" rx="15" ry="5.2" transform="rotate(-18 16 16)" stroke="currentColor" stroke-width="1" opacity=".45"/>
+        <circle cx="28.6" cy="11.4" r="1.8" fill="currentColor"/>
+      </svg>
+      Gaea
+    </a>
+    <div class="nav-links">
+      <a href="#profiles">Profiles</a>
+      <a href="#how">How it works</a>
+      <a href="#office">For your office</a>
+      <a href="#developers">Developers</a>
+      <a href="#plugins">Plugins</a>
+    </div>
+    <div class="nav-end">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch between day and night themes">
+        <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+        <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+      </button>
+      <a class="icon-btn" href="https://github.com/xocialize-code/gaea" aria-label="Gaea on GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+      </a>
+      <a class="btn btn-primary btn-sm" href="https://github.com/xocialize-code/gaea/releases/latest">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 20h14"/></svg>
+        <span>Download</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-inner wrap">
+    <div class="hero-copy">
+      <a class="release-pill" id="release-pill" href="https://github.com/xocialize-code/gaea/releases/latest">
+        <b>New</b><span id="release-text">Latest release · open source · Apache-2.0</span>
+      </a>
+      <h1>Generate image, sound and video <em>on your own Mac.</em></h1>
+      <p class="hero-lede">Gaea is an open-source media server for Apple silicon. It runs open MLX models as signed plugins, keeps them within your Mac's memory, and serves them to every app on your network through one API.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="https://github.com/xocialize-code/gaea/releases/latest">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.62c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-3-.79-1.54.02-2.96.9-3.76 2.27-1.6 2.78-.41 6.9 1.15 9.15.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.24-.02 2.02-1.12 2.77-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.67ZM14.1 5.86c.63-.77 1.06-1.83.94-2.9-.91.04-2.02.61-2.67 1.37-.58.68-1.1 1.77-.96 2.81 1.02.08 2.06-.52 2.69-1.28Z"/></svg>
+          Download for macOS
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/xocialize-code/gaea">View on GitHub</a>
+      </div>
+      <div class="hero-meta label">
+        <span>macOS 26</span><span>Apple silicon</span><span>15 model plugins</span>
+      </div>
+    </div>
+    <div class="hero-stage" id="hero-stage" aria-hidden="true"></div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>MES Image</span><span>MES Audio</span><span>MES Video</span><span>Signed plugins</span><span>Runs on your Mac</span><span>One job at a time, no surprises</span><span>Apache-2.0</span><span>No accounts</span>
+    <span>MES Image</span><span>MES Audio</span><span>MES Video</span><span>Signed plugins</span><span>Runs on your Mac</span><span>One job at a time, no surprises</span><span>Apache-2.0</span><span>No accounts</span>
+  </div>
+</div>
+
+<main id="main">
+
+  <section class="section" id="why" aria-labelledby="why-title">
+    <div class="wrap shapes">
+      <div class="shapes-copy">
+        <span class="kicker">Why a media server</span>
+        <div class="section-head" style="margin-bottom:0">
+          <h2 id="why-title">Chat is one shape. Media is many.</h2>
+        </div>
+        <p>Local LLM servers made open models easy to use, because text goes in and text comes out. Generative media doesn't fit that pipe. A picture needs a size, a seed, and maybe a mask and three references. A voice streams out while it is still being spoken. A video has a frame rate, a soundtrack, and a label saying a model made it.</p>
+        <p><strong>Gaea takes that on so your app doesn't have to.</strong> A job names an operation and a quality tier. Gaea picks the model, fits it into memory, runs it, and hands back files that say what made them.</p>
+      </div>
+      <div class="shape-list">
+        <div class="shape is-chat">
+          <span class="label">Chat</span>
+          <span class="io">Messages<small>text</small></span>
+          <span class="arrow" aria-hidden="true">→</span>
+          <span class="io">A reply<small>text</small></span>
+        </div>
+        <div class="shape" data-p="image">
+          <span class="label">image.edit</span>
+          <span class="io">Prompt and two reference images<small>sized to suit the model</small></span>
+          <span class="arrow" aria-hidden="true">→</span>
+          <span class="io">1024 × 1024 PNG<small>seed, lane and licence attached</small></span>
+        </div>
+        <div class="shape" data-p="audio">
+          <span class="label">audio.speak</span>
+          <span class="io">Text and a voice<small>or a reference to clone</small></span>
+          <span class="arrow" aria-hidden="true">→</span>
+          <span class="io">Speech, streamed<small>chunks that rebuild the WAV</small></span>
+        </div>
+        <div class="shape" data-p="audio">
+          <span class="label">audio.generate</span>
+          <span class="io">"Rain on a tin roof", 6 s<small>with a negative prompt</small></span>
+          <span class="arrow" aria-hidden="true">→</span>
+          <span class="io">48 kHz audio<small>exact to the frame</small></span>
+        </div>
+        <div class="shape" data-p="video">
+          <span class="label">video.generate</span>
+          <span class="io">Prompt, first and last frames<small>terms accepted by the user</small></span>
+          <span class="arrow" aria-hidden="true">→</span>
+          <span class="io">MP4 with sound<small>labelled AI-generated</small></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="profiles" aria-labelledby="profiles-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Three profiles, one engine</span>
+        <h2 id="profiles-title">Everything an app can ask for, by operation.</h2>
+        <p>Gaea serves the Media Engine Spec's Image, Audio and Video profiles. Apps ask for an operation. Plugins bring the models behind it, and a new model reaches every app without an app update.</p>
+      </div>
+      <div class="profiles">
+        <article class="profile" data-p="image">
+          <div class="profile-top"><h3>Image</h3><span class="label">MES Image</span></div>
+          <p>Generate, edit with references, repair and take apart.</p>
+          <ul class="ops">
+            <li><code>image.generate</code><span class="what">Text to image</span><span class="who">Z-Image Turbo · FLUX.2 Klein 4B · Qwen-Image Flash · Boogu-Image · Ming-Image</span></li>
+            <li><code>image.edit</code><span class="what">Edit from one or more reference images</span><span class="who">FLUX.2 Klein 4B · Qwen-Image-Edit 2511 · Boogu-Image</span></li>
+            <li><code>image.fill · image.upscale · image.restore</code><span class="what">Inpaint, enlarge and repair</span><span class="who">Forge processing pack</span></li>
+            <li><code>image.matte · image.segment</code><span class="what">Cut out a subject, or select by points</span><span class="who">Forge processing pack</span></li>
+            <li><code>image.decompose</code><span class="what">Split a design into layers at its own size</span><span class="who">Ming-Image Design-Layer</span></li>
+          </ul>
+        </article>
+        <article class="profile" data-p="audio">
+          <div class="profile-top"><h3>Audio</h3><span class="label">MES Audio</span></div>
+          <p>Voices, edits, sound effects and whole songs.</p>
+          <ul class="ops">
+            <li><code>audio.speak</code><span class="what">Text to speech, streamed as it's spoken</span><span class="who">Kokoro-82M, 28 voices · Qwen3-TTS 1.7B, voices, emotions and cloning</span></li>
+            <li><code>audio.design_voice</code><span class="what">Describe a voice and get one</span><span class="who">Qwen3-TTS Design</span></li>
+            <li><code>audio.edit_speech</code><span class="what">Change emotion or style, add a laugh or a sigh, denoise, trim</span><span class="who">Step-Audio-EditX</span></li>
+            <li><code>audio.generate</code><span class="what">Sound effects from 0.5 to 30 s at 48 kHz</span><span class="who">MOSS-SoundEffect v2.0</span></li>
+            <li><code>audio.compose</code><span class="what">Songs and instrumentals from 10 s to 10 min, in 50 languages</span><span class="who">ACE-Step 1.5</span></li>
+          </ul>
+        </article>
+        <article class="profile" data-p="video">
+          <div class="profile-top"><h3>Video</h3><span class="label">MES Video</span></div>
+          <p>Clips with sound, and the tools to finish them.</p>
+          <ul class="ops">
+            <li><code>video.generate</code><span class="what">Text or keyframes to video, with sound</span><span class="who">LTX 2.5, four memory tiers</span></li>
+            <li><code>video.extend · video.retake</code><span class="what">Continue a clip, or redo a span of it</span><span class="who">LTX 2.5</span></li>
+            <li><code>video.upscale</code><span class="what">×2 or ×4, up to 1920 × 1080</span><span class="who">SeedVR2-3B</span></li>
+            <li><code>video.interpolate</code><span class="what">2× to 8× the frames up to 4K, keeping the sound</span><span class="who">RIFE 4.25</span></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">How it works</span>
+        <h2 id="how-title">The host keeps order. The plugins do the generating.</h2>
+        <p>Gaea runs the front door, the queue, memory across processes and each plugin's life. Every model family runs as a plugin in a process of its own, on the GPU your Mac already has.</p>
+      </div>
+
+      <div class="arch" role="img" aria-label="Apps send MES requests to the Gaea host, which runs plugins in their own processes on the Mac's GPU.">
+        <div class="arch-col">
+          <span class="label">Your apps</span>
+          <div class="node">Your own app<small>MESClientKit or plain HTTP</small></div>
+          <div class="node">Gaea Lab<small>every server as one engine</small></div>
+          <div class="node">Pixel Agency apps<small>Desktop and friends</small></div>
+          <div class="node">Scripts<small><code>curl</code>, CI, agents</small></div>
+        </div>
+        <div class="wire"><span>MES · :17630</span></div>
+        <div class="arch-col">
+          <div class="host">
+            <div class="host-head"><strong>Gaea</strong><span class="label">the host</span></div>
+            <div class="host-grid">
+              <div class="node">Queue<small>one GPU job at a time</small></div>
+              <div class="node">Memory governor<small>budget, lanes, eviction</small></div>
+              <div class="node">Plugin manager<small>install, update, roll back</small></div>
+              <div class="node">Trust list<small>signatures, never URLs</small></div>
+            </div>
+            <div class="gpu">Console, menu bar and the <code>gaea</code> CLI · <code>gaea.sqlite</code></div>
+          </div>
+        </div>
+        <div class="wire"><span>GPP · one process each</span></div>
+        <div class="arch-col">
+          <span class="label">Plugins</span>
+          <div class="node plugin-node" data-p="image"><i></i>z-image</div>
+          <div class="node plugin-node" data-p="image"><i></i>flux2-klein</div>
+          <div class="node plugin-node" data-p="audio"><i></i>kokoro</div>
+          <div class="node plugin-node" data-p="video"><i></i>ltx</div>
+          <div class="gpu">MLX on Metal · unified memory</div>
+        </div>
+      </div>
+
+      <ol class="steps">
+        <li><h3>Add a plugin by its repo</h3><p><code>gaea plugins add &lt;github-url&gt;</code> fetches the newest release. Gaea checks its Developer ID signature and notarization against your trust list.</p></li>
+        <li><h3>Its models appear everywhere</h3><p>Every app sees the new operations and models on its next look. Models that need a licence accepted start switched off.</p></li>
+        <li><h3>An app sends a job</h3><p>It names an operation, inputs and a quality tier: draft, standard or best. Options a model adds travel as <code>x-</code> extensions.</p></li>
+        <li><h3>Gaea makes room</h3><p>It admits the job against the memory budget, stops idle workers if it must, and loads the largest lane that fits.</p></li>
+        <li><h3>The plugin generates</h3><p>In its own process, streaming progress and audio chunks as it goes. A crash costs one worker, and the job runs once more.</p></li>
+        <li><h3>The result says what ran</h3><p>Files with the model, licence, effective parameters and warnings. No media outlives its job.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">What Gaea handles</span>
+        <h2 id="features-title">The hard parts of running models, done once.</h2>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7v10M11 7v10M15.5 7v10" opacity=".5"/><path d="M18 4v16" stroke-dasharray="2 2"/></svg>
+          <h3>Memory that never surprises</h3>
+          <p>Gaea knows a model's footprint before it loads it. Jobs are admitted against a budget of three quarters of your Mac's memory, and Gaea learns each model's real peak from its runs.</p>
+        </div>
+        <div class="feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h11M4 18h6"/></svg>
+          <h3>Lanes: bf16, int8, int4</h3>
+          <p>When the default doesn't fit, Gaea loads the largest lane that does and adds a warning. Ask for a lane with <code>x-gaea.lane</code> and you get exactly that lane, or a clear refusal.</p>
+        </div>
+        <div class="feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+          <h3>Trust from the signature</h3>
+          <p>Plugins are notarized Developer ID bundles, checked at install and every launch. A release from a team you haven't trusted waits for your approval.</p>
+        </div>
+        <div class="feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="4" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><path d="m15 15 5 5m0-5-5 5"/></svg>
+          <h3>One process per model</h3>
+          <p>A crashing model takes down its own worker, never the server. Gaea records the crash with macOS's report, reruns the job once, and quarantines a plugin that crashes three times in ten minutes.</p>
+        </div>
+        <div class="feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4.5h-4.5"/></svg>
+          <h3>Updates with a way back</h3>
+          <p>Gaea and its plugins update from GitHub releases, verified before they install. Updates wait for running jobs to finish, and the previous version is kept for rollback.</p>
+        </div>
+        <div class="feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h4"/></svg>
+          <h3>Honest results</h3>
+          <p>Every result names its model and licence, the parameters that took effect, and any warnings. Video carries an AI-generated label.</p>
+        </div>
+        <div class="feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>
+          <h3>LoRA adapters by URL</h3>
+          <p><code>gaea adapters add &lt;hf-url&gt; --model &lt;id&gt;</code> registers a LoRA from Hugging Face, pinned to its commit and sha256.</p>
+        </div>
+        <div class="feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>
+          <h3>Keeps nothing</h3>
+          <p>Gaea is stateless and safe to restart. Inputs and outputs live only as long as the job, so libraries and projects stay in your apps.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="office" aria-labelledby="office-title">
+    <div class="wrap office">
+      <div>
+        <div class="section-head">
+          <span class="kicker">For home and small offices</span>
+          <h2 id="office-title">One Mac can serve the whole office.</h2>
+          <p>Put a Mac Studio or Mac mini in the corner, add the plugins you need, and every app on the network can generate with them.</p>
+        </div>
+        <ul class="office-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="16" height="12" rx="2"/><path d="M9 20h6M12 16v4"/></svg>
+            <div><strong>A menu-bar app, or headless</strong><span>Open <code>Gaea.app</code>, or run <code>--headless</code> from a launch agent on a Mac no one sits at.</span></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5a10 10 0 0 1 14 0M8 15.5a5.5 5.5 0 0 1 8 0"/><circle cx="12" cy="18.5" r="1" fill="currentColor"/></svg>
+            <div><strong>Apps find it on their own</strong><span>Gaea advertises itself over Bonjour. It serves only its own Mac by default. <code>--paired</code> opens it to your network over TLS, and each device pairs once.</span></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="3" y="6" width="7" height="12" rx="1.5"/><rect x="14" y="6" width="7" height="12" rx="1.5"/></svg>
+            <div><strong>Several servers, one pool</strong><span>Give each Mac its own area, such as image on one and video on another. Apps pick a server for each job.</span></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            <div><strong>Only you configure it</strong><span>Apps can use Gaea but never change it. Plugins, models and trust are set in its console or with <code>gaea</code> on that Mac.</span></div>
+          </li>
+        </ul>
+      </div>
+
+      <figure class="ledger" aria-label="An illustration of Gaea's memory ledger on a Mac Studio">
+        <div class="ledger-top"><strong>Memory ledger</strong><span class="label">Mac Studio · 128 GB</span></div>
+        <div class="bar" aria-hidden="true">
+          <i data-p="image" style="width:12%"></i>
+          <i data-p="audio" style="width:3%"></i>
+          <i data-p="video" style="width:41%"></i>
+          <i data-p="image" class="idle" style="width:9%"></i>
+          <span class="limit"></span>
+        </div>
+        <div class="bar-scale" aria-hidden="true"><span>0</span><span class="mark">budget · 96 GB</span><span>128 GB</span></div>
+        <ul class="ledger-rows">
+          <li><i style="background:var(--sun)"></i><b>z-image-turbo · int8</b><span>warm</span></li>
+          <li><i style="background:var(--sea)"></i><b>kokoro-82m</b><span>streaming</span></li>
+          <li><i style="background:var(--leaf)"></i><b>ltx · standard64</b><span>running</span></li>
+          <li><i style="background:var(--sun);opacity:.5"></i><b>flux2-klein-4b · bf16</b><span>idle, stopped first</span></li>
+        </ul>
+        <figcaption class="ledger-note">Illustration. Gaea charges each worker what it holds, stops idle ones least recently used first when a job needs room, and refuses with <code>no_capacity</code> only when nothing more can be freed.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="developers" aria-labelledby="dev-title">
+    <div class="wrap dev">
+      <div>
+        <div class="section-head">
+          <span class="kicker">For developers</span>
+          <h2 id="dev-title">One API for every model.</h2>
+          <p>Gaea speaks MES, an open HTTP spec for media engines. Write against operations once, and new plugins show up in your app without a code change.</p>
+        </div>
+        <nav class="dev-links" aria-label="Developer resources">
+          <a href="https://github.com/xocialize-code/gaea-plugin-demo/blob/main/AUTHORING.md">Write a plugin <span>AUTHORING.md</span></a>
+          <a href="https://github.com/xocialize-code/gaea/blob/main/spec/GPP-1.md">The plugin protocol <span>GPP-1</span></a>
+          <a href="https://github.com/xocialize-code/gaea-plugin-kit">GaeaPluginKit <span>Swift package</span></a>
+          <a href="https://github.com/xocialize-code/gaea#running-a-server">Run a server <span>operator's guide</span></a>
+        </nav>
+      </div>
+
+      <div class="term">
+        <div class="term-bar" role="tablist" aria-label="Code samples">
+          <button class="tab" role="tab" id="tab-call" aria-selected="true" aria-controls="panel-call" type="button">Call it</button>
+          <button class="tab" role="tab" id="tab-run" aria-selected="false" aria-controls="panel-run" type="button" tabindex="-1">Run it</button>
+          <button class="tab" role="tab" id="tab-build" aria-selected="false" aria-controls="panel-build" type="button" tabindex="-1">Build a plugin</button>
+          <button class="copy" id="copy-code" type="button">Copy</button>
+        </div>
+<pre role="tabpanel" id="panel-call" aria-labelledby="tab-call"><code><span class="c"># Ask any Gaea for an image</span>
+<span class="k">curl</span> -s http://127.0.0.1:17630/mes/v0/jobs \
+  -H <span class="s">'MES-Version: 0.1'</span> -H <span class="s">'Content-Type: application/json'</span> \
+  -d <span class="s">'{"operation": "image.generate",
+       "inputs": {"prompt": "a lighthouse on a cliff at dusk"},
+       "params": {"quality": "best", "seed": 42,
+                  "size": {"width": 1024, "height": 1024}}}'</span>
+<span class="c"># → {"id": "…"}</span>
+
+<span class="c"># Wait for it, then fetch result.outputs[].href</span>
+<span class="k">curl</span> -s <span class="s">'http://127.0.0.1:17630/mes/v0/jobs/&lt;id&gt;?wait=10'</span> \
+  -H <span class="s">'MES-Version: 0.1'</span>
+
+<span class="c"># What can this server do right now?</span>
+<span class="k">curl</span> -s http://127.0.0.1:17630/mes/v0/operations -H <span class="s">'MES-Version: 0.1'</span></code></pre>
+<pre role="tabpanel" id="panel-run" aria-labelledby="tab-run" hidden><code><span class="c"># Add models from GitHub</span>
+<span class="k">gaea</span> plugins add https://github.com/xocialize-code/gaea-plugin-z-image
+<span class="k">gaea</span> plugins add https://github.com/xocialize-code/gaea-plugin-kokoro
+
+<span class="c"># See what's offered, and choose a default lane</span>
+<span class="k">gaea</span> models
+<span class="k">gaea</span> models lane z-image-turbo <span class="g">int8</span>
+
+<span class="c"># Keep weights on a fast volume</span>
+<span class="k">gaea</span> models root /Volumes/Models
+
+<span class="c"># Watch memory, workers and crashes</span>
+<span class="k">gaea</span> ledger
+<span class="k">gaea</span> status
+
+<span class="c"># Stay current, with a way back</span>
+<span class="k">gaea</span> plugins check
+<span class="k">gaea</span> update --check</code></pre>
+<pre role="tabpanel" id="panel-build" aria-labelledby="tab-build" hidden><code><span class="c"># 1. Start from the template</span>
+<span class="k">gh</span> repo create my-gaea-plugin --template xocialize-code/gaea-plugin-demo --clone
+
+<span class="c"># 2. Wrap your MLX model with GaeaPluginKit and describe it in
+#    manifest.json: operations, quality tiers, lanes, licence</span>
+
+<span class="c"># 3. Sign with your own Developer ID, notarize, tag a release</span>
+<span class="k">git</span> tag <span class="g">v0.1.0</span> &amp;&amp; <span class="k">git</span> push origin <span class="g">v0.1.0</span>
+
+<span class="c"># 4. Any operator can install it. The first release from
+#    a new team waits for their approval.</span>
+<span class="k">gaea</span> plugins add https://github.com/you/my-gaea-plugin</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="see" aria-labelledby="see-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">See it</span>
+        <h2 id="see-title">A console for you. Any app for everyone else.</h2>
+      </div>
+      <div class="shots">
+        <figure class="shot">
+          <img src="assets/lab.webp" width="1500" height="900" loading="lazy" alt="Gaea Lab generating a lighthouse at dusk. The model list shows Z-Image Turbo, FLUX.2 Klein 4B and Qwen-Image Flash with their licences, and a LoRA panel on the right.">
+          <figcaption><b>Gaea Lab</b>, the reference app, pools two Gaea servers into one engine. Each model shows its licence and memory size, and this image ran on Qwen-Image Flash with a LoRA.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/console.webp" width="1320" height="1000" loading="lazy" alt="Gaea's Plugins page showing the demo plugin with an update available, its signature and notarization, and the trusted teams list.">
+          <figcaption><b>The console's Plugins page.</b> Every update shows its signature, notarization and sha256 before you take it, and the trust list sits right below.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="plugins" aria-labelledby="plugins-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">The plugins</span>
+        <h2 id="plugins-title">Open models, ready to install.</h2>
+        <p>Each one is a repo on GitHub with signed releases. Most come in several lanes, so a Mac with less memory runs a lighter quantization of the same model.</p>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th scope="col">Plugin</th><th scope="col">Profile</th><th scope="col">What it does</th><th scope="col">Licence</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-z-image">Z-Image</a><small>Turbo and Base</small></td><td><span class="tag" data-p="image">Image</span></td><td>Fast text to image, and edits<small><code>int4 · int8 · bf16</code></small></td><td>Apache-2.0</td></tr>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-flux2-klein">FLUX.2 Klein</a><small>4B and 4B Base</small></td><td><span class="tag" data-p="image">Image</span></td><td>Generate, and edit from several references<small><code>int4 · int8 · bf16</code></small></td><td>Apache-2.0</td></tr>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-qwen-image">Qwen-Image</a><small>Edit 2511 and Flash</small></td><td><span class="tag" data-p="image">Image</span></td><td>Multi-reference editing, and fast generation</td><td>Per model, NVIDIA Open Model License for Flash</td></tr>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-boogu">Boogu-Image</a><small>0.1 Base and Turbo</small></td><td><span class="tag" data-p="image">Image</span></td><td>Generate, and one-image edit<small><code>int4 · int8 · bf16</code></small></td><td>Apache-2.0</td></tr>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-ming-image">Ming-Image</a><small>0.1 Design and Design-Layer</small></td><td><span class="tag" data-p="image">Image</span></td><td>Posters and layouts, transparent backgrounds, layers</td><td>MIT</td></tr>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-forge">Forge</a><small>processing pack</small></td><td><span class="tag" data-p="image">Image</span></td><td>Inpaint, upscale, matte, segment and restore in one worker</td><td>Per model</td></tr>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-prompt-enhance">Prompt Enhance</a><small>Qwen3.5 4B and 9B</small></td><td><span class="tag" data-p="image">Image</span></td><td>Rewrites short prompts where a quality profile asks</td><td>Per model</td></tr>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-kokoro">Kokoro</a><small>82M</small></td><td><span class="tag" data-p="audio">Audio</span></td><td>Text to speech with 28 English voices, streamed</td><td>Apache-2.0</td></tr>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-qwen3-tts">Qwen3-TTS</a><small>1.7B</small></td><td><span class="tag" data-p="audio">Audio</span></td><td>Voices with emotion, cloning from a reference, voice design</td><td>Apache-2.0</td></tr>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-step-audio-editx">Step-Audio-EditX</a></td><td><span class="tag" data-p="audio">Audio</span></td><td>Edit speech: emotion, style, laughs and sighs, denoise, trim<small><code>int8 · bf16</code></small></td><td>Apache-2.0</td></tr>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-moss-soundeffect">MOSS-SoundEffect</a><small>v2.0</small></td><td><span class="tag" data-p="audio">Audio</span></td><td>Sound effects from 0.5 to 30 s at 48 kHz<small><code>int4 · bf16</code></small></td><td>Apache-2.0</td></tr>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-ace-step">ACE-Step</a><small>1.5</small></td><td><span class="tag" data-p="audio">Audio</span></td><td>Songs and instrumentals, covers, repaints and extensions<small><code>int4 · int8 · bf16</code></small></td><td>MIT</td></tr>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-ltx">LTX</a><small>2.5</small></td><td><span class="tag" data-p="video">Video</span></td><td>Generate, extend and retake video with sound, in four memory tiers</td><td>LTX-2 Community</td></tr>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-seedvr2">SeedVR2</a><small>3B</small></td><td><span class="tag" data-p="video">Video</span></td><td>Upscale ×2 or ×4, live action and drawn</td><td>Apache-2.0 weights</td></tr>
+            <tr><td><a href="https://github.com/xocialize-code/gaea-plugin-rife">RIFE</a><small>4.25</small></td><td><span class="tag" data-p="video">Video</span></td><td>Frame interpolation from 2× to 8×, up to 4K</td><td>MIT</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="catalog-foot">Bring your own model: the <a href="https://github.com/xocialize-code/gaea-plugin-demo">plugin template</a> starts you with signing, a self-check and release CI. Adapters are not plugins; add a LoRA with <code>gaea adapters add</code>.</p>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-title">
+    <div class="cta-horizon" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="kicker">Open source</span>
+      <h2 id="cta-title">Give open models a place to grow.</h2>
+      <p>Gaea is free and open source under Apache-2.0. It runs on hardware you own, asks for no account, and keeps your media on the network you choose.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="https://github.com/xocialize-code/gaea/releases/latest">Download for macOS</a>
+        <a class="btn btn-ghost" href="https://github.com/xocialize-code/gaea">Read the source</a>
+      </div>
+      <div class="principles"><span>Apache-2.0</span><span>Runs on your Mac</span><span>No accounts</span><span>Signed and notarized</span><span>Anyone can publish a plugin</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#top">Gaea</a>
+      <p>An open-source media server for Apple silicon. One engine for the MES Image, Audio and Video profiles, with models as plugins.</p>
+    </div>
+    <div>
+      <h4 class="label">Project</h4>
+      <ul>
+        <li><a href="https://github.com/xocialize-code/gaea">GitHub</a></li>
+        <li><a href="https://github.com/xocialize-code/gaea/releases">Releases</a></li>
+        <li><a href="https://github.com/xocialize-code/gaea/issues">Issues</a></li>
+        <li><a href="https://github.com/xocialize-code/gaea/blob/main/LICENSE">Licence</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="label">Build</h4>
+      <ul>
+        <li><a href="https://github.com/xocialize-code/gaea-plugin-demo/blob/main/AUTHORING.md">Plugin guide</a></li>
+        <li><a href="https://github.com/xocialize-code/gaea-plugin-demo">Plugin template</a></li>
+        <li><a href="https://github.com/xocialize-code/gaea-plugin-kit">GaeaPluginKit</a></li>
+        <li><a href="https://github.com/xocialize-code/gaea/blob/main/spec/GPP-1.md">GPP-1 spec</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="label">Profiles</h4>
+      <ul>
+        <li><a href="#profiles">Image</a></li>
+        <li><a href="#profiles">Audio</a></li>
+        <li><a href="#profiles">Video</a></li>
+        <li><a href="#plugins">All plugins</a></li>
+      </ul>
+    </div>
+    <div class="footer-base">
+      <span>Apache-2.0 · Free and open source</span>
+      <span>Requires macOS 26 on Apple silicon</span>
+    </div>
+  </div>
+</footer>
+
+<script src="hero.js" defer></script>
+<script src="main.js" defer></script>
+</body>
+</html>
