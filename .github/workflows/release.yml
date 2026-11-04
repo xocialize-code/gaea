@@ -21,7 +21,9 @@ permissions:
 
 jobs:
   release:
-    runs-on: macos-26
+    # Xcode 27 (Swift 6.4), as the plugins build: Swift 6.3.3 on macos-26 built plugin workers that segfault on macOS 27
+    # (AB-L-0324). `xcode-27` is GitHub's macOS 27 image, a public preview.
+    runs-on: xcode-27
     timeout-minutes: 60
     steps:
       # Fail loudly, before anything is built, when a secret is missing: a release that skipped notarization must never
