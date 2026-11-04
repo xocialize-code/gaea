@@ -1,0 +1,11 @@
+== events ==
+2026-11-04T16:23:27Z held 0.1.0: v0.1.0 from xocialize-code/gaea-plugin-team2-test is signed by MOUNTAIN VIEW STAGING SERVICES INC (F84FKGN358), a team Gaea doesn't trust; held as h-913f9f9b
+2026-11-04T16:23:28Z installed 0.1.0: added from https://github.com/xocialize-code/gaea-plugin-team2-test (v0.1.0) after its team was approved; Developer ID Application: MOUNTAIN VIEW STAGING SERVICES INC (F84FKGN358), id com.mountainviewstaging.gaea.team2-test, notarized, hardened runtime
+2026-11-04T16:23:31Z untrusted: its team F84FKGN358 was removed from the trust list; stopped until it's trusted again
+== worker stderr (/tmp/gaea-team2.WT3o/h/Logs/plugins/com.mountainviewstaging.gaea.team2-test.log) ==
+
+=== 2026-11-04T16:23:28Z launch com.mountainviewstaging.gaea.team2-test 0.1.0 ===
+=== 2026-11-04T16:23:31Z exited (status 0) ===
+
+=== 2026-11-04T16:23:31Z launch com.mountainviewstaging.gaea.team2-test 0.1.0 ===
+

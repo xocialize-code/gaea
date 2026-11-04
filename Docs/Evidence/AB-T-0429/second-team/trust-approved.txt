@@ -1,0 +1,4 @@
+Trusted teams:
+  CFZS6RXUCP  Gaea's own team (built in)
+  F84FKGN358  MOUNTAIN VIEW STAGING SERVICES INC, approved 2026-11-04T16:23:28Z  plugins: com.mountainviewstaging.gaea.team2-test
+Held: none

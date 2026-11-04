@@ -1,0 +1,82 @@
+# Clean install (AB-T-0429) 2026-11-04T16:25:32Z: Gaea v1.0.0-rc.1 from GitHub in gaea-clean-20261104-082532, a clone of appprobe-golden
+guest: 26.6.2 VirtualMac2,1 17179869184 at 192.168.64.23
+PASS  the guest has never seen Gaea
+PASS  the release downloads: Gaea-1.0.0-rc.1.zip and its sha256
+Gaea-1.0.0-rc.1.zip: OK
+PASS    its digest matches
+0083;6aeb5c8a;Safari;
+PASS    it unzips with quarantine kept, and Gaea.app moves to /Applications
+/Applications/Gaea.app: accepted
+source=Notarized Developer ID
+override=security disabled
+origin=Developer ID Application: Dustin Nielson (CFZS6RXUCP)
+PASS  Gatekeeper accepts the quarantined app: notarized Developer ID
+PASS    its notarization ticket is stapled
+PASS    --version answers 1.0.0-rc.1
+Gaea 1.0.0-rc.1
+MES:       http://127.0.0.1:17630/mes/v0 (open, this Mac only)
+Operations: 
+Plugins:   0 installed, 0 enabled
+Trust:     CFZS6RXUCP
+Crashes:   none in the last 24 h
+Workers:   none
+Memory:    0.00 GB charged of 12.88 GB budget; host 0.03 GB
+Models:    /Users/admin/Library/Application Support/MLXEngine/Models
+Update:    up to date
+Operator:  /Users/admin/Library/Application Support/Gaea/operator.sock (same user, Developer ID team); you are pid 748, uid 501, Developer ID CFZS6RXUCP
+Database:  /Users/admin/Library/Application Support/Gaea/gaea.sqlite
+PASS  the app opens, and gaea status answers
+Installed Gaea demo worker 0.3.3 (com.xocialize.gaea.demo), enabled.
+PASS  the demo plugin installs from GitHub
+{'effective': {'count': 1, 'seed': 1, 'size': {'height': 512, 'width': 512}, 'x-gaea.gradient_angle': 45}, 'lane': 'fp32', 'operation': 'image.generate', 'outputs': [{'media_type': 'image/png', 'name': 'images', 'path': '/Users/admin/Library/Caches/Gaea/spool/jobs/job_vkynxjvdm93cyrzdfgwn/outputs/worker/worker-1/out/image-0.png'}], 'plugin': 'com.xocialize.gaea.demo', 'seconds': 1.244, 'version': '0.3.3'}
+PASS    a job runs on it, on the guest's GPU
+on  com.xocialize.gaea.demo 0.3.3  Gaea demo worker  https://github.com/xocialize-code/gaea-plugin-demo
+PASS  headless Gaea starts on the same folder, with the plugin
+PASS    and runs a job
+2026-11-04T16:25:57Z operator: listening on /Users/admin/Library/Application Support/Gaea/operator.sock (same user, Developer ID team)
+2026-11-04T16:25:57Z gaea 1.0.0-rc.1 starting: /Users/admin/Library/Application Support/Gaea, budget 12.88 GB, models /Users/admin/Library/Application Support/MLXEngine/Models
+2026-11-04T16:25:57+0000 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17630
+2026-11-04T16:25:57Z gaea: serving MES at http://127.0.0.1:17630/mes/v0
+2026-11-04T16:25:57Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 868, hello after 0.013335166 seconds
+wrote /Users/admin/snap/console-plugins-light.png
+wrote /Users/admin/snap/console-models-light.png
+wrote /Users/admin/snap/console-system-memory-light.png
+wrote /Users/admin/snap/console-system-overview-light.png
+wrote /Users/admin/snap/console-plugins-dark.png
+wrote /Users/admin/snap/console-models-dark.png
+wrote /Users/admin/snap/console-system-memory-dark.png
+wrote /Users/admin/snap/console-system-overview-dark.png
+wrote /Users/admin/snap/settings-adapters-light.png
+wrote /Users/admin/snap/settings-adapters-dark.png
+wrote /Users/admin/snap/settings-updates-light.png
+wrote /Users/admin/snap/settings-updates-dark.png
+2026-11-04T16:26:14+0000 error mes-engine: [HummingbirdCore] Server shutdown error: Already closed
+2026-11-04T16:26:14+0000 error mes-engine: [HummingbirdCore] Waiting on child channel: CancellationError()
+2026-11-04T16:26:14Z scheduler: stopped com.xocialize.gaea.demo 0.3.3 (shutdown)
+/Users/admin/snap/console-models-dark.png
+/Users/admin/snap/console-models-light.png
+/Users/admin/snap/console-plugins-dark.png
+/Users/admin/snap/console-plugins-light.png
+/Users/admin/snap/console-system-memory-dark.png
+/Users/admin/snap/console-system-memory-light.png
+/Users/admin/snap/console-system-overview-dark.png
+/Users/admin/snap/console-system-overview-light.png
+/Users/admin/snap/settings-adapters-dark.png
+/Users/admin/snap/settings-adapters-light.png
+/Users/admin/snap/settings-updates-dark.png
+/Users/admin/snap/settings-updates-light.png
+PASS  the console renders its pages (--snapshot)
+Docs/Evidence/AB-T-0429/clean-install/console-models-dark.png
+Docs/Evidence/AB-T-0429/clean-install/console-models-light.png
+Docs/Evidence/AB-T-0429/clean-install/console-plugins-dark.png
+Docs/Evidence/AB-T-0429/clean-install/console-plugins-light.png
+Docs/Evidence/AB-T-0429/clean-install/console-system-memory-dark.png
+Docs/Evidence/AB-T-0429/clean-install/console-system-memory-light.png
+Docs/Evidence/AB-T-0429/clean-install/console-system-overview-dark.png
+Docs/Evidence/AB-T-0429/clean-install/console-system-overview-light.png
+Docs/Evidence/AB-T-0429/clean-install/settings-adapters-dark.png
+Docs/Evidence/AB-T-0429/clean-install/settings-adapters-light.png
+Docs/Evidence/AB-T-0429/clean-install/settings-updates-dark.png
+Docs/Evidence/AB-T-0429/clean-install/settings-updates-light.png
+
+13 passed, 0 failed

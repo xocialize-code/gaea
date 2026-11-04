@@ -1,0 +1,9 @@
+Held h-913f9f9b: Second-team test plugin 0.1.0 (com.mountainviewstaging.gaea.team2-test) is signed by a team Gaea doesn't trust yet.
+  Signed by:  Developer ID Application: MOUNTAIN VIEW STAGING SERVICES INC (F84FKGN358)
+  Team:       F84FKGN358
+  Notarized:  yes
+  Repo:       https://github.com/xocialize-code/gaea-plugin-team2-test (v0.1.0)
+  Models:     team2-matmul, team2-gradient
+Trusting the team lets Gaea run any plugin it signs, including later updates.
+  Approve: gaea trust approve h-913f9f9b
+  Decline: gaea trust decline h-913f9f9b

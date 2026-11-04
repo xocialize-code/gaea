@@ -1,0 +1,127 @@
+# Second team (AB-T-0429, G-25) 2026-11-04T16:23:25Z: Gaea 1.0.0-rc.1, com.mountainviewstaging.gaea.team2-test from GitHub
+host: Mac17,14, macOS 27.3; GAEA_HOME /tmp/gaea-team2.WT3o/h
+Trusted teams:
+  CFZS6RXUCP  Gaea's own team (built in)
+Held: none
+PASS  only Gaea's own team is trusted
+Held h-913f9f9b: Second-team test plugin 0.1.0 (com.mountainviewstaging.gaea.team2-test) is signed by a team Gaea doesn't trust yet.
+  Signed by:  Developer ID Application: MOUNTAIN VIEW STAGING SERVICES INC (F84FKGN358)
+  Team:       F84FKGN358
+  Notarized:  yes
+  Repo:       https://github.com/xocialize-code/gaea-plugin-team2-test (v0.1.0)
+  Models:     team2-matmul, team2-gradient
+Trusting the team lets Gaea run any plugin it signs, including later updates.
+  Approve: gaea trust approve h-913f9f9b
+  Decline: gaea trust decline h-913f9f9b
+PASS  adding it holds the release instead of installing
+PASS  the hold names the certificate, the team, notarization, the repo and the models
+PASS  nothing is installed
+PASS  nothing is offered
+{"error":{"code":"unknown_operation","message":"No operation image.generate on this engine.","param":"operation","request_id":"req_jg75j4yfwapx"}}
+PASS  a job for its model is refused
+Trusted its team. Installed Second-team test plugin 0.1.0 (com.mountainviewstaging.gaea.team2-test), enabled.
+PASS  approving it trusts the team and installs the plugin
+PASS    the trust list has both teams
+PASS    team2-gradient is offered
+{'effective': {'count': 1, 'seed': 11, 'size': {'height': 384, 'width': 512}, 'x-gaea.gradient_angle': 45}, 'lane': 'fp32', 'operation': 'image.generate', 'outputs': [{'media_type': 'image/png', 'name': 'images', 'path': '/tmp/gaea-team2.WT3o/h/Caches/spool/jobs/job_qxcpn23zsx3gxsnersp0/outputs/worker/worker-1/out/image-0.png'}], 'plugin': 'com.mountainviewstaging.gaea.team2-test', 'seconds': 0.022, 'version': '0.1.0'}
+PASS    a job runs on the second team's plugin
+worker 42884: /tmp/gaea-team2.WT3o/h/Plugins/com.mountainviewstaging.gaea.team2-test/0.1.0/demo.gaeaplugin/Contents/MacOS/gaea-demo-worker
+Executable=/private/tmp/gaea-team2.WT3o/h/Plugins/com.mountainviewstaging.gaea.team2-test/0.1.0/demo.gaeaplugin/Contents/MacOS/gaea-demo-worker
+Identifier=com.mountainviewstaging.gaea.team2-test
+Format=bundle with Mach-O thin (arm64)
+CodeDirectory v=20500 size=70675 flags=0x10000(runtime) hashes=2201+3 location=embedded
+Hash type=sha256 size=32
+CandidateCDHash sha256=781d9540e007c1a64d457a07d33ee1e960b58e19
+CandidateCDHashFull sha256=781d9540e007c1a64d457a07d33ee1e960b58e19882210b9a594a090bf76388d
+Hash choices=sha256
+CMSDigest=781d9540e007c1a64d457a07d33ee1e960b58e19882210b9a594a090bf76388d
+CMSDigestType=2
+CDHash=781d9540e007c1a64d457a07d33ee1e960b58e19
+Signature size=9019
+Authority=Developer ID Application: MOUNTAIN VIEW STAGING SERVICES INC (F84FKGN358)
+Authority=Developer ID Certification Authority
+Authority=Apple Root CA
+Timestamp=Nov 4, 2026 at 8:15:12 AM
+Notarization Ticket=stapled
+Info.plist entries=7
+TeamIdentifier=F84FKGN358
+Runtime Version=26.0.0
+Sealed Resources version=2 rules=13 files=3
+Internal requirements count=1 size=200
+Total signatures=1
+Chosen signature=1
+PASS    its worker is signed by F84FKGN358
+Installed Gaea demo worker 0.3.3 (com.xocialize.gaea.demo), enabled.
+PASS  our team's demo installs without asking
+{'effective': {'count': 1, 'seed': 12, 'size': {'height': 256, 'width': 256}, 'x-gaea.gradient_angle': 45}, 'lane': 'fp32', 'operation': 'image.generate', 'outputs': [{'media_type': 'image/png', 'name': 'images', 'path': '/tmp/gaea-team2.WT3o/h/Caches/spool/jobs/job_4bppxeymkz6wyndn2het/outputs/worker/worker-1/out/image-0.png'}], 'plugin': 'com.xocialize.gaea.demo', 'seconds': 0.014, 'version': '0.3.3'}
+PASS    a job runs on it
+worker 42993: /tmp/gaea-team2.WT3o/h/Plugins/com.xocialize.gaea.demo/0.3.3/demo.gaeaplugin/Contents/MacOS/gaea-demo-worker
+Executable=/private/tmp/gaea-team2.WT3o/h/Plugins/com.xocialize.gaea.demo/0.3.3/demo.gaeaplugin/Contents/MacOS/gaea-demo-worker
+Identifier=com.xocialize.gaea.demo
+Format=bundle with Mach-O thin (arm64)
+CodeDirectory v=20500 size=70723 flags=0x10000(runtime) hashes=2203+3 location=embedded
+Hash type=sha256 size=32
+CandidateCDHash sha256=13199bd023bd49e0bac6f46e23278468b80fc15c
+CandidateCDHashFull sha256=13199bd023bd49e0bac6f46e23278468b80fc15c4be576dbb84646ec4b3b8b39
+Hash choices=sha256
+CMSDigest=13199bd023bd49e0bac6f46e23278468b80fc15c4be576dbb84646ec4b3b8b39
+CMSDigestType=2
+CDHash=13199bd023bd49e0bac6f46e23278468b80fc15c
+Signature size=8979
+Authority=Developer ID Application: Dustin Nielson (CFZS6RXUCP)
+Authority=Developer ID Certification Authority
+Authority=Apple Root CA
+Timestamp=Nov 2, 2026 at 6:31:20 AM
+Notarization Ticket=stapled
+Info.plist entries=7
+TeamIdentifier=CFZS6RXUCP
+Runtime Version=26.0.0
+Sealed Resources version=2 rules=13 files=3
+Internal requirements count=1 size=184
+Total signatures=1
+Chosen signature=1
+PASS    its worker is signed by CFZS6RXUCP
+worker 42884: /tmp/gaea-team2.WT3o/h/Plugins/com.mountainviewstaging.gaea.team2-test/0.1.0/demo.gaeaplugin/Contents/MacOS/gaea-demo-worker
+Executable=/private/tmp/gaea-team2.WT3o/h/Plugins/com.mountainviewstaging.gaea.team2-test/0.1.0/demo.gaeaplugin/Contents/MacOS/gaea-demo-worker
+Identifier=com.mountainviewstaging.gaea.team2-test
+Format=bundle with Mach-O thin (arm64)
+CodeDirectory v=20500 size=70675 flags=0x10000(runtime) hashes=2201+3 location=embedded
+Hash type=sha256 size=32
+CandidateCDHash sha256=781d9540e007c1a64d457a07d33ee1e960b58e19
+CandidateCDHashFull sha256=781d9540e007c1a64d457a07d33ee1e960b58e19882210b9a594a090bf76388d
+Hash choices=sha256
+CMSDigest=781d9540e007c1a64d457a07d33ee1e960b58e19882210b9a594a090bf76388d
+CMSDigestType=2
+CDHash=781d9540e007c1a64d457a07d33ee1e960b58e19
+Signature size=9019
+Authority=Developer ID Application: MOUNTAIN VIEW STAGING SERVICES INC (F84FKGN358)
+Authority=Developer ID Certification Authority
+Authority=Apple Root CA
+Timestamp=Nov 4, 2026 at 8:15:12 AM
+Notarization Ticket=stapled
+Info.plist entries=7
+TeamIdentifier=F84FKGN358
+Runtime Version=26.0.0
+Sealed Resources version=2 rules=13 files=3
+Internal requirements count=1 size=200
+Total signatures=1
+Chosen signature=1
+PASS    and the second team's worker is still signed by F84FKGN358
+No longer trusting F84FKGN358. Stopped, and kept installed until it's trusted again: com.mountainviewstaging.gaea.team2-test.
+PASS  removing F84FKGN358 stops its plugin and keeps it
+on  com.xocialize.gaea.demo 0.3.3  Gaea demo worker  https://github.com/xocialize-code/gaea-plugin-demo
+on  com.mountainviewstaging.gaea.team2-test 0.1.0  Second-team test plugin  https://github.com/xocialize-code/gaea-plugin-team2-test
+      stopped: its team F84FKGN358 isn't trusted (gaea trust approve F84FKGN358)
+PASS    it is marked stopped, still installed
+PASS    our demo still runs
+Trusted F84FKGN358. Its plugins run again: com.mountainviewstaging.gaea.team2-test.
+PASS  approving F84FKGN358 again runs it
+PASS    a job runs on it again
+OK
+PASS  transcript com.mountainviewstaging.gaea.team2-test-0.1.0-2026-11-04T162328Z-a1005966.gpp passes validate.py
+OK
+PASS  transcript com.mountainviewstaging.gaea.team2-test-0.1.0-2026-11-04T162331Z-2d3c5f08.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.demo-0.3.3-2026-11-04T162330Z-4fcd9aec.gpp passes validate.py
+
+23 passed, 0 failed

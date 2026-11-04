@@ -1,0 +1,2 @@
+on  com.xocialize.gaea.demo 0.3.3  Gaea demo worker  https://github.com/xocialize-code/gaea-plugin-demo
+on  com.mountainviewstaging.gaea.team2-test 0.1.0  Second-team test plugin  https://github.com/xocialize-code/gaea-plugin-team2-test

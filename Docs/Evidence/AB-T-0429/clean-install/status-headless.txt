@@ -1,0 +1,14 @@
+Gaea 1.0.0-rc.1
+MES:       http://127.0.0.1:17630/mes/v0 (open, this Mac only)
+Operations: image.generate [demo-gradient]
+Plugins:   1 installed, 1 enabled
+Trust:     CFZS6RXUCP
+Crashes:   none in the last 24 h
+Workers:   com.xocialize.gaea.demo pid 838
+Memory:    0.02 GB charged of 12.88 GB budget; host 0.01 GB
+Models:    /Users/admin/Library/Application Support/MLXEngine/Models
+Update:    up to date
+Operator:  /Users/admin/Library/Application Support/Gaea/operator.sock (same user, Developer ID team); you are pid 852, uid 501, Developer ID CFZS6RXUCP
+Database:  /Users/admin/Library/Application Support/Gaea/gaea.sqlite
+
+No crashes.
