@@ -658,6 +658,17 @@ starts while the phase before it is being built.
      - a plugin signed by a real second team, approved and run (G-25);
      - conformance with every plugin;
      - 1.0.0 tagged and released by CI.
+     - **Done 2026-11-05 (AB-T-0429):** Gaea 1.0.0, released from CI and still labelled alpha (AB-D-0207).
+       - **Clean install:** 13/13 in a throwaway macOS 26 VM.
+       - **Second team:** 23/23 with a plugin from F84FKGN358.
+       - **Soak:** 7,413 of 7,413 mixed jobs over 24 h, and the self-update answered in 63 s. All 24 injected crashes
+         failed as designed, and nothing was quarantined.
+       - **Conformance:** with all 22 plugins, Base, Image, Audio and Video 0.1 conform (83/0/8).
+       - **The leak the soak found:** two LTX workers hit MLX's 499,000-buffer limit. mlx-swift's `_updateInternal`
+         leaked every quantized load, and LTX reloads Gemma 4 every run (AB-L-0330). It was fixed through the fleet's
+         mlx-swift fork in mlx-engine-swift 0.74.1 (AB-A-0249, AB-D-0208), and LTX 0.1.3 runs flat.
+
+       Evidence: `Docs/Evidence/AB-T-0429/`.
 - **Decided** (the operator, 2026-11-01):
   1. **The update path** (G-24): Gaea's own GitHub path, not Sparkle. It reuses the plugin installer's download,
      signature check and swap, works headless, and adds no dependency or keys.

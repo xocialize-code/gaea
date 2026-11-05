@@ -120,6 +120,10 @@ notes="$state
 - \`release.json\`: the version, digest, minimum macOS ($(defaults read $APP/Contents/Info LSMinimumSystemVersion)) and plugin protocol (GPP $GPP_VERSIONS), for Gaea's updater
 
 Checked before publishing: \`codesign --verify --strict --deep\`, the app headless answering the MES handshake and \`gaea status\`$([[ $notarized == yes ]] && print ', `stapler validate` and `spctl --assess`')."
+# Notes written for this version (Docs/Releases/<version>.md) go first.
+[[ -f Docs/Releases/$VERSION.md ]] && notes="$(<Docs/Releases/$VERSION.md)
+
+$notes"
 [[ -n $previous ]] && notes+="
 
 Changes since ${previous}: https://github.com/xocialize-code/gaea/compare/${previous}...${TAG}"
