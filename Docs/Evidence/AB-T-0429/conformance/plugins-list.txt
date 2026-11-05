@@ -1,0 +1,22 @@
+on  com.xocialize.gaea.ace-step 0.1.1  ACE-Step 1.5  https://github.com/xocialize-code/gaea-plugin-ace-step
+on  com.xocialize.gaea.boogu 0.1.1  Boogu Image  https://github.com/xocialize-code/gaea-plugin-boogu
+on  com.xocialize.gaea.flux3-klein 0.1.1  FLUX 3 Klein  https://github.com/xocialize-code/gaea-plugin-flux3-klein
+on  com.xocialize.gaea.flux2-klein 0.2.3  FLUX.2 Klein  https://github.com/xocialize-code/gaea-plugin-flux2-klein
+on  com.xocialize.gaea.forge 0.2.1  Forge processing pack  https://github.com/xocialize-code/gaea-plugin-forge
+on  com.xocialize.gaea.demo 0.3.3  Gaea demo worker  https://github.com/xocialize-code/gaea-plugin-demo
+on  com.xocialize.gaea.kokoro 0.1.1  Kokoro  https://github.com/xocialize-code/gaea-plugin-kokoro
+on  com.xocialize.gaea.ltx 0.1.3  LTX 2.5  https://github.com/xocialize-code/gaea-plugin-ltx
+on  com.xocialize.gaea.moss-image 0.1.1  MOSS-Image  https://github.com/xocialize-code/gaea-plugin-moss-image
+on  com.xocialize.gaea.moss-soundeffect 0.1.2  MOSS-SoundEffect  https://github.com/xocialize-code/gaea-plugin-moss-soundeffect
+on  com.xocialize.gaea.mage-flow 0.1.1  Mage-Flow  https://github.com/xocialize-code/gaea-plugin-mage-flow
+on  com.xocialize.gaea.mage-vl 0.1.1  Mage-VL  https://github.com/xocialize-code/gaea-plugin-mage-vl
+on  com.xocialize.gaea.ming-image 0.3.1  Ming-Image  https://github.com/xocialize-code/gaea-plugin-ming-image
+on  com.xocialize.gaea.prompt-enhance 0.1.1  Prompt enhancer  https://github.com/xocialize-code/gaea-plugin-prompt-enhance
+on  com.xocialize.gaea.qwen-image 0.2.1  Qwen-Image  https://github.com/xocialize-code/gaea-plugin-qwen-image
+on  com.xocialize.gaea.qwen-image-21 0.1.1  Qwen-Image-2.1  https://github.com/xocialize-code/gaea-plugin-qwen-image-21
+on  com.xocialize.gaea.qwen3-tts 0.2.1  Qwen3-TTS  https://github.com/xocialize-code/gaea-plugin-qwen3-tts
+on  com.xocialize.gaea.rife 0.1.1  RIFE  https://github.com/xocialize-code/gaea-plugin-rife
+on  com.xocialize.gaea.seedvr2 0.1.1  SeedVR2  https://github.com/xocialize-code/gaea-plugin-seedvr2
+on  com.xocialize.gaea.sensenova 0.1.1  SenseNova-U1.5  https://github.com/xocialize-code/gaea-plugin-sensenova
+on  com.xocialize.gaea.step-audio-editx 0.1.1  Step-Audio-EditX  https://github.com/xocialize-code/gaea-plugin-step-audio-editx
+on  com.xocialize.gaea.z-image 0.1.2  Z-Image  https://github.com/xocialize-code/gaea-plugin-z-image

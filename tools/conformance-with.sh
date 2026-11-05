@@ -4,6 +4,7 @@
 # leaves Base 0.1 and Image 0.1 conforming (AB-T-0387 onwards).
 #
 #   tools/conformance-with.sh <short-work-dir> <evidence-dir> [gaea-plugin-<name> ...]
+#   ALL=1 tools/conformance-with.sh …   every public gaea-plugin-* with a full release (needs gh)
 #
 # Needs: dist/Gaea.app; MES_CONFORMANCE (default ../media-engine-spec/.build/release/mes-conformance). ENABLE lists opt-in
 # models to turn on before the run.
@@ -16,10 +17,15 @@ CONFORMANCE=${MES_CONFORMANCE:-../media-engine-spec/.build/release/mes-conforman
 G1=(gaea-plugin-z-image gaea-plugin-flux2-klein gaea-plugin-qwen-image gaea-plugin-forge gaea-plugin-prompt-enhance gaea-plugin-mage-vl)
 P=${PORT:-17690}
 mkdir -p "$OUT"; rm -rf "$WORK"; mkdir -p "$WORK"
-unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN
+# Anonymous GitHub allows 60 API calls an hour, too few for every plugin: GAEA_GITHUB_TOKEN, when set, is used.
+unset GH_TOKEN GITHUB_TOKEN
 export GAEA_HOME=$WORK/home
 "$GAEA" --headless --port $P --no-advertise > "$WORK/gaea.out" 2>&1 &
 for _ in {1..50}; do [[ -S $GAEA_HOME/operator.sock ]] && break; sleep 0.2; done
+if [[ -n ${ALL:-} ]]; then
+  G1=(${(f)"$(gh repo list xocialize-code --limit 100 --visibility public --no-archived --json name \
+    --jq '.[].name | select(startswith("gaea-plugin-") and . != "gaea-plugin-kit")' | sort)"})
+fi
 for repo in $G1 "$@"; do
   "$CLI" plugins add "https://github.com/xocialize-code/$repo" | tee -a "$OUT/plugins.txt"
 done
