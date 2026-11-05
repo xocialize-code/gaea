@@ -19,7 +19,7 @@ plugins do the generating.
 
 G-1 to G-19 were agreed on 2026-10-27: G-1 to G-9 came from the proposal, and G-10 to G-19 are the answers to the
 open questions. G-20 was agreed on 2026-10-28 from mlx-apps' reply on AB-A-0208, and G-21 to G-23 answer the PRD's open
-questions. G-24 to G-26 are G4's decisions, taken on 2026-11-01. Each is filed on the bridge under
+questions. G-24 to G-26 are G4's decisions, taken on 2026-11-01, and G-27 to G-31 are G5's, taken on 2026-11-05. Each is filed on the bridge under
 the `gaea` area; the Record column gives its id.
 
 | ID | Decision | Why | Record |
@@ -50,6 +50,11 @@ the `gaea` area; the Record column gives its id.
 | G-24 | **Gaea updates itself by its own GitHub release path,** not Sparkle: the plugin installer's download, Developer ID check, sha256 and swap when idle, with rollback. Stable releases only; pre-releases are opt-in. | Plan G4 decision 1 (2026-11-01) | AB-D-0196 |
 | G-25 | **The trust list is tested with an injected trust set;** a plugin from a real second team is the 1.0 exit's test. | Plan G4 decision 2 (2026-11-01) | AB-D-0197 |
 | G-26 | **Quarantine after three crashes in ten minutes; 1.0 is a 24-hour soak** with hourly injected crashes and an update, and doesn't wait for MES 1.0. | Plan G4 decisions 3 and 4 (2026-11-01) | AB-D-0198 |
+| G-27 | **AuK ships named-only, opt-in and non-commercial, with users' acceptance:** its required Qwen2.5-Omni encoder is research-only. | Plan G5 D-1 (2026-11-05) | AB-D-0209 |
+| G-28 | **G5's MES change is asked of mlx-apps** and worked in its own session in media-engine-spec. | Plan G5 D-2 | AB-D-0210 |
+| G-29 | **`audio.separate` is designed for music stems too;** G5 ships only AuK's three stems. | Plan G5 D-3 | AB-D-0211 |
+| G-30 | **AuK's Mandarin edits never run on the int4 encoder:** they move to int8 with a warning, or are refused. | Plan G5 D-4 | AB-D-0212 |
+| G-31 | **The MES change runs in parallel;** IndexTTS 2.5 and VoxCPM2 come first, and AuK follows MES 0.10. | Plan G5 D-5 | AB-D-0213 |
 
 ## 2. Architecture
 
@@ -680,6 +685,27 @@ starts while the phase before it is being built.
   4. **The 1.0 bar** (G-26): a 24-hour soak of mixed image, audio and video jobs on this Mac, with a crash injected
      every hour and one update. Gaea 1.0 doesn't wait for MES 1.0.
   5. **Update channels** (G-24): stable only, with GitHub pre-releases opt-in in Settings.
+
+**G5. More audio: IndexTTS 2.5, VoxCPM2 and AuK** (planned 2026-11-05 after 1.0.0; the detail, with each model's
+facts and the gaps, is in [Gaea - G5 audio plan.md](Gaea%20-%20G5%20audio%20plan.md))
+
+- Three audio plugins on packages the `mlx-audio` area already ships.
+  - **IndexTTS 2.5:** cloning in five languages, decoupled emotion, exact duration.
+  - **VoxCPM2:** 48 kHz, a default voice, cloning and continuation cloning, `design_voice`.
+  - **AuK and AuK-Flash:** cloning, `design_voice`, 14 speech edits with no transcript, separation.
+- IndexTTS and VoxCPM2 fit MES Audio 0.1 as it is. AuK exposes what MES lacks: S-1 `audio.separate`, S-2 a
+  `dereverb` edit, S-3 a `hum` cue, S-4 where an `add_cue` may go, and S-5 `target_duration_s` for `edit_speech`.
+- **Exit:** the three plugins released and run through Gaea Lab, `audio.separate` in Gaea on MES 0.10, conformance
+  with every plugin, and a soak of AuK's staged edits with live memory flat.
+- **Work orders:**
+  1. The IndexTTS 2.5 plugin (`gaea-plugin-indextts`).
+  2. The VoxCPM2 plugin (`gaea-plugin-voxcpm2`).
+  3. MES 0.10, S-1 to S-5: asked of `mlx-apps` (G-28), and run in parallel with orders 1 and 2.
+  4. Kit 0.11.0 (the shared edit mapping) and `audio.separate` in Gaea: 1.1.0.
+  5. The AuK plugin (`gaea-plugin-auk`): restricted (G-27), with int4 never used for Mandarin edits (G-30).
+  6. The exit: Lab, conformance, and the soak.
+- Every new plugin names the fleet's mlx-swift fork in its own `Package.swift` (AB-D-0208), or upstream's would win and
+  drop the leak fix.
 
 ## 6. Risks
 
