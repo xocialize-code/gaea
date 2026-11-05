@@ -1,0 +1,18 @@
+--- a/Source/MLX/MLXArray.swift (mlx-swift 0.32.3, 19601207)
++++ b/Source/MLX/MLXArray.swift
+@@ -564,7 +564,14 @@
+     /// Note: this is an implementation detail and only visible because of the need to call it from
+     /// other `mlx-swift` modules.
+     public func _updateInternal(_ array: MLXArray) {
+-        mlx_array_set(&self.ctx, array.ctx)
++        // Assigning over the old mlx::core::array (mlx_array_set) drops it without ~array's sibling-cycle check, so a
++        // replaced output of a multi-output op (quantized's weight, scales and biases) and its graph never free.
++        // Free the old one instead (AB-T-0429).
++        var replacement = mlx_array_new()
++        mlx_array_set(&replacement, array.ctx)
++        let old = self.ctx
++        self.ctx = replacement
++        mlx_array_free(old)
+     }
+ 
+     /// Internal function for copying the backing `mlx::core::array` context.

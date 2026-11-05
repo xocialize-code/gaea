@@ -1,0 +1,405 @@
+2026-11-04T16:38:59Z operator: listening on /tmp/gsoak.ytnwmqm0/operator.sock (same user, Developer ID team)
+2026-11-04T16:38:59Z gaea 1.0.0-rc.1 starting: /tmp/gsoak.ytnwmqm0, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-04T08:38:59-0800 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17785
+2026-11-04T16:38:59Z gaea: serving MES at http://127.0.0.1:17785/mes/v0
+gaea 1.0.0-rc.1 serving MES at http://127.0.0.1:17785/mes/v0; operator API at /tmp/gsoak.ytnwmqm0/operator.sock
+2026-11-04T16:39:01Z update: pre-releases included
+2026-11-04T16:39:01Z update: Gaea 1.0.0-rc.2 (pre-release) is available
+2026-11-04T16:39:03Z plugins: added com.xocialize.gaea.demo 0.3.3 from xocialize-code/gaea-plugin-demo
+2026-11-04T16:39:05Z plugins: added com.xocialize.gaea.z-image 0.1.2 from xocialize-code/gaea-plugin-z-image
+2026-11-04T16:39:06Z plugins: added com.xocialize.gaea.flux2-klein 0.2.3 from xocialize-code/gaea-plugin-flux2-klein
+2026-11-04T16:39:10Z plugins: added com.xocialize.gaea.forge 0.2.1 from xocialize-code/gaea-plugin-forge
+2026-11-04T16:39:12Z plugins: added com.xocialize.gaea.kokoro 0.1.1 from xocialize-code/gaea-plugin-kokoro
+2026-11-04T16:39:14Z plugins: added com.xocialize.gaea.moss-soundeffect 0.1.2 from xocialize-code/gaea-plugin-moss-soundeffect
+2026-11-04T16:39:17Z plugins: added com.xocialize.gaea.rife 0.1.1 from xocialize-code/gaea-plugin-rife
+2026-11-04T16:39:19Z plugins: added com.xocialize.gaea.ltx 0.1.2 from xocialize-code/gaea-plugin-ltx
+2026-11-04T16:39:20Z scheduler: launched com.xocialize.gaea.z-image 0.1.2, pid 60983, hello after 0.35150625 seconds
+2026-11-04T16:39:35Z scheduler: launched com.xocialize.gaea.kokoro 0.1.1, pid 61465, hello after 0.338271292 seconds
+2026-11-04T16:39:36Z scheduler: kokoro-82m lane bf16 held 2.44 GB, past 0.50 GB; admitting it at that from now on
+2026-11-04T16:39:37Z scheduler: launched com.xocialize.gaea.rife 0.1.1, pid 61492, hello after 0.343723125 seconds
+2026-11-04T16:39:38Z scheduler: launched com.xocialize.gaea.flux2-klein 0.2.3, pid 61542, hello after 0.3640685 seconds
+2026-11-04T16:39:43Z scheduler: launched com.xocialize.gaea.moss-soundeffect 0.1.2, pid 61642, hello after 0.37323425 seconds
+2026-11-04T16:39:56Z scheduler: launched com.xocialize.gaea.forge 0.2.1, pid 62066, hello after 0.58058475 seconds
+2026-11-04T16:39:57Z scheduler: launched com.xocialize.gaea.ltx 0.1.2, pid 62097, hello after 0.521192875 seconds
+2026-11-04T16:41:18Z scheduler: kokoro-82m lane bf16 held 3.23 GB, past 2.44 GB; admitting it at that from now on
+2026-11-04T16:42:41Z scheduler: kokoro-82m lane bf16 held 3.30 GB, past 3.23 GB; admitting it at that from now on
+2026-11-04T16:47:02Z scheduler: kokoro-82m lane bf16 held 3.35 GB, past 3.30 GB; admitting it at that from now on
+2026-11-04T16:49:48Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 90435, hello after 0.395031792 seconds
+2026-11-04T16:49:49Z scheduler: com.xocialize.gaea.demo's worker died during job_g268z2nem3g2aqhse1nk-1 (the worker exited (signal 5)); requeueing once
+2026-11-04T16:49:49Z scheduler: crash #1: com.xocialize.gaea.demo 0.3.3 pid 90435 ended by SIGTRAP running demo-gradient for job_g268z2nem3g2aqhse1nk-1; requeued
+2026-11-04T16:49:49Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 90462, hello after 0.011713334 seconds
+2026-11-04T16:49:49Z scheduler: crash #2: com.xocialize.gaea.demo 0.3.3 pid 90462 ended by SIGTRAP running demo-gradient for job_g268z2nem3g2aqhse1nk-1; failed
+job job_g268z2nem3g2aqhse1nk (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #1) then SIGTRAP (crash #2); it was requeued once. gaea crashes shows them.
+2026-11-04T16:49:50Z scheduler: crash #2's report: /tmp/gsoak.ytnwmqm0/Crashes/2-gaea-demo-worker-2026-11-04-084950.ips
+2026-11-04T16:49:50Z scheduler: crash #1's report: /tmp/gsoak.ytnwmqm0/Crashes/1-gaea-demo-worker-2026-11-04-084950.000.ips
+2026-11-04T16:54:16Z scheduler: kokoro-82m lane bf16 held 3.50 GB, past 3.35 GB; admitting it at that from now on
+2026-11-04T17:11:42Z scheduler: kokoro-82m lane bf16 held 3.57 GB, past 3.50 GB; admitting it at that from now on
+2026-11-04T17:13:04Z scheduler: kokoro-82m lane bf16 held 3.63 GB, past 3.57 GB; admitting it at that from now on
+2026-11-04T17:29:12Z scheduler: kokoro-82m lane bf16 held 3.66 GB, past 3.63 GB; admitting it at that from now on
+2026-11-04T17:49:39Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 10219, hello after 0.216463334 seconds
+2026-11-04T17:49:39Z scheduler: com.xocialize.gaea.demo's worker died during job_kka3xj0m72rcny5qtxtg-1 (the worker exited (signal 5)); requeueing once
+2026-11-04T17:49:39Z scheduler: crash #3: com.xocialize.gaea.demo 0.3.3 pid 10219 ended by SIGTRAP running demo-gradient for job_kka3xj0m72rcny5qtxtg-1; requeued
+2026-11-04T17:49:40Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 10221, hello after 0.00955975 seconds
+2026-11-04T17:49:40Z scheduler: crash #4: com.xocialize.gaea.demo 0.3.3 pid 10221 ended by SIGTRAP running demo-gradient for job_kka3xj0m72rcny5qtxtg-1; failed
+job job_kka3xj0m72rcny5qtxtg (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #3) then SIGTRAP (crash #4); it was requeued once. gaea crashes shows them.
+2026-11-04T17:49:40Z scheduler: crash #3's report: /tmp/gsoak.ytnwmqm0/Crashes/3-gaea-demo-worker-2026-11-04-094940.000.ips
+2026-11-04T17:49:40Z scheduler: crash #4's report: /tmp/gsoak.ytnwmqm0/Crashes/4-gaea-demo-worker-2026-11-04-094940.ips
+2026-11-04T17:54:03Z scheduler: kokoro-82m lane bf16 held 3.79 GB, past 3.66 GB; admitting it at that from now on
+2026-11-04T17:55:26Z scheduler: kokoro-82m lane bf16 held 3.84 GB, past 3.79 GB; admitting it at that from now on
+2026-11-04T18:49:47Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 26932, hello after 0.216056417 seconds
+2026-11-04T18:49:47Z scheduler: com.xocialize.gaea.demo's worker died during job_e2782qx5wj0cr0nwwaja-1 (the worker exited (signal 5)); requeueing once
+2026-11-04T18:49:47Z scheduler: crash #5: com.xocialize.gaea.demo 0.3.3 pid 26932 ended by SIGTRAP running demo-gradient for job_e2782qx5wj0cr0nwwaja-1; requeued
+2026-11-04T18:49:47Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 26937, hello after 0.011102083 seconds
+2026-11-04T18:49:47Z scheduler: crash #6: com.xocialize.gaea.demo 0.3.3 pid 26937 ended by SIGTRAP running demo-gradient for job_e2782qx5wj0cr0nwwaja-1; failed
+job job_e2782qx5wj0cr0nwwaja (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #5) then SIGTRAP (crash #6); it was requeued once. gaea crashes shows them.
+2026-11-04T18:49:49Z scheduler: crash #5's report: /tmp/gsoak.ytnwmqm0/Crashes/5-gaea-demo-worker-2026-11-04-104949.ips
+2026-11-04T19:49:27Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 1232, hello after 0.213282833 seconds
+2026-11-04T19:49:27Z scheduler: com.xocialize.gaea.demo's worker died during job_wwekr7q52jbjckb6m4ee-1 (the worker exited (signal 5)); requeueing once
+2026-11-04T19:49:27Z scheduler: crash #7: com.xocialize.gaea.demo 0.3.3 pid 1232 ended by SIGTRAP running demo-gradient for job_wwekr7q52jbjckb6m4ee-1; requeued
+2026-11-04T19:49:27Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 1236, hello after 0.009990875 seconds
+2026-11-04T19:49:27Z scheduler: crash #8: com.xocialize.gaea.demo 0.3.3 pid 1236 ended by SIGTRAP running demo-gradient for job_wwekr7q52jbjckb6m4ee-1; failed
+job job_wwekr7q52jbjckb6m4ee (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #7) then SIGTRAP (crash #8); it was requeued once. gaea crashes shows them.
+2026-11-04T19:49:28Z scheduler: crash #7's report: /tmp/gsoak.ytnwmqm0/Crashes/7-gaea-demo-worker-2026-11-04-114928.ips
+2026-11-04T19:49:29Z scheduler: crash #8's report: /tmp/gsoak.ytnwmqm0/Crashes/8-gaea-demo-worker-2026-11-04-114928.000.ips
+2026-11-04T19:56:07Z scheduler: kokoro-82m lane bf16 held 3.99 GB, past 3.84 GB; admitting it at that from now on
+2026-11-04T19:57:46Z scheduler: ltx-2.5-compact24 lane int8 held 16.27 GB, past 16.20 GB; admitting it at that from now on
+2026-11-04T20:13:52Z scheduler: ltx-2.5-compact24 lane int8 held 16.30 GB, past 16.27 GB; admitting it at that from now on
+2026-11-04T20:16:15Z scheduler: ltx-2.5-compact24 lane int8 held 16.31 GB, past 16.30 GB; admitting it at that from now on
+2026-11-04T20:16:38Z scheduler: kokoro-82m lane bf16 held 4.08 GB, past 3.99 GB; admitting it at that from now on
+2026-11-04T20:31:36Z scheduler: ltx-2.5-compact24 lane int8 held 16.32 GB, past 16.31 GB; admitting it at that from now on
+2026-11-04T20:32:55Z scheduler: ltx-2.5-compact24 lane int8 held 16.33 GB, past 16.32 GB; admitting it at that from now on
+2026-11-04T20:34:14Z scheduler: ltx-2.5-compact24 lane int8 held 16.34 GB, past 16.33 GB; admitting it at that from now on
+2026-11-04T20:35:34Z scheduler: ltx-2.5-compact24 lane int8 held 16.35 GB, past 16.34 GB; admitting it at that from now on
+2026-11-04T20:36:54Z scheduler: ltx-2.5-compact24 lane int8 held 16.36 GB, past 16.35 GB; admitting it at that from now on
+2026-11-04T20:38:13Z scheduler: ltx-2.5-compact24 lane int8 held 16.37 GB, past 16.36 GB; admitting it at that from now on
+2026-11-04T20:39:31Z scheduler: ltx-2.5-compact24 lane int8 held 16.38 GB, past 16.37 GB; admitting it at that from now on
+2026-11-04T20:40:50Z scheduler: ltx-2.5-compact24 lane int8 held 16.39 GB, past 16.38 GB; admitting it at that from now on
+2026-11-04T20:42:09Z scheduler: ltx-2.5-compact24 lane int8 held 16.40 GB, past 16.39 GB; admitting it at that from now on
+2026-11-04T20:43:28Z scheduler: ltx-2.5-compact24 lane int8 held 16.41 GB, past 16.40 GB; admitting it at that from now on
+2026-11-04T20:44:47Z scheduler: ltx-2.5-compact24 lane int8 held 16.42 GB, past 16.41 GB; admitting it at that from now on
+2026-11-04T20:46:05Z scheduler: ltx-2.5-compact24 lane int8 held 16.43 GB, past 16.42 GB; admitting it at that from now on
+2026-11-04T20:47:24Z scheduler: ltx-2.5-compact24 lane int8 held 16.44 GB, past 16.43 GB; admitting it at that from now on
+2026-11-04T20:48:42Z scheduler: ltx-2.5-compact24 lane int8 held 16.45 GB, past 16.44 GB; admitting it at that from now on
+2026-11-04T20:50:01Z scheduler: ltx-2.5-compact24 lane int8 held 16.46 GB, past 16.45 GB; admitting it at that from now on
+2026-11-04T20:50:01Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 65671, hello after 0.207269458 seconds
+2026-11-04T20:50:01Z scheduler: com.xocialize.gaea.demo's worker died during job_tm9p9vsetddgx8gwstkh-1 (the worker exited (signal 5)); requeueing once
+2026-11-04T20:50:01Z scheduler: crash #9: com.xocialize.gaea.demo 0.3.3 pid 65671 ended by SIGTRAP running demo-gradient for job_tm9p9vsetddgx8gwstkh-1; requeued
+2026-11-04T20:50:01Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 65673, hello after 0.009555334 seconds
+2026-11-04T20:50:01Z scheduler: crash #10: com.xocialize.gaea.demo 0.3.3 pid 65673 ended by SIGTRAP running demo-gradient for job_tm9p9vsetddgx8gwstkh-1; failed
+job job_tm9p9vsetddgx8gwstkh (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #9) then SIGTRAP (crash #10); it was requeued once. gaea crashes shows them.
+2026-11-04T20:50:06Z scheduler: crash #9's report: /tmp/gsoak.ytnwmqm0/Crashes/9-gaea-demo-worker-2026-11-04-125006.ips
+2026-11-04T20:50:06Z scheduler: crash #10's report: /tmp/gsoak.ytnwmqm0/Crashes/10-gaea-demo-worker-2026-11-04-125006.000.ips
+2026-11-04T20:51:19Z scheduler: ltx-2.5-compact24 lane int8 held 16.47 GB, past 16.46 GB; admitting it at that from now on
+2026-11-04T20:52:37Z scheduler: ltx-2.5-compact24 lane int8 held 16.48 GB, past 16.47 GB; admitting it at that from now on
+2026-11-04T20:53:55Z scheduler: ltx-2.5-compact24 lane int8 held 16.49 GB, past 16.48 GB; admitting it at that from now on
+2026-11-04T20:55:12Z scheduler: ltx-2.5-compact24 lane int8 held 16.50 GB, past 16.49 GB; admitting it at that from now on
+2026-11-04T20:56:30Z scheduler: ltx-2.5-compact24 lane int8 held 16.51 GB, past 16.50 GB; admitting it at that from now on
+2026-11-04T20:57:48Z scheduler: ltx-2.5-compact24 lane int8 held 16.52 GB, past 16.51 GB; admitting it at that from now on
+2026-11-04T20:59:06Z scheduler: ltx-2.5-compact24 lane int8 held 16.53 GB, past 16.52 GB; admitting it at that from now on
+2026-11-04T21:00:24Z scheduler: ltx-2.5-compact24 lane int8 held 16.54 GB, past 16.53 GB; admitting it at that from now on
+2026-11-04T21:01:42Z scheduler: ltx-2.5-compact24 lane int8 held 16.55 GB, past 16.54 GB; admitting it at that from now on
+2026-11-04T21:03:00Z scheduler: ltx-2.5-compact24 lane int8 held 16.56 GB, past 16.55 GB; admitting it at that from now on
+2026-11-04T21:04:18Z scheduler: ltx-2.5-compact24 lane int8 held 16.56 GB, past 16.56 GB; admitting it at that from now on
+2026-11-04T21:05:36Z scheduler: ltx-2.5-compact24 lane int8 held 16.57 GB, past 16.56 GB; admitting it at that from now on
+2026-11-04T21:06:55Z scheduler: ltx-2.5-compact24 lane int8 held 16.58 GB, past 16.57 GB; admitting it at that from now on
+2026-11-04T21:08:13Z scheduler: ltx-2.5-compact24 lane int8 held 16.59 GB, past 16.58 GB; admitting it at that from now on
+2026-11-04T21:09:31Z scheduler: ltx-2.5-compact24 lane int8 held 16.60 GB, past 16.59 GB; admitting it at that from now on
+2026-11-04T21:10:49Z scheduler: ltx-2.5-compact24 lane int8 held 16.61 GB, past 16.60 GB; admitting it at that from now on
+2026-11-04T21:12:07Z scheduler: ltx-2.5-compact24 lane int8 held 16.62 GB, past 16.61 GB; admitting it at that from now on
+2026-11-04T21:13:29Z scheduler: ltx-2.5-compact24 lane int8 held 16.63 GB, past 16.62 GB; admitting it at that from now on
+2026-11-04T21:14:48Z scheduler: ltx-2.5-compact24 lane int8 held 16.64 GB, past 16.63 GB; admitting it at that from now on
+2026-11-04T21:16:06Z scheduler: ltx-2.5-compact24 lane int8 held 16.65 GB, past 16.64 GB; admitting it at that from now on
+2026-11-04T21:17:24Z scheduler: ltx-2.5-compact24 lane int8 held 16.66 GB, past 16.65 GB; admitting it at that from now on
+2026-11-04T21:18:42Z scheduler: ltx-2.5-compact24 lane int8 held 16.67 GB, past 16.66 GB; admitting it at that from now on
+2026-11-04T21:20:00Z scheduler: ltx-2.5-compact24 lane int8 held 16.68 GB, past 16.67 GB; admitting it at that from now on
+2026-11-04T21:21:18Z scheduler: ltx-2.5-compact24 lane int8 held 16.69 GB, past 16.68 GB; admitting it at that from now on
+2026-11-04T21:22:37Z scheduler: ltx-2.5-compact24 lane int8 held 16.70 GB, past 16.69 GB; admitting it at that from now on
+2026-11-04T21:23:54Z scheduler: ltx-2.5-compact24 lane int8 held 16.71 GB, past 16.70 GB; admitting it at that from now on
+2026-11-04T21:25:11Z scheduler: ltx-2.5-compact24 lane int8 held 16.72 GB, past 16.71 GB; admitting it at that from now on
+2026-11-04T21:26:27Z scheduler: ltx-2.5-compact24 lane int8 held 16.73 GB, past 16.72 GB; admitting it at that from now on
+2026-11-04T21:27:44Z scheduler: ltx-2.5-compact24 lane int8 held 16.74 GB, past 16.73 GB; admitting it at that from now on
+2026-11-04T21:29:00Z scheduler: ltx-2.5-compact24 lane int8 held 16.75 GB, past 16.74 GB; admitting it at that from now on
+2026-11-04T21:30:17Z scheduler: ltx-2.5-compact24 lane int8 held 16.76 GB, past 16.75 GB; admitting it at that from now on
+2026-11-04T21:31:33Z scheduler: ltx-2.5-compact24 lane int8 held 16.77 GB, past 16.76 GB; admitting it at that from now on
+2026-11-04T21:32:49Z scheduler: ltx-2.5-compact24 lane int8 held 16.77 GB, past 16.77 GB; admitting it at that from now on
+2026-11-04T21:34:06Z scheduler: ltx-2.5-compact24 lane int8 held 16.78 GB, past 16.77 GB; admitting it at that from now on
+2026-11-04T21:35:23Z scheduler: ltx-2.5-compact24 lane int8 held 16.79 GB, past 16.78 GB; admitting it at that from now on
+2026-11-04T21:36:40Z scheduler: ltx-2.5-compact24 lane int8 held 16.79 GB, past 16.79 GB; admitting it at that from now on
+2026-11-04T21:37:56Z scheduler: ltx-2.5-compact24 lane int8 held 16.80 GB, past 16.79 GB; admitting it at that from now on
+2026-11-04T21:39:13Z scheduler: ltx-2.5-compact24 lane int8 held 16.80 GB, past 16.80 GB; admitting it at that from now on
+2026-11-04T21:40:30Z scheduler: ltx-2.5-compact24 lane int8 held 16.81 GB, past 16.80 GB; admitting it at that from now on
+2026-11-04T21:41:46Z scheduler: ltx-2.5-compact24 lane int8 held 16.82 GB, past 16.81 GB; admitting it at that from now on
+2026-11-04T21:43:03Z scheduler: ltx-2.5-compact24 lane int8 held 16.82 GB, past 16.82 GB; admitting it at that from now on
+2026-11-04T21:44:19Z scheduler: ltx-2.5-compact24 lane int8 held 16.83 GB, past 16.82 GB; admitting it at that from now on
+2026-11-04T21:45:36Z scheduler: ltx-2.5-compact24 lane int8 held 16.83 GB, past 16.83 GB; admitting it at that from now on
+2026-11-04T21:46:53Z scheduler: ltx-2.5-compact24 lane int8 held 16.84 GB, past 16.83 GB; admitting it at that from now on
+2026-11-04T21:48:09Z scheduler: ltx-2.5-compact24 lane int8 held 16.85 GB, past 16.84 GB; admitting it at that from now on
+2026-11-04T21:49:26Z scheduler: ltx-2.5-compact24 lane int8 held 16.85 GB, past 16.85 GB; admitting it at that from now on
+2026-11-04T21:49:26Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 66848, hello after 0.009695791 seconds
+2026-11-04T21:49:26Z scheduler: com.xocialize.gaea.demo's worker died during job_09em5wpkanss5baz0m84-1 (the worker exited (signal 5)); requeueing once
+2026-11-04T21:49:26Z scheduler: crash #11: com.xocialize.gaea.demo 0.3.3 pid 66848 ended by SIGTRAP running demo-gradient for job_09em5wpkanss5baz0m84-1; requeued
+2026-11-04T21:49:26Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 66850, hello after 0.009292625 seconds
+2026-11-04T21:49:26Z scheduler: crash #12: com.xocialize.gaea.demo 0.3.3 pid 66850 ended by SIGTRAP running demo-gradient for job_09em5wpkanss5baz0m84-1; failed
+job job_09em5wpkanss5baz0m84 (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #11) then SIGTRAP (crash #12); it was requeued once. gaea crashes shows them.
+2026-11-04T21:49:26Z scheduler: crash #12's report: /tmp/gsoak.ytnwmqm0/Crashes/12-gaea-demo-worker-2026-11-04-134926.ips
+2026-11-04T21:49:27Z scheduler: crash #11's report: /tmp/gsoak.ytnwmqm0/Crashes/11-gaea-demo-worker-2026-11-04-134926.000.ips
+2026-11-04T21:50:42Z scheduler: ltx-2.5-compact24 lane int8 held 16.86 GB, past 16.85 GB; admitting it at that from now on
+2026-11-04T21:51:59Z scheduler: ltx-2.5-compact24 lane int8 held 16.86 GB, past 16.86 GB; admitting it at that from now on
+2026-11-04T21:53:16Z scheduler: ltx-2.5-compact24 lane int8 held 16.87 GB, past 16.86 GB; admitting it at that from now on
+2026-11-04T21:54:32Z scheduler: ltx-2.5-compact24 lane int8 held 16.87 GB, past 16.87 GB; admitting it at that from now on
+2026-11-04T21:55:49Z scheduler: ltx-2.5-compact24 lane int8 held 16.88 GB, past 16.87 GB; admitting it at that from now on
+2026-11-04T21:57:06Z scheduler: ltx-2.5-compact24 lane int8 held 16.88 GB, past 16.88 GB; admitting it at that from now on
+2026-11-04T21:58:22Z scheduler: ltx-2.5-compact24 lane int8 held 16.89 GB, past 16.88 GB; admitting it at that from now on
+2026-11-04T21:59:40Z scheduler: ltx-2.5-compact24 lane int8 held 16.90 GB, past 16.89 GB; admitting it at that from now on
+2026-11-04T22:00:59Z scheduler: ltx-2.5-compact24 lane int8 held 16.90 GB, past 16.90 GB; admitting it at that from now on
+2026-11-04T22:02:17Z scheduler: ltx-2.5-compact24 lane int8 held 16.91 GB, past 16.90 GB; admitting it at that from now on
+2026-11-04T22:03:36Z scheduler: ltx-2.5-compact24 lane int8 held 16.91 GB, past 16.91 GB; admitting it at that from now on
+2026-11-04T22:04:55Z scheduler: ltx-2.5-compact24 lane int8 held 16.92 GB, past 16.91 GB; admitting it at that from now on
+2026-11-04T22:06:15Z scheduler: ltx-2.5-compact24 lane int8 held 16.92 GB, past 16.92 GB; admitting it at that from now on
+2026-11-04T22:07:41Z scheduler: ltx-2.5-compact24 lane int8 held 16.93 GB, past 16.92 GB; admitting it at that from now on
+2026-11-04T22:09:07Z scheduler: ltx-2.5-compact24 lane int8 held 16.94 GB, past 16.93 GB; admitting it at that from now on
+2026-11-04T22:10:28Z scheduler: ltx-2.5-compact24 lane int8 held 16.95 GB, past 16.94 GB; admitting it at that from now on
+2026-11-04T22:11:48Z scheduler: ltx-2.5-compact24 lane int8 held 16.95 GB, past 16.95 GB; admitting it at that from now on
+2026-11-04T22:13:09Z scheduler: ltx-2.5-compact24 lane int8 held 16.95 GB, past 16.95 GB; admitting it at that from now on
+2026-11-04T22:14:29Z scheduler: ltx-2.5-compact24 lane int8 held 16.96 GB, past 16.95 GB; admitting it at that from now on
+2026-11-04T22:15:50Z scheduler: ltx-2.5-compact24 lane int8 held 16.97 GB, past 16.96 GB; admitting it at that from now on
+2026-11-04T22:17:12Z scheduler: ltx-2.5-compact24 lane int8 held 16.97 GB, past 16.97 GB; admitting it at that from now on
+2026-11-04T22:18:32Z scheduler: ltx-2.5-compact24 lane int8 held 17.04 GB, past 16.97 GB; admitting it at that from now on
+2026-11-04T22:26:46Z scheduler: ltx-2.5-compact24 lane int8 held 17.08 GB, past 17.04 GB; admitting it at that from now on
+2026-11-04T22:33:42Z scheduler: ltx-2.5-compact24 lane int8 held 17.11 GB, past 17.08 GB; admitting it at that from now on
+2026-11-04T22:36:30Z scheduler: ltx-2.5-compact24 lane int8 held 17.12 GB, past 17.11 GB; admitting it at that from now on
+2026-11-04T22:39:23Z update: Gaea 1.0.0-rc.2 (pre-release) is available
+2026-11-04T22:39:35Z scheduler: ltx-2.5-compact24 lane int8 held 17.17 GB, past 17.12 GB; admitting it at that from now on
+2026-11-04T22:41:19Z scheduler: ltx-2.5-compact24 lane int8 held 17.18 GB, past 17.17 GB; admitting it at that from now on
+2026-11-04T22:42:53Z scheduler: ltx-2.5-compact24 lane int8 held 17.18 GB, past 17.18 GB; admitting it at that from now on
+2026-11-04T22:44:17Z scheduler: ltx-2.5-compact24 lane int8 held 17.19 GB, past 17.18 GB; admitting it at that from now on
+2026-11-04T22:45:41Z scheduler: ltx-2.5-compact24 lane int8 held 17.19 GB, past 17.19 GB; admitting it at that from now on
+2026-11-04T22:47:04Z scheduler: ltx-2.5-compact24 lane int8 held 17.20 GB, past 17.19 GB; admitting it at that from now on
+2026-11-04T22:48:28Z scheduler: ltx-2.5-compact24 lane int8 held 17.21 GB, past 17.20 GB; admitting it at that from now on
+2026-11-04T22:49:49Z scheduler: ltx-2.5-compact24 lane int8 held 17.21 GB, past 17.21 GB; admitting it at that from now on
+2026-11-04T22:49:49Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 26206, hello after 0.20633825 seconds
+2026-11-04T22:49:49Z scheduler: com.xocialize.gaea.demo's worker died during job_jpby1rkgvz7cnpt0y9gb-1 (the worker exited (signal 5)); requeueing once
+2026-11-04T22:49:49Z scheduler: crash #13: com.xocialize.gaea.demo 0.3.3 pid 26206 ended by SIGTRAP running demo-gradient for job_jpby1rkgvz7cnpt0y9gb-1; requeued
+2026-11-04T22:49:49Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 26207, hello after 0.009963542 seconds
+2026-11-04T22:49:49Z scheduler: crash #14: com.xocialize.gaea.demo 0.3.3 pid 26207 ended by SIGTRAP running demo-gradient for job_jpby1rkgvz7cnpt0y9gb-1; failed
+job job_jpby1rkgvz7cnpt0y9gb (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #13) then SIGTRAP (crash #14); it was requeued once. gaea crashes shows them.
+2026-11-04T22:49:55Z scheduler: crash #14's report: /tmp/gsoak.ytnwmqm0/Crashes/14-gaea-demo-worker-2026-11-04-144955.000.ips
+2026-11-04T22:49:55Z scheduler: crash #13's report: /tmp/gsoak.ytnwmqm0/Crashes/13-gaea-demo-worker-2026-11-04-144955.ips
+2026-11-04T22:51:11Z scheduler: ltx-2.5-compact24 lane int8 held 17.22 GB, past 17.21 GB; admitting it at that from now on
+2026-11-04T22:52:33Z scheduler: ltx-2.5-compact24 lane int8 held 17.22 GB, past 17.22 GB; admitting it at that from now on
+2026-11-04T22:53:54Z scheduler: ltx-2.5-compact24 lane int8 held 17.23 GB, past 17.22 GB; admitting it at that from now on
+2026-11-04T22:55:15Z scheduler: ltx-2.5-compact24 lane int8 held 17.27 GB, past 17.23 GB; admitting it at that from now on
+2026-11-04T23:03:23Z scheduler: ltx-2.5-compact24 lane int8 held 17.27 GB, past 17.27 GB; admitting it at that from now on
+2026-11-04T23:04:45Z scheduler: ltx-2.5-compact24 lane int8 held 17.34 GB, past 17.27 GB; admitting it at that from now on
+2026-11-04T23:15:39Z scheduler: ltx-2.5-compact24 lane int8 held 17.38 GB, past 17.34 GB; admitting it at that from now on
+2026-11-04T23:17:01Z scheduler: ltx-2.5-compact24 lane int8 held 17.39 GB, past 17.38 GB; admitting it at that from now on
+2026-11-04T23:18:23Z scheduler: ltx-2.5-compact24 lane int8 held 17.39 GB, past 17.39 GB; admitting it at that from now on
+2026-11-04T23:23:48Z scheduler: ltx-2.5-compact24 lane int8 held 17.42 GB, past 17.39 GB; admitting it at that from now on
+2026-11-04T23:38:31Z scheduler: ltx-2.5-compact24 lane int8 held 17.43 GB, past 17.42 GB; admitting it at that from now on
+2026-11-04T23:41:10Z scheduler: ltx-2.5-compact24 lane int8 held 17.44 GB, past 17.43 GB; admitting it at that from now on
+2026-11-04T23:42:30Z scheduler: ltx-2.5-compact24 lane int8 held 17.44 GB, past 17.44 GB; admitting it at that from now on
+2026-11-04T23:43:50Z scheduler: ltx-2.5-compact24 lane int8 held 17.45 GB, past 17.44 GB; admitting it at that from now on
+2026-11-04T23:45:09Z scheduler: ltx-2.5-compact24 lane int8 held 17.45 GB, past 17.45 GB; admitting it at that from now on
+2026-11-04T23:46:29Z scheduler: ltx-2.5-compact24 lane int8 held 17.46 GB, past 17.45 GB; admitting it at that from now on
+2026-11-04T23:47:49Z scheduler: ltx-2.5-compact24 lane int8 held 17.47 GB, past 17.46 GB; admitting it at that from now on
+2026-11-04T23:49:08Z scheduler: ltx-2.5-compact24 lane int8 held 17.47 GB, past 17.47 GB; admitting it at that from now on
+2026-11-04T23:49:20Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 27195, hello after 0.01165075 seconds
+2026-11-04T23:49:20Z scheduler: com.xocialize.gaea.demo's worker died during job_xs08kp7hpb5gsbyr0xqz-1 (the worker exited (signal 5)); requeueing once
+2026-11-04T23:49:20Z scheduler: crash #15: com.xocialize.gaea.demo 0.3.3 pid 27195 ended by SIGTRAP running demo-gradient for job_xs08kp7hpb5gsbyr0xqz-1; requeued
+2026-11-04T23:49:20Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 27197, hello after 0.01040125 seconds
+2026-11-04T23:49:20Z scheduler: crash #16: com.xocialize.gaea.demo 0.3.3 pid 27197 ended by SIGTRAP running demo-gradient for job_xs08kp7hpb5gsbyr0xqz-1; failed
+job job_xs08kp7hpb5gsbyr0xqz (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #15) then SIGTRAP (crash #16); it was requeued once. gaea crashes shows them.
+2026-11-04T23:49:21Z scheduler: crash #15's report: /tmp/gsoak.ytnwmqm0/Crashes/15-gaea-demo-worker-2026-11-04-154921.000.ips
+2026-11-04T23:49:21Z scheduler: crash #16's report: /tmp/gsoak.ytnwmqm0/Crashes/16-gaea-demo-worker-2026-11-04-154921.ips
+2026-11-04T23:50:28Z scheduler: ltx-2.5-compact24 lane int8 held 17.48 GB, past 17.47 GB; admitting it at that from now on
+2026-11-04T23:51:48Z scheduler: ltx-2.5-compact24 lane int8 held 17.48 GB, past 17.48 GB; admitting it at that from now on
+2026-11-04T23:53:07Z scheduler: ltx-2.5-compact24 lane int8 held 17.49 GB, past 17.48 GB; admitting it at that from now on
+2026-11-04T23:54:32Z scheduler: ltx-2.5-compact24 lane int8 held 17.49 GB, past 17.49 GB; admitting it at that from now on
+2026-11-04T23:55:56Z scheduler: ltx-2.5-compact24 lane int8 held 17.50 GB, past 17.49 GB; admitting it at that from now on
+2026-11-04T23:57:16Z scheduler: ltx-2.5-compact24 lane int8 held 17.50 GB, past 17.50 GB; admitting it at that from now on
+2026-11-04T23:58:41Z scheduler: ltx-2.5-compact24 lane int8 held 17.51 GB, past 17.50 GB; admitting it at that from now on
+2026-11-05T00:00:10Z scheduler: ltx-2.5-compact24 lane int8 held 17.52 GB, past 17.51 GB; admitting it at that from now on
+2026-11-05T00:01:55Z scheduler: ltx-2.5-compact24 lane int8 held 17.69 GB, past 17.52 GB; admitting it at that from now on
+2026-11-05T00:03:37Z scheduler: ltx-2.5-compact24 lane int8 held 17.89 GB, past 17.69 GB; admitting it at that from now on
+2026-11-05T00:49:51Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 56805, hello after 0.21932075 seconds
+2026-11-05T00:49:51Z scheduler: com.xocialize.gaea.demo's worker died during job_1caehx642fdzm3addszx-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T00:49:51Z scheduler: crash #17: com.xocialize.gaea.demo 0.3.3 pid 56805 ended by SIGTRAP running demo-gradient for job_1caehx642fdzm3addszx-1; requeued
+2026-11-05T00:49:51Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 56807, hello after 0.010268083 seconds
+2026-11-05T00:49:51Z scheduler: crash #18: com.xocialize.gaea.demo 0.3.3 pid 56807 ended by SIGTRAP running demo-gradient for job_1caehx642fdzm3addszx-1; failed
+job job_1caehx642fdzm3addszx (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #17) then SIGTRAP (crash #18); it was requeued once. gaea crashes shows them.
+2026-11-05T00:49:51Z scheduler: crash #17's report: /tmp/gsoak.ytnwmqm0/Crashes/17-gaea-demo-worker-2026-11-04-164951.ips
+2026-11-05T00:49:51Z scheduler: crash #18's report: /tmp/gsoak.ytnwmqm0/Crashes/18-gaea-demo-worker-2026-11-04-164951.000.ips
+2026-11-05T01:34:45Z scheduler: ltx-2.5-compact24 lane int8 held 17.89 GB, past 17.89 GB; admitting it at that from now on
+2026-11-05T01:36:02Z scheduler: ltx-2.5-compact24 lane int8 held 17.90 GB, past 17.89 GB; admitting it at that from now on
+2026-11-05T01:37:21Z scheduler: ltx-2.5-compact24 lane int8 held 17.90 GB, past 17.90 GB; admitting it at that from now on
+2026-11-05T01:38:38Z scheduler: ltx-2.5-compact24 lane int8 held 17.91 GB, past 17.90 GB; admitting it at that from now on
+2026-11-05T01:39:56Z scheduler: ltx-2.5-compact24 lane int8 held 17.92 GB, past 17.91 GB; admitting it at that from now on
+2026-11-05T01:41:14Z scheduler: ltx-2.5-compact24 lane int8 held 17.92 GB, past 17.92 GB; admitting it at that from now on
+2026-11-05T01:42:32Z scheduler: ltx-2.5-compact24 lane int8 held 17.93 GB, past 17.92 GB; admitting it at that from now on
+2026-11-05T01:43:51Z scheduler: ltx-2.5-compact24 lane int8 held 17.93 GB, past 17.93 GB; admitting it at that from now on
+2026-11-05T01:45:09Z scheduler: ltx-2.5-compact24 lane int8 held 17.94 GB, past 17.93 GB; admitting it at that from now on
+2026-11-05T01:45:33Z scheduler: com.xocialize.gaea.ltx's worker exited (signal 5)
+2026-11-05T01:45:33Z scheduler: com.xocialize.gaea.ltx's worker died during job_j0tr2t11m1zww0end5rb (the worker exited (signal 5)); requeueing once
+2026-11-05T01:45:33Z scheduler: crash #19: com.xocialize.gaea.ltx 0.1.2 pid 62097 ended by SIGTRAP running ltx-2.5-compact24 for job_j0tr2t11m1zww0end5rb; requeued
+2026-11-05T01:45:33Z scheduler: launched com.xocialize.gaea.ltx 0.1.2, pid 78661, hello after 0.016468375 seconds
+2026-11-05T01:45:36Z scheduler: crash #19's report: /tmp/gsoak.ytnwmqm0/Crashes/19-gaea-ltx-worker-2026-11-04-174536.ips
+2026-11-05T01:49:25Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 81925, hello after 0.230396541 seconds
+2026-11-05T01:49:25Z scheduler: com.xocialize.gaea.demo's worker died during job_fn4t6n6azrp9rjv2wprt-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T01:49:25Z scheduler: crash #20: com.xocialize.gaea.demo 0.3.3 pid 81925 ended by SIGTRAP running demo-gradient for job_fn4t6n6azrp9rjv2wprt-1; requeued
+2026-11-05T01:49:25Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 81929, hello after 0.009471 seconds
+2026-11-05T01:49:25Z scheduler: crash #21: com.xocialize.gaea.demo 0.3.3 pid 81929 ended by SIGTRAP running demo-gradient for job_fn4t6n6azrp9rjv2wprt-1; failed
+job job_fn4t6n6azrp9rjv2wprt (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #20) then SIGTRAP (crash #21); it was requeued once. gaea crashes shows them.
+2026-11-05T01:49:25Z scheduler: crash #20's report: /tmp/gsoak.ytnwmqm0/Crashes/20-gaea-demo-worker-2026-11-04-174925.ips
+2026-11-05T01:49:25Z scheduler: crash #21's report: /tmp/gsoak.ytnwmqm0/Crashes/21-gaea-demo-worker-2026-11-04-174925.000.ips
+2026-11-05T02:49:20Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 96348, hello after 0.009536542 seconds
+2026-11-05T02:49:20Z scheduler: com.xocialize.gaea.demo's worker died during job_v1ref8fvbw9tpn9hzpcm-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T02:49:20Z scheduler: crash #22: com.xocialize.gaea.demo 0.3.3 pid 96348 ended by SIGTRAP running demo-gradient for job_v1ref8fvbw9tpn9hzpcm-1; requeued
+2026-11-05T02:49:20Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 96350, hello after 0.008124791 seconds
+2026-11-05T02:49:20Z scheduler: crash #23: com.xocialize.gaea.demo 0.3.3 pid 96350 ended by SIGTRAP running demo-gradient for job_v1ref8fvbw9tpn9hzpcm-1; failed
+job job_v1ref8fvbw9tpn9hzpcm (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #22) then SIGTRAP (crash #23); it was requeued once. gaea crashes shows them.
+2026-11-05T02:49:25Z scheduler: crash #22's report: /tmp/gsoak.ytnwmqm0/Crashes/22-gaea-demo-worker-2026-11-04-184925.ips
+2026-11-05T02:49:25Z scheduler: crash #23's report: /tmp/gsoak.ytnwmqm0/Crashes/23-gaea-demo-worker-2026-11-04-184925.000.ips
+2026-11-05T03:49:57Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 7077, hello after 0.22862975 seconds
+2026-11-05T03:49:57Z scheduler: com.xocialize.gaea.demo's worker died during job_fx9scsg9nemawq1mq9he-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T03:49:57Z scheduler: crash #24: com.xocialize.gaea.demo 0.3.3 pid 7077 ended by SIGTRAP running demo-gradient for job_fx9scsg9nemawq1mq9he-1; requeued
+2026-11-05T03:49:57Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 7079, hello after 0.009027041 seconds
+2026-11-05T03:49:57Z scheduler: crash #25: com.xocialize.gaea.demo 0.3.3 pid 7079 ended by SIGTRAP running demo-gradient for job_fx9scsg9nemawq1mq9he-1; failed
+job job_fx9scsg9nemawq1mq9he (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #24) then SIGTRAP (crash #25); it was requeued once. gaea crashes shows them.
+2026-11-05T03:50:02Z scheduler: crash #25's report: /tmp/gsoak.ytnwmqm0/Crashes/25-gaea-demo-worker-2026-11-04-195002.ips
+2026-11-05T03:50:02Z scheduler: crash #24's report: /tmp/gsoak.ytnwmqm0/Crashes/24-gaea-demo-worker-2026-11-04-195002.000.ips
+2026-11-05T04:39:27Z update: verified Gaea 1.0.0-rc.2: sha256 f57763cdf889…, Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea, notarized, hardened runtime
+2026-11-05T04:39:27Z update: Gaea 1.0.0-rc.2 downloaded and verified; installing when no job is running or waiting
+2026-11-05T04:39:39Z update: Gaea 1.0.0-rc.2 (pre-release) is available
+2026-11-05T04:40:24Z update: Gaea 1.0.0-rc.2 is in place (kept 1.0.0-rc.1); relaunching
+2026-11-04T20:40:24-0800 error mes-engine: [HummingbirdCore] Waiting on child channel: CancellationError()
+2026-11-04T20:40:24-0800 error mes-engine: [HummingbirdCore] Server shutdown error: Already closed
+2026-11-05T04:40:24Z scheduler: stopped com.xocialize.gaea.rife 0.1.1 (sigterm)
+2026-11-05T04:40:24Z scheduler: stopped com.xocialize.gaea.forge 0.2.1 (sigterm)
+2026-11-05T04:40:24Z scheduler: stopped com.xocialize.gaea.kokoro 0.1.1 (sigterm)
+2026-11-05T04:40:25Z scheduler: stopped com.xocialize.gaea.z-image 0.1.2 (sigterm)
+2026-11-05T04:40:25Z scheduler: stopped com.xocialize.gaea.moss-soundeffect 0.1.2 (sigterm)
+2026-11-05T04:40:25Z scheduler: stopped com.xocialize.gaea.flux2-klein 0.2.3 (sigterm)
+2026-11-05T04:40:25Z scheduler: stopped com.xocialize.gaea.ltx 0.1.2 (sigterm)
+gaea 1.0.0-rc.1 stopped; relaunching /tmp/gaea-soak/Gaea.app
+2026-11-05T04:40:25Z operator: listening on /tmp/gsoak.ytnwmqm0/operator.sock (same user, Developer ID team)
+2026-11-05T04:40:25Z gaea 1.0.0-rc.2 starting: /tmp/gsoak.ytnwmqm0, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-04T20:40:25-0800 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17785
+2026-11-05T04:40:25Z gaea: serving MES at http://127.0.0.1:17785/mes/v0
+gaea 1.0.0-rc.2 serving MES at http://127.0.0.1:17785/mes/v0; operator API at /tmp/gsoak.ytnwmqm0/operator.sock
+2026-11-05T04:40:27Z scheduler: launched com.xocialize.gaea.kokoro 0.1.1, pid 20318, hello after 0.013688167 seconds
+2026-11-05T04:40:28Z scheduler: launched com.xocialize.gaea.rife 0.1.1, pid 20325, hello after 0.012897 seconds
+2026-11-05T04:40:29Z scheduler: launched com.xocialize.gaea.flux2-klein 0.2.3, pid 20328, hello after 0.015409958 seconds
+2026-11-05T04:40:33Z scheduler: launched com.xocialize.gaea.moss-soundeffect 0.1.2, pid 20333, hello after 0.014077041 seconds
+2026-11-05T04:40:44Z scheduler: launched com.xocialize.gaea.forge 0.2.1, pid 20432, hello after 0.02092625 seconds
+2026-11-05T04:40:44Z scheduler: launched com.xocialize.gaea.ltx 0.1.2, pid 20433, hello after 0.015655042 seconds
+2026-11-05T04:41:46Z scheduler: launched com.xocialize.gaea.z-image 0.1.2, pid 21236, hello after 0.014348208 seconds
+2026-11-05T04:49:50Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 24111, hello after 0.013722667 seconds
+2026-11-05T04:49:50Z scheduler: com.xocialize.gaea.demo's worker died during job_gk1hdjzhsbwbzf5m050f-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T04:49:50Z scheduler: crash #26: com.xocialize.gaea.demo 0.3.3 pid 24111 ended by SIGTRAP running demo-gradient for job_gk1hdjzhsbwbzf5m050f-1; requeued
+2026-11-05T04:49:50Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 24113, hello after 0.009370042 seconds
+2026-11-05T04:49:50Z scheduler: crash #27: com.xocialize.gaea.demo 0.3.3 pid 24113 ended by SIGTRAP running demo-gradient for job_gk1hdjzhsbwbzf5m050f-1; failed
+job job_gk1hdjzhsbwbzf5m050f (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #26) then SIGTRAP (crash #27); it was requeued once. gaea crashes shows them.
+2026-11-05T04:49:52Z scheduler: crash #27's report: /tmp/gsoak.ytnwmqm0/Crashes/27-gaea-demo-worker-2026-11-04-204952.ips
+2026-11-05T04:49:52Z scheduler: crash #26's report: /tmp/gsoak.ytnwmqm0/Crashes/26-gaea-demo-worker-2026-11-04-204952.000.ips
+2026-11-05T05:50:10Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 39057, hello after 0.212724208 seconds
+2026-11-05T05:50:10Z scheduler: com.xocialize.gaea.demo's worker died during job_krjj8wpspfr2k3y9pt2b-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T05:50:10Z scheduler: crash #28: com.xocialize.gaea.demo 0.3.3 pid 39057 ended by SIGTRAP running demo-gradient for job_krjj8wpspfr2k3y9pt2b-1; requeued
+2026-11-05T05:50:10Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 39060, hello after 0.00884775 seconds
+2026-11-05T05:50:10Z scheduler: crash #29: com.xocialize.gaea.demo 0.3.3 pid 39060 ended by SIGTRAP running demo-gradient for job_krjj8wpspfr2k3y9pt2b-1; failed
+job job_krjj8wpspfr2k3y9pt2b (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #28) then SIGTRAP (crash #29); it was requeued once. gaea crashes shows them.
+2026-11-05T05:50:16Z scheduler: crash #28's report: /tmp/gsoak.ytnwmqm0/Crashes/28-gaea-demo-worker-2026-11-04-215016.000.ips
+2026-11-05T05:50:16Z scheduler: crash #29's report: /tmp/gsoak.ytnwmqm0/Crashes/29-gaea-demo-worker-2026-11-04-215016.ips
+2026-11-05T06:49:47Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 51285, hello after 0.208635541 seconds
+2026-11-05T06:49:47Z scheduler: com.xocialize.gaea.demo's worker died during job_wpy6ag7hvhxkwcw70mpg-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T06:49:47Z scheduler: crash #30: com.xocialize.gaea.demo 0.3.3 pid 51285 ended by SIGTRAP running demo-gradient for job_wpy6ag7hvhxkwcw70mpg-1; requeued
+2026-11-05T06:49:47Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 51286, hello after 0.010635833 seconds
+2026-11-05T06:49:47Z scheduler: crash #31: com.xocialize.gaea.demo 0.3.3 pid 51286 ended by SIGTRAP running demo-gradient for job_wpy6ag7hvhxkwcw70mpg-1; failed
+job job_wpy6ag7hvhxkwcw70mpg (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #30) then SIGTRAP (crash #31); it was requeued once. gaea crashes shows them.
+2026-11-05T06:49:53Z scheduler: crash #31's report: /tmp/gsoak.ytnwmqm0/Crashes/31-gaea-demo-worker-2026-11-04-224953.ips
+2026-11-05T07:49:26Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 57006, hello after 0.014399084 seconds
+2026-11-05T07:49:26Z scheduler: com.xocialize.gaea.demo's worker died during job_rrycynzqn3zy777pjcr2-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T07:49:26Z scheduler: crash #32: com.xocialize.gaea.demo 0.3.3 pid 57006 ended by SIGTRAP running demo-gradient for job_rrycynzqn3zy777pjcr2-1; requeued
+2026-11-05T07:49:26Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 57008, hello after 0.009730375 seconds
+2026-11-05T07:49:26Z scheduler: crash #33: com.xocialize.gaea.demo 0.3.3 pid 57008 ended by SIGTRAP running demo-gradient for job_rrycynzqn3zy777pjcr2-1; failed
+job job_rrycynzqn3zy777pjcr2 (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #32) then SIGTRAP (crash #33); it was requeued once. gaea crashes shows them.
+2026-11-05T07:49:28Z scheduler: crash #33's report: /tmp/gsoak.ytnwmqm0/Crashes/33-gaea-demo-worker-2026-11-04-234928.000.ips
+2026-11-05T07:49:28Z scheduler: crash #32's report: /tmp/gsoak.ytnwmqm0/Crashes/32-gaea-demo-worker-2026-11-04-234928.ips
+2026-11-05T08:49:26Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 13122, hello after 0.033758333 seconds
+2026-11-05T08:49:27Z scheduler: com.xocialize.gaea.demo's worker died during job_a54c3e38fc22ndfnxk38-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T08:49:27Z scheduler: crash #34: com.xocialize.gaea.demo 0.3.3 pid 13122 ended by SIGTRAP running demo-gradient for job_a54c3e38fc22ndfnxk38-1; requeued
+2026-11-05T08:49:27Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 13124, hello after 0.009530375 seconds
+2026-11-05T08:49:27Z scheduler: crash #35: com.xocialize.gaea.demo 0.3.3 pid 13124 ended by SIGTRAP running demo-gradient for job_a54c3e38fc22ndfnxk38-1; failed
+job job_a54c3e38fc22ndfnxk38 (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #34) then SIGTRAP (crash #35); it was requeued once. gaea crashes shows them.
+2026-11-05T08:49:28Z scheduler: crash #34's report: /tmp/gsoak.ytnwmqm0/Crashes/34-gaea-demo-worker-2026-11-05-004928.000.ips
+2026-11-05T08:49:28Z scheduler: crash #35's report: /tmp/gsoak.ytnwmqm0/Crashes/35-gaea-demo-worker-2026-11-05-004928.ips
+2026-11-05T09:49:54Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 98949, hello after 0.043873917 seconds
+2026-11-05T09:49:54Z scheduler: com.xocialize.gaea.demo's worker died during job_5e40qawatz5ykd53daje-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T09:49:54Z scheduler: crash #36: com.xocialize.gaea.demo 0.3.3 pid 98949 ended by SIGTRAP running demo-gradient for job_5e40qawatz5ykd53daje-1; requeued
+2026-11-05T09:49:54Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 98951, hello after 0.009941875 seconds
+2026-11-05T09:49:55Z scheduler: crash #37: com.xocialize.gaea.demo 0.3.3 pid 98951 ended by SIGTRAP running demo-gradient for job_5e40qawatz5ykd53daje-1; failed
+job job_5e40qawatz5ykd53daje (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #36) then SIGTRAP (crash #37); it was requeued once. gaea crashes shows them.
+2026-11-05T09:50:01Z scheduler: crash #37's report: /tmp/gsoak.ytnwmqm0/Crashes/37-gaea-demo-worker-2026-11-05-015001.000.ips
+2026-11-05T09:50:01Z scheduler: crash #36's report: /tmp/gsoak.ytnwmqm0/Crashes/36-gaea-demo-worker-2026-11-05-015001.ips
+2026-11-05T10:49:25Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 2500, hello after 0.015323875 seconds
+2026-11-05T10:49:25Z scheduler: com.xocialize.gaea.demo's worker died during job_bs44yqxqg4rhkjhnxa2z-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T10:49:25Z scheduler: crash #38: com.xocialize.gaea.demo 0.3.3 pid 2500 ended by SIGTRAP running demo-gradient for job_bs44yqxqg4rhkjhnxa2z-1; requeued
+2026-11-05T10:49:26Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 2502, hello after 0.010519333 seconds
+2026-11-05T10:49:26Z scheduler: crash #39: com.xocialize.gaea.demo 0.3.3 pid 2502 ended by SIGTRAP running demo-gradient for job_bs44yqxqg4rhkjhnxa2z-1; failed
+job job_bs44yqxqg4rhkjhnxa2z (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #38) then SIGTRAP (crash #39); it was requeued once. gaea crashes shows them.
+2026-11-05T10:49:31Z scheduler: crash #38's report: /tmp/gsoak.ytnwmqm0/Crashes/38-gaea-demo-worker-2026-11-05-024931.ips
+2026-11-05T10:49:31Z scheduler: crash #39's report: /tmp/gsoak.ytnwmqm0/Crashes/39-gaea-demo-worker-2026-11-05-024931.000.ips
+2026-11-05T11:49:51Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 6059, hello after 0.023140416 seconds
+2026-11-05T11:49:51Z scheduler: com.xocialize.gaea.demo's worker died during job_dadzv2t5apk97twgrexb-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T11:49:51Z scheduler: crash #40: com.xocialize.gaea.demo 0.3.3 pid 6059 ended by SIGTRAP running demo-gradient for job_dadzv2t5apk97twgrexb-1; requeued
+2026-11-05T11:49:51Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 6061, hello after 0.00953475 seconds
+2026-11-05T11:49:51Z scheduler: crash #41: com.xocialize.gaea.demo 0.3.3 pid 6061 ended by SIGTRAP running demo-gradient for job_dadzv2t5apk97twgrexb-1; failed
+job job_dadzv2t5apk97twgrexb (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #40) then SIGTRAP (crash #41); it was requeued once. gaea crashes shows them.
+2026-11-05T11:49:52Z scheduler: crash #41's report: /tmp/gsoak.ytnwmqm0/Crashes/41-gaea-demo-worker-2026-11-05-034952.ips
+2026-11-05T11:49:52Z scheduler: crash #40's report: /tmp/gsoak.ytnwmqm0/Crashes/40-gaea-demo-worker-2026-11-05-034952.000.ips
+2026-11-05T12:49:24Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 9885, hello after 0.009666584 seconds
+2026-11-05T12:49:24Z scheduler: com.xocialize.gaea.demo's worker died during job_2dzd0edk1v7hsw3705xm-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T12:49:24Z scheduler: crash #42: com.xocialize.gaea.demo 0.3.3 pid 9885 ended by SIGTRAP running demo-gradient for job_2dzd0edk1v7hsw3705xm-1; requeued
+2026-11-05T12:49:24Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 9887, hello after 0.008578333 seconds
+2026-11-05T12:49:24Z scheduler: crash #43: com.xocialize.gaea.demo 0.3.3 pid 9887 ended by SIGTRAP running demo-gradient for job_2dzd0edk1v7hsw3705xm-1; failed
+job job_2dzd0edk1v7hsw3705xm (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #42) then SIGTRAP (crash #43); it was requeued once. gaea crashes shows them.
+2026-11-05T12:49:29Z scheduler: crash #42's report: /tmp/gsoak.ytnwmqm0/Crashes/42-gaea-demo-worker-2026-11-05-044929.000.ips
+2026-11-05T12:49:29Z scheduler: crash #43's report: /tmp/gsoak.ytnwmqm0/Crashes/43-gaea-demo-worker-2026-11-05-044929.ips
+2026-11-05T12:55:37Z scheduler: ltx-2.5-compact24 lane int8 held 17.95 GB, past 17.94 GB; admitting it at that from now on
+2026-11-05T12:56:54Z scheduler: ltx-2.5-compact24 lane int8 held 17.96 GB, past 17.95 GB; admitting it at that from now on
+2026-11-05T12:58:10Z scheduler: com.xocialize.gaea.ltx's worker died during job_xas9vwqc4r4stp40afm8 (the worker exited (signal 5)); requeueing once
+2026-11-05T12:58:10Z scheduler: crash #44: com.xocialize.gaea.ltx 0.1.2 pid 20433 ended by SIGTRAP running ltx-2.5-compact24 for job_xas9vwqc4r4stp40afm8; requeued
+2026-11-05T12:58:10Z scheduler: launched com.xocialize.gaea.ltx 0.1.2, pid 10024, hello after 0.013742833 seconds
+2026-11-05T12:58:16Z scheduler: crash #44's report: /tmp/gsoak.ytnwmqm0/Crashes/44-gaea-ltx-worker-2026-11-05-045816.ips
+2026-11-05T13:49:26Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 10704, hello after 0.009333083 seconds
+2026-11-05T13:49:27Z scheduler: com.xocialize.gaea.demo's worker died during job_ysgb8k52ng3dydpnzndt-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T13:49:27Z scheduler: crash #45: com.xocialize.gaea.demo 0.3.3 pid 10704 ended by SIGTRAP running demo-gradient for job_ysgb8k52ng3dydpnzndt-1; requeued
+2026-11-05T13:49:27Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 10706, hello after 0.008559167 seconds
+2026-11-05T13:49:27Z scheduler: crash #46: com.xocialize.gaea.demo 0.3.3 pid 10706 ended by SIGTRAP running demo-gradient for job_ysgb8k52ng3dydpnzndt-1; failed
+job job_ysgb8k52ng3dydpnzndt (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #45) then SIGTRAP (crash #46); it was requeued once. gaea crashes shows them.
+2026-11-05T13:49:32Z scheduler: crash #45's report: /tmp/gsoak.ytnwmqm0/Crashes/45-gaea-demo-worker-2026-11-05-054932.ips
+2026-11-05T13:49:32Z scheduler: crash #46's report: /tmp/gsoak.ytnwmqm0/Crashes/46-gaea-demo-worker-2026-11-05-054932.000.ips
+2026-11-05T14:49:28Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 11491, hello after 0.010023625 seconds
+2026-11-05T14:49:28Z scheduler: com.xocialize.gaea.demo's worker died during job_jt37wwd7wj3bv46b2rfp-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T14:49:28Z scheduler: crash #47: com.xocialize.gaea.demo 0.3.3 pid 11491 ended by SIGTRAP running demo-gradient for job_jt37wwd7wj3bv46b2rfp-1; requeued
+2026-11-05T14:49:28Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 11493, hello after 0.008944584 seconds
+2026-11-05T14:49:28Z scheduler: crash #48: com.xocialize.gaea.demo 0.3.3 pid 11493 ended by SIGTRAP running demo-gradient for job_jt37wwd7wj3bv46b2rfp-1; failed
+job job_jt37wwd7wj3bv46b2rfp (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #47) then SIGTRAP (crash #48); it was requeued once. gaea crashes shows them.
+2026-11-05T14:49:33Z scheduler: crash #47's report: /tmp/gsoak.ytnwmqm0/Crashes/47-gaea-demo-worker-2026-11-05-064933.ips
+2026-11-05T14:49:33Z scheduler: crash #48's report: /tmp/gsoak.ytnwmqm0/Crashes/48-gaea-demo-worker-2026-11-05-064933.000.ips
+2026-11-05T15:49:23Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 54296, hello after 0.023402291 seconds
+2026-11-05T15:49:24Z scheduler: com.xocialize.gaea.demo's worker died during job_jjxenqkay5r36vgrsbbf-1 (the worker exited (signal 5)); requeueing once
+2026-11-05T15:49:24Z scheduler: crash #49: com.xocialize.gaea.demo 0.3.3 pid 54296 ended by SIGTRAP running demo-gradient for job_jjxenqkay5r36vgrsbbf-1; requeued
+2026-11-05T15:49:24Z scheduler: launched com.xocialize.gaea.demo 0.3.3, pid 54298, hello after 0.0097275 seconds
+2026-11-05T15:49:24Z scheduler: crash #50: com.xocialize.gaea.demo 0.3.3 pid 54298 ended by SIGTRAP running demo-gradient for job_jjxenqkay5r36vgrsbbf-1; failed
+job job_jjxenqkay5r36vgrsbbf (image.generate, demo-gradient) failed: engine_error: Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #49) then SIGTRAP (crash #50); it was requeued once. gaea crashes shows them.
+2026-11-05T15:49:24Z scheduler: crash #49's report: /tmp/gsoak.ytnwmqm0/Crashes/49-gaea-demo-worker-2026-11-05-074924.ips
+2026-11-05T15:49:24Z scheduler: crash #50's report: /tmp/gsoak.ytnwmqm0/Crashes/50-gaea-demo-worker-2026-11-05-074924.000.ips
+2026-11-05T08:40:10-0800 error mes-engine: [HummingbirdCore] Server shutdown error: Already closed
+2026-11-05T08:40:10-0800 error mes-engine: [HummingbirdCore] Waiting on child channel: CancellationError()
+2026-11-05T16:40:10Z scheduler: stopped com.xocialize.gaea.rife 0.1.1 (sigterm)
+2026-11-05T16:40:10Z scheduler: stopped com.xocialize.gaea.forge 0.2.1 (sigterm)
+2026-11-05T16:40:10Z scheduler: stopped com.xocialize.gaea.moss-soundeffect 0.1.2 (sigterm)
+2026-11-05T16:40:10Z scheduler: stopped com.xocialize.gaea.flux2-klein 0.2.3 (sigterm)
+2026-11-05T16:40:10Z scheduler: stopped com.xocialize.gaea.kokoro 0.1.1 (sigterm)
+2026-11-05T16:40:10Z scheduler: stopped com.xocialize.gaea.ltx 0.1.2 (sigterm)
+2026-11-05T16:40:10Z scheduler: stopped com.xocialize.gaea.z-image 0.1.2 (sigterm)

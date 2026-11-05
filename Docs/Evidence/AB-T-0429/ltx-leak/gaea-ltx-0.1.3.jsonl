@@ -1,0 +1,14 @@
+{"kind": "job", "pid": 32973, "regions": 438, "phys_mb": 923, "i": 1, "outcome": "succeeded", "s": 64.0, "t": 1793912601.7}
+{"kind": "job", "pid": 32973, "regions": 433, "phys_mb": 884, "i": 2, "outcome": "succeeded", "s": 53.1, "t": 1793912656.1}
+{"kind": "job", "pid": 32973, "regions": 439, "phys_mb": 1079, "i": 3, "outcome": "succeeded", "s": 53.6, "t": 1793912711.9}
+{"kind": "job", "pid": 32973, "regions": 444, "phys_mb": 1098, "i": 4, "outcome": "succeeded", "s": 53.6, "t": 1793912767.2}
+{"kind": "job", "pid": 32973, "regions": 439, "phys_mb": 1095, "i": 5, "outcome": "succeeded", "s": 54.2, "t": 1793912822.5}
+{"kind": "job", "pid": 32973, "regions": 439, "phys_mb": 1096, "i": 6, "outcome": "succeeded", "s": 54.5, "t": 1793912878.6}
+{"kind": "job", "pid": 32973, "regions": 443, "phys_mb": 1096, "i": 7, "outcome": "succeeded", "s": 53.8, "t": 1793912933.8}
+{"kind": "job", "pid": 32973, "regions": 443, "phys_mb": 1096, "i": 8, "outcome": "succeeded", "s": 53.8, "t": 1793912989.1}
+{"kind": "job", "pid": 32973, "regions": 443, "phys_mb": 1096, "i": 9, "outcome": "succeeded", "s": 53.6, "t": 1793913044.1}
+{"kind": "job", "pid": 32973, "regions": 448, "phys_mb": 1099, "i": 10, "outcome": "succeeded", "s": 53.9, "t": 1793913099.7}
+{"kind": "job", "pid": 32973, "regions": 443, "phys_mb": 1097, "i": 11, "outcome": "succeeded", "s": 53.7, "t": 1793913154.9}
+{"kind": "job", "pid": 32973, "regions": 443, "phys_mb": 1097, "i": 12, "outcome": "succeeded", "s": 54.1, "t": 1793913210.6}
+{"kind": "idle", "pid": 32973, "regions": 443, "phys_mb": 934, "t": 1793913242.5}
+{"kind": "idle", "pid": 32973, "regions": 443, "phys_mb": 934, "t": 1793913273.9}

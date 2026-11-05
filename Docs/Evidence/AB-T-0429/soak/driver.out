@@ -1,0 +1,36 @@
+2026-11-04T16:39:01Z Gaea up: pid 59950, home /tmp/gsoak.ytnwmqm0
+2026-11-04T16:39:03Z Installed Gaea demo worker 0.3.3 (com.xocialize.gaea.demo), enabled.
+2026-11-04T16:39:05Z Installed Z-Image 0.1.2 (com.xocialize.gaea.z-image), enabled.
+2026-11-04T16:39:06Z Installed FLUX.2 Klein 0.2.3 (com.xocialize.gaea.flux2-klein), enabled.
+2026-11-04T16:39:10Z Installed Forge processing pack 0.2.1 (com.xocialize.gaea.forge), enabled.
+2026-11-04T16:39:12Z Installed Kokoro 0.1.1 (com.xocialize.gaea.kokoro), enabled.
+2026-11-04T16:39:14Z Installed MOSS-SoundEffect 0.1.2 (com.xocialize.gaea.moss-soundeffect), enabled.
+2026-11-04T16:39:17Z Installed RIFE 0.1.1 (com.xocialize.gaea.rife), enabled.
+2026-11-04T16:39:19Z Installed LTX 2.5 0.1.2 (com.xocialize.gaea.ltx), enabled.
+2026-11-04T16:49:49Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #1) then SIGTRAP (crash #2); it was requeued once. gaea crashes shows them.
+2026-11-04T17:49:40Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #3) then SIGTRAP (crash #4); it was requeued once. gaea crashes shows them.
+2026-11-04T18:49:47Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #5) then SIGTRAP (crash #6); it was requeued once. gaea crashes shows them.
+2026-11-04T19:49:27Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #7) then SIGTRAP (crash #8); it was requeued once. gaea crashes shows them.
+2026-11-04T20:50:01Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #9) then SIGTRAP (crash #10); it was requeued once. gaea crashes shows them.
+2026-11-04T21:49:26Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #11) then SIGTRAP (crash #12); it was requeued once. gaea crashes shows them.
+2026-11-04T22:49:49Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #13) then SIGTRAP (crash #14); it was requeued once. gaea crashes shows them.
+2026-11-04T23:49:20Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #15) then SIGTRAP (crash #16); it was requeued once. gaea crashes shows them.
+2026-11-05T00:49:51Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #17) then SIGTRAP (crash #18); it was requeued once. gaea crashes shows them.
+2026-11-05T01:49:25Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #20) then SIGTRAP (crash #21); it was requeued once. gaea crashes shows them.
+2026-11-05T02:49:20Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #22) then SIGTRAP (crash #23); it was requeued once. gaea crashes shows them.
+2026-11-05T03:49:57Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #24) then SIGTRAP (crash #25); it was requeued once. gaea crashes shows them.
+2026-11-05T04:39:27Z update to 1.0.0-rc.2: Installing Gaea 1.0.0-rc.2 once no job is running or waiting (now: 2 just finished, held for its client); Gaea relaunches itself. gaea update --cancel stops it.
+2026-11-05T04:40:27Z Gaea 1.0.0-rc.2 answering, 63 s after the update was asked for
+2026-11-05T04:49:50Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #26) then SIGTRAP (crash #27); it was requeued once. gaea crashes shows them.
+2026-11-05T05:50:10Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #28) then SIGTRAP (crash #29); it was requeued once. gaea crashes shows them.
+2026-11-05T06:49:47Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #30) then SIGTRAP (crash #31); it was requeued once. gaea crashes shows them.
+2026-11-05T07:49:26Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #32) then SIGTRAP (crash #33); it was requeued once. gaea crashes shows them.
+2026-11-05T08:49:27Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #34) then SIGTRAP (crash #35); it was requeued once. gaea crashes shows them.
+2026-11-05T09:49:55Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #36) then SIGTRAP (crash #37); it was requeued once. gaea crashes shows them.
+2026-11-05T10:49:26Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #38) then SIGTRAP (crash #39); it was requeued once. gaea crashes shows them.
+2026-11-05T11:49:51Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #40) then SIGTRAP (crash #41); it was requeued once. gaea crashes shows them.
+2026-11-05T12:49:24Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #42) then SIGTRAP (crash #43); it was requeued once. gaea crashes shows them.
+2026-11-05T13:49:27Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #45) then SIGTRAP (crash #46); it was requeued once. gaea crashes shows them.
+2026-11-05T14:49:28Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #47) then SIGTRAP (crash #48); it was requeued once. gaea crashes shows them.
+2026-11-05T15:49:24Z injected crash: failed Gaea demo worker: the worker crashed twice running this job, SIGTRAP (crash #49) then SIGTRAP (crash #50); it was requeued once. gaea crashes shows them.
+2026-11-05T16:40:10Z summary: 7413/7413 mixed jobs succeeded, 24 injected, 50 crashes, versions ['1.0.0-rc.1', '1.0.0-rc.2']

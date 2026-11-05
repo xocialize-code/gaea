@@ -1,0 +1,162 @@
+{
+  "hours": 24.0,
+  "jobs": 7413,
+  "succeeded": 7413,
+  "by_plugin": {
+    "z-image": {
+      "jobs": 1059,
+      "succeeded": 1059
+    },
+    "kokoro": {
+      "jobs": 1059,
+      "succeeded": 1059
+    },
+    "rife": {
+      "jobs": 1059,
+      "succeeded": 1059
+    },
+    "flux2-klein": {
+      "jobs": 1059,
+      "succeeded": 1059
+    },
+    "moss-soundeffect": {
+      "jobs": 1059,
+      "succeeded": 1059
+    },
+    "forge": {
+      "jobs": 1059,
+      "succeeded": 1059
+    },
+    "ltx": {
+      "jobs": 1059,
+      "succeeded": 1059
+    }
+  },
+  "injected": 24,
+  "injected_failed_as_expected": 24,
+  "crashes": 50,
+  "crashes_not_demo": [
+    {
+      "at": "2026-11-05T12:58:10Z",
+      "how": "SIGTRAP",
+      "id": 44,
+      "job": "job_xas9vwqc4r4stp40afm8",
+      "lane": "int8",
+      "model": "ltx-2.5-compact24",
+      "outcome": "requeued",
+      "pid": 20433,
+      "pluginID": "com.xocialize.gaea.ltx",
+      "quarantined": false,
+      "reportPath": "/tmp/gsoak.ytnwmqm0/Crashes/44-gaea-ltx-worker-2026-11-05-045816.ips",
+      "reportSummary": "EXC_BREAKPOINT (SIGTRAP)\n0  libswiftCore.dylib  _assertionFailure(_:_:file:line:flags:)\n1  gaea-ltx-worker  ErrorHandler.dispatch(_:)\n2  gaea-ltx-worker  @objc errorHandlerTrampoline(message:data:)\n3  gaea-ltx-worker  _mlx_error\n4  gaea-ltx-worker  mlx_eval\n5  gaea-ltx-worker  eval(_:)",
+      "signal": 5,
+      "stderrTail": [
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "MLX/ErrorHandler.swift:345: Fatal error: [metal::malloc] Resource limit (499000) exceeded. at /Users/runner/work/gaea-plugin-ltx/gaea-plugin-ltx/.build/plugin/checkouts/mlx-swift/Source/Cmlx/mlx-c/mlx/c/transforms.cpp:73"
+      ],
+      "version": "0.1.2"
+    },
+    {
+      "at": "2026-11-05T01:45:33Z",
+      "how": "SIGTRAP",
+      "id": 19,
+      "job": "job_j0tr2t11m1zww0end5rb",
+      "lane": "int8",
+      "model": "ltx-2.5-compact24",
+      "outcome": "requeued",
+      "pid": 62097,
+      "pluginID": "com.xocialize.gaea.ltx",
+      "quarantined": false,
+      "reportPath": "/tmp/gsoak.ytnwmqm0/Crashes/19-gaea-ltx-worker-2026-11-04-174536.ips",
+      "reportSummary": "EXC_BREAKPOINT (SIGTRAP)\n0  libswiftCore.dylib  _assertionFailure(_:_:file:line:flags:)\n1  gaea-ltx-worker  ErrorHandler.dispatch(_:)\n2  gaea-ltx-worker  @objc errorHandlerTrampoline(message:data:)\n3  gaea-ltx-worker  _mlx_error\n4  gaea-ltx-worker  mlx_eval\n5  gaea-ltx-worker  eval<A>(_:)",
+      "signal": 5,
+      "stderrTail": [
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "[BlockStreamer] bound 48 blocks \u00b7 group=2 \u00b7 slots 2\u00d7784 MiB (1.53 GiB resident) \u00b7 sweep 18.37 GiB \u00b7 block-resident 18450 KiB (12 tensors/block)",
+        "[BlockStreamer] streaming set 0 from q8",
+        "MLX/ErrorHandler.swift:345: Fatal error: [metal::malloc] Resource limit (499000) exceeded. at /Users/runner/work/gaea-plugin-ltx/gaea-plugin-ltx/.build/plugin/checkouts/mlx-swift/Source/Cmlx/mlx-c/mlx/c/transforms.cpp:73"
+      ],
+      "version": "0.1.2"
+    }
+  ],
+  "gaea_versions_seen": [
+    "1.0.0-rc.1",
+    "1.0.0-rc.2"
+  ],
+  "plugins": "on  com.xocialize.gaea.flux2-klein 0.2.3  FLUX.2 Klein  https://github.com/xocialize-code/gaea-plugin-flux2-klein\non  com.xocialize.gaea.forge 0.2.1  Forge processing pack  https://github.com/xocialize-code/gaea-plugin-forge\non  com.xocialize.gaea.demo 0.3.3  Gaea demo worker  https://github.com/xocialize-code/gaea-plugin-demo\n      crashed 48 times in 24 h, last SIGTRAP at 2026-11-05T15:49:24Z (gaea crashes show 50)\non  com.xocialize.gaea.kokoro 0.1.1  Kokoro  https://github.com/xocialize-code/gaea-plugin-kokoro\non  com.xocialize.gaea.ltx 0.1.2  LTX 2.5  https://github.com/xocialize-code/gaea-plugin-ltx\n      crashed 2 times in 24 h, last SIGTRAP at 2026-11-05T12:58:10Z (gaea crashes show 44)\non  com.xocialize.gaea.moss-soundeffect 0.1.2  MOSS-SoundEffect  https://github.com/xocialize-code/gaea-plugin-moss-soundeffect\non  com.xocialize.gaea.rife 0.1.1  RIFE  https://github.com/xocialize-code/gaea-plugin-rife\non  com.xocialize.gaea.z-image 0.1.2  Z-Image  https://github.com/xocialize-code/gaea-plugin-z-image\n",
+  "status": "Gaea 1.0.0-rc.2\nMES:       http://127.0.0.1:17785/mes/v0 (open, this Mac only)\nOperations: image.generate [z-image-turbo, demo-gradient, klein-4b, klein-4b-base, z-image]; image.edit [klein-4b, klein-4b-base, z-image, z-image-turbo]; image.fill [lama-inpaint, klein-4b, klein-4b-base, z-image, z-image-turbo]; image.erase [lama-inpaint]; image.extend [lama-inpaint, klein-4b, klein-4b-base, z-image, z-image-turbo]; image.upscale [realplksr-upscale, anime4k-upscale, heart-upscale, nacre-upscale, nerve-upscale, vosr2-upscale]; image.restore [nafnet-restore, drunet-denoise, gfpgan-face, restoreformer-face, restormer-defocus, restormer-denoise, restormer-motion, scunet-denoise]; image.relight [cidnet-relight]; image.colorize [ddcolor-colorize]; image.matte [birefnet-matte]; image.segment [sam21-segment, edgetam-segment]; image.score [siglip2-quality]; audio.generate [moss-soundeffect]; audio.speak [kokoro-82m]; video.extend [ltx-2.5-compact24]; video.generate [ltx-2.5-compact24]; video.interpolate [rife-4.25]; video.retake [ltx-2.5-compact24]\nPlugins:   8 installed, 8 enabled\nTrust:     CFZS6RXUCP\nCrashes:   50 in the last 24 h\nWorkers:   com.xocialize.gaea.flux2-klein pid 20328, com.xocialize.gaea.forge pid 20432, com.xocialize.gaea.kokoro pid 20318, com.xocialize.gaea.ltx pid 10024, com.xocialize.gaea.moss-soundeffect pid 20333, com.xocialize.gaea.rife pid 20325, com.xocialize.gaea.z-image pid 21236\nMemory:    43.35 GB charged of 103.08 GB budget; host 0.49 GB\nModels:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models\nUpdate:    up to date\nOperator:  /tmp/gsoak.ytnwmqm0/operator.sock (same user, Developer ID team); you are pid 63048, uid 501, Developer ID CFZS6RXUCP\nDatabase:  /tmp/gsoak.ytnwmqm0/gaea.sqlite\n"
+}
