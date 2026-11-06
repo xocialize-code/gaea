@@ -42,9 +42,16 @@ extension GaeaEngine {
             schema["x-mes-ui"] = .object(audioUI(name, order: order))
             properties[name] = .object(schema)
         }
-        let outputs = spec.outputs.sorted { $0.key < $1.key }.map { name, io -> OutputSpec in
+        // §3.6 (RFC 0006): a separator's outputs are the stems its offers make, in the registry's order, each optional.
+        let made = Set(models.flatMap { $0.supports(AudioProfile.SupportsKey.stems)?.arrayValue?.compactMap(\.stringValue) ?? [] })
+        let ordered = spec.outputs.sorted { a, b in
+            a.value.stem == true && b.value.stem == true
+                ? (AudioProfile.stems.firstIndex(of: a.key) ?? 0) < (AudioProfile.stems.firstIndex(of: b.key) ?? 0) : a.key < b.key
+        }
+        let outputs = ordered.filter { $0.value.stem != true || made.contains($0.key) }.map { name, io -> OutputSpec in
             let many = ["samples", "sounds"].contains(name)
             let optional = (operation == "audio.edit_speech" && name == "transcript") || (operation == "audio.compose" && name != "song")
+                || io.stem == true
             let mediaTypes = io.kind == .data ? ["application/json"] : io.kind == .text ? ["text/vnd.abc"] : ["audio/wav"]
             return OutputSpec(name: name, kind: io.kind, mediaTypes: mediaTypes, min: optional ? 0 : 1,
                               max: many ? (operation == "audio.design_voice" ? 4 : 8) : 1,
@@ -101,7 +108,7 @@ extension GaeaEngine {
 
     static func audioTitle(_ operation: String) -> String {
         ["audio.design_voice": "Design a voice", "audio.speak": "Speak", "audio.edit_speech": "Edit speech",
-         "audio.generate": "Generate a sound", "audio.compose": "Compose a song"][operation] ?? operation
+         "audio.generate": "Generate a sound", "audio.compose": "Compose a song", "audio.separate": "Separate sources"][operation] ?? operation
     }
 
     static func audioUI(_ name: String, order: Int) -> [String: MESValue] {
@@ -141,6 +148,11 @@ extension GaeaEngine {
         let inputs = try Self.inputPaths(audioInputs, writingTextTo: inputDirectory)
         var params = route.manifestOffer.defaults?.objectValue ?? [:]
         for (key, value) in context.params { params[key] = value.gpp }
+        if route.operation == "audio.separate" {
+            // §3.6: the worker makes exactly the stems the plan names (effective.stems), the offer's own when the request
+            // asked for none.
+            params[AudioProfile.Param.stems] = .array(AudioProfileRules.stems(context.params, model: route.offer).map { .string($0) })
+        }
         let names = Set(route.extensions.map(\.name))
         let modelParams = context.extensions.filter { names.contains($0.key) }.mapValues(\.gpp)
         let modelStreams = route.offer.supports("stream")?.boolValue == true
@@ -226,8 +238,8 @@ extension GaeaEngine {
                        channels: written.channels, bitDepth: written.bitsPerSample), warnings)
     }
 
-    /// The input lengths an offer's limits bound (Audio §4.2): `edit_speech`'s take (`max_duration_s`), and `compose`'s
-    /// source and reference. MESKit reads the request, not its media, so the engine measures them; longer is 422
+    /// The input lengths an offer's limits bound (Audio §4.2): `edit_speech`'s take and `separate`'s mixture
+    /// (`max_duration_s`), and `compose`'s source and reference. MESKit reads the request, not its media, so the engine measures them; longer is 422
     /// `out_of_limits`, never trimmed. A `compose` repaint must also lie inside its source (§3.5), which only the source's
     /// length can tell.
     static func checkInputLengths(_ operation: String, inputs: [String: [RunInput]], limits: Descriptor.Limits?,
@@ -240,7 +252,7 @@ extension GaeaEngine {
         }
         guard let limits else { return }
         let bounds: [(input: String, seconds: Double?)] = switch operation {
-        case "audio.edit_speech": [(AudioProfile.Input.audio, limits.maxDurationSeconds)]
+        case "audio.edit_speech", "audio.separate": [(AudioProfile.Input.audio, limits.maxDurationSeconds)]
         case "audio.compose": [(AudioProfile.Input.source, limits.profile[AudioProfile.LimitField.maxSourceSeconds]),
                                (AudioProfile.Input.reference, limits.profile[AudioProfile.LimitField.maxReferenceSeconds])]
         default: []

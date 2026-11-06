@@ -21,7 +21,7 @@
             "capabilities": [],
             "contractVersion": {
               "major": 1,
-              "minor": 57,
+              "minor": 59,
               "patch": 0
             },
             "footprintQuant": "fp32",
@@ -38,7 +38,7 @@
       "package": {
         "contractVersion": {
           "major": 1,
-          "minor": 57,
+          "minor": 59,
           "patch": 0
         },
         "license": {

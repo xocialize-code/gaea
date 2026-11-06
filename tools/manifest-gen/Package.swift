@@ -6,9 +6,9 @@ import PackageDescription
 // encoding rather than a hand copy of it. MLXToolKit is MLX-free; nothing here loads a model.
 let package = Package(
     name: "gaea-manifest-gen",
-    platforms: [.macOS("26.0")], // mlx-engine-swift 0.72.0 requires macOS 26,
+    platforms: [.macOS("26.0")], // mlx-engine-swift 0.74.1 requires macOS 26,
     dependencies: [
-        .package(url: "https://github.com/xocialize/mlx-engine-swift.git", from: "0.72.0"),
+        .package(url: "https://github.com/xocialize/mlx-engine-swift.git", from: "0.74.1"),
     ],
     targets: [
         .executableTarget(

@@ -12,8 +12,8 @@
   "executable": "gaea-z-image-worker",
   "engine": {
     "package": "mlx-engine-swift",
-    "version": "0.72.0",
-    "contract": "1.57.0"
+    "version": "0.74.1",
+    "contract": "1.59.0"
   },
   "models": [
     {
@@ -29,7 +29,7 @@
             ],
             "contractVersion": {
               "major": 1,
-              "minor": 57,
+              "minor": 59,
               "patch": 0
             },
             "footprintQuant": "int4",
@@ -67,7 +67,7 @@
             ],
             "contractVersion": {
               "major": 1,
-              "minor": 57,
+              "minor": 59,
               "patch": 0
             },
             "footprintQuant": "int8",
@@ -105,7 +105,7 @@
             ],
             "contractVersion": {
               "major": 1,
-              "minor": 57,
+              "minor": 59,
               "patch": 0
             },
             "footprintQuant": "bf16",
@@ -137,7 +137,7 @@
       "package": {
         "contractVersion": {
           "major": 1,
-          "minor": 57,
+          "minor": 59,
           "patch": 0
         },
         "license": {

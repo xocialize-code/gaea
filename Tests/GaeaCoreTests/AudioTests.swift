@@ -65,6 +65,49 @@ struct AudioTests {
         #expect(properties?["voice"] != nil)
     }
 
+    /// Two audio.separate offers (RFC 0006): a masked music separator and a regenerating voice separator.
+    @Test func aSeparatorsOutputsAreTheStemsItsOffersMake() throws {
+        let routes = try speakRoutes().enumerated().map { i, route -> PluginRoute in
+            var offer = route.manifestOffer
+            offer.operation = "audio.separate"
+            var r = route
+            r.manifestOffer = offer
+            r.offer.supports = i == 0
+                ? ["stems": ["vocals", "instrumental"], "stem_method": "masked", "sample_rate": 44100, "channels": 2]
+                : ["stems": ["speaker", "singing"], "speaker_selection": ["ordinal", "saying"], "stem_method": "regenerated",
+                   "sample_rate": 24000, "channels": 1]
+            r.offer.limits = .init(maxDurationSeconds: i == 0 ? 600 : 30)
+            return r
+        }
+        let descriptor = try #require(GaeaEngine.audioDescriptor("audio.separate", routes: routes))
+        #expect(descriptor.title == "Separate sources")
+        // The registry's order, only the stems some offer makes, each optional and single.
+        #expect(descriptor.outputs.map(\.name) == ["speaker", "singing", "vocals", "instrumental"])
+        #expect(descriptor.outputs.allSatisfy { $0.min == 0 && $0.max == 1 && $0.kind == .audio })
+        #expect(descriptor.inputs.map(\.name) == ["audio"] && descriptor.inputs[0].required)
+        #expect(descriptor.limits?.maxDurationSeconds == 600)
+        let properties = descriptor.params["properties"]
+        #expect(properties?["stems"] != nil && properties?["speaker"] != nil)
+        // The stems a job makes: the request's, else the offer's without the speaker, else the speaker for a pick.
+        #expect(AudioProfileRules.stems([:], model: routes[1].offer) == ["singing"])
+        #expect(AudioProfileRules.stems(["speaker": ["ordinal": 2]], model: routes[1].offer) == ["speaker"])
+        #expect(AudioProfileRules.stems(["stems": ["vocals"]], model: routes[0].offer) == ["vocals"])
+    }
+
+    /// A mixture longer than the offer's max_duration_s is refused, never trimmed (§3.6).
+    @Test func aSeparatorsMixtureIsBoundedByItsLimit() throws {
+        let dir = FileManager.default.temporaryDirectory.appending(path: "gaea-separate-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: dir) }
+        let mixture = dir.appending(path: "mix.wav")
+        try AudioPCM.wav([Float](repeating: 0, count: 24000 * 31), sampleRate: 24000, channels: 1, bitDepth: 16).write(to: mixture)
+        let inputs: [String: [RunInput]] = ["audio": [.file(mixture, mediaType: "audio/wav")]]
+        #expect(throws: MESError.self) {
+            try GaeaEngine.checkInputLengths("audio.separate", inputs: inputs, limits: .init(maxDurationSeconds: 30))
+        }
+        try GaeaEngine.checkInputLengths("audio.separate", inputs: inputs, limits: .init(maxDurationSeconds: 600))
+    }
+
     @Test func noStreamingModelMeansNoStreamedOutput() throws {
         let descriptor = try #require(GaeaEngine.audioDescriptor("audio.speak", routes: [try speakRoutes()[1]]))
         #expect(descriptor.outputs.allSatisfy { $0.stream == nil })

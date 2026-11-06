@@ -1,4 +1,4 @@
 # manifest: demo.json
 # expect: goes H→W, but W sent it
-W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.2.0"},"pid":1,"models":["demo-matmul"],"manifest_sha256":"d0cdaa96493eaaf380cdecaab443e1cc2775d446818b79d5b726a6501c1a6745"}
+W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.2.0"},"pid":1,"models":["demo-matmul"],"manifest_sha256":"99ca53d467d4ff4b43f63c2c3a9bc7ca380a5f8180ff43c9af5f713d082fb6c2"}
 W {"type":"prepare","id":"w1","model":"demo-matmul","lane":"fp32"}
