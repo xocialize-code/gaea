@@ -704,7 +704,10 @@ facts and the gaps, is in [Gaea - G5 audio plan.md](Gaea%20-%20G5%20audio%20plan
   2. The VoxCPM2 plugin (`gaea-plugin-voxcpm2`). **Done 2026-11-06 (AB-T-0453):** v0.1.0, one model on `speak` and
      `design_voice`, acceptance 44/44 through Gaea 1.0.0 (Docs/Evidence/AB-T-0453/).
   3. MES 0.10, S-1 to S-5: asked of `mlx-apps` (G-28), and run in parallel with orders 1 and 2.
-  4. Kit 0.11.0 (the shared edit mapping) and `audio.separate` in Gaea: 1.1.0.
+  4. Kit 0.11.0 (the shared edit mapping) and `audio.separate` in Gaea: 1.1.0. **Done 2026-11-06 (AB-T-0454):**
+     Gaea 1.1.0 on MESKit 0.10.0 and GaeaPluginKit 0.11.0. Step-Audio-EditX 0.1.2 is byte-identical on the kit's
+     mapping, and demo 0.4.0 has a stand-in separator. Conformance with 24 plugins: 88/0/7
+     (Docs/Evidence/AB-T-0454/).
   5. The AuK plugin (`gaea-plugin-auk`): restricted (G-27), with int4 never used for Mandarin edits (G-30).
   6. The exit: Lab, conformance, and the soak.
 - Every new plugin names the fleet's mlx-swift fork in its own `Package.swift` (AB-D-0208), or upstream's would win and
