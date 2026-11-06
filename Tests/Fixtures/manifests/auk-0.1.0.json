@@ -1,0 +1,1258 @@
+{
+  "engine" : {
+    "contract" : "1.59.0",
+    "package" : "mlx-engine-swift",
+    "version" : "0.74.1"
+  },
+  "executable" : "gaea-auk-worker",
+  "helpers" : [
+
+  ],
+  "id" : "com.xocialize.gaea.auk",
+  "license" : "Apache-2.0",
+  "manifest_version" : 1,
+  "min_gaea" : "1.1.0",
+  "models" : [
+    {
+      "id" : "auk-flash",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "tts",
+              "speechEdit",
+              "audioSeparation"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 59,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 2800000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 9600000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "config.json",
+                  "dit.safetensors",
+                  "vae.safetensors"
+                ],
+                "repo" : "mlx-community/AuK-Flash-bf16",
+                "role" : "model"
+              },
+              {
+                "matching" : [
+                  "config.json",
+                  "encoder.safetensors",
+                  "tokenizer.json",
+                  "tokenizer_config.json",
+                  "vocab.json",
+                  "merges.txt",
+                  "added_tokens.json",
+                  "special_tokens_map.json",
+                  "chat_template.json",
+                  "preprocessor_config.json"
+                ],
+                "repo" : "mlx-community/Qwen2.5-Omni-3B-Thinker-8bit",
+                "role" : "encoder"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "tts",
+              "speechEdit",
+              "audioSeparation"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 59,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 2800000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 12900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "config.json",
+                  "dit.safetensors",
+                  "vae.safetensors"
+                ],
+                "repo" : "mlx-community/AuK-Flash-bf16",
+                "role" : "model"
+              },
+              {
+                "matching" : [
+                  "config.json",
+                  "encoder.safetensors",
+                  "tokenizer.json",
+                  "tokenizer_config.json",
+                  "vocab.json",
+                  "merges.txt",
+                  "added_tokens.json",
+                  "special_tokens_map.json",
+                  "chat_template.json",
+                  "preprocessor_config.json"
+                ],
+                "repo" : "mlx-community/Qwen2.5-Omni-3B-Thinker-bf16",
+                "role" : "encoder"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int4",
+          "resolved" : {
+            "capabilities" : [
+              "tts",
+              "speechEdit",
+              "audioSeparation"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 59,
+              "patch" : 0
+            },
+            "footprintQuant" : "int4",
+            "materialization" : "engine",
+            "peakTransientBytes" : 2800000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 8000000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int4",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "config.json",
+                  "dit.safetensors",
+                  "vae.safetensors"
+                ],
+                "repo" : "mlx-community/AuK-Flash-bf16",
+                "role" : "model"
+              },
+              {
+                "matching" : [
+                  "config.json",
+                  "encoder.safetensors",
+                  "tokenizer.json",
+                  "tokenizer_config.json",
+                  "vocab.json",
+                  "merges.txt",
+                  "added_tokens.json",
+                  "special_tokens_map.json",
+                  "chat_template.json",
+                  "preprocessor_config.json"
+                ],
+                "repo" : "mlx-community/Qwen2.5-Omni-3B-Thinker-4bit",
+                "role" : "encoder"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 59,
+          "patch" : 0
+        },
+        "license" : {
+          "additionalWeightLicenses" : [
+            {
+              "identifier" : "MIT"
+            }
+          ],
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "LicenseRef-Qwen-Research"
+          }
+        },
+        "provenance" : {
+          "revision" : "575b92f0895f75180bf2cbd35f2e176c5732b8ed",
+          "sourceRepo" : "tencent/AuK-Flash",
+          "tier" : 3
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 2800000000,
+              "quant" : "bf16",
+              "residentBytes" : 12900000000
+            },
+            {
+              "peakActivationBytes" : 2800000000,
+              "quant" : "int8",
+              "residentBytes" : 9600000000
+            },
+            {
+              "peakActivationBytes" : 2800000000,
+              "quant" : "int4",
+              "residentBytes" : 8000000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "tts",
+            "controls" : {
+              "tts" : {
+                "_0" : {
+                  "emotionModes" : [
+                    "textDescription"
+                  ],
+                  "supportsTargetDuration" : true
+                }
+              }
+            },
+            "name" : "auk-flash",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "text",
+                "required" : true,
+                "summary" : "The text to speak."
+              },
+              {
+                "kind" : "object",
+                "name" : "voice",
+                "required" : false,
+                "summary" : "Canonical voice selection (named / referenceAudio / auto)."
+              },
+              {
+                "kind" : "string",
+                "name" : "referenceTranscript",
+                "required" : false,
+                "summary" : "Transcript of the referenceAudio clip (ICL-grade cloning)."
+              },
+              {
+                "kind" : "object",
+                "name" : "emotion",
+                "required" : false,
+                "summary" : "Emotion steering; modes honored: textDescription."
+              },
+              {
+                "kind" : "number",
+                "name" : "targetDuration",
+                "required" : false,
+                "summary" : "Target output length in seconds (native duration control)."
+              }
+            ],
+            "summary" : "AuK-Flash (Tencent Hunyuan) speech generation (.wav, 24 kHz mono; en / zh; 4 distilled steps, no CFG): zero-shot cloning from a reference clip, or a voice designed from a text description (emotion.textDescription, no reference). ≤ 30 s. RESEARCH LICENCE (Qwen2.5-Omni encoder): not for commercial use. metaData: seed.",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "speechEdit",
+            "controls" : {
+              "speechEdit" : {
+                "_0" : {
+                  "emotionLabels" : [
+                    "happy",
+                    "angry",
+                    "sad",
+                    "fearful",
+                    "surprised",
+                    "disgusted",
+                    "calm",
+                    "excited"
+                  ],
+                  "maxInputSeconds" : 30,
+                  "nonverbalSounds" : [
+                    "breath",
+                    "laugh",
+                    "cough",
+                    "humming"
+                  ],
+                  "operations" : [
+                    "emotion",
+                    "style",
+                    "denoise",
+                    "dereverberate",
+                    "replaceWords",
+                    "insertWords",
+                    "removeWords",
+                    "speed",
+                    "pitch",
+                    "volume",
+                    "timbre",
+                    "deAccent",
+                    "addNonverbal",
+                    "removeNonverbal"
+                  ],
+                  "paralinguisticTags" : [
+
+                  ],
+                  "pitchSemitones" : [
+                    -3,
+                    -2,
+                    -1,
+                    1,
+                    2,
+                    3
+                  ],
+                  "speedFactors" : [
+                    0.5,
+                    0.75,
+                    1.25,
+                    1.5,
+                    2
+                  ],
+                  "styleLabels" : [
+                    "whisper",
+                    "normal"
+                  ],
+                  "supportsTargetDuration" : true,
+                  "transcript" : "unused",
+                  "volumeDecibels" : [
+                    -15,
+                    -10,
+                    -5,
+                    5,
+                    10,
+                    15
+                  ]
+                }
+              }
+            },
+            "name" : "auk-flash-edit",
+            "parameters" : [
+              {
+                "kind" : "audio",
+                "name" : "audio",
+                "required" : true,
+                "summary" : "The take to re-deliver."
+              },
+              {
+                "kind" : "string",
+                "name" : "transcript",
+                "required" : false,
+                "summary" : "What the take says, if known; the model does not need it."
+              },
+              {
+                "kind" : "object",
+                "name" : "edit",
+                "required" : true,
+                "summary" : "One edit: emotion (happy / angry / sad / fearful / surprised / disgusted / calm / excited); style (whisper / normal); denoise; dereverberate; replaceWords (original, new); insertWords (text, anchor, before); removeWords (text, optional anchor, before); speed (factor: 0.5x / 0.75x / 1.25x / 1.5x / 2x); pitch (semitones: -3 / -2 / -1 / +1 / +2 / +3); volume (dB: -15 / -10 / -5 / +5 / +10 / +15); timbre (description); deAccent; addNonverbal (sound: breath / laugh / cough / humming; atEnd); removeNonverbal (sound: breath / laugh / cough / humming; absent = all). Takes up to 30 s."
+              },
+              {
+                "kind" : "number",
+                "name" : "targetDuration",
+                "required" : false,
+                "summary" : "Length of the edited take in seconds, for edits that change it; absent = the model's estimate."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "AuK-Flash (Tencent Hunyuan) speech editor (.wav, 24 kHz mono; en / zh): an existing take in the same voice with words replaced, inserted or removed; faster or slower, higher or lower, louder or quieter on AuK's trained steps; a new emotion, timbre or accent; to or from a whisper; denoised or dereverberated; or a breath, laugh, cough or humming added at an edge or removed. Needs no transcript. Content and speed edits change the length: pass targetDuration to fit a cue. ≤ 30 s. The int4 (4-bit encoder) tier loses words in Mandarin edits: use int8 for zh. RESEARCH LICENCE (Qwen2.5-Omni encoder): not for commercial use.",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "audioSeparation",
+            "controls" : {
+              "audioSeparation" : {
+                "_0" : {
+                  "speakerSelection" : [
+                    "ordinal",
+                    "saying"
+                  ],
+                  "stems" : [
+                    "speaker",
+                    "singing"
+                  ]
+                }
+              }
+            },
+            "name" : "auk-flash-separate",
+            "parameters" : [
+              {
+                "kind" : "audio",
+                "name" : "audio",
+                "required" : true,
+                "summary" : "The mixture audio to separate."
+              },
+              {
+                "kind" : "array",
+                "name" : "stems",
+                "required" : false,
+                "summary" : "Requested stems (speaker / singing); empty means all the model produces."
+              },
+              {
+                "kind" : "object",
+                "name" : "speaker",
+                "required" : false,
+                "summary" : "Keep one speaker, returned as the speaker stem: ordinal (the n-th to start talking, from 1); saying (words that speaker says)."
+              }
+            ],
+            "summary" : "AuK-Flash (Tencent Hunyuan) separator (.wav, 24 kHz mono, same length; en / zh): one speaker of a conversation kept — the n-th to start talking, or the one who says given words — as the speaker stem; or the singing alone (singing). Picking a later speaker by order is unreliable on Flash: name words they say instead. Each stem is one regeneration, not a mask: it cannot be subtracted from the mixture, and no instrumental or music stem is offered. ≤ 30 s. RESEARCH LICENCE (Qwen2.5-Omni encoder): not for commercial use. metaData: seed.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "AuK-Flash"
+    },
+    {
+      "id" : "auk",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "int8",
+          "resolved" : {
+            "capabilities" : [
+              "tts",
+              "speechEdit",
+              "audioSeparation"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 59,
+              "patch" : 0
+            },
+            "footprintQuant" : "int8",
+            "materialization" : "engine",
+            "peakTransientBytes" : 2800000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 9600000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int8",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "config.json",
+                  "dit.safetensors",
+                  "vae.safetensors"
+                ],
+                "repo" : "mlx-community/AuK-bf16",
+                "role" : "model"
+              },
+              {
+                "matching" : [
+                  "config.json",
+                  "encoder.safetensors",
+                  "tokenizer.json",
+                  "tokenizer_config.json",
+                  "vocab.json",
+                  "merges.txt",
+                  "added_tokens.json",
+                  "special_tokens_map.json",
+                  "chat_template.json",
+                  "preprocessor_config.json"
+                ],
+                "repo" : "mlx-community/Qwen2.5-Omni-3B-Thinker-8bit",
+                "role" : "encoder"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "bf16",
+          "resolved" : {
+            "capabilities" : [
+              "tts",
+              "speechEdit",
+              "audioSeparation"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 59,
+              "patch" : 0
+            },
+            "footprintQuant" : "bf16",
+            "materialization" : "engine",
+            "peakTransientBytes" : 2800000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 12900000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "bf16",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "config.json",
+                  "dit.safetensors",
+                  "vae.safetensors"
+                ],
+                "repo" : "mlx-community/AuK-bf16",
+                "role" : "model"
+              },
+              {
+                "matching" : [
+                  "config.json",
+                  "encoder.safetensors",
+                  "tokenizer.json",
+                  "tokenizer_config.json",
+                  "vocab.json",
+                  "merges.txt",
+                  "added_tokens.json",
+                  "special_tokens_map.json",
+                  "chat_template.json",
+                  "preprocessor_config.json"
+                ],
+                "repo" : "mlx-community/Qwen2.5-Omni-3B-Thinker-bf16",
+                "role" : "encoder"
+              }
+            ]
+          }
+        },
+        {
+          "default" : false,
+          "id" : "int4",
+          "resolved" : {
+            "capabilities" : [
+              "tts",
+              "speechEdit",
+              "audioSeparation"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 59,
+              "patch" : 0
+            },
+            "footprintQuant" : "int4",
+            "materialization" : "engine",
+            "peakTransientBytes" : 2800000000,
+            "peakTransientSource" : "quantMatch",
+            "persistentBytes" : 8100000000,
+            "persistentSource" : "quantMatch",
+            "quant" : "int4",
+            "selfMaterializing" : false,
+            "weightSources" : [
+              {
+                "matching" : [
+                  "config.json",
+                  "dit.safetensors",
+                  "vae.safetensors"
+                ],
+                "repo" : "mlx-community/AuK-bf16",
+                "role" : "model"
+              },
+              {
+                "matching" : [
+                  "config.json",
+                  "encoder.safetensors",
+                  "tokenizer.json",
+                  "tokenizer_config.json",
+                  "vocab.json",
+                  "merges.txt",
+                  "added_tokens.json",
+                  "special_tokens_map.json",
+                  "chat_template.json",
+                  "preprocessor_config.json"
+                ],
+                "repo" : "mlx-community/Qwen2.5-Omni-3B-Thinker-4bit",
+                "role" : "encoder"
+              }
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 59,
+          "patch" : 0
+        },
+        "license" : {
+          "additionalWeightLicenses" : [
+            {
+              "identifier" : "MIT"
+            }
+          ],
+          "portCodeLicense" : {
+            "identifier" : "MIT"
+          },
+          "weightLicense" : {
+            "identifier" : "LicenseRef-Qwen-Research"
+          }
+        },
+        "provenance" : {
+          "revision" : "790742b71a4430120daf2b2099192abae449eb9f",
+          "sourceRepo" : "tencent/AuK",
+          "tier" : 3
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 2800000000,
+              "quant" : "bf16",
+              "residentBytes" : 12900000000
+            },
+            {
+              "peakActivationBytes" : 2800000000,
+              "quant" : "int8",
+              "residentBytes" : 9600000000
+            },
+            {
+              "peakActivationBytes" : 2800000000,
+              "quant" : "int4",
+              "residentBytes" : 8100000000
+            }
+          ],
+          "os" : {
+            "minMacOS" : {
+              "major" : 26,
+              "minor" : 0,
+              "patch" : 0
+            }
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "tts",
+            "controls" : {
+              "tts" : {
+                "_0" : {
+                  "emotionModes" : [
+                    "textDescription"
+                  ],
+                  "supportsTargetDuration" : true
+                }
+              }
+            },
+            "name" : "auk",
+            "parameters" : [
+              {
+                "kind" : "string",
+                "name" : "text",
+                "required" : true,
+                "summary" : "The text to speak."
+              },
+              {
+                "kind" : "object",
+                "name" : "voice",
+                "required" : false,
+                "summary" : "Canonical voice selection (named / referenceAudio / auto)."
+              },
+              {
+                "kind" : "string",
+                "name" : "referenceTranscript",
+                "required" : false,
+                "summary" : "Transcript of the referenceAudio clip (ICL-grade cloning)."
+              },
+              {
+                "kind" : "object",
+                "name" : "emotion",
+                "required" : false,
+                "summary" : "Emotion steering; modes honored: textDescription."
+              },
+              {
+                "kind" : "number",
+                "name" : "targetDuration",
+                "required" : false,
+                "summary" : "Target output length in seconds (native duration control)."
+              }
+            ],
+            "summary" : "AuK (Tencent Hunyuan) speech generation (.wav, 24 kHz mono; en / zh; 32 steps × CFG 2): zero-shot cloning from a reference clip, or a voice designed from a text description (emotion.textDescription, no reference). ≤ 30 s. RESEARCH LICENCE (Qwen2.5-Omni encoder): not for commercial use. metaData: seed.",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "speechEdit",
+            "controls" : {
+              "speechEdit" : {
+                "_0" : {
+                  "emotionLabels" : [
+                    "happy",
+                    "angry",
+                    "sad",
+                    "fearful",
+                    "surprised",
+                    "disgusted",
+                    "calm",
+                    "excited"
+                  ],
+                  "maxInputSeconds" : 30,
+                  "nonverbalSounds" : [
+                    "breath",
+                    "laugh",
+                    "cough",
+                    "humming"
+                  ],
+                  "operations" : [
+                    "emotion",
+                    "style",
+                    "denoise",
+                    "dereverberate",
+                    "replaceWords",
+                    "insertWords",
+                    "removeWords",
+                    "speed",
+                    "pitch",
+                    "volume",
+                    "timbre",
+                    "deAccent",
+                    "addNonverbal",
+                    "removeNonverbal"
+                  ],
+                  "paralinguisticTags" : [
+
+                  ],
+                  "pitchSemitones" : [
+                    -3,
+                    -2,
+                    -1,
+                    1,
+                    2,
+                    3
+                  ],
+                  "speedFactors" : [
+                    0.5,
+                    0.75,
+                    1.25,
+                    1.5,
+                    2
+                  ],
+                  "styleLabels" : [
+                    "whisper",
+                    "normal"
+                  ],
+                  "supportsTargetDuration" : true,
+                  "transcript" : "unused",
+                  "volumeDecibels" : [
+                    -15,
+                    -10,
+                    -5,
+                    5,
+                    10,
+                    15
+                  ]
+                }
+              }
+            },
+            "name" : "auk-edit",
+            "parameters" : [
+              {
+                "kind" : "audio",
+                "name" : "audio",
+                "required" : true,
+                "summary" : "The take to re-deliver."
+              },
+              {
+                "kind" : "string",
+                "name" : "transcript",
+                "required" : false,
+                "summary" : "What the take says, if known; the model does not need it."
+              },
+              {
+                "kind" : "object",
+                "name" : "edit",
+                "required" : true,
+                "summary" : "One edit: emotion (happy / angry / sad / fearful / surprised / disgusted / calm / excited); style (whisper / normal); denoise; dereverberate; replaceWords (original, new); insertWords (text, anchor, before); removeWords (text, optional anchor, before); speed (factor: 0.5x / 0.75x / 1.25x / 1.5x / 2x); pitch (semitones: -3 / -2 / -1 / +1 / +2 / +3); volume (dB: -15 / -10 / -5 / +5 / +10 / +15); timbre (description); deAccent; addNonverbal (sound: breath / laugh / cough / humming; atEnd); removeNonverbal (sound: breath / laugh / cough / humming; absent = all). Takes up to 30 s."
+              },
+              {
+                "kind" : "number",
+                "name" : "targetDuration",
+                "required" : false,
+                "summary" : "Length of the edited take in seconds, for edits that change it; absent = the model's estimate."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "RNG seed for reproducibility."
+              }
+            ],
+            "summary" : "AuK (Tencent Hunyuan) speech editor (.wav, 24 kHz mono; en / zh): an existing take in the same voice with words replaced, inserted or removed; faster or slower, higher or lower, louder or quieter on AuK's trained steps; a new emotion, timbre or accent; to or from a whisper; denoised or dereverberated; or a breath, laugh, cough or humming added at an edge or removed. Needs no transcript. Content and speed edits change the length: pass targetDuration to fit a cue. ≤ 30 s. The int4 (4-bit encoder) tier loses words in Mandarin edits: use int8 for zh. RESEARCH LICENCE (Qwen2.5-Omni encoder): not for commercial use.",
+            "supportedModes" : [
+
+            ]
+          },
+          {
+            "capability" : "audioSeparation",
+            "controls" : {
+              "audioSeparation" : {
+                "_0" : {
+                  "speakerSelection" : [
+                    "ordinal",
+                    "saying"
+                  ],
+                  "stems" : [
+                    "speaker",
+                    "singing",
+                    "voices"
+                  ]
+                }
+              }
+            },
+            "name" : "auk-separate",
+            "parameters" : [
+              {
+                "kind" : "audio",
+                "name" : "audio",
+                "required" : true,
+                "summary" : "The mixture audio to separate."
+              },
+              {
+                "kind" : "array",
+                "name" : "stems",
+                "required" : false,
+                "summary" : "Requested stems (speaker / singing / voices); empty means all the model produces."
+              },
+              {
+                "kind" : "object",
+                "name" : "speaker",
+                "required" : false,
+                "summary" : "Keep one speaker, returned as the speaker stem: ordinal (the n-th to start talking, from 1); saying (words that speaker says)."
+              }
+            ],
+            "summary" : "AuK (Tencent Hunyuan) separator (.wav, 24 kHz mono, same length; en / zh): one speaker of a conversation kept — the n-th to start talking, or the one who says given words — as the speaker stem; or the singing alone (singing); or every human voice, speech and singing (voices). Each stem is one regeneration, not a mask: it cannot be subtracted from the mixture, and no instrumental or music stem is offered. ≤ 30 s. RESEARCH LICENCE (Qwen2.5-Omni encoder): not for commercial use. metaData: seed.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "AuK"
+    }
+  ],
+  "offers" : [
+    {
+      "model" : {
+        "id" : "auk-flash",
+        "license" : {
+          "accepted_required" : true,
+          "commercial_use" : false,
+          "notice" : "AuK needs the Qwen2.5-Omni-3B encoder, which is under the Qwen Research License Agreement: for research and evaluation only, not for any commercial use. AuK's own DiT and VAE are MIT. By using it you accept the Qwen Research licence's terms.",
+          "spdx" : "LicenseRef-Qwen-Research",
+          "terms_url" : "https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/main/LICENSE",
+          "user_accept_required" : true
+        },
+        "limits" : {
+          "max_duration_s" : 30,
+          "max_text_chars" : 600,
+          "max_voice_ref_s" : 30
+        },
+        "memory_class" : "medium",
+        "named_only" : true,
+        "notes" : "AuK-Flash, quick: speech in the voice of a reference clip (up to 30 s), in English or Chinese, at most 30 s. Give the clip's transcript (voice_ref_text) or a target_duration_s for the best length; without either the length is estimated from the text. [pause 1s] adds silence. Research use only (Qwen Research licence).",
+        "quality_tiers" : [
+          "standard"
+        ],
+        "speed_class" : "fast",
+        "supports" : {
+          "channels" : 1,
+          "cues" : [
+            "pause"
+          ],
+          "languages" : [
+            "en",
+            "zh"
+          ],
+          "sample_rate" : 24000,
+          "target_duration" : true,
+          "voice_ref" : true,
+          "voice_ref_text" : "optional"
+        },
+        "title" : "AuK-Flash"
+      },
+      "operation" : "audio.speak",
+      "profile" : "audio"
+    },
+    {
+      "model" : {
+        "id" : "auk-flash",
+        "license" : {
+          "accepted_required" : true,
+          "commercial_use" : false,
+          "notice" : "AuK needs the Qwen2.5-Omni-3B encoder, which is under the Qwen Research License Agreement: for research and evaluation only, not for any commercial use. AuK's own DiT and VAE are MIT. By using it you accept the Qwen Research licence's terms.",
+          "spdx" : "LicenseRef-Qwen-Research",
+          "terms_url" : "https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/main/LICENSE",
+          "user_accept_required" : true
+        },
+        "limits" : {
+          "max_count" : 4,
+          "max_text_chars" : 400
+        },
+        "memory_class" : "medium",
+        "named_only" : true,
+        "notes" : "AuK-Flash, quick: a voice designed from a description, in English or Chinese. Keep the sample you like as an asset and clone it with voice_ref. Research use only (Qwen Research licence).",
+        "quality_tiers" : [
+          "standard"
+        ],
+        "speed_class" : "fast",
+        "supports" : {
+          "channels" : 1,
+          "languages" : [
+            "en",
+            "zh"
+          ],
+          "sample_rate" : 24000
+        },
+        "title" : "AuK-Flash"
+      },
+      "operation" : "audio.design_voice",
+      "profile" : "audio"
+    },
+    {
+      "model" : {
+        "id" : "auk-flash",
+        "license" : {
+          "accepted_required" : true,
+          "commercial_use" : false,
+          "notice" : "AuK needs the Qwen2.5-Omni-3B encoder, which is under the Qwen Research License Agreement: for research and evaluation only, not for any commercial use. AuK's own DiT and VAE are MIT. By using it you accept the Qwen Research licence's terms.",
+          "spdx" : "LicenseRef-Qwen-Research",
+          "terms_url" : "https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/main/LICENSE",
+          "user_accept_required" : true
+        },
+        "limits" : {
+          "max_duration_s" : 30
+        },
+        "memory_class" : "medium",
+        "named_only" : true,
+        "notes" : "AuK-Flash, quick: one edit of a take of up to 30 s, in the same voice, with no transcript needed: words replaced, inserted or removed; faster or slower, higher or lower, louder or quieter on AuK's trained steps; a new emotion, timbre or accent; to or from a whisper; denoised or dereverberated; a breath, laugh, cough or hum added at the start or end, or removed. Content and speed edits change the length: give target_duration_s to fit a cue. Mandarin edits need the int8 or bf16 lane. Research use only (Qwen Research licence).",
+        "quality_tiers" : [
+          "standard"
+        ],
+        "speed_class" : "fast",
+        "supports" : {
+          "channels" : 1,
+          "cue_placement" : [
+            "edge"
+          ],
+          "cues" : [
+            "breath",
+            "laugh",
+            "cough",
+            "hum"
+          ],
+          "edits" : [
+            "emotion",
+            "style",
+            "add_cue",
+            "remove_cue",
+            "replace_text",
+            "insert_text",
+            "remove_text",
+            "speed",
+            "pitch",
+            "volume",
+            "timbre",
+            "de_accent",
+            "denoise",
+            "dereverb"
+          ],
+          "emotions" : [
+            "happy",
+            "angry",
+            "sad",
+            "afraid",
+            "surprised",
+            "disgusted",
+            "calm",
+            "excited"
+          ],
+          "keeps_length" : false,
+          "languages" : [
+            "en",
+            "zh"
+          ],
+          "remove_all_cues" : false,
+          "sample_rate" : 24000,
+          "styles" : [
+            "whisper",
+            "normal"
+          ],
+          "target_duration" : true,
+          "transcript" : "optional"
+        },
+        "title" : "AuK-Flash"
+      },
+      "operation" : "audio.edit_speech",
+      "profile" : "audio"
+    },
+    {
+      "model" : {
+        "id" : "auk-flash",
+        "license" : {
+          "accepted_required" : true,
+          "commercial_use" : false,
+          "notice" : "AuK needs the Qwen2.5-Omni-3B encoder, which is under the Qwen Research License Agreement: for research and evaluation only, not for any commercial use. AuK's own DiT and VAE are MIT. By using it you accept the Qwen Research licence's terms.",
+          "spdx" : "LicenseRef-Qwen-Research",
+          "terms_url" : "https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/main/LICENSE",
+          "user_accept_required" : true
+        },
+        "limits" : {
+          "max_duration_s" : 30
+        },
+        "memory_class" : "medium",
+        "named_only" : true,
+        "notes" : "AuK-Flash, quick: from a mixture of up to 30 s, one speaker (the n-th to start talking, or the one who says given words), the singing. Picking a later speaker by order is unreliable on Flash: name words they say instead. Each stem is made again, at the mixture's length, so none can be subtracted from it. Research use only (Qwen Research licence).",
+        "quality_tiers" : [
+          "standard"
+        ],
+        "speed_class" : "fast",
+        "supports" : {
+          "channels" : 1,
+          "sample_rate" : 24000,
+          "speaker_selection" : [
+            "ordinal",
+            "saying"
+          ],
+          "stem_method" : "regenerated",
+          "stems" : [
+            "speaker",
+            "singing"
+          ]
+        },
+        "title" : "AuK-Flash"
+      },
+      "operation" : "audio.separate",
+      "profile" : "audio"
+    },
+    {
+      "model" : {
+        "id" : "auk",
+        "license" : {
+          "accepted_required" : true,
+          "commercial_use" : false,
+          "notice" : "AuK needs the Qwen2.5-Omni-3B encoder, which is under the Qwen Research License Agreement: for research and evaluation only, not for any commercial use. AuK's own DiT and VAE are MIT. By using it you accept the Qwen Research licence's terms.",
+          "spdx" : "LicenseRef-Qwen-Research",
+          "terms_url" : "https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/main/LICENSE",
+          "user_accept_required" : true
+        },
+        "limits" : {
+          "max_duration_s" : 30,
+          "max_text_chars" : 600,
+          "max_voice_ref_s" : 30
+        },
+        "memory_class" : "medium",
+        "named_only" : true,
+        "notes" : "AuK Base, slower and steadier: speech in the voice of a reference clip (up to 30 s), in English or Chinese, at most 30 s. Give the clip's transcript (voice_ref_text) or a target_duration_s for the best length; without either the length is estimated from the text. [pause 1s] adds silence. Research use only (Qwen Research licence).",
+        "quality_tiers" : [
+          "standard"
+        ],
+        "speed_class" : "standard",
+        "supports" : {
+          "channels" : 1,
+          "cues" : [
+            "pause"
+          ],
+          "languages" : [
+            "en",
+            "zh"
+          ],
+          "sample_rate" : 24000,
+          "target_duration" : true,
+          "voice_ref" : true,
+          "voice_ref_text" : "optional"
+        },
+        "title" : "AuK"
+      },
+      "operation" : "audio.speak",
+      "profile" : "audio"
+    },
+    {
+      "model" : {
+        "id" : "auk",
+        "license" : {
+          "accepted_required" : true,
+          "commercial_use" : false,
+          "notice" : "AuK needs the Qwen2.5-Omni-3B encoder, which is under the Qwen Research License Agreement: for research and evaluation only, not for any commercial use. AuK's own DiT and VAE are MIT. By using it you accept the Qwen Research licence's terms.",
+          "spdx" : "LicenseRef-Qwen-Research",
+          "terms_url" : "https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/main/LICENSE",
+          "user_accept_required" : true
+        },
+        "limits" : {
+          "max_count" : 4,
+          "max_text_chars" : 400
+        },
+        "memory_class" : "medium",
+        "named_only" : true,
+        "notes" : "AuK Base, slower and steadier: a voice designed from a description, in English or Chinese. Keep the sample you like as an asset and clone it with voice_ref. Research use only (Qwen Research licence).",
+        "quality_tiers" : [
+          "standard"
+        ],
+        "speed_class" : "standard",
+        "supports" : {
+          "channels" : 1,
+          "languages" : [
+            "en",
+            "zh"
+          ],
+          "sample_rate" : 24000
+        },
+        "title" : "AuK"
+      },
+      "operation" : "audio.design_voice",
+      "profile" : "audio"
+    },
+    {
+      "model" : {
+        "id" : "auk",
+        "license" : {
+          "accepted_required" : true,
+          "commercial_use" : false,
+          "notice" : "AuK needs the Qwen2.5-Omni-3B encoder, which is under the Qwen Research License Agreement: for research and evaluation only, not for any commercial use. AuK's own DiT and VAE are MIT. By using it you accept the Qwen Research licence's terms.",
+          "spdx" : "LicenseRef-Qwen-Research",
+          "terms_url" : "https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/main/LICENSE",
+          "user_accept_required" : true
+        },
+        "limits" : {
+          "max_duration_s" : 30
+        },
+        "memory_class" : "medium",
+        "named_only" : true,
+        "notes" : "AuK Base, slower and steadier: one edit of a take of up to 30 s, in the same voice, with no transcript needed: words replaced, inserted or removed; faster or slower, higher or lower, louder or quieter on AuK's trained steps; a new emotion, timbre or accent; to or from a whisper; denoised or dereverberated; a breath, laugh, cough or hum added at the start or end, or removed. Content and speed edits change the length: give target_duration_s to fit a cue. Mandarin edits need the int8 or bf16 lane. Research use only (Qwen Research licence).",
+        "quality_tiers" : [
+          "standard"
+        ],
+        "speed_class" : "standard",
+        "supports" : {
+          "channels" : 1,
+          "cue_placement" : [
+            "edge"
+          ],
+          "cues" : [
+            "breath",
+            "laugh",
+            "cough",
+            "hum"
+          ],
+          "edits" : [
+            "emotion",
+            "style",
+            "add_cue",
+            "remove_cue",
+            "replace_text",
+            "insert_text",
+            "remove_text",
+            "speed",
+            "pitch",
+            "volume",
+            "timbre",
+            "de_accent",
+            "denoise",
+            "dereverb"
+          ],
+          "emotions" : [
+            "happy",
+            "angry",
+            "sad",
+            "afraid",
+            "surprised",
+            "disgusted",
+            "calm",
+            "excited"
+          ],
+          "keeps_length" : false,
+          "languages" : [
+            "en",
+            "zh"
+          ],
+          "remove_all_cues" : false,
+          "sample_rate" : 24000,
+          "styles" : [
+            "whisper",
+            "normal"
+          ],
+          "target_duration" : true,
+          "transcript" : "optional"
+        },
+        "title" : "AuK"
+      },
+      "operation" : "audio.edit_speech",
+      "profile" : "audio"
+    },
+    {
+      "model" : {
+        "id" : "auk",
+        "license" : {
+          "accepted_required" : true,
+          "commercial_use" : false,
+          "notice" : "AuK needs the Qwen2.5-Omni-3B encoder, which is under the Qwen Research License Agreement: for research and evaluation only, not for any commercial use. AuK's own DiT and VAE are MIT. By using it you accept the Qwen Research licence's terms.",
+          "spdx" : "LicenseRef-Qwen-Research",
+          "terms_url" : "https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/main/LICENSE",
+          "user_accept_required" : true
+        },
+        "limits" : {
+          "max_duration_s" : 30
+        },
+        "memory_class" : "medium",
+        "named_only" : true,
+        "notes" : "AuK Base, slower and steadier: from a mixture of up to 30 s, one speaker (the n-th to start talking, or the one who says given words), the singing, or every voice. Each stem is made again, at the mixture's length, so none can be subtracted from it. Research use only (Qwen Research licence).",
+        "quality_tiers" : [
+          "standard"
+        ],
+        "speed_class" : "standard",
+        "supports" : {
+          "channels" : 1,
+          "sample_rate" : 24000,
+          "speaker_selection" : [
+            "ordinal",
+            "saying"
+          ],
+          "stem_method" : "regenerated",
+          "stems" : [
+            "speaker",
+            "singing",
+            "voices"
+          ]
+        },
+        "title" : "AuK"
+      },
+      "operation" : "audio.separate",
+      "profile" : "audio"
+    }
+  ],
+  "protocol" : 1,
+  "repo" : "https://github.com/xocialize-code/gaea-plugin-auk",
+  "settings" : [
+
+  ],
+  "summary" : "AuK and AuK-Flash (Tencent Hunyuan): cloned and designed speech, 14 kinds of speech edit with no transcript needed, and voice separation, in English and Chinese. Research use only.",
+  "team" : "CFZS6RXUCP",
+  "title" : "AuK",
+  "version" : "0.1.0"
+}

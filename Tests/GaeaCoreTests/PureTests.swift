@@ -27,6 +27,25 @@ let repoRoot = URL(fileURLWithPath: #filePath).deletingLastPathComponent().delet
     }
 }
 
+/// A manifest from a plugin built on a newer engine contract must decode: AuK 0.1.0's speech-edit control lists
+/// contract 1.59.0's operations (dereverberate, hum), which Gaea 1.1.0's engine (0.73.0) couldn't read (AB-T-0455).
+@Suite struct ManifestDecodingTests {
+    @Test func aukZeroOneZeroDecodes() throws {
+        let data = try Data(contentsOf: repoRoot.appending(path: "Tests/Fixtures/manifests/auk-0.1.0.json"))
+        let manifest = try JSONDecoder().decode(PluginManifest.self, from: data)
+        #expect(manifest.models.map(\.id) == ["auk-flash", "auk"])
+    }
+
+    @Test func everyExampleManifestDecodes() throws {
+        let folder = repoRoot.appending(path: "examples/v1/manifest")
+        let files = try FileManager.default.contentsOfDirectory(at: folder, includingPropertiesForKeys: nil).filter { $0.pathExtension == "json" }
+        #expect(!files.isEmpty)
+        for file in files {
+            #expect(throws: Never.self, "\(file.lastPathComponent)") { try JSONDecoder().decode(PluginManifest.self, from: Data(contentsOf: file)) }
+        }
+    }
+}
+
 /// MEM-7 and G-23 on the z-image example manifest: int4 (39.9 GB), int8 (43 GB), bf16 (48.5 GB).
 @Suite struct LaneChoiceTests {
     let model: PluginManifest.Model
