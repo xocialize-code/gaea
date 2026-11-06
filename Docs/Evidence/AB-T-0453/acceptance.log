@@ -1,0 +1,61 @@
+# VoxCPM2 acceptance (AB-T-0453) 2026-11-06T00:54:47Z: Gaea 1.0.0, voxcpm2 from GitHub
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+Installed Kokoro 0.1.1 (com.xocialize.gaea.kokoro), enabled.
+PASS  add by repo URL installs kokoro
+Installed IndexTTS 2.5 0.1.1 (com.xocialize.gaea.indextts), enabled.
+PASS  add by repo URL installs indextts
+Installed VoxCPM2 0.1.0 (com.xocialize.gaea.voxcpm2), enabled.
+PASS  add by repo URL installs voxcpm2
+      voxcpm2 0.1.0
+PASS  audio.speak lists voxcpm2 beside kokoro-82m and indextts-2.5, with its supports
+PASS  audio.design_voice lists voxcpm2, at most 4 samples, 12 languages
+      zero, cold: 3.78 s from submit to settled (launch, prepare, speak)
+PASS  zero succeeds
+PASS  happy succeeds
+PASS  described succeeds
+PASS  chinese succeeds
+PASS  clone succeeds
+PASS  continuation succeeds
+PASS  zero: a 48 kHz mono 16-bit WAV, the default voice, seed 42
+PASS  the clone and the continuation report their mode
+PASS  intensity is ignored with emotion_intensity_ignored
+PASS  design_voice: two samples, effective seed 7 and the sample text
+PASS  five samples is 422 out_of_limits
+      asset: ast_mtrpefv5d0f3x7ay1sae
+PASS  the designed voice cloned from its asset, a continuation
+PASS  a second job on the asset is the same WAV
+PASS  the run carried the asset id to the worker
+PASS  deleting the asset (204) sends asset_removed to the worker
+PASS  a description with no reference → voxcpm2
+PASS  a reference with a description → voxcpm2
+PASS  a reference with target_duration_s → indextts-2.5
+PASS  design_voice → voxcpm2
+PASS  a ref24.wav reference is accepted
+PASS  a reff32.wav reference is accepted
+PASS  a ref.flac reference is accepted
+PASS  a stereo reference is mixed down, with audio_downmixed
+PASS  a 30 s reference is trimmed to 20 s, with voice_ref_trimmed
+      r-count: 422 out_of_limits count - $.count: above 4.0
+      r-design-th: 422 unsupported_parameter language - Model voxcpm2 doesn't support the language 'th'.
+      r-emotion: 422 unsupported_parameter emotion - Model voxcpm2 doesn't support the emotion 'excited'.
+      r-fit: 422 unsupported_parameter target_duration_s - Model voxcpm2 doesn't support a target duration.
+      r-uk: 422 unsupported_parameter language - Model voxcpm2 doesn't support the language 'uk'.
+PASS  an emotion outside the list is 422
+PASS  Ukrainian is 422
+PASS  a design language without a sample (Thai) is 422
+PASS  target_duration_s on voxcpm2 is 422
+PASS  zero through Gaea is voxcpm2-inproc's WAV, byte for byte
+PASS  happy through Gaea is voxcpm2-inproc's WAV, byte for byte
+PASS  described through Gaea is voxcpm2-inproc's WAV, byte for byte
+PASS  chinese through Gaea is voxcpm2-inproc's WAV, byte for byte
+PASS  clone through Gaea is voxcpm2-inproc's WAV, byte for byte
+PASS  continuation through Gaea is voxcpm2-inproc's WAV, byte for byte
+PASS  designed-clone through Gaea is voxcpm2-inproc's WAV, byte for byte
+PASS  design sample 0 through Gaea is voxcpm2-inproc's, byte for byte
+PASS  design sample 1 through Gaea is voxcpm2-inproc's, byte for byte
+      in-process zero: {"audio_s":5.4400000000000004,"max_rss_gb":1.1043307520000001,"model":"voxcpm2","prepare_s":0.54335475,"run_s":2.4756563329999999,"seed":42,"voice":"default"}
+OK
+PASS  transcript com.xocialize.gaea.indextts-0.1.1-2026-11-06T005523Z-06a0b97c.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.voxcpm2-0.1.0-2026-11-06T005453Z-5146932b.gpp passes validate.py
+== 44 passed, 0 failed
