@@ -1,0 +1,70 @@
+on  ace-step-1.5  ACE-Step 1.5  [com.xocialize.gaea.ace-step 0.1.1] lanes: int8* 18.00 GB, bf16 19.00 GB, int4 17.20 GB
+on  auk-flash  AuK-Flash  [com.xocialize.gaea.auk 0.1.1] lanes: int8* 12.40 GB, bf16 15.70 GB, int4 10.80 GB
+on  auk  AuK  [com.xocialize.gaea.auk 0.1.1] lanes: int8* 12.40 GB, bf16 15.70 GB, int4 10.90 GB
+on  boogu  Boogu Image  [com.xocialize.gaea.boogu 0.1.1] lanes: bf16* 40.80 GB, int8 32.70 GB, int4 28.10 GB
+on  boogu-turbo  Boogu Image Turbo  [com.xocialize.gaea.boogu 0.1.1] lanes: bf16* 40.80 GB, int8 32.70 GB
+on  boogu-edit  Boogu Image Edit  [com.xocialize.gaea.boogu 0.1.1] lanes: bf16* 40.80 GB, int8 32.70 GB, int4 28.10 GB
+off flux-3-klein  FLUX 3 Klein  [com.xocialize.gaea.flux3-klein 0.1.1] lanes: bf16* 23.70 GB, int8 18.70 GB, int4 16.90 GB
+on  klein-4b  FLUX.2 Klein 4B  [com.xocialize.gaea.flux2-klein 0.2.3] lanes: bf16* 25.90 GB, int8 22.70 GB, int4 20.50 GB
+on  klein-4b-base  FLUX.2 Klein 4B Base  [com.xocialize.gaea.flux2-klein 0.2.3] lanes: bf16* 27.10 GB, int8 23.90 GB, int4 21.70 GB
+on  lama-inpaint  LaMa inpaint  [com.xocialize.gaea.forge 0.2.1] lanes: fp16* 4.50 GB
+on  nerve-upscale  NERVE upscale  [com.xocialize.gaea.forge 0.2.1] lanes: fp16* 6.16 GB
+on  realplksr-upscale  RealPLKSR upscale  [com.xocialize.gaea.forge 0.2.1] lanes: fp32* 8.70 GB
+on  heart-upscale  HEART upscale  [com.xocialize.gaea.forge 0.2.1] lanes: fp16* 8.66 GB
+on  birefnet-matte  BiRefNet matte  [com.xocialize.gaea.forge 0.2.1] lanes: fp16* 14.90 GB
+on  edgetam-segment  EdgeTAM segment  [com.xocialize.gaea.forge 0.2.1] lanes: fp16* 1.50 GB
+on  sam21-segment  SAM 2.1 segment  [com.xocialize.gaea.forge 0.2.1] lanes: fp16* 2.85 GB
+on  nafnet-restore  NAFNet restore  [com.xocialize.gaea.forge 0.2.1] lanes: fp16* 5.86 GB
+on  restormer-motion  Restormer motion deblur  [com.xocialize.gaea.forge 0.2.1] lanes: fp32* 5.68 GB
+on  restormer-defocus  Restormer defocus deblur  [com.xocialize.gaea.forge 0.2.1] lanes: fp32* 5.68 GB
+on  restormer-denoise  Restormer denoise  [com.xocialize.gaea.forge 0.2.1] lanes: fp32* 5.68 GB
+on  drunet-denoise  DRUNet denoise  [com.xocialize.gaea.forge 0.2.1] lanes: fp32* 7.20 GB
+on  scunet-denoise  SCUNet denoise  [com.xocialize.gaea.forge 0.2.1] lanes: fp32* 5.18 GB
+on  gfpgan-face  GFPGAN face restore  [com.xocialize.gaea.forge 0.2.1] lanes: fp32* 2.40 GB
+on  restoreformer-face  RestoreFormer++ face restore  [com.xocialize.gaea.forge 0.2.1] lanes: fp32* 2.35 GB
+on  cidnet-relight  HVI-CIDNet relight  [com.xocialize.gaea.forge 0.2.1] lanes: fp32* 6.58 GB
+on  ddcolor-colorize  DDColor colorize  [com.xocialize.gaea.forge 0.2.1] lanes: fp16* 5.05 GB
+on  siglip2-quality  SigLIP2 quality score  [com.xocialize.gaea.forge 0.2.1] lanes: int8* 1.20 GB
+on  anime4k-upscale  Anime4K VL  [com.xocialize.gaea.forge 0.2.1] lanes: fp32* 1.02 GB
+on  vosr2-upscale  VOSR2 upscale  [com.xocialize.gaea.forge 0.2.1] lanes: fp16* 10.00 GB
+on  nacre-upscale  Nacre upscale  [com.xocialize.gaea.forge 0.2.1] lanes: fp16* 5.80 GB
+on  bopbtl-defects  BOPBTL defect detection  [com.xocialize.gaea.forge 0.2.1] lanes: fp32* 4.10 GB
+on  demo-matmul  Demo matmul (GPU smoke test)  [com.xocialize.gaea.demo 0.4.0] lanes: fp32* 2.37 GB
+on  demo-gradient  Demo gradient (image.generate smoke test)  [com.xocialize.gaea.demo 0.4.0] lanes: fp32* 0.20 GB
+on  demo-separator  Demo separator (audio.separate smoke test)  [com.xocialize.gaea.demo 0.4.0] lanes: fp32* 0.50 GB
+on  indextts-2.5  IndexTTS 2.5  [com.xocialize.gaea.indextts 0.1.1] lanes: fp16* 9.70 GB, int8 9.30 GB, int4 9.00 GB
+on  kokoro-82m  Kokoro-82M  [com.xocialize.gaea.kokoro 0.1.1] lanes: bf16* 0.50 GB
+on  ltx-2.5-compact24  LTX 2.5 (compact24)  [com.xocialize.gaea.ltx 0.1.3] lanes: int8* 16.20 GB
+on  ltx-2.5-balanced32  LTX 2.5 (balanced32)  [com.xocialize.gaea.ltx 0.1.3] lanes: int8* 18.00 GB
+on  ltx-2.5-standard64  LTX 2.5 (standard64)  [com.xocialize.gaea.ltx 0.1.3] lanes: int8* 34.80 GB
+on  ltx-2.5-max128  LTX 2.5 (max128)  [com.xocialize.gaea.ltx 0.1.3] lanes: bf16* 75.30 GB
+on  moss-image-sft  MOSS-Image  [com.xocialize.gaea.moss-image 0.1.1] lanes: bf16* 27.20 GB, int8 16.20 GB
+on  moss-image-base  MOSS-Image Base  [com.xocialize.gaea.moss-image 0.1.1] lanes: bf16* 27.20 GB, int8 16.20 GB
+on  moss-soundeffect  MOSS-SoundEffect  [com.xocialize.gaea.moss-soundeffect 0.1.2] lanes: bf16* 25.40 GB, int4 23.40 GB
+on  mage-flow  Mage-Flow  [com.xocialize.gaea.mage-flow 0.1.1] lanes: bf16* 20.10 GB, int8 17.90 GB, int4 16.60 GB
+on  mage-flow-turbo  Mage-Flow Turbo  [com.xocialize.gaea.mage-flow 0.1.1] lanes: bf16* 20.10 GB, int8 17.90 GB, int4 16.60 GB
+on  mage-flow-edit  Mage-Flow Edit  [com.xocialize.gaea.mage-flow 0.1.1] lanes: bf16* 20.10 GB, int8 17.90 GB, int4 16.60 GB
+on  mage-flow-edit-turbo  Mage-Flow Edit Turbo  [com.xocialize.gaea.mage-flow 0.1.1] lanes: int8* 17.90 GB, int4 16.60 GB
+on  mage-flow-edit-base  Mage-Flow Edit Base  [com.xocialize.gaea.mage-flow 0.1.1] lanes: bf16* 20.10 GB, int8 17.90 GB, int4 16.60 GB
+on  mage-vl  Mage-VL  [com.xocialize.gaea.mage-vl 0.1.1] lanes: int8* 12.00 GB
+on  ming-image  Ming-Image Design  [com.xocialize.gaea.ming-image 0.3.1] lanes: int8* 32.30 GB, bf16 57.60 GB, int4 22.50 GB
+on  ming-image-layer  Ming-Image Design-Layer  [com.xocialize.gaea.ming-image 0.3.1] lanes: int8* 33.00 GB, bf16 58.20 GB, int4 23.50 GB
+on  qwen3.5-4b  Qwen3.5 4B  [com.xocialize.gaea.prompt-enhance 0.1.1] lanes: int4* 7.57 GB
+on  qwen3.5-9b  Qwen3.5 9B  [com.xocialize.gaea.prompt-enhance 0.1.1] lanes: int4* 13.37 GB
+on  qwen-image-edit  Qwen-Image-Edit 2511  [com.xocialize.gaea.qwen-image 0.2.1] lanes: bf16* 63.00 GB
+on  qwen-image-flash  Qwen-Image Flash  [com.xocialize.gaea.qwen-image 0.2.1] lanes: int8* 31.60 GB
+off qwen-image-2.1  Qwen-Image-2.1  [com.xocialize.gaea.qwen-image-21 0.1.1] lanes: bf16* 58.80 GB
+off qwen-image-2.1-base  Qwen-Image-2.1 Base  [com.xocialize.gaea.qwen-image-21 0.1.1] lanes: bf16* 58.80 GB
+on  qwen3-tts  Qwen3-TTS  [com.xocialize.gaea.qwen3-tts 0.2.1] lanes: int8* 7.80 GB, bf16 9.40 GB, int4 6.95 GB
+on  qwen3-tts-clone  Qwen3-TTS voice cloning  [com.xocialize.gaea.qwen3-tts 0.2.1] lanes: int8* 7.80 GB, bf16 9.40 GB, int4 6.95 GB
+on  qwen3-tts-design  Qwen3-TTS VoiceDesign  [com.xocialize.gaea.qwen3-tts 0.2.1] lanes: int8* 7.80 GB, bf16 9.40 GB, int4 6.95 GB
+on  rife-4.25  RIFE 4.25  [com.xocialize.gaea.rife 0.1.1] lanes: fp32* 4.15 GB
+on  seedvr2-int8  SeedVR2 3B (int8)  [com.xocialize.gaea.seedvr2 0.1.1] lanes: int8* 9.30 GB
+on  seedvr2-fp16  SeedVR2 3B (fp16)  [com.xocialize.gaea.seedvr2 0.1.1] lanes: fp16* 12.00 GB
+on  sensenova-u1  SenseNova-U1.5  [com.xocialize.gaea.sensenova 0.1.1] lanes: int8* 24.70 GB, bf16 39.50 GB
+on  sensenova-u1-fast  SenseNova-U1.5 8-step  [com.xocialize.gaea.sensenova 0.1.1] lanes: int8* 24.70 GB, int4 16.70 GB
+on  sensenova-u1-fast-v1  SenseNova-U1.5 8-step (V1 adapter)  [com.xocialize.gaea.sensenova 0.1.1] lanes: int8* 24.70 GB, int4 16.70 GB
+on  step-audio-editx  Step-Audio-EditX  [com.xocialize.gaea.step-audio-editx 0.1.2] lanes: int8* 9.00 GB, bf16 12.30 GB
+on  voxcpm2  VoxCPM2  [com.xocialize.gaea.voxcpm2 0.1.0] lanes: bf16* 13.30 GB
+on  z-image-turbo  Z-Image Turbo  [com.xocialize.gaea.z-image 0.1.2] lanes: int4* 39.90 GB, int8 43.00 GB, bf16 48.50 GB
+on  z-image  Z-Image  [com.xocialize.gaea.z-image 0.1.2] lanes: int4* 39.90 GB, int8 43.00 GB, bf16 48.50 GB

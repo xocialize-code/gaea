@@ -15,6 +15,9 @@ final class LabModel {
     /// Whose acceptances of licence terms the workflow sends (Base §10.2 rule 4): the user's, kept in their defaults,
     /// unless set before `shared` is first used (`--snapshot` keeps its own, so a recorded run accepts nothing for them).
     static var acceptances = LicenseAcceptances.shared
+    /// Where the directory keeps the servers added by hand: the user's defaults, unless set before `shared` is first used
+    /// (`--snapshot` keeps a throwaway store, so a recorded run never adds its servers to the user's Lab).
+    static var directoryDefaults = UserDefaults.standard
 
     let folder = WorkingFolder(key: "Gaea.Lab.workingFolder", appName: "Gaea Lab")
     let log = SessionLog()
@@ -28,7 +31,8 @@ final class LabModel {
 
     private init() {
         directory = EngineDirectory(credentials: KeychainCredentialStore(prefix: "Gaea.Lab"),
-                                    clientName: "Gaea Lab on \(Host.current().localizedName ?? "a Mac")")
+                                    clientName: "Gaea Lab on \(Host.current().localizedName ?? "a Mac")",
+                                    defaults: LabModel.directoryDefaults)
         workflow = RunWorkflow(directory: directory, log: log, acceptances: LabModel.acceptances)
         pool = EnginePool(adapters: choices.provider)
     }

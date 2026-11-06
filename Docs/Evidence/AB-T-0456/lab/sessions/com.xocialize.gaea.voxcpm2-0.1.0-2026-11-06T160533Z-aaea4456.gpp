@@ -1,0 +1,19 @@
+# manifest: /tmp/glab6/home/Plugins/com.xocialize.gaea.voxcpm2/0.1.0/voxcpm2.gaeaplugin/Contents/Resources/manifest.json
+# Gaea 1.1.1 session with com.xocialize.gaea.voxcpm2 0.1.0
+W {"engine":{"contract":"1.59.0","version":"0.72.0"},"kit":{"version":"0.10.0"},"manifest_sha256":"62c1653191f284919431e474bcfe4f100689f906345290dbb90390f63fae249e","models":["voxcpm2"],"pid":39179,"plugin":{"id":"com.xocialize.gaea.voxcpm2","version":"0.1.0"},"protocol":1,"type":"hello"}
+H {"budget":{"ceilingBytes":103079215104,"wiresWeights":true},"cache_root":"/tmp/glab6/home/Caches/plugins/com.xocialize.gaea.voxcpm2","id":"h1","models_root":"/Volumes/DEV_VOL1/Models/Models","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"bf16","model":"voxcpm2","type":"prepare"}
+W {"lane":"bf16","model":"voxcpm2","re":"h2","seconds":1.425,"storage":{"protocol":"PCI-Express","read_bytes_per_s":4090343759,"removable":false,"volume":"/Volumes/DEV_VOL1"},"type":"prepared"}
+W {"report":{"availableBytes":89779215104,"budgetBytes":103079215104,"date":815673935.236208,"gpuActiveBytes":8,"gpuCacheBytes":12168,"physFootprintBytes":68240224,"residentBytes":9300000000,"residents":{"voxcpm2":9300000000},"running":[],"transientReserveBytes":4000000000},"type":"memory"}
+H {"id":"h3","inputs":{"text":"/tmp/glab6/home/Caches/spool/jobs/job_q8134cj9dtdzfbrg5a3e/outputs/worker-inputs/text-0.txt"},"job":"job_q8134cj9dtdzfbrg5a3e","lane":"bf16","model":"voxcpm2","operation":"audio.speak","output_dir":"/tmp/glab6/home/Caches/spool/jobs/job_q8134cj9dtdzfbrg5a3e/outputs/worker","params":{"seed":42},"seed":42,"type":"run"}
+W {"effective":{"seed":42,"x-voxcpm2.voice":"default"},"job":"job_q8134cj9dtdzfbrg5a3e","outputs":[{"media_type":"audio/wav","name":"audio","path":"/tmp/glab6/home/Caches/spool/jobs/job_q8134cj9dtdzfbrg5a3e/outputs/worker/audio-0.wav"}],"re":"h3","seconds":2.879,"type":"result","warnings":[]}
+W {"report":{"availableBytes":89779215104,"budgetBytes":103079215104,"date":815673938.115845,"gpuActiveBytes":9343172221,"gpuCacheBytes":2310767560,"physFootprintBytes":11920346160,"residentBytes":9300000000,"residents":{"voxcpm2":9300000000},"running":[],"transientReserveBytes":4000000000},"type":"memory"}
+H {"id":"h4","inputs":{"description":"/tmp/glab6/home/Caches/spool/jobs/job_k20p63f1tc5vhwmrzzk1/outputs/worker-inputs/description-0.txt"},"job":"job_k20p63f1tc5vhwmrzzk1","lane":"bf16","model":"voxcpm2","operation":"audio.design_voice","output_dir":"/tmp/glab6/home/Caches/spool/jobs/job_k20p63f1tc5vhwmrzzk1/outputs/worker","params":{"count":2,"language":"en","seed":7},"seed":7,"type":"run"}
+W {"effective":{"count":2,"language":"en","seed":7,"text":"Hello! This is how I sound when I read a sentence aloud."},"job":"job_k20p63f1tc5vhwmrzzk1","outputs":[{"media_type":"audio/wav","name":"samples","path":"/tmp/glab6/home/Caches/spool/jobs/job_k20p63f1tc5vhwmrzzk1/outputs/worker/samples-0.wav"},{"media_type":"audio/wav","name":"samples","path":"/tmp/glab6/home/Caches/spool/jobs/job_k20p63f1tc5vhwmrzzk1/outputs/worker/samples-1.wav"}],"re":"h4","seconds":6.342,"type":"result","warnings":[]}
+W {"report":{"availableBytes":89779215104,"budgetBytes":103079215104,"date":815673944.641039,"gpuActiveBytes":9343172221,"gpuCacheBytes":2171364576,"physFootprintBytes":12182964792,"residentBytes":9300000000,"residents":{"voxcpm2":9300000000},"running":[],"transientReserveBytes":4000000000},"type":"memory"}
+H {"id":"h5","model":"voxcpm2","type":"unload"}
+W {"model":"voxcpm2","re":"h5","type":"unloaded"}
+W {"report":{"availableBytes":103079215104,"budgetBytes":103079215104,"date":815673963.243995,"gpuActiveBytes":16,"gpuCacheBytes":0,"physFootprintBytes":29426984,"residentBytes":0,"residents":{},"running":[],"transientReserveBytes":0},"type":"memory"}
+H {"id":"h6","type":"shutdown"}
+# exited: status 0

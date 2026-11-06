@@ -1,0 +1,6 @@
+Installed IndexTTS 2.5 0.1.1 (com.xocialize.gaea.indextts), enabled.
+Installed VoxCPM2 0.1.0 (com.xocialize.gaea.voxcpm2), enabled.
+Installed AuK 0.1.1 (com.xocialize.gaea.auk), enabled.
+Installed Gaea demo worker 0.4.0 (com.xocialize.gaea.demo), enabled.
+auk-flash enabled.
+auk enabled.

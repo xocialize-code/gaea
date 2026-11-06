@@ -1,0 +1,27 @@
+# manifest: /tmp/glab6/home/Plugins/com.xocialize.gaea.auk/0.1.1/auk.gaeaplugin/Contents/Resources/manifest.json
+# Gaea 1.1.1 session with com.xocialize.gaea.auk 0.1.1
+W {"engine":{"contract":"1.59.0","version":"0.74.1"},"kit":{"version":"0.11.1"},"manifest_sha256":"94dbef4a1481ba5a79203668fcc29880aef499428f0b9645a1792e48953d8f61","models":["auk-flash","auk"],"pid":39368,"plugin":{"id":"com.xocialize.gaea.auk","version":"0.1.1"},"protocol":1,"type":"hello"}
+H {"budget":{"ceilingBytes":103079215104,"wiresWeights":true},"cache_root":"/tmp/glab6/home/Caches/plugins/com.xocialize.gaea.auk","id":"h1","models_root":"/Volumes/DEV_VOL1/Models/Models","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"int8","model":"auk-flash","type":"prepare"}
+W {"lane":"int8","model":"auk-flash","re":"h2","seconds":1.629,"storage":{"protocol":"PCI-Express","read_bytes_per_s":4616556630,"removable":false,"volume":"/Volumes/DEV_VOL1"},"type":"prepared"}
+W {"report":{"availableBytes":90679215104,"budgetBytes":103079215104,"date":815673969.023082,"gpuActiveBytes":7617061476,"gpuCacheBytes":0,"physFootprintBytes":8858868384,"residentBytes":9600000000,"residents":{"auk-flash":9600000000},"running":[],"transientReserveBytes":2800000000},"type":"memory"}
+H {"id":"h3","inputs":{"audio":"/tmp/glab6/home/Caches/spool/jobs/job_yhzdtyr6r1tsatsjgkv0/inputs/audio-0.wav","transcript":"/tmp/glab6/home/Caches/spool/jobs/job_yhzdtyr6r1tsatsjgkv0/outputs/worker-inputs/transcript-0.txt"},"job":"job_yhzdtyr6r1tsatsjgkv0","lane":"int8","model":"auk-flash","operation":"audio.edit_speech","output_dir":"/tmp/glab6/home/Caches/spool/jobs/job_yhzdtyr6r1tsatsjgkv0/outputs/worker","params":{"edit":{"at":"start","cue":"hum","kind":"add_cue"},"seed":4},"seed":4,"type":"run"}
+W {"fraction":0.25,"job":"job_yhzdtyr6r1tsatsjgkv0","of":4,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.5,"job":"job_yhzdtyr6r1tsatsjgkv0","of":4,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.75,"job":"job_yhzdtyr6r1tsatsjgkv0","of":4,"re":"h3","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":1,"job":"job_yhzdtyr6r1tsatsjgkv0","of":4,"re":"h3","stage":"denoise","step":4,"type":"progress"}
+W {"effective":{"edit":{"at":"start","cue":"hum","kind":"add_cue"},"seed":4},"job":"job_yhzdtyr6r1tsatsjgkv0","outputs":[{"media_type":"audio/wav","name":"audio","path":"/tmp/glab6/home/Caches/spool/jobs/job_yhzdtyr6r1tsatsjgkv0/outputs/worker/audio-0.wav"},{"name":"transcript","value":{"text":"[hum] The morning train was late again, so I walked along the river and watched the boats come in."}}],"re":"h3","seconds":0.937,"type":"result","warnings":[]}
+W {"report":{"availableBytes":90679215104,"budgetBytes":103079215104,"date":815673969.960361,"gpuActiveBytes":7625490684,"gpuCacheBytes":2154131162,"physFootprintBytes":10143652560,"residentBytes":9600000000,"residents":{"auk-flash":9600000000},"running":[],"transientReserveBytes":2800000000},"type":"memory"}
+H {"id":"h4","inputs":{"audio":"/tmp/glab6/home/Caches/spool/jobs/job_7ckq1ft6s443d2j3xyx5/inputs/audio-0.wav"},"job":"job_7ckq1ft6s443d2j3xyx5","lane":"int8","model":"auk-flash","operation":"audio.separate","output_dir":"/tmp/glab6/home/Caches/spool/jobs/job_7ckq1ft6s443d2j3xyx5/outputs/worker","params":{"seed":5,"speaker":{"ordinal":2},"stems":["speaker"]},"seed":5,"type":"run"}
+W {"fraction":0.25,"job":"job_7ckq1ft6s443d2j3xyx5","of":4,"re":"h4","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.5,"job":"job_7ckq1ft6s443d2j3xyx5","of":4,"re":"h4","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.75,"job":"job_7ckq1ft6s443d2j3xyx5","of":4,"re":"h4","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":1,"job":"job_7ckq1ft6s443d2j3xyx5","of":4,"re":"h4","stage":"denoise","step":4,"type":"progress"}
+W {"effective":{"seed":5,"speaker":{"ordinal":2},"stems":["speaker"]},"job":"job_7ckq1ft6s443d2j3xyx5","outputs":[{"media_type":"audio/wav","name":"speaker","path":"/tmp/glab6/home/Caches/spool/jobs/job_7ckq1ft6s443d2j3xyx5/outputs/worker/speaker.wav"}],"re":"h4","seconds":1.038,"type":"result","warnings":[]}
+W {"report":{"availableBytes":90679215104,"budgetBytes":103079215104,"date":815673978.361128,"gpuActiveBytes":7625605372,"gpuCacheBytes":2154953851,"physFootprintBytes":10143668968,"residentBytes":9600000000,"residents":{"auk-flash":9600000000},"running":[],"transientReserveBytes":2800000000},"type":"memory"}
+H {"id":"h5","model":"auk-flash","type":"unload"}
+W {"model":"auk-flash","re":"h5","type":"unloaded"}
+W {"report":{"availableBytes":103079215104,"budgetBytes":103079215104,"date":815673982.337766,"gpuActiveBytes":24,"gpuCacheBytes":0,"physFootprintBytes":47973840,"residentBytes":0,"residents":{},"running":[],"transientReserveBytes":0},"type":"memory"}
+H {"id":"h6","type":"shutdown"}
+# exited: status 0

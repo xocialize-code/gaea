@@ -1,0 +1,278 @@
+{
+  "hours": 1.0,
+  "jobs": 4607,
+  "succeeded": 4607,
+  "by_name": {
+    "speak": {
+      "jobs": 813,
+      "succeeded": 813
+    },
+    "edit-emotion": {
+      "jobs": 813,
+      "succeeded": 813
+    },
+    "edit-speed": {
+      "jobs": 813,
+      "succeeded": 813
+    },
+    "edit-hum": {
+      "jobs": 813,
+      "succeeded": 813
+    },
+    "edit-dereverb": {
+      "jobs": 813,
+      "succeeded": 813
+    },
+    "separate-speaker": {
+      "jobs": 271,
+      "succeeded": 271
+    },
+    "separate-voices": {
+      "jobs": 271,
+      "succeeded": 271
+    }
+  },
+  "crashes": 0,
+  "worker_pids": [
+    6468
+  ],
+  "samples": 57,
+  "footprint": {
+    "settled_gb": 17.79,
+    "last_gb": 17.8,
+    "change": 0.0006,
+    "within_5_percent": true
+  },
+  "footprint_gb_by_minute": [
+    [
+      1.0,
+      17.863
+    ],
+    [
+      2.1,
+      17.764
+    ],
+    [
+      3.2,
+      17.819
+    ],
+    [
+      4.3,
+      17.82
+    ],
+    [
+      5.3,
+      17.817
+    ],
+    [
+      6.3,
+      17.811
+    ],
+    [
+      7.4,
+      17.825
+    ],
+    [
+      8.4,
+      17.825
+    ],
+    [
+      9.4,
+      17.833
+    ],
+    [
+      10.5,
+      17.814
+    ],
+    [
+      11.6,
+      17.759
+    ],
+    [
+      12.6,
+      17.759
+    ],
+    [
+      13.7,
+      17.812
+    ],
+    [
+      14.7,
+      17.79
+    ],
+    [
+      15.7,
+      17.803
+    ],
+    [
+      16.8,
+      17.812
+    ],
+    [
+      17.8,
+      17.793
+    ],
+    [
+      18.9,
+      17.857
+    ],
+    [
+      19.9,
+      17.806
+    ],
+    [
+      21.0,
+      17.766
+    ],
+    [
+      22.0,
+      17.767
+    ],
+    [
+      23.0,
+      17.976
+    ],
+    [
+      24.1,
+      17.826
+    ],
+    [
+      25.1,
+      17.811
+    ],
+    [
+      26.2,
+      17.812
+    ],
+    [
+      27.3,
+      17.759
+    ],
+    [
+      28.3,
+      17.84
+    ],
+    [
+      29.4,
+      17.845
+    ],
+    [
+      30.4,
+      17.951
+    ],
+    [
+      31.5,
+      17.854
+    ],
+    [
+      32.5,
+      17.823
+    ],
+    [
+      33.6,
+      17.929
+    ],
+    [
+      34.7,
+      17.847
+    ],
+    [
+      35.7,
+      17.811
+    ],
+    [
+      36.8,
+      17.841
+    ],
+    [
+      37.9,
+      17.859
+    ],
+    [
+      38.9,
+      17.761
+    ],
+    [
+      40.0,
+      17.765
+    ],
+    [
+      41.0,
+      17.911
+    ],
+    [
+      42.1,
+      17.944
+    ],
+    [
+      43.1,
+      17.918
+    ],
+    [
+      44.2,
+      17.75
+    ],
+    [
+      45.2,
+      17.868
+    ],
+    [
+      46.2,
+      17.95
+    ],
+    [
+      47.3,
+      17.764
+    ],
+    [
+      48.4,
+      17.947
+    ],
+    [
+      49.5,
+      17.766
+    ],
+    [
+      50.6,
+      17.829
+    ],
+    [
+      51.7,
+      17.758
+    ],
+    [
+      52.8,
+      17.764
+    ],
+    [
+      53.9,
+      17.759
+    ],
+    [
+      55.1,
+      17.835
+    ],
+    [
+      56.1,
+      17.896
+    ],
+    [
+      57.1,
+      17.762
+    ],
+    [
+      58.2,
+      17.783
+    ],
+    [
+      59.3,
+      17.817
+    ],
+    [
+      60.0,
+      17.759
+    ]
+  ],
+  "plugins": "on  com.xocialize.gaea.auk 0.1.1  AuK  https://github.com/xocialize-code/gaea-plugin-auk\n",
+  "status": "Gaea 1.1.1\nMES:       http://127.0.0.1:17786/mes/v0 (open, this Mac only)\nOperations: audio.design_voice [auk-flash, auk]; audio.edit_speech [auk-flash, auk]; audio.separate [auk-flash, auk]; audio.speak [auk-flash, auk]\nPlugins:   1 installed, 1 enabled\nTrust:     CFZS6RXUCP\nCrashes:   none in the last 24 h\nWorkers:   com.xocialize.gaea.auk pid 6468\nMemory:    19.20 GB charged of 103.08 GB budget; host 0.45 GB\nModels:    /Volumes/DEV_VOL1/Models/Models\nUpdate:    up to date\nOperator:  /tmp/gsauk.9k9y0v9v/operator.sock (same user, Developer ID team); you are pid 37983, uid 501, Developer ID CFZS6RXUCP\nDatabase:  /tmp/gsauk.9k9y0v9v/gaea.sqlite\n"
+}

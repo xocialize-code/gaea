@@ -1,0 +1,7 @@
+wrote /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/app/lab-audio.edit_speech-before-light.png
+wrote /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/app/lab-audio.edit_speech-before-dark.png
+needs acceptance: LicenseRef-Qwen-Research
+run: finished; route: Gaea (127.0.0.1:17694)
+results: audio (audio), transcript (text)
+wrote /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/app/lab-audio.edit_speech-after-light.png
+wrote /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/app/lab-audio.edit_speech-after-dark.png

@@ -715,7 +715,11 @@ facts and the gaps, is in [Gaea - G5 audio plan.md](Gaea%20-%20G5%20audio%20plan
        0.74.1.
      - Stems came back up to a 20 ms frame short. Kit 0.11.1 fits them to the mixture.
      - The conformance suite doesn't accept terms on the requests that name a model (AB-A-0252).
-  6. The exit: Lab, conformance, and the soak.
+  6. The exit: Lab, conformance, and the soak. **Done 2026-11-06 (AB-T-0456); G5 exited** (Docs/Evidence/AB-T-0456/):
+     - Gaea Lab on MES 0.10.1: 28/0 across IndexTTS, VoxCPM2, AuK (users' acceptance refused, then given) and the
+       demo, with the app rendering AuK's edit and separation.
+     - Conformance with all 25 plugins and every opt-in model: 88/0/7, with every profile conforming.
+     - The 1 h soak of AuK's staged edits: 4,607/4,607 jobs, 0 crashes, one worker, footprint 17.79 → 17.80 GB.
 - Every new plugin names the fleet's mlx-swift fork in its own `Package.swift` (AB-D-0208), or upstream's would win and
   drop the leak fix.
 

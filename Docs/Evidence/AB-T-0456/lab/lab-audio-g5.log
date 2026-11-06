@@ -1,0 +1,125 @@
+# Gaea Lab on the G5 audio (AB-T-0456) 2026-11-06T16:05:18Z: Gaea 1.1.1, pixel-agency-run 0.3.0, media-engine-spec 0.10.1
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add gaea-plugin-indextts by repo URL
+PASS  add gaea-plugin-voxcpm2 by repo URL
+PASS  add gaea-plugin-auk by repo URL
+PASS  add gaea-plugin-demo by repo URL
+      ran on Gaea (127.0.0.1:17694) · picked for indextts-2.5
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/indextts-fit/speak-20261106-080533.wav
+      model indextts-2.5 · LicenseRef-bilibili-Model-Use
+      ran on Gaea (127.0.0.1:17694) · picked for indextts-2.5
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/indextts-fit/speak-20261106-080533.wav
+      model indextts-2.5 · LicenseRef-bilibili-Model-Use
+PASS  IndexTTS: a clone fitted to 4.0 s
+PASS  the fit is 4.0 s at 22.05 kHz
+      ran on Gaea (127.0.0.1:17694) · picked for voxcpm2
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/voxcpm2-speak/speak-20261106-080538.wav
+      model voxcpm2 · Apache-2.0
+      ran on Gaea (127.0.0.1:17694) · picked for voxcpm2
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/voxcpm2-speak/speak-20261106-080538.wav
+      model voxcpm2 · Apache-2.0
+PASS  VoxCPM2: its own voice
+PASS  VoxCPM2's take is 48 kHz
+      ran on Gaea (127.0.0.1:17694) · picked for voxcpm2
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/voxcpm2-design/design_voice-20261106-080544.wav
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/voxcpm2-design/design_voice-20261106-080544-1.wav
+      model voxcpm2 · Apache-2.0
+      ran on Gaea (127.0.0.1:17694) · picked for voxcpm2
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/voxcpm2-design/design_voice-20261106-080544.wav
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/voxcpm2-design/design_voice-20261106-080544-1.wav
+      model voxcpm2 · Apache-2.0
+PASS  VoxCPM2: design_voice, two samples
+PASS  the design saved two samples
+      failed: Accept the terms of LicenseRef-Qwen-Research to run this. The engine runs it only for people who have accepted them (policy_unmet, terms_not_accepted).
+      needs acceptance: read the terms (https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/main/LICENSE), then add --accept LicenseRef-Qwen-Research
+PASS  AuK without users' acceptance fails, naming the licence to accept
+      ran on Gaea (127.0.0.1:17694) · picked for auk-flash
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/auk-clone/speak-20261106-080548.wav
+      model auk-flash · LicenseRef-Qwen-Research
+      ran on Gaea (127.0.0.1:17694) · picked for auk-flash
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/auk-clone/speak-20261106-080548.wav
+      model auk-flash · LicenseRef-Qwen-Research
+PASS  AuK-Flash: a clone, accepted
+      ran on Gaea (127.0.0.1:17694) · picked for auk-flash
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/auk-dereverb/edit_speech-20261106-080549.wav
+      model auk-flash · LicenseRef-Qwen-Research
+      ran on Gaea (127.0.0.1:17694) · picked for auk-flash
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/auk-dereverb/edit_speech-20261106-080549.wav
+      model auk-flash · LicenseRef-Qwen-Research
+PASS  AuK-Flash: dereverb
+      ran on Gaea (127.0.0.1:17694) · picked for auk-flash
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/auk-hum/edit_speech-20261106-080550.wav
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/auk-hum/edit_speech-20261106-080550-1.json
+      model auk-flash · LicenseRef-Qwen-Research
+      ran on Gaea (127.0.0.1:17694) · picked for auk-flash
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/auk-hum/edit_speech-20261106-080550.wav
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/auk-hum/edit_speech-20261106-080550-1.json
+      model auk-flash · LicenseRef-Qwen-Research
+PASS  AuK-Flash: a hum at the start, with the transcript
+PASS  the hum's transcript output starts with the cue
+      ran on Gaea (127.0.0.1:17694) · picked for auk-flash
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/auk-separate/separate-20261106-080551.wav
+      model auk-flash · LicenseRef-Qwen-Research
+      ran on Gaea (127.0.0.1:17694) · picked for auk-flash
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/auk-separate/separate-20261106-080551.wav
+      model auk-flash · LicenseRef-Qwen-Research
+PASS  AuK-Flash: separate the second speaker
+      ran on Gaea (127.0.0.1:17694) · picked for auk
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/auk-voices/separate-20261106-080601.wav
+      model auk · LicenseRef-Qwen-Research
+      ran on Gaea (127.0.0.1:17694) · picked for auk
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/auk-voices/separate-20261106-080601.wav
+      model auk · LicenseRef-Qwen-Research
+PASS  AuK Base: separate every voice
+PASS  each stem is one WAV at the mixture's length
+      ran on Gaea (127.0.0.1:17694) · picked for demo-separator
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/separate-unnamed/separate-20261106-080602.wav
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/separate-unnamed/separate-20261106-080602-1.wav
+      model demo-separator · Apache-2.0
+      ran on Gaea (127.0.0.1:17694) · picked for demo-separator
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/separate-unnamed/separate-20261106-080602.wav
+      saved /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/separate-unnamed/separate-20261106-080602-1.wav
+      model demo-separator · Apache-2.0
+PASS  an unnamed separate goes to the demo's separator
+PASS  the unnamed separate ran on demo-separator, two stems
+      indextts-fit: indextts-2.5 · indextts-fit/speak-20261106-080533.wav 22050 88081 
+      voxcpm2-speak: voxcpm2 · voxcpm2-speak/speak-20261106-080538.wav 48000 168960 
+      voxcpm2-design: voxcpm2 · voxcpm2-design/design_voice-20261106-080544-1.wav 48000 192000 voxcpm2-design/design_voice-20261106-080544.wav 48000 215040 
+      auk-clone: auk-flash · auk-clone/speak-20261106-080548.wav 24000 72960 
+      auk-dereverb: auk-flash · auk-dereverb/edit_speech-20261106-080549.wav 24000 115200 
+      auk-hum: auk-flash · auk-hum/edit_speech-20261106-080550.wav 24000 115200 
+      auk-separate: auk-flash · auk-separate/separate-20261106-080551.wav 24000 133281 
+      auk-voices: auk · auk-voices/separate-20261106-080601.wav 24000 133281 
+      separate-unnamed: demo-separator · separate-unnamed/separate-20261106-080602-1.wav 24000 133281 separate-unnamed/separate-20261106-080602.wav 24000 133281 
+      wrote /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/app/lab-audio.edit_speech-before-light.png
+      wrote /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/app/lab-audio.edit_speech-before-dark.png
+      needs acceptance: LicenseRef-Qwen-Research
+      run: finished; route: Gaea (127.0.0.1:17694)
+      results: audio (audio), transcript (text)
+      wrote /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/app/lab-audio.edit_speech-after-light.png
+      wrote /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/app/lab-audio.edit_speech-after-dark.png
+Docs/Evidence/AB-T-0456/lab/app/lab-audio.edit_speech-after-dark.png
+Docs/Evidence/AB-T-0456/lab/app/lab-audio.edit_speech-after-light.png
+PASS  the Lab app showed AuK's terms for audio.edit_speech, then ran it on Every server and rendered it
+      wrote /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/app/lab-audio.separate-before-light.png
+      wrote /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/app/lab-audio.separate-before-dark.png
+      needs acceptance: LicenseRef-Qwen-Research
+      run: finished; route: Gaea (127.0.0.1:17694)
+      results: speaker (audio)
+      wrote /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/app/lab-audio.separate-after-light.png
+      wrote /Volumes/Satechi/Development/gaea-mes-media-server/Docs/Evidence/AB-T-0456/lab/app/lab-audio.separate-after-dark.png
+Docs/Evidence/AB-T-0456/lab/app/lab-audio.separate-after-dark.png
+Docs/Evidence/AB-T-0456/lab/app/lab-audio.separate-after-light.png
+PASS  the Lab app showed AuK's terms for audio.separate, then ran it on Every server and rendered it
+PASS  the app's separation saved the speaker stem
+OK
+PASS  transcript com.xocialize.gaea.auk-0.1.1-2026-11-06T160544Z-06cc057c.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.auk-0.1.1-2026-11-06T160607Z-87b88fbe.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.demo-0.4.0-2026-11-06T160601Z-ae3dbf6b.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.indextts-0.1.1-2026-11-06T160527Z-cbc88e37.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.voxcpm2-0.1.0-2026-11-06T160533Z-aaea4456.gpp passes validate.py
+== 28 passed, 0 failed

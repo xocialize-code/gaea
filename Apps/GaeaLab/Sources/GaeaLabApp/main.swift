@@ -9,24 +9,31 @@ import SwiftUI
 // Gaea Lab.
 //
 //   GaeaLab                                   the app
-//   GaeaLab --snapshot <dir> --engine <url>… [--operation image.generate | audio.speak | audio.compose | video.generate]
+//   GaeaLab --snapshot <dir> --engine <url>… [--operation image.generate | audio.speak | audio.compose | audio.edit_speech
+//                                             | audio.separate | video.generate] [--input <wav>]
 //                                             add those servers, choose the operation with a preset (image.generate on
 //                                             Qwen-Image Flash with a LoRA; audio.speak on Kokoro with a voice, streamed;
-//                                             audio.compose on ACE-Step with lyrics and timestamps; video.generate on
-//                                             LTX 2.5 compact24, its terms shown, then accepted for this run only), run it
-//                                             on "Every server", and render the window before and after to PNGs (light
-//                                             and dark), then quit
+//                                             audio.compose on ACE-Step with lyrics and timestamps; audio.edit_speech on
+//                                             AuK-Flash, a hum added at the start of --input; audio.separate on AuK-Flash,
+//                                             the second speaker of the --input mixture; video.generate on LTX 2.5
+//                                             compact24; AuK's and LTX's terms are shown, then accepted for this run
+//                                             only), run it on "Every server", and render the window before and after to
+//                                             PNGs (light and dark), then quit
 let arguments = CommandLine.arguments
 if let i = arguments.firstIndex(of: "--snapshot"), i + 1 < arguments.count {
     let directory = URL(fileURLWithPath: arguments[i + 1], isDirectory: true)
     let engines = arguments.indices.filter { arguments[$0] == "--engine" && $0 + 1 < arguments.count }.compactMap { URL(string: arguments[$0 + 1]) }
     let operation = arguments.firstIndex(of: "--operation").flatMap { $0 + 1 < arguments.count ? arguments[$0 + 1] : nil } ?? "image.generate"
+    let input = arguments.firstIndex(of: "--input").flatMap { $0 + 1 < arguments.count ? URL(fileURLWithPath: arguments[$0 + 1]) : nil }
     MainActor.assumeIsolated {
         LabModel.acceptances = LicenseAcceptances()
+        let scratch = "Gaea.Lab.snapshot"
+        UserDefaults().removePersistentDomain(forName: scratch)
+        LabModel.directoryDefaults = UserDefaults(suiteName: scratch) ?? .standard
         let app = NSApplication.shared
         app.setActivationPolicy(.prohibited)
         Task { @MainActor in
-            await Snapshot.render(to: directory, engines: engines, operation: operation)
+            await Snapshot.render(to: directory, engines: engines, operation: operation, input: input)
             exit(0)
         }
         app.run()
@@ -37,7 +44,7 @@ if let i = arguments.firstIndex(of: "--snapshot"), i + 1 < arguments.count {
 
 @MainActor
 enum Snapshot {
-    static func render(to directory: URL, engines: [URL], operation: String) async {
+    static func render(to directory: URL, engines: [URL], operation: String, input: URL? = nil) async {
         try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         let lab = LabModel.shared
         for url in engines { _ = try? await lab.directory.add(url: url) }
@@ -64,6 +71,22 @@ enum Snapshot {
             run.form.setValue(.string("en"), at: ["language"])
             run.form.setValue(.bool(true), at: ["timestamps"])
             run.form.setValue(.number(5), at: ["seed"])
+        case "audio.edit_speech", "audio.separate":
+            guard let input else {
+                print("\(operation) needs --input <wav>")
+                return
+            }
+            run.form.model = "auk-flash"
+            run.media["audio"] = [await MediaItem.reading(input)]
+            if operation == "audio.edit_speech" {
+                run.form.text["transcript"] = "The morning train was late again, so I walked along the river and watched the boats come in."
+                run.form.setValue(.object(["kind": .string("add_cue"), "cue": .string("hum"), "at": .string("start")]), at: ["edit"])
+                run.form.setValue(.number(4), at: ["seed"])
+            } else {
+                run.form.setValue(.array([.string("speaker")]), at: ["stems"])
+                run.form.setValue(.object(["ordinal": .number(2)]), at: ["speaker"])
+                run.form.setValue(.number(5), at: ["seed"])
+            }
         case "video.generate":
             run.form.model = "ltx-2.5-compact24"
             run.form.text["prompt"] = "A red kite flies over a green hill on a sunny day, the camera slowly following it."

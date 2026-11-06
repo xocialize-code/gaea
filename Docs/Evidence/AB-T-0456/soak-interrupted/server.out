@@ -1,0 +1,7 @@
+2026-11-06T06:00:28Z operator: listening on /tmp/gsauk.uie_b2ja/operator.sock (same user, Developer ID team)
+2026-11-06T06:00:28Z gaea 1.1.1 starting: /tmp/gsauk.uie_b2ja, budget 103.08 GB, models /Volumes/DEV_VOL1/Models/Models
+2026-11-05T22:00:28-0800 info mes-engine: [HummingbirdCore] Server started and listening on 127.0.0.1:17786
+2026-11-06T06:00:28Z gaea: serving MES at http://127.0.0.1:17786/mes/v0
+gaea 1.1.1 serving MES at http://127.0.0.1:17786/mes/v0; operator API at /tmp/gsauk.uie_b2ja/operator.sock
+2026-11-06T06:00:31Z plugins: added com.xocialize.gaea.auk 0.1.1 from xocialize-code/gaea-plugin-auk
+2026-11-06T06:00:31Z scheduler: launched com.xocialize.gaea.auk 0.1.1, pid 92668, hello after 0.290934458 seconds

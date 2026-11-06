@@ -1,0 +1,2 @@
+failed: Accept the terms of LicenseRef-Qwen-Research to run this. The engine runs it only for people who have accepted them (policy_unmet, terms_not_accepted).
+needs acceptance: read the terms (https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/main/LICENSE), then add --accept LicenseRef-Qwen-Research
