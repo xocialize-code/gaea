@@ -1,0 +1,5 @@
+off auk-flash  AuK-Flash  [com.xocialize.gaea.auk 0.1.1] lanes: int8* 12.40 GB, bf16 15.70 GB, int4 10.80 GB
+off auk  AuK  [com.xocialize.gaea.auk 0.1.1] lanes: int8* 12.40 GB, bf16 15.70 GB, int4 10.90 GB
+on  demo-matmul  Demo matmul (GPU smoke test)  [com.xocialize.gaea.demo 0.4.0] lanes: fp32* 2.37 GB
+on  demo-gradient  Demo gradient (image.generate smoke test)  [com.xocialize.gaea.demo 0.4.0] lanes: fp32* 0.20 GB
+on  demo-separator  Demo separator (audio.separate smoke test)  [com.xocialize.gaea.demo 0.4.0] lanes: fp32* 0.50 GB

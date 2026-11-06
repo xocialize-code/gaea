@@ -1,0 +1,3 @@
+budget 103.08 GB, charged 17.61 GB, free 85.47 GB; host 0.03 GB; 0 queued
+  com.xocialize.gaea.auk 0.1.1 pid 76865: declared 20.40 GB, phys_footprint 13.87 GB (peak 18.90 GB), worker says 15.56 GB, charged 17.60 GB lanes ["auk": "int8", "auk-flash": "int4"]
+  com.xocialize.gaea.demo 0.4.0 pid 76839: declared 0.50 GB, phys_footprint 0.01 GB (peak 0.01 GB), worker says 0.01 GB, charged 0.01 GB lanes ["demo-separator": "fp32"]

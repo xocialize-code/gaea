@@ -1,0 +1,69 @@
+# AuK acceptance (AB-T-0455) 2026-11-06T03:23:17Z: Gaea 1.1.1, auk from GitHub
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add by repo URL installs the demo
+Installed AuK 0.1.1 (com.xocialize.gaea.auk), enabled.
+PASS  add by repo URL installs AuK
+PASS  both models start off, and AuK offers nothing until the operator enables them
+auk-flash enabled.
+auk enabled.
+PASS  enabled, each model offers speak, design_voice, edit_speech and separate: named-only, Qwen Research, non-commercial, users' acceptance
+PASS  a named job without policy.accepted is 422 policy_unmet, terms_not_accepted
+PASS  a separate job naming no model runs on the demo's separator, never on AuK (named-only)
+      clone, cold: 2.26 s from submit to settled (launch, prepare int8, speak)
+PASS  clone succeeds
+PASS  fitted succeeds
+PASS  design succeeds
+PASS  the fit is 4.0 s within a tenth
+PASS  edit replace succeeds
+PASS  edit insert succeeds
+PASS  edit remove succeeds
+PASS  edit happy succeeds
+PASS  edit whisper succeeds
+PASS  edit hum succeeds
+PASS  edit unlaugh succeeds
+PASS  edit speed succeeds
+PASS  edit pitch succeeds
+PASS  edit volume succeeds
+PASS  edit timbre succeeds
+PASS  edit accent succeeds
+PASS  edit denoise succeeds
+PASS  edit dereverb succeeds
+PASS  replace returns the edited transcript
+PASS  hum at the start returns the transcript with the cue first
+PASS  speed 1.4 is snapped to AuK's 1.5 with param_adjusted
+PASS  separate ordinal succeeds
+PASS  separate saying succeeds
+PASS  separate singing succeeds
+PASS  separate voices succeeds
+PASS  each stem is named by it, at the mixture's length, with effective.stems
+      r-allcues: 422 unsupported_parameter edit - Model auk-flash doesn't support removing every cue.
+      r-inline: 422 unsupported_parameter edit - Model auk-flash doesn't support a cue placed inline (text).
+      r-nopick: 400 invalid_request speaker - The speaker stem keeps one speaker: say which with 'speaker' ({ordinal} or {saying}).
+      r-terms: 422 policy_unmet policy - AuK-Flash is under LicenseRef-Qwen-Research, whose terms bind each user: show them its notice and terms (https
+      r-trim: 422 unsupported_parameter edit - Model auk-flash doesn't support a trim_silence edit.
+      r-voices: 422 unsupported_parameter stems - Model auk-flash doesn't support the stem 'voices'.
+      f-longmix: failed out_of_limits audio - The audio is 38.9 s; this model takes at most 30 s.
+      f-longtake: failed out_of_limits audio - The audio is 38.9 s; this model takes at most 30 s.
+      f-int4: failed unsupported_parameter x-gaea.lane - AuK: AuK's 4-bit encoder drops words in Mandarin edits: run this edit on the int8 or bf16 lane (x-gaea.lane).
+PASS  a cue placed inline is 422 (cue_placement edge)
+PASS  removing every cue is 422 (remove_all_cues false)
+PASS  trim_silence is 422
+PASS  the voices stem on AuK-Flash is 422
+PASS  the speaker stem without a pick is 400
+PASS  a 38 s take fails out_of_limits on audio, measured when it runs
+PASS  a 38 s mixture fails out_of_limits on audio, measured when it runs
+PASS  a Mandarin edit on the int4 lane is refused, naming the lane
+PASS  the clone through Gaea is auk-inproc's, byte for byte
+PASS  the fit through Gaea is auk-inproc's, byte for byte
+PASS  design sample 1 through Gaea is auk-inproc's, byte for byte
+PASS  the replace through Gaea is auk-inproc's, byte for byte
+PASS  the emotion edit through Gaea is auk-inproc's, byte for byte
+PASS  the second speaker through Gaea is auk-inproc's, byte for byte
+PASS  the speaker who says the words through Gaea is auk-inproc's, byte for byte
+PASS  Base's voices through Gaea are auk-inproc's, byte for byte
+      in-process clone: {"audio_s":4,"lane":"int8","max_rss_gb":7.782907904,"model":"auk-flash","prepare_s":1.14014525,"run_s":0.52760983299999997,"seed":42}
+OK
+PASS  transcript com.xocialize.gaea.auk-0.1.1-2026-11-06T032322Z-95951ae7.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.demo-0.4.0-2026-11-06T032321Z-ef3af759.gpp passes validate.py
+== 50 passed, 0 failed

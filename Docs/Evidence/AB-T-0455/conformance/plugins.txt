@@ -1,0 +1,27 @@
+Installed ACE-Step 1.5 0.1.1 (com.xocialize.gaea.ace-step), enabled.
+Installed AuK 0.1.1 (com.xocialize.gaea.auk), enabled.
+Installed Boogu Image 0.1.1 (com.xocialize.gaea.boogu), enabled.
+Installed Gaea demo worker 0.4.0 (com.xocialize.gaea.demo), enabled.
+Installed FLUX.2 Klein 0.2.3 (com.xocialize.gaea.flux2-klein), enabled.
+Installed FLUX 3 Klein 0.1.1 (com.xocialize.gaea.flux3-klein), enabled.
+Installed Forge processing pack 0.2.1 (com.xocialize.gaea.forge), enabled.
+Installed IndexTTS 2.5 0.1.1 (com.xocialize.gaea.indextts), enabled.
+Installed Kokoro 0.1.1 (com.xocialize.gaea.kokoro), enabled.
+Installed LTX 2.5 0.1.3 (com.xocialize.gaea.ltx), enabled.
+Installed Mage-Flow 0.1.1 (com.xocialize.gaea.mage-flow), enabled.
+Installed Mage-VL 0.1.1 (com.xocialize.gaea.mage-vl), enabled.
+Installed Ming-Image 0.3.1 (com.xocialize.gaea.ming-image), enabled.
+Installed MOSS-Image 0.1.1 (com.xocialize.gaea.moss-image), enabled.
+Installed MOSS-SoundEffect 0.1.2 (com.xocialize.gaea.moss-soundeffect), enabled.
+Installed Prompt enhancer 0.1.1 (com.xocialize.gaea.prompt-enhance), enabled.
+Installed Qwen-Image 0.2.1 (com.xocialize.gaea.qwen-image), enabled.
+Installed Qwen-Image-2.1 0.1.1 (com.xocialize.gaea.qwen-image-21), enabled.
+Installed Qwen3-TTS 0.2.1 (com.xocialize.gaea.qwen3-tts), enabled.
+Installed RIFE 0.1.1 (com.xocialize.gaea.rife), enabled.
+Installed SeedVR2 0.1.1 (com.xocialize.gaea.seedvr2), enabled.
+Installed SenseNova-U1.5 0.1.1 (com.xocialize.gaea.sensenova), enabled.
+Installed Step-Audio-EditX 0.1.2 (com.xocialize.gaea.step-audio-editx), enabled.
+Installed VoxCPM2 0.1.0 (com.xocialize.gaea.voxcpm2), enabled.
+Installed Z-Image 0.1.2 (com.xocialize.gaea.z-image), enabled.
+auk-flash enabled.
+auk enabled.

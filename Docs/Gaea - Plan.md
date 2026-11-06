@@ -709,6 +709,12 @@ facts and the gaps, is in [Gaea - G5 audio plan.md](Gaea%20-%20G5%20audio%20plan
      mapping, and demo 0.4.0 has a stand-in separator. Conformance with 24 plugins: 88/0/7
      (Docs/Evidence/AB-T-0454/).
   5. The AuK plugin (`gaea-plugin-auk`): restricted (G-27), with int4 never used for Mandarin edits (G-30).
+     **Done 2026-11-06 (AB-T-0455):** v0.1.1, acceptance 50/50 through Gaea 1.1.1 (Docs/Evidence/AB-T-0455/). AuK
+     exposed three gaps:
+     - Gaea 1.1.0's engine (0.73) couldn't decode contract 1.59.0's manifests. Gaea 1.1.1 is on mlx-engine-swift
+       0.74.1.
+     - Stems came back up to a 20 ms frame short. Kit 0.11.1 fits them to the mixture.
+     - The conformance suite doesn't accept terms on the requests that name a model (AB-A-0252).
   6. The exit: Lab, conformance, and the soak.
 - Every new plugin names the fleet's mlx-swift fork in its own `Package.swift` (AB-D-0208), or upstream's would win and
   drop the leak fix.
