@@ -1,0 +1,61 @@
+# IndexTTS 2.5 acceptance (AB-T-0452) 2026-11-06T00:26:00Z: Gaea 1.0.0, indextts from GitHub
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add by repo URL installs kokoro
+Installed IndexTTS 2.5 0.1.1 (com.xocialize.gaea.indextts), enabled.
+PASS  add by repo URL installs IndexTTS 2.5
+      indextts 0.1.1
+PASS  audio.speak lists indextts-2.5 beside kokoro-82m, with its supports
+      asset: ast_s22mz7enqcae7ptn2dnz
+      plain, cold: 3.63 s from submit to settled (launch, prepare fp16, speak)
+PASS  plain succeeds
+PASS  plain-int8 succeeds
+PASS  happy succeeds
+PASS  vector succeeds
+PASS  fitted succeeds
+PASS  fast succeeds
+PASS  chinese succeeds
+PASS  spanish succeeds
+PASS  plain: a 22.05 kHz mono 16-bit WAV, effective language and seed, the fp16 lane
+PASS  plain-int8 ran on the int8 lane
+PASS  happy: effective emotion and emo_alpha 0.8
+PASS  fitted: 4.0 s within a tenth of a second, no duration_missed
+PASS  ja is detected from its script (effective.language)
+PASS  ar is detected from its script (effective.language)
+PASS  a voice_ref with no model named → indextts-2.5
+PASS  plain text with no model named → kokoro-82m
+PASS  a second job on the asset is the same WAV
+      worker runs on the asset: first (warm model, new reference) 1.72 s, repeat of plain 2.328 s
+PASS  the runs carried the asset id to the worker
+PASS  deleting the asset (204) sends asset_removed to the worker
+PASS  the same reference as an upload (keyed by the job, evicted after) gives the same WAV
+PASS  a ref24.wav reference is accepted
+PASS  a reff32.wav reference is accepted
+PASS  a ref.flac reference is accepted
+PASS  a stereo reference is mixed down, with audio_downmixed
+PASS  a 30 s reference is trimmed to 20 s, with voice_ref_trimmed
+      r-emotion: 422 unsupported_parameter emotion - Model indextts-2.5 doesn't support the emotion 'excited'.
+      r-fr: 422 unsupported_parameter language - Model indextts-2.5 doesn't support the language 'fr'.
+      r-noref: 422 unsupported_parameter voice - Model indextts-2.5 doesn't support a default voice (neither voice nor voice_ref).
+      r-vector: 422 out_of_limits x-indextts.emotion_vector - Extension x-indextts.emotion_vector: $: fewer than 8 items
+PASS  no voice_ref on indextts-2.5 is 422 (neither voice nor voice_ref)
+PASS  French is 422
+PASS  an emotion outside the list is 422
+PASS  a vector of three weights is refused at submit by its declared schema (422 out_of_limits)
+PASS  a label with a vector fails as invalid_request
+PASS  a 5 s target with a 5 s pause fails as out_of_limits
+      f-both: failed invalid_request x-indextts.emotion_vector - IndexTTS 2.5: Send an emotion label or x-indextts.emotion_vector, not both.
+      f-fit: failed out_of_limits target_duration_s - IndexTTS 2.5: 5 s leaves too little time for the words once the pauses are kept.
+PASS  plain through Gaea is indextts-inproc's WAV, byte for byte
+PASS  plain-int8 through Gaea is indextts-inproc's WAV, byte for byte
+PASS  happy through Gaea is indextts-inproc's WAV, byte for byte
+PASS  vector through Gaea is indextts-inproc's WAV, byte for byte
+PASS  fitted through Gaea is indextts-inproc's WAV, byte for byte
+PASS  fast through Gaea is indextts-inproc's WAV, byte for byte
+PASS  chinese through Gaea is indextts-inproc's WAV, byte for byte
+PASS  spanish through Gaea is indextts-inproc's WAV, byte for byte
+      in-process plain: {"audio_s":4.7833106575963722,"lane":"fp16","language":"en","max_rss_gb":4.6310686719999996,"model":"indextts-2.5","prepare_s":0.70016975000000004,"run_s":2.7733296250000001,"seed":42,"warnings":[]}
+OK
+PASS  transcript com.xocialize.gaea.indextts-0.1.1-2026-11-06T002604Z-bcf112d4.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.kokoro-0.1.1-2026-11-06T002627Z-8f51aa07.gpp passes validate.py
+== 44 passed, 0 failed

@@ -698,7 +698,9 @@ facts and the gaps, is in [Gaea - G5 audio plan.md](Gaea%20-%20G5%20audio%20plan
 - **Exit:** the three plugins released and run through Gaea Lab, `audio.separate` in Gaea on MES 0.10, conformance
   with every plugin, and a soak of AuK's staged edits with live memory flat.
 - **Work orders:**
-  1. The IndexTTS 2.5 plugin (`gaea-plugin-indextts`).
+  1. The IndexTTS 2.5 plugin (`gaea-plugin-indextts`). **Done 2026-11-05 (AB-T-0452):** v0.1.1, acceptance 44/44
+     through Gaea 1.0.0 (Docs/Evidence/AB-T-0452/). It needed mlx-indextts2-swift 0.6.0's caller-keyed voice cache
+     (AB-A-0251; VoxCPM2's package got the same) and an offer that declares its extension.
   2. The VoxCPM2 plugin (`gaea-plugin-voxcpm2`).
   3. MES 0.10, S-1 to S-5: asked of `mlx-apps` (G-28), and run in parallel with orders 1 and 2.
   4. Kit 0.11.0 (the shared edit mapping) and `audio.separate` in Gaea: 1.1.0.

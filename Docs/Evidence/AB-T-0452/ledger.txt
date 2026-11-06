@@ -1,0 +1,3 @@
+budget 103.08 GB, charged 6.22 GB, free 96.86 GB; host 0.02 GB; 0 queued
+  com.xocialize.gaea.indextts 0.1.1 pid 72891: declared 9.70 GB, phys_footprint 4.71 GB (peak 9.44 GB), worker says 6.86 GB, charged 4.71 GB lanes ["indextts-2.5": "fp16"]
+  com.xocialize.gaea.kokoro 0.1.1 pid 73107: declared 1.65 GB, phys_footprint 1.51 GB (peak 1.65 GB), worker says 1.65 GB, charged 1.51 GB lanes ["kokoro-82m": "bf16"]
