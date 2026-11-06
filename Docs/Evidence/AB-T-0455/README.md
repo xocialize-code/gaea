@@ -70,22 +70,35 @@ installed beside the demo plugin.
      fails with `out_of_limits` on `audio` when the job runs.
    - This is how Step-Audio-EditX's acceptance already treated it. The acceptance checks it that way.
 
-## Conformance (`conformance/`)
+## Conformance
 
-MES v0.10.0's `mes-conformance` against Gaea 1.1.1, with all 25 public plugins from GitHub and AuK's two models
-enabled (`ALL=1 ENABLE="auk-flash auk" tools/conformance-with.sh`, in `conformance/`): **72 passed, 10 failed, 13 skipped.** Image and
-Video conform. Base and Audio don't, and every failure has one cause, which is in the suite, not in Gaea:
-- AuK's offers need users' acceptance. The tests that name a model build their own request without
-  `policy.accepted`, so each gets 422 `policy_unmet` before the check it means to make. The tests are BASE-015,
+### Every plugin, every opt-in model (`conformance/`)
+
+media-engine-spec v0.10.1's `mes-conformance` against Gaea 1.1.1, with all 25 public plugins from GitHub, AuK's two
+models enabled, and LTX's four tiers enabled. Command: `ALL=1 ENABLE="auk-flash auk ltx-2.5-compact24
+ltx-2.5-balanced32 ltx-2.5-standard64 ltx-2.5-max128" tools/conformance-with.sh`.
+
+**87 passed, 1 failed, 7 skipped.** Base, Image and Video conform. The failure is AUDIO-004, which is intermittent and
+not AuK's:
+- **What failed:** Step-Audio-EditX's language model ran past its 7,937-token window on the suite's FLAC take, and
+  the plugin refused the take, as its package does for a take that doesn't finish.
+- **It's intermittent:** AUDIO-004 alone, run five times against the same install, passed 5 of 5
+  (`conformance/audio-004-reruns/`). It also passed in the three earlier full runs. That makes 1 failure in 9 runs.
+- **The likely cause:** the suite's edit is unseeded, so a sampled run can run away.
+
+### Before the suite's fix (AB-A-0252)
+
+v0.10.0's suite with AuK enabled gave **72 passed, 10 failed, 13 skipped**, all with one cause in the suite:
+- AuK's offers need users' acceptance. The tests that name a model built their own request without
+  `policy.accepted`, so each got 422 `policy_unmet` before the check it meant to make. The tests were BASE-015,
   BASE-016, BASE-056, AUDIO-006, AUDIO-008, AUDIO-009 and AUDIO-015 to AUDIO-018.
-- `Suite.acceptance(d)` exists but is used only by `minimalRequest`.
-- **Asked of `mlx-apps` as AB-A-0252** (send acceptance on every request, as a client whose user accepted).
-  Conformance with every plugin and AuK enabled waits on it, in order 6.
-- With acceptance sent, Gaea gives the codes those tests expect, as the acceptance's refusals show.
-- **With AuK installed but off**, and LTX's four tiers enabled as in AB-T-0454, Gaea 1.1.1 conforms with all 25
-  plugins: **88 passed, 0 failed, 7 skipped**, the same as 1.1.0 (`conformance-auk-off/`).
-- LTX's tiers need users' acceptance too, but don't trip this. The video tests build their requests with acceptance,
-  and the Base and Audio tests that name a model reach AuK first.
+- mlx-apps fixed it in v0.10.1 (f5c56c1): every job request carries the acceptance, and BASE-019 still probes
+  without it. Those 10 tests now pass.
+
+### AuK installed but off (`conformance-auk-off/`)
+
+v0.10.0's suite, with LTX's four tiers enabled as in AB-T-0454: **88 passed, 0 failed, 7 skipped**, the same as
+1.1.0.
 
 ## Files
 

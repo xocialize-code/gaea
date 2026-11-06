@@ -2,13 +2,13 @@
 
 | | |
 |---|---|
-| **Engine** | Gaea (`eng_gaea_dustin_s_mac_studio_ua3z8j`) · gaea 1.1.1 |
+| **Engine** | Gaea (`eng_gaea_dustin_s_mac_studio_h5tpqw`) · gaea 1.1.1 |
 | **URL** | http://127.0.0.1:17690/mes/v0 · open |
 | **Profiles** | audio 0.1, image 0.1, video 0.1 |
 | **Features** | uploads, sse, grants, previews, websocket, mcp, assets, streaming |
-| **Suite** | MES conformance 0.1 · 2026-11-06T03:25:14Z |
-| **Result** | 72 passed · 10 failed · 13 skipped |
-| **Base 0.1** | ❌ does not conform |
+| **Suite** | MES conformance 0.1 · 2026-11-06T05:18:23Z |
+| **Result** | 87 passed · 1 failed · 7 skipped |
+| **Base 0.1** | ✅ conforms |
 | **Image 0.1** | ✅ conforms for the operations offered |
 | **Audio 0.1** | ❌ does not conform |
 | **Video 0.1** | ✅ conforms for the operations offered |
@@ -46,8 +46,8 @@
 | BASE-071 | Outputs expire: after outputs_ttl_s the job is expired and its outputs answer 410 | §13 rule 2 | ➖ skip: outputs_ttl_s is 3600 s (observed only up to 30 s) |
 | BASE-080 | MCP: a session lists one tool per operation (dots → underscores) and the four helpers | §15 | ✅ pass |
 | BASE-014 | Offers' declarations are consistent: Base supports keys typed, offer limits within the operation's | §6.4 | ✅ pass |
-| BASE-015 | A gate the named model lacks is 422 unsupported_parameter; with no model named, the plan names an offer that has it | §6.4 rules 2–3 | ❌ **fail**: stream to auk-flash, which doesn't stream: expected error code unsupported_parameter, got policy_unmet |
-| BASE-016 | A voice implies its model: the plan lists it and provenance names it; an unlisted voice, or one the named model lacks, is 422 | §6.5, §10.1 | ❌ **fail**: a voice auk-flash doesn't list: expected error code unsupported_parameter, got policy_unmet |
+| BASE-015 | A gate the named model lacks is 422 unsupported_parameter; with no model named, the plan names an offer that has it | §6.4 rules 2–3 | ✅ pass |
+| BASE-016 | A voice implies its model: the plan lists it and provenance names it; an unlisted voice, or one the named model lacks, is 422 | §6.5, §10.1 | ✅ pass |
 | BASE-017 | supports.seed false: a request with a seed runs, and warns seed_ignored | §6.4 | ✅ pass |
 | BASE-018 | Voice lists: as many voices as supports.voices, with an ETag and 304; unique ids; a model without voices, or not offered, is 404 | §6.5 | ✅ pass |
 | BASE-019 | Users' acceptance: an offer whose licence has user_accept_required is 422 policy_unmet (terms_not_accepted) without policy.accepted, and runs with it | §10.2, §10.3 | ✅ pass: audio.design_voice / auk-flash under LicenseRef-Qwen-Research |
@@ -58,7 +58,7 @@
 | BASE-053 | Stream declarations: only on audio outputs with max 1; streaming is claimed exactly when some offer streams | §6, §6.4 | ✅ pass |
 | BASE-054 | A streamed job: plan.streams gives the format; chunks from 0 with no gaps, whole frames, one final, before output_ready; the output is the chunks | §7.2, §10.1, §11 | ✅ pass: 1 chunks, 66600 frames at 24000 Hz |
 | BASE-055 | Release mid-stream: the outcome is cancelled, no final chunk is sent, and none follows the cancelled state | §7.3, §11 rule 5 | ✅ pass: 4 chunks before the release |
-| BASE-056 | stream on an output that can't stream, or to a named model that doesn't stream, is 422 unsupported_parameter | §7.1 | ❌ **fail**: stream to auk-flash: expected error code unsupported_parameter, got policy_unmet |
+| BASE-056 | stream on an output that can't stream, or to a named model that doesn't stream, is 422 unsupported_parameter | §7.1 | ✅ pass |
 | BASE-057 | After confirm, a replayed chunk carries no data | §11 rule 4, §13 rule 2 | ✅ pass |
 | IMAGE-001 | fill and erase keep black-mask pixels byte-identical | Image §1.7 | ✅ pass |
 | IMAGE-002 | upscale returns exactly input size × scale, for each scale offered | Image §3 | ✅ pass |
@@ -75,38 +75,38 @@
 | IMAGE-013 | An ic adapter's required slots are counted: too few references or images is 400 | Image §1.10 | ✅ pass |
 | IMAGE-014 | decompose returns exactly layer_count layers, each an RGBA PNG the input's size; effective.layer_count is the count | Image §3.2 | ✅ pass |
 | IMAGE-015 | decompose refuses a layer_count above its maximum (422), outputs without layers (400) and an un-offered composite (422) | Image §3.2, Base §6 rule 4 | ✅ pass: composite is offered, so its refusal doesn't apply. |
-| IMAGE-016 | decompose's layers, composited back to front, approximate the input: the error is reported, never failed | Image §3.2 | ✅ pass: 4 layers recompose to the input with a mean absolute error of 5.96/255 per channel; the composite's is 5.10/255. |
+| IMAGE-016 | decompose's layers, composited back to front, approximate the input: the error is reported, never failed | Image §3.2 | ✅ pass: 4 layers recompose to the input with a mean absolute error of 2.55/255 per channel; the composite's is 2.46/255. |
 | AUDIO-001 | Descriptors match the profile table: required inputs and outputs of the right kinds, only vocabulary parameters | Audio §3, §6 | ✅ pass |
 | AUDIO-002 | Offers' supports keys have the profile's types, offer limits are the profile's fields, and streaming offers state their format | Audio §4 | ✅ pass |
 | AUDIO-003 | Audio outputs report sample_rate, channels and duration_s, and the file agrees | Audio §1.1, Base §10.1 | ✅ pass |
-| AUDIO-004 | Every MUST input format is accepted: WAV at 16 and 24 bits and in float, and FLAC | Audio §1.1 | ✅ pass |
+| AUDIO-004 | Every MUST input format is accepted: WAV at 16 and 24 bits and in float, and FLAC | Audio §1.1 | ❌ **fail**: audio.edit_speech / step-audio-editx refused a FLAC audio: Step-Audio-EditX: the take did not finish within the LM window (7937 audio tokens) — a shorter take, or split it |
 | AUDIO-005 | speak: a voice, a voice_ref and neither each route to an offer that supports them; voice with voice_ref is 400 | Audio §3.2, Base §6.4, §6.5 | ✅ pass: voice → kokoro-82m; voice_ref → indextts-2.5; neither → kokoro-82m |
-| AUDIO-006 | Labels: an emotion the named model doesn't list is 422; an alias is resolved by the engine | Audio §2.1, Base §6.4 rule 3 | ❌ **fail**: an emotion auk-flash doesn't list: expected error code unsupported_parameter, got policy_unmet |
-| AUDIO-007 | Cues: one the model can't perform is removed with cue_unsupported; [pause 1s] is about a second of silence | Audio §2.2 | ✅ pass: longest silence 1.28 s |
-| AUDIO-008 | design_voice returns count samples with a seed and the sample text; the same seed reproduces; a sample clones | Audio §3.1 | ❌ **fail**: POST jobs (audio.speak): expected 201, got 422 policy_unmet {"error":{"code":"policy_unmet","message":"AuK-Flash is under LicenseRef-Qwen-Research, whose terms bind each user: show them its notice and terms (https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/mai |
-| AUDIO-009 | edit_speech: an edit an offer lists runs; one it doesn't is 422; one missing its fields is 400; keeps_length keeps it | Audio §3.3 | ❌ **fail**: POST jobs (audio.edit_speech): expected 201, got 422 policy_unmet {"error":{"code":"policy_unmet","message":"AuK-Flash is under LicenseRef-Qwen-Research, whose terms bind each user: show them its notice and terms (https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/mai |
+| AUDIO-006 | Labels: an emotion the named model doesn't list is 422; an alias is resolved by the engine | Audio §2.1, Base §6.4 rule 3 | ✅ pass |
+| AUDIO-007 | Cues: one the model can't perform is removed with cue_unsupported; [pause 1s] is about a second of silence | Audio §2.2 | ✅ pass: longest silence 1.12 s |
+| AUDIO-008 | design_voice returns count samples with a seed and the sample text; the same seed reproduces; a sample clones | Audio §3.1 | ✅ pass |
+| AUDIO-009 | edit_speech: an edit an offer lists runs; one it doesn't is 422; one missing its fields is 400; keeps_length keeps it | Audio §3.3 | ✅ pass |
 | AUDIO-010 | generate: count sounds, each duration_s long to the frame, each seeded; the same seed reproduces; an unseeded request reports one | Audio §3.4 | ✅ pass |
 | AUDIO-011 | compose: one song with its facts, duration and seed; the same seed reproduces; malformed edits and scores are 400; no named_only offer by default | Audio §3.5 | ✅ pass |
 | AUDIO-012 | compose extend: the song is before_s + the source + after_s long, to the frame | Audio §3.5 | ✅ pass |
 | AUDIO-013 | compose: a score, reference or edit sent to an offer without the key is 422 unsupported_parameter | Audio §3.5, §4.1 | ✅ pass: refused: score |
 | AUDIO-014 | Output format: output.sample_rate is honoured; an un-offered media type is 422; a seed above 2³²−1 is 422 | Audio §1.2, §1.8 | ✅ pass |
-| AUDIO-015 | separate: each offer's stems run, one output per stem named by it, with its facts and the mixture's length | Audio §3.6 | ❌ **fail**: POST jobs (audio.separate): expected 201, got 422 policy_unmet {"error":{"code":"policy_unmet","message":"AuK-Flash is under LicenseRef-Qwen-Research, whose terms bind each user: show them its notice and terms (https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/mai |
-| AUDIO-016 | separate: an unlisted stem and an unlisted pick kind are 422; the speaker stem without a pick, or a pick without it, is 400 | Audio §3.6, Base §6.4 rule 3 | ❌ **fail**: the stem 'instrumental' to auk-flash, which doesn't list it: expected error code unsupported_parameter, got policy_unmet |
-| AUDIO-017 | separate: a mixture longer than the offer's max_duration_s is 422 out_of_limits | Audio §1.7, §3.6, §4.2 | ❌ **fail**: a 31 s mixture to auk-flash: expected error code out_of_limits, got policy_unmet |
-| AUDIO-018 | edit_speech: a cue placement, removing every cue and target_duration_s each need their key; a fitted take is that long | Audio §3.3, §4.1 | ❌ **fail**: a cue placed inline on auk-flash: expected error code unsupported_parameter, got policy_unmet |
+| AUDIO-015 | separate: each offer's stems run, one output per stem named by it, with its facts and the mixture's length | Audio §3.6 | ✅ pass: auk-flash speaker+singing (regenerated); auk speaker+singing+voices (regenerated); demo-separator vocals+instrumental (masked) |
+| AUDIO-016 | separate: an unlisted stem and an unlisted pick kind are 422; the speaker stem without a pick, or a pick without it, is 400 | Audio §3.6, Base §6.4 rule 3 | ✅ pass: refused: unlisted stem, speaker without a pick, a pick without the speaker stem |
+| AUDIO-017 | separate: a mixture longer than the offer's max_duration_s is 422 out_of_limits | Audio §1.7, §3.6, §4.2 | ✅ pass |
+| AUDIO-018 | edit_speech: a cue placement, removing every cue and target_duration_s each need their key; a fitted take is that long | Audio §3.3, §4.1 | ✅ pass: inline cue, removing every cue, target_duration_s, fitted auk-flash to 1.5 s |
 | VIDEO-001 | Descriptors match the profile table: required inputs and outputs of the right kinds, only vocabulary parameters | Video §3, §6 | ✅ pass |
 | VIDEO-002 | Offers' supports keys have the profile's types, offer limits are the profile's fields, and offers with sound state its format | Video §4 | ✅ pass |
 | VIDEO-003 | Video outputs report width, height, fps, frames and duration_s, the file agrees, and audio facts appear exactly with a track | Video §1.3, §1.7, Base §10.1 | ✅ pass |
 | VIDEO-004 | Every MUST input format is accepted: MP4 with H.264 and with HEVC, each with AAC | Video §1.1 | ✅ pass: on video.interpolate / rife-4.25 |
-| VIDEO-005 | generate: frames on the offer's grid, effective duration_s, fps, size and frames as made; size with aspect is 400; an off-grid size snaps | Video §1.3, §1.4, §2 | ➖ skip: the engine offers none of video.generate |
-| VIDEO-006 | generate: fixed frames route to offers that support them; a named offer that doesn't is 422; keyframes without a time each is 400 | Video §3.1, §4.1 | ➖ skip: the engine offers none of video.generate |
-| VIDEO-007 | audio: false gives a silent clip; audio: true to an offer without sound is 422 | Video §1.7, §4.1 | ➖ skip: the engine offers none of video.generate |
-| VIDEO-008 | soundtrack: the output's track lasts as long as the clip; a named offer without soundtrack is 422 | Video §3.1 | ➖ skip: the engine offers none of video.generate |
-| VIDEO-009 | extend: the source plus the added frames on the grid, the source's frames kept; before_s to an offer without extend_before is 422 | Video §1.8, §3.2 | ➖ skip: the engine offers none of video.extend |
-| VIDEO-010 | retake: the source's frame count, frames outside the span kept; end_s before start_s is 400; an unlisted retake is 422 | Video §1.8, §3.3 | ➖ skip: the engine offers none of video.retake |
+| VIDEO-005 | generate: frames on the offer's grid, effective duration_s, fps, size and frames as made; size with aspect is 400; an off-grid size snaps | Video §1.3, §1.4, §2 | ✅ pass |
+| VIDEO-006 | generate: fixed frames route to offers that support them; a named offer that doesn't is 422; keyframes without a time each is 400 | Video §3.1, §4.1 | ✅ pass |
+| VIDEO-007 | audio: false gives a silent clip; audio: true to an offer without sound is 422 | Video §1.7, §4.1 | ✅ pass |
+| VIDEO-008 | soundtrack: the output's track lasts as long as the clip; a named offer without soundtrack is 422 | Video §3.1 | ✅ pass |
+| VIDEO-009 | extend: the source plus the added frames on the grid, the source's frames kept; before_s to an offer without extend_before is 422 | Video §1.8, §3.2 | ✅ pass: source frames kept within 2.3/255 on average |
+| VIDEO-010 | retake: the source's frame count, frames outside the span kept; end_s before start_s is 400; an unlisted retake is 422 | Video §1.8, §3.3 | ✅ pass: 9 frames outside the span kept (from frame 0) |
 | VIDEO-011 | upscale: exactly size × scale, the same frames and fps, audio kept; no content is 400; an unlisted content is 422 | Video §1.7, §3.4 | ✅ pass |
 | VIDEO-012 | interpolate: (N − 1) × factor + 1 frames at fps × factor, source frames kept, audio kept; factor with fps is 400 | Video §1.7, §3.5 | ✅ pass: source frames kept within 1.4/255 on average |
-| VIDEO-013 | Disclosure: a generated clip says AI-generated in its comment item; upscale and interpolate keep an input's marking | Video §1.9, Base §10.2 | ✅ pass: checked upscale, interpolate |
+| VIDEO-013 | Disclosure: a generated clip says AI-generated in its comment item; upscale and interpolate keep an input's marking | Video §1.9, Base §10.2 | ✅ pass: checked generate, upscale, interpolate |
 | VIDEO-014 | Previews from an offer with supports.previews are images with at_s inside the clip | Video §1.14, Base §11 | ➖ skip: no Video offer declares previews |
-| VIDEO-015 | seed is reported; the same seed reproduces where the offer is deterministic; an output media type not offered is 422 | Video §1.2, §1.13 | ✅ pass: no Video offer takes a seed |
+| VIDEO-015 | seed is reported; the same seed reproduces where the offer is deterministic; an output media type not offered is 422 | Video §1.2, §1.13 | ✅ pass: video.generate / ltx-2.5-compact24: the same seed differed by at most 1.23/255 (not deterministic) |
 | BASE-090 | Pairing: the token is handed out once, and unpairing revokes it | §5 | ➖ skip: open mode |

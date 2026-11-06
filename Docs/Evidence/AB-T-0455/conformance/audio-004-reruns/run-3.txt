@@ -1,0 +1,5 @@
+Gaea (eng_gaea_dustin_s_mac_studio_h5tpqw) · gaea 1.1.1 · open
+✅ AUDIO-004  Every MUST input format is accepted: WAV at 16 and 24 bits and in float, and FLAC
+
+1 passed · 0 failed · 0 skipped — Base 0.1: conforms, Audio 0.1: conforms
+Report: /private/tmp/claude-501/-Volumes-Satechi-Development-gaea-mes-media-server/c320af8b-3192-4279-ac2c-7ee8c4bc9dec/scratchpad/a004-3/report.md

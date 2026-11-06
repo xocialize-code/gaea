@@ -34,10 +34,10 @@ on  demo-gradient  Demo gradient (image.generate smoke test)  [com.xocialize.gae
 on  demo-separator  Demo separator (audio.separate smoke test)  [com.xocialize.gaea.demo 0.4.0] lanes: fp32* 0.50 GB
 on  indextts-2.5  IndexTTS 2.5  [com.xocialize.gaea.indextts 0.1.1] lanes: fp16* 9.70 GB, int8 9.30 GB, int4 9.00 GB
 on  kokoro-82m  Kokoro-82M  [com.xocialize.gaea.kokoro 0.1.1] lanes: bf16* 0.50 GB
-off ltx-2.5-compact24  LTX 2.5 (compact24)  [com.xocialize.gaea.ltx 0.1.3] lanes: int8* 16.20 GB
-off ltx-2.5-balanced32  LTX 2.5 (balanced32)  [com.xocialize.gaea.ltx 0.1.3] lanes: int8* 18.00 GB
-off ltx-2.5-standard64  LTX 2.5 (standard64)  [com.xocialize.gaea.ltx 0.1.3] lanes: int8* 34.80 GB
-off ltx-2.5-max128  LTX 2.5 (max128)  [com.xocialize.gaea.ltx 0.1.3] lanes: bf16* 75.30 GB
+on  ltx-2.5-compact24  LTX 2.5 (compact24)  [com.xocialize.gaea.ltx 0.1.3] lanes: int8* 16.20 GB
+on  ltx-2.5-balanced32  LTX 2.5 (balanced32)  [com.xocialize.gaea.ltx 0.1.3] lanes: int8* 18.00 GB
+on  ltx-2.5-standard64  LTX 2.5 (standard64)  [com.xocialize.gaea.ltx 0.1.3] lanes: int8* 34.80 GB
+on  ltx-2.5-max128  LTX 2.5 (max128)  [com.xocialize.gaea.ltx 0.1.3] lanes: bf16* 75.30 GB
 on  moss-image-sft  MOSS-Image  [com.xocialize.gaea.moss-image 0.1.1] lanes: bf16* 27.20 GB, int8 16.20 GB
 on  moss-image-base  MOSS-Image Base  [com.xocialize.gaea.moss-image 0.1.1] lanes: bf16* 27.20 GB, int8 16.20 GB
 on  moss-soundeffect  MOSS-SoundEffect  [com.xocialize.gaea.moss-soundeffect 0.1.2] lanes: bf16* 25.40 GB, int4 23.40 GB

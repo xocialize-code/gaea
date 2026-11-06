@@ -11,7 +11,7 @@
       "assets",
       "streaming"
     ],
-    "id" : "eng_gaea_dustin_s_mac_studio_ua3z8j",
+    "id" : "eng_gaea_dustin_s_mac_studio_h5tpqw",
     "implementation" : "gaea 1.1.1",
     "name" : "Gaea",
     "profiles" : [
@@ -68,7 +68,7 @@
     },
     {
       "id" : "BASE-010",
-      "milliseconds" : 48,
+      "milliseconds" : 56,
       "spec" : "§6, §10.2",
       "status" : "pass",
       "title" : "Descriptors validate, name their profile, and offer at least one licensed model"
@@ -82,7 +82,7 @@
     },
     {
       "id" : "BASE-011",
-      "milliseconds" : 2,
+      "milliseconds" : 3,
       "spec" : "§6",
       "status" : "pass",
       "title" : "The operations list has an ETag, and If-None-Match answers 304"
@@ -96,77 +96,77 @@
     },
     {
       "id" : "BASE-020",
-      "milliseconds" : 17801,
+      "milliseconds" : 13577,
       "spec" : "§7, §10",
       "status" : "pass",
       "title" : "A job: 201 with Location, then held with a valid result, plan and provenance"
     },
     {
       "id" : "BASE-021",
-      "milliseconds" : 11,
+      "milliseconds" : 8,
       "spec" : "§7.1, §12",
       "status" : "pass",
       "title" : "Request errors: 400 invalid_request, 404 unknown_operation, 422 unsupported_parameter, with valid error bodies"
     },
     {
       "id" : "BASE-022",
-      "milliseconds" : 11209,
+      "milliseconds" : 11067,
       "spec" : "§7.1",
       "status" : "pass",
       "title" : "An Idempotency-Key repeated returns the original job"
     },
     {
       "id" : "BASE-023",
-      "milliseconds" : 11338,
+      "milliseconds" : 11135,
       "spec" : "§7.3",
       "status" : "pass",
       "title" : "A long poll on a held job answers at once with a valid snapshot"
     },
     {
       "id" : "BASE-024",
-      "milliseconds" : 11321,
+      "milliseconds" : 11279,
       "spec" : "§7.3",
       "status" : "pass",
       "title" : "GET jobs lists the caller's jobs and filters by state"
     },
     {
       "id" : "BASE-025",
-      "milliseconds" : 11307,
+      "milliseconds" : 11186,
       "spec" : "§7.3",
       "status" : "pass",
       "title" : "An output: its media type, its bytes and an ETag of its SHA-256"
     },
     {
       "id" : "BASE-026",
-      "milliseconds" : 11289,
+      "milliseconds" : 11176,
       "spec" : "§7.3",
       "status" : "pass",
       "title" : "Outputs serve byte ranges: 206 with Content-Range, suffixes, and 416 beyond the end"
     },
     {
       "id" : "BASE-027",
-      "milliseconds" : 11309,
+      "milliseconds" : 11252,
       "spec" : "§7.3, §13",
       "status" : "pass",
       "title" : "Confirm purges: the job is purged and succeeded, its outputs answer 410 gone"
     },
     {
       "id" : "BASE-028",
-      "milliseconds" : 10,
+      "milliseconds" : 12,
       "spec" : "§7.3, §13",
       "status" : "pass",
       "title" : "Release is idempotent; a released job's outputs answer 410"
     },
     {
       "id" : "BASE-029",
-      "milliseconds" : 18774,
+      "milliseconds" : 13898,
       "spec" : "§6.3, §10",
       "status" : "pass",
       "title" : "Adapters: a run lists them in provenance with licence and strength; unknown, out-of-range and policy-failing ones are refused"
     },
     {
       "id" : "BASE-030",
-      "milliseconds" : 13343,
+      "milliseconds" : 12375,
       "spec" : "§8",
       "status" : "pass",
       "title" : "Uploads: 201 with the right size and SHA-256, at most an hour's expiry, and single use"
@@ -180,28 +180,28 @@
     },
     {
       "id" : "BASE-040",
-      "milliseconds" : 12504,
+      "milliseconds" : 12283,
       "spec" : "§9",
       "status" : "pass",
       "title" : "Grants: the engine pulls with the bearer token, and fails the job on a wrong SHA-256"
     },
     {
       "id" : "BASE-050",
-      "milliseconds" : 11712,
+      "milliseconds" : 11531,
       "spec" : "§11",
       "status" : "pass",
       "title" : "SSE: framed events that validate, rising seq, output_ready, then job.ended after confirm"
     },
     {
       "id" : "BASE-051",
-      "milliseconds" : 11348,
+      "milliseconds" : 11132,
       "spec" : "§11",
       "status" : "pass",
       "title" : "SSE resumes after Last-Event-ID"
     },
     {
       "id" : "BASE-052",
-      "milliseconds" : 11314,
+      "milliseconds" : 11151,
       "spec" : "§11",
       "status" : "pass",
       "title" : "WebSocket: pong, engine.health on \"*\", the client's job events, error messages"
@@ -215,7 +215,7 @@
     },
     {
       "id" : "BASE-070",
-      "milliseconds" : 11332,
+      "milliseconds" : 11185,
       "spec" : "§13",
       "status" : "pass",
       "title" : "Retention deadlines respect the engine's TTLs"
@@ -230,44 +230,42 @@
     },
     {
       "id" : "BASE-080",
-      "milliseconds" : 41,
+      "milliseconds" : 47,
       "spec" : "§15",
       "status" : "pass",
       "title" : "MCP: a session lists one tool per operation (dots → underscores) and the four helpers"
     },
     {
       "id" : "BASE-014",
-      "milliseconds" : 3,
+      "milliseconds" : 7,
       "spec" : "§6.4",
       "status" : "pass",
       "title" : "Offers' declarations are consistent: Base supports keys typed, offer limits within the operation's"
     },
     {
-      "detail" : "stream to auk-flash, which doesn't stream: expected error code unsupported_parameter, got policy_unmet",
       "id" : "BASE-015",
-      "milliseconds" : 6810,
+      "milliseconds" : 1231,
       "spec" : "§6.4 rules 2–3",
-      "status" : "fail",
+      "status" : "pass",
       "title" : "A gate the named model lacks is 422 unsupported_parameter; with no model named, the plan names an offer that has it"
     },
     {
-      "detail" : "a voice auk-flash doesn't list: expected error code unsupported_parameter, got policy_unmet",
       "id" : "BASE-016",
-      "milliseconds" : 68,
+      "milliseconds" : 65,
       "spec" : "§6.5, §10.1",
-      "status" : "fail",
+      "status" : "pass",
       "title" : "A voice implies its model: the plan lists it and provenance names it; an unlisted voice, or one the named model lacks, is 422"
     },
     {
       "id" : "BASE-017",
-      "milliseconds" : 356,
+      "milliseconds" : 372,
       "spec" : "§6.4",
       "status" : "pass",
       "title" : "supports.seed false: a request with a seed runs, and warns seed_ignored"
     },
     {
       "id" : "BASE-018",
-      "milliseconds" : 15,
+      "milliseconds" : 18,
       "spec" : "§6.5",
       "status" : "pass",
       "title" : "Voice lists: as many voices as supports.voices, with an ETag and 304; unique ids; a model without voices, or not offered, is 404"
@@ -275,14 +273,14 @@
     {
       "detail" : "audio.design_voice / auk-flash under LicenseRef-Qwen-Research",
       "id" : "BASE-019",
-      "milliseconds" : 6,
+      "milliseconds" : 8,
       "spec" : "§10.2, §10.3",
       "status" : "pass",
       "title" : "Users' acceptance: an offer whose licence has user_accept_required is 422 policy_unmet (terms_not_accepted) without policy.accepted, and runs with it"
     },
     {
       "id" : "BASE-032",
-      "milliseconds" : 12347,
+      "milliseconds" : 4665,
       "spec" : "§8.1, §13 rule 6",
       "status" : "pass",
       "title" : "Assets: 201 with the right size and SHA-256 and an expiry within max_asset_ttl_s; listed; two jobs use it; DELETE, then 422 and 404"
@@ -320,7 +318,7 @@
     {
       "detail" : "1 chunks, 66600 frames at 24000 Hz",
       "id" : "BASE-054",
-      "milliseconds" : 76,
+      "milliseconds" : 71,
       "spec" : "§7.2, §10.1, §11",
       "status" : "pass",
       "title" : "A streamed job: plan.streams gives the format; chunks from 0 with no gaps, whole frames, one final, before output_ready; the output is the chunks"
@@ -328,78 +326,77 @@
     {
       "detail" : "4 chunks before the release",
       "id" : "BASE-055",
-      "milliseconds" : 299,
+      "milliseconds" : 283,
       "spec" : "§7.3, §11 rule 5",
       "status" : "pass",
       "title" : "Release mid-stream: the outcome is cancelled, no final chunk is sent, and none follows the cancelled state"
     },
     {
-      "detail" : "stream to auk-flash: expected error code unsupported_parameter, got policy_unmet",
       "id" : "BASE-056",
       "milliseconds" : 3,
       "spec" : "§7.1",
-      "status" : "fail",
+      "status" : "pass",
       "title" : "stream on an output that can't stream, or to a named model that doesn't stream, is 422 unsupported_parameter"
     },
     {
       "id" : "BASE-057",
-      "milliseconds" : 150,
+      "milliseconds" : 140,
       "spec" : "§11 rule 4, §13 rule 2",
       "status" : "pass",
       "title" : "After confirm, a replayed chunk carries no data"
     },
     {
       "id" : "IMAGE-001",
-      "milliseconds" : 4159,
+      "milliseconds" : 2331,
       "spec" : "Image §1.7",
       "status" : "pass",
       "title" : "fill and erase keep black-mask pixels byte-identical"
     },
     {
       "id" : "IMAGE-002",
-      "milliseconds" : 942,
+      "milliseconds" : 137,
       "spec" : "Image §3",
       "status" : "pass",
       "title" : "upscale returns exactly input size × scale, for each scale offered"
     },
     {
       "id" : "IMAGE-003",
-      "milliseconds" : 101056,
+      "milliseconds" : 87920,
       "spec" : "Image §1.8, §3",
       "status" : "pass",
       "title" : "Image operations keep the input size (except upscale and extend)"
     },
     {
       "id" : "IMAGE-004",
-      "milliseconds" : 689,
+      "milliseconds" : 442,
       "spec" : "Image §1.5, §1.6",
       "status" : "pass",
       "title" : "matte masks are 8-bit grey; extract carries alpha"
     },
     {
       "id" : "IMAGE-005",
-      "milliseconds" : 13568,
+      "milliseconds" : 12656,
       "spec" : "Image §1.4",
       "status" : "pass",
       "title" : "EXIF orientation is applied; outputs are upright with no rotation flag"
     },
     {
       "id" : "IMAGE-006",
-      "milliseconds" : 12377,
+      "milliseconds" : 12390,
       "spec" : "Image §1.3, §4",
       "status" : "pass",
       "title" : "A non-sRGB input is converted: a color_converted warning and an output tagged sRGB"
     },
     {
       "id" : "IMAGE-007",
-      "milliseconds" : 22592,
+      "milliseconds" : 22975,
       "spec" : "Image §2",
       "status" : "pass",
       "title" : "The seed is reported, and the same seed reproduces the result"
     },
     {
       "id" : "IMAGE-008",
-      "milliseconds" : 4,
+      "milliseconds" : 0,
       "spec" : "Image §2",
       "status" : "pass",
       "title" : "size and aspect together are refused with 400"
@@ -413,35 +410,35 @@
     },
     {
       "id" : "IMAGE-010",
-      "milliseconds" : 0,
+      "milliseconds" : 1,
       "spec" : "Image §1.2",
       "status" : "pass",
       "title" : "An output the operation doesn't offer is refused with 422 unsupported_parameter"
     },
     {
       "id" : "IMAGE-011",
-      "milliseconds" : 6193,
+      "milliseconds" : 2898,
       "spec" : "Image §3.1",
       "status" : "pass",
       "title" : "enhance_prompt returns enhanced data with prompt and applied, for a target model the target operation offers"
     },
     {
       "id" : "IMAGE-012",
-      "milliseconds" : 24451,
+      "milliseconds" : 25383,
       "spec" : "Image §1.9",
       "status" : "pass",
       "title" : "With prompt_enhance off the text goes as typed: no prompt_rewritten unless prompt_enhance_ignored says why"
     },
     {
       "id" : "IMAGE-013",
-      "milliseconds" : 19468,
+      "milliseconds" : 21160,
       "spec" : "Image §1.10",
       "status" : "pass",
       "title" : "An ic adapter's required slots are counted: too few references or images is 400"
     },
     {
       "id" : "IMAGE-014",
-      "milliseconds" : 100312,
+      "milliseconds" : 99636,
       "spec" : "Image §3.2",
       "status" : "pass",
       "title" : "decompose returns exactly layer_count layers, each an RGBA PNG the input's size; effective.layer_count is the count"
@@ -455,16 +452,16 @@
       "title" : "decompose refuses a layer_count above its maximum (422), outputs without layers (400) and an un-offered composite (422)"
     },
     {
-      "detail" : "4 layers recompose to the input with a mean absolute error of 5.96/255 per channel; the composite's is 5.10/255.",
+      "detail" : "4 layers recompose to the input with a mean absolute error of 2.55/255 per channel; the composite's is 2.46/255.",
       "id" : "IMAGE-016",
-      "milliseconds" : 60269,
+      "milliseconds" : 60522,
       "spec" : "Image §3.2",
       "status" : "pass",
       "title" : "decompose's layers, composited back to front, approximate the input: the error is reported, never failed"
     },
     {
       "id" : "AUDIO-001",
-      "milliseconds" : 3,
+      "milliseconds" : 0,
       "spec" : "Audio §3, §6",
       "status" : "pass",
       "title" : "Descriptors match the profile table: required inputs and outputs of the right kinds, only vocabulary parameters"
@@ -478,75 +475,73 @@
     },
     {
       "id" : "AUDIO-003",
-      "milliseconds" : 50434,
+      "milliseconds" : 29425,
       "spec" : "Audio §1.1, Base §10.1",
       "status" : "pass",
       "title" : "Audio outputs report sample_rate, channels and duration_s, and the file agrees"
     },
     {
+      "detail" : "audio.edit_speech / step-audio-editx refused a FLAC audio: Step-Audio-EditX: the take did not finish within the LM window (7937 audio tokens) — a shorter take, or split it",
       "id" : "AUDIO-004",
-      "milliseconds" : 5729,
+      "milliseconds" : 178457,
       "spec" : "Audio §1.1",
-      "status" : "pass",
+      "status" : "fail",
       "title" : "Every MUST input format is accepted: WAV at 16 and 24 bits and in float, and FLAC"
     },
     {
       "detail" : "voice → kokoro-82m; voice_ref → indextts-2.5; neither → kokoro-82m",
       "id" : "AUDIO-005",
-      "milliseconds" : 1609,
+      "milliseconds" : 5239,
       "spec" : "Audio §3.2, Base §6.4, §6.5",
       "status" : "pass",
       "title" : "speak: a voice, a voice_ref and neither each route to an offer that supports them; voice with voice_ref is 400"
     },
     {
-      "detail" : "an emotion auk-flash doesn't list: expected error code unsupported_parameter, got policy_unmet",
       "id" : "AUDIO-006",
-      "milliseconds" : 1,
+      "milliseconds" : 1460,
       "spec" : "Audio §2.1, Base §6.4 rule 3",
-      "status" : "fail",
+      "status" : "pass",
       "title" : "Labels: an emotion the named model doesn't list is 422; an alias is resolved by the engine"
     },
     {
-      "detail" : "longest silence 1.28 s",
+      "detail" : "longest silence 1.12 s",
       "id" : "AUDIO-007",
-      "milliseconds" : 1826,
+      "milliseconds" : 1958,
       "spec" : "Audio §2.2",
       "status" : "pass",
       "title" : "Cues: one the model can't perform is removed with cue_unsupported; [pause 1s] is about a second of silence"
     },
     {
-      "detail" : "POST jobs (audio.speak): expected 201, got 422 policy_unmet {\"error\":{\"code\":\"policy_unmet\",\"message\":\"AuK-Flash is under LicenseRef-Qwen-Research, whose terms bind each user: show them its notice and terms (https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/mai",
       "id" : "AUDIO-008",
-      "milliseconds" : 5754,
+      "milliseconds" : 11851,
       "spec" : "Audio §3.1",
-      "status" : "fail",
+      "status" : "pass",
       "title" : "design_voice returns count samples with a seed and the sample text; the same seed reproduces; a sample clones"
     },
     {
-      "detail" : "POST jobs (audio.edit_speech): expected 201, got 422 policy_unmet {\"error\":{\"code\":\"policy_unmet\",\"message\":\"AuK-Flash is under LicenseRef-Qwen-Research, whose terms bind each user: show them its notice and terms (https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/mai",
       "id" : "AUDIO-009",
-      "milliseconds" : 1,
+      "milliseconds" : 432,
       "spec" : "Audio §3.3",
-      "status" : "fail",
+      "status" : "pass",
       "title" : "edit_speech: an edit an offer lists runs; one it doesn't is 422; one missing its fields is 400; keeps_length keeps it"
     },
     {
       "id" : "AUDIO-010",
-      "milliseconds" : 46049,
+      "milliseconds" : 48873,
       "spec" : "Audio §3.4",
       "status" : "pass",
       "title" : "generate: count sounds, each duration_s long to the frame, each seeded; the same seed reproduces; an unseeded request reports one"
     },
     {
       "id" : "AUDIO-011",
-      "milliseconds" : 9140,
+      "milliseconds" : 12689,
       "spec" : "Audio §3.5",
       "status" : "pass",
       "title" : "compose: one song with its facts, duration and seed; the same seed reproduces; malformed edits and scores are 400; no named_only offer by default"
     },
     {
       "id" : "AUDIO-012",
-      "milliseconds" : 1038,
+      "milliseconds" : 430,
       "spec" : "Audio §3.5",
       "status" : "pass",
       "title" : "compose extend: the song is before_s + the source + after_s long, to the frame"
@@ -561,60 +556,59 @@
     },
     {
       "id" : "AUDIO-014",
-      "milliseconds" : 4753,
+      "milliseconds" : 5802,
       "spec" : "Audio §1.2, §1.8",
       "status" : "pass",
       "title" : "Output format: output.sample_rate is honoured; an un-offered media type is 422; a seed above 2³²−1 is 422"
     },
     {
-      "detail" : "POST jobs (audio.separate): expected 201, got 422 policy_unmet {\"error\":{\"code\":\"policy_unmet\",\"message\":\"AuK-Flash is under LicenseRef-Qwen-Research, whose terms bind each user: show them its notice and terms (https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/mai",
+      "detail" : "auk-flash speaker+singing (regenerated); auk speaker+singing+voices (regenerated); demo-separator vocals+instrumental (masked)",
       "id" : "AUDIO-015",
-      "milliseconds" : 1,
+      "milliseconds" : 10573,
       "spec" : "Audio §3.6",
-      "status" : "fail",
+      "status" : "pass",
       "title" : "separate: each offer's stems run, one output per stem named by it, with its facts and the mixture's length"
     },
     {
-      "detail" : "the stem 'instrumental' to auk-flash, which doesn't list it: expected error code unsupported_parameter, got policy_unmet",
+      "detail" : "refused: unlisted stem, speaker without a pick, a pick without the speaker stem",
       "id" : "AUDIO-016",
-      "milliseconds" : 1,
+      "milliseconds" : 5,
       "spec" : "Audio §3.6, Base §6.4 rule 3",
-      "status" : "fail",
+      "status" : "pass",
       "title" : "separate: an unlisted stem and an unlisted pick kind are 422; the speaker stem without a pick, or a pick without it, is 400"
     },
     {
-      "detail" : "a 31 s mixture to auk-flash: expected error code out_of_limits, got policy_unmet",
       "id" : "AUDIO-017",
-      "milliseconds" : 5,
+      "milliseconds" : 16,
       "spec" : "Audio §1.7, §3.6, §4.2",
-      "status" : "fail",
+      "status" : "pass",
       "title" : "separate: a mixture longer than the offer's max_duration_s is 422 out_of_limits"
     },
     {
-      "detail" : "a cue placed inline on auk-flash: expected error code unsupported_parameter, got policy_unmet",
+      "detail" : "inline cue, removing every cue, target_duration_s, fitted auk-flash to 1.5 s",
       "id" : "AUDIO-018",
-      "milliseconds" : 1,
+      "milliseconds" : 439,
       "spec" : "Audio §3.3, §4.1",
-      "status" : "fail",
+      "status" : "pass",
       "title" : "edit_speech: a cue placement, removing every cue and target_duration_s each need their key; a fitted take is that long"
     },
     {
       "id" : "VIDEO-001",
-      "milliseconds" : 4,
+      "milliseconds" : 0,
       "spec" : "Video §3, §6",
       "status" : "pass",
       "title" : "Descriptors match the profile table: required inputs and outputs of the right kinds, only vocabulary parameters"
     },
     {
       "id" : "VIDEO-002",
-      "milliseconds" : 1,
+      "milliseconds" : 3,
       "spec" : "Video §4",
       "status" : "pass",
       "title" : "Offers' supports keys have the profile's types, offer limits are the profile's fields, and offers with sound state its format"
     },
     {
       "id" : "VIDEO-003",
-      "milliseconds" : 17396,
+      "milliseconds" : 204222,
       "spec" : "Video §1.3, §1.7, Base §10.1",
       "status" : "pass",
       "title" : "Video outputs report width, height, fps, frames and duration_s, the file agrees, and audio facts appear exactly with a track"
@@ -622,62 +616,58 @@
     {
       "detail" : "on video.interpolate / rife-4.25",
       "id" : "VIDEO-004",
-      "milliseconds" : 599,
+      "milliseconds" : 6548,
       "spec" : "Video §1.1",
       "status" : "pass",
       "title" : "Every MUST input format is accepted: MP4 with H.264 and with HEVC, each with AAC"
     },
     {
-      "detail" : "the engine offers none of video.generate",
       "id" : "VIDEO-005",
-      "milliseconds" : 0,
+      "milliseconds" : 55180,
       "spec" : "Video §1.3, §1.4, §2",
-      "status" : "skip",
+      "status" : "pass",
       "title" : "generate: frames on the offer's grid, effective duration_s, fps, size and frames as made; size with aspect is 400; an off-grid size snaps"
     },
     {
-      "detail" : "the engine offers none of video.generate",
       "id" : "VIDEO-006",
-      "milliseconds" : 0,
+      "milliseconds" : 53847,
       "spec" : "Video §3.1, §4.1",
-      "status" : "skip",
+      "status" : "pass",
       "title" : "generate: fixed frames route to offers that support them; a named offer that doesn't is 422; keyframes without a time each is 400"
     },
     {
-      "detail" : "the engine offers none of video.generate",
       "id" : "VIDEO-007",
-      "milliseconds" : 3,
+      "milliseconds" : 55030,
       "spec" : "Video §1.7, §4.1",
-      "status" : "skip",
+      "status" : "pass",
       "title" : "audio: false gives a silent clip; audio: true to an offer without sound is 422"
     },
     {
-      "detail" : "the engine offers none of video.generate",
       "id" : "VIDEO-008",
-      "milliseconds" : 0,
+      "milliseconds" : 82114,
       "spec" : "Video §3.1",
-      "status" : "skip",
+      "status" : "pass",
       "title" : "soundtrack: the output's track lasts as long as the clip; a named offer without soundtrack is 422"
     },
     {
-      "detail" : "the engine offers none of video.extend",
+      "detail" : "source frames kept within 2.3/255 on average",
       "id" : "VIDEO-009",
-      "milliseconds" : 0,
+      "milliseconds" : 59219,
       "spec" : "Video §1.8, §3.2",
-      "status" : "skip",
+      "status" : "pass",
       "title" : "extend: the source plus the added frames on the grid, the source's frames kept; before_s to an offer without extend_before is 422"
     },
     {
-      "detail" : "the engine offers none of video.retake",
+      "detail" : "9 frames outside the span kept (from frame 0)",
       "id" : "VIDEO-010",
-      "milliseconds" : 0,
+      "milliseconds" : 56392,
       "spec" : "Video §1.8, §3.3",
-      "status" : "skip",
+      "status" : "pass",
       "title" : "retake: the source's frame count, frames outside the span kept; end_s before start_s is 400; an unlisted retake is 422"
     },
     {
       "id" : "VIDEO-011",
-      "milliseconds" : 3464,
+      "milliseconds" : 8086,
       "spec" : "Video §1.7, §3.4",
       "status" : "pass",
       "title" : "upscale: exactly size × scale, the same frames and fps, audio kept; no content is 400; an unlisted content is 422"
@@ -685,15 +675,15 @@
     {
       "detail" : "source frames kept within 1.4/255 on average",
       "id" : "VIDEO-012",
-      "milliseconds" : 209,
+      "milliseconds" : 718,
       "spec" : "Video §1.7, §3.5",
       "status" : "pass",
       "title" : "interpolate: (N − 1) × factor + 1 frames at fps × factor, source frames kept, audio kept; factor with fps is 400"
     },
     {
-      "detail" : "checked upscale, interpolate",
+      "detail" : "checked generate, upscale, interpolate",
       "id" : "VIDEO-013",
-      "milliseconds" : 3791,
+      "milliseconds" : 65383,
       "spec" : "Video §1.9, Base §10.2",
       "status" : "pass",
       "title" : "Disclosure: a generated clip says AI-generated in its comment item; upscale and interpolate keep an input's marking"
@@ -707,9 +697,9 @@
       "title" : "Previews from an offer with supports.previews are images with at_s inside the clip"
     },
     {
-      "detail" : "no Video offer takes a seed",
+      "detail" : "video.generate / ltx-2.5-compact24: the same seed differed by at most 1.23/255 (not deterministic)",
       "id" : "VIDEO-015",
-      "milliseconds" : 0,
+      "milliseconds" : 113122,
       "spec" : "Video §1.2, §1.13",
       "status" : "pass",
       "title" : "seed is reported; the same seed reproduces where the offer is deterministic; an output media type not offered is 422"
@@ -723,6 +713,6 @@
       "title" : "Pairing: the token is handed out once, and unpairing revokes it"
     }
   ],
-  "startedAt" : "2026-11-06T03:25:14Z",
+  "startedAt" : "2026-11-06T05:18:23Z",
   "suite" : "MES conformance 0.1"
 }
