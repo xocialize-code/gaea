@@ -27,6 +27,62 @@ let repoRoot = URL(fileURLWithPath: #filePath).deletingLastPathComponent().delet
     }
 }
 
+/// A lane that declares an ActivationScaling on output pixels is charged per job (Klein's latent upscale, AB-T-0464): the
+/// line through 11.2 GB at 1024² and 27.0 GB at 4096², as flux2-klein-swift 0.11.0 declares it.
+@Suite struct WorkloadChargeTests {
+    let model: PluginManifest.Model
+
+    init() throws {
+        var json = try #require(JSONSerialization.jsonObject(with: Data(contentsOf: repoRoot.appending(path: "examples/v1/manifest/z-image.json"))) as? [String: Any])
+        var models = try #require(json["models"] as? [[String: Any]])
+        var lanes = try #require(models[0]["lanes"] as? [[String: Any]])
+        let small = 1024.0 * 1024, big = 4096.0 * 4096
+        let slope = (27.0e9 - 11.2e9) / (big - small), base = 11.2e9 - slope * small
+        for i in lanes.indices {
+            var resolved = try #require(lanes[i]["resolved"] as? [String: Any])
+            resolved["persistentBytes"] = 13_650_000_000
+            resolved["peakTransientBytes"] = 11_200_000_000
+            resolved["activationScaling"] = ["axis": "outputPixels", "baseBytes": UInt64(base), "bytesPerUnit": slope, "measuredCeiling": big]
+            lanes[i]["resolved"] = resolved
+        }
+        models[0]["lanes"] = lanes
+        json["models"] = models
+        model = try JSONDecoder().decode(PluginManifest.self, from: JSONSerialization.data(withJSONObject: json)).models[0]
+    }
+
+    func size(_ w: Int, _ h: Int) -> [String: JSONValue] { ["size": ["width": .int(Int64(w)), "height": .int(Int64(h))]] }
+
+    @Test func aJobIsChargedOnTheLineAtItsSize() throws {
+        let lane = model.lanes[0]
+        #expect(LaneChoice.workload(lane, params: size(2048, 1024)) == Double(2048 * 1024))
+        let at1k = LaneChoice.transient(lane, params: size(1024, 1024)), at4k = LaneChoice.transient(lane, params: size(4096, 4096))
+        #expect(abs(Double(at1k) - 11.2e9) < 1e6 && abs(Double(at4k) - 27.0e9) < 1e6)
+        #expect(LaneChoice.transient(lane, params: size(2048, 2048)) > at1k)
+        // No size (an edit the model sizes itself) and a lane with no scaling charge the scalar.
+        #expect(LaneChoice.transient(lane, params: [:]) == 11_200_000_000)
+        #expect(LaneChoice.need(lane, params: size(4096, 4096)) == 13_650_000_000 + at4k)
+    }
+
+    @Test func aLargeJobFallsBackOrIsRefusedWhereASmallOneFits() throws {
+        // 30 GB free: every lane fits a 1024² job (24.85 GB) and none a 4096² one (40.65 GB).
+        let small = try LaneChoice.choose(model, named: nil, preferred: nil, available: 30_000_000_000, params: size(1024, 1024))
+        #expect(small.fellBackFrom == nil)
+        #expect(throws: LaneChoice.Refusal.self) {
+            try LaneChoice.choose(model, named: nil, preferred: nil, available: 30_000_000_000, params: size(4096, 4096))
+        }
+        #expect(throws: LaneChoice.Refusal.self) {
+            try LaneChoice.choose(model, named: model.lanes[0].id, preferred: nil, available: 30_000_000_000, params: size(4096, 4096))
+        }
+    }
+
+    @Test func aScaledLaneLearnsNoSinglePeak() throws {
+        // The unscaled rule still raises a lane to what it held; a scaled lane is admitted on its line instead, so
+        // learnPeak skips it (Scheduler.learnPeak). Here: the line already covers 4096²'s measured 40.7 GB within 1 GB.
+        let lane = model.lanes[0]
+        #expect(Double(LaneChoice.need(lane, params: size(4096, 4096))) > 40.6e9)
+    }
+}
+
 /// A manifest from a plugin built on a newer engine contract must decode: AuK 0.1.0's speech-edit control lists
 /// contract 1.59.0's operations (dereverberate, hum), which Gaea 1.1.0's engine (0.73.0) couldn't read (AB-T-0455).
 @Suite struct ManifestDecodingTests {

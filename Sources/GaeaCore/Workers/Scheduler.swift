@@ -52,6 +52,29 @@ public enum LaneChoice {
     /// Persistent weights plus the peak transient: what a lane needs while it runs.
     public static func need(_ lane: PluginManifest.Lane) -> UInt64 { lane.resolved.persistentBytes &+ lane.resolved.peakTransientBytes }
 
+    /// What a job's workload is on the lane's `ActivationScaling` axis, read from its params: `outputPixels` is the
+    /// image `size` Gaea plans (width × height). Nil for any other axis, for a lane that declares no scaling, and for a
+    /// job that asks no size: those charge the lane's scalar.
+    public static func workload(_ lane: PluginManifest.Lane, params: [String: JSONValue]) -> Double? {
+        guard let scaling = lane.resolved.activationScaling, scaling.axis == .outputPixels,
+              let w = params["size"]?["width"]?.intValue, let h = params["size"]?["height"]?.intValue, w > 0, h > 0 else { return nil }
+        return Double(w) * Double(h)
+    }
+
+    /// The transient one job on `lane` reserves: the scaling line at the job's workload when the lane declares one (the
+    /// engine's per-run reservation, WorkloadDeclaring), else the lane's peak transient.
+    public static func transient(_ lane: PluginManifest.Lane, params: [String: JSONValue]) -> UInt64 {
+        guard let units = workload(lane, params: params), let scaling = lane.resolved.activationScaling else {
+            return lane.resolved.peakTransientBytes
+        }
+        return scaling.projectedBytes(at: units)
+    }
+
+    /// What `lane` needs while it runs a job with `params`: its persistent bytes and that job's transient.
+    public static func need(_ lane: PluginManifest.Lane, params: [String: JSONValue]) -> UInt64 {
+        lane.resolved.persistentBytes &+ transient(lane, params: params)
+    }
+
     /// `model` with each lane's need raised to what that lane was measured holding, where that's more than it declares
     /// (`measured` by lane id). The persistent part stays declared; the transient takes the rest.
     public static func learned(_ model: PluginManifest.Model, measured: [String: UInt64]) -> PluginManifest.Model {
@@ -72,9 +95,12 @@ public enum LaneChoice {
 
     /// The operator's default lane when it fits, else the largest smaller lane that fits (reported as `fellBackFrom`).
     /// A named lane is that lane or a refusal.
-    public static func choose(_ model: PluginManifest.Model, named: String?, preferred: String?, available: UInt64) throws(Refusal)
+    /// `params` sizes a lane that declares an `ActivationScaling` (`need(_:params:)`).
+    public static func choose(_ model: PluginManifest.Model, named: String?, preferred: String?, available: UInt64,
+                              params: [String: JSONValue] = [:]) throws(Refusal)
         -> (lane: PluginManifest.Lane, fellBackFrom: PluginManifest.Lane?)
     {
+        func need(_ lane: PluginManifest.Lane) -> UInt64 { LaneChoice.need(lane, params: params) }
         if let named {
             guard let lane = model.lanes.first(where: { $0.id == named }) else { throw .unknownLane(named, model: model.id) }
             guard need(lane) <= available else { throw .namedDoesNotFit(named, need: need(lane), available: available) }
@@ -240,9 +266,11 @@ public actor Scheduler: WorkerControl {
         /// Every `model/lane` this worker has prepared since it started: its lifetime peak is a lane's own only while
         /// this holds one.
         var everPrepared: Set<String> = []
+        /// The transient the running job was admitted at, when its lane scales with the job's workload; nil between jobs.
+        var runTransientBytes: UInt64?
 
         var persistentBytes: UInt64 { prepared.values.reduce(0) { $0 + $1.resolved.persistentBytes } }
-        var peakTransientBytes: UInt64 { prepared.values.map(\.resolved.peakTransientBytes).max() ?? 0 }
+        var peakTransientBytes: UInt64 { runTransientBytes ?? prepared.values.map(\.resolved.peakTransientBytes).max() ?? 0 }
         var declaredBytes: UInt64 { persistentBytes + peakTransientBytes }
     }
 
@@ -418,6 +446,7 @@ public actor Scheduler: WorkerControl {
             outcome = .failure(error)
         }
         running[job.pluginID] = nil
+        slots[job.pluginID]?.runTransientBytes = nil
         busy.remove(job.pluginID)
         slots[job.pluginID]?.lastUsed = Date()
         if restartWhenIdle.remove(job.pluginID) != nil { await retire(plugin: job.pluginID) }
@@ -465,7 +494,7 @@ public actor Scheduler: WorkerControl {
         let storageKey = "\(plugin.id)/\(model.id)"
         let (fast, skipped) = try StorageFloor.filter(model, read: volumeReads[storageKey], named: job.namedLane)
         let preferred = (try? database.setting(Self.laneSetting(plugin: plugin.id, model: model.id))) ?? nil
-        let (lane, memoryFallback) = try await chooseLane(fast, plugin: plugin.id, named: job.namedLane,
+        let (lane, memoryFallback) = try await chooseLane(fast, plugin: plugin.id, named: job.namedLane, params: job.params,
                                                           preferred: preferred.flatMap { p in fast.lanes.contains { $0.id == p } ? p : nil },
                                                           conduct: requeued ? .waiting : .preempting)
         var fellBackFrom = memoryFallback
@@ -476,8 +505,8 @@ public actor Scheduler: WorkerControl {
                 + "that reads \((skipped.resolved.minSustainedReadBytesPerSecond ?? 0).mbps); this one reads \((volumeReads[storageKey] ?? 0).mbps)."
             log("scheduler: lane_fallback \(model.id): \(skipped.id) → \(lane.id) (storage floor)")
         } else if let memoryFallback {
-            fallbackMessage = "Loaded \(model.id) lane \(lane.id) (\(LaneChoice.need(lane).gb)) instead of the default \(memoryFallback.id) "
-                + "(\(LaneChoice.need(memoryFallback).gb)), which doesn't fit in the memory free now."
+            fallbackMessage = "Loaded \(model.id) lane \(lane.id) (\(LaneChoice.need(lane, params: job.params).gb)) instead of the default "
+                + "\(memoryFallback.id) (\(LaneChoice.need(memoryFallback, params: job.params).gb)), which doesn't fit in the memory free now."
             log("scheduler: lane_fallback \(model.id): \(memoryFallback.id) → \(lane.id)")
         }
 
@@ -502,6 +531,8 @@ public actor Scheduler: WorkerControl {
             slots[plugin.id]?.prepared[model.id] = lane
             slots[plugin.id]?.everPrepared.insert("\(model.id)/\(lane.id)")
         }
+        // A lane that scales with the job is charged this job's transient while it runs (cleared when the job ends).
+        slots[plugin.id]?.runTransientBytes = lane.resolved.activationScaling == nil ? nil : LaneChoice.transient(lane, params: job.params)
 
         var fields: [String: JSONValue] = [
             "job": .string(job.job), "operation": .string(job.operation), "model": .string(model.id), "lane": .string(lane.id),
@@ -527,21 +558,22 @@ public actor Scheduler: WorkerControl {
     /// Picks the lane (G-23) against what stopping every idle worker would free, then admits it under the memory policy.
     /// A lane that fits only without the worker's own other models has them unloaded first: the policy sees workers,
     /// not the models inside one.
-    func chooseLane(_ model: PluginManifest.Model, plugin id: String, named: String?, preferred: String?,
-                    conduct: AdmissionConduct) async throws -> (PluginManifest.Lane, PluginManifest.Lane?)
+    func chooseLane(_ model: PluginManifest.Model, plugin id: String, named: String?, params: [String: JSONValue] = [:],
+                    preferred: String?, conduct: AdmissionConduct) async throws -> (PluginManifest.Lane, PluginManifest.Lane?)
     {
         let keeping = available(for: id, keeping: model.id, evictingIdle: true)
-        var choice = try? LaneChoice.choose(model, named: named, preferred: preferred, available: keeping)
+        var choice = try? LaneChoice.choose(model, named: named, preferred: preferred, available: keeping, params: params)
         var dropOwn = false
         if choice == nil || choice?.fellBackFrom != nil, ownBytes(id, except: model.id) > 0,
            let better = try? LaneChoice.choose(model, named: named, preferred: preferred,
-                                               available: available(for: id, keeping: model.id, evictingIdle: true, keepingOwn: false)),
+                                               available: available(for: id, keeping: model.id, evictingIdle: true, keepingOwn: false),
+                                               params: params),
            choice == nil || better.fellBackFrom == nil {
             choice = better
             dropOwn = true
         }
         // Nothing fits either way: the refusal names what the worker keeping its models would have.
-        let chosen = try choice ?? LaneChoice.choose(model, named: named, preferred: preferred, available: keeping)
+        let chosen = try choice ?? LaneChoice.choose(model, named: named, preferred: preferred, available: keeping, params: params)
         if dropOwn, let slot = slots[id] {
             for other in slot.prepared.keys.sorted() where other != model.id {
                 log("scheduler: unloading \(other) from \(id)'s worker: \(model.id) \(chosen.lane.id) fits only without it")
@@ -549,16 +581,18 @@ public actor Scheduler: WorkerControl {
                 slots[id]?.prepared[other] = nil
             }
         }
-        try await admit(chosen.lane, model: model.id, plugin: id, conduct: conduct)
+        let transient = LaneChoice.transient(chosen.lane, params: params)
+        try await admit(chosen.lane, model: model.id, plugin: id, transient: transient, conduct: conduct)
         return (chosen.lane, chosen.fellBackFrom)
     }
 
     /// Admits a lane under MLXMemoryPolicy and carries out its plan: the idle workers it evicts, least recently used
     /// first, and those real pressure evicts, each logged with the policy's reason. A refusal is `no_capacity`.
-    func admit(_ lane: PluginManifest.Lane, model: String, plugin id: String, conduct: AdmissionConduct) async throws {
+    func admit(_ lane: PluginManifest.Lane, model: String, plugin id: String, transient: UInt64? = nil,
+               conduct: AdmissionConduct) async throws {
         let state = memoryState()
         let admission = MemoryAdmission(tenant: id, persistentBytes: ownBytes(id, except: model) + lane.resolved.persistentBytes,
-                                        transientBytes: lane.resolved.peakTransientBytes)
+                                        transientBytes: transient ?? lane.resolved.peakTransientBytes)
         // R-MEM-1 reads what the other workers measure, plus what this one will hold.
         let reading = state.tenants.filter { $0.id != id }.reduce(admission.persistentBytes) { $0 + ($1.measuredBytes ?? $1.persistentBytes) }
         let plan = policy.plan(admission, in: state, conduct: conduct, measuredReading: reading)
@@ -673,6 +707,9 @@ public actor Scheduler: WorkerControl {
     /// the lane declares and what was measured before, so the next admission charges it.
     func learnPeak(plugin: InstalledPlugin, model: String, lane: PluginManifest.Lane, worker: WorkerProcess) {
         guard slots[plugin.id]?.everPrepared == ["\(model)/\(lane.id)"], let peak = worker.peakFootprint else { return }
+        // A lane that scales with the job declares a line, not one peak: a large job's footprint would be charged to every
+        // small one after it. Its runs are admitted on the line (`LaneChoice.transient`).
+        guard lane.resolved.activationScaling == nil else { return }
         let key = Self.peakSetting(plugin: plugin, model: model, lane: lane.id)
         let known = ((try? database.setting(key)) ?? nil).flatMap(UInt64.init) ?? 0
         guard peak > max(known, LaneChoice.need(lane)) else { return }
