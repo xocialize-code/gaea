@@ -1,0 +1,80 @@
+{
+ "portrait": {
+  "generate_1024_s": 3.343,
+  "generate_2048_s": 18.039,
+  "pass_2k_s": 0.222,
+  "taef2_2k_s": 0.162,
+  "mps_alloc_after_taef2_2k_gb": 22.32,
+  "pass_4k_s": 0.761,
+  "taef2_4k_s": 0.758,
+  "mps_alloc_after_taef2_4k_gb": 31.31,
+  "pass_8k_s": 2.879,
+  "taef2_8k_s": 2.972,
+  "mps_alloc_after_taef2_8k_gb": 51.04
+ },
+ "forest": {
+  "generate_1024_s": 3.372,
+  "generate_2048_s": 17.971,
+  "pass_2k_s": 0.223,
+  "taef2_2k_s": 0.16,
+  "mps_alloc_after_taef2_2k_gb": 22.32,
+  "pass_4k_s": 0.755,
+  "taef2_4k_s": 0.736,
+  "mps_alloc_after_taef2_4k_gb": 31.31,
+  "pass_8k_s": 2.855,
+  "taef2_8k_s": 2.934,
+  "mps_alloc_after_taef2_8k_gb": 51.04
+ },
+ "sign": {
+  "generate_1024_s": 3.377,
+  "generate_2048_s": 17.99,
+  "pass_2k_s": 0.22,
+  "taef2_2k_s": 0.161,
+  "mps_alloc_after_taef2_2k_gb": 22.32,
+  "pass_4k_s": 0.741,
+  "taef2_4k_s": 0.737,
+  "mps_alloc_after_taef2_4k_gb": 31.31,
+  "pass_8k_s": 2.871,
+  "taef2_8k_s": 2.944,
+  "mps_alloc_after_taef2_8k_gb": 51.04
+ },
+ "cat": {
+  "generate_1024_s": 3.377,
+  "generate_2048_s": 17.977,
+  "pass_2k_s": 0.224,
+  "taef2_2k_s": 0.16,
+  "mps_alloc_after_taef2_2k_gb": 22.32,
+  "pass_4k_s": 0.77,
+  "taef2_4k_s": 0.734,
+  "mps_alloc_after_taef2_4k_gb": 31.31,
+  "pass_8k_s": 2.869,
+  "taef2_8k_s": 2.924,
+  "mps_alloc_after_taef2_8k_gb": 51.04
+ },
+ "city": {
+  "generate_1024_s": 3.371,
+  "generate_2048_s": 18.002,
+  "pass_2k_s": 0.238,
+  "taef2_2k_s": 0.161,
+  "mps_alloc_after_taef2_2k_gb": 22.32,
+  "pass_4k_s": 0.761,
+  "taef2_4k_s": 0.724,
+  "mps_alloc_after_taef2_4k_gb": 31.31,
+  "pass_8k_s": 2.856,
+  "taef2_8k_s": 2.927,
+  "mps_alloc_after_taef2_8k_gb": 51.04
+ },
+ "illustration": {
+  "generate_1024_s": 3.375,
+  "generate_2048_s": 17.953,
+  "pass_2k_s": 0.238,
+  "taef2_2k_s": 0.16,
+  "mps_alloc_after_taef2_2k_gb": 22.32,
+  "pass_4k_s": 0.747,
+  "taef2_4k_s": 0.737,
+  "mps_alloc_after_taef2_4k_gb": 31.31,
+  "pass_8k_s": 2.86,
+  "taef2_8k_s": 2.927,
+  "mps_alloc_after_taef2_8k_gb": 51.04
+ }
+}

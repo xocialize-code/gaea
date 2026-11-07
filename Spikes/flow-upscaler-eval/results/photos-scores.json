@@ -1,0 +1,1046 @@
+{
+"flow-dt|x2|boat": {
+"mtime": 1794070168.648227,
+"size": [
+2496,
+1664
+],
+"lpips_gt": 0.13808025295535722,
+"dists_gt": 0.10255464911460876,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow-dt|x2|face-man": {
+"mtime": 1794070176.1333055,
+"size": [
+1520,
+2288
+],
+"lpips_gt": 0.2131940002242724,
+"dists_gt": 0.10319133599599202,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow-dt|x2|face-woman": {
+"mtime": 1794070186.2485409,
+"size": [
+1696,
+2448
+],
+"lpips_gt": 0.11781467854355772,
+"dists_gt": 0.07302156090736389,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow-dt|x2|group": {
+"mtime": 1794070195.9261172,
+"size": [
+2496,
+1664
+],
+"lpips_gt": 0.13230141003926596,
+"dists_gt": 0.07626331845919292,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow-dt|x2|kiosk": {
+"mtime": 1794070203.1821184,
+"size": [
+2240,
+1488
+],
+"lpips_gt": 0.1311553455889225,
+"dists_gt": 0.07472214102745056,
+"truth_words": 14,
+"f1": 0.5806451612903226,
+"f1_in": 0.8,
+"corrupted": 3,
+"fixed": 2,
+"invented": 8
+},
+"flow-dt|x2|painting": {
+"mtime": 1794070210.4734714,
+"size": [
+2128,
+1568
+],
+"lpips_gt": 0.4920971194903056,
+"dists_gt": 0.1009039580821991,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow-dt|x2|poster": {
+"mtime": 1794070219.8785837,
+"size": [
+1664,
+2496
+],
+"lpips_gt": 0.06162446551024914,
+"dists_gt": 0.08916613459587097,
+"truth_words": 46,
+"f1": 0.5625,
+"f1_in": 0.5217391304347826,
+"corrupted": 1,
+"fixed": 1,
+"invented": 0
+},
+"flow-dt|x2|sign-forge": {
+"mtime": 1794070229.3495936,
+"size": [
+2336,
+1776
+],
+"lpips_gt": 0.1502575824658076,
+"dists_gt": 0.08526428540547688,
+"truth_words": 13,
+"f1": 0.8,
+"f1_in": 0.8461538461538461,
+"corrupted": 2,
+"fixed": 1,
+"invented": 2
+},
+"flow-dt|x2|stamp": {
+"mtime": 1794070237.3090377,
+"size": [
+1744,
+2000
+],
+"lpips_gt": 0.14820517475406328,
+"dists_gt": 0.09518015384674072,
+"truth_words": 4,
+"f1": 0.6666666666666666,
+"f1_in": 0.75,
+"corrupted": 1,
+"fixed": 0,
+"invented": 0
+},
+"flow-dt|x2|zt-cats": {
+"mtime": 1794070246.355206,
+"size": [
+2048,
+2048
+],
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow-dt|x2|zt-jazz": {
+"mtime": 1794070255.2659152,
+"size": [
+2048,
+2048
+],
+"truth_words": 32,
+"f1": 0.7619047619047619,
+"f1_in": 1.0,
+"corrupted": 8,
+"fixed": 0,
+"invented": 7
+},
+"flow-dt|x2|zt-reader": {
+"mtime": 1794070264.182173,
+"size": [
+2048,
+2048
+],
+"truth_words": 1,
+"f1": 1.0,
+"f1_in": 1.0,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow-dt|x4|boat": {
+"mtime": 1794070300.5069458,
+"size": [
+4992,
+3328
+],
+"lpips_gt": 0.21734977637728056,
+"dists_gt": 0.20587464173634848,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow-dt|x4|face-man": {
+"mtime": 1794070329.6618161,
+"size": [
+3040,
+4576
+],
+"lpips_gt": 0.31791221847136814,
+"dists_gt": 0.24142909049987793,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow-dt|x4|face-woman": {
+"mtime": 1794070366.077518,
+"size": [
+3392,
+4896
+],
+"lpips_gt": 0.181609938852489,
+"dists_gt": 0.12989482283592224,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow-dt|x4|group": {
+"mtime": 1794070402.417272,
+"size": [
+4992,
+3328
+],
+"lpips_gt": 0.29570115357637405,
+"dists_gt": 0.2086930274963379,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow-dt|x4|kiosk": {
+"mtime": 1794070430.3488848,
+"size": [
+4480,
+2976
+],
+"lpips_gt": 0.23317086696624756,
+"dists_gt": 0.1764304538567861,
+"truth_words": 17,
+"f1": 0.42424242424242425,
+"f1_in": 0.6428571428571428,
+"corrupted": 3,
+"fixed": 1,
+"invented": 9
+},
+"flow-dt|x4|painting": {
+"mtime": 1794070458.8719141,
+"size": [
+4256,
+3136
+],
+"lpips_gt": 0.4293586214383443,
+"dists_gt": 0.28236647446950275,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow-dt|x4|poster": {
+"mtime": 1794070494.5123496,
+"size": [
+3328,
+4992
+],
+"lpips_gt": 0.1406561297674974,
+"dists_gt": 0.19071921706199646,
+"truth_words": 22,
+"f1": 0.8095238095238095,
+"f1_in": 0.8444444444444444,
+"corrupted": 2,
+"fixed": 0,
+"invented": 3
+},
+"flow-dt|x4|sign-forge": {
+"mtime": 1794070529.7784622,
+"size": [
+4672,
+3552
+],
+"lpips_gt": 0.2551436920960744,
+"dists_gt": 0.16624240080515543,
+"truth_words": 13,
+"f1": 0.7199999999999999,
+"f1_in": 0.7692307692307693,
+"corrupted": 2,
+"fixed": 1,
+"invented": 3
+},
+"flow-dt|x4|stamp": {
+"mtime": 1794070559.8451111,
+"size": [
+3488,
+4000
+],
+"lpips_gt": 0.33662429451942444,
+"dists_gt": 0.20238199830055237,
+"truth_words": 4,
+"f1": 0.5,
+"f1_in": 0.75,
+"corrupted": 2,
+"fixed": 1,
+"invented": 2
+},
+"flow-dt|x4|zt-cats": {
+"mtime": 1794070596.0970056,
+"size": [
+4096,
+4096
+],
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow-dt|x4|zt-jazz": {
+"mtime": 1794070632.161587,
+"size": [
+4096,
+4096
+],
+"truth_words": 32,
+"f1": 0.7619047619047619,
+"f1_in": 1.0,
+"corrupted": 8,
+"fixed": 0,
+"invented": 7
+},
+"flow-dt|x4|zt-reader": {
+"mtime": 1794070668.284449,
+"size": [
+4096,
+4096
+],
+"truth_words": 1,
+"f1": 1.0,
+"f1_in": 1.0,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"lanczos|x2|boat": {
+"mtime": 1794070159.454732,
+"size": [
+2496,
+1664
+],
+"lpips_gt": 0.2123617579539617,
+"dists_gt": 0.07108585039774577,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"lanczos|x2|face-man": {
+"mtime": 1794070168.8052962,
+"size": [
+1520,
+2288
+],
+"lpips_gt": 0.2786318038900693,
+"dists_gt": 0.08475270867347717,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"lanczos|x2|face-woman": {
+"mtime": 1794070176.3223066,
+"size": [
+1696,
+2448
+],
+"lpips_gt": 0.13772335570926467,
+"dists_gt": 0.0523661474386851,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"lanczos|x2|group": {
+"mtime": 1794070186.4924853,
+"size": [
+2496,
+1664
+],
+"lpips_gt": 0.15852793802817663,
+"dists_gt": 0.04600810011227926,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"lanczos|x2|kiosk": {
+"mtime": 1794070196.091274,
+"size": [
+2240,
+1488
+],
+"lpips_gt": 0.23942175755898157,
+"dists_gt": 0.061338176329930626,
+"truth_words": 14,
+"f1": 0.8571428571428571,
+"f1_in": 0.8,
+"corrupted": 1,
+"fixed": 3,
+"invented": 2
+},
+"lanczos|x2|painting": {
+"mtime": 1794070203.3600893,
+"size": [
+2128,
+1568
+],
+"lpips_gt": 0.6432863970597585,
+"dists_gt": 0.13523648182551065,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"lanczos|x2|poster": {
+"mtime": 1794070210.6298344,
+"size": [
+1664,
+2496
+],
+"lpips_gt": 0.08923342575629552,
+"dists_gt": 0.07726025581359863,
+"truth_words": 46,
+"f1": 0.506024096385542,
+"f1_in": 0.5217391304347826,
+"corrupted": 0,
+"fixed": 3,
+"invented": 16
+},
+"lanczos|x2|sign-forge": {
+"mtime": 1794070220.0757298,
+"size": [
+2336,
+1776
+],
+"lpips_gt": 0.2801709895332654,
+"dists_gt": 0.07589620351791382,
+"truth_words": 13,
+"f1": 0.9230769230769231,
+"f1_in": 0.8461538461538461,
+"corrupted": 0,
+"fixed": 1,
+"invented": 1
+},
+"lanczos|x2|stamp": {
+"mtime": 1794070229.5178423,
+"size": [
+1744,
+2000
+],
+"lpips_gt": 0.15567117556929588,
+"dists_gt": 0.05970264474550883,
+"truth_words": 4,
+"f1": 0.5,
+"f1_in": 0.75,
+"corrupted": 1,
+"fixed": 0,
+"invented": 2
+},
+"lanczos|x2|zt-cats": {
+"mtime": 1794070237.5140011,
+"size": [
+2048,
+2048
+],
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"lanczos|x2|zt-jazz": {
+"mtime": 1794070246.5668175,
+"size": [
+2048,
+2048
+],
+"truth_words": 32,
+"f1": 0.7868852459016394,
+"f1_in": 1.0,
+"corrupted": 8,
+"fixed": 0,
+"invented": 5
+},
+"lanczos|x2|zt-reader": {
+"mtime": 1794070255.4679122,
+"size": [
+2048,
+2048
+],
+"truth_words": 1,
+"f1": 1.0,
+"f1_in": 1.0,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"lanczos|x4|boat": {
+"mtime": 1794070264.9385035,
+"size": [
+4992,
+3328
+],
+"lpips_gt": 0.3166581317782402,
+"dists_gt": 0.19031508763631186,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"lanczos|x4|face-man": {
+"mtime": 1794070301.1226938,
+"size": [
+3040,
+4576
+],
+"lpips_gt": 0.375241423646609,
+"dists_gt": 0.20136135816574097,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"lanczos|x4|face-woman": {
+"mtime": 1794070330.351215,
+"size": [
+3392,
+4896
+],
+"lpips_gt": 0.22118137769090632,
+"dists_gt": 0.10325345396995544,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"lanczos|x4|group": {
+"mtime": 1794070366.7836618,
+"size": [
+4992,
+3328
+],
+"lpips_gt": 0.32177241146564484,
+"dists_gt": 0.17026846607526144,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 1
+},
+"lanczos|x4|kiosk": {
+"mtime": 1794070403.0095863,
+"size": [
+4480,
+2976
+],
+"lpips_gt": 0.3663974155982335,
+"dists_gt": 0.17567431926727295,
+"truth_words": 17,
+"f1": 0.7333333333333334,
+"f1_in": 0.6428571428571428,
+"corrupted": 0,
+"fixed": 2,
+"invented": 2
+},
+"lanczos|x4|painting": {
+"mtime": 1794070431.0988874,
+"size": [
+4256,
+3136
+],
+"lpips_gt": 0.5720483263333639,
+"dists_gt": 0.31425148248672485,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"lanczos|x4|poster": {
+"mtime": 1794070459.362004,
+"size": [
+3328,
+4992
+],
+"lpips_gt": 0.18717996776103973,
+"dists_gt": 0.18737215797106424,
+"truth_words": 22,
+"f1": 0.9047619047619048,
+"f1_in": 0.8444444444444444,
+"corrupted": 1,
+"fixed": 1,
+"invented": 1
+},
+"lanczos|x4|sign-forge": {
+"mtime": 1794070495.294238,
+"size": [
+4672,
+3552
+],
+"lpips_gt": 0.3541783367594083,
+"dists_gt": 0.1834214727083842,
+"truth_words": 13,
+"f1": 0.8461538461538461,
+"f1_in": 0.7692307692307693,
+"corrupted": 0,
+"fixed": 1,
+"invented": 2
+},
+"lanczos|x4|stamp": {
+"mtime": 1794070530.5282602,
+"size": [
+3488,
+4000
+],
+"lpips_gt": 0.5044443806012472,
+"dists_gt": 0.166863222916921,
+"truth_words": 4,
+"f1": 0.8571428571428571,
+"f1_in": 0.75,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"lanczos|x4|zt-cats": {
+"mtime": 1794070560.5150511,
+"size": [
+4096,
+4096
+],
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"lanczos|x4|zt-jazz": {
+"mtime": 1794070596.7988741,
+"size": [
+4096,
+4096
+],
+"truth_words": 32,
+"f1": 0.7213114754098361,
+"f1_in": 1.0,
+"corrupted": 10,
+"fixed": 0,
+"invented": 7
+},
+"lanczos|x4|zt-reader": {
+"mtime": 1794070632.7870388,
+"size": [
+4096,
+4096
+],
+"truth_words": 1,
+"f1": 1.0,
+"f1_in": 1.0,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow|x2|boat": {
+"mtime": 1794071231.4070072,
+"size": [
+2496,
+1664
+],
+"lpips_gt": 0.10783798371752103,
+"dists_gt": 0.07471902171770732,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 1
+},
+"flow|x2|face-man": {
+"mtime": 1794071231.606659,
+"size": [
+1520,
+2288
+],
+"lpips_gt": 0.19872170314192772,
+"dists_gt": 0.0910520354906718,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow|x2|face-woman": {
+"mtime": 1794071231.8362682,
+"size": [
+1696,
+2448
+],
+"lpips_gt": 0.10833513922989368,
+"dists_gt": 0.059334258238474526,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow|x2|group": {
+"mtime": 1794071232.1089535,
+"size": [
+2496,
+1664
+],
+"lpips_gt": 0.11707565436760585,
+"dists_gt": 0.05992599328358968,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow|x2|kiosk": {
+"mtime": 1794071232.3095152,
+"size": [
+2240,
+1488
+],
+"lpips_gt": 0.11603413460155328,
+"dists_gt": 0.062425305445988975,
+"truth_words": 14,
+"f1": 0.45161290322580644,
+"f1_in": 0.8,
+"corrupted": 4,
+"fixed": 1,
+"invented": 10
+},
+"flow|x2|painting": {
+"mtime": 1794071232.465691,
+"size": [
+2128,
+1568
+],
+"lpips_gt": 0.47364503641923267,
+"dists_gt": 0.08536241451899211,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow|x2|poster": {
+"mtime": 1794071232.7369072,
+"size": [
+1664,
+2496
+],
+"lpips_gt": 0.05253576176861922,
+"dists_gt": 0.08200488487879436,
+"truth_words": 46,
+"f1": 0.53125,
+"f1_in": 0.5217391304347826,
+"corrupted": 2,
+"fixed": 1,
+"invented": 1
+},
+"flow|x2|sign-forge": {
+"mtime": 1794071232.9710732,
+"size": [
+2336,
+1776
+],
+"lpips_gt": 0.13921922942002615,
+"dists_gt": 0.07179706295331319,
+"truth_words": 13,
+"f1": 0.8,
+"f1_in": 0.8461538461538461,
+"corrupted": 2,
+"fixed": 1,
+"invented": 2
+},
+"flow|x2|stamp": {
+"mtime": 1794071233.1555586,
+"size": [
+1744,
+2000
+],
+"lpips_gt": 0.1441779968639215,
+"dists_gt": 0.08492127060890198,
+"truth_words": 4,
+"f1": 0.6666666666666666,
+"f1_in": 0.75,
+"corrupted": 1,
+"fixed": 0,
+"invented": 0
+},
+"flow|x2|zt-cats": {
+"mtime": 1794071233.4235134,
+"size": [
+2048,
+2048
+],
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow|x2|zt-jazz": {
+"mtime": 1794071233.6966424,
+"size": [
+2048,
+2048
+],
+"truth_words": 32,
+"f1": 0.6885245901639345,
+"f1_in": 1.0,
+"corrupted": 11,
+"fixed": 0,
+"invented": 8
+},
+"flow|x2|zt-reader": {
+"mtime": 1794071233.9764123,
+"size": [
+2048,
+2048
+],
+"truth_words": 1,
+"f1": 1.0,
+"f1_in": 1.0,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow|x4|boat": {
+"mtime": 1794071235.0131433,
+"size": [
+4992,
+3328
+],
+"lpips_gt": 0.16740468020240465,
+"dists_gt": 0.1563759744167328,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow|x4|face-man": {
+"mtime": 1794071235.8460965,
+"size": [
+3040,
+4576
+],
+"lpips_gt": 0.2542150020599365,
+"dists_gt": 0.19312683741251627,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow|x4|face-woman": {
+"mtime": 1794071236.7793388,
+"size": [
+3392,
+4896
+],
+"lpips_gt": 0.17126025150840482,
+"dists_gt": 0.11205389102300008,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow|x4|group": {
+"mtime": 1794071237.8836842,
+"size": [
+4992,
+3328
+],
+"lpips_gt": 0.22772815823554993,
+"dists_gt": 0.16088890035947165,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow|x4|kiosk": {
+"mtime": 1794071238.7106004,
+"size": [
+4480,
+2976
+],
+"lpips_gt": 0.212678795059522,
+"dists_gt": 0.1479657789071401,
+"truth_words": 17,
+"f1": 0.4666666666666667,
+"f1_in": 0.6428571428571428,
+"corrupted": 3,
+"fixed": 1,
+"invented": 6
+},
+"flow|x4|painting": {
+"mtime": 1794071239.4479854,
+"size": [
+4256,
+3136
+],
+"lpips_gt": 0.37884065012137097,
+"dists_gt": 0.2678856650988261,
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow|x4|poster": {
+"mtime": 1794071240.558961,
+"size": [
+3328,
+4992
+],
+"lpips_gt": 0.10867132619023323,
+"dists_gt": 0.16186315814654031,
+"truth_words": 22,
+"f1": 0.761904761904762,
+"f1_in": 0.8444444444444444,
+"corrupted": 3,
+"fixed": 0,
+"invented": 4
+},
+"flow|x4|sign-forge": {
+"mtime": 1794071241.5511425,
+"size": [
+4672,
+3552
+],
+"lpips_gt": 0.2393459714949131,
+"dists_gt": 0.14999795953432718,
+"truth_words": 13,
+"f1": 0.7199999999999999,
+"f1_in": 0.7692307692307693,
+"corrupted": 2,
+"fixed": 1,
+"invented": 3
+},
+"flow|x4|stamp": {
+"mtime": 1794071242.4291694,
+"size": [
+3488,
+4000
+],
+"lpips_gt": 0.3091461757818858,
+"dists_gt": 0.17539448539415994,
+"truth_words": 4,
+"f1": 0.8571428571428571,
+"f1_in": 0.75,
+"corrupted": 1,
+"fixed": 1,
+"invented": 0
+},
+"flow|x4|zt-cats": {
+"mtime": 1794071243.3829618,
+"size": [
+4096,
+4096
+],
+"truth_words": 0,
+"f1": null,
+"f1_in": null,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+},
+"flow|x4|zt-jazz": {
+"mtime": 1794071244.3333828,
+"size": [
+4096,
+4096
+],
+"truth_words": 32,
+"f1": 0.7419354838709677,
+"f1_in": 1.0,
+"corrupted": 9,
+"fixed": 0,
+"invented": 7
+},
+"flow|x4|zt-reader": {
+"mtime": 1794071245.2864666,
+"size": [
+4096,
+4096
+],
+"truth_words": 1,
+"f1": 1.0,
+"f1_in": 1.0,
+"corrupted": 0,
+"fixed": 0,
+"invented": 0
+}
+}

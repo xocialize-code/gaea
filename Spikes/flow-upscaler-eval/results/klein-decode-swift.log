@@ -1,0 +1,31 @@
+portrait-base.png 1024x1024 decode 0.94 s peak 2.54 GB
+portrait-native-2k.png 2048x2048 decode 3.88 s peak 7.39 GB
+portrait-flow-2k.png 2048x2048 decode 3.77 s peak 7.39 GB
+portrait-flow-4k.png 4096x4096 decode 18.80 s peak 26.83 GB
+forest-base.png 1024x1024 decode 1.03 s peak 2.54 GB
+forest-native-2k.png 2048x2048 decode 3.83 s peak 7.39 GB
+forest-flow-2k.png 2048x2048 decode 3.86 s peak 7.39 GB
+forest-flow-4k.png 4096x4096 decode 18.71 s peak 26.83 GB
+sign-base.png 1024x1024 decode 1.04 s peak 2.54 GB
+sign-native-2k.png 2048x2048 decode 3.84 s peak 7.39 GB
+sign-flow-2k.png 2048x2048 decode 3.85 s peak 7.39 GB
+sign-flow-4k.png 4096x4096 decode 18.72 s peak 26.83 GB
+cat-base.png 1024x1024 decode 1.01 s peak 2.54 GB
+cat-native-2k.png 2048x2048 decode 3.86 s peak 7.39 GB
+cat-flow-2k.png 2048x2048 decode 3.86 s peak 7.39 GB
+cat-flow-4k.png 4096x4096 decode 18.70 s peak 26.83 GB
+city-base.png 1024x1024 decode 1.03 s peak 2.54 GB
+city-native-2k.png 2048x2048 decode 3.83 s peak 7.39 GB
+city-flow-2k.png 2048x2048 decode 3.86 s peak 7.39 GB
+city-flow-4k.png 4096x4096 decode 18.70 s peak 26.83 GB
+illustration-base.png 1024x1024 decode 1.02 s peak 2.54 GB
+illustration-native-2k.png 2048x2048 decode 3.86 s peak 7.39 GB
+illustration-flow-2k.png 2048x2048 decode 3.84 s peak 7.39 GB
+illustration-flow-4k.png 4096x4096 decode 18.71 s peak 26.83 GB
+forest-flow-8k.png 8192x8192 decode 101.13 s peak 52.33 GB
+sign-flow-8k.png 8192x8192 decode 101.49 s peak 52.33 GB
+cat-flow-8k.png 8192x8192 decode 102.07 s peak 52.33 GB
+city-flow-8k.png 8192x8192 decode 105.35 s peak 52.33 GB
+illustration-flow-8k.png 8192x8192 decode 104.51 s peak 52.33 GB
+portrait-flow-8k.png 8192x8192 decode 175.44 s peak 104.45 GB (fp32)
+portrait-flow-8k-bf16.png 8192x8192 decode 105.07 s peak 52.33 GB (bf16; 53.33 dB vs fp32)

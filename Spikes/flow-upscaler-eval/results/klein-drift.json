@@ -1,0 +1,182 @@
+{
+ "portrait": {
+  "flow-2k": {
+   "psnr_vs_base": 30.4804630279541,
+   "dists_vs_base": 0.024522244930267334
+  },
+  "taef-2k": {
+   "psnr_vs_base": 29.805143356323242,
+   "dists_vs_base": 0.03894607722759247
+  },
+  "flow-4k": {
+   "psnr_vs_base": 29.72235870361328,
+   "dists_vs_base": 0.04437723755836487,
+   "psnr_vs_previous": 33.18598937988281,
+   "dists_vs_previous": 0.025580860674381256
+  },
+  "taef-4k": {
+   "psnr_vs_base": 25.021867752075195,
+   "dists_vs_base": 0.07773289084434509
+  },
+  "flow-8k": {
+   "psnr_vs_base": 28.422832489013672,
+   "dists_vs_base": 0.060373201966285706,
+   "psnr_vs_previous": 35.96768569946289,
+   "dists_vs_previous": 0.03376927971839905
+  },
+  "taef-8k": {
+   "psnr_vs_base": 23.924053192138672,
+   "dists_vs_base": 0.09382115304470062
+  }
+ },
+ "forest": {
+  "flow-2k": {
+   "psnr_vs_base": 26.55881118774414,
+   "dists_vs_base": 0.032987356185913086
+  },
+  "taef-2k": {
+   "psnr_vs_base": 26.171825408935547,
+   "dists_vs_base": 0.04779496788978577
+  },
+  "flow-4k": {
+   "psnr_vs_base": 26.22647476196289,
+   "dists_vs_base": 0.05076472461223602,
+   "psnr_vs_previous": 29.5438175201416,
+   "dists_vs_previous": 0.03156198561191559
+  },
+  "taef-4k": {
+   "psnr_vs_base": 23.535160064697266,
+   "dists_vs_base": 0.08055901527404785
+  },
+  "flow-8k": {
+   "psnr_vs_base": 25.536191940307617,
+   "dists_vs_base": 0.06695890426635742,
+   "psnr_vs_previous": 33.53977966308594,
+   "dists_vs_previous": 0.034072574228048325
+  },
+  "taef-8k": {
+   "psnr_vs_base": 23.18793296813965,
+   "dists_vs_base": 0.09940259158611298
+  }
+ },
+ "sign": {
+  "flow-2k": {
+   "psnr_vs_base": 28.40898323059082,
+   "dists_vs_base": 0.019441694021224976
+  },
+  "taef-2k": {
+   "psnr_vs_base": 28.07152557373047,
+   "dists_vs_base": 0.0290764719247818
+  },
+  "flow-4k": {
+   "psnr_vs_base": 27.835494995117188,
+   "dists_vs_base": 0.031968966126441956,
+   "psnr_vs_previous": 31.076980590820312,
+   "dists_vs_previous": 0.020464126020669937
+  },
+  "taef-4k": {
+   "psnr_vs_base": 26.2305850982666,
+   "dists_vs_base": 0.05155140161514282
+  },
+  "flow-8k": {
+   "psnr_vs_base": 26.604785919189453,
+   "dists_vs_base": 0.045253410935401917,
+   "psnr_vs_previous": 34.56709289550781,
+   "dists_vs_previous": 0.03159608878195286
+  },
+  "taef-8k": {
+   "psnr_vs_base": 24.837215423583984,
+   "dists_vs_base": 0.06188422441482544
+  }
+ },
+ "cat": {
+  "flow-2k": {
+   "psnr_vs_base": 33.1002311706543,
+   "dists_vs_base": 0.015026509761810303
+  },
+  "taef-2k": {
+   "psnr_vs_base": 32.124977111816406,
+   "dists_vs_base": 0.03125946223735809
+  },
+  "flow-4k": {
+   "psnr_vs_base": 32.359561920166016,
+   "dists_vs_base": 0.031172722578048706,
+   "psnr_vs_previous": 34.816444396972656,
+   "dists_vs_previous": 0.022967934608459473
+  },
+  "taef-4k": {
+   "psnr_vs_base": 30.213088989257812,
+   "dists_vs_base": 0.050787195563316345
+  },
+  "flow-8k": {
+   "psnr_vs_base": 30.526634216308594,
+   "dists_vs_base": 0.047110140323638916,
+   "psnr_vs_previous": 35.03342056274414,
+   "dists_vs_previous": 0.035766374319791794
+  },
+  "taef-8k": {
+   "psnr_vs_base": 28.25370979309082,
+   "dists_vs_base": 0.06710986793041229
+  }
+ },
+ "city": {
+  "flow-2k": {
+   "psnr_vs_base": 25.302316665649414,
+   "dists_vs_base": 0.028469547629356384
+  },
+  "taef-2k": {
+   "psnr_vs_base": 25.0977783203125,
+   "dists_vs_base": 0.039627522230148315
+  },
+  "flow-4k": {
+   "psnr_vs_base": 24.928752899169922,
+   "dists_vs_base": 0.044012442231178284,
+   "psnr_vs_previous": 28.20356559753418,
+   "dists_vs_previous": 0.023106183856725693
+  },
+  "taef-4k": {
+   "psnr_vs_base": 24.01020050048828,
+   "dists_vs_base": 0.05699348449707031
+  },
+  "flow-8k": {
+   "psnr_vs_base": 24.567758560180664,
+   "dists_vs_base": 0.05895017087459564,
+   "psnr_vs_previous": 33.517879486083984,
+   "dists_vs_previous": 0.030561519786715508
+  },
+  "taef-8k": {
+   "psnr_vs_base": 23.536834716796875,
+   "dists_vs_base": 0.07628855109214783
+  }
+ },
+ "illustration": {
+  "flow-2k": {
+   "psnr_vs_base": 29.957630157470703,
+   "dists_vs_base": 0.033769652247428894
+  },
+  "taef-2k": {
+   "psnr_vs_base": 29.465229034423828,
+   "dists_vs_base": 0.0353354811668396
+  },
+  "flow-4k": {
+   "psnr_vs_base": 29.549449920654297,
+   "dists_vs_base": 0.061006322503089905,
+   "psnr_vs_previous": 32.308956146240234,
+   "dists_vs_previous": 0.0314154215157032
+  },
+  "taef-4k": {
+   "psnr_vs_base": 27.946205139160156,
+   "dists_vs_base": 0.07266782224178314
+  },
+  "flow-8k": {
+   "psnr_vs_base": 29.22491455078125,
+   "dists_vs_base": 0.0883391946554184,
+   "psnr_vs_previous": 36.131752014160156,
+   "dists_vs_previous": 0.04301759507507086
+  },
+  "taef-8k": {
+   "psnr_vs_base": 26.587427139282227,
+   "dists_vs_base": 0.09907597303390503
+  }
+ }
+}
