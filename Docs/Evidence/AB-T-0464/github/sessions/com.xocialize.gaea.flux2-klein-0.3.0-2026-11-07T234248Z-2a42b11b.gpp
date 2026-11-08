@@ -1,0 +1,24 @@
+# manifest: /tmp/gkg/tight/Plugins/com.xocialize.gaea.flux2-klein/0.3.0/flux2-klein.gaeaplugin/Contents/Resources/manifest.json
+# Gaea 1.2.0 session with com.xocialize.gaea.flux2-klein 0.3.0
+W {"engine":{"contract":"1.59.0","version":"0.74.1"},"kit":{"version":"0.11.1"},"manifest_sha256":"7cb1151a0b5792983f2f82f2041388089675e72c25f6c7968ef1565bc3329a7d","models":["klein-4b","klein-4b-base"],"pid":14100,"plugin":{"id":"com.xocialize.gaea.flux2-klein","version":"0.3.0"},"protocol":1,"type":"hello"}
+H {"budget":{"ceilingBytes":27899399450,"wiresWeights":true},"cache_root":"/tmp/gkg/tight/Caches/plugins/com.xocialize.gaea.flux2-klein","id":"h1","models_root":"/Volumes/DEV_VOL1/Models","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"bf16","model":"klein-4b","type":"prepare"}
+W {"lane":"bf16","model":"klein-4b","re":"h2","seconds":3.246,"type":"prepared"}
+W {"report":{"availableBytes":1999399450,"budgetBytes":27899399450,"date":815787772.231591,"gpuActiveBytes":14315456916,"gpuCacheBytes":92723930,"physFootprintBytes":14489693032,"residentBytes":14700000000,"residents":{"klein-4b":14700000000},"running":[],"transientReserveBytes":11200000000},"type":"memory"}
+H {"id":"h3","inputs":{"prompt":"/tmp/gkg/tight/Caches/spool/jobs/job_vbf8f15gbhy2t9gx2gq5/outputs/worker/worker-1/inputs/prompt-0.txt"},"job":"job_vbf8f15gbhy2t9gx2gq5-1","lane":"bf16","model":"klein-4b","operation":"image.generate","output_dir":"/tmp/gkg/tight/Caches/spool/jobs/job_vbf8f15gbhy2t9gx2gq5/outputs/worker/worker-1/out","params":{"count":1,"size":{"height":1024,"width":1024}},"seed":44,"type":"run"}
+W {"job":"job_vbf8f15gbhy2t9gx2gq5-1","re":"h3","stage":"encode","type":"progress"}
+W {"job":"job_vbf8f15gbhy2t9gx2gq5-1","re":"h3","stage":"denoise","type":"progress"}
+W {"fraction":0.25,"job":"job_vbf8f15gbhy2t9gx2gq5-1","of":4,"re":"h3","stage":"denoise","step":1,"type":"progress"}
+W {"fraction":0.5,"job":"job_vbf8f15gbhy2t9gx2gq5-1","of":4,"re":"h3","stage":"denoise","step":2,"type":"progress"}
+W {"fraction":0.75,"job":"job_vbf8f15gbhy2t9gx2gq5-1","of":4,"re":"h3","stage":"denoise","step":3,"type":"progress"}
+W {"fraction":1,"job":"job_vbf8f15gbhy2t9gx2gq5-1","of":4,"re":"h3","stage":"denoise","step":4,"type":"progress"}
+W {"job":"job_vbf8f15gbhy2t9gx2gq5-1","re":"h3","stage":"decode","type":"progress"}
+W {"job":"job_vbf8f15gbhy2t9gx2gq5-1","re":"h3","stage":"postprocess","type":"progress"}
+W {"effective":{"count":1,"seed":44,"size":{"height":1024,"width":1024},"x-klein.steps":4},"job":"job_vbf8f15gbhy2t9gx2gq5-1","outputs":[{"media_type":"image/png","name":"images","path":"/tmp/gkg/tight/Caches/spool/jobs/job_vbf8f15gbhy2t9gx2gq5/outputs/worker/worker-1/out/image-0.png"}],"re":"h3","seconds":6.492,"type":"result","warnings":[]}
+W {"report":{"availableBytes":1999399450,"budgetBytes":27899399450,"date":815787778.724005,"gpuActiveBytes":14315456924,"gpuCacheBytes":1128792088,"physFootprintBytes":15691656304,"residentBytes":14700000000,"residents":{"klein-4b":14700000000},"running":[],"transientReserveBytes":11200000000},"type":"memory"}
+H {"id":"h4","model":"klein-4b","type":"unload"}
+W {"model":"klein-4b","re":"h4","type":"unloaded"}
+W {"report":{"availableBytes":27899399450,"budgetBytes":27899399450,"date":815787779.027439,"gpuActiveBytes":16,"gpuCacheBytes":0,"physFootprintBytes":10994114408,"residentBytes":0,"residents":{},"running":[],"transientReserveBytes":0},"type":"memory"}
+H {"id":"h5","type":"shutdown"}
+# exited: status 0

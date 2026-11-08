@@ -1,0 +1,2 @@
+[License] mlx-community/flux-3-image-klein-bf16: weight license LicenseRef-FLUX-Kommunity-1.0 is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+{"cold_s":40.505410208000001,"draw":"1024x1024","height":4096,"lane":"bf16","model":"flux-3-klein","passes":2,"prepare_s":0.323238792,"references":0,"run1_s":40.107879083,"seed":44,"steps":16,"upsample":false,"width":4096}

@@ -1,0 +1,51 @@
+# Klein latent upscale acceptance (AB-T-0464) 2026-11-07T23:35:48Z: Gaea 1.2.0, flux2-klein 0.3.0, flux3-klein 0.2.0, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add flux2-klein 0.3.0 by repo URL
+PASS  add flux3-klein 0.2.0 by repo URL
+{'max_count': 4, 'max_inputs': 10, 'max_megapixels': 16.777216}
+PASS  the image.generate offers reach 4096² of area
+      k1024: succeeded bf16 7.53 s 1024x1024
+      k2048: succeeded bf16 10.832 s 2048x2048
+      k4096: succeeded bf16 28.791 s 4096x4096
+PASS  1024², 2048² and 4096² come back at their sizes
+{'from': {'height': 1024, 'width': 1024}, 'model': 'FlowUpscaler', 'passes': 1} {'from': {'height': 1024, 'width': 1024}, 'model': 'FlowUpscaler', 'passes': 2}
+PASS  effective: 1024² drawn as it is; 2048² one pass and 4096² two from a 1024² draw
+(2048, 2048, 3) (2048, 2048, 3) differing pixels 0
+PASS  2048² through Gaea is klein-inproc's, pixel for pixel
+(4096, 4096, 3) (4096, 4096, 3) differing pixels 0
+PASS  4096² through Gaea is klein-inproc's, pixel for pixel
+      drift vs the 1024² image: 2048² 0.0238, 4096² 0.0435
+PASS  2048² keeps the 1024² picture (DISTS ≤ 0.04)
+PASS  4096² keeps the 1024² picture (DISTS ≤ 0.07)
+{'height': 1024, 'width': 1792} {'from': {'height': 512, 'width': 896}, 'model': 'FlowUpscaler', 'passes': 1}
+PASS  Klein 4B Base at 1792×1024, one pass from 896×512
+succeeded {'from': {'height': 1024, 'width': 1024}, 'model': 'FlowUpscaler', 'passes': 1}
+PASS  an edit asked at 2048² is drawn at 1024² and upscaled once
+{'height': 992, 'width': 1536} ['size_snapped']
+PASS  1536×1000 is made at 1536×992 (one pass, multiples of 32), with size_snapped
+failed invalid_request FLUX.2 Klein: FLUX.2 Klein makes 256–4096 px a side, at most 4096² in area: past 1024² it draws a quarter or a sixteenth of the area and upscales it. 5472×256 needs a draw of 256–2048 px a side, ×2, w
+PASS  4096×200 is refused cleanly: invalid_request naming the draw it would need
+      f1024: succeeded bf16 19.217 s 1024x1024
+      f2048: succeeded bf16 101.697 s 2048x2048
+      f4096: succeeded bf16 39.572 s 4096x4096
+{'from': {'height': 1024, 'width': 1024}, 'model': 'FlowUpscaler', 'passes': 2}
+PASS  FLUX 3: 2048² is drawn natively and 4096² from 1024² ×4, at their sizes
+(4096, 4096, 3) (4096, 4096, 3) differing pixels 0
+PASS  FLUX 3's 4096² through Gaea is flux3-inproc's, pixel for pixel
+      FLUX 3 drift vs its 1024² image: 4096² 0.0509
+PASS  FLUX 3's 4096² keeps its 1024² picture (DISTS ≤ 0.07)
+      Klein 4B bf16: declared need at 1024² 25.9 GB, at 4096² 41.7 GB; charged while running: 1024² 25.9 GB, 4096² 41.7 GB
+PASS  a 4096² job is charged its line's 4096² point while it runs
+PASS  a 1024² job is charged at least 10 GB less than a 4096² one
+PASS  no Klein lane learned a single peak or overran its declaration
+      budget for the refusal: 27.9 GB (the smallest lane's 4096² need is 36.3 GB)
+PASS  under a budget that fits a 1024² job: the 1024² job runs
+failed no_capacity No lane fits: the smallest needs 36.30 GB and 27.90 GB is free.
+PASS  and a 4096² job is refused, no_capacity (every lane's 4096² need is past the budget)
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.3.0-2026-11-07T233553Z-326581d8.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.3.0-2026-11-07T234248Z-2a42b11b.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.flux3-klein-0.2.0-2026-11-07T233915Z-b93fb47d.gpp passes validate.py
+== 24 passed, 0 failed

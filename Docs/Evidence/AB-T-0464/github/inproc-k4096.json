@@ -1,0 +1,1 @@
+{"cold_s":30.338571958999999,"draw":"1024x1024","guidance":1,"height":4096,"lane":"bf16","model":"klein-4b","passes":2,"prepare_s":0.52835791600000004,"references":0,"run1_s":29.787140208,"run2_s":29.773900957999999,"seed":44,"steps":4,"width":4096}
