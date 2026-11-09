@@ -85,11 +85,20 @@ Every model is a plugin's. A plugin is a signed bundle from a GitHub repo, and e
     and the result carries a `lane_fallback` warning naming both.
   - `gaea models lane <id> <lane>` sets the default, and `… default` goes back to the manifest's.
   - A request that names a lane (`x-gaea.lane`) gets that lane or is refused; it never falls back.
-- **Tiers:** a plugin with tiers of very different cost ships each as its own model (LTX's compact24 … max128,
-  TRELLIS.2's 512, 1024 and 1536). Turning the costly ones off keeps a server to the quick tiers, for a preview server
-  that has to keep up with many requests: `gaea models disable trellis2-1024`. The server then offers only the
-  qualities its remaining models serve and refuses the rest, and clients see it in the operation's descriptor. A
-  smaller `--budget-bytes` drops every model that can't fit.
+- **Keeping a server to quick work** (a preview server that has to keep up with many requests). Clients see each change
+  in the operations' descriptors, and a request past it is refused.
+  - **Tiers:** a plugin with tiers of very different cost ships each as its own model (LTX's compact24 … max128,
+    TRELLIS.2's 512, 1024 and 1536): `gaea models disable trellis2-1024` turns one off, and the server offers only the
+    qualities its remaining models serve.
+  - **Caps:** `gaea models limit <id> <field> <value>` narrows what a model takes, by MES limit name:
+    `max_megapixels`, `max_side`, `max_duration_s`, `max_frames`, `max_count`, `max_faces`, `max_texture_size`,
+    `max_text_chars`, `max_source_s` or `max_layer_count`. For example, `gaea models limit klein-4b max_megapixels 4.2`
+    keeps Klein to 2048². A cap never widens what the plugin offers. `… <field> none` removes one, and `… none` every
+    one. A mesh offer whose default is above a cap is made at the cap, with `faces_reduced` or `texture_reduced`.
+  - **Lanes:** `gaea models lanes <id> off <lane>` switches a lane off. It's never chosen, not even as a fallback, and
+    a request that names it is refused. The default moves to the next lane, and a model with every lane off isn't
+    offered. `… on <lane>` switches it back.
+  - **The budget:** `gaea budget <GB>` (below).
 - **Adapters (LoRAs):** `gaea adapters` lists those the plugins ship and those you added. `gaea adapters add <hf-url>
   --model <id>` adds one from Hugging Face, pinned to its commit and sha256. One that needs accepting starts off, and
   `gaea adapters enable <id>` accepts its terms.
@@ -98,7 +107,12 @@ Every model is a plugin's. A plugin is a signed bundle from a GitHub repo, and e
 
 Gaea runs one GPU job at a time across all its plugins, and it keeps workers warm so the next job doesn't reload.
 
-- **The budget** is three quarters of the Mac's memory unless `--budget-bytes N` sets another for the launch.
+- **The budget** is three quarters of the Mac's memory unless the operator sets another.
+  - `gaea budget <GB>` sets it now and for later launches, and `gaea budget default` goes back. `gaea budget` reads it
+    and lists the models no lane of which fits.
+  - `--budget-bytes N` sets one for a launch, and the operator's applies again from the next.
+  - A model whose smallest lane doesn't fit isn't offered. Workers already running keep the ceiling they started with
+    until they restart.
 - **Admission:** Gaea admits each job against the budget, counting what every worker holds. When a job doesn't fit,
   Gaea stops idle workers, least recently used first, to make room. A job that can't fit even then is refused with
   `no_capacity`, and a model larger than the whole budget isn't offered.

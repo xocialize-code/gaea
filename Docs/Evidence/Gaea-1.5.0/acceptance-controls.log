@@ -1,0 +1,59 @@
+# Operator controls acceptance 2026-11-09T20:20:48Z: Gaea 1.5.0, plugins from GitHub
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+Installed FLUX.2 Klein 0.3.0 (com.xocialize.gaea.flux2-klein), enabled.
+Installed Z-Image 0.1.2 (com.xocialize.gaea.z-image), enabled.
+Installed TRELLIS.2 0.1.0 (com.xocialize.gaea.trellis2), enabled.
+PASS  gaea budget reads three quarters of memory (103.08 GB), the default
+Budget: 50.00 GB (set by the operator).
+Not offered, no lane fits: trellis2-1024, trellis2-1536.
+PASS  gaea budget 50 sets it now and says what stops being offered
+PASS  with 50 GB, mesh.generate offers only trellis2-512
+PASS  gaea status names the operator's budget
+PASS  the budget survives a restart
+PASS  gaea budget default goes back, and the cascades are offered again
+z-image-turbo: int4 off, int8 on, bf16 on
+PASS  gaea models lanes z-image-turbo off int4 says so
+PASS  gaea models lanes reads it back
+succeeded int8
+PASS  a Z-Image job runs on the next lane (int8), not int4
+failed {'code': 'unsupported_parameter', 'job': 'job_fq3m0jx36emm1dnntdwn', 'message': "z-image-turbo's lane int4 is switched off on this server.", 'param': 'x-gaea.lane'}
+PASS  a request naming int4 is refused (unsupported_parameter, switched off)
+PASS  with every lane off, z-image-turbo isn't offered
+klein-4b: max_megapixels 4.2
+{'max_megapixels': 4.2}
+PASS  Klein's offer says 4.2 megapixels
+succeeded
+PASS  a 1024² Klein job runs under the cap
+PASS  a 4096² Klein request is refused at submit (422 out_of_limits)
+{'max_faces': 5000, 'max_texture_size': 2048, 'min_faces': 1000}
+PASS  TRELLIS.2 512's offer says 5,000 faces
+PASS  a mesh request for 20,000 faces is refused (422)
+succeeded 4760 ['faces_reduced']
+PASS  a mesh request that doesn't ask is made under 5,000 faces, with faces_reduced
+succeeded z-image-turbo None
+PASS  an unnamed 4096² request goes to a model it fits, not capped Klein 4B
+PASS  an unknown cap is refused, naming the caps there are
+PASS  caps and lanes survive a restart
+      on  klein-4b  FLUX.2 Klein 4B  [com.xocialize.gaea.flux2-klein 0.3.0] lanes: bf16* 25.90 GB, int8 22.70 GB, int4 20.50 GB  caps: max_megapixels 4.2
+      on  klein-4b-base  FLUX.2 Klein 4B Base  [com.xocialize.gaea.flux2-klein 0.3.0] lanes: bf16* 27.10 GB, int8 23.90 GB, int4 21.70 GB
+      on  trellis2-512  TRELLIS.2 512  [com.xocialize.gaea.trellis2 0.1.0] lanes: bf16* 38.00 GB  caps: max_faces 5000
+      on  trellis2-1024  TRELLIS.2 1024  [com.xocialize.gaea.trellis2 0.1.0] lanes: bf16* 69.00 GB
+      on  trellis2-1536  TRELLIS.2 1536  [com.xocialize.gaea.trellis2 0.1.0] lanes: bf16* 72.00 GB
+      on  z-image-turbo  Z-Image Turbo  [com.xocialize.gaea.z-image 0.1.2] lanes: int4 (off) 39.90 GB, int8* 43.00 GB, bf16 48.50 GB
+      on  z-image  Z-Image  [com.xocialize.gaea.z-image 0.1.2] lanes: int4* 39.90 GB, int8 43.00 GB, bf16 48.50 GB
+PASS  gaea models shows the caps and the lane switched off
+None 2000000
+PASS  removing every cap restores the plugins' limits
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.3.0-2026-11-09T201615Z-beae9b71.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.3.0-2026-11-09T202107Z-ece77227.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.trellis2-0.1.0-2026-11-09T201637Z-015fae45.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.trellis2-0.1.0-2026-11-09T202148Z-426cad57.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.1.2-2026-11-09T201603Z-3aa5655f.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.1.2-2026-11-09T202100Z-f24e7444.gpp passes validate.py
+== 28 passed, 0 failed

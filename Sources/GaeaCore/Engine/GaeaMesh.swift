@@ -112,6 +112,25 @@ extension GaeaEngine {
             if !["png", "jpg", "jpeg"].contains(url.pathExtension.lowercased()) {
                 inputs[MeshProfile.Input.image] = [.file(try Self.workerPNG(url, into: inputDirectory), mediaType: "image/png")]
             }
+            // §1.9: an offer's default above its limit (an operator's cap, Gaea 1.5.0) is reduced to it, with a warning;
+            // a request's own value past the limit never gets here (MESKit refuses it).
+            let limits = route.offer.limits
+            if context.param(P.maxFaces) == nil, let most = limits?.value(MeshProfile.LimitField.maxFaces),
+               let faces = params[P.maxFaces]?.doubleValue, faces > most {
+                params[P.maxFaces] = .int(Int64(most))
+                warnings.append(Warning(code: MeshProfile.WarningCode.facesReduced,
+                                        message: "\(title) makes \(Int(faces)) faces by default; this server's limit cut them to at most \(Int(most)).",
+                                        param: P.maxFaces))
+            }
+            if context.param(P.textureSize) == nil, let most = limits?.value(MeshProfile.LimitField.maxTextureSize),
+               let size = params[P.textureSize]?.doubleValue, size > most {
+                let allowed = (route.offer.supports(MeshProfile.SupportsKey.textureSizes)?.arrayValue?.compactMap(\.numberValue) ?? [most])
+                    .filter { $0 <= most }.max() ?? most
+                params[P.textureSize] = .int(Int64(allowed))
+                warnings.append(Warning(code: MeshProfile.WarningCode.textureReduced,
+                                        message: "\(title)'s \(Int(size)) px texture was made at \(Int(allowed)) px, this server's limit.",
+                                        param: P.textureSize))
+            }
             // The offer's one resolution, or the request's (MESKit's gate admits only one the offer lists).
             if params[P.resolution] == nil,
                let first = route.offer.supports(MeshProfile.SupportsKey.resolutions)?.arrayValue?.first?.numberValue {

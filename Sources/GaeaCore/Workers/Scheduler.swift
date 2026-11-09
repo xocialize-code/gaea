@@ -29,6 +29,8 @@ actor GPULane {
 public enum LaneChoice {
     public enum Refusal: Error, Equatable, CustomStringConvertible {
         case unknownLane(String, model: String)
+        /// The request named a lane the operator switched off (Gaea 1.5.0).
+        case laneOff(String, model: String)
         /// The request named this lane and it doesn't fit: never fall back.
         case namedDoesNotFit(String, need: UInt64, available: UInt64)
         case nothingFits(need: UInt64, available: UInt64)
@@ -40,6 +42,7 @@ public enum LaneChoice {
         public var description: String {
             switch self {
             case let .unknownLane(lane, model): "\(model) has no lane \(lane)."
+            case let .laneOff(lane, model): "\(model)'s lane \(lane) is switched off on this server."
             case let .namedDoesNotFit(lane, need, available):
                 "Lane \(lane) needs \(need.gb) and \(available.gb) is free; a request that names a lane never falls back."
             case let .nothingFits(need, available): "No lane fits: the smallest needs \(need.gb) and \(available.gb) is free."
@@ -240,10 +243,17 @@ public actor Scheduler: WorkerControl {
     let database: GaeaDatabase
     let paths: GaeaPaths
     let log: HostLog
-    public let budgetBytes: UInt64
+    /// The memory budget, shared with the offers (they follow it): `--budget-bytes`, else the operator's, else three
+    /// quarters of unified memory. `setBudget` changes it while Gaea runs.
+    public let budget: BudgetValue
+    nonisolated public var budgetBytes: UInt64 { budget.value }
+    /// Whether `--budget-bytes` set this launch's budget (the operator's setting then waits for the next launch).
+    let budgetFromLaunch: Bool
+    /// What the operator narrows on models: lanes switched off (Gaea 1.5.0).
+    public let controls: OperatorControls
     /// MLXServeEngine's rules with two settings for one GPU job at a time across processes: only the job being admitted
     /// reserves a peak, and an idle worker is charged the larger of its resident bytes and its measured footprint.
-    public let policy: MemoryPolicy
+    public private(set) var policy: MemoryPolicy
     /// The shared weights folder workers are configured with (G-9, MEM-8): `--models-root`, else the operator's
     /// `models.root` setting, else MLXEngine's store.
     public private(set) var modelsRoot: URL
@@ -320,10 +330,36 @@ public actor Scheduler: WorkerControl {
         let stored = (try? database.setting(Self.modelsRootSetting)).flatMap { $0 }.map { URL(fileURLWithPath: $0, isDirectory: true) }
         self.modelsRoot = modelsRoot ?? stored ?? paths.modelsRoot
         // Three quarters of unified memory, unless the operator set a budget.
-        let configured = (try? database.setting("memory.budget_bytes")).flatMap { $0 }.flatMap(UInt64.init)
-        let budget = budgetBytes ?? configured ?? ProcessInfo.processInfo.physicalMemory / 4 * 3
-        self.budgetBytes = budget
-        self.policy = MemoryPolicy(budgetBytes: budget, transientAccounting: .admittedRunsOnly, idleCharge: .largerOfDeclaredAndMeasured)
+        let controls = OperatorControls(database: database)
+        self.controls = controls
+        let budget = budgetBytes ?? controls.storedBudget ?? Self.defaultBudget
+        self.budget = BudgetValue(budget)
+        self.budgetFromLaunch = budgetBytes != nil
+        self.policy = Self.policy(budget)
+    }
+
+    /// Three quarters of unified memory.
+    public static var defaultBudget: UInt64 { ProcessInfo.processInfo.physicalMemory / 4 * 3 }
+
+    static func policy(_ budget: UInt64) -> MemoryPolicy {
+        MemoryPolicy(budgetBytes: budget, transientAccounting: .admittedRunsOnly, idleCharge: .largerOfDeclaredAndMeasured)
+    }
+
+    /// Keeps the operator's budget (nil returns to three quarters of memory) and applies it now, unless `--budget-bytes`
+    /// set this launch's. Workers already running keep the ceiling they were configured with until they restart; the
+    /// next admission is decided against the new budget, and idle workers past it are stopped as jobs need room.
+    public func setBudget(_ bytes: UInt64?) throws {
+        try database.setSetting(OperatorControls.budgetSetting, bytes.map(String.init))
+        guard !budgetFromLaunch else { return }
+        let value = bytes ?? Self.defaultBudget
+        budget.set(value)
+        policy = Self.policy(value)
+        log("scheduler: budget \(value.gb)\(bytes == nil ? " (three quarters of memory)" : " (set by the operator)")")
+    }
+
+    /// Where this launch's budget comes from.
+    public var budgetSource: String {
+        budgetFromLaunch ? "--budget-bytes, for this launch" : controls.storedBudget != nil ? "set by the operator" : "three quarters of memory, the default"
     }
 
     public func setWaits(_ waits: WorkerProcess.Waits) { self.waits = waits }
@@ -505,6 +541,11 @@ public actor Scheduler: WorkerControl {
         }
         running[plugin.id]?.version = plugin.version
         guard var model = plugin.model(job.model) else { throw WorkerFailure(code: "unknown_model", message: "no model \(job.model)") }
+        // Lanes the operator switched off are never chosen, and a request naming one is refused.
+        let off = controls.lanesOff(plugin: plugin.id, model: model.id)
+        if let named = job.namedLane, off.contains(named) { throw LaneChoice.Refusal.laneOff(named, model: model.id) }
+        model = OperatorControls.applying(lanesOff: off, to: model)
+        guard !model.lanes.isEmpty else { throw WorkerFailure(code: "unknown_model", message: "every lane of \(model.id) is switched off") }
         if let allowed = job.lanes {
             model.lanes = model.lanes.filter { allowed.contains($0.id) }
             guard !model.lanes.isEmpty else { throw WorkerFailure(code: "unknown_model", message: "no lane of \(model.id) serves this offer") }
@@ -618,6 +659,10 @@ public actor Scheduler: WorkerControl {
             let plugin = try await manager.launchable(pluginID)
             guard plugin.trusted, plugin.enabled else { throw WorkerFailure(code: "unknown_model", message: "\(plugin.title) isn't enabled and trusted") }
             guard var model = plugin.model(modelID) else { throw WorkerFailure(code: "unknown_model", message: "no model \(modelID)") }
+            let off = controls.lanesOff(plugin: plugin.id, model: model.id)
+            if let named, off.contains(named) { throw LaneChoice.Refusal.laneOff(named, model: model.id) }
+            model = OperatorControls.applying(lanesOff: off, to: model)
+            guard !model.lanes.isEmpty else { throw WorkerFailure(code: "unknown_model", message: "every lane of \(model.id) is switched off") }
             model = LaneChoice.learned(model, measured: measuredPeaks(plugin: plugin, model: model.id))
             if let slot = slots[pluginID], slot.plugin.version != plugin.version || !slot.worker.isRunning { await retire(plugin: pluginID) }
             let (fast, _) = try StorageFloor.filter(model, read: volumeReads["\(plugin.id)/\(model.id)"], named: named)

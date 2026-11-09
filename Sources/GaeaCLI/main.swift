@@ -26,6 +26,11 @@ import GaeaOperator
 //   gaea models root [<folder> | default]  the shared weights folder: read it, set it, or go back to MLXEngine's store
 //   gaea models lane <id> [<lane> | default]  the lane a model loads when it fits (MEM-7): read it, set it, or go back
 //                                       to the manifest's default
+//   gaea models lanes <id> [on | off <lane>]  lanes switched off are never chosen, and a request naming one is refused
+//   gaea models limit <id> [<field> <value | none> | none]  caps on what a model's offers take, by MES limit name
+//                                       (max_megapixels, max_side, max_duration_s, max_frames, max_count, max_faces, …)
+//   gaea budget [<GB> | default]        the memory budget: read it, set it now and for later launches, or go back to
+//                                       three quarters of memory
 //   gaea adapters [list]                every adapter (LoRA), shipped by a plugin or added, on or off
 //   gaea adapters add <hf-url> --model <id> [--file f] [--id id] [--title t] [--trigger t] [--format f] [--strength s]
 //                                       add a LoRA by its Hugging Face repo URL for one model (GPP-1 §4.8)
@@ -47,7 +52,9 @@ let usage = """
            gaea workers idle [<seconds> | default]
            gaea crashes [<plugin> | show <id>]
            gaea trust [list | approve <held-id | team> | decline <held-id> | remove <team>]
-           gaea models [list | enable <id> | disable <id> | root [<folder> | default] | lane <id> [<lane> | default]]
+           gaea models [list | enable <id> | disable <id> | root [<folder> | default] | lane <id> [<lane> | default]
+                        | lanes <id> [on | off <lane>] | limit <id> [<field> <value | none> | none]]
+           gaea budget [<GB> | default]
            gaea adapters [list | add <hf-url> --model <id> [--file f] [--id id] [--title t] [--trigger t] [--format f]
                           [--strength s] | enable <id> | disable <id> | remove <id>]
            gaea update [<version> | --check | --rollback | --cancel | --prereleases [on|off]]
@@ -124,6 +131,20 @@ func fail(_ message: String) -> Never {
         var a = ["id": operand()]
         if args.count >= 4 { a["lane"] = args[3] }
         return OperatorRequest(command: .modelsLane, args: a)
+    case ("models", "lanes"):
+        var a = ["id": operand()]
+        if args.count >= 5 {
+            guard ["on", "off"].contains(args[3]) else { fail(usage) }
+            a["on"] = args[3] == "on" ? "true" : "false"; a["lane"] = args[4]
+        } else if args.count == 4 { fail(usage) }
+        return OperatorRequest(command: .modelsLanes, args: a)
+    case ("models", "limit"):
+        var a = ["id": operand()]
+        if args.count >= 5 { a["field"] = args[3]; a["value"] = args[4] }
+        else if args.count == 4 { guard args[3] == "none" else { fail(usage) }; a["field"] = "none" }
+        return OperatorRequest(command: .modelsLimit, args: a)
+    case ("budget", nil): return OperatorRequest(command: .budget)
+    case ("budget", let gb?): return OperatorRequest(command: .budget, args: ["gb": gb])
     case ("adapters", nil), ("adapters", "list"): return OperatorRequest(command: .adaptersList)
     case ("adapters", "add"):
         var a = ["url": operand()]

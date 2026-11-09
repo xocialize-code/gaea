@@ -48,6 +48,14 @@ public enum OperatorAPI {
         /// A model's default lane (MEM-7): `id` the model, `lane` sets it, `lane` = `default` returns to the manifest's
         /// default, none reads it.
         case modelsLane = "models.lane"
+        /// A model's lanes the operator switched off (Gaea 1.5.0): `id` the model; `lane` with `on` = `true` or `false`
+        /// switches one, none reads them.
+        case modelsLanes = "models.lanes"
+        /// A model's caps (Gaea 1.5.0): `id` the model; `field` (an MES limit name) with `value` (a number, or `none` to
+        /// remove it) sets one, `field` = `none` removes every cap, none reads them.
+        case modelsLimit = "models.limit"
+        /// The memory budget: `gb` sets it (a number of GB, or `default` for three quarters of memory), none reads it.
+        case budget
         /// Adapters (LoRAs), shipped by plugins or added by the operator (GPP-1 §4.8).
         case adaptersList = "adapters.list"
         /// `url` a Hugging Face repo, `model` the model it's for; optional `file`, `id`, `title`, `trigger`, `format`,

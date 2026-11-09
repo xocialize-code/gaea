@@ -238,6 +238,66 @@ public final class GaeaHost: Sendable {
                 }
                 return OperatorResponse(id: request.id, ok: true,
                                         text: "A worker idle \(await scheduler.idleSeconds) s is stopped and its memory freed.")
+            case .budget:
+                if let value = args["gb"], !value.isEmpty {
+                    let bytes: UInt64?
+                    if value == "default" { bytes = nil } else {
+                        guard let gb = Double(value), gb >= 1 else { throw OperatorError("the budget is a number of GB (1 or more), or default") }
+                        bytes = UInt64(gb * 1e9)
+                    }
+                    try await scheduler.setBudget(bytes)
+                    await server.reloadDescriptors()
+                }
+                let source = await scheduler.budgetSource
+                let stored = scheduler.controls.storedBudget
+                var text = "Budget: \(scheduler.budgetBytes.gb) (\(source))."
+                if options.budgetBytes != nil, let stored { text += " The operator's \(stored.gb) applies from the next launch." }
+                let unoffered = await engine.catalog().filter { !PluginOffers.fits(scheduler.controls.applying(to: $0.model, plugin: $0.plugin.id), budget: scheduler.budgetBytes) }
+                    .map(\.model.id).uniqued()
+                if !unoffered.isEmpty { text += "\nNot offered, no lane fits: \(unoffered.joined(separator: ", "))." }
+                return OperatorResponse(id: request.id, ok: true, text: text,
+                                        json: Self.json(["budget_bytes": String(scheduler.budgetBytes), "source": source]))
+            case .modelsLanes:
+                let id = try arg("id")
+                guard let c = await engine.catalog().first(where: { $0.model.id == id }) else { throw OperatorError("no model \(id)") }
+                if let lane = args["lane"], let on = args["on"] {
+                    guard c.model.lanes.contains(where: { $0.id == lane }) else {
+                        throw OperatorError("\(id) has no lane \(lane): \(c.model.lanes.map(\.id).joined(separator: ", "))")
+                    }
+                    try scheduler.controls.setLane(plugin: c.plugin.id, model: id, lane: lane, on: on == "true")
+                    log("operator: \(id)'s lane \(lane) switched \(on == "true" ? "on" : "off")")
+                    await server.reloadDescriptors()
+                }
+                let off = scheduler.controls.lanesOff(plugin: c.plugin.id, model: id)
+                let line = c.model.lanes.map { "\($0.id) \(off.contains($0.id) ? "off" : "on")" }.joined(separator: ", ")
+                return OperatorResponse(id: request.id, ok: true,
+                                        text: "\(id): \(line)" + (off.count == c.model.lanes.count ? " (every lane is off, so it isn't offered)" : ""),
+                                        json: Self.json(["model": id, "off": off.sorted().joined(separator: ",")]))
+            case .modelsLimit:
+                let id = try arg("id")
+                guard let c = await engine.catalog().first(where: { $0.model.id == id }) else { throw OperatorError("no model \(id)") }
+                if let field = args["field"] {
+                    if field == "none" {
+                        for f in scheduler.controls.caps(plugin: c.plugin.id, model: id).keys {
+                            try scheduler.controls.setCap(plugin: c.plugin.id, model: id, field: f, value: nil)
+                        }
+                    } else {
+                        guard OperatorControls.capFields[field] != nil else {
+                            throw OperatorError("caps are \(OperatorControls.capFields.keys.sorted().joined(separator: ", "))")
+                        }
+                        let raw = args["value"] ?? ""
+                        let value: Double? = raw == "none" ? nil : Double(raw)
+                        guard raw == "none" || (value ?? 0) > 0 else { throw OperatorError("a cap is a positive number, or none") }
+                        try scheduler.controls.setCap(plugin: c.plugin.id, model: id, field: field, value: value)
+                    }
+                    log("operator: \(id)'s caps are now \(scheduler.controls.caps(plugin: c.plugin.id, model: id))")
+                    await server.reloadDescriptors()
+                }
+                let caps = scheduler.controls.caps(plugin: c.plugin.id, model: id)
+                let text = caps.isEmpty ? "\(id): no caps (the plugin's own limits)."
+                    : "\(id): " + caps.sorted { $0.key < $1.key }.map { "\($0.key) \(String(format: "%g", $0.value))" }.joined(separator: ", ")
+                return OperatorResponse(id: request.id, ok: true, text: text,
+                                        json: Self.json(caps.mapValues { String(format: "%g", $0) }.merging(["model": id]) { a, _ in a }))
             case .pluginsRemove:
                 try await manager.remove(plugin: try arg("id"))
                 return OperatorResponse(id: request.id, ok: true, text: "Removed \(try arg("id")).")
@@ -283,11 +343,14 @@ public final class GaeaHost: Sendable {
                     let optIn = c.offer.isOptIn
                     let on = c.plugin.enabled && enablement.isEnabled(c.model.id, optIn: optIn)
                     let chosen = defaultLane(c.model, plugin: c.plugin.id)
-                    let fits = PluginOffers.fits(c.model, budget: scheduler.budgetBytes)
+                    let off = scheduler.controls.lanesOff(plugin: c.plugin.id, model: c.model.id)
+                    let fits = PluginOffers.fits(OperatorControls.applying(lanesOff: off, to: c.model), budget: scheduler.budgetBytes)
                     let lane = c.model.lanes.first { $0.id == chosen }
                     let missing = lane.map { Self.missingWeights($0, root: root) } ?? []
+                    let caps = scheduler.controls.caps(plugin: c.plugin.id, model: c.model.id)
                     return "\(on ? "on " : "off") \(c.model.id)  \(c.model.title)  [\(c.plugin.id) \(c.plugin.version)] lanes: "
-                        + c.model.lanes.map { "\($0.id)\($0.id == chosen ? "*" : "") \(LaneChoice.need($0).gb)" }.joined(separator: ", ")
+                        + c.model.lanes.map { "\($0.id)\($0.id == chosen ? "*" : "")\(off.contains($0.id) ? " (off)" : "") \(LaneChoice.need($0).gb)" }.joined(separator: ", ")
+                        + (caps.isEmpty ? "" : "  caps: " + caps.sorted { $0.key < $1.key }.map { "\($0.key) \(String(format: "%g", $0.value))" }.joined(separator: ", "))
                         + (fits ? "" : "  (not offered: no lane fits the \(scheduler.budgetBytes.gb) budget)")
                         + (missing.isEmpty ? "" : "  (weights not under the models root: \(missing.joined(separator: ", ")); "
                             + "the first job downloads them, or gaea plugins warm \(c.plugin.id))")
@@ -404,7 +467,7 @@ public final class GaeaHost: Sendable {
             Trust:     \(await trustSummary())
             Crashes:   \(try crashSummary(plugins))
             Workers:   \(ledger.workers.map { "\($0.pluginID) pid \($0.pid)\($0.busy ? " (busy)" : "")" }.joined(separator: ", ").ifEmpty("none"))
-            Memory:    \(ledger.chargedBytes.gb) charged of \(ledger.budgetBytes.gb) budget; host \(ledger.hostFootprintBytes.gb)
+            Memory:    \(ledger.chargedBytes.gb) charged of \(ledger.budgetBytes.gb) budget (\(await scheduler.budgetSource)); host \(ledger.hostFootprintBytes.gb)
             Idle:      a worker idle \(await scheduler.idleSeconds) s is stopped and its memory freed (gaea workers idle <seconds>)
             Models:    \(await scheduler.modelsRoot.path)
             Update:    \(Self.describe(await updater.status()))
@@ -449,6 +512,7 @@ public final class GaeaHost: Sendable {
     }
 
     func defaultLane(_ model: PluginManifest.Model, plugin: String) -> String? {
+        let model = scheduler.controls.applying(to: model, plugin: plugin)
         let stored = (try? database.setting(Scheduler.laneSetting(plugin: plugin, model: model.id))) ?? nil
         return stored.flatMap { s in model.lanes.first { $0.id == s }?.id } ?? model.lanes.first(where: \.default)?.id ?? model.lanes.first?.id
     }

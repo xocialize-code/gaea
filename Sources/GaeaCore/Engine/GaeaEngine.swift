@@ -82,7 +82,7 @@ public struct GaeaEngine: MediaEngine {
         self.manager = manager
         self.scheduler = scheduler
         self.enablement = enablement
-        let offers = PluginOffers(manager: manager, enablement: enablement, budgetBytes: scheduler.budgetBytes)
+        let offers = PluginOffers(manager: manager, enablement: enablement, budget: scheduler.budget, controls: scheduler.controls)
         self.offers = offers
         // Gaea's scheduler owns memory, so the host keeps the normalizer's residency hooks at their defaults. The prompt
         // enhancer is the LLM plugin's helper (AB-T-0370).
@@ -129,6 +129,10 @@ public struct GaeaEngine: MediaEngine {
                 let id = descriptor.models[i].id
                 if let route = served.first(where: { $0.model.id == id }) {
                     descriptor.models[i].license = route.offer.license
+                    // The operator's caps (Gaea 1.5.0) as the model's own limits, which clients and validate read.
+                    if let capped = route.offer.limits, route.offer.limits != nil {
+                        descriptor.models[i].limits = Self.narrower(descriptor.models[i].limits, capped)
+                    }
                 }
                 // The plugin's own say on the offer that runs this operation: named-only stays named-only (Z-Image's
                 // image-to-image isn't an instruction editor), and is never the default.
@@ -201,12 +205,45 @@ public struct GaeaEngine: MediaEngine {
         if descriptor.profile == VideoProfile.id { return try VideoProfileRules.validate(request, descriptor: descriptor) }
         if descriptor.profile == MeshProfile.id { return try MeshProfileRules.validate(request, descriptor: descriptor) }
         try normalizer.validate(request, descriptor: descriptor)
+        // A named image model's own limits (an operator's caps, Gaea 1.5.0): the descriptor's are the largest any model
+        // allows, which MESKit and the normalizer check.
+        if let named = request.model, let model = descriptor.models.first(where: { $0.id == named }),
+           let refusal = Self.sizeRefusal(request, limits: model.limits, title: model.title) {
+            throw refusal
+        }
     }
 
     public func defaultModel(for request: JobRequest, descriptor: Descriptor, kitChoice: ModelOffer,
                              candidates: [ModelOffer]) -> ModelOffer? {
         guard descriptor.profile == ImageProfile.id else { return nil }
-        return normalizer.defaultModel(for: request, descriptor: descriptor, kitChoice: kitChoice, candidates: candidates)
+        // Only models whose own limits take the request's size (an operator's caps): a request too large for the kit's
+        // choice goes to one it fits, and is refused at run by the normalizer's plan when none does.
+        let fitting = candidates.filter { Self.sizeRefusal(request, limits: $0.limits, title: $0.title) == nil }
+        guard !fitting.isEmpty else { return nil }
+        let choice = fitting.contains(where: { $0.id == kitChoice.id }) ? kitChoice : fitting[0]
+        return normalizer.defaultModel(for: request, descriptor: descriptor, kitChoice: choice, candidates: fitting) ?? choice
+    }
+
+    /// 422 `out_of_limits` when an image request's `size` is past `limits` (megapixels, width, height); nil otherwise.
+    static func sizeRefusal(_ request: JobRequest, limits: Descriptor.Limits?, title: String) -> MESError? {
+        guard let limits, let size = request.params?["size"], let w = size["width"]?.intValue, let h = size["height"]?.intValue else { return nil }
+        if let mp = limits.maxMegapixels, Double(w * h) > mp * 1_000_000 + 0.5 {
+            return MESError(.outOfLimits, "\(w)×\(h) is over \(title)'s \(String(format: "%g", mp)) megapixels on this server.", param: "size")
+        }
+        if let most = limits.maxWidth, w > most { return MESError(.outOfLimits, "\(title) makes at most \(most) pixels wide on this server.", param: "size") }
+        if let most = limits.maxHeight, h > most { return MESError(.outOfLimits, "\(title) makes at most \(most) pixels high on this server.", param: "size") }
+        return nil
+    }
+
+    /// Two limit sets as one: each field the smaller where both say.
+    static func narrower(_ a: Descriptor.Limits?, _ b: Descriptor.Limits) -> Descriptor.Limits {
+        guard var out = a else { return b }
+        func m<T: Comparable>(_ x: T?, _ y: T?) -> T? { switch (x, y) { case let (x?, y?): min(x, y); case let (x?, nil): x; default: y } }
+        out.maxWidth = m(out.maxWidth, b.maxWidth); out.maxHeight = m(out.maxHeight, b.maxHeight)
+        out.maxMegapixels = m(out.maxMegapixels, b.maxMegapixels); out.maxDurationSeconds = m(out.maxDurationSeconds, b.maxDurationSeconds)
+        out.maxInputs = m(out.maxInputs, b.maxInputs); out.maxCount = m(out.maxCount, b.maxCount)
+        for (k, v) in b.profile { out.profile[k] = m(out.profile[k], v) }
+        return out
     }
 
     public func voices(operation: String, model: String) async -> [Voice] {
@@ -377,7 +414,7 @@ public struct GaeaEngine: MediaEngine {
             ran = try await scheduler.run(job, progress: onLine)
         } catch let refusal as LaneChoice.Refusal {
             switch refusal {
-            case .unknownLane: throw MESError(.unsupportedParameter, refusal.description, param: Self.laneExtension)
+            case .unknownLane, .laneOff: throw MESError(.unsupportedParameter, refusal.description, param: Self.laneExtension)
             case .namedDoesNotFit, .nothingFits, .policy, .storageBelowFloor: throw MESError(.noCapacity, refusal.description)
             }
         } catch let failure as WorkerFailure {
@@ -553,8 +590,11 @@ struct PluginOffers: Sendable {
     let manager: PluginManager
     let enablement: ModelEnablement
     /// The scheduler's whole budget: a model whose smallest lane needs more can never run on this Mac, so it isn't
-    /// offered (LTX's max128 on a 32 or 64 GB Mac, AB-T-0405).
-    var budgetBytes: UInt64 = .max
+    /// offered (LTX's max128 on a 32 or 64 GB Mac, AB-T-0405). The operator can change it while Gaea runs.
+    var budget = BudgetValue(.max)
+    var budgetBytes: UInt64 { budget.value }
+    /// The operator's lanes switched off and caps (Gaea 1.5.0), applied to every route.
+    var controls: OperatorControls?
 
     /// Whether some lane of `model` fits the budget with nothing else loaded.
     static func fits(_ model: PluginManifest.Model, budget: UInt64) -> Bool {
@@ -644,15 +684,22 @@ struct PluginOffers: Sendable {
                       var offer = try? JSONDecoder().decode(ModelOffer.self, from: JSONEncoder().encode(manifestOffer.model))
                 else { continue }
                 if Self.offer(model).namedOnly == true { offer.namedOnly = true }
-                routes.append(PluginRoute(plugin: plugin, model: model, manifestOffer: manifestOffer, offer: offer))
+                var route = PluginRoute(plugin: plugin, model: model, manifestOffer: manifestOffer, offer: offer)
+                if let controls {
+                    route.model = controls.applying(to: model, plugin: plugin.id)
+                    (route.manifestOffer, route.offer) = OperatorControls.applying(controls.caps(plugin: plugin.id, model: id),
+                                                                                   to: manifestOffer, offer: offer)
+                }
+                routes.append(route)
             }
         }
         return routes
     }
 
     func isLive(_ plugin: InstalledPlugin, _ model: PluginManifest.Model) -> Bool {
-        plugin.enabled && enablement.isEnabled(model.id, optIn: Self.offer(model, in: plugin).isOptIn)
-            && Self.fits(model, budget: budgetBytes)
+        let model = controls?.applying(to: model, plugin: plugin.id) ?? model
+        return plugin.enabled && enablement.isEnabled(model.id, optIn: Self.offer(model, in: plugin).isOptIn)
+            && !model.lanes.isEmpty && Self.fits(model, budget: budgetBytes)
     }
 
     func liveRoutes() async -> [PluginRoute] {
