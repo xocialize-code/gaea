@@ -1,0 +1,9 @@
+{"stage": "finishing", "message": null}
+{"stage": "preparing", "message": "downloading the weights (first use): 0.0 of 0.4 GB"}
+{"stage": "preparing", "message": "downloading the weights (first use): 0.1 of 0.4 GB"}
+{"stage": "preparing", "message": "downloading the weights (first use): 0.2 of 0.4 GB"}
+{"stage": "preparing", "message": "downloading the weights (first use): 0.3 of 0.4 GB"}
+{"stage": "preparing", "message": "downloading the weights (first use): 0.4 of 0.4 GB"}
+{"stage": "preparing", "message": "loading kokoro-82m (bf16)"}
+{"stage": "preparing", "message": "loading the model"}
+{"stage": "running", "message": null}

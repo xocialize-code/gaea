@@ -1,0 +1,2 @@
+kokoro-82m bf16: downloaded 0.4 GB and loaded in 33.7 s
+The worker keeps them until it has been idle 900 s.

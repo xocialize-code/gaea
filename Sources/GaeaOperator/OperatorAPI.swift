@@ -25,6 +25,9 @@ public enum OperatorAPI {
         case pluginsDisable = "plugins.disable"
         case pluginsRemove = "plugins.remove"
         case pluginsLogs = "plugins.logs"
+        /// `id` a plugin, optional `model` and `lane`: download (when missing) and load each enabled model's default lane
+        /// now, as its first job would, so nobody waits on it. The worker keeps them until its idle timeout.
+        case pluginsWarm = "plugins.warm"
         /// Worker crashes, newest first (SRV-8): optional `plugin`, and `lines` the most to list.
         case crashesList = "crashes.list"
         /// `id` one crash: its stderr's last lines and macOS's crash report.
@@ -54,6 +57,9 @@ public enum OperatorAPI {
         case adaptersEnable = "adapters.enable"
         case adaptersDisable = "adapters.disable"
         case ledger
+        /// How long a worker may sit idle before Gaea stops it and frees its memory: `seconds` (30 or more, or
+        /// `default` for 900) sets it, none reads it. A `--idle-seconds` launch option wins for that launch.
+        case workersIdle = "workers.idle"
         /// Gaea's own updates (G-24): read the releases and say what's available.
         case updateCheck = "update.check"
         /// Download, verify and install the newest release, or `version`, once no job is running or waiting.

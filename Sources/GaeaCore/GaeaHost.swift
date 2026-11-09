@@ -23,7 +23,8 @@ public final class GaeaHost: Sendable {
         public var echoLog = true
         /// Pairing approvals; the default declines (the app asks its operator).
         public var pairingApproval: @Sendable (PairingPrompt) async -> Bool = { _ in false }
-        public var idleTimeout: Duration = .seconds(900)
+        /// `--idle-seconds` for this launch; nil keeps the operator's setting (`gaea workers idle`), else 900 s.
+        public var idleTimeout: Duration? = nil
         /// How long held outputs stay (Base §13); the MES default is an hour.
         public var outputsTTLSeconds: Int?
         /// How long an update waits after a job finishes, so its client can fetch the outputs (G-24).
@@ -192,7 +193,9 @@ public final class GaeaHost: Sendable {
             case .pluginsAdd:
                 switch try await manager.add(repository: try arg("repo"), version: args["version"]) {
                 case .installed(let plugin):
-                    return OperatorResponse(id: request.id, ok: true, text: "Installed \(plugin.title) \(plugin.version) (\(plugin.id)), enabled.",
+                    let missing = await missingWeightsNotice(plugin: plugin.id)
+                    return OperatorResponse(id: request.id, ok: true,
+                                            text: "Installed \(plugin.title) \(plugin.version) (\(plugin.id)), enabled." + missing,
                                             json: Self.json(["id": plugin.id, "version": plugin.version]))
                 case .held(let held):
                     return OperatorResponse(id: request.id, ok: true, text: Self.describe(held), json: Self.json(held))
@@ -210,6 +213,31 @@ public final class GaeaHost: Sendable {
                 let on = request.command == OperatorAPI.Command.pluginsEnable.rawValue
                 try await manager.setEnabled(on, plugin: try arg("id"))
                 return OperatorResponse(id: request.id, ok: true, text: "\(try arg("id")) \(on ? "enabled" : "disabled").")
+            case .pluginsWarm:
+                let id = try arg("id")
+                var models: [String] = []
+                for c in await engine.catalog() where c.plugin.id == id && !models.contains(c.model.id) {
+                    if args["model"] == nil, !(c.plugin.enabled && enablement.isEnabled(c.model.id, optIn: c.offer.isOptIn)) { continue }
+                    if let only = args["model"], only != c.model.id { continue }
+                    models.append(c.model.id)
+                }
+                guard !models.isEmpty else { throw OperatorError(args["model"].map { "\(id) has no model \($0)" } ?? "\(id) has no enabled models") }
+                var lines: [String] = []
+                for model in models {
+                    let w = try await scheduler.warm(pluginID: id, model: model, lane: args["lane"])
+                    lines.append(w.alreadyLoaded ? "\(w.model) \(w.lane): already loaded"
+                        : String(format: "%@ %@: %@loaded in %.1f s", w.model, w.lane,
+                                 w.downloadedBytes.map { String(format: "downloaded %.1f GB and ", Double($0) / 1e9) } ?? "", w.seconds))
+                }
+                return OperatorResponse(id: request.id, ok: true, text: lines.joined(separator: "\n")
+                    + "\nThe worker keeps them until it has been idle \(Int(await scheduler.idleSeconds)) s.")
+            case .workersIdle:
+                if let value = args["seconds"], !value.isEmpty {
+                    guard value == "default" || (Int(value) ?? 0) >= 30 else { throw OperatorError("seconds is 30 or more, or default") }
+                    try await scheduler.setIdleSeconds(value == "default" ? nil : Int(value))
+                }
+                return OperatorResponse(id: request.id, ok: true,
+                                        text: "A worker idle \(await scheduler.idleSeconds) s is stopped and its memory freed.")
             case .pluginsRemove:
                 try await manager.remove(plugin: try arg("id"))
                 return OperatorResponse(id: request.id, ok: true, text: "Removed \(try arg("id")).")
@@ -250,14 +278,19 @@ public final class GaeaHost: Sendable {
                 return OperatorResponse(id: request.id, ok: true, text: text)
             case .modelsList:
                 let catalog = await engine.catalog()
+                let root = await scheduler.modelsRoot
                 let lines = catalog.map { c in
                     let optIn = c.offer.isOptIn
                     let on = c.plugin.enabled && enablement.isEnabled(c.model.id, optIn: optIn)
                     let chosen = defaultLane(c.model, plugin: c.plugin.id)
                     let fits = PluginOffers.fits(c.model, budget: scheduler.budgetBytes)
+                    let lane = c.model.lanes.first { $0.id == chosen }
+                    let missing = lane.map { Self.missingWeights($0, root: root) } ?? []
                     return "\(on ? "on " : "off") \(c.model.id)  \(c.model.title)  [\(c.plugin.id) \(c.plugin.version)] lanes: "
                         + c.model.lanes.map { "\($0.id)\($0.id == chosen ? "*" : "") \(LaneChoice.need($0).gb)" }.joined(separator: ", ")
                         + (fits ? "" : "  (not offered: no lane fits the \(scheduler.budgetBytes.gb) budget)")
+                        + (missing.isEmpty ? "" : "  (weights not under the models root: \(missing.joined(separator: ", ")); "
+                            + "the first job downloads them, or gaea plugins warm \(c.plugin.id))")
                 }
                 return OperatorResponse(id: request.id, ok: true, text: lines.isEmpty ? "No models: add a plugin." : lines.joined(separator: "\n"))
             case .modelsEnable, .modelsDisable:
@@ -372,6 +405,7 @@ public final class GaeaHost: Sendable {
             Crashes:   \(try crashSummary(plugins))
             Workers:   \(ledger.workers.map { "\($0.pluginID) pid \($0.pid)\($0.busy ? " (busy)" : "")" }.joined(separator: ", ").ifEmpty("none"))
             Memory:    \(ledger.chargedBytes.gb) charged of \(ledger.budgetBytes.gb) budget; host \(ledger.hostFootprintBytes.gb)
+            Idle:      a worker idle \(await scheduler.idleSeconds) s is stopped and its memory freed (gaea workers idle <seconds>)
             Models:    \(await scheduler.modelsRoot.path)
             Update:    \(Self.describe(await updater.status()))
             Operator:  \(paths.socket.path) (\(operatorServer.policy.rawValue)); you are \(peer)
@@ -388,6 +422,32 @@ public final class GaeaHost: Sendable {
     }
 
     /// The lane a model loads when it fits: the operator's choice, else the manifest's default.
+    /// The repos of `lane`'s engine-materialized weights with no snapshot folder under `root` (`models--org--name`, the
+    /// MLXEngine store's layout): what its first job would download. A heuristic: a folder that's there but incomplete
+    /// still downloads, and is reported by the job's `preparing` progress.
+    static func missingWeights(_ lane: PluginManifest.Lane, root: URL) -> [String] {
+        guard lane.resolved.materialization == .engine else { return [] }
+        return lane.resolved.weightSources.map(\.repo).filter { repo in
+            !FileManager.default.fileExists(atPath: root.appending(path: "models--" + repo.replacingOccurrences(of: "/", with: "--")).path)
+        }.uniqued()
+    }
+
+    /// After an install: the enabled models whose default lane would download on its first job, and how to warm them.
+    func missingWeightsNotice(plugin id: String) async -> String {
+        let root = await scheduler.modelsRoot
+        var seen: Set<String> = [], lines: [String] = []
+        for c in await engine.catalog() where c.plugin.id == id && seen.insert(c.model.id).inserted {
+            guard enablement.isEnabled(c.model.id, optIn: c.offer.isOptIn),
+                  let lane = c.model.lanes.first(where: { $0.id == defaultLane(c.model, plugin: id) }) else { continue }
+            let missing = Self.missingWeights(lane, root: root)
+            if !missing.isEmpty { lines.append("  \(c.model.id) \(lane.id): \(missing.joined(separator: ", "))") }
+        }
+        guard !lines.isEmpty else { return "" }
+        return "\nThese weights aren't under the models root (\(root.path)), so the first job on them downloads them first:\n"
+            + lines.joined(separator: "\n") + "\nRun gaea plugins warm \(id) to download and load them now, "
+            + "or point gaea models root at the folder that has them."
+    }
+
     func defaultLane(_ model: PluginManifest.Model, plugin: String) -> String? {
         let stored = (try? database.setting(Scheduler.laneSetting(plugin: plugin, model: model.id))) ?? nil
         return stored.flatMap { s in model.lanes.first { $0.id == s }?.id } ?? model.lanes.first(where: \.default)?.id ?? model.lanes.first?.id
@@ -580,4 +640,12 @@ public final class GaeaHost: Sendable {
 
 extension String {
     func ifEmpty(_ fallback: String) -> String { isEmpty ? fallback : self }
+}
+
+extension Sequence where Element: Hashable {
+    /// The elements in order, each once.
+    func uniqued() -> [Element] {
+        var seen = Set<Element>()
+        return filter { seen.insert($0).inserted }
+    }
 }

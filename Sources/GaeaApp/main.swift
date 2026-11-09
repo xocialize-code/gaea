@@ -46,7 +46,7 @@ struct Launch {
             case "--no-advertise": options.advertise = false
             case "--budget-bytes": options.budgetBytes = args.next().flatMap(UInt64.init)
             case "--models-root": options.modelsRoot = args.next().map { URL(fileURLWithPath: ($0 as NSString).expandingTildeInPath, isDirectory: true) }
-            case "--idle-seconds": options.idleTimeout = .seconds(Int(args.next() ?? "") ?? 900)
+            case "--idle-seconds": options.idleTimeout = .seconds(max(30, Int(args.next() ?? "") ?? 900))
             case "--outputs-ttl": options.outputsTTLSeconds = args.next().flatMap(Int.init)
             case "--update-grace": options.updateGrace = args.next().flatMap(TimeInterval.init) ?? options.updateGrace
             // Headless only: pre-approve every pairing (development, unattended hosts). The app asks its operator.

@@ -78,6 +78,7 @@ func fail(_ message: String) -> Never {
     case ("status", _): return OperatorRequest(command: .status)
     case ("logs", _): return OperatorRequest(command: .logs, args: lines.map { ["lines": $0] } ?? [:])
     case ("ledger", _): return OperatorRequest(command: .ledger)
+    case ("workers", "idle"): return OperatorRequest(command: .workersIdle, args: args.count >= 3 ? ["seconds": args[2]] : [:])
     case ("plugins", nil), ("plugins", "list"): return OperatorRequest(command: .pluginsList)
     case ("plugins", "add"):
         var a = ["repo": operand()]
@@ -92,6 +93,11 @@ func fail(_ message: String) -> Never {
     case ("plugins", "enable"): return OperatorRequest(command: .pluginsEnable, args: ["id": operand()])
     case ("plugins", "disable"): return OperatorRequest(command: .pluginsDisable, args: ["id": operand()])
     case ("plugins", "remove"): return OperatorRequest(command: .pluginsRemove, args: ["id": operand()])
+    case ("plugins", "warm"):
+        var a = ["id": operand()]
+        if args.count >= 4 { a["model"] = args[3] }
+        if args.count >= 5 { a["lane"] = args[4] }
+        return OperatorRequest(command: .pluginsWarm, args: a)
     case ("crashes", "show"): return OperatorRequest(command: .crashesShow, args: ["id": operand()])
     case ("crashes", let plugin):
         var a: [String: String] = [:]

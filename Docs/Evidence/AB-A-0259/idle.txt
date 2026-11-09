@@ -1,0 +1,1 @@
+A worker idle 30 s is stopped and its memory freed.

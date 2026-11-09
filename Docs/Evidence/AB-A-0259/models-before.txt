@@ -1,0 +1,1 @@
+on  kokoro-82m  Kokoro-82M  [com.xocialize.gaea.kokoro 0.1.1] lanes: bf16* 0.50 GB  (weights not under the models root: mlx-community/Kokoro-82M-bf16; the first job downloads them, or gaea plugins warm com.xocialize.gaea.kokoro)

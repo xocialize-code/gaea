@@ -1,0 +1,4 @@
+Installed Kokoro 0.1.1 (com.xocialize.gaea.kokoro), enabled.
+These weights aren't under the models root (/Volumes/DEV_VOL1/Evidence/AB-A-0259/roots/a), so the first job on them downloads them first:
+  kokoro-82m bf16: mlx-community/Kokoro-82M-bf16
+Run gaea plugins warm com.xocialize.gaea.kokoro to download and load them now, or point gaea models root at the folder that has them.

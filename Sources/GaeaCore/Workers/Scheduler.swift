@@ -3,6 +3,7 @@ import Foundation
 import GaeaProtocol
 import MLXMemoryPolicy
 import MLXToolKit
+import Synchronization
 
 /// One GPU job at a time across Gaea (G-13): a FIFO lock every job holds while it runs.
 actor GPULane {
@@ -193,6 +194,8 @@ public struct WorkerJobResult: Sendable {
     public var fellBackFrom: String?
     public var fallbackMessage: String?
     public var requeued: Bool
+    /// Seconds this job spent preparing its lane (a download, then the load), when it had to; nil when it was resident.
+    public var prepareSeconds: Double? = nil
 }
 
 /// Everything memory-shaped Gaea knows, across its processes (MEM-4).
@@ -250,6 +253,11 @@ public actor Scheduler: WorkerControl {
     var waits = WorkerProcess.Waits()
     /// Workers idle this long are shut down.
     var idleTimeout: Duration
+    /// Whether `--idle-seconds` set this launch's timeout (the operator's setting then waits for the next launch).
+    let idleFromLaunch: Bool
+    /// The gaea.sqlite setting for the idle timeout, in seconds.
+    public static let idleSetting = "workers.idle_seconds"
+    public var idleSeconds: Int { Int(idleTimeout.components.seconds) }
     /// Whether workers keep their weights wired while they run (AB-T-0380). MLX's wired limit is per process, and a worker
     /// raises its own only for its run, to its resident weights and that run's transient, then drops it to 0. With one
     /// GPU job at a time that wires at most the one job the governor admitted. `GAEA_UNWIRED=1` leaves it at 0, for
@@ -299,14 +307,16 @@ public actor Scheduler: WorkerControl {
     public static let quarantineWindow: TimeInterval = 600
 
     public init(manager: PluginManager, database: GaeaDatabase, paths: GaeaPaths, log: HostLog,
-                budgetBytes: UInt64? = nil, modelsRoot: URL? = nil, idleTimeout: Duration = .seconds(900),
+                budgetBytes: UInt64? = nil, modelsRoot: URL? = nil, idleTimeout: Duration? = nil,
                 crashReports: CrashReports = CrashReports()) {
         self.manager = manager
         self.crashReports = crashReports
         self.database = database
         self.paths = paths
         self.log = log
-        self.idleTimeout = idleTimeout
+        let storedIdle = (try? database.setting(Self.idleSetting)).flatMap { $0 }.flatMap(Int.init)
+        self.idleTimeout = idleTimeout ?? .seconds(storedIdle ?? 900)
+        self.idleFromLaunch = idleTimeout != nil
         let stored = (try? database.setting(Self.modelsRootSetting)).flatMap { $0 }.map { URL(fileURLWithPath: $0, isDirectory: true) }
         self.modelsRoot = modelsRoot ?? stored ?? paths.modelsRoot
         // Three quarters of unified memory, unless the operator set a budget.
@@ -317,6 +327,13 @@ public actor Scheduler: WorkerControl {
     }
 
     public func setWaits(_ waits: WorkerProcess.Waits) { self.waits = waits }
+
+    /// Keeps the operator's idle timeout (nil returns to 900 s) and applies it now, unless `--idle-seconds` set this
+    /// launch's.
+    public func setIdleSeconds(_ seconds: Int?) throws {
+        try database.setSetting(Self.idleSetting, seconds.map(String.init))
+        if !idleFromLaunch { idleTimeout = .seconds(seconds ?? 900) }
+    }
 
     /// The `gaea.sqlite` setting that holds the operator's models root.
     public static let modelsRootSetting = "models.root"
@@ -512,13 +529,25 @@ public actor Scheduler: WorkerControl {
 
         running[plugin.id]?.lane = lane.id
         let worker = try await ensureWorker(plugin)
+        var prepareSeconds: Double?
         if slots[plugin.id]?.prepared[model.id]?.id != lane.id {
+            // The client hears the load (MES progress stage `preparing`), and a download on the way with its bytes.
+            let preparing = ContinuousClock.now
+            progress(["type": "progress", "stage": "loading", "message": .string("loading \(model.id) (\(lane.id))")])
             if slots[plugin.id]?.prepared[model.id] != nil {
                 try await worker.unload(model: model.id)
                 slots[plugin.id]?.prepared[model.id] = nil
             }
             do {
-                try await worker.prepare(model: model.id, lane: lane.id)
+                try await worker.prepare(model: model.id, lane: lane.id) { fraction, done, total in
+                    var line: [String: JSONValue] = ["type": "progress", "stage": fraction < 1 ? "downloading" : "loading",
+                                                     "fraction": .double(fraction)]
+                    if let done { line["bytes_done"] = .int(done) }
+                    if let total { line["bytes_total"] = .int(total) }
+                    progress(line)
+                }
+                let d = ContinuousClock.now - preparing
+                prepareSeconds = Double(d.components.seconds) + Double(d.components.attoseconds) / 1e18
             } catch let failure as WorkerFailure where failure.code == "storage_below_floor" {
                 // Measured now: remember it, so the next choice skips every lane this volume can't feed, and choose again.
                 let read = failure.detail?["read_bytes_per_s"]?.intValue.map { UInt64(max(0, $0)) } ?? 0
@@ -552,7 +581,64 @@ public actor Scheduler: WorkerControl {
         }
         learnPeak(plugin: plugin, model: model.id, lane: lane, worker: worker)
         return WorkerJobResult(result: result, lane: lane.id, fellBackFrom: fellBackFrom?.id, fallbackMessage: fallbackMessage,
-                               requeued: requeued)
+                               requeued: requeued, prepareSeconds: prepareSeconds)
+    }
+
+    /// What warming one model did: the lane, the seconds it took, and how much it downloaded (nil when nothing).
+    public struct Warmed: Sendable {
+        public var model: String
+        public var lane: String
+        public var seconds: Double
+        public var downloadedBytes: Int64?
+        public var alreadyLoaded: Bool
+    }
+
+    /// Prepares `model`'s lane (`lane`, else the operator's default, else one that fits) the way its first job would,
+    /// and runs nothing: missing weights are downloaded, then loaded. It holds the GPU lane like a job; the worker keeps
+    /// the model until its idle timeout.
+    public func warm(pluginID: String, model modelID: String, lane named: String?) async throws -> Warmed {
+        await gpu.acquire()
+        busy.insert(pluginID)
+        defer {
+            busy.remove(pluginID)
+            slots[pluginID]?.lastUsed = Date()
+        }
+        do {
+            let plugin = try await manager.launchable(pluginID)
+            guard plugin.trusted, plugin.enabled else { throw WorkerFailure(code: "unknown_model", message: "\(plugin.title) isn't enabled and trusted") }
+            guard var model = plugin.model(modelID) else { throw WorkerFailure(code: "unknown_model", message: "no model \(modelID)") }
+            model = LaneChoice.learned(model, measured: measuredPeaks(plugin: plugin, model: model.id))
+            if let slot = slots[pluginID], slot.plugin.version != plugin.version || !slot.worker.isRunning { await retire(plugin: pluginID) }
+            let (fast, _) = try StorageFloor.filter(model, read: volumeReads["\(plugin.id)/\(model.id)"], named: named)
+            let preferred = (try? database.setting(Self.laneSetting(plugin: plugin.id, model: model.id))) ?? nil
+            let (lane, _) = try await chooseLane(fast, plugin: plugin.id, named: named,
+                                                 preferred: preferred.flatMap { p in fast.lanes.contains { $0.id == p } ? p : nil },
+                                                 conduct: .waiting)
+            let worker = try await ensureWorker(plugin)
+            if slots[pluginID]?.prepared[model.id]?.id == lane.id {
+                await gpu.release()
+                return Warmed(model: model.id, lane: lane.id, seconds: 0, downloadedBytes: nil, alreadyLoaded: true)
+            }
+            if slots[pluginID]?.prepared[model.id] != nil {
+                try await worker.unload(model: model.id)
+                slots[pluginID]?.prepared[model.id] = nil
+            }
+            let started = ContinuousClock.now
+            let downloaded = Mutex<Int64?>(nil)
+            log("scheduler: warming \(model.id) \(lane.id) on \(pluginID)")
+            try await worker.prepare(model: model.id, lane: lane.id) { _, _, total in
+                if let total { downloaded.withLock { $0 = total } }
+            }
+            slots[pluginID]?.prepared[model.id] = lane
+            slots[pluginID]?.everPrepared.insert("\(model.id)/\(lane.id)")
+            let d = ContinuousClock.now - started
+            await gpu.release()
+            return Warmed(model: model.id, lane: lane.id, seconds: Double(d.components.seconds) + Double(d.components.attoseconds) / 1e18,
+                          downloadedBytes: downloaded.withLock { $0 }, alreadyLoaded: false)
+        } catch {
+            await gpu.release()
+            throw error
+        }
     }
 
     /// Picks the lane (G-23) against what stopping every idle worker would free, then admits it under the memory policy.

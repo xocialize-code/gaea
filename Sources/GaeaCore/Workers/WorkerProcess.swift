@@ -303,9 +303,13 @@ public final class WorkerProcess: @unchecked Sendable {
                                         "cache_root": .string(cacheRoot.path), "settings": .object(settings)], finals: ["configured"])
     }
 
-    public func prepare(model: String, lane: String, progress: (@Sendable (Double) -> Void)? = nil) async throws {
+    /// `progress` hears a download on the way (`materialize.progress`, GPP-1 §3.2): the fraction, and the bytes done and
+    /// in all when the worker knows them.
+    public func prepare(model: String, lane: String, progress: (@Sendable (Double, Int64?, Int64?) -> Void)? = nil) async throws {
         try await request("prepare", ["model": .string(model), "lane": .string(lane)], finals: ["prepared"]) { line in
-            if line["type"]?.stringValue == "materialize.progress", let f = line["fraction"]?.doubleValue { progress?(f) }
+            if line["type"]?.stringValue == "materialize.progress", let f = line["fraction"]?.doubleValue {
+                progress?(f, line["bytes_done"]?.intValue.map(Int64.init), line["bytes_total"]?.intValue.map(Int64.init))
+            }
         }
     }
 

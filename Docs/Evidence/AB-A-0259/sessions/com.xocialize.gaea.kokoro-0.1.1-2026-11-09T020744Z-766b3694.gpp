@@ -1,0 +1,16 @@
+# manifest: /tmp/gfu/home/Plugins/com.xocialize.gaea.kokoro/0.1.1/kokoro.gaeaplugin/Contents/Resources/manifest.json
+# Gaea 1.3.0 session with com.xocialize.gaea.kokoro 0.1.1
+W {"engine":{"contract":"1.58.0","version":"0.72.0"},"kit":{"version":"0.7.1"},"manifest_sha256":"bfde1d46757c7601e6f52455cb14f3d754b9e0901498538f3e12c7a2342e02cb","models":["kokoro-82m"],"pid":8588,"plugin":{"id":"com.xocialize.gaea.kokoro","version":"0.1.1"},"protocol":1,"type":"hello"}
+H {"budget":{"ceilingBytes":103079215104,"wiresWeights":true},"cache_root":"/tmp/gfu/home/Caches/plugins/com.xocialize.gaea.kokoro","id":"h1","models_root":"/Volumes/DEV_VOL1/Evidence/AB-A-0259/roots/b","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"bf16","model":"kokoro-82m","type":"prepare"}
+W {"lane":"bf16","model":"kokoro-82m","re":"h2","seconds":0.325,"type":"prepared"}
+W {"report":{"availableBytes":102579215104,"budgetBytes":103079215104,"date":815882864.714537,"gpuActiveBytes":327250256,"gpuCacheBytes":4884,"physFootprintBytes":360498232,"residentBytes":500000000,"residents":{"kokoro-82m":500000000},"running":[],"transientReserveBytes":0},"type":"memory"}
+H {"id":"h3","inputs":{"text":"/tmp/gfu/home/Caches/spool/jobs/job_r20stw1ja6031a8fvjp9/outputs/worker-inputs/text-0.txt"},"job":"job_r20stw1ja6031a8fvjp9","lane":"bf16","model":"kokoro-82m","operation":"audio.speak","output_dir":"/tmp/gfu/home/Caches/spool/jobs/job_r20stw1ja6031a8fvjp9/outputs/worker","params":{"seed":1,"voice":"af_heart"},"seed":1,"type":"run"}
+W {"effective":{"language":"en-US","seed":1,"voice":"af_heart","x-kokoro.pieces":1},"job":"job_r20stw1ja6031a8fvjp9","outputs":[{"media_type":"audio/wav","name":"audio","path":"/tmp/gfu/home/Caches/spool/jobs/job_r20stw1ja6031a8fvjp9/outputs/worker/audio-0.wav"}],"re":"h3","seconds":0.478,"type":"result","warnings":[]}
+W {"report":{"availableBytes":102579215104,"budgetBytes":103079215104,"date":815882865.192854,"gpuActiveBytes":330821260,"gpuCacheBytes":1589538315,"physFootprintBytes":2191279424,"residentBytes":500000000,"residents":{"kokoro-82m":500000000},"running":[],"transientReserveBytes":0},"type":"memory"}
+H {"id":"h4","model":"kokoro-82m","type":"unload"}
+W {"model":"kokoro-82m","re":"h4","type":"unloaded"}
+W {"report":{"availableBytes":103079215104,"budgetBytes":103079215104,"date":815882926.349028,"gpuActiveBytes":36,"gpuCacheBytes":0,"physFootprintBytes":45286456,"residentBytes":0,"residents":{},"running":[],"transientReserveBytes":0},"type":"memory"}
+H {"id":"h5","type":"shutdown"}
+# exited: status 0

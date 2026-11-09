@@ -317,10 +317,29 @@ public struct GaeaEngine: MediaEngine {
             let step = line["step"]?.intValue, of = line["of"]?.intValue
             let stage = line["stage"]?.stringValue ?? "running"
             let preview = Self.preview(line, root: root)
+            // The scheduler's load and download (MES §7.2 `preparing`), with what is being fetched; the worker's own
+            // stages are `running`.
+            let preparing = stage == "loading" || stage == "downloading"
+            let message = Self.preparingMessage(line) ?? stage
             Task {
-                await reporter.progress(.running, step: step, steps: of, fraction: line["fraction"]?.doubleValue, message: stage)
+                await reporter.progress(preparing ? .preparing : .running, step: step, steps: of,
+                                        fraction: line["fraction"]?.doubleValue, message: message)
                 if let preview { await reporter.preview(preview.data, mediaType: preview.mediaType) }
             }
+        }
+    }
+
+    /// What a client is told while a lane prepares: "downloading the weights: 4.2 of 19.0 GB", or the load. Nil for a
+    /// worker's own stages.
+    static func preparingMessage(_ line: [String: GPPValue]) -> String? {
+        switch line["stage"]?.stringValue {
+        case "downloading":
+            guard let done = line["bytes_done"]?.doubleValue, let total = line["bytes_total"]?.doubleValue, total > 0 else {
+                return "downloading the weights (first use)"
+            }
+            return String(format: "downloading the weights (first use): %.1f of %.1f GB", done / 1e9, total / 1e9)
+        case "loading": return line["message"]?.stringValue ?? "loading the model"
+        default: return nil
         }
     }
 
@@ -373,6 +392,8 @@ public struct GaeaEngine: MediaEngine {
         if let effective = ran.result["effective"] { worker["effective"] = effective.mes }
         if let outputs = ran.result["outputs"] { worker["outputs"] = outputs.mes }
         if let seconds = ran.result["seconds"]?.doubleValue { worker["seconds"] = .number(seconds) }
+        // The lane's download and load, when this job had to (MES's prepare_ms is the job registry's to fill).
+        if let prepare = ran.prepareSeconds { worker["prepare_seconds"] = .number((prepare * 1000).rounded() / 1000) }
         if ran.requeued { worker["requeued"] = true }
         var modelParams = output.effective["model_params"]?.objectValue ?? [:]
         modelParams["x-gaea.worker"] = .object(worker)
@@ -408,6 +429,8 @@ public struct GaeaEngine: MediaEngine {
             if calls.count > 1 {
                 facts["calls"] = .number(Double(calls.count))
                 facts["seconds"] = .number(calls.compactMap { $0.ran.result["seconds"]?.doubleValue }.reduce(0, +))
+                let prepared = calls.compactMap(\.ran.prepareSeconds)
+                if !prepared.isEmpty { facts["prepare_seconds"] = .number((prepared.reduce(0, +) * 1000).rounded() / 1000) }
             }
             var modelParams = output.effective["model_params"]?.objectValue ?? [:]
             modelParams["x-gaea.worker"] = .object(facts)

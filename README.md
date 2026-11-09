@@ -47,6 +47,12 @@ Every model is a plugin's. A plugin is a signed bundle from a GitHub repo, and e
   [CLAUDE.md](CLAUDE.md#where-things-are) are ours. `GAEA_GITHUB_TOKEN=$(gh auth token)` in Gaea's environment reads a
   private repo, and lifts GitHub's limit of 60 API calls an hour without a token, which a server with many plugins
   reaches when it checks them all. Gaea never stores the token.
+- **Before anyone waits on one:** a model's first job downloads any weights that aren't under the models root, then
+  loads them. A large model can take minutes; Z-Image's 19 GB took about nine on a fast connection.
+  - `gaea plugins add` names the weights it didn't find there.
+  - `gaea plugins warm <id> [model] [lane]` downloads and loads them now, so the next job starts at once.
+  - A client that does wait is told, as MES progress stage `preparing`: "downloading the weights (first use): 4.2 of
+    19.0 GB", then the load. The job's `x-gaea.worker.prepare_seconds` says how long it took.
 - **Seeing them:** `gaea plugins` lists them, with each one's version, state and recent crashes. `gaea plugins logs
   <id>` shows its events and its worker's stderr.
 - **Updates:** Gaea reads every plugin's repo when it starts, and `gaea plugins check` reads them again.
@@ -71,6 +77,9 @@ Every model is a plugin's. A plugin is a signed bundle from a GitHub repo, and e
   - Workers restart when it changes, each one once its job ends.
   - A model downloads its weights the first time a job needs them. Put the root on a fast volume: a plugin can refuse
     a lane whose weights sit on a volume too slow for it, and the warning says what it measured.
+  - Point it at the folder that holds the `models--org--name` snapshots themselves, not a folder above it. Otherwise
+    every model downloads a copy of weights you already have. `gaea models` marks a model whose default lane's weights
+    it doesn't find under the root.
 - **Lanes:** many models come in several quantizations ("lanes", such as bf16, int8, int4).
   - Gaea loads a model's default lane when it fits in memory. Otherwise it loads the largest smaller lane that fits,
     and the result carries a `lane_fallback` warning naming both.
@@ -90,7 +99,11 @@ Gaea runs one GPU job at a time across all its plugins, and it keeps workers war
   `no_capacity`, and a model larger than the whole budget isn't offered.
 - **Peaks:** it learns each model's real peak from its runs, so a model that declares too little is charged what it
   used.
-- **Idle workers** stop after 15 minutes (`--idle-seconds`).
+- **Idle workers** stop after 15 minutes, which frees their memory. A model then reloads on its next job (seconds,
+  from disk).
+  - `gaea workers idle <seconds>` changes it (30 or more), and `gaea workers idle default` goes back.
+  - `--idle-seconds` sets it for one launch.
+  - `gaea status` shows it.
 - **The ledger:** `gaea ledger` shows the budget, what each worker is charged and what it measures; the System page
   shows the same.
 - **Wired memory:** a worker keeps its weights wired while its job runs, as an in-process engine does, and lets them
@@ -114,6 +127,8 @@ every launch.
 
 - **Checks:** Gaea checks its GitHub releases every six hours, and `gaea update --check` checks now. Settings →
   Updates shows the same.
+- **Gaea updates itself only while it runs.** A copy that has been closed for a while is updated by starting it, then
+  `gaea update`.
 - **Installing:** `gaea update [<version>]` downloads the release, checks its signature, notarization and sha256, and
   installs it once no job is running or waiting. It waits a minute after the last job (`--update-grace`), so that job's
   client can fetch its outputs, then swaps the app and relaunches.

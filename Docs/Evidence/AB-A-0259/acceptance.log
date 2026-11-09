@@ -1,0 +1,41 @@
+# First use (AB-A-0259) 2026-11-09T02:06:22Z: Gaea 1.3.0, Kokoro from GitHub
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+      Installed Kokoro 0.1.1 (com.xocialize.gaea.kokoro), enabled.
+      These weights aren't under the models root (/Volumes/DEV_VOL1/Evidence/AB-A-0259/roots/a), so the first job on them downloads them first:
+        kokoro-82m bf16: mlx-community/Kokoro-82M-bf16
+      Run gaea plugins warm com.xocialize.gaea.kokoro to download and load them now, or point gaea models root at the folder that has them.
+PASS  plugins add names Kokoro's missing weights and points to gaea plugins warm
+PASS  gaea models marks the model: the first job downloads its weights
+      {"stage": "finishing", "message": null}
+      {"stage": "preparing", "message": "downloading the weights (first use): 0.0 of 0.4 GB"}
+      {"stage": "preparing", "message": "downloading the weights (first use): 0.1 of 0.4 GB"}
+      {"stage": "preparing", "message": "downloading the weights (first use): 0.2 of 0.4 GB"}
+      {"stage": "preparing", "message": "downloading the weights (first use): 0.3 of 0.4 GB"}
+      {"stage": "preparing", "message": "downloading the weights (first use): 0.4 of 0.4 GB"}
+      {"stage": "preparing", "message": "loading kokoro-82m (bf16)"}
+      {"stage": "preparing", "message": "loading the model"}
+      {"stage": "running", "message": null}
+PASS  the first job succeeds
+PASS  its client saw stage preparing: the download in GB
+PASS  then the load, then running
+      first job: prepare_seconds 34.114, worker seconds 8.36
+PASS  the worker block reports prepare_seconds
+PASS  a second job sees no preparing and reports no prepare_seconds
+PASS  gaea models no longer marks it
+      kokoro-82m bf16: downloaded 0.4 GB and loaded in 33.7 s
+      The worker keeps them until it has been idle 900 s.
+/Volumes/DEV_VOL1/Evidence/AB-A-0259/roots/b/models--mlx-community--Kokoro-82M-bf16
+PASS  plugins warm downloads and loads Kokoro under the new root
+PASS  the next job finds it loaded: no preparing, no prepare_seconds
+PASS  warming again says it's already loaded
+PASS  gaea workers idle 30 is kept and shown in gaea status
+PASS  it survives a restart
+PASS  a worker idle past 30 s is stopped (the sweep runs every 30 s)
+PASS  gaea workers idle default returns to 900 s
+OK
+PASS  transcript com.xocialize.gaea.kokoro-0.1.1-2026-11-09T020625Z-31133625.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.kokoro-0.1.1-2026-11-09T020709Z-40ca87ac.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.kokoro-0.1.1-2026-11-09T020744Z-766b3694.gpp passes validate.py
+== 18 passed, 0 failed
