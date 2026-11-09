@@ -197,7 +197,8 @@
           "enum": [
             "image",
             "audio",
-            "video"
+            "video",
+            "mesh"
           ]
         },
         "model": {

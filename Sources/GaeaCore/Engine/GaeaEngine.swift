@@ -166,7 +166,7 @@ public struct GaeaEngine: MediaEngine {
             descriptor.extensions = extensions.isEmpty ? nil : extensions
             descriptors.append(descriptor)
         }
-        for var descriptor in audioDescriptors(routes) + videoDescriptors(routes) {
+        for var descriptor in audioDescriptors(routes) + videoDescriptors(routes) + meshDescriptors(routes) {
             let served = routes.filter { $0.operation == descriptor.operation }
             descriptor.extensions = Self.extensions(served)
             descriptors.append(descriptor)
@@ -199,6 +199,7 @@ public struct GaeaEngine: MediaEngine {
     public func validate(_ request: JobRequest, descriptor: Descriptor) throws {
         if descriptor.profile == AudioProfile.id { return try AudioProfileRules.validate(request, descriptor: descriptor) }
         if descriptor.profile == VideoProfile.id { return try VideoProfileRules.validate(request, descriptor: descriptor) }
+        if descriptor.profile == MeshProfile.id { return try MeshProfileRules.validate(request, descriptor: descriptor) }
         try normalizer.validate(request, descriptor: descriptor)
     }
 
@@ -250,6 +251,18 @@ public struct GaeaEngine: MediaEngine {
 
     public func residentModels() async -> [String] { await scheduler.residentModels() }
 
+    /// `GET /health` (Base §14, AB-A-0260): the kit's status, queue and resident models, with Gaea's idle policy (a worker
+    /// idle `gaea workers idle` seconds is stopped) and when each resident model will be unloaded if it stays idle.
+    public func health(_ kit: Health) async -> Health {
+        var health = kit
+        var memory = health.memory ?? Health.Memory()
+        memory.idleUnloadSeconds = await scheduler.idleSeconds
+        health.memory = memory
+        let until = await scheduler.residentUntil()
+        health.residentUntil = until.isEmpty ? nil : until
+        return health
+    }
+
     public func run(_ context: RunContext) async throws -> RunOutput {
         if context.descriptor.profile == ImageProfile.id {
             await enhancer.refresh(offers)
@@ -266,6 +279,7 @@ public struct GaeaEngine: MediaEngine {
         }
         if context.descriptor.profile == AudioProfile.id { return try await runAudio(route, context) }
         if context.descriptor.profile == VideoProfile.id { return try await runVideo(route, context) }
+        if context.descriptor.profile == MeshProfile.id { return try await runMesh(route, context) }
         return try await run(route, context)
     }
 
@@ -623,7 +637,8 @@ struct PluginOffers: Sendable {
             for manifestOffer in plugin.manifest.offers {
                 let known = manifestOffer.profile == ImageProfile.id ? ImageProfile.operations.operations[manifestOffer.operation] != nil
                     : manifestOffer.profile == AudioProfile.id ? AudioProfile.operations.operations[manifestOffer.operation] != nil
-                    : manifestOffer.profile == VideoProfile.id && VideoProfile.operations.operations[manifestOffer.operation] != nil
+                    : manifestOffer.profile == VideoProfile.id ? VideoProfile.operations.operations[manifestOffer.operation] != nil
+                    : manifestOffer.profile == MeshProfile.id && MeshProfile.operations.operations[manifestOffer.operation] != nil
                 guard known,
                       let id = manifestOffer.modelID, let model = plugin.model(id),
                       var offer = try? JSONDecoder().decode(ModelOffer.self, from: JSONEncoder().encode(manifestOffer.model))

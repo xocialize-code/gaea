@@ -4,7 +4,7 @@
 |---|---|
 | **Status** | Draft 1.0, 2026-10-28 (AB-T-0353) |
 | **Schemas** | [`schemas/v1/gpp.schema.json`](../schemas/v1/gpp.schema.json) (one line), [`schemas/v1/manifest.schema.json`](../schemas/v1/manifest.schema.json) (manifest.json) |
-| **Builds on** | mlx-engine-swift ≥ 0.72.0 (contract 1.57.0, AB-A-0206); MES Base 0.1, Image 0.1 and Audio 0.1, MESKit 0.7.0 (vendored in [`schemas/vendor/mes-v0`](../schemas/vendor/mes-v0)) |
+| **Builds on** | mlx-engine-swift ≥ 0.72.0 (contract 1.57.0, AB-A-0206); MES Base 0.1, Image 0.1, Audio 0.1, Video 0.1 and Mesh 0.1, MESKit 0.12.0 (vendored in [`schemas/vendor/mes-v0`](../schemas/vendor/mes-v0)) |
 | **Plan** | [Gaea - Plan.md](../Docs/Gaea%20-%20Plan.md) §3; decisions G-2 to G-5 and G-18 (AB-D-0164 to AB-D-0167, AB-D-0180) |
 
 GPP is how the Gaea host talks to a plugin's worker process. The worker is a signed executable in a `.gaeaplugin`
@@ -178,6 +178,19 @@ what a client happened to send:
   frames, width, height, whether there's audio and its rate and channels) from the file, and converts to the client's
   `output` where the profile asks.
 - Frames as images, when a model works on them, travel as PNG files (`image/png`) in a list input or output, in order.
+
+#### 3.3.4 Meshes
+
+Meshes travel as glTF 2.0 binary files (`model/gltf-binary`), MES Mesh 0.1's form (AB-T-0467):
+- **Outputs** are GLBs by Mesh §1.1 and §1.2: one JSON and one BIN chunk, nothing outside the file, triangles with
+  normals, +Y up. The worker writes the model's own placement and scale; Gaea centres or grounds the result and scales it
+  to the request's `size_m` (§1.4) with a root node over the scene, writes the disclosure and licences into
+  `asset.extras.mes` and `asset.copyright` (§1.11, §1.12), and renders the `preview` itself (§1.7). A worker needn't
+  write a preview; one it writes is replaced.
+- **Inputs**: a mesh input (`mesh.rig`) is passed as the client sent it, a GLB Gaea has read. An image input is passed
+  as sent; `params.background` tells the worker what to do with it: `alpha` (it has transparency and is already cut
+  out: use its alpha as the mask), `remove` (cut the object out first) or `keep` (use the whole picture).
+- `params.resolution` is always set for an offer that lists `supports.resolutions`: the request's, or the offer's first.
 
 ### 3.4 Stop
 

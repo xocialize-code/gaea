@@ -10,13 +10,14 @@ import SwiftUI
 //
 //   GaeaLab                                   the app
 //   GaeaLab --snapshot <dir> --engine <url>… [--operation image.generate | audio.speak | audio.compose | audio.edit_speech
-//                                             | audio.separate | video.generate] [--input <wav>]
+//                                             | audio.separate | video.generate | mesh.generate] [--input <wav | png>]
 //                                             add those servers, choose the operation with a preset (image.generate on
 //                                             Qwen-Image Flash with a LoRA; audio.speak on Kokoro with a voice, streamed;
 //                                             audio.compose on ACE-Step with lyrics and timestamps; audio.edit_speech on
 //                                             AuK-Flash, a hum added at the start of --input; audio.separate on AuK-Flash,
 //                                             the second speaker of the --input mixture; video.generate on LTX 2.5
-//                                             compact24; AuK's and LTX's terms are shown, then accepted for this run
+//                                             compact24; mesh.generate on TRELLIS.2 512, the object in --input at 20,000
+//                                             faces; AuK's and LTX's terms are shown, then accepted for this run
 //                                             only), run it on "Every server", and render the window before and after to
 //                                             PNGs (light and dark), then quit
 let arguments = CommandLine.arguments
@@ -87,6 +88,16 @@ enum Snapshot {
                 run.form.setValue(.object(["ordinal": .number(2)]), at: ["speaker"])
                 run.form.setValue(.number(5), at: ["seed"])
             }
+        case "mesh.generate":
+            guard let input else {
+                print("mesh.generate needs --input <png>")
+                return
+            }
+            run.form.model = "trellis2-512"
+            run.media["image"] = [await MediaItem.reading(input)]
+            run.form.setValue(.number(20_000), at: ["max_faces"])
+            run.form.setValue(.number(512), at: ["texture_size"])
+            run.form.setValue(.number(42), at: ["seed"])
         case "video.generate":
             run.form.model = "ltx-2.5-compact24"
             run.form.text["prompt"] = "A red kite flies over a green hill on a sunny day, the camera slowly following it."
@@ -114,7 +125,7 @@ enum Snapshot {
         if let s = run.streamed {
             print("streamed \(s.chunks) chunks, \(String(format: "%.2f", s.seconds)) s; first after \(s.firstChunkAfter.map { "\(Int($0 * 1000)) ms" } ?? "-")")
         }
-        print("results: \(run.results.map { $0.output.name + ($0.isVideo ? " (video \($0.videoFacts?.line ?? ""))" : $0.isAudio ? " (audio)" : $0.isText ? " (text)" : "") }.joined(separator: ", "))")
+        print("results: \(run.results.map { $0.output.name + ($0.isVideo ? " (video \($0.videoFacts?.line ?? ""))" : $0.isAudio ? " (audio)" : $0.isText ? " (text)" : $0.output.isMesh ? " (mesh \($0.output.faces ?? 0) faces)" : "") }.joined(separator: ", "))")
         await capture(lab, save: save, to: directory, name: "\(operation)-after")
         lab.end()
     }

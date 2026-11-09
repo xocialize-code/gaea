@@ -374,6 +374,17 @@ public actor Scheduler: WorkerControl {
 
     public func residentModels() -> [String] { slots.values.flatMap { $0.prepared.keys } }
 
+    /// When each resident model is unloaded if it stays idle (MES Base §14, AB-A-0260): its worker's last use plus the
+    /// idle timeout. A model whose worker is running a job has no time yet: it is left out.
+    public func residentUntil() -> [String: Date] {
+        var out: [String: Date] = [:]
+        for slot in slots.values where !busy.contains(slot.plugin.id) {
+            let until = slot.lastUsed.addingTimeInterval(Double(idleSeconds))
+            for model in slot.prepared.keys { out[model] = until }
+        }
+        return out
+    }
+
     public func processes() -> [(pluginID: String, title: String, pid: pid_t, models: [String])] {
         slots.values.filter { $0.worker.isRunning }.map { ($0.plugin.id, $0.plugin.title, $0.worker.pid, Array($0.prepared.keys).sorted()) }
     }

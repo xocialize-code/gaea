@@ -1,5 +1,5 @@
 {
-  "originHash" : "49a70c373332b2298f11c9c9f251540b78e94508734c6ab5a8f8581e6a006aa4",
+  "originHash" : "96b6458913db26c86671f5381b9612cf8c7a9d341d470718bf533d13f84eb3ad",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "4e44017bbfb1c445aabbe85687f0a1a00ba193f2",
         "version" : "0.26.0"
+      }
+    },
+    {
+      "identity" : "erasekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/xocialize/EraseKit.git",
+      "state" : {
+        "revision" : "14754f6dc2ad92ed54bc962bf4d0d139aca95652",
+        "version" : "0.3.0"
       }
     },
     {
@@ -74,12 +83,30 @@
       }
     },
     {
+      "identity" : "matroska-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/xocialize/matroska-swift.git",
+      "state" : {
+        "revision" : "7baa8a635259bc9bd2b7f3a3dffff6bcd700e453",
+        "version" : "0.2.0"
+      }
+    },
+    {
+      "identity" : "media-bridge",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/xocialize/media-bridge.git",
+      "state" : {
+        "revision" : "88f80a49ac8ea9e5d08c44bb42ab9e20cf2cfeb0",
+        "version" : "0.40.2"
+      }
+    },
+    {
       "identity" : "media-engine-spec",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xocialize/media-engine-spec.git",
       "state" : {
-        "revision" : "16d415f0c09943cdb1aa7820fc8ea37bffb3cfb9",
-        "version" : "0.10.0"
+        "revision" : "35cabbd01a2d49ca17d159bfa7ac0d8be63bb6b5",
+        "version" : "0.12.0"
       }
     },
     {
@@ -105,8 +132,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xocialize/pixel-agency-normalizer.git",
       "state" : {
-        "revision" : "7bfd2a69b4c9c600aa3f5b305f0c5341978da911",
-        "version" : "0.2.0"
+        "revision" : "fafe7e5bda23c7425302b2201a1e7b835cd2c10e",
+        "version" : "0.3.1"
       }
     },
     {
