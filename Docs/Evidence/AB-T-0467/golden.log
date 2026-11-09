@@ -1,0 +1,18 @@
+# TRELLIS.2 golden check 2026-11-09T17:52:24Z: com.xocialize.gaea.trellis2 0.1.0
+      remove: over GPP ran in 34.99 s; in-process {"background":"remove","faces":20000,"faces_made":18956,"max_rss_gb":11.567742976,"model":"trellis2-512","prepare_s":1.0061846249999999,"run_s":35.330993249999999,"seed":42,"texture_size":512,"vertices":21318}
+PASS  remove: the same GLB, sha256 7392366ad5fd256b…, v2 chunks=JSON,BIN texture=512 faces=18956
+      cutout: over GPP ran in 33.53 s; in-process {"background":"alpha","faces":20000,"faces_made":17826,"max_rss_gb":11.111219200000001,"model":"trellis2-512","prepare_s":1.0071899580000001,"run_s":33.556137917000001,"seed":42,"texture_size":512,"vertices":9657}
+PASS  cutout: the same GLB, sha256 47a9ee99a04571f4…, v2 chunks=JSON,BIN texture=512 faces=17826
+      keep: over GPP ran in 40.46 s; in-process {"background":"keep","faces":20000,"faces_made":19774,"max_rss_gb":11.112071168,"model":"trellis2-512","prepare_s":0.98966133300000003,"run_s":40.403360583000001,"seed":42,"texture_size":512,"vertices":45434}
+PASS  keep: the same GLB, sha256 3989dce92b5d7e47…, v2 chunks=JSON,BIN texture=512 faces=19774
+      seed7: over GPP ran in 36.94 s; in-process {"background":"remove","faces":60000,"faces_made":54774,"max_rss_gb":11.570446336,"model":"trellis2-512","prepare_s":1.005951625,"run_s":36.797949500000001,"seed":7,"texture_size":1024,"vertices":58360}
+PASS  seed7: the same GLB, sha256 2b9b60b9a18c51d7…, v2 chunks=JSON,BIN texture=1024 faces=54774
+OK
+PASS  cutout.gpp passes validate.py
+OK
+PASS  keep.gpp passes validate.py
+OK
+PASS  remove.gpp passes validate.py
+OK
+PASS  seed7.gpp passes validate.py
+== 8 passed, 0 failed
