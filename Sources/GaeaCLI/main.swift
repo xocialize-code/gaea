@@ -43,7 +43,8 @@ import GaeaOperator
 let usage = """
     usage: gaea status | logs [-n N] | ledger
            gaea plugins [list | add <repo-url> [version] | check | update <id> [version] | rollback <id>
-                         | enable <id> | disable <id> | remove <id> | logs <id> [-n N]]
+                         | enable <id> | disable <id> | remove <id> | logs <id> [-n N] | warm <id> [model] [lane]]
+           gaea workers idle [<seconds> | default]
            gaea crashes [<plugin> | show <id>]
            gaea trust [list | approve <held-id | team> | decline <held-id> | remove <team>]
            gaea models [list | enable <id> | disable <id> | root [<folder> | default] | lane <id> [<lane> | default]]
