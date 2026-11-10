@@ -1,0 +1,39 @@
+# NitroFusion2 acceptance 2026-11-10T05:19:44Z: Gaea 1.5.0, z-image from GitHub
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add z-image 0.2.0 by repo URL
+      on  z-image-turbo  Z-Image Turbo  [com.xocialize.gaea.z-image 0.2.0] lanes: int4* 39.90 GB, int8 43.00 GB, bf16 48.50 GB
+      on  z-image  Z-Image  [com.xocialize.gaea.z-image 0.2.0] lanes: int4* 39.90 GB, int8 43.00 GB, bf16 48.50 GB
+      on  z-image-nitrofusion2  NitroFusion2 (Z-Image Turbo in 1–4 steps)  [com.xocialize.gaea.z-image 0.2.0] lanes: int4* 40.30 GB, int8 43.40 GB, bf16 48.90 GB
+PASS  gaea models finds NitroFusion2's weights under the models root
+{'id': 'z-image-nitrofusion2', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://www.apache.org/licenses/LICENSE-2.0'}, 'memory_class': 'medium', 'named_only': True, 'quality_tiers': ['standard'], 'title': 'NitroFusion2 (Z-Image Turbo in 1–4 steps)'}
+{'default': 8, 'description': 'Denoising steps. Turbo is distilled for 8.', 'maximum': 100, 'minimum': 1, 'type': 'integer', 'x-mes-ui': {'advanced': True, 'label': 'Steps', 'widget': 'slider'}}
+PASS  image.generate offers NitroFusion2 by name only; Turbo is still the default, and the tiers are unchanged
+PASS  NitroFusion2 offers no image.edit
+      nf2: succeeded z-image-nitrofusion2 int4 4.274 s 2 steps 
+      nf2-again: succeeded z-image-nitrofusion2 int4 4.281 s 2 steps 
+      turbo: succeeded z-image-turbo int4 11.9 s 8 steps 
+      turbo-again: succeeded z-image-turbo int4 12 s 8 steps 
+PASS  NitroFusion2 by name runs two steps by default
+(1024, 1024, 3) (1024, 1024, 3) differing pixels 0
+PASS  its image is zimage-inproc's, pixel for pixel
+      warm 1024² on int4: NitroFusion2 two steps 4.281 s, Turbo eight steps 12 s
+PASS  warm, NitroFusion2 takes under half of Turbo's time
+      nf2-1: succeeded z-image-nitrofusion2 int4 1.069 s 1 steps 
+      nf2-4: succeeded z-image-nitrofusion2 int4 2.424 s 4 steps 
+PASS  one step and four steps run as asked
+      nf2-5: failed None None None s None steps Z-Image: x-zimage.steps is 1–4 for NitroFusion2.
+201 failed {'code': 'invalid_request', 'job': 'job_pdc54e5b19wpnmkpegbv', 'message': 'Z-Image: x-zimage.steps is 1–4 for NitroFusion2.', 'param': 'x-zimage.steps'}
+PASS  five steps is refused
+      nf2-neg: succeeded z-image-nitrofusion2 int4 1.448 s 2 steps 
+['negative_prompt_ignored']
+PASS  a negative prompt is reported ignored
+      standard: succeeded z-image-turbo int4 11.858 s 8 steps 
+      best: succeeded z-image-turbo int4 11.88 s 8 steps 
+PASS  a request naming no model runs Turbo, at standard and at best
+(1024, 1024, 3) (1024, 1024, 3) differing pixels 0
+PASS  Turbo's image is zimage-inproc's Turbo, pixel for pixel
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.2.0-2026-11-10T051745Z-50b43f45.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.2.0-2026-11-10T051947Z-241b750d.gpp passes validate.py
+== 14 passed, 0 failed
