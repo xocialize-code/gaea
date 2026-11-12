@@ -44,5 +44,19 @@ On the MacBook Pro, with that signed bundle and `mlx-community/sam-audio-base-sw
     names `sam-audio-base` with acceptance but sends no `describe`, and Gaea refuses it (422), as RFC 0008 says an
     engine does. The suite's minimal request needs a description for a described-only offer (asked of mlx-apps).
 
-**Not tested:** a notarized bundle, the plugin installed from a GitHub release, and Gaea's release build rather than a
-debug build.
+## The released plugin (SAM-Audio 0.1.0, 2026-11-11)
+
+`gaea-plugin-sam-audio` v0.1.0 (`92b7f4a`, release run 43133528519): signed, notarized and stapled, sha256
+`d39bd7776a92…`. Since the bundle tested above it gained a copy of the SAM License in `Contents/Resources/LICENSE`,
+which the release attaches too: that licence allows redistribution only with a copy.
+
+With the released Gaea 1.6.0 (`Gaea-1.6.0.zip`, notarized) on the MacBook Pro, the demo plugin 0.4.0 and SAM-Audio
+0.1.0 installed from GitHub, `sam-audio-base` enabled:
+
+- [conformance-released.md](conformance-released.md): AUDIO-019 to 021 passed; BASE-019 failed as above (the suite's
+  request, AB-A-0273).
+- [sam-audio-golden-released.log](sam-audio-golden-released.log): `scripts/golden.sh` on the installed bundle, 5/5
+  byte for byte, the same hashes as the bundle tested before the licence was added.
+
+**Not tested:** the whole conformance suite with every plugin (`ALL=1 tools/conformance-with.sh`), an acceptance
+script of this plugin's own, and its speed (AB-R-0828: not established through the engine).
