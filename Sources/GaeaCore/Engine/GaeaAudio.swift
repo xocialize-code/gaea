@@ -120,6 +120,15 @@ extension GaeaEngine {
                                          "order": .number(Double(order))]
         if let widget = widgets[name] { hints["widget"] = .string(widget) }
         if ["seed", "output", "negative_prompt", "prompt_enhance"].contains(name) { hints["advanced"] = true }
+        if name == AudioProfile.Param.describe {            // RFC 0008: what a description is, said where it's typed
+            hints["label"] = "Sound to separate"
+            hints["widget"] = "text"
+            hints["help"] = "Name the sound in a few words: speech, dog barking."
+        }
+        if name == AudioProfile.Param.spans {
+            hints["label"] = "Where it is heard"
+            hints["help"] = "Stretches of the recording where the described sound is heard, or is not."
+        }
         return hints
     }
 
@@ -145,6 +154,9 @@ extension GaeaEngine {
         }
         try Self.checkInputLengths(route.operation, inputs: audioInputs, limits: route.offer.limits,
                                    edit: context.param(AudioProfile.Param.edit)?.objectValue)
+        if route.operation == "audio.separate" {
+            try Self.checkSpans(context.spans, mixture: audioInputs[AudioProfile.Input.audio]?.first)
+        }
         let inputs = try Self.inputPaths(audioInputs, writingTextTo: inputDirectory)
         var params = route.manifestOffer.defaults?.objectValue ?? [:]
         for (key, value) in context.params { params[key] = value.gpp }
@@ -266,6 +278,17 @@ extension GaeaEngine {
                                                         wav.durationSeconds, most), param: input)
                 }
             }
+        }
+    }
+
+    /// `separate`'s spans against the mixture (Audio §3.6, RFC 0008): one ending more than a sample after the mixture
+    /// does is 422 `out_of_limits`, never clipped. MESKit checks the spans against each other when the request arrives;
+    /// only the mixture's length, which Gaea reads here, can tell this.
+    static func checkSpans(_ spans: [SeparationSpan], mixture: RunInput?) throws {
+        guard !spans.isEmpty, case .file(let url, _)? = mixture, let wav = try? WAVFile(Data(contentsOf: url)) else { return }
+        if let span = SeparationSpan.firstPastEnd(spans, mixtureSeconds: wav.durationSeconds, sampleRate: Double(wav.sampleRate)) {
+            throw MESError(.outOfLimits, String(format: "A span ends at %g s; the mixture is %.2f s long.", span.end, wav.durationSeconds),
+                           param: AudioProfile.Param.spans)
         }
     }
 

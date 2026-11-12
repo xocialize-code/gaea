@@ -108,6 +108,68 @@ struct AudioTests {
         try GaeaEngine.checkInputLengths("audio.separate", inputs: inputs, limits: .init(maxDurationSeconds: 600))
     }
 
+    /// A described-target separator (RFC 0008, MES 0.13.0: SAM-Audio's shape) beside a labelled one: the descriptor
+    /// takes `describe` and `spans`, lists `target` and `residual` after the labelled stems, and carries the watermark.
+    @Test func aDescribedSeparatorTakesADescriptionAndSpans() throws {
+        let routes = try speakRoutes().enumerated().map { i, route -> PluginRoute in
+            var offer = route.manifestOffer
+            offer.operation = "audio.separate"
+            var r = route
+            r.manifestOffer = offer
+            r.offer.supports = i == 0
+                ? ["stems": ["target", "residual"], "described_target": true, "spans": true, "stem_method": "regenerated",
+                   "languages": ["en"], "sample_rate": 48000, "channels": 1, "watermark": "audioseal"]
+                : ["stems": ["vocals", "instrumental"], "stem_method": "masked", "sample_rate": 44100, "channels": 2]
+            r.offer.limits = .init(maxDurationSeconds: 30)
+            return r
+        }
+        let descriptor = try #require(GaeaEngine.audioDescriptor("audio.separate", routes: routes))
+        #expect(descriptor.outputs.map(\.name) == ["vocals", "instrumental", "target", "residual"])
+        let properties = descriptor.params["properties"]
+        #expect(properties?["describe"]?["x-mes-ui"]?["label"] == "Sound to separate")
+        #expect(properties?["spans"] != nil)
+        #expect(descriptor.models[0].watermark == "audioseal")
+        // The stems a job makes: with a description the target and the residual, without one only labelled stems.
+        #expect(AudioProfileRules.stems(["describe": "speech"], model: routes[0].offer) == ["target", "residual"])
+        #expect(AudioProfileRules.stems([:], model: routes[0].offer) == [])
+        #expect(AudioProfileRules.stems([:], model: routes[1].offer) == ["vocals", "instrumental"])
+    }
+
+    /// A span ending more than a sample past the mixture is refused `out_of_limits`, never clipped (§3.6, RFC 0008).
+    @Test func aSpanPastTheMixtureIsRefused() throws {
+        let dir = FileManager.default.temporaryDirectory.appending(path: "gaea-spans-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: dir) }
+        let file = dir.appending(path: "mix.wav")
+        try AudioPCM.wav([Float](repeating: 0, count: 48000 * 2), sampleRate: 48000, channels: 1, bitDepth: 16).write(to: file)
+        let mixture = RunInput.file(file, mediaType: "audio/wav")
+        try GaeaEngine.checkSpans([.init(start: 0.5, end: 2, present: true)], mixture: mixture)
+        try GaeaEngine.checkSpans([.init(start: 0.5, end: 2 + 1.0 / 48000, present: false)], mixture: mixture)
+        do {
+            try GaeaEngine.checkSpans([.init(start: 0, end: 1, present: true), .init(start: 1, end: 2.01, present: true)], mixture: mixture)
+            Issue.record("a span 10 ms past the mixture ran")
+        } catch let error as MESError {
+            #expect(error.code == "out_of_limits" && error.param == "spans")
+        }
+        try GaeaEngine.checkSpans([], mixture: mixture)
+    }
+
+    /// The SAM-Audio plugin's manifest (engine contract 1.62.0), when its checkout is next door: Gaea decodes it, and
+    /// its offer is a described-target separator under the SAM licence with both acceptances.
+    static let samManifest = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        .deletingLastPathComponent().appending(path: "gaea-plugin-sam-audio/dist/manifest.json")
+    @Test(.enabled(if: FileManager.default.fileExists(atPath: samManifest.path)))
+    func theSAMAudioManifestDecodes() throws {
+        let manifest = try JSONDecoder().decode(PluginManifest.self, from: Data(contentsOf: Self.samManifest))
+        let offer = try #require(manifest.offers.first { $0.operation == "audio.separate" })
+        let mes = try JSONDecoder().decode(ModelOffer.self, from: JSONEncoder().encode(offer.model))
+        #expect(mes.id == "sam-audio-base")
+        #expect(mes.supports("described_target")?.boolValue == true && mes.supports("spans")?.boolValue == true)
+        #expect(mes.supports("stems")?.arrayValue?.compactMap(\.stringValue) == ["target", "residual"])
+        #expect(mes.watermark == "audioseal")
+        #expect(mes.license.spdx == "LicenseRef-SAM")
+    }
+
     @Test func noStreamingModelMeansNoStreamedOutput() throws {
         let descriptor = try #require(GaeaEngine.audioDescriptor("audio.speak", routes: [try speakRoutes()[1]]))
         #expect(descriptor.outputs.allSatisfy { $0.stream == nil })
