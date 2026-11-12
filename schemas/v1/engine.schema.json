@@ -419,6 +419,22 @@
         "gpuCacheBytes": {
           "$ref": "#/$defs/Bytes"
         },
+        "externalBytes": {
+          "description": "What tenants outside the engine's packages hold of the budget (written from mlx-engine-swift 0.77.0; contract 1.43.0's external tenants).",
+          "$ref": "#/$defs/Bytes"
+        },
+        "externalTenants": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["persistentBytes", "transientBytes"],
+            "additionalProperties": false,
+            "properties": {
+              "persistentBytes": { "$ref": "#/$defs/Bytes" },
+              "transientBytes": { "$ref": "#/$defs/Bytes" }
+            }
+          }
+        },
         "residents": {
           "type": "object",
           "additionalProperties": {

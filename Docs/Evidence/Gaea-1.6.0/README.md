@@ -21,7 +21,28 @@ Pro, with the demo plugin 0.4.0 from GitHub):
   an offer with `described_target`, and none was installed.
 - [conformance-demo.md](conformance-demo.md): the whole suite, 42 passed, 0 failed, 68 skipped.
 
-**Not tested:** a described-target job through Gaea from request to stems (AUDIO-019 and 021 with an offer to run
-them on). The SAM-Audio plugin is unsigned, so Gaea can't install it, and the Mac this ran on has no Developer ID
-certificate to sign it or a stand-in in the demo plugin. Run `mes-conformance --only AUDIO-019,AUDIO-020,AUDIO-021`
-again with the signed plugin installed and accepted.
+## With the signed SAM-Audio plugin (2026-11-11, later the same day)
+
+The plugin's CI signed 0.1.0 (`967173f`, `minGaea` 1.6.0) with Developer ID in its build-and-check mode
+(run 43128827291, nothing published). That run then failed at the transcript check: `schemas/v1/engine.schema.json`
+didn't allow `externalBytes` and `externalTenants`, which mlx-engine-swift 0.77.0 writes in a worker's memory report.
+The schema now allows them. The run stopped before notarizing, so the bundle is signed, not notarized.
+
+On the MacBook Pro, with that signed bundle and `mlx-community/sam-audio-base-swift-fp16` downloaded by the worker:
+
+- **`scripts/check-plugin.sh`** ([sam-audio-check.log](sam-audio-check.log)): passed. Signature, launch under the
+  launch requirement, hello, prepare, a described separation, the memory report, the transcript, and the control (the
+  bare worker finds no metallib). The prepare took 892 s because it downloaded the weights.
+- **`scripts/golden.sh`** ([sam-audio-golden.log](sam-audio-golden.log)): 5/5 stems byte for byte the same as
+  `sam-audio-inproc`, each 384,000 frames.
+- **Through Gaea 1.6.0** (a debug build, headless; the plugin installed from the release stand-in, enabled, with
+  users' acceptance):
+  - [conformance-sam-audio-019-021.md](conformance-sam-audio-019-021.md): AUDIO-019 to 021 with SAM-Audio alone, 3
+    passed, every branch a described-only offer has.
+  - [conformance-demo-sam-audio.md](conformance-demo-sam-audio.md): the whole suite with the demo plugin beside it,
+    42 passed, 1 failed, 67 skipped. AUDIO-019 to 021 passed with every branch. The failure is BASE-019: the suite
+    names `sam-audio-base` with acceptance but sends no `describe`, and Gaea refuses it (422), as RFC 0008 says an
+    engine does. The suite's minimal request needs a description for a described-only offer (asked of mlx-apps).
+
+**Not tested:** a notarized bundle, the plugin installed from a GitHub release, and Gaea's release build rather than a
+debug build.
