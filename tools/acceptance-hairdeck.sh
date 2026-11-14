@@ -269,6 +269,8 @@ assert m['report']['parts'] == 1 and m['headBonesNamedLikeItem'] == 1 and m['hai
   check "and carries its springs: the merged file has the body's and the item's, and the hair swings" py "
 import json; t = open('$OUT/merge.txt').read(); m = json.loads(t[:t.rindex('}') + 1]); print(m)
 assert m['springsMerged'] == m['springsBody'] + m['springsItem'] and m['hairSprings'] == m['springsItem'] and m['peakEndLag_m'] > 0.005, 'springs not carried'"
+  check "and the hair settles: within 1 cm of rest 2.5 s after the head turns (the tool's own verdict)" py "
+t = open('$OUT/merge.txt').read(); assert 'CHECK PASSED' in t, t[t.rindex('}') - 80:]"
   [[ ${KEEP_MERGED:-0} == 1 ]] || rm -f $OUT/merged.vrm
 else
   say "SKIP  the merge: no $MERGE, $VRMMERGE or $NODE_MODULES"

@@ -34,7 +34,43 @@ Evidence: [hairdeck-0.1.0/](hairdeck-0.1.0/acceptance.log).
 
 | Run | Result |
 |---|---|
-| `tools/acceptance-hairdeck.sh` (`REPO_FROM=github`) | **30 passed, 1 failed**: the failure is the merge tool in this tree, not the item (below) |
+| `tools/acceptance-hairdeck.sh` (`REPO_FROM=github`) | **30 passed, 1 failed** (31 checks, with Item Studio's `mergeVrm`): the failure is the merged hair not settling within the merge tool's 1 cm, the same for the in-process item (below) |
+| mes-conformance v0.14.0 with only HairDeck installed | 41 passed, 1 failed, 74 skipped: Base and Mesh 0.1 conform; MESH-001 to 003, 005, 009, 010 and 013 to 018 pass; the failure is IMAGE-007, the suite's request (AB-A-0280) ([conformance.md](hairdeck-0.1.0/conformance.md)) |
+
+- **The item is `hairdeck-inproc`'s** in four cases: the cut-out picture, `physics: false`, `texture: none`, and an
+  opaque JPEG matted by BiRefNet. In each the BIN chunk is the same byte for byte and every JSON member but `asset`
+  is equal: Gaea stamps the item and changes nothing else. 15,160 vertices, 36,836 faces, a 1064 px texture, 30
+  springs, skinned under `J_Bip_C_Head`.
+- **Inputs**: a HEIC with transparency arrives as an upright PNG and runs as `alpha`; the opaque JPEG as `remove`.
+- **Refusals**: no box 422, a box outside the picture or without area 400, no body 400, vertex colours 422, a part
+  the model doesn't make 422, a body that isn't a GLB refused at submit, `mesh.generate` 404 (not offered).
+- **The weights are public**: on the first run `xocialize/hairdeck-mlx` wasn't under the models root, Gaea said so at
+  install, and the first job downloaded it anonymously (`prepare_ms` 50,080). The log kept here is the second run.
+- **The merge** (`mlx-hairdeck-swift/tools/check_merged_vrm.mjs` with Item Studio's `vrmMerge.js`,
+  `xocialize-code/vrmx-studio` `9123c46`, passed as `VRMMERGE`; [merge.txt](hairdeck-0.1.0/merge.txt)): the item goes
+  into Spec under one head bone, its chains intact, the hair within 2.4e-7 m of where the item put it, and **its
+  springs are carried**: the merged file has 32 (the body's 2 and the item's 30) and the hair swings (the ends lag by
+  up to 0.39 m in a 50° head turn). **The tool's own verdict still fails, on settling**: 2.5 s after the turn the
+  ends are 1.82 cm from rest against its 1 cm limit. The in-process item gives the same figure, so this is the item's
+  springs or the tool's limit, mlx-3d's either way (AB-A-0278). The first run, with the older copy in
+  `VRMXA_Specification` (`0d8f1ce`, no spring-bone code), carried none of the item's springs; the log kept here is
+  the re-run.
+- **Memory** ([hairdeck-memory.txt](hairdeck-memory.txt)): the plugin's lane declares 4.20 GB. Gaea measured the worker
+  holding 5.35 to 5.63 GB on cut-out pictures and 10.27 GB once BiRefNet had run. The budget was 103 GB, so nothing
+  was refused; the declaration is mlx-3d's to raise (AB-A-0278).
+- Unit tests: `swift test` 109/109; `tools/validate.py` OK; `tools/test_validator.py` 78/78.
+
+## HairDeck 0.1.0 from GitHub through the released Gaea (2026-11-14)
+
+AB-T-0482's item 6. Gaea-1.7.0.zip from GitHub (the notarized app above), headless on a throwaway home and port;
+`gaea-plugin-hairdeck` 0.1.0 installed by repo URL from its public release (`8645c82`, mlx-hairdeck-swift 0.2.1);
+models root `/Volumes/DEV_VOL1/Models`. The picture is the plugin's own `Tests/Fixtures/girl.png` (768 × 1024, cut
+out), the box `{0.048, 0.03, 0.934, 0.941}` ([36, 30, 755, 995] px), the body `vrmdeveloper/src/assets/Spec.vrm`, seed 42.
+Evidence: [hairdeck-0.1.0/](hairdeck-0.1.0/acceptance.log).
+
+| Run | Result |
+|---|---|
+| `tools/acceptance-hairdeck.sh` (`REPO_FROM=github`) | **30 passed, 1 failed** (31 checks, with Item Studio's `mergeVrm`): the failure is the merged hair not settling within the merge tool's 1 cm, the same for the in-process item (below) |
 | mes-conformance v0.14.0 with only HairDeck installed | 41 passed, 1 failed, 74 skipped: Base and Mesh 0.1 conform; MESH-001 to 003, 005, 009, 010 and 013 to 018 pass; the failure is IMAGE-007, the suite's request (AB-A-0280) ([conformance.md](hairdeck-0.1.0/conformance.md)) |
 
 - **The item is `hairdeck-inproc`'s** in four cases: the cut-out picture, `physics: false`, `texture: none`, and an
@@ -53,7 +89,7 @@ Evidence: [hairdeck-0.1.0/](hairdeck-0.1.0/acceptance.log).
   `vrmMerge.js` in this tree (`0d8f1ce`) has no spring-bone code. mlx-3d's README says the check passed with a
   `mergeVrm` "extended to carry an item's spring bones"; that version isn't in the tree. Asked on AB-A-0278.
 - **Memory** ([memory.txt](hairdeck-0.1.0/memory.txt)): the lane declares 5.50 GB. The worker held 6.01 GB on cut-out
-  pictures and 10.44 GB after BiRefNet had run. BiRefNet's lane (0.9 + 7.2 GB) is not in HairDeck's declared figure.
+  pictures and 10.44 GB after BiRefNet had run (10.26 GB on the re-run). BiRefNet's lane (0.9 + 7.2 GB) is not in HairDeck's declared figure.
 - **Times**: a warm job ran in 0.9 to 1.1 s when the GPU was free, and in 12 to 18 s while another session's LTX
   probe was running on this Mac. The slow ones are that, not the plugin.
 - **Not run**: the suite with every plugin (`ALL=1 tools/conformance-with.sh`) on 1.7.0. The Mac's GPU was shared
