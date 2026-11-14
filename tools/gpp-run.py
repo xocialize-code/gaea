@@ -5,7 +5,9 @@ worker writes (AB-T-0364's acceptance).
     python3 tools/gpp-run.py <bundle.gaeaplugin> <work-dir> <model> <lane> <operation> <params-json> <model-params-json>
                              <seed> [<prompt>]
 
-File inputs (an image, a body) go in the environment: GPP_RUN_INPUTS='{"image": "/abs/a.png", "body": "/abs/b.vrm"}'.
+GPP_RUN_BUDGET_BYTES sets the memory ceiling the worker is configured with (8 GB by default; a model charged more than
+its ceiling refuses the job, as HairDeck with BiRefNet does at 8.1 GB). File inputs (an image, a body) go in the
+environment: GPP_RUN_INPUTS='{"image": "/abs/a.png", "body": "/abs/b.vrm"}'.
 
 Prints {"outputs": [...], "sha256": [one per file output], "effective": {...}, "warnings": [...]} on stdout. The worker
 is launched directly (a host would also check its signature and launch requirement; this tool trusts the bundle).
@@ -43,7 +45,7 @@ def main():
 
     hello = json.loads(worker.stdout.readline())
     assert hello["type"] == "hello", hello
-    send({"type": "configure", "id": "h1", "budget": {"ceilingBytes": 8_000_000_000, "wiresWeights": False},
+    send({"type": "configure", "id": "h1", "budget": {"ceilingBytes": int(os.environ.get("GPP_RUN_BUDGET_BYTES", 8_000_000_000)), "wiresWeights": False},
           "models_root": os.path.join(work, "models"), "cache_root": os.path.join(work, "cache"), "settings": {}})
     until("h1", ["configured"])
     send({"type": "prepare", "id": "h2", "model": model, "lane": lane})

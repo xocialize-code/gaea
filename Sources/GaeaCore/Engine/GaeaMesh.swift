@@ -21,17 +21,12 @@ import UniformTypeIdentifiers
 /// - **Disclosure and licences** (§1.11, §1.12): `asset.extras.mes` and `asset.copyright` in the file.
 /// - **The preview** (§1.7): a square PNG of the result, rendered by Gaea with the mesh's own texture, on transparent.
 ///
-/// A part made to fit a body (`mesh.generate_part`, AB-T-0482, asked of MES in AB-A-0280) is the exception to placement:
-/// it comes back in the body's coordinates, so Gaea stamps and previews it and never moves, scales, re-roots or
-/// decimates it. The operation is served once MESKit's Mesh tables list it.
+/// A part made to fit a body (`mesh.generate_part`, Mesh §3.3, RFC 0009, media-engine-spec v0.14.0; AB-T-0482) is the
+/// exception to placement: it comes back in the body's coordinates, so Gaea stamps and previews it and never moves,
+/// scales, re-roots or decimates it.
 extension GaeaEngine {
     /// The operation that makes a part for a body (HairDeck's hair item first).
     static let generatePart = "mesh.generate_part"
-    /// Its names, until MESKit's `MeshProfile` carries them.
-    enum PartName {
-        static let body = "body", part = "part", subjectBox = "subject_box", physics = "physics"
-        static let parts = "parts", none = "none"
-    }
 
     /// The preview's side in pixels: 768, drawn at twice that and scaled down.
     static let meshPreviewSize = 768
@@ -154,14 +149,18 @@ extension GaeaEngine {
             guard case .file(let url, _)? = context.inputs[MeshProfile.Input.image]?.first else {
                 throw MESError(.invalidRequest, "Input 'image' is missing.", param: MeshProfile.Input.image)
             }
-            guard case .file(let body, _)? = context.inputs[PartName.body]?.first else {
-                throw MESError(.invalidRequest, "Input 'body' is missing: the GLB or VRM the part goes on.", param: PartName.body)
+            guard case .file(let body, _)? = context.inputs[MeshProfile.Input.body]?.first else {
+                throw MESError(.invalidRequest, "Input 'body' is missing: the GLB or VRM the part goes on.", param: MeshProfile.Input.body)
             }
             // The body is read, never changed, and not held to Mesh §1.1–1.2 (a VRM may break them): it must be a GLB.
             do { _ = try GLB(data: Data(contentsOf: body)) } catch {
-                throw MESError(.inputInvalid, "Input 'body' isn't a GLB or VRM: \(error).", param: PartName.body)
+                throw MESError(.inputInvalid, "Input 'body' isn't a GLB or VRM: \(error).", param: MeshProfile.Input.body)
             }
-            try Self.checkSubjectBox(context.param(PartName.subjectBox))
+            // MESKit refuses a malformed box when the request arrives (400); this is the same rule, for a job that got here
+            // another way.
+            if let box = context.param(P.subjectBox), let problem = SubjectBox.problem(box) {
+                throw MESError(.invalidRequest, problem, param: P.subjectBox)
+            }
             // The box is a share of the upright image, so the worker gets the image upright: an upright PNG or JPEG as
             // sent, anything else as an upright PNG, alpha kept (GPP-1 §3.3.4).
             if let upright = try Self.uprightImage(url, into: inputDirectory) {
@@ -176,14 +175,18 @@ extension GaeaEngine {
                 throw MESError(.unsupportedParameter, "\(title) needs a picture that is already cut out (one with transparency).",
                                param: MeshProfile.Input.image)
             }
-            // What the request left out, said: the offer's first part, spring bones where it makes them, an atlas.
-            if params[PartName.part] == nil, let first = route.offer.supports(PartName.parts)?.arrayValue?.first?.stringValue {
-                params[PartName.part] = .string(first)
+            // What the request left out, said (§3.3): the offer's first part, spring bones where it makes them, its first
+            // texture. An offer's own default (the manifest's `defaults`) stands before those.
+            let supports = route.offer
+            if params[P.part] == nil {
+                params[P.part] = .string(supports.supports(MeshProfile.SupportsKey.parts)?.arrayValue?.first?.stringValue ?? MeshProfile.Part.hair)
             }
-            if params[PartName.physics] == nil {
-                params[PartName.physics] = .bool(route.offer.supports(PartName.physics)?.boolValue == true)
+            if params[P.physics] == nil {
+                params[P.physics] = .bool(supports.supports(MeshProfile.SupportsKey.physics)?.boolValue == true)
             }
-            if params[P.texture] == nil { params[P.texture] = "atlas" }
+            if params[P.texture] == nil {
+                params[P.texture] = .string(supports.supports(MeshProfile.SupportsKey.textures)?.arrayValue?.first?.stringValue ?? "atlas")
+            }
         } else if case .file(let url, _)? = context.inputs[MeshProfile.Input.mesh]?.first {
             // §1.1: a mesh input is a GLB this engine reads; §3.2: its faces within the offer's limit.
             let glb: GLB
@@ -246,7 +249,9 @@ extension GaeaEngine {
             effective[P.size] = .number(size)
             for key in [P.background, P.resolution] where effective[key] == nil { effective[key] = params[key]?.mes }
         } else if route.operation == Self.generatePart {
-            for key in [PartName.part, PartName.physics, P.texture, PartName.subjectBox] where effective[key] == nil {
+            // §3.3: what the job used, `background` included (`alpha` or `remove`), whatever the worker reported.
+            effective[P.background] = params[P.background]?.mes
+            for key in [P.part, P.physics, P.texture, P.subjectBox] where effective[key] == nil {
                 effective[key] = params[key]?.mes
             }
         }
@@ -256,24 +261,6 @@ extension GaeaEngine {
         Self.attach(ran, plugin: route.plugin, model: route.model.id, operation: route.operation, to: &output)
         for warning in warnings where !output.warnings.contains(warning) { output.warnings.append(warning) }
         return output
-    }
-
-    /// `subject_box` (AB-A-0280): `{x, y, width, height}`, each a share of the upright image from its top-left corner,
-    /// with some area and inside the image. Absent is fine here: an offer that needs one is the gate's to refuse.
-    static func checkSubjectBox(_ value: MESValue?) throws {
-        guard let value else { return }
-        let name = PartName.subjectBox
-        guard let box = value.objectValue, Set(box.keys) == ["x", "y", "width", "height"],
-              let x = box["x"]?.numberValue, let y = box["y"]?.numberValue,
-              let width = box["width"]?.numberValue, let height = box["height"]?.numberValue,
-              [x, y, width, height].allSatisfy(\.isFinite) else {
-            throw MESError(.invalidRequest, "subject_box is {x, y, width, height}, each a number from 0 to 1 of the image.", param: name)
-        }
-        let slack = 1e-9
-        guard x >= 0, y >= 0, width > 0, height > 0, x + width <= 1 + slack, y + height <= 1 + slack else {
-            throw MESError(.invalidRequest, "subject_box must have some area and lie inside the image (0 to 1 from its top-left corner).",
-                           param: name)
-        }
     }
 
     /// The image as an upright PNG, alpha kept, when a worker can't take it as sent: anything but a PNG or JPEG, and any

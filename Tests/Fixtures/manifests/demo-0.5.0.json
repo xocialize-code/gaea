@@ -358,10 +358,10 @@
               "characterPart" : {
                 "_0" : {
                   "features" : [
-                    "subjectBox",
-                    "colors",
                     "bodyFit",
-                    "springBones"
+                    "springBones",
+                    "subjectBox",
+                    "colors"
                   ],
                   "inputs" : [
                     "image"

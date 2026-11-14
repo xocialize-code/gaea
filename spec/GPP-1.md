@@ -192,8 +192,7 @@ Meshes travel as glTF 2.0 binary files (`model/gltf-binary`), MES Mesh 0.1's for
   out: use its alpha as the mask), `remove` (cut the object out first) or `keep` (use the whole picture).
 - `params.resolution` is always set for an offer that lists `supports.resolutions`: the request's, or the offer's first.
 
-**A part made to fit a body** (`mesh.generate_part`, AB-T-0482; MES's side is asked in AB-A-0280, and Gaea serves the
-operation once MESKit's Mesh tables list it). A model makes one part of a character (hair first) for the body it goes
+**A part made to fit a body** (`mesh.generate_part`, Mesh §3.3, RFC 0009, media-engine-spec v0.14.0; AB-T-0482). A model makes one part of a character (hair first) for the body it goes
 on, and the result is already placed on that body, so the rules above change:
 - **`inputs.image`** is the picture, always upright (no orientation tag left to apply): a PNG or JPEG as the client sent
   it, anything else as a PNG with its alpha kept. `params.background` is `alpha` (the picture has transparency and is
@@ -205,13 +204,16 @@ on, and the result is already placed on that body, so the rules above change:
   top-left corner, each 0 to 1, with some area and inside the image. The worker turns it into pixels of the file it
   received (`GaeaPluginKit`'s `CharacterParts.pixelBox`: edges rounded outwards to whole pixels).
 - **`params.part`**, **`params.physics`** and **`params.texture`** are always set: the request's, or the offer's first
-  `supports.parts`, whether it has `supports.physics`, and `atlas`. `physics` asks for chain bones and
+  `supports.parts`, whether it has `supports.physics`, and its first `supports.textures` (else `atlas`). `physics` asks for chain bones and
   `VRMC_springBone`; `texture` is `atlas` or `none`.
 - **The output** `mesh` is the part alone, in the body's coordinates, and otherwise a GLB by Mesh §1.1 and §1.2 (so
   extensions go in `extensionsUsed`, never `extensionsRequired`). Gaea writes `asset.generator`, `asset.copyright` and
   `asset.extras.mes` and renders the `preview`. It adds no root node and never moves, scales, grounds or decimates the
   part: every other member of the file's JSON and its BIN chunk reach the client as the worker wrote them (the JSON is
-  re-encoded, so compare parsed values, not bytes).
+  re-encoded, so compare parsed values, not bytes). Its skin's root joint has the name and the place of the body's bone
+  the part hangs from (§3.3; `MESCore`'s `GLB.bodyBone(for:)` finds it as the conformance suite does).
+- Gaea reports `effective.background` (`alpha` or `remove`), and `part`, `physics`, `texture` and `subject_box` where the
+  worker didn't.
 - `GaeaPluginKit`'s `CharacterParts.request` maps such a run to MLXEngine's `CharacterPartRequest` (contract 1.63).
 
 ### 3.4 Stop

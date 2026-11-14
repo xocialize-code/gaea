@@ -1,0 +1,6 @@
+2026-11-14T05:35:20Z gaea 1.7.0 starting: .build/c-hd/home, budget 103.08 GB, models /Volumes/Satechi/charm/gaea_models_test
+2026-11-14T05:35:26Z scheduler: hairdeck lane fp32 held 5.35 GB, past 4.20 GB; admitting it at that from now on
+2026-11-14T05:35:36Z scheduler: hairdeck lane fp32 held 5.56 GB, past 5.35 GB; admitting it at that from now on
+2026-11-14T05:35:59Z scheduler: hairdeck lane fp32 held 5.57 GB, past 5.56 GB; admitting it at that from now on
+2026-11-14T05:36:13Z scheduler: hairdeck lane fp32 held 5.63 GB, past 5.57 GB; admitting it at that from now on
+2026-11-14T05:38:48Z scheduler: hairdeck lane fp32 held 10.27 GB, past 5.63 GB; admitting it at that from now on

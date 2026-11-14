@@ -76,19 +76,6 @@ import MLXToolKit
         #expect(pixels[3] == 0, "on transparent")
     }
 
-    @Test func subjectBoxIsAShareOfTheImage() throws {
-        func box(_ x: Double, _ y: Double, _ w: Double, _ h: Double) -> MESValue {
-            ["x": .number(x), "y": .number(y), "width": .number(w), "height": .number(h)]
-        }
-        try GaeaEngine.checkSubjectBox(nil)
-        try GaeaEngine.checkSubjectBox(box(0.25, 0.1, 0.5, 0.4))
-        try GaeaEngine.checkSubjectBox(box(0, 0, 1, 1))
-        for bad: MESValue in [box(0.25, 0.1, 0, 0.4), box(-0.1, 0, 0.5, 0.5), box(0.6, 0, 0.5, 0.5), box(0, 0.7, 0.5, 0.5),
-                              ["x": 0.1, "y": 0.1, "width": 0.5], [0.1, 0.1, 0.5, 0.5], ["x": 0.1, "y": 0.1, "width": 0.5, "height": 0.5, "unit": "px"]] {
-            #expect(throws: MESError.self) { try GaeaEngine.checkSubjectBox(bad) }
-        }
-    }
-
     /// The box is a share of the upright image, so a turned image reaches the worker upright; an upright PNG or JPEG
     /// goes as sent.
     @Test func aTurnedImageReachesTheWorkerUpright() throws {
@@ -143,6 +130,10 @@ import MLXToolKit
             #expect(facts.bounds.min[1] > 1.3 && facts.bounds.max[1] < 1.9, "above the head bone, in the body's metres")
             #expect(glb.object("nodes", 0)?["name"]?.stringValue == "J_Bip_C_Head")
             #expect((glb.json["extensions"]?["VRMC_springBone"] != nil) == springs)
+            // The body's head bone, by MESKit's own rule, and every vertex fully bound (MESH-014).
+            #expect(glb.bodyBone(for: MeshProfile.Part.hair)?.name == "J_Bip_C_Head")
+            let weights = try glb.floats(accessor: try #require(glb.primitives().first?.attributes["WEIGHTS_0"]))
+            #expect(weights.count == facts.vertices && weights.allSatisfy { abs($0.reduce(0, +) - 1) < 1e-6 })
             let before = glb
             GaeaEngine.stamp(&glb, license: License(spdx: "Apache-2.0", commercialUse: .yes), title: "Demo part", generated: true)
             let read = try GLB(data: glb.data())

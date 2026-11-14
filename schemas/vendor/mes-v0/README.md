@@ -1,6 +1,6 @@
 # Vendored MES schemas
 
-`common.schema.json`, `descriptor.schema.json` and `voices.schema.json` from media-engine-spec at tag **v0.13.0** (`f496931`),
+`common.schema.json`, `descriptor.schema.json` and `voices.schema.json` from media-engine-spec at tag **v0.14.0** (`43e5a57`),
 `schemas/v0/base/`, copied unchanged. Gaea's manifest refers to them for MES offers (`ModelOffer`), parameter
 properties and shared definitions, so a plugin's offer is checked by the same rules MES clients check descriptors by.
 
