@@ -5,6 +5,8 @@ worker writes (AB-T-0364's acceptance).
     python3 tools/gpp-run.py <bundle.gaeaplugin> <work-dir> <model> <lane> <operation> <params-json> <model-params-json>
                              <seed> [<prompt>]
 
+File inputs (an image, a body) go in the environment: GPP_RUN_INPUTS='{"image": "/abs/a.png", "body": "/abs/b.vrm"}'.
+
 Prints {"outputs": [...], "sha256": [one per file output], "effective": {...}, "warnings": [...]} on stdout. The worker
 is launched directly (a host would also check its signature and launch requirement; this tool trusts the bundle).
 """
@@ -51,6 +53,7 @@ def main():
         path = os.path.join(work, "in", "prompt-0.txt")
         open(path, "w").write(prompt)
         inputs["prompt"] = path
+    inputs.update(json.loads(os.environ.get("GPP_RUN_INPUTS", "{}")))
     run = {"type": "run", "id": "h3", "job": "job_direct", "operation": operation, "model": model, "lane": lane,
            "inputs": inputs, "params": json.loads(params), "seed": int(seed), "output_dir": os.path.join(work, "out")}
     if json.loads(model_params):

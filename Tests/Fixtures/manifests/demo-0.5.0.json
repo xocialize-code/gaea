@@ -1,0 +1,546 @@
+{
+  "engine" : {
+    "contract" : "1.63.0",
+    "package" : "mlx-engine-swift",
+    "version" : "0.78.0"
+  },
+  "executable" : "gaea-demo-worker",
+  "helpers" : [
+    {
+      "model" : "demo-matmul",
+      "operation" : "x-gaea.demo.matmul",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "holdBytes" : {
+            "default" : 0,
+            "minimum" : 0,
+            "type" : "integer"
+          },
+          "iterations" : {
+            "default" : 10,
+            "maximum" : 1000,
+            "minimum" : 1,
+            "type" : "integer"
+          },
+          "n" : {
+            "default" : 4096,
+            "maximum" : 16384,
+            "minimum" : 16,
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "summary" : "n×n fp32 matmul, repeated; holds holdBytes to exercise the memory ledger.",
+      "title" : "Matmul smoke test"
+    }
+  ],
+  "id" : "com.xocialize.gaea.demo",
+  "license" : "Apache-2.0",
+  "manifest_version" : 1,
+  "min_gaea" : "1.7.0",
+  "models" : [
+    {
+      "id" : "demo-matmul",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "fp32",
+          "resolved" : {
+            "capabilities" : [
+
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 63,
+              "patch" : 0
+            },
+            "footprintQuant" : "fp32",
+            "materialization" : "bundled",
+            "peakTransientBytes" : 2370000000,
+            "peakTransientSource" : "largestThatFits",
+            "persistentBytes" : 0,
+            "persistentSource" : "largestThatFits",
+            "selfMaterializing" : false,
+            "weightSources" : [
+
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 63,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "Apache-2.0"
+          },
+          "weightLicense" : {
+            "identifier" : "Apache-2.0"
+          }
+        },
+        "provenance" : {
+          "revision" : "0.3.3",
+          "sourceRepo" : "xocialize-code/gaea-plugin-demo",
+          "tier" : 1
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 2370000000,
+              "quant" : "fp32",
+              "residentBytes" : 0
+            }
+          ],
+          "os" : {
+
+          },
+          "processEnvironment" : {
+
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+
+        ]
+      },
+      "title" : "Demo matmul (GPU smoke test)"
+    },
+    {
+      "id" : "demo-gradient",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "fp32",
+          "resolved" : {
+            "capabilities" : [
+              "textToImage"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 63,
+              "patch" : 0
+            },
+            "footprintQuant" : "fp32",
+            "materialization" : "bundled",
+            "peakTransientBytes" : 200000000,
+            "peakTransientSource" : "largestThatFits",
+            "persistentBytes" : 0,
+            "persistentSource" : "largestThatFits",
+            "selfMaterializing" : false,
+            "weightSources" : [
+
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 63,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "Apache-2.0"
+          },
+          "weightLicense" : {
+            "identifier" : "Apache-2.0"
+          }
+        },
+        "provenance" : {
+          "revision" : "0.3.3",
+          "sourceRepo" : "xocialize-code/gaea-plugin-demo",
+          "tier" : 1
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 200000000,
+              "quant" : "fp32",
+              "residentBytes" : 0
+            }
+          ],
+          "os" : {
+
+          },
+          "processEnvironment" : {
+
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "textToImage",
+            "name" : "demo_gradient",
+            "parameters" : [
+
+            ],
+            "summary" : "A two-colour GPU gradient: a smoke test for a host's image path, not a generative model.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "Demo gradient (image.generate smoke test)"
+    },
+    {
+      "id" : "demo-separator",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "fp32",
+          "resolved" : {
+            "capabilities" : [
+              "audioSeparation"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 63,
+              "patch" : 0
+            },
+            "footprintQuant" : "fp32",
+            "materialization" : "bundled",
+            "peakTransientBytes" : 500000000,
+            "peakTransientSource" : "largestThatFits",
+            "persistentBytes" : 0,
+            "persistentSource" : "largestThatFits",
+            "selfMaterializing" : false,
+            "weightSources" : [
+
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 63,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "Apache-2.0"
+          },
+          "weightLicense" : {
+            "identifier" : "Apache-2.0"
+          }
+        },
+        "provenance" : {
+          "revision" : "0.4.0",
+          "sourceRepo" : "xocialize-code/gaea-plugin-demo",
+          "tier" : 1
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 500000000,
+              "quant" : "fp32",
+              "residentBytes" : 0
+            }
+          ],
+          "os" : {
+
+          },
+          "processEnvironment" : {
+
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "audioSeparation",
+            "name" : "demo_separator",
+            "parameters" : [
+
+            ],
+            "summary" : "A masked split of a mixture in two halves: a smoke test for a host's separate path, not a separator.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "Demo separator (audio.separate smoke test)"
+    },
+    {
+      "id" : "demo-part",
+      "lanes" : [
+        {
+          "default" : true,
+          "id" : "fp32",
+          "resolved" : {
+            "capabilities" : [
+              "characterPart"
+            ],
+            "contractVersion" : {
+              "major" : 1,
+              "minor" : 63,
+              "patch" : 0
+            },
+            "footprintQuant" : "fp32",
+            "materialization" : "bundled",
+            "peakTransientBytes" : 100000000,
+            "peakTransientSource" : "largestThatFits",
+            "persistentBytes" : 0,
+            "persistentSource" : "largestThatFits",
+            "selfMaterializing" : false,
+            "weightSources" : [
+
+            ]
+          }
+        }
+      ],
+      "package" : {
+        "contractVersion" : {
+          "major" : 1,
+          "minor" : 63,
+          "patch" : 0
+        },
+        "license" : {
+          "portCodeLicense" : {
+            "identifier" : "Apache-2.0"
+          },
+          "weightLicense" : {
+            "identifier" : "Apache-2.0"
+          }
+        },
+        "provenance" : {
+          "revision" : "0.5.0",
+          "sourceRepo" : "xocialize-code/gaea-plugin-demo",
+          "tier" : 1
+        },
+        "requirements" : {
+          "footprints" : [
+            {
+              "peakActivationBytes" : 100000000,
+              "quant" : "fp32",
+              "residentBytes" : 0
+            }
+          ],
+          "os" : {
+
+          },
+          "processEnvironment" : {
+
+          },
+          "requiredBackends" : [
+            "metalGPU"
+          ]
+        },
+        "specialties" : [
+
+        ],
+        "surfaces" : [
+          {
+            "capability" : "characterPart",
+            "controls" : {
+              "characterPart" : {
+                "_0" : {
+                  "features" : [
+                    "subjectBox",
+                    "colors",
+                    "bodyFit",
+                    "springBones"
+                  ],
+                  "inputs" : [
+                    "image"
+                  ],
+                  "parts" : [
+                    "hair"
+                  ],
+                  "requiresSubjectBox" : true
+                }
+              }
+            },
+            "name" : "demo_part",
+            "parameters" : [
+              {
+                "kind" : "image",
+                "name" : "image",
+                "required" : true,
+                "summary" : "A picture of the character wearing the part."
+              },
+              {
+                "kind" : "array",
+                "name" : "subjectBox",
+                "required" : true,
+                "summary" : "Where in the image the part is read from, [x0,y0,x1,y1] in source pixels (for hair: the head box). Required with an image."
+              },
+              {
+                "kind" : "mesh",
+                "name" : "body",
+                "required" : false,
+                "summary" : "The body the part goes on (a VRM or rigged GLB); the part comes back placed on it. Omit for the part in the model's own frame."
+              },
+              {
+                "kind" : "integer",
+                "name" : "seed",
+                "required" : false,
+                "summary" : "Generation seed."
+              },
+              {
+                "kind" : "boolean",
+                "name" : "springBones",
+                "required" : false,
+                "summary" : "Emit spring-bone physics chains (VRMC_springBone). Default on."
+              },
+              {
+                "kind" : "boolean",
+                "name" : "colors",
+                "required" : false,
+                "summary" : "Carry the part's colours read from the source. Default on."
+              }
+            ],
+            "summary" : "A tuft on the body's head bone, as wide as the box: a smoke test for a host's part path, not a hair model.",
+            "supportedModes" : [
+
+            ]
+          }
+        ]
+      },
+      "title" : "Demo part (mesh.generate_part smoke test)"
+    }
+  ],
+  "offers" : [
+    {
+      "limits" : {
+        "max_pixels" : 4194304,
+        "max_side" : 2048,
+        "min_side" : 8,
+        "size_multiple" : 8
+      },
+      "model" : {
+        "id" : "demo-gradient",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "memory_class" : "small",
+        "notes" : "A GPU-computed two-colour gradient, not a generative model: it checks a host's image path. Colours come from the seed and the prompt.",
+        "quality_tiers" : [
+          "draft",
+          "standard",
+          "best"
+        ],
+        "speed_class" : "fast",
+        "title" : "Demo gradient"
+      },
+      "operation" : "image.generate",
+      "params" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "x-gaea.gradient_angle" : {
+            "default" : 45,
+            "description" : "The gradient's direction, in degrees.",
+            "maximum" : 360,
+            "minimum" : 0,
+            "type" : "number",
+            "x-mes-ui" : {
+              "label" : "Angle",
+              "widget" : "slider"
+            }
+          }
+        },
+        "type" : "object"
+      },
+      "profile" : "image"
+    },
+    {
+      "model" : {
+        "id" : "demo-separator",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "limits" : {
+          "max_duration_s" : 600
+        },
+        "memory_class" : "small",
+        "notes" : "Not a separator: vocals is the mixture at half level and instrumental the rest, so the two add back to the mixture. It checks a host's separate path.",
+        "quality_tiers" : [
+          "draft",
+          "standard",
+          "best"
+        ],
+        "speed_class" : "fast",
+        "supports" : {
+          "seed" : false,
+          "stem_method" : "masked",
+          "stems" : [
+            "vocals",
+            "instrumental"
+          ]
+        },
+        "title" : "Demo separator"
+      },
+      "operation" : "audio.separate",
+      "profile" : "audio"
+    },
+    {
+      "model" : {
+        "id" : "demo-part",
+        "license" : {
+          "commercial_use" : true,
+          "spdx" : "Apache-2.0",
+          "terms_url" : "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "memory_class" : "small",
+        "notes" : "Not a hair model: a small skinned tuft with one spring, put above the body's head bone and as wide as the box. It checks a host's part path.",
+        "quality_tiers" : [
+          "draft",
+          "standard",
+          "best"
+        ],
+        "speed_class" : "fast",
+        "supports" : {
+          "background_removal" : true,
+          "parts" : [
+            "hair"
+          ],
+          "physics" : true,
+          "seed" : true,
+          "subject_box" : "required",
+          "textures" : [
+            "atlas",
+            "none"
+          ]
+        },
+        "title" : "Demo part"
+      },
+      "operation" : "mesh.generate_part",
+      "profile" : "mesh"
+    }
+  ],
+  "protocol" : 1,
+  "repo" : "https://github.com/xocialize-code/gaea-plugin-demo",
+  "settings" : [
+
+  ],
+  "summary" : "A GPU matmul loop that proves the plugin path end to end (download, verify, launch, run, cancel), a GPU gradient for image.generate, a masked two-stem split for audio.separate, and a tuft on a body's head for mesh.generate_part.",
+  "team" : "CFZS6RXUCP",
+  "title" : "Gaea demo worker",
+  "version" : "0.5.0"
+}

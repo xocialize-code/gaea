@@ -1,5 +1,5 @@
 # manifest: demo.json
 # expect: memory carries re only in answer to memory.query
-W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.2.0"},"pid":1,"models":["demo-matmul"],"manifest_sha256":"99ca53d467d4ff4b43f63c2c3a9bc7ca380a5f8180ff43c9af5f713d082fb6c2"}
+W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.2.0"},"pid":1,"models":["demo-matmul"],"manifest_sha256":"dcbb6c6c79315efe72a26eb0d6c60fa35340d1615669bae83f544cbae429418f"}
 H {"type":"configure","id":"h1","budget":{"ceilingBytes":8000000000,"wiresWeights":false},"models_root":"/m","cache_root":"/c","settings":{}}
 W {"type":"memory","re":"h1","report":{"budgetBytes":1,"residentBytes":0,"transientReserveBytes":0,"availableBytes":1,"residents":{},"running":[],"date":1}}

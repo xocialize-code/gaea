@@ -21,7 +21,7 @@
             "capabilities": [],
             "contractVersion": {
               "major": 1,
-              "minor": 59,
+              "minor": 63,
               "patch": 0
             },
             "footprintQuant": "fp32",
@@ -38,7 +38,7 @@
       "package": {
         "contractVersion": {
           "major": 1,
-          "minor": 59,
+          "minor": 63,
           "patch": 0
         },
         "license": {
@@ -63,6 +63,7 @@
             }
           ],
           "os": {},
+          "processEnvironment": {},
           "requiredBackends": [
             "metalGPU"
           ]
