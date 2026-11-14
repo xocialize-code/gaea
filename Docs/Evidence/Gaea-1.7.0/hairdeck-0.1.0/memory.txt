@@ -1,0 +1,4 @@
+2026-11-14T18:10:46Z gaea 1.7.0 starting: <work>/main, budget 103.08 GB, models /Volumes/DEV_VOL1/Models
+2026-11-14T18:11:20Z scheduler: hairdeck lane fp32 held 6.01 GB, past 5.50 GB; admitting it at that from now on
+2026-11-14T18:11:36Z scheduler: hairdeck lane fp32 held 6.01 GB, past 6.01 GB; admitting it at that from now on
+2026-11-14T18:13:36Z scheduler: hairdeck lane fp32 held 10.44 GB, past 6.01 GB; admitting it at that from now on

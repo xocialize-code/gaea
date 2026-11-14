@@ -1,0 +1,22 @@
+{
+ "report": {
+  "parts": 1,
+  "meshes": 1,
+  "addedBones": 122,
+  "droppedFaceMeshes": 0
+ },
+ "bytes": 12170516,
+ "springsBody": 2,
+ "springsItem": 30,
+ "springsMerged": 2,
+ "hairSprings": 0,
+ "hairChainsIntact": true,
+ "headBonesNamedLikeItem": 1,
+ "hairVertices": 15160,
+ "restPositionError_m": 2.37e-7,
+ "springJointsLoaded": 4,
+ "peakEndLag_m": 0,
+ "endOffsetAfter2_5s_m": 0,
+ "nan": false
+}
+CHECK FAILED
