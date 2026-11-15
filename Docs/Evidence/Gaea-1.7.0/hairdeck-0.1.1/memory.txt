@@ -1,0 +1,11 @@
+HairDeck 0.1.1 through the released Gaea 1.7.0, 2026-11-15. The lane declares 11.00 GB (3.8 GB held + 7.2 GB peak
+transient: HairDeck's own 2.9 + 2.6 GB with BiRefNet's 0.9 + 7.2 GB charged by kit 0.13.1).
+
+Gaea's log has no "held … past" line in either run (0.1.0 logged "held 10.26 GB, past 5.50 GB").
+
+The worker, by `footprint <pid>` (MiB), in a second scratch Gaea:
+  after a cut-out job (alpha)              phys_footprint 4942 MB
+  after an opaque job (BiRefNet ran)       phys_footprint 5412 MB
+  after a second opaque job                phys_footprint 5420 MB
+  peak over those jobs                     phys_footprint_peak 9816 MB  (10.29 GB)
+  after the conformance suite              phys_footprint 5345 MB, phys_footprint_peak 9731 MB (10.20 GB)

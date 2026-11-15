@@ -269,7 +269,7 @@ assert m['report']['parts'] == 1 and m['headBonesNamedLikeItem'] == 1 and m['hai
   check "and carries its springs: the merged file has the body's and the item's, and the hair swings" py "
 import json; t = open('$OUT/merge.txt').read(); m = json.loads(t[:t.rindex('}') + 1]); print(m)
 assert m['springsMerged'] == m['springsBody'] + m['springsItem'] and m['hairSprings'] == m['springsItem'] and m['peakEndLag_m'] > 0.005, 'springs not carried'"
-  check "and the hair settles: within 1 cm of rest 2.5 s after the head turns (the tool's own verdict)" py "
+  check "and the hair settles: the tool's own verdict (within 1 cm of rest 5 s after the head turns, from 12f24cd)" py "
 t = open('$OUT/merge.txt').read(); assert 'CHECK PASSED' in t, t[t.rindex('}') - 80:]"
   [[ ${KEEP_MERGED:-0} == 1 ]] || rm -f $OUT/merged.vrm
 else
@@ -279,6 +279,7 @@ fi
 # 7. Memory and the sessions.
 GAEA_HOME=$H "$CLI" models > "$OUT/models-after.txt"
 grep -h -E "starting|held|budget" $H/Logs/*.log $H.out 2>/dev/null | sort -u > "$OUT/memory.txt"; sed 's/^/      /' "$OUT/memory.txt" | tee -a "$LOG"
+check "the worker held no more than its lane declares, BiRefNet included (no 'held … past' in Gaea's log)" zsh -c "! grep -q 'held .* past' '$OUT/memory.txt'"
 stop $P
 mkdir -p "$OUT/sessions"; cp $H/Logs/sessions/*.gpp "$OUT/sessions/" 2>/dev/null
 for s in $OUT/sessions/*.gpp; do check "transcript $(basename $s) passes validate.py" python3 tools/validate.py --transcript "$s"; done

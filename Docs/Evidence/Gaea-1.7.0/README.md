@@ -94,3 +94,26 @@ Evidence: [hairdeck-0.1.0/](hairdeck-0.1.0/acceptance.log).
   probe was running on this Mac. The slow ones are that, not the plugin.
 - **Not run**: the suite with every plugin (`ALL=1 tools/conformance-with.sh`) on 1.7.0. The Mac's GPU was shared
   with another session's measurements.
+
+## HairDeck 0.1.1 from GitHub through the released Gaea (2026-11-15)
+
+The same run on `gaea-plugin-hairdeck` 0.1.1 (`37fb717`, GaeaPluginKit 0.13.1, still mlx-hairdeck-swift 0.2.1),
+installed by repo URL from its public release; the same picture, box, body and seed; the merge by Item Studio's
+`vrmMerge.js` (`VRMMERGE`) and mlx-3d's check tool at `12f24cd`, which judges rest at 5 s.
+Evidence: [hairdeck-0.1.1/](hairdeck-0.1.1/acceptance.log).
+
+| Run | Result |
+|---|---|
+| `tools/acceptance-hairdeck.sh` (`REPO_FROM=github`) | **32 passed, 0 failed** (the 31 checks of 0.1.0's re-run and one on memory) |
+| mes-conformance v0.14.0 with only HairDeck installed | 41 passed, 1 failed, 74 skipped: Base and Mesh 0.1 conform; MESH-001 to 003, 005, 009, 010 and 013 to 018 pass; the failure is IMAGE-007, the suite's request (AB-A-0280) ([conformance.md](hairdeck-0.1.1/conformance.md)) |
+
+- **The item** is `hairdeck-inproc`'s byte for byte in the same four cases, and the same item as 0.1.0's (15,160
+  vertices, 36,836 faces, 30 springs). `hairdeck-inproc` here is the build of 14 November, before 0.1.1; the package
+  it links didn't change.
+- **Memory** ([memory.txt](hairdeck-0.1.1/memory.txt)): the lane declares **11.00 GB** (BiRefNet charged by
+  `.composing(…, charged: true)`). The worker's peak footprint with BiRefNet run was 10.29 GB, and Gaea's log has no
+  "held … past" line, where 0.1.0 logged 10.26 GB past 5.50 GB. At rest after jobs the worker holds 4.9 to 5.4 GB.
+- **The merge** ([merge.txt](hairdeck-0.1.1/merge.txt)): 32 springs in the merged file (2 of the body, 30 of the
+  item), the ends lag by up to 0.39 m, 1.82 cm from rest at 2.5 s (one soft chain) and at rest by 5 s: CHECK PASSED.
+- **Refusals and inputs** as on 0.1.0. Warm jobs ran in 0.9 to 1.0 s.
+- **Not run**: the suite with every plugin (`ALL=1`).

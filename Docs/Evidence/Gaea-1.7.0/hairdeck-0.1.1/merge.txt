@@ -1,0 +1,26 @@
+{
+ "report": {
+  "parts": 1,
+  "meshes": 1,
+  "addedBones": 122,
+  "droppedFaceMeshes": 0,
+  "springs": 30,
+  "skippedSprings": 0
+ },
+ "bytes": 12182720,
+ "springsBody": 2,
+ "springsItem": 30,
+ "springsMerged": 32,
+ "hairSprings": 30,
+ "hairChainsIntact": true,
+ "headBonesNamedLikeItem": 1,
+ "hairVertices": 15160,
+ "restPositionError_m": 2.37e-7,
+ "springJointsLoaded": 96,
+ "peakEndLag_m": 0.3932,
+ "endOffsetAfter2_5s_m": 0.0182,
+ "endsOver1cmAt2_5s": 1,
+ "endOffsetAfter5s_m": 0,
+ "nan": false
+}
+CHECK PASSED
