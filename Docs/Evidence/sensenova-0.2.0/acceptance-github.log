@@ -1,0 +1,50 @@
+# TailSteer acceptance 2026-11-15T14:38:47Z: Gaea 1.8.0, sensenova from github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add sensenova 0.2.0 by repo URL
+      on  sensenova-u1  SenseNova-U1.5  [com.xocialize.gaea.sensenova 0.2.0] lanes: int8* 24.70 GB, bf16 39.50 GB
+      on  sensenova-u1-fast  SenseNova-U1.5 8-step  [com.xocialize.gaea.sensenova 0.2.0] lanes: int8* 24.70 GB, int4 16.70 GB
+      on  sensenova-u1-fast-v1  SenseNova-U1.5 8-step (V1 adapter)  [com.xocialize.gaea.sensenova 0.2.0] lanes: int8* 24.70 GB, int4 16.70 GB  (weights not under the models root: mlx-community/SenseNova-U1.5-8B-MoT-8step-8bit; the first job downloads them, or gaea plugins warm com.xocialize.gaea.sensenova)
+      on  sensenova-u1-tailsteer  SenseNova-U1.5 TailSteer 8-step  [com.xocialize.gaea.sensenova 0.2.0] lanes: int8* 24.70 GB
+PASS  gaea models finds TailSteer's weights under the models root
+image.generate {'id': 'sensenova-u1-tailsteer', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://huggingface.co/sensenova/SenseNova-U1.5-8B-MoT-TailSteer'}, 'memory_class': 'large', 'named_only': True, 'quality_tiers': ['standard'], 'title': 'SenseNova-U1.5 TailSteer 8-step'}
+image.edit {'id': 'sensenova-u1-tailsteer', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://huggingface.co/sensenova/SenseNova-U1.5-8B-MoT-TailSteer'}, 'memory_class': 'large', 'named_only': True, 'quality_tiers': ['standard'], 'title': 'SenseNova-U1.5 TailSteer 8-step'}
+PASS  image.generate and image.edit offer TailSteer by name only, Apache-2.0 with its own terms page, beside the three earlier models
+PASS  TailSteer has one lane, int8
+      tail: succeeded sensenova-u1-tailsteer int8 2.148 [] 
+{'count': 1, 'seed': 42, 'size': {'height': 768, 'width': 768}, 'x-sensenova.steps': 8}
+PASS  TailSteer by name draws 768² in eight steps on int8
+PASS  the picture is 768×768
+(768, 768, 3) (768, 768, 3) differing pixels 0
+PASS  it is sensenova-inproc's, pixel for pixel
+      chain source: 0001-01.png 1024x672, seeds 42 43 44
+      turn-1: succeeded sensenova-u1-tailsteer int8 2.849 [] 
+      turn-2: succeeded sensenova-u1-tailsteer int8 2.752 [] 
+      turn-3: succeeded sensenova-u1-tailsteer int8 2.756 [] 
+PASS  three chained edits each ran TailSteer and kept the picture's size (1024x672)
+(672, 1024, 3) (672, 1024, 3) differing pixels 0
+PASS  the first edit is sensenova-inproc's edit of the same picture, pixel for pixel
+(672, 1024, 3) (672, 1024, 3) differing pixels 0
+PASS  turn 1 is the picture mlx-image's own driver made, pixel for pixel
+(672, 1024, 3) (672, 1024, 3) differing pixels 0
+PASS  turn 2 is the picture mlx-image's own driver made, pixel for pixel
+(672, 1024, 3) (672, 1024, 3) differing pixels 0
+PASS  turn 3 is the picture mlx-image's own driver made, pixel for pixel
+mean abs change per turn [7.322067502945188, 3.1535852825830855, 3.5559469556051586]
+PASS  each turn changed the picture
+      fast-1: succeeded sensenova-u1-fast int8 2.95 [] 
+      fast-2: succeeded sensenova-u1-fast int8 2.752 [] 
+      fast-3: succeeded sensenova-u1-fast int8 2.752 [] 
+      whole-picture PSNR against the source, turns 1 to 3 (reported, not judged): TailSteer 24.46 23.84 22.41 dB, sensenova-u1-fast 23.90 23.10 21.68 dB
+PASS  the TailSteer edit is another picture than sensenova-u1-fast's of the same input and seed
+      ignore: succeeded sensenova-u1-tailsteer int8 1.134 ['negative_prompt_ignored'] 
+succeeded ['negative_prompt_ignored'] None
+PASS  a negative prompt is reported ignored, and think mode, which its offer doesn't list, isn't run
+      lane: failed None None None [] sensenova-u1-tailsteer has no lane int4.
+failed {'code': 'unsupported_parameter', 'job': 'job_6cscn4mvjchvfd3q7xk5', 'message': 'sensenova-u1-tailsteer has no lane int4.', 'param': 'x-gaea.lane'}
+PASS  an int4 lane, which TailSteer doesn't have, fails the job naming the lane and runs nothing
+      fast: succeeded sensenova-u1-fast int8 1.132 [] 
+(512, 512, 3) (512, 512, 3) differing pixels 0
+PASS  sensenova-u1-fast by name is sensenova-inproc's, pixel for pixel
+OK
+PASS  transcript com.xocialize.gaea.sensenova-0.2.0-2026-11-15T143850Z-11f1ee49.gpp passes validate.py
+== 18 passed, 0 failed

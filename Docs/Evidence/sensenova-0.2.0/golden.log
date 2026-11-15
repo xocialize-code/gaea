@@ -1,0 +1,23 @@
+# SenseNova golden check 2026-11-15T14:13:20Z: com.xocialize.gaea.sensenova 0.2.0
+      fast: over GPP ran in 1.13 s; in-process {"cold_s":5.0722587499999996,"guidance":1,"height":512,"lane":"int8","model":"sensenova-u1-fast","prepare_s":0.81906929100000003,"references":0,"run1_s":4.2324790840000004,"seed":42,"size_snapped":false,"steps":8,"think":false,"width":512}
+PASS  fast: the same PNG, sha256 36b2d2c67a7fdf1a…, 512x512
+      tail: over GPP ran in 2.18 s; in-process {"cold_s":3.0275954999999999,"guidance":1,"height":768,"lane":"int8","model":"sensenova-u1-tailsteer","prepare_s":0.87975020800000003,"references":0,"run1_s":2.1380874169999999,"seed":42,"size_snapped":false,"steps":8,"think":false,"width":768}
+PASS  tail: the same PNG, sha256 6b3f6f209d068708…, 768x768
+      tail-edit1: over GPP ran in 2.46 s; in-process {"cold_s":3.3612927500000001,"guidance":1,"height":768,"lane":"int8","model":"sensenova-u1-tailsteer","prepare_s":0.91572770800000003,"references":1,"run1_s":2.4308179170000002,"seed":42,"size_snapped":false,"steps":8,"think":false,"width":768}
+PASS  tail-edit1: the same PNG, sha256 2864ec50b1adfe7a…, 768x768
+      tail-edit2: over GPP ran in 2.35 s; in-process {"cold_s":3.2710966250000002,"guidance":1,"height":768,"lane":"int8","model":"sensenova-u1-tailsteer","prepare_s":0.88168645800000001,"references":1,"run1_s":2.3761743750000002,"seed":42,"size_snapped":false,"steps":8,"think":false,"width":768}
+PASS  tail-edit2: the same PNG, sha256 19859dd9717adec3…, 768x768
+      fast-edit1: over GPP ran in 2.36 s; in-process {"cold_s":3.2231358330000002,"guidance":1,"height":768,"lane":"int8","model":"sensenova-u1-fast","prepare_s":0.853185792,"references":1,"run1_s":2.3574182910000001,"seed":42,"size_snapped":false,"steps":8,"think":false,"width":768}
+PASS  fast-edit1: the same PNG, sha256 92193800137601db…, 768x768
+PASS  the TailSteer edit is another picture than sensenova-u1-fast's of the same input and seed
+OK
+PASS  fast-edit1.gpp passes validate.py
+OK
+PASS  fast.gpp passes validate.py
+OK
+PASS  tail-edit1.gpp passes validate.py
+OK
+PASS  tail-edit2.gpp passes validate.py
+OK
+PASS  tail.gpp passes validate.py
+== 11 passed, 0 failed
