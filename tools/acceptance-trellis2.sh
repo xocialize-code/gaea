@@ -1,6 +1,6 @@
 #!/bin/zsh
-# AB-T-0467's acceptance: MES Mesh 0.1's mesh.generate through Gaea 1.4.0 with TRELLIS.2 (gaea-plugin-trellis2), and the
-# operator's tier controls.
+# AB-T-0467's acceptance: MES Mesh 0.1's mesh.generate through Gaea with TRELLIS.2 (gaea-plugin-trellis2), and the
+# operator's tier controls. From plugin 0.2.0 (Gaea 1.8.0) it also covers the detail maps and Pixal3D.
 #
 #   1. The plugin by repo URL. The descriptor is Mesh 0.1's mesh.generate with three models (512 draft and standard,
 #      1024 best, 1536 by resolution), the licence's "Built with DINOv3", and GET /health's idle policy.
@@ -17,13 +17,21 @@
 #   5. A preview server: with trellis2-1024 and -1536 disabled the descriptor offers draft and standard only, and best is
 #      refused; with the budget at 51.54 GB (--budget-bytes) only trellis2-512 is offered.
 #   6. FULL=1: best runs trellis2-1024, and resolution 1536 runs trellis2-1536.
-#   7. Every recorded GPP session passes the validator.
+#   7. Plugin 0.2.0 on Gaea 1.8.0 (mlx-trellis2-swift 0.17.0):
+#      - the detail maps: a default mesh has neither; with x-trellis2.normal_map and x-trellis2.ao_map the materials carry
+#        a normal and an occlusion texture and the mesh TANGENT, reported in effective, on the same geometry;
+#      - the GLBs' normals are all unit length;
+#      - Pixal3D: pixal3d-1024 and -1536 are offered by name only, never for an unnamed request; by name it runs at 20°,
+#        its buffers are trellis2-inproc's byte for byte, its bf16-lowmem lane named gives the same buffers, another field of
+#        view gives another mesh and one out of range is refused;
+#      - with a 70 GB budget the bf16 lane doesn't fit, and Pixal3D runs on bf16-lowmem with lane_fallback.
+#   8. Every recorded GPP session passes the validator.
 #
 #   tools/acceptance-trellis2.sh <short-work-dir> <evidence-dir>
 #
-# Needs APP (default dist/Gaea.app, 1.4.0 or later), ../gaea-plugin-trellis2 with its dist/ and
+# Needs APP (default dist/Gaea.app, 1.8.0 or later), ../gaea-plugin-trellis2 with its dist/ and
 # .build/out/Products/Release/trellis2-inproc (or INPROC), and MODELS (default /Volumes/DEV_VOL1/Models) holding
-# xocialize/trellis2-mlx and mlx-community/BiRefNet-fp16. REPO_FROM=github installs the published release instead of
+# xocialize/trellis2-mlx, xocialize/pixal3d-mlx and mlx-community/BiRefNet-fp16. REPO_FROM=github installs the published release instead of
 # serving dist/ through tools/release-standin.py.
 set -uo pipefail
 cd "${0:A:h}/.."
@@ -55,9 +63,9 @@ job() { # json body, out file → the settled job
 fetch() { # job file, output name, out path
   local href=$(py "import json; print([o for o in json.load(open('$1'))['result']['outputs'] if o['name']=='$2'][0]['href'])"); mes -o "$3" "http://127.0.0.1:$P$href"
 }
-mesh() { # name, image file, params JSON, [model]
-  local up=$(upload $2) model=""; [[ -n ${4:-} ]] && model='"model":"'$4'",'
-  job '{"operation":"mesh.generate",'$model'"inputs":{"image":{"upload":"'$up'"}},"params":'$3'}' "$OUT/job-$1.json"
+mesh() { # name, image file, params JSON, [model], [extensions JSON]
+  local up=$(upload $2) model="" ext=""; [[ -n ${4:-} ]] && model='"model":"'$4'",'; [[ -n ${5:-} ]] && ext=',"extensions":'$5
+  job '{"operation":"mesh.generate",'$model'"inputs":{"image":{"upload":"'$up'"}},"params":'$3$ext'}' "$OUT/job-$1.json"
   if [[ $(py "import json; print(json.load(open('$OUT/job-$1.json')).get('outcome'))") == succeeded ]]; then
     fetch "$OUT/job-$1.json" mesh "$OUT/$1.glb"; fetch "$OUT/job-$1.json" preview "$OUT/$1-preview.png"
   fi
@@ -97,10 +105,12 @@ start $H $P
 check "add trellis2 $V by repo URL" zsh -c "GAEA_HOME=$H $CLI plugins add https://github.com/xocialize-code/gaea-plugin-trellis2 | tee $OUT/plugins.txt | grep -q 'Installed .* $V'"
 GAEA_HOME=$H "$CLI" models > "$OUT/models.txt"; sed 's/^/      /' "$OUT/models.txt" | tee -a "$LOG"
 mes "http://127.0.0.1:$P/mes/v0/operations" > "$OUT/operations.json"
-check "mesh.generate is Mesh 0.1 with the three TRELLIS.2 models and their tiers" py "
+check "mesh.generate is Mesh 0.1 with the three TRELLIS.2 models and their tiers, and Pixal3D by name only" py "
 import json; ops = {o['operation']: o for o in json.load(open('$OUT/operations.json'))['operations']}
 d = ops['mesh.generate']; assert d['profile'] == 'mesh' and d['profile_version'] == '0.1', d['profile']
-models = {m['id']: m for m in d['models']}; print(sorted(models)); assert sorted(models) == ['trellis2-1024', 'trellis2-1536', 'trellis2-512']
+models = {m['id']: m for m in d['models']}; print(sorted(models))
+assert sorted(m for m in models if not models[m].get('named_only')) == ['trellis2-1024', 'trellis2-1536', 'trellis2-512']
+assert sorted(m for m in models if models[m].get('named_only')) == ['pixal3d-1024', 'pixal3d-1536']
 assert models['trellis2-512']['quality_tiers'] == ['draft', 'standard'] and models['trellis2-1024']['quality_tiers'] == ['best']
 assert models['trellis2-1536']['supports']['resolutions'] == [1536]
 assert all(m['license']['attribution'] == 'Built with DINOv3' for m in models.values())
@@ -180,14 +190,14 @@ for spec in "colours|{\"texture\":\"vertex_colors\"}|422" "size300|{\"texture_si
 done
 
 # 5. A preview server.
-GAEA_HOME=$H "$CLI" models disable trellis2-1024 >> "$LOG" 2>&1; GAEA_HOME=$H "$CLI" models disable trellis2-1536 >> "$LOG" 2>&1
+for m in trellis2-1024 trellis2-1536 pixal3d-1024 pixal3d-1536; do GAEA_HOME=$H "$CLI" models disable $m >> "$LOG" 2>&1; done
 mes "http://127.0.0.1:$P/mes/v0/operations" > "$OUT/operations-preview.json"
-check "with 1024 and 1536 disabled, mesh.generate offers draft and standard only" py "
+check "with every model but trellis2-512 disabled, mesh.generate offers draft and standard only" py "
 import json; d = {o['operation']: o for o in json.load(open('$OUT/operations-preview.json'))['operations']}['mesh.generate']
 print([m['id'] for m in d['models']], d['quality_tiers']); assert [m['id'] for m in d['models']] == ['trellis2-512'] and sorted(d['quality_tiers']) == ['draft', 'standard']"
 submit '{"operation":"mesh.generate","inputs":{"image":{"upload":"'$UP'"}},"params":{"quality":"best"}}' "$OUT/refuse-best.json"
 check "and quality best is refused (422)" test "$(cat $OUT/refuse-best.json.status)" = "422"
-GAEA_HOME=$H "$CLI" models enable trellis2-1024 >> "$LOG" 2>&1; GAEA_HOME=$H "$CLI" models enable trellis2-1536 >> "$LOG" 2>&1
+for m in trellis2-1024 trellis2-1536 pixal3d-1024 pixal3d-1536; do GAEA_HOME=$H "$CLI" models enable $m >> "$LOG" 2>&1; done
 H2=$WORK/small; P2=17675
 start $H2 $P2 --budget-bytes 51540000000
 GAEA_HOME=$H2 "$CLI" plugins add https://github.com/xocialize-code/gaea-plugin-trellis2 > /dev/null 2>&1
@@ -208,8 +218,76 @@ import json; r=json.load(open('$OUT/job-r1536.json'))['result']; o=[o for o in r
 assert r['provenance']['model']['id'] == 'trellis2-1536' and o['texture_size'] == 2048, (r['provenance']['model'], o)"
 fi
 
+# 7. Plugin 0.2.0: the detail maps, unit normals, Pixal3D.
+bufs() { # two GLBs: passes when their BIN chunks are the same bytes (Gaea rewrites only the JSON)
+  python3 - "$1" "$2" <<'PYEOF'
+import struct, sys
+def bin(f):
+    d = open(f, 'rb').read(); n = struct.unpack('<I', d[12:16])[0]; return d[20 + n + 8:].rstrip(b'\0')
+a, b = bin(sys.argv[1]), bin(sys.argv[2]); print(len(a), len(b)); assert a == b
+PYEOF
+}
+check "a default mesh carries no normal or occlusion texture" glbpy $OUT/fox.glb "
+assert not any('normalTexture' in m or 'occlusionTexture' in m for m in g['materials'])"
+mesh maps $FOX '{"seed":42,"max_faces":20000,"texture_size":512}' "" '{"x-trellis2.normal_map":true,"x-trellis2.ao_map":true}'
+check "with the two extensions the materials carry a normal and an occlusion texture, and the mesh TANGENT" glbpy $OUT/maps.glb "
+assert all('normalTexture' in m and 'occlusionTexture' in m for m in g['materials'])
+assert all('TANGENT' in p['attributes'] for me in g['meshes'] for p in me['primitives'])"
+check "effective reports both maps, and the mesh has the plain run's face count" py "
+import json; a=json.load(open('$OUT/job-maps.json'))['result']; b=json.load(open('$OUT/job-fox.json'))['result']
+w=a['effective']['model_params']['x-gaea.worker']['effective']; print(w)
+assert w.get('x-trellis2.normal_map') is True and w.get('x-trellis2.ao_map') is True
+f=lambda r: [o for o in r['outputs'] if o['name']=='mesh'][0]['faces']; assert f(a) == f(b), (f(a), f(b))"
+check "every normal in the GLB is unit length" glbpy $OUT/fox.glb "
+import struct as st
+bad = 0
+for me in g['meshes']:
+    for p in me['primitives']:
+        a = g['accessors'][p['attributes']['NORMAL']]; v = g['bufferViews'][a['bufferView']]
+        off = v.get('byteOffset', 0) + a.get('byteOffset', 0); stride = v.get('byteStride', 12)
+        for i in range(a['count']):
+            x, y, z = st.unpack_from('<fff', bin, off + i * stride); bad += abs((x*x + y*y + z*z) ** 0.5 - 1) > 1e-3
+print('non-unit normals', bad); assert bad == 0"
+mes "http://127.0.0.1:$P/mes/v0/operations" > "$OUT/operations-2.json"
+check "Pixal3D's lanes and its field of view are in the descriptor's extensions" py "
+import json; d = {o['operation']: o for o in json.load(open('$OUT/operations-2.json'))['operations']}['mesh.generate']
+e = {x['name']: x['schema'] for x in d['extensions']}; print(sorted(e)); assert 'x-pixal3d.fov' in e and 'x-trellis2.normal_map' in e
+assert {'bf16', 'bf16-lowmem'} <= set(e['x-gaea.lane']['enum'])"
+PIX='{"seed":42,"max_faces":60000,"texture_size":1024}'
+mesh pixal $FOX "$PIX" pixal3d-1024
+check "pixal3d-1024 by name runs on its bf16 lane at 20°, resolution 1024" py "
+import json; j=json.load(open('$OUT/job-pixal.json')); r=j['result']; w=r['effective']['model_params']['x-gaea.worker']; print(j['outcome'], w['lane'], w['effective'])
+assert j['outcome'] == 'succeeded' and r['provenance']['model']['id'] == 'pixal3d-1024' and w['lane'] == 'bf16'
+assert w['effective']['x-pixal3d.fov'] == 20 and r['effective']['resolution'] == 1024"
+if [[ -x $INPROC ]]; then
+  $INPROC --image $FOX --model pixal3d-1024 --seed 42 --faces 60000 --texture-size 1024 --background remove --models-root "$MODELS" --out $OUT/inproc-pixal.glb > $OUT/inproc-pixal.json 2>> $LOG
+  check "Pixal3D's geometry and texture are trellis2-inproc's, byte for byte" bufs $OUT/pixal.glb $OUT/inproc-pixal.glb
+fi
+mesh pixal-lowmem $FOX "$PIX" pixal3d-1024 '{"x-gaea.lane":"bf16-lowmem"}'
+check "its bf16-lowmem lane, named, runs on it" py "
+import json; w=json.load(open('$OUT/job-pixal-lowmem.json'))['result']['effective']['model_params']['x-gaea.worker']; assert w['lane'] == 'bf16-lowmem', w['lane']"
+check "and gives the bf16 lane's buffers, byte for byte" bufs $OUT/pixal.glb $OUT/pixal-lowmem.glb
+mesh pixal-fov $FOX "$PIX" pixal3d-1024 '{"x-pixal3d.fov":49}'
+check "a 49° field of view gives another mesh" zsh -c "! cmp -s $OUT/pixal.glb $OUT/pixal-fov.glb && python3 -c \"import json; assert json.load(open('$OUT/job-pixal-fov.json'))['outcome']=='succeeded'\""
+UP=$(upload $FOX)
+submit '{"operation":"mesh.generate","model":"pixal3d-1024","inputs":{"image":{"upload":"'$UP'"}},"params":{},"extensions":{"x-pixal3d.fov":150}}' "$OUT/refuse-fov.json"
+check "a 150° field of view is refused when it arrives (4xx)" zsh -c "grep -q '^4' $OUT/refuse-fov.json.status"
+check "an unnamed request never runs Pixal3D (the default run above was trellis2-512)" py "
+import json; assert json.load(open('$OUT/job-fox.json'))['result']['provenance']['model']['id'] == 'trellis2-512'"
 stop $P
 mkdir -p "$OUT/sessions"; cp $H/Logs/sessions/*.gpp "$OUT/sessions/" 2>/dev/null
+# A 70 GB budget: Pixal3D's bf16 lane (71.3 GB) doesn't fit, its bf16-lowmem lane (60.3 GB) does.
+H3=$WORK/mid; P3=17679
+start $H3 $P3 --budget-bytes 70000000000
+GAEA_HOME=$H3 "$CLI" plugins add https://github.com/xocialize-code/gaea-plugin-trellis2 > /dev/null 2>&1
+P=$P3
+mesh pixal-70 $FOX "$PIX" pixal3d-1024
+check "with a 70 GB budget Pixal3D runs on bf16-lowmem, with lane_fallback" py "
+import json; j=json.load(open('$OUT/job-pixal-70.json')); w=j['result']['effective']['model_params']['x-gaea.worker']; print(j['outcome'], w['lane'], [x['code'] for x in j['warnings']])
+assert j['outcome'] == 'succeeded' and w['lane'] == 'bf16-lowmem' and any(x['code'] == 'lane_fallback' for x in j['warnings'])"
+check "and gives the bf16 lane's buffers" bufs $OUT/pixal.glb $OUT/pixal-70.glb
+stop $P3
+cp $H3/Logs/sessions/*.gpp "$OUT/sessions/" 2>/dev/null
 for s in $OUT/sessions/*.gpp; do check "transcript $(basename $s) passes validate.py" python3 tools/validate.py --transcript "$s"; done
 [[ -n ${STANDIN:-} ]] && kill $STANDIN 2>/dev/null
 say "== $pass passed, $fail failed"
