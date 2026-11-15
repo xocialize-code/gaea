@@ -1,7 +1,7 @@
 # Gaea 1.8.0 and gaea-plugin-trellis2 0.2.0: Pixal3D, detail maps, valid normals
 
 2026-11-15, Mac Studio (Mac17,14, M5 Max, 128 GB, macOS 27.3). A Release build of Gaea 1.8.0 (`f4d3b55`), run headless on
-throwaway homes and ports; mes-conformance from media-engine-spec v0.14.0.
+throwaway homes and ports, and then the released app; mes-conformance from media-engine-spec v0.14.0.
 
 mlx-3d's mlx-trellis2-swift went from 0.12.1 to 0.17.0 (AB-A-0286): unit normals, a normal map and an ambient-occlusion
 map as options, and Pixal3D. Pixal3D's camera is typed on mlx-engine-swift 0.79.0 (contract 1.64.0), so Gaea, the kit
@@ -31,6 +31,7 @@ named after it (GPP-1 §4.7), and both lanes read bf16 weights.
 | `scripts/golden.sh`: the signed bundle over GPP against `trellis2-inproc` | 20 passed, 0 failed | [golden.log](golden.log) |
 | Acceptance, the plugin's local build through a stand-in | 39 passed, 0 failed | [acceptance-standin.log](acceptance-standin.log) |
 | Acceptance, `FULL=1`, the plugin's 0.2.0 release from GitHub (notarized) | 41 passed, 0 failed | [acceptance-github.log](acceptance-github.log) |
+| Acceptance through the released app: `Gaea-1.8.0.zip` from GitHub (sha256 `407e1e9f…fdb70342`, Gatekeeper: Notarized Developer ID), the plugin from GitHub | 39 passed, 0 failed | [acceptance-released.log](acceptance-released.log) |
 | Conformance with all 28 published plugins from GitHub and the 7 opt-in models | 107 passed, 0 failed, 9 skipped: Base, Image, Audio, Video and Mesh 0.1 conform | [conformance-all.md](conformance-all.md), [conformance-plugins.txt](conformance-plugins.txt) |
 
 What the acceptance's new section shows (`tools/acceptance-trellis2.sh`, section 7):
@@ -79,4 +80,5 @@ The fox photo (`Tests/Fixtures/fox.png`), previews rendered by Gaea:
 - **Khronos glTF validator.** Only the unit length of the normals was checked, not a validator run.
 - **A real photo with a known lens.** The field of view was checked only for taking effect, not for which value suits
   a given photo.
-- **The released Gaea 1.8.0 app.** These runs used the local Release build of the tagged commit.
+- **Conformance and the `FULL=1` cases through the released app.** They ran on the local Release build of `f4d3b55`;
+  the released app (`982d035`, the same sources) ran the acceptance without `FULL=1`.
