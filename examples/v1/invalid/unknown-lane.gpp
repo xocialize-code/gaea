@@ -1,5 +1,5 @@
 # manifest: demo.json
 # expect: lane int4 is not a lane of demo-matmul
-W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.2.0"},"pid":1,"models":["demo-matmul"],"manifest_sha256":"dcbb6c6c79315efe72a26eb0d6c60fa35340d1615669bae83f544cbae429418f"}
+W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.2.0"},"pid":1,"models":["demo-matmul"],"manifest_sha256":"81ae0a5a2cf49e87a0bebdcf26df170e1d29a5aeeca18469d1ce209867a529ca"}
 H {"type":"prepare","id":"h2","model":"demo-matmul","lane":"int4"}
 W {"type":"error","re":"h2","code":"invalid_request","message":"no lane","retryable":false}
