@@ -11,11 +11,13 @@ import SwiftUI
 //   GaeaLab                                   the app
 //   GaeaLab --snapshot <dir> --engine <url>… [--operation image.generate | audio.speak | audio.compose | audio.edit_speech
 //                                             | audio.separate | video.generate | mesh.generate] [--input <wav | png>]
+//                                             [--describe <sound>]
 //                                             add those servers, choose the operation with a preset (image.generate on
 //                                             Qwen-Image Flash with a LoRA; audio.speak on Kokoro with a voice, streamed;
 //                                             audio.compose on ACE-Step with lyrics and timestamps; audio.edit_speech on
 //                                             AuK-Flash, a hum added at the start of --input; audio.separate on AuK-Flash,
-//                                             the second speaker of the --input mixture; video.generate on LTX 2.5
+//                                             the second speaker of the --input mixture, or with --describe <sound> on
+//                                             SAM-Audio, that sound and everything else; video.generate on LTX 2.5
 //                                             compact24; mesh.generate on TRELLIS.2 512, the object in --input at 20,000
 //                                             faces; AuK's and LTX's terms are shown, then accepted for this run
 //                                             only), run it on "Every server", and render the window before and after to
@@ -26,6 +28,7 @@ if let i = arguments.firstIndex(of: "--snapshot"), i + 1 < arguments.count {
     let engines = arguments.indices.filter { arguments[$0] == "--engine" && $0 + 1 < arguments.count }.compactMap { URL(string: arguments[$0 + 1]) }
     let operation = arguments.firstIndex(of: "--operation").flatMap { $0 + 1 < arguments.count ? arguments[$0 + 1] : nil } ?? "image.generate"
     let input = arguments.firstIndex(of: "--input").flatMap { $0 + 1 < arguments.count ? URL(fileURLWithPath: arguments[$0 + 1]) : nil }
+    let describe = arguments.firstIndex(of: "--describe").flatMap { $0 + 1 < arguments.count ? arguments[$0 + 1] : nil }
     MainActor.assumeIsolated {
         LabModel.acceptances = LicenseAcceptances()
         let scratch = "Gaea.Lab.snapshot"
@@ -34,7 +37,7 @@ if let i = arguments.firstIndex(of: "--snapshot"), i + 1 < arguments.count {
         let app = NSApplication.shared
         app.setActivationPolicy(.prohibited)
         Task { @MainActor in
-            await Snapshot.render(to: directory, engines: engines, operation: operation, input: input)
+            await Snapshot.render(to: directory, engines: engines, operation: operation, input: input, describe: describe)
             exit(0)
         }
         app.run()
@@ -45,7 +48,7 @@ if let i = arguments.firstIndex(of: "--snapshot"), i + 1 < arguments.count {
 
 @MainActor
 enum Snapshot {
-    static func render(to directory: URL, engines: [URL], operation: String, input: URL? = nil) async {
+    static func render(to directory: URL, engines: [URL], operation: String, input: URL? = nil, describe: String? = nil) async {
         try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         let lab = LabModel.shared
         for url in engines { _ = try? await lab.directory.add(url: url) }
@@ -77,9 +80,13 @@ enum Snapshot {
                 print("\(operation) needs --input <wav>")
                 return
             }
-            run.form.model = "auk-flash"
+            run.form.model = describe == nil ? "auk-flash" : "sam-audio-base"
             run.media["audio"] = [await MediaItem.reading(input)]
-            if operation == "audio.edit_speech" {
+            if let describe {
+                // Separation by description (MES 0.13, RFC 0008): the sound named, on SAM-Audio.
+                run.form.setValue(.string(describe), at: ["describe"])
+                run.form.setValue(.number(5), at: ["seed"])
+            } else if operation == "audio.edit_speech" {
                 run.form.text["transcript"] = "The morning train was late again, so I walked along the river and watched the boats come in."
                 run.form.setValue(.object(["kind": .string("add_cue"), "cue": .string("hum"), "at": .string("start")]), at: ["edit"])
                 run.form.setValue(.number(4), at: ["seed"])

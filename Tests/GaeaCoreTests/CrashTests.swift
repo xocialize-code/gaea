@@ -179,7 +179,10 @@ import Testing
 
     /// A trap in the plugin (the demo's `GAEA_DEMO_TRAP_SEED`, from 0.3.2): both tries crash with SIGTRAP, the job fails
     /// naming them, and each record has the worker's `Fatal error:` line and macOS's crash report, copied and summarised.
-    @Test(.enabled(if: FileManager.default.fileExists(atPath: TrustTests.demoZip.path) && TrustTests.version >= "0.3.2"))
+    /// Each run leaves two real crash reports of gaea-demo-worker with macOS (and its "quit unexpectedly" notice where
+    /// that is on): `GAEA_TEST_SKIP_TRAP=1` skips it, for a loop of runs.
+    @Test(.enabled(if: FileManager.default.fileExists(atPath: TrustTests.demoZip.path) && TrustTests.version >= "0.3.2"
+                   && ProcessInfo.processInfo.environment["GAEA_TEST_SKIP_TRAP"] == nil))
     func aTrapIsRecordedWithItsReport() async throws {
         let dir = try scratch()
         let manager = try TrustTests().manager(dir, ownTeamTrusted: true)

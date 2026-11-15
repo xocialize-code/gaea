@@ -1,5 +1,5 @@
 {
-  "originHash" : "4e3ac71dc1fa1d5eb8ec9a092aad95c8f3c7e8ca306c4a61118d8108eb2ff8a9",
+  "originHash" : "12a4b072ea43c166f6df14acc2cd0d8c52a1259da078b56c42b4680e6bd579bd",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xocialize/media-engine-spec.git",
       "state" : {
-        "revision" : "35cabbd01a2d49ca17d159bfa7ac0d8be63bb6b5",
-        "version" : "0.12.0"
+        "revision" : "43e5a57e7196f74560bdee1b908f36578cccf483",
+        "version" : "0.14.0"
       }
     },
     {

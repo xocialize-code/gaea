@@ -1,0 +1,32 @@
+# Gaea Lab, separation by description 2026-11-15T15:00:07Z: Gaea 1.8.0, Lab on media-engine-spec 0.14.0
+Installed Gaea demo worker 0.5.0 (com.xocialize.gaea.demo), enabled.
+Installed SAM-Audio 0.1.0 (com.xocialize.gaea.samaudio), enabled.
+sam-audio-base enabled.
+      failed: Accept the terms of LicenseRef-SAM to run this. The engine runs it only for people who have accepted them (policy_unmet, terms_not_accepted).
+      needs acceptance: read the terms (https://huggingface.co/facebook/sam-audio-base/blob/main/LICENSE), then add --accept LicenseRef-SAM
+zsh:1: no matches found: /Volumes/DEV_VOL1/Evidence/sam-audio-acceptance/lab/refused/*.wav
+PASS  without users' acceptance lab-run doesn't run it and names the licence to accept
+      ran on Gaea (127.0.0.1:17696) · picked for sam-audio-base
+      saved /Volumes/DEV_VOL1/Evidence/sam-audio-acceptance/lab/speech/separate-20261115-070013.wav
+      saved /Volumes/DEV_VOL1/Evidence/sam-audio-acceptance/lab/speech/separate-20261115-070013-1.wav
+      model sam-audio-base · LicenseRef-SAM
+PASS  with --accept, "speech" ran on sam-audio-base and saved its two stems
+      ran on Gaea (127.0.0.1:17696) · picked for sam-audio-base
+      saved /Volumes/DEV_VOL1/Evidence/sam-audio-acceptance/lab/spans/separate-20261115-070015.wav
+      saved /Volumes/DEV_VOL1/Evidence/sam-audio-acceptance/lab/spans/separate-20261115-070015-1.wav
+      model sam-audio-base · LicenseRef-SAM
+PASS  with two spans it runs too, two stems
+      wrote /Volumes/DEV_VOL1/Evidence/sam-audio-acceptance/lab/app/lab-audio.separate-before-light.png
+      wrote /Volumes/DEV_VOL1/Evidence/sam-audio-acceptance/lab/app/lab-audio.separate-before-dark.png
+      needs acceptance: LicenseRef-SAM
+      run: finished; route: Gaea (127.0.0.1:17696)
+      results: target (audio), residual (audio)
+      wrote /Volumes/DEV_VOL1/Evidence/sam-audio-acceptance/lab/app/lab-audio.separate-after-light.png
+      wrote /Volumes/DEV_VOL1/Evidence/sam-audio-acceptance/lab/app/lab-audio.separate-after-dark.png
+/Volumes/DEV_VOL1/Evidence/sam-audio-acceptance/lab/app/lab-audio.separate-after-dark.png
+/Volumes/DEV_VOL1/Evidence/sam-audio-acceptance/lab/app/lab-audio.separate-after-light.png
+PASS  the Lab app showed SAM-Audio's terms, then ran the described separation and rendered it
+PASS  the app's separation saved the target and the residual
+OK
+PASS  transcript com.xocialize.gaea.samaudio-0.1.0-2026-11-15T150010Z-00e4766e.gpp passes validate.py
+== 6 passed, 0 failed

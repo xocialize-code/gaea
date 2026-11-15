@@ -45,7 +45,22 @@ import Testing
 
     /// Releases served from memory, as GitHub would serve the demo's: `files` maps a URL's path to its bytes.
     final class Releases: URLProtocol, @unchecked Sendable {
-        nonisolated(unsafe) static var files: [String: Data] = [:]
+        static let names = ["demo-\(TrustTests.version).gaeaplugin.zip", "demo-\(TrustTests.version).gaeaplugin.zip.sha256", "manifest.json"]
+        static let base = "https://api.stub.test/dl/"
+        /// Built once and never written again. Other suites call `manager()` while this one runs (CrashTests,
+        /// FirstUseTests, OperatorControlsTests), and a dictionary each call rewrote was a data race that crashed about
+        /// one `swift test` in five (AB-T-0473). A file missing from `dist` is left out, and `manager()` reports it.
+        static let files: [String: Data] = {
+            let releases: [[String: Any]] = [[
+                "tag_name": "v\(TrustTests.version)", "draft": false, "prerelease": false,
+                "assets": names.enumerated().map { i, name in
+                    ["id": i + 1, "name": name, "size": 1, "url": base + name, "browser_download_url": base + name] as [String: Any]
+                },
+            ]]
+            var files = ["/repos/xocialize-code/gaea-plugin-demo/releases": (try? JSONSerialization.data(withJSONObject: releases)) ?? Data()]
+            for name in names { files["/dl/\(name)"] = try? Data(contentsOf: TrustTests.dist.appending(path: name)) }
+            return files
+        }()
         override class func canInit(with request: URLRequest) -> Bool { true }
         override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
         override func startLoading() {
@@ -59,16 +74,8 @@ import Testing
     }
 
     func manager(_ dir: URL, ownTeamTrusted: Bool) throws -> PluginManager {
-        let base = "https://api.stub.test/dl/"
-        let names = ["demo-\(Self.version).gaeaplugin.zip", "demo-\(Self.version).gaeaplugin.zip.sha256", "manifest.json"]
-        let releases: [[String: Any]] = [[
-            "tag_name": "v\(Self.version)", "draft": false, "prerelease": false,
-            "assets": names.enumerated().map { i, name in
-                ["id": i + 1, "name": name, "size": 1, "url": base + name, "browser_download_url": base + name] as [String: Any]
-            },
-        ]]
-        Releases.files = ["/repos/xocialize-code/gaea-plugin-demo/releases": try JSONSerialization.data(withJSONObject: releases)]
-        for name in names { Releases.files["/dl/\(name)"] = try Data(contentsOf: Self.dist.appending(path: name)) }
+        // As before the table was shared: a demo build missing from `dist` fails the test here, naming the file.
+        for name in Releases.names where Releases.files["/dl/\(name)"] == nil { _ = try Data(contentsOf: Self.dist.appending(path: name)) }
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [Releases.self]
         let paths = GaeaPaths(root: dir.appending(path: "home"))
