@@ -289,8 +289,11 @@ What Gaea advertises to MES clients. Each offer is one model for one operation:
 - `params`: the model's own options as `x-` extension parameters, rendered by MESFormsUI. Plugins ship no UI code;
 - `defaults` for profile-vocabulary params, and `limits` (pixels, sides, size multiple, images, seconds, frames,
   sample rates, and `max_layer_count` for `image.decompose`);
-- `supports`: what the model does beyond the operation's required behaviour, by key, absent keys false. Today one key:
-  `composite`, for an `image.decompose` model that returns its own reconstruction of the canvas (MES Image §3.2);
+- `supports`: what the model does beyond the operation's required behaviour, by key, absent keys false:
+  - `composite`, for an `image.decompose` model that returns its own reconstruction of the canvas (MES Image §3.2);
+  - `image_to_image` (Gaea 1.7.1, AB-A-0267), for an `image.edit` model that re-generates the picture from the input at
+    a strength and doesn't follow an instruction about a region (Z-Image). Gaea's fill, extend and erase show an edit
+    model the region in magenta and tell it what to paint there, so such a model isn't offered on them;
 - **the MES offer's own `supports` and `limits`** (Base §6.4, RFC 0003) go inside `model`, which is an MES
   `ModelOffer`, and Gaea serves them as given. An Audio offer declares there the facts and gates its profile names
   (Audio §4): `sample_rate` and `channels`, `languages`, `stream`, `seed: false` for an unseeded model, `voices` (a

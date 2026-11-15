@@ -123,7 +123,7 @@ struct GaeaModelHost: ModelHost {
             chosen = routes.first { $0.offer.isDefault == true && $0.offer.namedOnly != true } ?? routes.first { $0.offer.namedOnly != true }
         }
         guard let chosen else {
-            throw MESError(.modelUnavailable, model.map { "\($0) isn't enabled for \(operation)." } ?? "No plugin model offers \(operation).")
+            throw MESError(.modelUnavailable, model.map { "\($0) isn't enabled for \(operation)." } ?? Self.noDefault(operation))
         }
         let all = await offers.liveRoutes().filter { $0.plugin.id == chosen.plugin.id && $0.model.id == chosen.model.id }
         let adapters = PluginOffers.adapters(all, registrations: offers.registrations())
@@ -133,6 +133,17 @@ struct GaeaModelHost: ModelHost {
                           revision: chosen.plugin.version, footprintBytes: card.footprintBytes,
                           adapterSupport: Self.adapterSupport(chosen),
                           adapterRevisions: Dictionary(adapters.map { ($0.card.id, $0.source.revision) }) { a, _ in a })
+    }
+
+    /// What a step that takes the server's default model for `operation` says when there is none. The normalizer asks
+    /// for the default inpainter on its own (AB-A-0267): as the fallback when an edit model leaves a fill's or an
+    /// extend's region unpainted twice, to bridge an extend's seam, and to paint out restore's scratches. The job named
+    /// another model, so the message says which model is missing and where it comes from.
+    static func noDefault(_ operation: String) -> String {
+        guard operation == "image.fill" else { return "No plugin model offers \(operation) without being named." }
+        return "This step needs the server's inpainting model, and none is enabled: the edit model left the area unpainted "
+            + "twice (or the step is an extend's seam or a scratch repair), and LaMa, which fills it instead, comes with "
+            + "gaea-plugin-forge."
     }
 
     /// Nothing to do ahead of the run: the scheduler admits and prepares the lane when the job reaches the worker.

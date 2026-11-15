@@ -122,7 +122,12 @@ public struct GaeaEngine: MediaEngine {
         await enhancer.refresh(offers)
         let routes = await liveRoutes()
         var descriptors: [Descriptor] = []
-        for var descriptor in await normalizer.descriptors() {
+        // What this server can finish of fill, extend and erase (AB-A-0267): see `finishable`.
+        let regenerators = Set(routes.filter { $0.operation == "image.edit" && $0.manifestOffer.supports?[Self.imageToImageKey] == true }
+            .map(\.model.id))
+        let hasInpainter = routes.contains { $0.operation == "image.fill" && $0.offer.namedOnly != true }
+        for descriptor in await normalizer.descriptors() {
+            guard var descriptor = Self.finishable(descriptor, regenerators: regenerators, hasInpainter: hasInpainter) else { continue }
             let models = Set(descriptor.models.map(\.id))
             let served = routes.filter { models.contains($0.model.id) }
             for i in descriptor.models.indices {
@@ -222,6 +227,29 @@ public struct GaeaEngine: MediaEngine {
         guard !fitting.isEmpty else { return nil }
         let choice = fitting.contains(where: { $0.id == kitChoice.id }) ? kitChoice : fitting[0]
         return normalizer.defaultModel(for: request, descriptor: descriptor, kitChoice: choice, candidates: fitting) ?? choice
+    }
+
+    /// The `supports` key of an `image.edit` offer whose model re-generates the picture from the input at a strength
+    /// and doesn't follow an instruction about a region (Z-Image's image-to-image; GPP-1 §4.3).
+    static let imageToImageKey = "image_to_image"
+
+    /// An image descriptor narrowed to what this server can finish, or nil when it can finish none of it (AB-A-0267).
+    /// The normalizer offers every edit model on `image.fill`, `image.extend` and `image.erase`: it shows the model
+    /// the region in magenta and tells it what to paint there. Two things it can't know from a model's capabilities:
+    /// - **A re-generating model can't paint a marked region** (`regenerators`: `supports.image_to_image`). Its result is
+    ///   rejected twice and the job falls back to the inpainter, so it isn't offered on these operations at all.
+    /// - **`image.extend` always needs the default inpainter** (LaMa, in gaea-plugin-forge): it fills the new area
+    ///   itself, or bridges the seam after an edit model painted it. Without one live, extend isn't offered.
+    /// `image.fill` with an instruction editor stays offered without an inpainter: it needs one only when the editor
+    /// leaves the marker twice, and `GaeaModelHost.route` then says what is missing.
+    static func finishable(_ descriptor: Descriptor, regenerators: Set<String>, hasInpainter: Bool) -> Descriptor? {
+        guard ["image.fill", "image.extend", "image.erase"].contains(descriptor.operation) else { return descriptor }
+        if descriptor.operation == "image.extend", !hasInpainter { return nil }
+        var descriptor = descriptor
+        descriptor.models.removeAll { regenerators.contains($0.id) }
+        guard !descriptor.models.isEmpty else { return nil }
+        descriptor.qualityTiers = QualityTier.allCases.filter { tier in descriptor.models.contains { $0.qualityTiers.contains(tier) } }
+        return descriptor
     }
 
     /// 422 `out_of_limits` when an image request's `size` is past `limits` (megapixels, width, height); nil otherwise.

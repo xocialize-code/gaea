@@ -224,11 +224,15 @@
           "$ref": "#/$defs/Limits"
         },
         "supports": {
-          "description": "What the model can do beyond the operation's required behaviour, by key: composite (image.decompose). Absent keys are false.",
+          "description": "What the model can do beyond the operation's required behaviour, by key: composite (image.decompose), image_to_image (image.edit). Absent keys are false.",
           "type": "object",
           "additionalProperties": false,
           "properties": {
             "composite": {
+              "type": "boolean"
+            },
+            "image_to_image": {
+              "description": "On an image.edit offer: the model re-generates the picture from the input at a strength and doesn't follow an instruction about a region, so Gaea doesn't offer it on image.fill, image.extend or image.erase.",
               "type": "boolean"
             }
           }
