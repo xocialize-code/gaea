@@ -175,7 +175,10 @@ public struct GaeaEngine: MediaEngine {
             descriptor.extensions = extensions.isEmpty ? nil : extensions
             descriptors.append(descriptor)
         }
-        for var descriptor in audioDescriptors(routes) + videoDescriptors(routes) + meshDescriptors(routes) {
+        // An Image operation the normalizer has no table entry for runs as its offers (GaeaImage.swift).
+        let normalized = Set(descriptors.map(\.operation))
+        let ownImage = ownImageDescriptors(routes).filter { !normalized.contains($0.operation) }
+        for var descriptor in ownImage + audioDescriptors(routes) + videoDescriptors(routes) + meshDescriptors(routes) {
             let served = routes.filter { $0.operation == descriptor.operation }
             descriptor.extensions = Self.extensions(served)
             descriptors.append(descriptor)
@@ -209,6 +212,7 @@ public struct GaeaEngine: MediaEngine {
         if descriptor.profile == AudioProfile.id { return try AudioProfileRules.validate(request, descriptor: descriptor) }
         if descriptor.profile == VideoProfile.id { return try VideoProfileRules.validate(request, descriptor: descriptor) }
         if descriptor.profile == MeshProfile.id { return try MeshProfileRules.validate(request, descriptor: descriptor) }
+        if Self.ownImageOperations.contains(descriptor.operation) { return try ImageProfileRules.validate(request, descriptor: descriptor) }
         try normalizer.validate(request, descriptor: descriptor)
         // A named image model's own limits (an operator's caps, Gaea 1.5.0): the descriptor's are the largest any model
         // allows, which MESKit and the normalizer check.
@@ -220,7 +224,7 @@ public struct GaeaEngine: MediaEngine {
 
     public func defaultModel(for request: JobRequest, descriptor: Descriptor, kitChoice: ModelOffer,
                              candidates: [ModelOffer]) -> ModelOffer? {
-        guard descriptor.profile == ImageProfile.id else { return nil }
+        guard descriptor.profile == ImageProfile.id, !Self.ownImageOperations.contains(descriptor.operation) else { return nil }
         // Only models whose own limits take the request's size (an operator's caps): a request too large for the kit's
         // choice goes to one it fits, and is refused at run by the normalizer's plan when none does.
         let fitting = candidates.filter { Self.sizeRefusal(request, limits: $0.limits, title: $0.title) == nil }
@@ -329,7 +333,7 @@ public struct GaeaEngine: MediaEngine {
     }
 
     public func run(_ context: RunContext) async throws -> RunOutput {
-        if context.descriptor.profile == ImageProfile.id {
+        if context.descriptor.profile == ImageProfile.id, !Self.ownImageOperations.contains(context.operation) {
             await enhancer.refresh(offers)
             let scope = NormalizerScope(jobID: context.jobID,
                                         directory: context.outputDirectory.appending(path: "worker", directoryHint: .isDirectory),
@@ -345,6 +349,7 @@ public struct GaeaEngine: MediaEngine {
         if context.descriptor.profile == AudioProfile.id { return try await runAudio(route, context) }
         if context.descriptor.profile == VideoProfile.id { return try await runVideo(route, context) }
         if context.descriptor.profile == MeshProfile.id { return try await runMesh(route, context) }
+        if context.descriptor.profile == ImageProfile.id { return try await runOwnImage(route, context) }
         return try await run(route, context)
     }
 

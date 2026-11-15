@@ -1,5 +1,5 @@
 {
-  "originHash" : "65fd92aaa974f13273975c9afe0dd2227b51b30b886994138aaac70f60d341c5",
+  "originHash" : "e9b1f430db6aa59081c4d66d331470a7fec7a1b0dda3578f73b1d4beaaadbe25",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -105,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xocialize/media-engine-spec.git",
       "state" : {
-        "revision" : "43e5a57e7196f74560bdee1b908f36578cccf483",
-        "version" : "0.14.0"
+        "revision" : "1022d6f7d5eca18745c1c7f37f88be15f2b9c1ec",
+        "version" : "0.15.0"
       }
     },
     {
@@ -114,8 +114,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xocialize/mlx-engine-swift.git",
       "state" : {
-        "revision" : "d75f43b903b9b72a684c99d37b85768c274ecc38",
-        "version" : "0.79.0"
+        "revision" : "c9621dcd2967bc3e9a8a30f90cccf6451444c69e",
+        "version" : "0.80.0"
       }
     },
     {
@@ -132,8 +132,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xocialize/pixel-agency-normalizer.git",
       "state" : {
-        "revision" : "fafe7e5bda23c7425302b2201a1e7b835cd2c10e",
-        "version" : "0.3.1"
+        "revision" : "c00095deb20b9340b00f9141a7ea8c70400ccdeb",
+        "version" : "0.4.0"
       }
     },
     {

@@ -216,6 +216,21 @@ on, and the result is already placed on that body, so the rules above change:
   worker didn't.
 - `GaeaPluginKit`'s `CharacterParts.request` maps such a run to MLXEngine's `CharacterPartRequest` (contract 1.63).
 
+#### 3.3.5 Boxes
+
+`image.locate` (MES Image §3.4, media-engine-spec v0.15.0; AB-T-0483) is an Image operation Gaea serves from MESKit's
+table, each offer run as itself, because the image normalizer has no entry for it:
+- **Inputs**: `image`, upright (an upright PNG or JPEG as sent, anything else as an upright PNG), and `prompt`, a text
+  file.
+- **`params.count`** is always set: the request's, else 1.
+- **Output**: `boxes`, a value and not a file: `{"name": "boxes", "value": [{x, y, width, height, label?, score?}]}`.
+  Each number is a share of the upright image from its top-left corner. An empty list means nothing was found, and is
+  a result, not an error.
+- **What the worker needn't do**: MESKit keeps each box inside the image, drops one with no area, sorts by score, cuts
+  the list to `count`, and warns `nothing_found` on an empty one. A worker returns what its model gave.
+- The offer's `model.limits.max_count` is the most boxes it returns; `model.supports.scores: false` says its boxes
+  carry no score.
+
 ### 3.4 Stop
 
 | Message | Dir | Fields | Meaning |

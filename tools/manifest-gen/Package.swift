@@ -8,7 +8,7 @@ let package = Package(
     name: "gaea-manifest-gen",
     platforms: [.macOS("26.0")], // mlx-engine-swift requires macOS 26,
     dependencies: [
-        .package(url: "https://github.com/xocialize/mlx-engine-swift.git", from: "0.79.0"),
+        .package(url: "https://github.com/xocialize/mlx-engine-swift.git", from: "0.80.0"),
     ],
     targets: [
         .executableTarget(

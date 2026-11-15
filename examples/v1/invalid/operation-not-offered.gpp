@@ -1,5 +1,5 @@
 # manifest: demo.json
 # expect: neither offers nor helps with image.generate
-W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.2.0"},"pid":1,"models":["demo-matmul"],"manifest_sha256":"81ae0a5a2cf49e87a0bebdcf26df170e1d29a5aeeca18469d1ce209867a529ca"}
+W {"type":"hello","protocol":1,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.2.0"},"pid":1,"models":["demo-matmul"],"manifest_sha256":"e42e3c1b9851bfa9e3ed96c6fc31d2863602aaa56316e61982ee85e1b75bd7db"}
 H {"type":"run","id":"h2","job":"j1","operation":"image.generate","model":"demo-matmul","lane":"fp32","inputs":{},"params":{},"output_dir":"/o"}
 W {"type":"error","re":"h2","job":"j1","code":"unsupported_operation","message":"no","retryable":false}
