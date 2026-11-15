@@ -7,7 +7,7 @@
 #   ALL=1 tools/conformance-with.sh …   every public gaea-plugin-* with a full release (needs gh)
 #
 # Needs: dist/Gaea.app; MES_CONFORMANCE (default ../media-engine-spec/.build/release/mes-conformance). ENABLE lists opt-in
-# models to turn on before the run.
+# models to turn on before the run; JOB_TIMEOUT and ONLY go to the suite as --job-timeout and --only.
 set -uo pipefail
 cd "${0:A:h}/.."
 WORK=${1:?work dir}; OUT=${2:?evidence dir}; shift 2
@@ -33,7 +33,9 @@ done
 for id in ${=ENABLE:-}; do "$CLI" models enable $id | tee -a "$OUT/plugins.txt"; done
 "$CLI" plugins > "$OUT/plugins-list.txt"
 "$CLI" models > "$OUT/models.txt"
-"$CONFORMANCE" engine "http://127.0.0.1:$P/mes/v0" --out "$OUT/conformance-open" > "$OUT/conformance-open.txt" 2>&1
+# JOB_TIMEOUT (seconds a test waits for a job; meshes at 1024 and 1536 need 900) and ONLY (test ids, comma-separated).
+extra=(); [[ -n ${JOB_TIMEOUT:-} ]] && extra+=(--job-timeout $JOB_TIMEOUT); [[ -n ${ONLY:-} ]] && extra+=(--only $ONLY)
+"$CONFORMANCE" engine "http://127.0.0.1:$P/mes/v0" $extra --out "$OUT/conformance-open" > "$OUT/conformance-open.txt" 2>&1
 result=$?
 pkill -TERM -f "$GAEA --headless --port $P"
 tail -3 "$OUT/conformance-open.txt"

@@ -1,0 +1,46 @@
+# TRELLIS.2 golden check 2026-11-15T07:07:05Z: com.xocialize.gaea.trellis2 0.2.0
+[Prewarm] trellis2-512: paged 8 file(s) / 11.0 GB into cache in 0.4s
+      remove: over GPP ran in 32.16 s; in-process {"background":"remove","faces":20000,"faces_made":18956,"lane":"bf16","max_rss_gb":11.572707328,"model":"trellis2-512","prepare_s":1.0091184580000001,"run_s":33.752967458000001,"seed":42,"texture_size":512,"vertices":21318}
+PASS  remove: the same GLB, sha256 ec0dbd3fe8d43d98…, v2 chunks=JSON,BIN texture=512 faces=18956
+[Prewarm] trellis2-512: paged 8 file(s) / 11.0 GB into cache in 0.4s
+      cutout: over GPP ran in 32.44 s; in-process {"background":"alpha","faces":20000,"faces_made":17826,"lane":"bf16","max_rss_gb":11.111989248,"model":"trellis2-512","prepare_s":0.98692395799999999,"run_s":32.070822499999998,"seed":42,"texture_size":512,"vertices":9657}
+PASS  cutout: the same GLB, sha256 47a9ee99a04571f4…, v2 chunks=JSON,BIN texture=512 faces=17826
+[Prewarm] trellis2-512: paged 8 file(s) / 11.0 GB into cache in 0.4s
+      keep: over GPP ran in 38.60 s; in-process {"background":"keep","faces":20000,"faces_made":19774,"lane":"bf16","max_rss_gb":11.11220224,"model":"trellis2-512","prepare_s":0.96937062500000004,"run_s":38.382895165999997,"seed":42,"texture_size":512,"vertices":45434}
+PASS  keep: the same GLB, sha256 3989dce92b5d7e47…, v2 chunks=JSON,BIN texture=512 faces=19774
+[Prewarm] trellis2-512: paged 8 file(s) / 11.0 GB into cache in 0.4s
+      seed7: over GPP ran in 35.65 s; in-process {"background":"remove","faces":60000,"faces_made":54774,"lane":"bf16","max_rss_gb":11.571101695999999,"model":"trellis2-512","prepare_s":0.97288129099999998,"run_s":35.586660166999998,"seed":7,"texture_size":1024,"vertices":58360}
+PASS  seed7: the same GLB, sha256 9440144b2f51a000…, v2 chunks=JSON,BIN texture=1024 faces=54774
+[Prewarm] trellis2-512: paged 8 file(s) / 11.0 GB into cache in 0.4s
+      maps: over GPP ran in 34.08 s; in-process {"background":"remove","faces":20000,"faces_made":18956,"lane":"bf16","max_rss_gb":11.571855360000001,"model":"trellis2-512","prepare_s":1.0041695829999999,"run_s":33.812318040999997,"seed":42,"texture_size":512,"vertices":21318}
+PASS  maps: the same GLB, sha256 6f9755fbb3f75117…, v2 chunks=JSON,BIN texture=512 faces=18956
+PASS  maps: the materials carry a normal and an occlusion texture, and the mesh TANGENT
+PASS  remove: without the options, neither map is written
+[Prewarm] pixal3d-1024: paged 10 file(s) / 14.3 GB into cache in 0.6s
+      pixal3d-bf16: over GPP ran in 153.28 s; in-process {"background":"remove","faces":60000,"faces_made":56870,"lane":"bf16","max_rss_gb":14.884110336000001,"model":"pixal3d-1024","prepare_s":1.4077962500000001,"run_s":155.831750959,"seed":42,"texture_size":1024,"vertices":50460}
+PASS  pixal3d-bf16: the same GLB, sha256 9c26b6c7453ccfd1…, v2 chunks=JSON,BIN texture=1024 faces=56870
+[Prewarm] pixal3d-1024: paged 10 file(s) / 14.3 GB into cache in 0.6s
+      pixal3d-lowmem: over GPP ran in 150.97 s; in-process {"background":"remove","faces":60000,"faces_made":56870,"lane":"bf16-lowmem","max_rss_gb":17.57339648,"model":"pixal3d-1024","prepare_s":1.3799661249999999,"run_s":149.90314816599999,"seed":42,"texture_size":1024,"vertices":50460}
+PASS  pixal3d-lowmem: the same GLB, sha256 9c26b6c7453ccfd1…, v2 chunks=JSON,BIN texture=1024 faces=56870
+PASS  pixal3d: the bf16-lowmem lane's GLB is the bf16 lane's, byte for byte
+[Prewarm] pixal3d-1024: paged 10 file(s) / 14.3 GB into cache in 0.6s
+      pixal3d-fov49: over GPP ran in 113.43 s; in-process {"background":"remove","faces":60000,"faces_made":53542,"lane":"bf16","max_rss_gb":14.884487168,"model":"pixal3d-1024","prepare_s":1.375515625,"run_s":114.28671337500001,"seed":42,"texture_size":1024,"vertices":44292}
+PASS  pixal3d-fov49: the same GLB, sha256 623789448f999602…, v2 chunks=JSON,BIN texture=1024 faces=53542
+PASS  pixal3d: a 49° field of view gives another mesh than 20°
+OK
+PASS  cutout.gpp passes validate.py
+OK
+PASS  keep.gpp passes validate.py
+OK
+PASS  maps.gpp passes validate.py
+OK
+PASS  pixal3d-bf16.gpp passes validate.py
+OK
+PASS  pixal3d-fov49.gpp passes validate.py
+OK
+PASS  pixal3d-lowmem.gpp passes validate.py
+OK
+PASS  remove.gpp passes validate.py
+OK
+PASS  seed7.gpp passes validate.py
+== 20 passed, 0 failed
