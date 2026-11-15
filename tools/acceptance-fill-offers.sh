@@ -77,8 +77,9 @@ ops ops-a
 check "A: with only Z-Image, image.fill, image.extend and image.erase aren't offered" test "$(models_of ops-a image.fill) $(models_of ops-a image.extend) $(models_of ops-a image.erase)" = "- - -"
 check "A: image.edit still offers both models by name" test "$(models_of ops-a image.edit)" = "z-image z-image-turbo"
 I=$(upload $WORK/image.png); K=$(upload $WORK/mask.png)
-submit "$(FILL z-image-turbo $I $K)" "$OUT/a-refuse-fill.json"; cat "$OUT/a-refuse-fill.json" >> "$LOG"
+submit "$(FILL z-image-turbo $I $K)" "$OUT/a-refuse-fill.json"; { cat "$OUT/a-refuse-fill.json"; print } >> "$LOG"
 check "A: a fill naming z-image-turbo is refused when it arrives (4xx)" zsh -c "grep -q '^4' $OUT/a-refuse-fill.json.status"
+I=$(upload $WORK/image.png)
 job '{"operation":"image.edit","model":"z-image-turbo","inputs":{"images":[{"upload":"'$I'"}],"instruction":"the same scene at sunset"},"params":{"seed":3}}' "$OUT/a-edit.json"
 check "A: image.edit by name still runs" py "import json; assert json.load(open('$OUT/a-edit.json'))['outcome'] == 'succeeded'"
 stop
@@ -115,12 +116,14 @@ j = json.load(open('$OUT/c-fill.json')); assert j['outcome'] == 'succeeded', j.g
 a = np.asarray(Image.open('$WORK/image.png').convert('RGB')).astype(int); b = np.asarray(Image.open('$OUT/c-fill.png').convert('RGB')).astype(int)
 m = np.asarray(Image.open('$WORK/mask.png').convert('L')) > 127; d = np.abs(a - b).max(-1)
 print('outside max', d[~m].max(), 'inside mean', d[m].mean()); assert d[~m].max() <= 2 and d[m].mean() > 5"
+I=$(upload $WORK/image.png)   # an upload is the job's once it is used
 job '{"operation":"image.extend","model":"klein-4b","inputs":{"image":{"upload":"'$I'"}},"params":{"canvas":{"left":0,"top":0,"right":256,"bottom":0},"seed":3}}' "$OUT/c-extend.json"
 check "C: an extend by Klein is 1024×512 and keeps the original's pixels" $PY -c "
 import json, numpy as np; from PIL import Image
 j = json.load(open('$OUT/c-extend.json')); assert j['outcome'] == 'succeeded', j.get('error')
 a = np.asarray(Image.open('$WORK/image.png').convert('RGB')).astype(int); im = Image.open('$OUT/c-extend.png').convert('RGB'); b = np.asarray(im).astype(int)
 print(im.size, 'kept max diff', np.abs(a[:, :700] - b[:, :700]).max()); assert im.size == (1024, 512) and np.abs(a[:, :700] - b[:, :700]).max() <= 2"
+I=$(upload $WORK/image.png); K=$(upload $WORK/mask.png)
 submit "$(FILL z-image-turbo $I $K)" "$OUT/c-refuse-fill.json"
 check "C: a fill naming z-image-turbo is refused when it arrives (4xx)" zsh -c "grep -q '^4' $OUT/c-refuse-fill.json.status"
 stop

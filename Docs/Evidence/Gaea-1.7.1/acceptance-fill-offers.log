@@ -1,0 +1,46 @@
+# Fill offers acceptance (AB-A-0267) 2026-11-15T06:13:44Z: Gaea 1.7.1, plugins from GitHub
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+Installed Z-Image 0.2.1 (com.xocialize.gaea.z-image), enabled.
+PASS  A: Z-Image 0.2.1 is installed
+PASS  A: with only Z-Image, image.fill, image.extend and image.erase aren't offered
+PASS  A: image.edit still offers both models by name
+{"error":{"code":"unknown_operation","message":"No operation image.fill on this engine.","param":"operation","request_id":"req_edxxzwa3yvb7"}}
+PASS  A: a fill naming z-image-turbo is refused when it arrives (4xx)
+      a-edit: succeeded z-image-turbo [] 
+PASS  A: image.edit by name still runs
+Installed Z-Image 0.2.0 (com.xocialize.gaea.z-image), enabled.
+PASS  B: with Z-Image 0.2.0 and no inpainter, image.extend isn't offered
+PASS  B: image.fill still lists it (the release says nothing about its edit)
+      b-fill: failed None [] This step needs the server's inpainting model, and none is enabled: the edit model left the area unpainted twice (or the step is an extend's seam or a scratch repair), and LaMa, which fills it instead
+{'code': 'model_unavailable', 'job': 'job_e6n0cwjb18rptb34xy8h', 'message': "This step needs the server's inpainting model, and none is enabled: the edit model left the area unpainted twice (or the step is an extend's seam or a scratch repair), and LaMa, which fills it instead, comes with gaea-plugin-forge."}
+PASS  B: the fill fails saying the inpainting model is what's missing, and where it comes from
+Installed Z-Image 0.2.1 (com.xocialize.gaea.z-image), enabled.
+Installed FLUX.2 Klein 0.3.0 (com.xocialize.gaea.flux2-klein), enabled.
+Installed Forge processing pack 0.2.1 (com.xocialize.gaea.forge), enabled.
+      fill: klein-4b klein-4b-base lama-inpaint; extend: klein-4b klein-4b-base lama-inpaint
+['klein-4b', 'klein-4b-base', 'lama-inpaint']
+PASS  C: fill offers LaMa and Klein, and not Z-Image
+['klein-4b', 'klein-4b-base', 'lama-inpaint']
+PASS  C: extend is offered, without Z-Image
+      c-fill: succeeded klein-4b [] 
+outside max 0 inside mean 149.4169897133787
+PASS  C: a fill by Klein succeeds and changes only the masked area
+      c-extend: succeeded klein-4b ['model_fallback'] 
+(1024, 512) kept max diff 0
+PASS  C: an extend by Klein is 1024×512 and keeps the original's pixels
+PASS  C: a fill naming z-image-turbo is refused when it arrives (4xx)
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.3.0-2026-11-15T061253Z-f6ca7226.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.3.0-2026-11-15T061408Z-220371b4.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.forge-0.2.1-2026-11-15T061425Z-8bc56491.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.2.0-2026-11-15T061235Z-32db18ea.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.2.0-2026-11-15T061353Z-a3cff4e1.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.2.1-2026-11-15T061221Z-ecb4246a.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.2.1-2026-11-15T061346Z-53d59115.gpp passes validate.py
+== 20 passed, 0 failed
