@@ -17,13 +17,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var settings: SettingsWindowController?
     private var host: GaeaHost?
     private var serving: Task<Void, Never>?
+    /// The app menu's update item: "Check for Updates…", or "Update to Gaea 1.9.0…" once a newer release is known.
+    private var updateItem: NSMenuItem?
+    private var updateWatch: Task<Void, Never>?
+    private var modeSummary = ""
 
     init(launch: Launch) {
         self.launch = launch
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        NSApp.mainMenu = Self.mainMenu()
+        let (menu, updateItem) = Self.mainMenu()
+        NSApp.mainMenu = menu
+        self.updateItem = updateItem
         var options = launch.options
         if options.paired, !launch.approvePairings {
             // Base §5: a person on this Mac approves each pairing, comparing the code on both screens.
@@ -58,15 +64,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let console = self.console
         let backend = GaeaConsoleBackend(host: host)
         let plugins = GaeaPluginBackend(host: host)
-        let paired = launch.options.paired
         let snapshot = launch.snapshot
+        modeSummary = launch.options.paired ? "Paired mode · any Mac on the network" : "Open mode · this Mac only"
         serving = Task {
             do {
                 try await host.run { _ in
                     await MainActor.run {
                         console.endpoint = host.endpoint
-                        console.modeSummary = paired ? "Paired mode · any Mac on the network" : "Open mode · this Mac only"
+                        console.modeSummary = self.modeSummary
                         console.attach(backend, plugins: plugins)
+                        if snapshot == nil { self.watchForUpdates(host) }
                     }
                     if let snapshot {
                         Task { @MainActor in await self.renderSnapshots(to: snapshot) }
@@ -100,10 +107,40 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         console.status = .failed(message)
     }
 
-    @objc func showSettings(_ sender: Any?) {
+    @objc func showSettings(_ sender: Any?) { showSettings(tab: nil) }
+
+    /// The app menu's update item: Settings on its Updates tab, checking as it opens.
+    @objc func showUpdates(_ sender: Any?) {
+        showSettings(tab: .updates)
+        if let host { Task { await host.updater.check(); self.show(update: await host.updater.status()) } }
+    }
+
+    private func showSettings(tab: SettingsTab?) {
         guard let host else { return }
         if settings == nil { settings = SettingsWindowController(host: host) }
-        settings?.show()
+        settings?.show(tab)
+    }
+
+    /// Keeps Gaea's own update where the operator already looks: a line in the console's status card and the app
+    /// menu's item. Until now a newer Gaea showed only in Settings' Updates tab and `gaea status`, so a server could sit
+    /// five releases behind and refuse a plugin without saying why.
+    private func watchForUpdates(_ host: GaeaHost) {
+        updateWatch?.cancel()
+        updateWatch = Task { [weak self] in
+            while !Task.isCancelled {
+                let status = await host.updater.status()
+                self?.show(update: status)
+                try? await Task.sleep(for: .seconds(status.lastChecked == nil ? 2 : 15))
+            }
+        }
+    }
+
+    private func show(update status: GaeaUpdater.Status) {
+        let notice = GaeaHost.updateNotice(status)
+        let summary = notice.map { "\(modeSummary)\n\($0)" + (status.staged == nil ? " · Settings › Updates" : "") } ?? modeSummary
+        if console.modeSummary != summary { console.modeSummary = summary }
+        let title = status.staged == nil ? status.latest.map { "Update to Gaea \($0)…" } ?? "Check for Updates…" : "Updates…"
+        if updateItem?.title != title { updateItem?.title = title }
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { false }
@@ -193,10 +230,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         exit(0)
     }
 
-    private static func mainMenu() -> NSMenu {
+    private static func mainMenu() -> (NSMenu, update: NSMenuItem) {
         let main = NSMenu()
         let appItem = NSMenuItem()
         let appMenu = NSMenu()
+        let update = appMenu.addItem(withTitle: "Check for Updates…", action: #selector(AppDelegate.showUpdates(_:)), keyEquivalent: "")
+        appMenu.addItem(.separator())
         appMenu.addItem(withTitle: "Settings…", action: #selector(AppDelegate.showSettings(_:)), keyEquivalent: ",")
         appMenu.addItem(.separator())
         appMenu.addItem(withTitle: "Quit Gaea", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
@@ -214,6 +253,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         windowMenu.addItem(withTitle: "Close", action: #selector(NSWindow.performClose(_:)), keyEquivalent: "w")
         windowItem.submenu = windowMenu
         main.addItem(windowItem)
-        return main
+        return (main, update)
     }
 }

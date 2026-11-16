@@ -5,26 +5,45 @@ import SwiftUI
 /// Gaea's own settings (G-17: a server is configured in its own UI): the shared weights folder (G-9, MEM-8), the same
 /// setting as `gaea models root`; adapters (GPP-1 §4.8), the same as `gaea adapters`; and Gaea's own updates (G-24),
 /// the same as `gaea update`.
+enum SettingsTab: Hashable { case general, adapters, updates }
+
+/// The tab Settings shows, so the app menu's update item can open it on Updates.
+@MainActor @Observable
+final class SettingsSelection {
+    var tab = SettingsTab.general
+}
+
+private struct SettingsTabs: View {
+    let host: GaeaHost
+    @Bindable var selection: SettingsSelection
+
+    var body: some View {
+        TabView(selection: $selection.tab) {
+            SettingsView(host: host).tabItem { Label("General", systemImage: "gearshape") }.tag(SettingsTab.general)
+            AdaptersView(host: host).tabItem { Label("Adapters", systemImage: "square.stack.3d.up") }.tag(SettingsTab.adapters)
+            UpdatesView(host: host).tabItem { Label("Updates", systemImage: "arrow.down.circle") }.tag(SettingsTab.updates)
+        }
+        .frame(minWidth: 640, minHeight: 420)
+    }
+}
+
 @MainActor
 final class SettingsWindowController {
     private let window: NSWindow
+    private let selection = SettingsSelection()
 
     init(host: GaeaHost) {
-        let view = TabView {
-            SettingsView(host: host).tabItem { Label("General", systemImage: "gearshape") }
-            AdaptersView(host: host).tabItem { Label("Adapters", systemImage: "square.stack.3d.up") }
-            UpdatesView(host: host).tabItem { Label("Updates", systemImage: "arrow.down.circle") }
-        }
-        .frame(minWidth: 640, minHeight: 420)
         window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 720, height: 520), styleMask: [.titled, .closable, .resizable],
                           backing: .buffered, defer: false)
         window.title = "Gaea Settings"
         window.isReleasedWhenClosed = false
-        window.contentView = NSHostingView(rootView: view)
+        window.contentView = NSHostingView(rootView: SettingsTabs(host: host, selection: selection))
         window.center()
     }
 
-    func show() {
+    /// Shows Settings, on `tab` when one is named and on the tab it was left on otherwise.
+    func show(_ tab: SettingsTab? = nil) {
+        if let tab { selection.tab = tab }
         NSApp.activate()
         window.makeKeyAndOrderFront(nil)
     }

@@ -228,17 +228,41 @@ public actor PluginManager {
         guard release.zip != nil, release.checksum != nil, let manifestAsset = release.manifest else {
             return .failure(Incompatible(description: "\(release.tag) lacks the .gaeaplugin.zip, its .sha256 or manifest.json"))
         }
+        let data: Data
+        do {
+            data = try await source.data(manifestAsset)
+        } catch {
+            return .failure(Incompatible(description: "\(release.tag)'s manifest can't be read (\(error.localizedDescription))"))
+        }
+        return Self.compatibility(manifest: data, tag: release.tag, gaea: SemVer(Gaea.version)!)
+    }
+
+    /// What a manifest says before anything else is read: the two facts that decide whether this Gaea can run it.
+    private struct ManifestHeader: Decodable {
+        var `protocol`: Int?
+        var minGaea: String?
+        enum CodingKeys: String, CodingKey { case `protocol`, minGaea = "min_gaea" }
+    }
+
+    /// Whether a Gaea of version `gaea` can run the release whose manifest this is. The GPP protocol and `min_gaea`
+    /// are read first, on their own: a manifest written for a later Gaea may name things this build doesn't know (a
+    /// capability, an operation), and then the answer is "needs Gaea 1.7.0", not the decoder's error.
+    static func compatibility(manifest data: Data, tag: String, gaea: SemVer) -> Result<PluginManifest, Incompatible> {
+        let header = try? JSONDecoder().decode(ManifestHeader.self, from: data)
+        if let spoken = header?.protocol, !Gaea.protocols.contains(spoken) {
+            return .failure(Incompatible(description: "\(tag) speaks GPP \(spoken)"))
+        }
+        if let needs = header?.minGaea, let minGaea = SemVer(needs), minGaea > gaea {
+            return .failure(Incompatible(description: "\(tag) needs Gaea \(needs) or later: update Gaea first"))
+        }
         let manifest: PluginManifest
         do {
-            manifest = try JSONDecoder().decode(PluginManifest.self, from: try await source.data(manifestAsset))
+            manifest = try JSONDecoder().decode(PluginManifest.self, from: data)
         } catch {
-            return .failure(Incompatible(description: "\(release.tag)'s manifest doesn't decode (\(error))"))
+            return .failure(Incompatible(description: "\(tag)'s manifest doesn't decode (\(error))"))
         }
-        guard Gaea.protocols.contains(manifest.protocol) else {
-            return .failure(Incompatible(description: "\(release.tag) speaks GPP \(manifest.protocol)"))
-        }
-        guard let minGaea = SemVer(manifest.minGaea), minGaea <= SemVer(Gaea.version)! else {
-            return .failure(Incompatible(description: "\(release.tag) needs Gaea \(manifest.minGaea)"))
+        guard SemVer(manifest.minGaea) != nil else {
+            return .failure(Incompatible(description: "\(tag)'s min_gaea, \(manifest.minGaea), isn't a version"))
         }
         return .success(manifest)
     }

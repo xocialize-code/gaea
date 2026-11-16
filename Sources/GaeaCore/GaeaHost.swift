@@ -683,6 +683,17 @@ public final class GaeaHost: Sendable {
         return status.lastChecked == nil ? "not checked yet" : "up to date"
     }
 
+    /// What the app says about Gaea's own update wherever the operator already looks (the console's status card, the
+    /// app menu): nil while there is nothing to install. Settings' Updates tab and `gaea update` do the installing.
+    public static func updateNotice(_ status: GaeaUpdater.Status) -> String? {
+        if let staged = status.staged {
+            guard status.waitingFor != nil else { return "\(status.rollingBack ? "Going back to" : "Installing") Gaea \(staged)…" }
+            return "Gaea \(staged) \(status.rollingBack ? "comes back" : "installs") once no job is running or waiting"
+        }
+        guard let latest = status.latest else { return nil }
+        return "Gaea \(latest)\(status.latestPrerelease == true ? " (pre-release)" : "") is available"
+    }
+
     static func describe(_ ledger: Ledger) -> String {
         var lines = ["budget \(ledger.budgetBytes.gb), charged \(ledger.chargedBytes.gb), free \(ledger.availableBytes.gb); "
             + "host \(ledger.hostFootprintBytes.gb); \(ledger.queued) queued"]

@@ -92,6 +92,41 @@ let repoRoot = URL(fileURLWithPath: #filePath).deletingLastPathComponent().delet
         #expect(manifest.models.map(\.id) == ["auk-flash", "auk"])
     }
 
+    /// Gaea 1.4.0 answered HairDeck's manifest with the decoder's error for `characterPart`, a capability it didn't
+    /// know. What the operator needs to hear is the manifest's own `min_gaea`.
+    @Test func aManifestForALaterGaeaSaysWhichGaeaItNeeds() throws {
+        let file = repoRoot.appending(path: "Tests/Fixtures/manifests/demo-0.5.0.json")
+        var json = try #require(JSONSerialization.jsonObject(with: Data(contentsOf: file)) as? [String: Any])
+        #expect(json["min_gaea"] as? String == "1.7.0")
+        let known = try JSONSerialization.data(withJSONObject: json)
+
+        // As a later Gaea would write it: something in the models this build can't read.
+        var models = try #require(json["models"] as? [[String: Any]])
+        var package = try #require(models[3]["package"] as? [String: Any])
+        var surfaces = try #require(package["surfaces"] as? [[String: Any]])
+        #expect(surfaces.first?["capability"] as? String == "characterPart")
+        surfaces[0]["capability"] = "aCapabilityFromTheFuture"
+        package["surfaces"] = surfaces
+        models[3]["package"] = package
+        json["models"] = models
+        let unknown = try JSONSerialization.data(withJSONObject: json)
+
+        func answer(_ data: Data, gaea: String) -> String {
+            switch PluginManager.compatibility(manifest: data, tag: "v0.5.0", gaea: SemVer(gaea)!) {
+            case .success(let manifest): "runs \(manifest.version)"
+            case .failure(let reason): reason.description
+            }
+        }
+        #expect(answer(unknown, gaea: "1.4.0") == "v0.5.0 needs Gaea 1.7.0 or later: update Gaea first")
+        #expect(answer(known, gaea: "1.6.9") == "v0.5.0 needs Gaea 1.7.0 or later: update Gaea first")
+        #expect(answer(known, gaea: "1.7.0") == "runs 0.5.0")
+        // Old enough for this Gaea and still unreadable: that is the plugin's fault, and the decoder says where.
+        #expect(answer(unknown, gaea: "1.7.0").hasPrefix("v0.5.0's manifest doesn't decode"))
+
+        json["protocol"] = 2
+        #expect(answer(try JSONSerialization.data(withJSONObject: json), gaea: "1.4.0") == "v0.5.0 speaks GPP 2")
+    }
+
     @Test func everyExampleManifestDecodes() throws {
         let folder = repoRoot.appending(path: "examples/v1/manifest")
         let files = try FileManager.default.contentsOfDirectory(at: folder, includingPropertiesForKeys: nil).filter { $0.pathExtension == "json" }
