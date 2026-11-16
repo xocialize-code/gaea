@@ -520,6 +520,16 @@
         "detailed_at_words": {
           "type": "integer",
           "minimum": 1
+        },
+        "text_only_tasks": {
+          "description": "The tasks (of tasks) it rewrites from the words alone, though the task has pictures: Gaea sends an imageEdit instruction to the helper only when it is listed here.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "textToImage",
+              "imageEdit"
+            ]
+          }
         }
       }
     },

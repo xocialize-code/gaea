@@ -79,9 +79,10 @@ public struct GaeaPromptEnhancer: PromptEnhancing {
         snapshot.withLock { $0.profiles.first { $0.0.models.contains(model) }?.0 }
     }
 
-    /// prompt-enhance-kit's decision (`PromptEnhancer.decision`, prompt-enhance-kit-swift 0.7.0), over the facts the
-    /// plugin lists: no instructions for the task, an edit (it would need to see the image), a prompt that is already
-    /// JSON where the profile passes those through, then under `auto` the policy and the detailed-prompt length.
+    /// prompt-enhance-kit's decision (`PromptEnhancer.decision`, prompt-enhance-kit-swift 0.8.0), over the facts the
+    /// plugin lists: no instructions for the task, an edit (it would need to see the image) unless the profile rewrites
+    /// it from the words alone (`text_only_tasks`, Fibo 2.0's edit instruction), a prompt that is already JSON where
+    /// the profile passes those through, then under `auto` the policy and the detailed-prompt length.
     public func skip(_ prompt: String, profile: PromptProfile, task: PromptTask, always: Bool) -> PromptOutcome? {
         guard let facts = snapshot.withLock({ $0.profiles.first { $0.0.id == profile.id }?.1 }) else { return nil }
         return Self.decision(prompt, facts: facts, task: task, always: always)
@@ -89,7 +90,7 @@ public struct GaeaPromptEnhancer: PromptEnhancing {
 
     static func decision(_ prompt: String, facts: PluginManifest.PromptProfile, task: PromptTask, always: Bool) -> PromptOutcome? {
         guard facts.tasks.contains(task.rawValue) else { return .noInstruction }
-        if task.needsVision { return .needsVision }
+        if task.needsVision, !(facts.textOnlyTasks ?? []).contains(task.rawValue) { return .needsVision }
         if facts.passThroughStructured, isStructured(prompt) { return .passedThrough }
         guard !always else { return nil }
         switch facts.policy {

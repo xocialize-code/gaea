@@ -3,7 +3,7 @@ import PixelAgencyNormalizer
 import Testing
 @testable import GaeaCore
 
-/// Gaea's copy of prompt-enhance-kit's decision (`PromptEnhancer.decision`, 0.7.0), over the facts a plugin lists: the
+/// Gaea's copy of prompt-enhance-kit's decision (`PromptEnhancer.decision`, 0.8.0), over the facts a plugin lists: the
 /// cases the kit's own tests pin.
 @Suite struct PromptEnhancerTests {
     static func facts(_ policy: PluginManifest.PromptProfile.Policy, words: Int? = 60, structured: Bool = false) -> PluginManifest.PromptProfile {
@@ -28,6 +28,23 @@ import Testing
         #expect(GaeaPromptEnhancer.decision(json, facts: Self.facts(.recommended, structured: true), task: .textToImage,
                                             always: true) == .passedThrough)
         #expect(GaeaPromptEnhancer.decision(json, facts: Self.facts(.recommended), task: .textToImage, always: true) == nil)
+    }
+
+    /// An edit goes as typed unless the profile rewrites it from the words alone (Fibo 2.0's `text_only_tasks`).
+    @Test func anEditRunsOnlyWhereTheProfileRewritesItFromTheWords() {
+        var fibo = Self.facts(.recommended, words: nil, structured: true)
+        fibo.tasks = ["imageEdit", "textToImage"]
+        #expect(GaeaPromptEnhancer.decision("make the sky red", facts: fibo, task: .imageEdit, always: false) == .needsVision)
+        #expect(GaeaPromptEnhancer.decision("make the sky red", facts: fibo, task: .imageEdit, always: true) == .needsVision)
+        fibo.textOnlyTasks = ["imageEdit"]
+        #expect(GaeaPromptEnhancer.decision("make the sky red", facts: fibo, task: .imageEdit, always: false) == nil)
+        #expect(GaeaPromptEnhancer.decision("make the sky red", facts: fibo, task: .textToImage, always: false) == nil)
+        // An instruction that is already JSON still goes as typed, and a task the profile lacks is still no instruction.
+        #expect(GaeaPromptEnhancer.decision(#"{"edit_instruction": "Make the sky red."}"#, facts: fibo, task: .imageEdit,
+                                            always: true) == .passedThrough)
+        var generateOnly = fibo
+        generateOnly.tasks = ["textToImage"]
+        #expect(GaeaPromptEnhancer.decision("make the sky red", facts: generateOnly, task: .imageEdit, always: true) == .noInstruction)
     }
 
     @Test func wordsCountIdeographsTwoToAWord() {

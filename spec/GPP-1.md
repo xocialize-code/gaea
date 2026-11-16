@@ -338,10 +338,15 @@ A prompt-enhance helper (`x-gaea.prompt.enhance`, G-10) also lists its `profiles
 rewrites prompts for, its policy (`required`, `recommended`, `optional`), the tasks it has instructions for, whether
 it answers JSON, suggests a size or lays out a canvas, whether it needs the large backbone, and when a prompt goes as
 typed (already JSON, or `detailed_at_words` long). The instructions stay in the plugin. Gaea reads these facts to
-decide whether a prompt needs the model at all, and calls the helper only when it does. The helper takes the prompt
-as a text input and `profile`, `task`, `mode` (`auto` or `always`), `target_size`, `temperature` and `timeout_s` as
-params, with the run's `seed`. It answers with values: `prompt`, `outcome`, `attempts`, and when they apply
-`failure`, `suggested_size` and `canvas`.
+decide whether a prompt needs the model at all, and calls the helper only when it does.
+
+The helper is a text model and never sees a job's pictures, so an edit's instruction (`imageEdit`) goes as typed
+(`needs_vision`) unless the profile lists the task in `text_only_tasks`: the tasks it rewrites from the words alone.
+Fibo 2.0's profile lists `imageEdit`, and puts the request in the imperative form the model was trained on.
+
+The helper takes the prompt as a text input and `profile`, `task`, `mode` (`auto` or `always`), `target_size`,
+`temperature` and `timeout_s` as params, with the run's `seed`. It answers with values: `prompt`, `outcome`,
+`attempts`, and when they apply `failure`, `suggested_size` and `canvas`.
 
 ### 4.5 settings[]
 
