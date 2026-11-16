@@ -1,0 +1,39 @@
+# Matte subject acceptance (AB-T-0491) 2026-11-15T20:54:19Z: Gaea 1.9.0, Forge from GitHub
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add the Forge pack by repo URL
+PASS  image.matte has the subject parameter, and its default offer lists supports.subject box and points
+      plain: HTTP 201 succeeded birefnet-matte [] ['mask', 'extract'] []  
+PASS  without a subject the matte runs as before: no subject in effective, no segmenter in provenance
+      points: HTTP 201 succeeded birefnet-matte [('subject', 'sam21-segment')] ['mask', 'extract'] []  
+PASS  points on the left disc: the mask covers the left disc and is empty over the right one
+PASS  the plain matte of the same picture covers both discs
+      box: HTTP 201 succeeded birefnet-matte [('subject', 'sam21-segment')] ['mask', 'extract'] []  
+PASS  a box round the cup: the mask covers the cup and is empty over the book
+PASS  box: effective.subject echoes it, and the segmenter is a helper with the role subject
+PASS  points: effective.subject echoes it, and the segmenter is a helper with the role subject
+      disc-box: HTTP 201 succeeded birefnet-matte [('subject', 'sam21-segment')] ['mask', 'extract'] []  
+      disc-box (reported, not judged): segmenter_score 0.004961797501891851, mask over the left disc 0/255
+      ex09-plain: HTTP 201 succeeded birefnet-matte [] ['mask', 'extract'] []  
+      ex09-box: HTTP 201 succeeded birefnet-matte [('subject', 'sam21-segment')] ['mask', 'extract'] []  
+      ex09-point: HTTP 201 succeeded birefnet-matte [('subject', 'sam21-segment')] ['mask', 'extract'] []  
+      ex09 IoU against the reference character mask: plain 0.203, box 0.545, point 0.066
+      ex10-plain: HTTP 201 succeeded birefnet-matte [] ['mask', 'extract'] []  
+      ex10-box: HTTP 201 succeeded birefnet-matte [('subject', 'sam21-segment')] ['mask', 'extract'] []  
+      ex10-point: HTTP 201 succeeded birefnet-matte [('subject', 'sam21-segment')] ['mask', 'extract'] []  
+      ex10 IoU against the reference character mask: plain 0.579, box 0.198, point 0.010
+PASS  on ex09, where the plain matte keeps most of the frame, the character's box does better than none
+      both: HTTP 400   [] [] [] invalid_request subject takes a box or points, not both.
+      outside: HTTP 400   [] [] [] invalid_request subject.box must have some area and lie inside the image (0 to 1 from its top-left corner).
+      noinclude: HTTP 400   [] [] [] invalid_request subject.points needs at least one include point: exclude points alone pick no subject.
+PASS  both forms at once, a box outside the image and points without an include are 400
+Installed Forge processing pack 0.2.1 (com.xocialize.gaea.forge), enabled.
+edgetam-segment disabled.
+sam21-segment disabled.
+PASS  with the segmenters disabled, image.matte's offers list no supports.subject
+      bare-box: HTTP 422   [] [] [] unsupported_parameter image.matte has no parameter 'subject'.
+PASS  and a subject is refused (4xx)
+      bare-plain: HTTP 201 succeeded birefnet-matte [] ['mask', 'extract'] []  
+PASS  while a plain matte still runs
+PASS  transcript com.xocialize.gaea.forge-0.2.1-2026-11-15T205423Z-e65b7a24.gpp passes validate.py
+PASS  transcript com.xocialize.gaea.forge-0.2.1-2026-11-15T205435Z-2c7c9521.gpp passes validate.py
+== 15 passed, 0 failed

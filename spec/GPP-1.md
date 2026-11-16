@@ -306,9 +306,12 @@ What Gaea advertises to MES clients. Each offer is one model for one operation:
   sample rates, and `max_layer_count` for `image.decompose`);
 - `supports`: what the model does beyond the operation's required behaviour, by key, absent keys false:
   - `composite`, for an `image.decompose` model that returns its own reconstruction of the canvas (MES Image §3.2);
-  - `image_to_image` (Gaea 1.7.1, AB-A-0267), for an `image.edit` model that re-generates the picture from the input at
-    a strength and doesn't follow an instruction about a region (Z-Image). Gaea's fill, extend and erase show an edit
-    model the region in magenta and tell it what to paint there, so such a model isn't offered on them;
+  - `image_to_image` (Gaea 1.7.1, AB-A-0267), for an `image.edit` model that can't paint a marked region of a picture
+    in place. Gaea's fill, extend and erase show an edit model the region in magenta, tell it what to paint there,
+    bring its result back to the picture's size and keep it only inside the region. Two kinds of model can't do that,
+    and neither is offered on those operations: one that re-generates the picture from the input at a strength and
+    doesn't follow an instruction about a region (Z-Image), and one whose result isn't the same framing as its input,
+    such as an editor that crops to a trained aspect ratio (Fibo 2.0, AB-A-0297);
 - **the MES offer's own `supports` and `limits`** (Base §6.4, RFC 0003) go inside `model`, which is an MES
   `ModelOffer`, and Gaea serves them as given. An Audio offer declares there the facts and gates its profile names
   (Audio §4): `sample_rate` and `channels`, `languages`, `stream`, `seed: false` for an unseeded model, `voices` (a
