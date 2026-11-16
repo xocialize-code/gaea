@@ -47,7 +47,7 @@ start() { # home, port, extra args… → waits for the operator socket
 }
 stop() { pkill -TERM -f "$GAEA --headless --port $1" ; sleep 1 }
 py() { python3 -c "$1" }
-calls() { cat $H/Logs/sessions/com.xocialize.gaea.prompt-enhance-*.gpp 2>/dev/null | grep -c '^H .*"operation":"x-gaea.prompt.enhance"' }
+calls() { cat /dev/null $H/Logs/sessions/com.xocialize.gaea.prompt-enhance-*.gpp(N) | grep -c '^H .*"operation":"x-gaea.prompt.enhance"' }
 # name, json body, expected outcome (or "none" for no report), whether the helper runs (1 or 0)
 gen() {
   local name=$1 body=$2 outcome=$3 called=$4 before=$(calls)
@@ -61,7 +61,7 @@ assert $after - $before == $called, ('helper runs', $after - $before)"
 }
 
 VERSION=$(py "import json; print(json.load(open('$PLUGIN_DIST/manifest.json'))['version'])")
-say "# Prompt enhancer acceptance (AB-T-0370) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), prompt-enhance $VERSION, source ${REPO_FROM:-stand-in}"
+say "# Prompt enhancer acceptance (AB-T-0370) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), prompt-enhance $VERSION, source ${REPO_FROM:-stand-in}"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN GAEA_GITHUB_API
 H=$WORK/main; P=17750

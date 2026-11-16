@@ -1,0 +1,34 @@
+# Fibo 2.0 prompt enhancement (AB-A-0300) 2026-11-16T05:15:59Z: Gaea 1.9.0, prompt-enhance from github, 8 steps at 512²
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add Fibo 2.0 from GitHub
+Installed Prompt enhancer 0.1.2 (com.xocialize.gaea.prompt-enhance), enabled.
+PASS  add the prompt enhancer by repo URL
+fibo-2-dev enabled.
+PASS  enabled, fibo-2-dev is offered on image.generate and image.edit, and image.generate declares prompt_enhance
+      auto: succeeded enhanced fibo2 qwen3.5-9b attempts 1 ['prompt_rewritten'] 
+{"applied": true, "attempts": 1, "backbone": "qwen3.5-9b", "outcome": "enhanced", "profile": "fibo2", "seed": 42, "version": 1}
+PASS  auto: enhanced, the helper called
+5231 characters; ['short_description', 'objects', 'background_setting', 'lighting', 'aesthetics', 'photographic_characteristics', 'style_medium', 'context', 'artistic_style']
+[{'id': 'qwen3.5-9b', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://huggingface.co/mlx-community/Qwen3.5-9B-MLX-4bit'}, 'role': 'prompt_enhance', 'title': 'Qwen3.5 9B'}]
+PASS  what ran is one VGL caption: a JSON object with short_description and objects, far longer than the prompt
+      caption: succeeded passed_through fibo2 None attempts None [] 
+{"applied": false, "outcome": "passed_through", "profile": "fibo2", "version": 1}
+PASS  caption: passed_through, the helper not called
+PASS  the caption as the prompt gives the picture the rewrite gave
+      off: succeeded off fibo2 None attempts None [] 
+{"applied": false, "outcome": "off", "profile": "fibo2", "version": 1}
+PASS  off: off, the helper not called
+      on: succeeded enhanced fibo2 qwen3.5-9b attempts 1 ['prompt_rewritten'] 
+{"applied": true, "attempts": 1, "backbone": "qwen3.5-9b", "outcome": "enhanced", "profile": "fibo2", "seed": 42, "version": 1}
+PASS  on: enhanced, the helper called
+{"bytes": 5447, "href": "/mes/v0/jobs/job_6hb5cr88k5ncbh3avr3a/outputs/0", "index": 0, "kind": "data", "media_type": "application/json", "name": "enhanced", "sha256": "5e5a89e7c9f2cdc5683f63548ec3b853a91331d3ad6548098d022504348d387d", "value": {"applied": true, "prompt": "{\"short_description\":\"A 
+PASS  image.enhance_prompt for fibo-2-dev: the caption as data, the helper called
+      edit: succeeded needs_vision fibo2 None attempts None [] 
+{"applied": false, "outcome": "needs_vision", "profile": "fibo2", "version": 1}
+PASS  edit: needs_vision, the helper not called
+      the instruction that ran: as typed
+OK
+PASS  transcript com.xocialize.gaea.fibo2-0.2.1-2026-11-16T051738Z-0d1522a9.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.prompt-enhance-0.1.2-2026-11-16T051603Z-bcbd948d.gpp passes validate.py
+== 13 passed, 0 failed
