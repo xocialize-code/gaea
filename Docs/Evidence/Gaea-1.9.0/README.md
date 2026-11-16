@@ -32,6 +32,7 @@ AB-A-0291 and AB-A-0292), and Gaea serves both from 1.9.0 (AB-T-0483, AB-T-0491)
 | Locate plugin: `scripts/golden.sh`, the signed bundle over GPP against `locate-inproc` | 8 passed, 0 failed | [golden-locate.log](golden-locate.log) |
 | Locate acceptance, the plugin's local build through a stand-in | 13 passed, 0 failed | [acceptance-locate-standin.log](acceptance-locate-standin.log) |
 | Locate acceptance, the plugin's 0.1.0 release from GitHub (notarized) | 13 passed, 0 failed | [acceptance-locate-github.log](acceptance-locate-github.log) |
+| Locate acceptance through the released app: `Gaea-1.9.0.zip` from GitHub (sha256 `565345fd…0c55f136`, Gatekeeper: Notarized Developer ID), the plugin from GitHub | 13 passed, 0 failed | [acceptance-locate-released.log](acceptance-locate-released.log) |
 | Matte subject acceptance, the Forge pack 0.2.1 from GitHub | 15 passed, 0 failed | [acceptance-matte-subject.log](acceptance-matte-subject.log) |
 | Conformance IMAGE-020 and IMAGE-021 with the Forge pack alone | 2 passed, 0 failed | [conformance-matte.md](conformance-matte.md) |
 | Conformance with all 30 published plugins from GitHub and the 7 opt-in models | 112 passed, 0 failed, 9 skipped: Base, Image, Audio, Video and Mesh 0.1 conform | [conformance-all.md](conformance-all.md), [conformance-plugins.txt](conformance-plugins.txt) |
@@ -103,7 +104,8 @@ The strip of these masks is kept outside the repo (the illustrations aren't ours
 
 ## Not covered
 
-- **The released app.** Every run here is the local Release build of `bd3a158`.
+- **The matte subject and conformance through the released app.** They ran on the local Release build of `bd3a158`;
+  the released app (`9162a0c`, the same sources) ran the locate acceptance.
 - **Memory.** The locate worker's peak wasn't measured here. The charges are mlx-locate-swift's declared footprints.
 - **Crowded or small things.** The model reads pictures at up to 1024 px on the long side; nothing here tests what it
   misses.
