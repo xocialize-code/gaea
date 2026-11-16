@@ -147,6 +147,9 @@ public struct GaeaEngine: MediaEngine {
                     descriptor.models[i].namedOnly = true
                     descriptor.models[i].isDefault = nil
                 }
+                // The normalizer states a speed only for the models in its tier table. For any other the plugin's
+                // offer says (Fibo 2.0 Dev is slow, about three minutes a picture).
+                if descriptor.models[i].speedClass == nil { descriptor.models[i].speedClass = runs?.offer.speedClass }
             }
             if !descriptor.models.contains(where: { $0.isDefault == true }),
                let first = descriptor.models.firstIndex(where: { $0.namedOnly != true }) {
