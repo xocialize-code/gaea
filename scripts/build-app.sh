@@ -27,6 +27,8 @@ if strings "$APP/Contents/MacOS/Gaea" | grep -q '/\.build/.*\.bundle$'; then
   print -u2 "Gaea's Bundle.module looks in the build folder: it would trap on another Mac"; exit 1
 fi
 cp "$BIN/gaea" "$APP/Contents/Helpers/gaea"
+# The icon: tools/make-icon.swift makes Gaea.icns from Apps/Gaea/Icon/artwork.png, a picture Gaea generated.
+cp Apps/Gaea/Gaea.icns "$APP/Contents/Resources/Gaea.icns"
 for bundle in "$BIN"/*.bundle(N); do ditto "$bundle" "$APP/Contents/Resources/${bundle:t}"; done
 
 TIMESTAMP=(--timestamp)
