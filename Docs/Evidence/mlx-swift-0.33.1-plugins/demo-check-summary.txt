@@ -1,0 +1,14 @@
+PASS manifest com.xocialize.gaea.demo 0.6.1, sha256 2a453267581a…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.demo, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-demo-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 60675
+PASS hello after 355 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared demo-matmul lane fp32 in 0.00 s
+PASS x-gaea.demo.matmul ran in 1.14 s (wall 1.14 s), 10 progress lines; outputs [{"value":{"device":"Device(gpu, 0)","held_elements":250000000,"checksum":-4713.4150390625},"name":"checksum"}]
+PASS memory report: worker says phys_footprint 1347339080 B; host read 1347371848 B now, peak 1347339080 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-demo/dist/check-session.gpp
+ALL PASS
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

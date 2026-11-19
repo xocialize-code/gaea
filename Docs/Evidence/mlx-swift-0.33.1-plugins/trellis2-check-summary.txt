@@ -1,0 +1,14 @@
+PASS manifest com.xocialize.gaea.trellis2 0.2.1, sha256 4590fb83de67…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.trellis2, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-trellis2-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 15064
+PASS hello after 407 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared trellis2-512 lane bf16 in 3.49 s
+PASS mesh.generate ran in 55.05 s (wall 55.05 s), 0 progress lines; outputs [{"media_type":"model\/gltf-binary","name":"mesh","path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-B4100EF4-5E9A-4AE2-B2C8-74D0911E5BC3\/spool\/job_check\/out\/mesh-0.glb"}]
+PASS memory report: worker says phys_footprint 24148172672 B; host read 24148172672 B now, peak 27395757936 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-trellis2/dist/check-session.gpp
+ALL PASS
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

@@ -1,0 +1,18 @@
+.engine.contract: '1.59.0' -> '1.66.0'
+.engine.version: '0.74.1' -> '0.82.1'
+.models[0].lanes[0].resolved.contractVersion.minor: 59 -> 66
+.models[0].lanes[1].resolved.contractVersion.minor: 59 -> 66
+.models[0].lanes[2].resolved.contractVersion.minor: 59 -> 66
+.models[0].package.contractVersion.minor: 59 -> 66
+.models[0].package.requirements.processEnvironment: added {}
+.models[1].lanes[0].resolved.contractVersion.minor: 59 -> 66
+.models[1].lanes[1].resolved.contractVersion.minor: 59 -> 66
+.models[1].lanes[2].resolved.contractVersion.minor: 59 -> 66
+.models[1].package.contractVersion.minor: 59 -> 66
+.models[1].package.requirements.processEnvironment: added {}
+.models[2].lanes[0].resolved.contractVersion.minor: 59 -> 66
+.models[2].lanes[1].resolved.contractVersion.minor: 59 -> 66
+.models[2].lanes[2].resolved.contractVersion.minor: 59 -> 66
+.models[2].package.contractVersion.minor: 59 -> 66
+.models[2].package.requirements.processEnvironment: added {}
+.version: '0.2.1' -> '0.2.2'

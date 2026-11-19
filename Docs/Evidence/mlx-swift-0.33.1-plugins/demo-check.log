@@ -1,0 +1,55 @@
+==> build gaea-plugin-check
+warning: 'gaea-plugin-demo': dependency 'mlx-engine-swift' is not used by any target
+warning: 'gaea-plugin-demo': dependency 'mlx-engine-swift' is not used by any target
+Building for production...
+[Planning deferred tasks]
+[3 / 8]
+[4 / 9] MLXToolKit
+[5 / 10] MLXToolKit
+[14 / 17] GaeaProtocol
+[19 / 22] gaea-plugin-check-product
+[20 / 23] gaea-plugin-check-product
+[22 / 23] gaea-plugin-check-product
+[23 / 23] gaea-plugin-check-product
+Build complete! (18.31 sec)
+/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/tmp.2D5kd4Xd77/bare/gaea-demo-worker: replacing existing signature
+==> hidden: /Volumes/Satechi/Development/gaea-plugin-demo/.build
+==> drive demo.gaeaplugin over GPP
+PASS manifest com.xocialize.gaea.demo 0.6.1, sha256 2a453267581a…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.demo, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-demo-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 60675
+W {"engine":{"contract":"1.66.0","version":"0.82.1"},"kit":{"version":"0.15.0"},"manifest_sha256":"2a453267581add12ec534d7e180ac8a479ee31ae2c0503e38b536b540e852c88","models":["demo-matmul","demo-gradient","demo-separator","demo-part","demo-locate"],"pid":60675,"plugin":{"id":"com.xocialize.gaea.demo","version":"0.6.1"},"protocol":1,"type":"hello"}
+PASS hello after 355 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+H {"budget":{"ceilingBytes":8000000000,"wiresWeights":false},"cache_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-1FCB8E8F-AF27-4716-B0C3-A65087B6866B/cache","id":"h1","models_root":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-1FCB8E8F-AF27-4716-B0C3-A65087B6866B/models","settings":{},"type":"configure"}
+W {"re":"h1","type":"configured"}
+H {"id":"h2","lane":"fp32","model":"demo-matmul","type":"prepare"}
+W {"lane":"fp32","model":"demo-matmul","re":"h2","seconds":0,"type":"prepared"}
+W {"report":{"availableBytes":5630000000,"budgetBytes":8000000000,"date":816798012.583625,"externalBytes":2370000000,"externalTenants":{"gaea.model.demo-matmul":{"persistentBytes":0,"transientBytes":2370000000}},"gpuActiveBytes":0,"gpuCacheBytes":0,"physFootprintBytes":5341928,"residentBytes":0,"residents":{},"running":[],"transientReserveBytes":0},"type":"memory"}
+PASS prepared demo-matmul lane fp32 in 0.00 s
+H {"id":"h3","inputs":{},"job":"job_check","lane":"fp32","model":"demo-matmul","operation":"x-gaea.demo.matmul","output_dir":"/var/folders/2t/n472rntx42g8s3bd3_xz7tg00000gn/T/gaea-plugin-check-1FCB8E8F-AF27-4716-B0C3-A65087B6866B/spool/job_check/out","params":{"holdBytes":1000000000,"iterations":10,"n":4096},"type":"run"}
+W {"job":"job_check","of":10,"re":"h3","stage":"matmul","step":1,"type":"progress"}
+W {"job":"job_check","of":10,"re":"h3","stage":"matmul","step":2,"type":"progress"}
+W {"job":"job_check","of":10,"re":"h3","stage":"matmul","step":3,"type":"progress"}
+W {"job":"job_check","of":10,"re":"h3","stage":"matmul","step":4,"type":"progress"}
+W {"job":"job_check","of":10,"re":"h3","stage":"matmul","step":5,"type":"progress"}
+W {"job":"job_check","of":10,"re":"h3","stage":"matmul","step":6,"type":"progress"}
+W {"job":"job_check","of":10,"re":"h3","stage":"matmul","step":7,"type":"progress"}
+W {"job":"job_check","of":10,"re":"h3","stage":"matmul","step":8,"type":"progress"}
+W {"job":"job_check","of":10,"re":"h3","stage":"matmul","step":9,"type":"progress"}
+W {"job":"job_check","of":10,"re":"h3","stage":"matmul","step":10,"type":"progress"}
+W {"effective":{"holdBytes":1000000000,"iterations":10,"n":4096},"job":"job_check","outputs":[{"name":"checksum","value":{"checksum":-4713.4150390625,"device":"Device(gpu, 0)","held_elements":250000000}}],"re":"h3","seconds":1.142,"type":"result","warnings":[]}
+W {"report":{"availableBytes":5630000000,"budgetBytes":8000000000,"date":816798013.726897,"externalBytes":2370000000,"externalTenants":{"gaea.model.demo-matmul":{"persistentBytes":0,"transientBytes":2370000000}},"gpuActiveBytes":16,"gpuCacheBytes":1067139656,"physFootprintBytes":1347339080,"residentBytes":0,"residents":{},"running":[],"transientReserveBytes":0},"type":"memory"}
+PASS x-gaea.demo.matmul ran in 1.14 s (wall 1.14 s), 10 progress lines; outputs [{"value":{"device":"Device(gpu, 0)","held_elements":250000000,"checksum":-4713.4150390625},"name":"checksum"}]
+H {"id":"h4","type":"memory.query"}
+W {"re":"h4","report":{"availableBytes":5630000000,"budgetBytes":8000000000,"date":816798013.727262,"externalBytes":2370000000,"externalTenants":{"gaea.model.demo-matmul":{"persistentBytes":0,"transientBytes":2370000000}},"gpuActiveBytes":16,"gpuCacheBytes":1067139656,"physFootprintBytes":1347339080,"residentBytes":0,"residents":{},"running":[],"transientReserveBytes":0},"type":"memory"}
+PASS memory report: worker says phys_footprint 1347339080 B; host read 1347371848 B now, peak 1347339080 B
+H {"id":"h5","type":"shutdown"}
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-demo/dist/check-session.gpp
+ALL PASS
+==> validate the session (tools/validate.py --transcript)
+OK
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

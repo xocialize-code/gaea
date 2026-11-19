@@ -1,0 +1,14 @@
+PASS manifest com.xocialize.gaea.locate 0.1.1, sha256 8eb91d32f669…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.locate, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-locate-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 2387
+PASS hello after 550 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared qwen3-vl-locate lane int8 in 0.48 s
+PASS image.locate ran in 7.99 s (wall 7.99 s), 0 progress lines; outputs [{"value":[{"x":0.148,"height":0.7070000000000001,"label":"the fox","y":0.177,"width":0.708,"score":0.47669559783030313}],"name":"boxes"}]
+PASS memory report: worker says phys_footprint 5436560256 B; host read 5436560256 B now, peak 5910352768 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-locate/dist/check-session.gpp
+ALL PASS
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

@@ -1,0 +1,22 @@
+# Z-Image golden check 2026-11-19T16:29:02Z: com.xocialize.gaea.z-image 0.2.2
+      nf2-int4: over GPP ran in 6.74 s; in-process {"height":1024,"lane":"int4","model":"z-image-nitrofusion2","prepare_s":1.3275840830000001,"run1_s":12.007465,"run2_s":4.6858674999999996,"seed":42,"steps":2,"width":1024}
+PASS  nf2-int4: the same PNG, sha256 0303ef6065f38ca8…, 1024x1024
+      nf2-bf16: over GPP ran in 4.91 s; in-process {"height":1024,"lane":"bf16","model":"z-image-nitrofusion2","prepare_s":0.79321350000000002,"run1_s":9.5318425839999996,"run2_s":4.2100057499999997,"seed":42,"steps":2,"width":1024}
+PASS  nf2-bf16: the same PNG, sha256 8e8c6198a2ac5e53…, 1024x1024
+      nf2-1step: over GPP ran in 1.25 s; in-process {"height":512,"lane":"int4","model":"z-image-nitrofusion2","prepare_s":0.99239979199999995,"run1_s":1.8653358330000001,"run2_s":1.148764584,"seed":42,"steps":1,"width":768}
+PASS  nf2-1step: the same PNG, sha256 e3c13df535fff4b3…, 768x512
+      nf2-4step: over GPP ran in 2.60 s; in-process {"height":512,"lane":"int4","model":"z-image-nitrofusion2","prepare_s":0.90387850000000003,"run1_s":2.588822709,"run2_s":2.586066792,"seed":42,"steps":4,"width":768}
+PASS  nf2-4step: the same PNG, sha256 fd8ba9ab2bbf18ad…, 768x512
+      turbo: over GPP ran in 2.85 s; in-process {"height":512,"lane":"int4","model":"z-image-turbo","prepare_s":1.0447461250000001,"run1_s":2.9118948329999998,"run2_s":2.9336626250000002,"seed":42,"steps":8,"width":512}
+PASS  turbo: the same PNG, sha256 33e3692477da6a20…, 512x512
+OK
+PASS  nf2-1step.gpp passes validate.py
+OK
+PASS  nf2-4step.gpp passes validate.py
+OK
+PASS  nf2-bf16.gpp passes validate.py
+OK
+PASS  nf2-int4.gpp passes validate.py
+OK
+PASS  turbo.gpp passes validate.py
+== 10 passed, 0 failed

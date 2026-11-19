@@ -1,0 +1,14 @@
+PASS manifest com.xocialize.gaea.sensenova 0.2.1, sha256 610a7876e402…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.sensenova, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-sensenova-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 67806
+PASS hello after 407 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared sensenova-u1-fast lane int8 in 1.95 s
+PASS image.generate ran in 6.00 s (wall 6.00 s), 8 progress lines; outputs [{"path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-278F3DC2-9AC9-42FA-A51B-2AEFC5597CB7\/spool\/job_check\/out\/image-0.png","name":"images","media_type":"image\/png"}]
+PASS memory report: worker says phys_footprint 20185807920 B; host read 20185807920 B now, peak 20624964656 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-sensenova/dist/check-session.gpp
+ALL PASS
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

@@ -1,0 +1,14 @@
+PASS manifest com.xocialize.gaea.ltx 0.2.0, sha256 478206810384…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.ltx, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-ltx-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 67422
+PASS hello after 487 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared ltx-2.5-max128 lane bf16 in 20.03 s
+PASS video.generate ran in 112.84 s (wall 112.84 s), 64 progress lines; outputs [{"path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-9083C199-18B9-4906-89C1-D0573ADA9E9F\/spool\/job_check\/out\/video-0.mp4","media_type":"video\/mp4","name":"video"}]
+PASS memory report: worker says phys_footprint 2501527376 B; host read 2367309648 B now, peak 24864999184 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-ltx/dist/check-session.gpp
+ALL PASS
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

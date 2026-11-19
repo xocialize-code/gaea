@@ -60,7 +60,8 @@ say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sy
 H=$WORK/home; P=17677
 GAEA_HOME=$H "$GAEA" --headless --port $P --no-advertise --models-root "$MODELS" > "$H.out" 2>&1 &
 for _ in {1..50}; do [[ -S $H/operator.sock ]] && break; sleep 0.2; done
-check "add z-image 0.2.0 by repo URL" zsh -c "GAEA_HOME=$H $CLI plugins add https://github.com/xocialize-code/gaea-plugin-z-image | tee $OUT/plugins.txt | grep -q 'Installed .* 0.2.0'"
+V=${V:-0.2.0}  # the release the run expects to install (the latest full release)
+check "add z-image $V by repo URL" zsh -c "GAEA_HOME=$H $CLI plugins add https://github.com/xocialize-code/gaea-plugin-z-image | tee $OUT/plugins.txt | grep -q 'Installed .* $V'"
 GAEA_HOME=$H "$CLI" models > "$OUT/models.txt"; sed 's/^/      /' "$OUT/models.txt" | tee -a "$LOG"
 check "gaea models finds NitroFusion2's weights under the models root" zsh -c "grep '$NF2' $OUT/models.txt | grep -qv 'weights not under'"
 mes "http://127.0.0.1:$P/mes/v0/operations" > "$OUT/operations.json"

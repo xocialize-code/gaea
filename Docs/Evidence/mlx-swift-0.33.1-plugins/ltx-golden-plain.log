@@ -1,0 +1,17 @@
+# LTX golden check 2026-11-19T17:29:46Z: com.xocialize.gaea.ltx 0.2.0
+      compact24: over GPP ran in 54.90 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":14.552825856,"model":"ltx-2.5-compact24","operation":"video.generate","prepare_s":15.336504417,"run_s":66.748824749999997,"warnings":[]}
+PASS  compact24: within 42 dB on every frame (int8, deterministic: false), h264,256,256,9 aac,48000,2
+      balanced32: over GPP ran in 54.94 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":14.550581248,"model":"ltx-2.5-balanced32","operation":"video.generate","prepare_s":10.726790083000001,"run_s":60.898313584,"warnings":[]}
+PASS  balanced32: within 42 dB on every frame (int8, deterministic: false), h264,256,256,9 aac,48000,2
+      standard64: over GPP ran in 82.15 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":24.783110143999998,"model":"ltx-2.5-standard64","operation":"video.generate","prepare_s":13.229111250000001,"run_s":71.738242999999997,"warnings":[]}
+PASS  standard64: the same decoded frames, h264,256,256,9 aac,48000,2, framemd5 sha256 f6c765b43be76a82…
+      max128: over GPP ran in 105.04 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":24.233721855999999,"model":"ltx-2.5-max128","operation":"video.generate","prepare_s":11.985935459,"run_s":105.099662791,"warnings":[]}
+PASS  max128: the same decoded frames, h264,256,256,9 aac,48000,2, framemd5 sha256 ad8c9c7435ab1485…
+      compact24-first: over GPP ; in-process 
+FAIL  compact24-first: e3b0c44298fc1c14… / e3b0c44298fc1c14…, lowest 0 dB,   (want h264,256,256,9 aac,48000,2)
+      standard64-last: over GPP ; in-process 
+FAIL  standard64-last: e3b0c44298fc1c14… / e3b0c44298fc1c14…, lowest 0 dB,   (want h264,256,256,17 aac,48000,2)
+      compact24-extend: over GPP ; in-process 
+FAIL  compact24-extend: e3b0c44298fc1c14… / e3b0c44298fc1c14…, lowest 0 dB,   (want h264,128,96,25 aac,48000,2)
+      compact24-retake: over GPP ; in-process 
+FAIL  compact24-retake: e3b0c44298fc1c14… / e3b0c44298fc1c14…, lowest 0 dB,   (want h264,128,96,17 aac,48000,2)

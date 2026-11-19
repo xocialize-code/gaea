@@ -1,0 +1,5 @@
+# trellis2 golden case 'remove', in-process side re-run alone on the GPU, 2026-11-19
+trellis2 remove rerun exit=0 34s gpp=395856e46a48186f6d0400e327f4a2f636681a23ec66cebc1cb60d65bb87f5e7 inproc=395856e46a48186f6d0400e327f4a2f636681a23ec66cebc1cb60d65bb87f5e7
+{"background":"remove","faces":20000,"faces_made":19888,"lane":"bf16","max_rss_gb":11.58209536,"model":"trellis2-512","prepare_s":2.4446157500000001,"run_s":32.336510916999998,"seed":42,"texture_size":512,"vertices":26267}
+# the golden run's in-process failure:
+MLX/ErrorHandler.swift:345: Fatal error: [METAL] Command buffer execution failed: Caused GPU Timeout Error (00000002:kIOGPUCommandBufferCallbackErrorTimeout). at /Volumes/Satechi/Development/gaea-plugin-trellis2/.build/checkouts/mlx-swift/Source/Cmlx/mlx-c/mlx/c/transforms.cpp:15

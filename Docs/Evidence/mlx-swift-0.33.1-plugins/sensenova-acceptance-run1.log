@@ -1,0 +1,37 @@
+# TailSteer acceptance 2026-11-19T16:41:20Z: Gaea 1.9.2, sensenova from github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+FAIL  add sensenova 0.2.0 by repo URL
+      on  sensenova-u1  SenseNova-U1.5  [com.xocialize.gaea.sensenova 0.2.1] lanes: int8* 24.70 GB, bf16 39.50 GB
+      on  sensenova-u1-fast  SenseNova-U1.5 8-step  [com.xocialize.gaea.sensenova 0.2.1] lanes: int8* 24.70 GB, int4 16.70 GB
+      on  sensenova-u1-fast-v1  SenseNova-U1.5 8-step (V1 adapter)  [com.xocialize.gaea.sensenova 0.2.1] lanes: int8* 24.70 GB, int4 16.70 GB  (weights not under the models root: mlx-community/SenseNova-U1.5-8B-MoT-8step-8bit; the first job downloads them, or gaea plugins warm com.xocialize.gaea.sensenova)
+      on  sensenova-u1-tailsteer  SenseNova-U1.5 TailSteer 8-step  [com.xocialize.gaea.sensenova 0.2.1] lanes: int8* 24.70 GB
+PASS  gaea models finds TailSteer's weights under the models root
+PASS  image.generate and image.edit offer TailSteer by name only, Apache-2.0 with its own terms page, beside the three earlier models
+PASS  TailSteer has one lane, int8
+      tail: succeeded sensenova-u1-tailsteer int8 14.834 [] 
+PASS  TailSteer by name draws 768² in eight steps on int8
+PASS  the picture is 768×768
+PASS  it is sensenova-inproc's, pixel for pixel
+      chain source: 0001-01.png 1024x672, seeds 42 43 44
+      turn-1: succeeded sensenova-u1-tailsteer int8 10.47 [] 
+      turn-2: succeeded sensenova-u1-tailsteer int8 8.384 [] 
+      turn-3: succeeded sensenova-u1-tailsteer int8 8.378 [] 
+PASS  three chained edits each ran TailSteer and kept the picture's size (1024x672)
+PASS  the first edit is sensenova-inproc's edit of the same picture, pixel for pixel
+FAIL  turn 1 is the picture mlx-image's own driver made, pixel for pixel
+FAIL  turn 2 is the picture mlx-image's own driver made, pixel for pixel
+FAIL  turn 3 is the picture mlx-image's own driver made, pixel for pixel
+PASS  each turn changed the picture
+      fast-1: succeeded sensenova-u1-fast int8 16.727 [] 
+      fast-2: succeeded sensenova-u1-fast int8 4.439 [] 
+      fast-3: succeeded sensenova-u1-fast int8 5.323 [] 
+      whole-picture PSNR against the source, turns 1 to 3 (reported, not judged): TailSteer 24.46 23.84 22.40 dB, sensenova-u1-fast 23.90 23.09 21.67 dB
+PASS  the TailSteer edit is another picture than sensenova-u1-fast's of the same input and seed
+      ignore: succeeded sensenova-u1-tailsteer int8 2.377 ['negative_prompt_ignored'] 
+PASS  a negative prompt is reported ignored, and think mode, which its offer doesn't list, isn't run
+      lane: failed None None None [] sensenova-u1-tailsteer has no lane int4.
+PASS  an int4 lane, which TailSteer doesn't have, fails the job naming the lane and runs nothing
+      fast: succeeded sensenova-u1-fast int8 1.816 [] 
+PASS  sensenova-u1-fast by name is sensenova-inproc's, pixel for pixel
+PASS  transcript com.xocialize.gaea.sensenova-0.2.1-2026-11-19T164122Z-f0152787.gpp passes validate.py
+== 14 passed, 4 failed

@@ -1,0 +1,14 @@
+PASS manifest com.xocialize.gaea.z-image 0.2.2, sha256 1432c0c4f489…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.z-image, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-z-image-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 82699
+PASS hello after 502 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared z-image-turbo lane int4 in 2.09 s
+PASS image.generate ran in 14.43 s (wall 14.43 s), 12 progress lines; outputs [{"path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-428791AA-7769-478B-8FDB-A8275272779A\/spool\/job_check\/out\/image-0.png","media_type":"image\/png","name":"images"}]
+PASS memory report: worker says phys_footprint 14021517616 B; host read 14021517616 B now, peak 16373211440 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-z-image/dist/check-session.gpp
+ALL PASS
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed
