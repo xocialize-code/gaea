@@ -1,0 +1,89 @@
+# AuK golden check 2026-11-20T02:29:56Z: com.xocialize.gaea.auk 0.1.2
+      clone: over GPP ran in 0.52 s
+[Prewarm] auk-flash: paged 3 file(s) / 7.6 GB into cache in 0.2s
+      clone in-process: {"audio_s":4,"lane":"int8","max_rss_gb":7.7756006400000004,"model":"auk-flash","prepare_s":6.9715222499999996,"run_s":3.1723073749999999,"seed":42}
+PASS  clone: byte-identical, sha256 7b9aec85f79f6a0e…
+      fitted: over GPP ran in 1.00 s
+[Prewarm] auk-flash: paged 3 file(s) / 7.6 GB into cache in 0.3s
+      fitted in-process: {"audio_s":4.0199999999999996,"lane":"int8","max_rss_gb":7.7851361280000004,"model":"auk-flash","prepare_s":1.183803833,"run_s":0.85587908300000004,"seed":7}
+PASS  fitted: byte-identical, sha256 8fd96c6e93d8cb05…
+      estimated: over GPP ran in 0.66 s
+[Prewarm] auk-flash: paged 3 file(s) / 7.6 GB into cache in 0.3s
+      estimated in-process: {"audio_s":4.5800000000000001,"lane":"int8","max_rss_gb":7.7816627199999999,"model":"auk-flash","prepare_s":1.5974595840000001,"run_s":0.75741466700000004,"seed":8}
+PASS  estimated: byte-identical, sha256 632050a5cefcb6b3…
+      int4: over GPP ran in 0.58 s
+[Prewarm] auk-flash: paged 3 file(s) / 5.9 GB into cache in 0.3s
+      int4 in-process: {"audio_s":4,"lane":"int4","max_rss_gb":6.0760883200000002,"model":"auk-flash","prepare_s":1.861525125,"run_s":0.70266220800000001,"seed":42}
+PASS  int4 lane: byte-identical, sha256 cf471577be8d1dd4…
+      design: over GPP ran in 0.85 s
+[Prewarm] auk-flash: paged 3 file(s) / 7.6 GB into cache in 0.3s
+      design in-process: {"lane":"int8","max_rss_gb":7.7714391039999997,"model":"auk-flash","prepare_s":1.540845375,"run_s":0.89248799999999995,"seed":7,"text":"Hello! This is how I sound when I read a sentence aloud."}
+PASS  design sample 0: byte-identical, sha256 b8ad97390f631081…
+PASS  design sample 1: byte-identical, sha256 8b5a7cdeac7e1b8d…
+      replace: over GPP ran in 0.64 s
+[Prewarm] auk-flash: paged 3 file(s) / 7.6 GB into cache in 0.3s
+      replace in-process: {"audio_s":4.9400000000000004,"lane":"int8","max_rss_gb":7.7887242240000001,"model":"auk-flash","prepare_s":1.481984084,"run_s":0.61438258400000001,"seed":3,"transcript":"The morning train was late again, so I walked along the harbour and watched the boats come in."}
+PASS  replace: byte-identical, sha256 dda2b3957659da02…
+PASS  replace returns the edited transcript
+      happy: over GPP ran in 0.58 s
+[Prewarm] auk-flash: paged 3 file(s) / 7.6 GB into cache in 0.3s
+      happy in-process: {"audio_s":4.7999999999999998,"lane":"int8","max_rss_gb":7.7785006079999999,"model":"auk-flash","prepare_s":1.398485583,"run_s":0.68256412499999997,"seed":3,"transcript":""}
+PASS  happy: byte-identical, sha256 140bde563531755b…
+      hum: over GPP ran in 0.59 s
+[Prewarm] auk-flash: paged 3 file(s) / 7.6 GB into cache in 0.3s
+      hum in-process: {"audio_s":4.7999999999999998,"lane":"int8","max_rss_gb":7.7792542720000002,"model":"auk-flash","prepare_s":1.289387125,"run_s":0.57844720800000005,"seed":4,"transcript":""}
+PASS  hum: byte-identical, sha256 4ec1173f12f1e7e8…
+      speed: over GPP ran in 0.50 s
+[Prewarm] auk-flash: paged 3 file(s) / 7.6 GB into cache in 0.3s
+      speed in-process: {"audio_s":3.2200000000000002,"lane":"int8","max_rss_gb":7.7851033599999999,"model":"auk-flash","prepare_s":1.2747863750000001,"run_s":0.50659120800000002,"seed":5,"transcript":""}
+PASS  speed: byte-identical, sha256 80be7c316549f0d2…
+PASS  speed 1.4 is snapped with param_adjusted
+      dereverb: over GPP ran in 0.57 s
+[Prewarm] auk-flash: paged 3 file(s) / 7.6 GB into cache in 0.3s
+      dereverb in-process: {"audio_s":4.7999999999999998,"lane":"int8","max_rss_gb":7.7841039360000002,"model":"auk-flash","prepare_s":1.2866628330000001,"run_s":0.57451574999999999,"seed":6,"transcript":""}
+PASS  dereverb: byte-identical, sha256 cccabefba31c3d73…
+      ordinal: over GPP ran in 0.68 s
+[Prewarm] auk-flash: paged 3 file(s) / 7.6 GB into cache in 0.3s
+      ordinal in-process: {"lane":"int8","max_rss_gb":7.7765672959999996,"model":"auk-flash","prepare_s":1.2062470830000001,"run_s":0.64122783400000005,"seed":5,"stems":["speaker"]}
+PASS  separate: the second speaker: byte-identical, sha256 ba16ea489f9cdf9a…
+      saying: over GPP ran in 0.61 s
+[Prewarm] auk-flash: paged 3 file(s) / 7.6 GB into cache in 0.3s
+      saying in-process: {"lane":"int8","max_rss_gb":7.7840875519999999,"model":"auk-flash","prepare_s":1.2287245419999999,"run_s":0.59937579100000005,"seed":5,"stems":["speaker"]}
+PASS  separate: the speaker who says coat pocket: byte-identical, sha256 c5277d7accdc04e7…
+      base-clone: over GPP ran in 3.57 s
+[Prewarm] auk: paged 3 file(s) / 7.6 GB into cache in 0.2s
+      base-clone in-process: {"audio_s":4,"lane":"int8","max_rss_gb":7.7776486399999998,"model":"auk","prepare_s":2.2601173750000001,"run_s":3.5992972500000002,"seed":42}
+PASS  AuK Base clone: byte-identical, sha256 24f847881b5b7f31…
+      base-voices: over GPP ran in 3.97 s
+[Prewarm] auk: paged 3 file(s) / 7.6 GB into cache in 0.2s
+      base-voices in-process: {"lane":"int8","max_rss_gb":7.775633408,"model":"auk","prepare_s":2.2372986250000002,"run_s":3.9848802499999998,"seed":9,"stems":["voices"]}
+PASS  AuK Base: every voice: byte-identical, sha256 1e3398ce32741edb…
+OK
+PASS  base-clone.gpp passes validate.py
+OK
+PASS  base-voices.gpp passes validate.py
+OK
+PASS  clone.gpp passes validate.py
+OK
+PASS  dereverb.gpp passes validate.py
+OK
+PASS  design.gpp passes validate.py
+OK
+PASS  estimated.gpp passes validate.py
+OK
+PASS  fitted.gpp passes validate.py
+OK
+PASS  happy.gpp passes validate.py
+OK
+PASS  hum.gpp passes validate.py
+OK
+PASS  int4.gpp passes validate.py
+OK
+PASS  ordinal.gpp passes validate.py
+OK
+PASS  replace.gpp passes validate.py
+OK
+PASS  saying.gpp passes validate.py
+OK
+PASS  speed.gpp passes validate.py
+== 31 passed, 0 failed

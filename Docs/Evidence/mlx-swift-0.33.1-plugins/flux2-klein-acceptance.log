@@ -1,0 +1,60 @@
+# FLUX.2 Klein plugin acceptance (AB-T-0367) 2026-11-20T02:41:21Z — Gaea 1.9.2, flux2-klein 0.3.1, source stand-in
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add by repo URL installs flux2-klein 0.3.1
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+    m = {x['id']: x for x in ops['image.generate']['models']}; assert 'klein-4b' in m and 'best' in m['klein-4b-base']['quality_tiers'], m
+                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'klein-4b': {'default': True, 'id': 'klein-4b', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://www.apache.org/licenses/LICENSE-2.0'}, 'memory_class': 'large', 'quality_tiers': ['draft'], 'speed_class': 'fast', 'title': 'FLUX.2 Klein 4B'}, 'klein-4b-base': {'id': 'klein-4b-base', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://www.apache.org/licenses/LICENSE-2.0'}, 'memory_class': 'large', 'quality_tiers': ['standard'], 'speed_class': 'slow', 'title': 'FLUX.2 Klein 4B Base'}}
+FAIL  image.generate offers Klein 4B and Klein 4B Base (best)
+{"max_count": 1, "max_inputs": 4, "max_megapixels": 16.777216}
+PASS  image.edit: Klein 4B is the default, not named-only, up to 4 images
+      cold: 12.51 s from submit to settled (launch, prepare bf16, generate)
+      warm: 6.23 s from submit to settled; worker run 6.134 s
+PASS  Klein 4B bf16 1024² seed 42 succeeds with one 1024² PNG, 4 steps
+PASS  a warm run gives the same bytes again
+      base: 2.22 s from submit to settled (launch base, prepare bf16, 28 steps CFG)
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+    import json; r = json.load(open('/Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/flux2-klein/acceptance-standin/job-base.json'))['result']; e = r['effective']
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+KeyError: 'result'
+FAIL  quality best reaches Klein 4B Base (28 steps, guidance 4, the negative prompt honoured)
+      edit: 2.19 s from submit to settled; worker run  s
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+    import json; j = json.load(open('/Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/flux2-klein/acceptance-standin/job-edit.json')); r = j['result']
+                                                                                                                                              ~^^^^^^^^^^
+KeyError: 'result'
+FAIL  image.edit with no model reaches Klein 4B: two references, the first image's 1024²
+PASS  count 2 gives two different 768×512 images, seeds 7 and 8
+PASS  Klein 4B reports the negative prompt as ignored
+PASS  x-gaea.lane int4 runs lane int4, and 1000² snaps to 992²
+{'code': 'out_of_limits', 'message': "Input 'images' takes at most 4.", 'param': 'images', 'request_id': 'req_4prkxhw554m2'}
+PASS  five references are refused out_of_limits at submit
+b94d680e8cb402084091d4290b97b3eb1055f7e4d61b975627573a41eed29a57 b94d680e8cb402084091d4290b97b3eb1055f7e4d61b975627573a41eed29a57
+PASS  Klein 4B through Gaea is byte for byte the in-process image
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import hashlib; a, b = (hashlib.sha256(open(f, 'rb').read()).hexdigest() for f in ('/Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/flux2-klein/acceptance-standin/gaea-base-0.png', '/Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/flux2-klein/acceptance-standin/inproc-base.png')); print(a, b); assert a == b
+                    ^^^^
+  File "<string>", line 1, in <genexpr>
+    import hashlib; a, b = (hashlib.sha256(open(f, 'rb').read()).hexdigest() for f in ('/Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/flux2-klein/acceptance-standin/gaea-base-0.png', '/Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/flux2-klein/acceptance-standin/inproc-base.png')); print(a, b); assert a == b
+                                           ~~~~^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/flux2-klein/acceptance-standin/gaea-base-0.png'
+FAIL  Klein 4B Base through Gaea is byte for byte the in-process image
+Swift/ErrorType.swift:254: Fatal error: Error raised at top level: Error Domain=NSCocoaErrorDomain Code=260 "The file “gaea-base-0.png” couldn’t be opened because there is no such file." UserInfo={NSFilePath=/Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/flux2-klein/acceptance-standin/gaea-base-0.png, NSURL=file:///Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/flux2-klein/acceptance-standin/gaea-base-0.png, NSUnderlyingError=0x762ac40210 {Error Domain=NSPOSIXErrorDomain Code=2 "No such file or directory"}}
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import hashlib; a, b = (hashlib.sha256(open(f, 'rb').read()).hexdigest() for f in ('/Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/flux2-klein/acceptance-standin/gaea-edit-0.png', '/Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/flux2-klein/acceptance-standin/inproc-edit.png')); print(a, b); assert a == b
+                    ^^^^
+  File "<string>", line 1, in <genexpr>
+    import hashlib; a, b = (hashlib.sha256(open(f, 'rb').read()).hexdigest() for f in ('/Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/flux2-klein/acceptance-standin/gaea-edit-0.png', '/Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/flux2-klein/acceptance-standin/inproc-edit.png')); print(a, b); assert a == b
+                                           ~~~~^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/flux2-klein/acceptance-standin/gaea-edit-0.png'
+FAIL  the two-reference edit through Gaea is byte for byte the in-process image
+bfb2321700c474bb318363b8506ac14011a1b4a8fbcf41a730868326eddc492e bfb2321700c474bb318363b8506ac14011a1b4a8fbcf41a730868326eddc492e
+PASS  the int4 lane through Gaea is byte for byte the in-process image
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.3.1-2026-11-20T024123Z-36252a31.gpp passes validate.py
+== 11 passed, 5 failed

@@ -1,0 +1,14 @@
+PASS manifest com.xocialize.gaea.samaudio 0.1.1, sha256 78b79e7a3b20…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.samaudio, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-sam-audio-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 8624
+PASS hello after 412 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared sam-audio-base lane fp16 in 66.97 s
+PASS audio.separate ran in 11.48 s (wall 11.48 s), 19 progress lines; outputs [{"name":"target","media_type":"audio\/wav","path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-FCF6705F-CE3E-4134-A7F3-EA01F68F3C04\/spool\/job_check\/out\/target.wav"},{"name":"residual","path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-FCF6705F-CE3E-4134-A7F3-EA01F68F3C04\/spool\/job_check\/out\/residual.wav","media_type":"audio\/wav"}]
+PASS memory report: worker says phys_footprint 3924069736 B; host read 3924069736 B now, peak 5501242512 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-sam-audio/dist/check-session.gpp
+ALL PASS
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

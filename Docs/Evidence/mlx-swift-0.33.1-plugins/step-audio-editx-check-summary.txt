@@ -1,0 +1,14 @@
+PASS manifest com.xocialize.gaea.step-audio-editx 0.1.3, sha256 457c11cc495b…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.step-audio-editx, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-step-audio-editx-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 6565
+PASS hello after 392 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared step-audio-editx lane int8 in 15.85 s
+PASS audio.edit_speech ran in 2.70 s (wall 2.70 s), 151 progress lines; outputs [{"name":"audio","media_type":"audio\/wav","path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-4B19C36D-1FE7-432D-A501-E2A8779F41DE\/spool\/job_check\/out\/audio-0.wav"}]
+PASS memory report: worker says phys_footprint 8026445008 B; host read 8026445008 B now, peak 8666911952 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-step-audio-editx/dist/check-session.gpp
+ALL PASS
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

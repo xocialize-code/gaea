@@ -1,0 +1,14 @@
+PASS manifest com.xocialize.gaea.kokoro 0.1.2, sha256 0751619cecf0…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.kokoro, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-kokoro-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 21898
+PASS hello after 321 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared kokoro-82m lane bf16 in 0.31 s
+PASS audio.speak ran in 10.97 s (wall 10.97 s), 0 progress lines; outputs [{"path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-963A087A-BC16-4643-B6FB-563513C1564D\/spool\/job_check\/out\/audio-0.wav","name":"audio","media_type":"audio\/wav"}]
+PASS memory report: worker says phys_footprint 2748515720 B; host read 2748515720 B now, peak 2949629320 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-kokoro/dist/check-session.gpp
+ALL PASS
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

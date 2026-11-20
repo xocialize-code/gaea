@@ -1,0 +1,71 @@
+# SAM-Audio acceptance (AB-T-0473) 2026-11-20T03:24:10Z: Gaea 1.9.2, sam-audio from GitHub
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add by repo URL installs the demo
+Installed SAM-Audio 0.1.0 (com.xocialize.gaea.samaudio), enabled.
+PASS  add by repo URL installs SAM-Audio
+PASS  the model starts off, and SAM-Audio offers nothing until the operator enables it
+sam-audio-base enabled.
+      on  sam-audio-base  SAM-Audio base  [com.xocialize.gaea.samaudio 0.1.0] lanes: fp16* 9.50 GB
+{'accepted_required': True, 'commercial_use': True, 'notice': "SAM-Audio and the code that runs it are under Meta's SAM License. Commercial use is allowed. You may not use it for military or warfare purposes, nuclear industries or applications, espionage, or the development or use of guns or illegal weapons, or for anything trade controls prohibit; redistribution is only under the same licence with a copy of it. By using it you accept those terms.", 'spdx': 'LicenseRef-SAM', 'terms_url': 'https://huggingface.co/facebook/sam-audio-base/blob/main/LICENSE', 'user_accept_required': True} {'channels': 1, 'described_target': True, 'languages': ['en'], 'sample_rate': 48000, 'spans': True, 'stem_method': 'regenerated', 'stems': ['target', 'residual'], 'watermark': 'audioseal'} {'max_duration_s': 30}
+PASS  enabled, audio.separate offers it: the SAM licence, users' acceptance, described_target, spans, target and residual, a watermark, 30 s
+      terms: HTTP 422    [] policy_unmet policy SAM-Audio base is under LicenseRef-SAM, whose terms bind each user: show them its notice and terms (https://huggingface.co/facebook/sam-audi
+PASS  a named job without policy.accepted is 422 policy_unmet, terms_not_accepted
+      route: HTTP 201 succeeded demo-separator 0.002 ['vocals', 'instrumental']   
+PASS  a separate job with no description and no model runs on the demo's separator (labelled stems)
+      route-terms: HTTP 422    [] policy_unmet policy SAM-Audio base is under LicenseRef-SAM, whose terms bind each user: show them its notice and terms (https://huggingface.co/facebook/sam-audi
+422 {'code': 'policy_unmet', 'message': 'SAM-Audio base is under LicenseRef-SAM, whose terms bind each user: show them its notice and terms (https://huggingface.co/facebook/sam-audio-base/blob/main/LICENSE), and once they accept, list LicenseRef-SAM in policy.accepted.', 'param': 'policy', 'reason': 'terms_not_accepted', 'request_id': 'req_xb8pg5w4sqj0'}
+PASS  a described job naming no model, without policy.accepted, is 422 policy_unmet too
+      route-described: HTTP 201 succeeded sam-audio-base 8.279 ['target', 'residual']   
+PASS  a described job naming no model runs on SAM-Audio, the only offer that takes a description
+      mixture: 384000 48000 1 (frames, rate, channels)
+      speech: HTTP 201 succeeded sam-audio-base 2.372 ['target', 'residual']   
+      speech, cold: 2.51 s from submit to settled (launch, prepare, separate)
+      speech-again: HTTP 201 succeeded sam-audio-base 2.38 ['target', 'residual']   
+      target-only: HTTP 201 succeeded sam-audio-base 2.418 ['target']   
+      music-spans: HTTP 201 succeeded sam-audio-base 2.515 ['target', 'residual']   
+PASS  speech succeeds on sam-audio-base
+PASS  speech-again succeeds on sam-audio-base
+PASS  target-only succeeds on sam-audio-base
+PASS  music-spans succeeds on sam-audio-base
+PASS  speech returns target and residual, each the mixture's length at 48 kHz mono
+PASS  effective.describe is what the model got: "speech", for the untrimmed mixed-case text too
+PASS  the target alone is one output
+[{'end_s': 0.5, 'present': True, 'start_s': 0}, {'end_s': 8, 'present': True, 'start_s': 5.5}]
+PASS  effective.spans echoes the two spans
+PASS  the same seed gives the same bytes
+PASS  the target and the residual differ, and neither is the mixture
+[Prewarm] sam-audio-base: paged 3 file(s) / 3.2 GB into cache in 0.2s
+[Prewarm] sam-audio-base: paged 3 file(s) / 3.2 GB into cache in 0.2s
+[Prewarm] sam-audio-base: paged 3 file(s) / 3.2 GB into cache in 0.2s
+PASS  speech's target is sam-audio-inproc's, byte for byte
+PASS  speech's residual is sam-audio-inproc's, byte for byte
+PASS  target-only's target is sam-audio-inproc's, byte for byte
+PASS  music-spans's target is sam-audio-inproc's, byte for byte
+PASS  music-spans's residual is sam-audio-inproc's, byte for byte
+      no-describe: HTTP 422    [] unsupported_parameter stems Model sam-audio-base doesn't support a stem that needs neither a speaker pick nor a description (give 'describe' to an offer that separates 
+      long-describe: HTTP 422    [] out_of_limits describe $.describe: longer than 200
+      many-spans: HTTP 422    [] out_of_limits spans $.spans: more than 32 items
+      backwards: HTTP 400    [] invalid_request spans A span ends after it starts; one runs from 2.0 s to 1.0 s.
+      past-end: HTTP 201 failed   [] out_of_limits spans A span ends at 600 s; the mixture is 8.00 s long.
+      stem: HTTP 400    [] invalid_request stems A description separates the target and the residual; 'vocals' is a labelled stem. Ask for one or the other.
+422 {'code': 'unsupported_parameter', 'message': "Model sam-audio-base doesn't support a stem that needs neither a speaker pick nor a description (give 'describe' to an offer that separates a described sound).", 'param': 'stems', 'request_id': 'req_mb1y7dc3gvxe'}
+PASS  no describe is refused (4xx) and runs nothing
+422 {'code': 'out_of_limits', 'message': '$.describe: longer than 200', 'param': 'describe', 'request_id': 'req_709w21mdzrqt'}
+PASS  a description of 201 characters is refused (4xx)
+422 {'code': 'out_of_limits', 'message': '$.spans: more than 32 items', 'param': 'spans', 'request_id': 'req_zc28a0exfkaw'}
+PASS  33 spans are refused (4xx)
+400 {'code': 'invalid_request', 'message': 'A span ends after it starts; one runs from 2.0 s to 1.0 s.', 'param': 'spans', 'request_id': 'req_c1b8wj8ccc7b'}
+PASS  a span that ends before it starts is 400 invalid_request
+201 failed {'code': 'out_of_limits', 'job': 'job_8p7wfvq44h4tjqyq5ab9', 'message': 'A span ends at 600 s; the mixture is 8.00 s long.', 'param': 'spans'}
+PASS  a span past the mixture's end is out_of_limits
+400 {'code': 'invalid_request', 'message': "A description separates the target and the residual; 'vocals' is a labelled stem. Ask for one or the other.", 'param': 'stems', 'request_id': 'req_63n7hf7pesfc'}
+PASS  a stem SAM-Audio doesn't make is refused (4xx)
+      long mixture: 1536000 48000 1
+      too-long: HTTP 201 failed   [] out_of_limits audio The audio is 32.0 s; this model takes at most 30 s.
+201 failed {'code': 'out_of_limits', 'job': 'job_40n59bzz0zfsqqzf41jk', 'message': 'The audio is 32.0 s; this model takes at most 30 s.', 'param': 'audio'}
+PASS  a mixture over 30 s is out_of_limits
+OK
+PASS  transcript com.xocialize.gaea.demo-0.6.1-2026-11-20T032414Z-37c8ae03.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.samaudio-0.1.0-2026-11-20T032415Z-449c1849.gpp passes validate.py
+== 32 passed, 0 failed

@@ -63,14 +63,17 @@ unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN GAEA_GITHUB_API
 H=$WORK/main; P=17730
 start $H $P
 export GAEA_HOME=$H
-check "add the pack by repo URL" zsh -c "$CLI plugins add https://github.com/xocialize-code/gaea-plugin-forge | grep -q 'Installed .*0.1'"
+# V: the release this run expects (default: the version in ../gaea-plugin-forge/dist/manifest.json).
+V=${V:-$(py "import json; print(json.load(open('../gaea-plugin-forge/dist/manifest.json'))['version'])")}
+check "add the pack $V by repo URL" zsh -c "$CLI plugins add https://github.com/xocialize-code/gaea-plugin-forge | grep -q 'Installed .* $V'"
 $CLI models > "$OUT/models.txt"
 mes "http://127.0.0.1:$P/mes/v0/operations" > "$OUT/operations.json"
-check "fill, erase, extend, upscale, matte, segment and restore are offered, with the table's defaults" py "
+check "fill, erase, extend, upscale, matte, segment, restore, relight, colorize and score are offered, with the table's defaults" py "
 import json; ops = {o['operation']: o for o in json.load(open('$OUT/operations.json'))['operations']}
 d = {op: next(m['id'] for m in o['models'] if m.get('default')) for op, o in ops.items()}; print(d)
 assert d == {'image.fill': 'lama-inpaint', 'image.erase': 'lama-inpaint', 'image.extend': 'lama-inpaint', 'image.upscale': 'realplksr-upscale',
-             'image.matte': 'birefnet-matte', 'image.segment': 'sam21-segment', 'image.restore': 'nafnet-restore'}, d"
+             'image.matte': 'birefnet-matte', 'image.segment': 'sam21-segment', 'image.restore': 'nafnet-restore',
+             'image.relight': 'cidnet-relight', 'image.colorize': 'ddcolor-colorize', 'image.score': 'siglip2-quality'}, d"
 
 FOX=$FIX/fox-256.png; MASK=$FIX/mask-256.png; FACE=$FIX/face-512.png
 img() { print -r -- "{\"upload\":\"$(upload $P $1)\"}" }

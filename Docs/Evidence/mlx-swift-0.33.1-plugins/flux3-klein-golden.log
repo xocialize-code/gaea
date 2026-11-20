@@ -1,0 +1,20 @@
+# FLUX 3 Klein golden check 2026-11-20T02:55:26Z: com.xocialize.gaea.flux3-klein 0.2.1
+PASS  gen-1024: 1024×1024 out
+PASS  gen-1024: byte-identical to in-process, sha256 12f9e97b400cca97…; over GPP ran in 18.51 s; in-process [License] mlx-community/flux-3-image-klein-bf16: weight license LicenseRef-FLUX-Kommunity-1.0 is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+{"cold_s":19.117149042000001,"draw":"1024x1024","height":1024,"lane":"bf16","model":"flux-3-klein","passes":0,"prepare_s":0.287693333,"references":0,"run1_s":18.805710542,"seed":44,"steps":16,"upsample":false,"width":1024}
+PASS  gen-2048: 2048×2048 out
+PASS  gen-2048: byte-identical to in-process, sha256 7677b5c83cab1834…; over GPP ran in 99.89 s; in-process [License] mlx-community/flux-3-image-klein-bf16: weight license LicenseRef-FLUX-Kommunity-1.0 is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+{"cold_s":98.194064541000003,"draw":"2048x2048","height":2048,"lane":"bf16","model":"flux-3-klein","passes":0,"prepare_s":0.27475387499999998,"references":0,"run1_s":97.905485416999994,"seed":44,"steps":16,"upsample":false,"width":2048}
+PASS  gen-4096: 4096×4096 out
+PASS  gen-4096: effective reports 2 upscale passes
+PASS  gen-4096: byte-identical to in-process, sha256 d4f6791bb03a4ed2…; over GPP ran in 38.29 s; in-process [License] mlx-community/flux-3-image-klein-bf16: weight license LicenseRef-FLUX-Kommunity-1.0 is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+{"cold_s":38.421892958000001,"draw":"1024x1024","height":4096,"lane":"bf16","model":"flux-3-klein","passes":2,"prepare_s":0.29567966699999998,"references":0,"run1_s":38.106688667,"seed":44,"steps":16,"upsample":false,"width":4096}
+PASS  gen-3072x2048: 3072×2048 out
+PASS  gen-3072x2048: effective reports 2 upscale passes
+PASS  gen-3072x2048: byte-identical to in-process, sha256 2872282298dc9e4c…; over GPP ran in 13.07 s; in-process [License] mlx-community/flux-3-image-klein-bf16: weight license LicenseRef-FLUX-Kommunity-1.0 is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+{"cold_s":13.103585291,"draw":"768x512","height":2048,"lane":"bf16","model":"flux-3-klein","passes":2,"prepare_s":0.29795895900000002,"references":0,"run1_s":12.785689459,"seed":5,"steps":16,"upsample":false,"width":3072}
+PASS  edit-4096: 4096×4096 out
+PASS  edit-4096: effective reports 2 upscale passes
+PASS  edit-4096: byte-identical to in-process, sha256 54a483b62bd912fa…; over GPP ran in 40.01 s; in-process [License] mlx-community/flux-3-image-klein-bf16: weight license LicenseRef-FLUX-Kommunity-1.0 is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+{"cold_s":39.648140124999998,"draw":"1024x1024","height":4096,"lane":"bf16","model":"flux-3-klein","passes":2,"prepare_s":0.29385412500000002,"references":1,"run1_s":39.333449209000001,"seed":7,"steps":16,"upsample":false,"width":4096}
+== 13 passed, 0 failed

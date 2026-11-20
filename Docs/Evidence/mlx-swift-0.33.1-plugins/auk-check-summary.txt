@@ -1,0 +1,14 @@
+PASS manifest com.xocialize.gaea.auk 0.1.2, sha256 5c933e7bf281…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.auk, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-auk-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 63639
+PASS hello after 434 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared auk-flash lane int8 in 10.07 s
+PASS audio.speak ran in 4.26 s (wall 4.26 s), 4 progress lines; outputs [{"path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-A3FF4D6E-C707-485E-9FB6-41B99866BF6C\/spool\/job_check\/out\/audio-0.wav","name":"audio","media_type":"audio\/wav"}]
+PASS memory report: worker says phys_footprint 10064829304 B; host read 10064829304 B now, peak 10947009376 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-auk/dist/check-session.gpp
+ALL PASS
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

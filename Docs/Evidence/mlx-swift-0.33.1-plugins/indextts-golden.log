@@ -1,0 +1,42 @@
+# IndexTTS 2.5 golden check 2026-11-20T03:12:29Z: com.xocialize.gaea.indextts 0.1.2
+[Prewarm] indextts-2.5: paged 5 file(s) / 4.5 GB into cache in 0.2s
+      plain: over GPP ran in 2.53 s; in-process {"audio_s":4.7833106575963722,"lane":"fp16","language":"en","max_rss_gb":4.6319697919999996,"model":"indextts-2.5","prepare_s":0.654978583,"run_s":12.684419875,"seed":42,"warnings":[]}
+PASS  plain: byte-identical, sha256 76c8b4b8203ec441…
+[Prewarm] indextts-2.5: paged 5 file(s) / 4.5 GB into cache in 0.2s
+      plain-int8: over GPP ran in 2.48 s; in-process {"audio_s":4.9458503401360545,"lane":"int8","language":"en","max_rss_gb":5.0857738240000003,"model":"indextts-2.5","prepare_s":1.278108375,"run_s":2.3837727919999998,"seed":42,"warnings":[]}
+PASS  plain-int8: byte-identical, sha256 3cf1ca166e518323…
+[Prewarm] indextts-2.5: paged 5 file(s) / 4.5 GB into cache in 0.2s
+      happy: over GPP ran in 2.24 s; in-process {"audio_s":3.0650340136054424,"lane":"fp16","language":"en","max_rss_gb":4.6164377600000002,"model":"indextts-2.5","prepare_s":0.67966824999999997,"run_s":1.952655083,"seed":3,"warnings":[]}
+PASS  happy: byte-identical, sha256 a692948f21094da5…
+[Prewarm] indextts-2.5: paged 5 file(s) / 4.5 GB into cache in 0.2s
+      vector: over GPP ran in 2.31 s; in-process {"audio_s":2.4729251700680273,"lane":"fp16","language":"en","max_rss_gb":4.6107361280000001,"model":"indextts-2.5","prepare_s":0.68539925000000002,"run_s":2.039203584,"seed":5,"warnings":[]}
+PASS  vector: byte-identical, sha256 49bfe7cc1a5c782a…
+[Prewarm] indextts-2.5: paged 5 file(s) / 4.5 GB into cache in 0.2s
+      fitted: over GPP ran in 2.86 s; in-process {"audio_s":3.9946031746031747,"lane":"fp16","language":"en","max_rss_gb":4.6095400959999999,"model":"indextts-2.5","prepare_s":0.70133137499999998,"run_s":2.6903889579999998,"seed":7,"warnings":[]}
+PASS  fitted: byte-identical, sha256 9fb9034b738dcb76…
+[Prewarm] indextts-2.5: paged 5 file(s) / 4.5 GB into cache in 0.2s
+      fast: over GPP ran in 2.41 s; in-process {"audio_s":3.8080725623582765,"lane":"fp16","language":"en","max_rss_gb":4.6234337280000002,"model":"indextts-2.5","prepare_s":0.64784758399999998,"run_s":2.2656317079999999,"seed":9,"warnings":[]}
+PASS  fast: byte-identical, sha256 bf66b0019b0e8d6f…
+[Prewarm] indextts-2.5: paged 5 file(s) / 4.5 GB into cache in 0.2s
+      chinese: over GPP ran in 1.83 s; in-process {"audio_s":2.9141043083900229,"lane":"fp16","language":"zh","max_rss_gb":4.6124400640000003,"model":"indextts-2.5","prepare_s":0.64942808399999996,"run_s":1.6115451670000001,"seed":11,"warnings":[]}
+PASS  chinese: byte-identical, sha256 aac958d3debbcf41…
+[Prewarm] indextts-2.5: paged 5 file(s) / 4.5 GB into cache in 0.2s
+      spanish: over GPP ran in 2.10 s; in-process {"audio_s":3.6339229024943309,"lane":"fp16","language":"es","max_rss_gb":4.6197145600000002,"model":"indextts-2.5","prepare_s":0.64101487499999998,"run_s":1.9109229999999999,"seed":13,"warnings":[]}
+PASS  spanish: byte-identical, sha256 eb06b8d97a868f2f…
+OK
+PASS  chinese.gpp passes validate.py
+OK
+PASS  fast.gpp passes validate.py
+OK
+PASS  fitted.gpp passes validate.py
+OK
+PASS  happy.gpp passes validate.py
+OK
+PASS  plain-int8.gpp passes validate.py
+OK
+PASS  plain.gpp passes validate.py
+OK
+PASS  spanish.gpp passes validate.py
+OK
+PASS  vector.gpp passes validate.py
+== 16 passed, 0 failed

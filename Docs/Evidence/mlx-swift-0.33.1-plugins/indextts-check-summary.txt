@@ -1,0 +1,14 @@
+PASS manifest com.xocialize.gaea.indextts 0.1.2, sha256 110481a5ec80…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.indextts, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-indextts-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 4361
+PASS hello after 373 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared indextts-2.5 lane fp16 in 1.43 s
+PASS audio.speak ran in 15.03 s (wall 15.03 s), 3 progress lines; outputs [{"path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-45C9D8A8-6DD4-4037-B1F7-213F741A1900\/spool\/job_check\/out\/audio-0.wav","name":"audio","media_type":"audio\/wav"}]
+PASS memory report: worker says phys_footprint 7136350864 B; host read 7136350864 B now, peak 9236550336 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-indextts/dist/check-session.gpp
+ALL PASS
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

@@ -1,0 +1,5 @@
+.engine.contract: '1.58.0' -> '1.66.0'
+.engine.version: '0.72.0' -> '0.82.1'
+.models[0].lanes[0].resolved.contractVersion.minor: 58 -> 66
+.models[0].package.contractVersion.minor: 58 -> 66
+.version: '0.1.1' -> '0.1.2'

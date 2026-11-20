@@ -1,0 +1,50 @@
+# Step-Audio-EditX golden check 2026-11-20T03:17:43Z: com.xocialize.gaea.step-audio-editx 0.1.3
+[Prewarm] step-audio-editx: paged 4 file(s) / 4.6 GB into cache in 0.1s
+      angry: over GPP ran in 1.89 s; in-process {"audio_s":3.7200000000000002,"edit":"emotion:angry","lane":"int8","max_rss_gb":6.0626698240000003,"model":"step-audio-editx","prepare_s":10.700526125,"run_s":2.4633592499999999,"seed":42}
+PASS  angry: byte-identical, sha256 d7f1ef486d409346…
+[Prewarm] step-audio-editx: paged 4 file(s) / 4.6 GB into cache in 0.1s
+      afraid: over GPP ran in 1.82 s; in-process {"audio_s":3.48,"edit":"emotion:fear","lane":"int8","max_rss_gb":6.0920135679999996,"model":"step-audio-editx","prepare_s":1.772034084,"run_s":1.834837625,"seed":7}
+PASS  afraid: byte-identical, sha256 33a780d316c35716…
+[Prewarm] step-audio-editx: paged 4 file(s) / 4.6 GB into cache in 0.1s
+      whisper: over GPP ran in 2.29 s; in-process {"audio_s":3.8399999999999999,"edit":"style:whisper","lane":"int8","max_rss_gb":6.0709928959999999,"model":"step-audio-editx","prepare_s":1.762156791,"run_s":1.9755147499999999,"seed":42}
+PASS  whisper: byte-identical, sha256 70c220f16b19375b…
+[Prewarm] step-audio-editx: paged 4 file(s) / 4.6 GB into cache in 0.2s
+      narration: over GPP ran in 1.93 s; in-process {"audio_s":3.48,"edit":"style:story","lane":"int8","max_rss_gb":6.086344704,"model":"step-audio-editx","prepare_s":1.7933162920000001,"run_s":1.8920496249999998,"seed":3}
+PASS  narration: byte-identical, sha256 2d501dede49a7326…
+[Prewarm] step-audio-editx: paged 4 file(s) / 4.6 GB into cache in 0.1s
+      laugh: over GPP ran in 3.02 s; in-process {"audio_s":4.2000000000000002,"edit":"paralinguistic:The weather is lovely today, and I think we should go outside.[Laughter]","lane":"int8","max_rss_gb":6.0722216959999997,"model":"step-audio-editx","prepare_s":1.74793025,"run_s":2.5374200839999999,"seed":42,"transcript":"The weather is lovely today, and I think we should go outside. [laugh]"}
+PASS  laugh: byte-identical, sha256 62f73c9431d12b45…
+PASS  laugh returns the transcript "The weather is lovely today, and I think we should go outside. [laugh]"
+[Prewarm] step-audio-editx: paged 4 file(s) / 4.6 GB into cache in 0.1s
+      breath: over GPP ran in 2.13 s; in-process {"audio_s":3.96,"edit":"paralinguistic:We don't have much time, [Breathing] so listen carefully to what I say.","lane":"int8","max_rss_gb":6.0829040640000001,"model":"step-audio-editx","prepare_s":1.784463959,"run_s":2.0589137919999998,"seed":5,"transcript":"We don't have much time, [breath] so listen carefully to what I say."}
+PASS  breath: byte-identical, sha256 0a5bc6f54db3a5f8…
+PASS  breath returns the transcript "We don't have much time, [breath] so listen carefully to what I say."
+[Prewarm] step-audio-editx: paged 4 file(s) / 4.6 GB into cache in 0.2s
+      sigh: over GPP ran in 1.86 s; in-process {"audio_s":3.48,"edit":"paralinguistic:[Sigh]We don't have much time, so listen carefully to what I say.","lane":"int8","max_rss_gb":6.1140172799999997,"model":"step-audio-editx","prepare_s":1.7925944170000001,"run_s":1.82893675,"seed":9,"transcript":"[sigh] We don't have much time, so listen carefully to what I say."}
+PASS  sigh: byte-identical, sha256 7128a3052690b4ff…
+PASS  sigh returns the transcript "[sigh] We don't have much time, so listen carefully to what I say."
+[Prewarm] step-audio-editx: paged 4 file(s) / 4.6 GB into cache in 0.1s
+      denoise: over GPP ran in 2.12 s; in-process {"audio_s":3.96,"edit":"denoise","lane":"int8","max_rss_gb":6.0886220800000004,"model":"step-audio-editx","prepare_s":1.785235208,"run_s":2.119126375,"seed":42}
+PASS  denoise: byte-identical, sha256 ef102ddd5f78702b…
+[Prewarm] step-audio-editx: paged 4 file(s) / 4.6 GB into cache in 0.1s
+      trim: over GPP ran in 1.75 s; in-process {"audio_s":3.2400000000000002,"edit":"vad","lane":"int8","max_rss_gb":6.0670607360000002,"model":"step-audio-editx","prepare_s":1.7572598749999999,"run_s":1.775459458,"seed":42}
+PASS  trim: byte-identical, sha256 d4267ce8b9f7fa6b…
+OK
+PASS  afraid.gpp passes validate.py
+OK
+PASS  angry.gpp passes validate.py
+OK
+PASS  breath.gpp passes validate.py
+OK
+PASS  denoise.gpp passes validate.py
+OK
+PASS  laugh.gpp passes validate.py
+OK
+PASS  narration.gpp passes validate.py
+OK
+PASS  sigh.gpp passes validate.py
+OK
+PASS  trim.gpp passes validate.py
+OK
+PASS  whisper.gpp passes validate.py
+== 21 passed, 0 failed

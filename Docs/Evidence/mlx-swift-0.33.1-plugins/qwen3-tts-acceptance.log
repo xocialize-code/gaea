@@ -1,0 +1,63 @@
+# Qwen3-TTS acceptance (AB-T-0396) 2026-11-20T02:25:25Z — Gaea 1.9.2, qwen3-tts 0.2.2, source stand-in
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add by repo URL installs kokoro
+PASS  add by repo URL installs qwen3-tts 0.2.2
+PASS  audio.speak lists qwen3-tts (9 voices, emotions, descriptions, 10 languages) and qwen3-tts-clone beside kokoro-82m
+PASS  audio.design_voice lists qwen3-tts-design, at most 4 samples
+PASS  GET …/voices lists the nine speakers
+      ryan, cold: 12.43 s from submit to settled (launch, prepare int8, speak)
+PASS  ryan: a 24 kHz mono 16-bit WAV, effective voice, language and seed
+PASS  an emotion's intensity is ignored with emotion_intensity_ignored
+PASS  a Qwen voice (sohee) → qwen3-tts
+PASS  a Kokoro voice (bm_lewis) → kokoro-82m
+PASS  an emotion → qwen3-tts
+PASS  French → qwen3-tts
+PASS  plain English, the default → kokoro-82m
+PASS  design_voice: two samples, effective seed 7 and the sample text
+PASS  five samples is 422 out_of_limits
+      asset: ast_fdhwa1zby1gxam8c6pv7
+PASS  a voice_ref with no model named goes to qwen3-tts-clone, in context (icl)
+PASS  the second job on the asset is the same WAV
+      clone worker runs: first 5.977 s, second (cached features) 2.53 s
+PASS  the clone's run carried the asset id to the worker
+PASS  deleting the asset (204) sends asset_removed to the worker
+PASS  without the text it clones from the embedding alone (x-vector)
+PASS  a ref24.wav reference is accepted
+PASS  a reff32.wav reference is accepted
+PASS  a ref.flac reference is accepted
+PASS  a stereo reference is mixed down, with audio_downmixed
+PASS  a 40 s reference is trimmed to 30 s, with voice_ref_trimmed
+PASS  a voice with a voice_ref is 400
+PASS  voice_ref_text without voice_ref is 400
+PASS  an emotion outside the list is 422
+PASS  Dutch is 422
+PASS  a Qwen voice on kokoro-82m is 422
+      r-both: 400 invalid_request voice - Give a voice or a voice_ref, not both.
+      r-count: 422 out_of_limits count - $.count: above 4.0
+      r-emotion: 422 unsupported_parameter emotion - Model qwen3-tts doesn't support the emotion 'excited'.
+      r-nl: 422 unsupported_parameter language - No model of audio.speak this request may use at the standard tier supports the language 'n
+      r-text: 400 invalid_request voice_ref_text - voice_ref_text is the transcript of a voice_ref; send the clip too.
+      r-wrong: 422 unsupported_parameter voice - Model kokoro-82m doesn't support the voice 'ryan'.
+[Prewarm] qwen3-tts: paged 3 file(s) / 3.8 GB into cache in 0.1s
+[Prewarm] qwen3-tts: paged 3 file(s) / 3.8 GB into cache in 0.1s
+[Prewarm] qwen3-tts: paged 3 file(s) / 3.8 GB into cache in 0.1s
+[Prewarm] qwen3-tts: paged 3 file(s) / 3.8 GB into cache in 0.1s
+[Prewarm] qwen3-tts-design: paged 3 file(s) / 3.8 GB into cache in 0.1s
+PASS  ryan through Gaea is qwen3-inproc's WAV, byte for byte
+PASS  angry through Gaea is qwen3-inproc's WAV, byte for byte
+PASS  described through Gaea is qwen3-inproc's WAV, byte for byte
+PASS  vivian through Gaea is qwen3-inproc's WAV, byte for byte
+PASS  design sample 0 through Gaea is qwen3-inproc's, byte for byte
+PASS  design sample 1 through Gaea is qwen3-inproc's, byte for byte
+[Prewarm] qwen3-tts-clone: paged 3 file(s) / 3.8 GB into cache in 0.2s
+[Prewarm] qwen3-tts-clone: paged 3 file(s) / 3.8 GB into cache in 0.2s
+PASS  the clone through Gaea (from an asset) is qwen3-inproc's, byte for byte
+PASS  the x-vector clone through Gaea is qwen3-inproc's, byte for byte
+      in-process clone: {"audio_s":4.4258333333333333,"clone":"icl","lane":"int8","max_rss_gb":3.2721797119999998,"model":"qwen3-tts-clone","prepare_s":1.508258042,"run_s":2.6593331660000001,"seed":9}
+      in-process ryan: {"audio_s":6.6799999999999997,"lane":"int8","max_rss_gb":3.04734208,"model":"qwen3-tts","prepare_s":1.4952965,"run_s":2.2107168330000002,"seed":42,"voice":"ryan"}
+      in-process design: {"count":2,"lane":"int8","max_rss_gb":3.0495539200000001,"model":"qwen3-tts-design","prepare_s":1.3859349169999999,"run_s":3.3399978749999999,"seed":7,"text":"Hello! This is how I sound when I read a sentence aloud."}
+OK
+PASS  transcript com.xocialize.gaea.kokoro-0.1.0-2026-11-20T022546Z-a37fb7ef.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.qwen3-tts-0.2.2-2026-11-20T022529Z-334bc1cb.gpp passes validate.py
+== 39 passed, 0 failed

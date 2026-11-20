@@ -1,0 +1,14 @@
+PASS manifest com.xocialize.gaea.forge 0.2.2, sha256 a52a19d85552…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.forge, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-forge-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 12581
+PASS hello after 4333 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared nafnet-restore lane fp16 in 0.01 s
+PASS image.restore ran in 2.03 s (wall 2.03 s), 0 progress lines; outputs [{"media_type":"image\/png","name":"image","path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-43D1438C-C2D7-48DF-A6D9-8FB5DE66A29B\/spool\/job_check\/out\/image-0.png"}]
+PASS memory report: worker says phys_footprint 374408152 B; host read 374408152 B now, peak 374408152 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-forge/dist/check-session.gpp
+ALL PASS
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

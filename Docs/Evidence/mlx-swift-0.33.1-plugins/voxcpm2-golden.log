@@ -1,0 +1,43 @@
+# VoxCPM2 golden check 2026-11-20T03:27:40Z: com.xocialize.gaea.voxcpm2 0.1.1
+[Prewarm] voxcpm2: paged 2 file(s) / 5.0 GB into cache in 0.2s
+      zero: over GPP ran in 2.41 s; in-process {"audio_s":5.4400000000000004,"max_rss_gb":1.1152588800000001,"model":"voxcpm2","prepare_s":0.49335683299999999,"run_s":7.1475344590000001,"seed":42,"voice":"default"}
+PASS  zero: byte-identical, sha256 8128c8db17fa5071…
+[Prewarm] voxcpm2: paged 2 file(s) / 5.0 GB into cache in 0.2s
+      happy: over GPP ran in 1.83 s; in-process {"audio_s":4.5,"max_rss_gb":1.0969251840000001,"model":"voxcpm2","prepare_s":0.47751383400000003,"run_s":1.83679975,"seed":3,"voice":"default"}
+PASS  happy: byte-identical, sha256 1bb604ffae91efa7…
+[Prewarm] voxcpm2: paged 2 file(s) / 5.0 GB into cache in 0.2s
+      described: over GPP ran in 1.88 s; in-process {"audio_s":4.1600000000000001,"max_rss_gb":1.1230904319999999,"model":"voxcpm2","prepare_s":0.47675070800000002,"run_s":1.87113475,"seed":5,"voice":"default"}
+PASS  described: byte-identical, sha256 e69b15f5cb01f4e0…
+[Prewarm] voxcpm2: paged 2 file(s) / 5.0 GB into cache in 0.2s
+      chinese: over GPP ran in 2.00 s; in-process {"audio_s":4.4800000000000004,"max_rss_gb":1.1056578560000001,"model":"voxcpm2","prepare_s":0.47955429199999999,"run_s":2.0066350000000002,"seed":11,"voice":"default"}
+PASS  chinese: byte-identical, sha256 22944df6dde1b6e1…
+[Prewarm] voxcpm2: paged 2 file(s) / 5.0 GB into cache in 0.2s
+      clone: over GPP ran in 2.42 s; in-process {"audio_s":4.96,"max_rss_gb":1.2796559359999999,"model":"voxcpm2","prepare_s":0.47391483400000001,"run_s":2.3865019580000002,"seed":9,"voice":"clone"}
+PASS  clone: byte-identical, sha256 c2bf8c27781f4284…
+[Prewarm] voxcpm2: paged 2 file(s) / 5.0 GB into cache in 0.2s
+      continuation: over GPP ran in 2.55 s; in-process {"audio_s":5.5999999999999996,"max_rss_gb":1.2823756799999999,"model":"voxcpm2","prepare_s":0.48202808400000002,"run_s":2.5295962909999998,"seed":9,"voice":"continuation"}
+PASS  continuation: byte-identical, sha256 7682e2e07141d09d…
+[Prewarm] voxcpm2: paged 2 file(s) / 5.0 GB into cache in 0.2s
+      design: over GPP ran in 3.66 s; in-process {"count":2,"max_rss_gb":1.1055104,"model":"voxcpm2","prepare_s":0.47828695900000001,"run_s":3.636932667,"seed":7,"text":"Hello! This is how I sound when I read a sentence aloud."}
+PASS  design sample 0 (seed 7): byte-identical, sha256 d39ccfa3c34ea8b4…
+PASS  design sample 1 (seed 8): byte-identical, sha256 c2a0339dfb267cb8…
+[Prewarm] voxcpm2: paged 2 file(s) / 5.0 GB into cache in 0.2s
+      designed-clone: over GPP ran in 2.08 s; in-process {"audio_s":4.4800000000000004,"max_rss_gb":1.2850954240000001,"model":"voxcpm2","prepare_s":0.47444045899999998,"run_s":2.0656054579999998,"seed":13,"voice":"continuation"}
+PASS  designed-clone: byte-identical, sha256 3bba44e241b51cd7…
+OK
+PASS  chinese.gpp passes validate.py
+OK
+PASS  clone.gpp passes validate.py
+OK
+PASS  continuation.gpp passes validate.py
+OK
+PASS  described.gpp passes validate.py
+OK
+PASS  design.gpp passes validate.py
+OK
+PASS  designed-clone.gpp passes validate.py
+OK
+PASS  happy.gpp passes validate.py
+OK
+PASS  zero.gpp passes validate.py
+== 17 passed, 0 failed

@@ -1,0 +1,37 @@
+# Qwen3-TTS golden check 2026-11-20T02:24:11Z: com.xocialize.gaea.qwen3-tts 0.2.2
+[Prewarm] qwen3-tts: paged 3 file(s) / 3.8 GB into cache in 0.1s
+      ryan: over GPP ran in 2.21 s; in-process {"audio_s":6.6799999999999997,"lane":"int8","max_rss_gb":3.0473912319999998,"model":"qwen3-tts","prepare_s":6.8065849170000003,"run_s":4.3328796250000003,"seed":42,"voice":"ryan"}
+PASS  ryan: byte-identical, sha256 6945433a77d067f1…
+[Prewarm] qwen3-tts: paged 3 file(s) / 3.8 GB into cache in 0.1s
+      angry: over GPP ran in 1.59 s; in-process {"audio_s":4.5499999999999998,"lane":"int8","max_rss_gb":3.0465392640000002,"model":"qwen3-tts","prepare_s":1.4570440840000001,"run_s":1.5803755000000002,"seed":42,"voice":"ryan"}
+PASS  angry: byte-identical, sha256 1808fae86986566d…
+[Prewarm] qwen3-tts: paged 3 file(s) / 3.8 GB into cache in 0.1s
+      described: over GPP ran in 1.07 s; in-process {"audio_s":3.0750000000000002,"lane":"int8","max_rss_gb":3.045228544,"model":"qwen3-tts","prepare_s":1.421619,"run_s":1.108524667,"seed":3,"voice":"aiden"}
+PASS  described: byte-identical, sha256 51be9fbd04832921…
+[Prewarm] qwen3-tts: paged 3 file(s) / 3.8 GB into cache in 0.1s
+      vivian: over GPP ran in 1.44 s; in-process {"audio_s":4.8399999999999999,"lane":"int8","max_rss_gb":3.0471618559999998,"model":"qwen3-tts","prepare_s":1.512268792,"run_s":1.2834479999999999,"seed":1,"voice":"vivian"}
+PASS  vivian: byte-identical, sha256 d028bb53ef8a0f95…
+[Prewarm] qwen3-tts-design: paged 3 file(s) / 3.8 GB into cache in 0.2s
+      design: over GPP ran in 3.83 s; in-process {"count":2,"lane":"int8","max_rss_gb":3.0485544959999999,"model":"qwen3-tts-design","prepare_s":1.4694485829999999,"run_s":3.8590119170000001,"seed":7,"text":"Hello! This is how I sound when I read a sentence aloud."}
+PASS  design sample 0 (seed 7): byte-identical, sha256 9e7046941db80276…
+PASS  design sample 1 (seed 8): byte-identical, sha256 7acbd4322e4daf19…
+[Prewarm] qwen3-tts-clone: paged 3 file(s) / 3.8 GB into cache in 0.2s
+      clone (icl): over GPP ran in 6.64 s; in-process {"audio_s":4.4258333333333333,"clone":"icl","lane":"int8","max_rss_gb":3.2830423039999999,"model":"qwen3-tts-clone","prepare_s":1.994902459,"run_s":7.6461609160000004,"seed":9}
+PASS  clone of the designed voice, with its text (icl): byte-identical, sha256 4af984c9a4d1e171…
+[Prewarm] qwen3-tts-clone: paged 3 file(s) / 3.8 GB into cache in 0.2s
+PASS  clone of the designed voice, without its text (x-vector): byte-identical, sha256 2e871c5af8933b7e…
+OK
+PASS  angry.gpp passes validate.py
+OK
+PASS  clone-icl.gpp passes validate.py
+OK
+PASS  clone-xvector.gpp passes validate.py
+OK
+PASS  described.gpp passes validate.py
+OK
+PASS  design.gpp passes validate.py
+OK
+PASS  ryan.gpp passes validate.py
+OK
+PASS  vivian.gpp passes validate.py
+== 15 passed, 0 failed

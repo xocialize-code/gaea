@@ -1,0 +1,22 @@
+# sizes
+PASS  gen-1024: 1024×1024 out
+PASS  gen-1024: byte-identical to in-process, sha256 0deab26a3b09822e…; over GPP ran in 6.75 s; in-process {"cold_s":12.775925415999998,"draw":"1024x1024","guidance":1,"height":1024,"lane":"bf16","model":"klein-4b","passes":0,"prepare_s":0.67862058300000005,"references":0,"run1_s":12.075050750000001,"run2_s":6.6019950420000004,"seed":44,"steps":4,"width":1024}
+PASS  gen-2048: 2048×2048 out
+PASS  gen-2048: effective reports 1 upscale pass(es)
+PASS  gen-2048: byte-identical to in-process, sha256 f947980d4844490a…; over GPP ran in 12.60 s; in-process {"cold_s":11.493497000999998,"draw":"1024x1024","guidance":1,"height":2048,"lane":"bf16","model":"klein-4b","passes":1,"prepare_s":0.59545816699999998,"references":0,"run1_s":10.88035275,"run2_s":9.5293444580000006,"seed":44,"steps":4,"width":2048}
+PASS  gen-4096: 4096×4096 out
+PASS  gen-4096: effective reports 2 upscale pass(es)
+PASS  gen-4096: byte-identical to in-process, sha256 8ad400ba031a171e…; over GPP ran in 28.92 s; in-process {"cold_s":28.754129291999998,"draw":"1024x1024","guidance":1,"height":4096,"lane":"bf16","model":"klein-4b","passes":2,"prepare_s":0.59412087499999999,"references":0,"run1_s":28.137764791999999,"run2_s":28.014297875,"seed":44,"steps":4,"width":4096}
+PASS  gen-1536x1024: 1536×1024 out
+PASS  gen-1536x1024: effective reports 1 upscale pass(es)
+PASS  gen-1536x1024: byte-identical to in-process, sha256 73ca67368a1f3c79…; over GPP ran in 4.25 s; in-process {"cold_s":4.7708492079999996,"draw":"768x512","guidance":1,"height":1024,"lane":"bf16","model":"klein-4b","passes":1,"prepare_s":0.47911962499999999,"references":0,"run1_s":4.2767950829999997,"run2_s":3.6382822500000001,"seed":5,"steps":4,"width":1536}
+PASS  base-1792x1024: 1792×1024 out
+PASS  base-1792x1024: effective reports 1 upscale pass(es)
+PASS  base-1792x1024: byte-identical to in-process, sha256 f8231752aef3d3cf…; over GPP ran in 36.55 s; in-process {"cold_s":37.284331666999996,"draw":"896x512","guidance":4,"height":1024,"lane":"bf16","model":"klein-4b-base","passes":1,"prepare_s":0.463778625,"references":0,"run1_s":36.809162749999999,"run2_s":38.715080790999998,"seed":9,"steps":28,"width":1792}
+PASS  edit-2048: 2048×2048 out
+PASS  edit-2048: effective reports 1 upscale pass(es)
+PASS  edit-2048: byte-identical to in-process, sha256 a0bf7c51e52dad14…; over GPP ran in 10.38 s; in-process {"cold_s":10.963594582999999,"draw":"1024x1024","guidance":1,"height":2048,"lane":"bf16","model":"klein-4b","passes":1,"prepare_s":0.49513770899999998,"references":1,"run1_s":10.454662958,"run2_s":10.314212375,"seed":7,"steps":4,"width":2048}
+# Klein adapter golden check 2026-11-20T02:41:00Z: com.xocialize.gaea.flux2-klein 0.3.1
+PASS  edit (klein-4b bf16, flux2-klein:refcontrol-pose ic + flux2-klein:background-remove plain): byte-identical, sha256 d6f154b458dfe3d5…; over GPP ran in 5.12 s; in-process {"adapters":["flux2-klein:refcontrol-pose=1.0","flux2-klein:background-remove=1.1"],"cold_s":5.4295702920000002,"draw":"512x512","guidance":1,"height":512,"lane":"bf16","model":"klein-4b","passes":0,"prepare_s":0.47456199999999998,"references":0,"run1_s":4.9438328330000001,"run2_s":2.633851333,"seed":7,"steps":4,"width":512}
+PASS  control: without the adapters the edit differs (sha256 a9fac5885c956a90…)
+== 19 passed, 0 failed

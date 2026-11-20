@@ -1,0 +1,14 @@
+PASS manifest com.xocialize.gaea.voxcpm2 0.1.1, sha256 7501907f799c…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.voxcpm2, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-voxcpm2-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 10568
+PASS hello after 388 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared voxcpm2 lane bf16 in 1.36 s
+PASS audio.speak ran in 7.39 s (wall 7.39 s), 0 progress lines; outputs [{"path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-32898369-4FF9-46D5-82EC-FE8BB9F2A28F\/spool\/job_check\/out\/audio-0.wav","media_type":"audio\/wav","name":"audio"}]
+PASS memory report: worker says phys_footprint 11791977688 B; host read 11791977688 B now, peak 13157305584 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-voxcpm2/dist/check-session.gpp
+ALL PASS
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

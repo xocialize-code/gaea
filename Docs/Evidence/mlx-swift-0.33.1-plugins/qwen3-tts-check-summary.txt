@@ -1,0 +1,14 @@
+PASS manifest com.xocialize.gaea.qwen3-tts 0.2.2, sha256 a3b44bf8fd24…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.qwen3-tts, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-qwen3-tts-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 43308
+PASS hello after 354 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared qwen3-tts lane int8 in 6.69 s
+PASS audio.speak ran in 6.70 s (wall 6.70 s), 0 progress lines; outputs [{"media_type":"audio\/wav","name":"audio","path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-B527C98A-687C-47DC-9BB2-758AC44DD36F\/spool\/job_check\/out\/audio-0.wav"}]
+PASS memory report: worker says phys_footprint 5796990432 B; host read 5796990432 B now, peak 7825231184 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-qwen3-tts/dist/check-session.gpp
+ALL PASS
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed
