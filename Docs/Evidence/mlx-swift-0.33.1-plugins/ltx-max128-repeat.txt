@@ -1,0 +1,4 @@
+run 1 17:52:40 ran in 104.08 s frames ad8c9c7435ab1485
+run 2 17:54:35 ran in 104.11 s frames ad8c9c7435ab1485
+run 3 17:56:31 ran in 103.98 s frames ad8c9c7435ab1485
+run 4 17:58:27 ran in 104.04 s frames ad8c9c7435ab1485

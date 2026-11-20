@@ -1,0 +1,3 @@
+# LTX golden check 2026-11-20T01:45:38Z: com.xocialize.gaea.ltx 0.2.0
+      max128: over GPP ran in 104.03 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":24.233050112000001,"model":"ltx-2.5-max128","operation":"video.generate","prepare_s":11.386983666999999,"run_s":103.81474545899999,"warnings":[]}
+PASS  max128: the same decoded frames, h264,256,256,9 aac,48000,2, framemd5 sha256 ad8c9c7435ab1485…

@@ -1,0 +1,16 @@
+# LTX golden check 2026-11-20T01:22:07Z: com.xocialize.gaea.ltx 0.2.0
+      max128: over GPP ran in 103.55 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":24.231739392000001,"model":"ltx-2.5-max128","operation":"video.generate","prepare_s":13.006348624999999,"run_s":112.236299917,"warnings":[]}
+FAIL  max128: 3cc91cde1f41ebef… / ad8c9c7435ab1485…, lowest 50 dB, h264,256,256,9 aac,48000,2 (want h264,256,256,9 aac,48000,2)
+      compact24-first: over GPP ran in 52.52 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":14.553300992,"model":"ltx-2.5-compact24","operation":"video.generate","prepare_s":8.0560514170000008,"run_s":52.749402207999999,"warnings":[]}
+PASS  compact24-first: the same decoded frames, h264,256,256,9 aac,48000,2, framemd5 sha256 260dd8960ffc34d8…
+      standard64-last: over GPP ran in 68.45 s; in-process {"effective":{"duration_s":0.70833333333333337,"fps":24,"frames":17,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":24.780324864000001,"model":"ltx-2.5-standard64","operation":"video.generate","prepare_s":8.6004392500000009,"run_s":69.132591542,"warnings":[]}
+PASS  standard64-last: within 51 dB on every frame (int8, deterministic: false), h264,256,256,17 aac,48000,2
+      compact24-extend: over GPP ran in 52.75 s; in-process {"effective":{"after_s":0.33333333333333331,"before_s":0,"frames":25,"seed":7},"max_rss_gb":17.07204608,"model":"ltx-2.5-compact24","operation":"video.extend","prepare_s":8.0751437910000003,"run_s":53.516995958999999,"warnings":[]}
+PASS  compact24-extend: the same decoded frames, h264,128,96,25 aac,48000,2, framemd5 sha256 b116c33889dcaffe…
+      compact24-retake: over GPP ran in 52.67 s; in-process {"effective":{"end_s":0.70833333333333337,"frames":17,"retake":"both","seed":7,"start_s":0.375},"max_rss_gb":17.072652288,"model":"ltx-2.5-compact24","operation":"video.retake","prepare_s":8.0304125410000005,"run_s":52.682738542000003,"warnings":["span_snapped"]}
+PASS  compact24-retake: within 29 dB on every frame (int8, deterministic: false), h264,128,96,17 aac,48000,2
+PASS compact24-extend.gpp validates
+PASS compact24-first.gpp validates
+PASS compact24-retake.gpp validates
+PASS max128.gpp validates
+PASS standard64-last.gpp validates

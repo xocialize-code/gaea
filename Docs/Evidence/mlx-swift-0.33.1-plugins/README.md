@@ -67,7 +67,7 @@ these models declares). Beyond that:
 | z-image 0.2.2 | pass | 10/10 ([z-image-golden.log](z-image-golden.log)) | 13/13 ([z-image-acceptance.log](z-image-acceptance.log), `acceptance-nitrofusion2.sh`, from GitHub) |
 | trellis2 0.2.1 | pass | 19/20, the miss 1/1 alone ([trellis2-golden.log](trellis2-golden.log), [rerun](trellis2-golden-remove-rerun.txt)) | 40/40 ([trellis2-acceptance.log](trellis2-acceptance.log), `acceptance-trellis2.sh`, from GitHub, without FULL) |
 | locate 0.1.1 | pass | 8/8 ([locate-golden.log](locate-golden.log)) | 13/13 ([locate-acceptance.log](locate-acceptance.log), `acceptance-locate.sh`, from GitHub; head crop 12/12) |
-| ltx 0.2.0 (not yet tagged) | pass | 4/4 plain generates ([ltx-golden-plain.log](ltx-golden-plain.log)) (compact24 and balanced32 within 42 dB, int8; standard64 and max128 the same frames); the 4 cases with input media pending | pending |
+| ltx 0.2.0 | pass | 8/8 with max128 re-run ([plain](ltx-golden-plain.log), [inputs](ltx-golden-inputs.log), [max128 re-run](ltx-golden-max128-rerun.log)): standard64, compact24-first, compact24-extend and max128 the same frames; compact24 and balanced32 within 42 dB, standard64-last 51 dB, compact24-retake 29 dB (int8) | 22/22 ([ltx-acceptance.log](ltx-acceptance.log), `acceptance-ltx.sh`, stand-in, before the tag) |
 
 `*-check-summary.txt` hold each check's PASS lines and its metallib control.
 
@@ -82,16 +82,18 @@ these models declares). Beyond that:
   (`kIOGPUCommandBufferCallbackErrorTimeout`) while the sensenova acceptance held the GPU. Alone it gives the bundle's
   GLB byte for byte (sha256 395856e4…, 32 s against 113 s under contention). The checks after it were run one at a
   time.
+- **LTX's max128 flaked once.** The first max128 run after a reboot gave frames 3cc91cde…, 50 dB from
+  in-process's ad8c9c74…, though bf16 says `deterministic: true`. The bundle before the reboot, the re-run right
+  after, and 4 more runs one at a time with nothing else on the GPU ([ltx-max128-repeat.txt](ltx-max128-repeat.txt))
+  all gave ad8c9c74…, as ltx-inproc did twice: 1 in 9, on a cold page cache (AB-L-0369). That reboot was for
+  DEV_VOL1, where from about 10:00 macOS reported 0 bytes of `volumeAvailableCapacityForImportantUsage` (1.3 TB
+  free) and the engine's prepare-time `VolumeProbe` refused every LTX lane with `materialize_failed`. After the
+  reboot, Swift Build's cached build description pointed at the Metal toolchain's old mount, so the first build
+  failed until `.build/{plugin/,}out/Intermediates.noindex/XCBuildData` was removed.
 - **Timings here aren't receipts.** Most runs shared the GPU with another job (NitroFusion2's 8.7 s warm against
   Turbo's 25.4 s, for instance, is twice 0.2.0's).
 
 ## Not covered
-
-- **LTX isn't released yet.** From about 10:00 on 2026-11-19 macOS reported 0 bytes of
-  `volumeAvailableCapacityForImportantUsage` on DEV_VOL1 (1.3 TB free by `volumeAvailableCapacity`), and the engine's
-  prepare-time probe (`VolumeProbe`, the same since 0.74.1) refuses every LTX lane with `materialize_failed`; just
-  before, writes to the volume were briefly denied. The first-frame, last-frame, extend and retake cases and the
-  acceptance wait on it.
 
 - FULL=1 cases (TRELLIS.2 at 1024 and 1536, Pixal3D at 1536) weren't run.
 - Gaea versions older than 1.9.2 weren't driven; `min_gaea` is unchanged on the reading above.
