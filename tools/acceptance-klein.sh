@@ -1,8 +1,9 @@
 #!/bin/zsh
 # AB-T-0367's acceptance: gaea-plugin-flux2-klein installed in Gaea by repo URL and run through MES.
 #
-#   1. Gaea installs and enables the plugin: both models offer image.generate (the base for `best`), and Klein 4B is
-#      image.edit's default, with up to 4 images;
+#   1. Gaea installs and enables the plugin: both models offer image.generate (Klein 4B at draft and the base at
+#      standard: the normalizer's table lists Klein 4B as draft and leaves a model it doesn't list at standard), and
+#      Klein 4B is image.edit's default, with up to 4 images;
 #   2. through Gaea, for fixed seeds, the same image as flux2-klein-swift in-process (klein-inproc, the plugin repo's
 #      reference tool on the same dependency resolution), compared byte for byte: Klein 4B bf16 generate at 1024²,
 #      Klein 4B Base generate (28 steps, CFG 4, a negative prompt), and a two-reference edit;
@@ -80,9 +81,9 @@ export GAEA_HOME=$H
 check "add by repo URL installs flux2-klein $VERSION" zsh -c "$CLI plugins add https://github.com/xocialize-code/gaea-plugin-flux2-klein | grep -q 'Installed .* $VERSION'"
 $CLI models > "$OUT/models.txt"
 mes "http://127.0.0.1:$P/mes/v0/operations" > "$OUT/operations.json"
-check "image.generate offers Klein 4B and Klein 4B Base (best)" py "
+check "image.generate offers Klein 4B (draft) and Klein 4B Base (standard)" py "
 import json; ops = {o['operation']: o for o in json.load(open('$OUT/operations.json'))['operations']}
-m = {x['id']: x for x in ops['image.generate']['models']}; assert 'klein-4b' in m and 'best' in m['klein-4b-base']['quality_tiers'], m"
+m = {x['id']: x for x in ops['image.generate']['models']}; assert m['klein-4b']['quality_tiers'] == ['draft'] and m['klein-4b-base']['quality_tiers'] == ['standard'], m"
 check "image.edit: Klein 4B is the default, not named-only, up to 4 images" py "
 import json; ops = {o['operation']: o for o in json.load(open('$OUT/operations.json'))['operations']}
 m = {x['id']: x for x in ops['image.edit']['models']}; k = m['klein-4b']
@@ -106,10 +107,10 @@ check "a warm run gives the same bytes again" py "
 import json; a, b = (json.load(open(f))['result']['outputs'][0]['sha256'] for f in ('$OUT/job-klein-cold.json', '$OUT/job-klein-warm.json')); assert a == b, (a, b)"
 
 t0=$(py 'import time; print(time.time())')
-job $P '{"operation":"image.generate","inputs":{"prompt":"'$CABIN'"},"params":{"quality":"best","size":{"width":1024,"height":1024},"seed":42,"negative_prompt":"'$NEGATIVE'"}}' > "$OUT/job-base.json"
+job $P '{"operation":"image.generate","inputs":{"prompt":"'$CABIN'"},"params":{"quality":"standard","size":{"width":1024,"height":1024},"seed":42,"negative_prompt":"'$NEGATIVE'"}}' > "$OUT/job-base.json"
 say "      base: $(py "import time; print(round(time.time()-$t0,2))") s from submit to settled (launch base, prepare bf16, 28 steps CFG)"
 fetch $P "$OUT/job-base.json" "$OUT/gaea-base"
-check "quality best reaches Klein 4B Base (28 steps, guidance 4, the negative prompt honoured)" py "
+check "quality standard reaches Klein 4B Base (28 steps, guidance 4, the negative prompt honoured)" py "
 import json; r = json.load(open('$OUT/job-base.json'))['result']; e = r['effective']
 assert r['provenance']['model']['id'] == 'klein-4b-base', r['provenance']; assert e['x-klein.steps'] == 28 and e['x-klein.guidance'] == 4, e
 assert e['negative_prompt'] == '$NEGATIVE', e"

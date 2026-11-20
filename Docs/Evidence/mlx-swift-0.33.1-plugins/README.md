@@ -144,12 +144,14 @@ style is `from:`, and each resolves exactly those. No model package had to move 
     0.3.0 left, 0.3.1 centre, |difference| × 4 right), and mlx-swift-lm (3.32.3 → 3.33.0) and mlx-exact-conv-swift
     (0.1.1 → 0.1.2) moved with it.
   - **FLUX 3 Klein:** every golden hash moved from 0.2.0's.
-- **acceptance-klein.sh has drifted from Gaea.** Gaea 1.9.2 offers Klein's quality tiers as draft and standard, so
-  its `quality: "best"` job is refused at submit. The two-reference edit uploads that job's image, so it fails too, and
-  both byte-for-byte checks fail with them: 11 pass, 5 fail on 0.3.1. Released 0.3.0 from GitHub fails the same
-  checks ([control](flux2-klein-acceptance-0.3.0-control.log); its first failure only expected 0.3.1's version, and
-  its byte-for-byte checks compare old-stack pictures with the new klein-inproc). The klein-upscale acceptance covers
-  Base and an edit and passes 24/24. The script is unchanged.
+- **acceptance-klein.sh had drifted from Gaea.** It expected Klein 4B Base to answer `quality: "best"`, but Gaea's
+  tiers come from pixel-agency-normalizer's table: on image.generate it lists Klein 4B as draft and leaves a model it
+  doesn't list (the base) at standard. So the `best` job was refused at submit. The two-reference edit uploads that
+  job's image, so it failed too, and both byte-for-byte checks failed with them: 11 pass, 5 fail on 0.3.1
+  ([first run](flux2-klein-acceptance-run1.log)). Released 0.3.0 from GitHub fails the same checks
+  ([control](flux2-klein-acceptance-0.3.0-control.log); its first failure only expected 0.3.1's version, and its
+  byte-for-byte checks compare old-stack pictures with the new klein-inproc). The script now checks draft and standard
+  and sends the base job at `standard`: 16/16 on 0.3.1, Base and the edit byte for byte.
 - `acceptance-forge.sh` takes `V` (it expected 0.1.x by name), and its offers check now lists relight, colorize and
   score: the pack has offered them since 0.2.0, so the first run's one failure was the list, not the plugin (the
   seven defaults it did check were all right).
@@ -164,7 +166,7 @@ tag, except forge, whose acceptance installs only from GitHub.
 | kokoro 0.1.2 | pass | 8/8 ([kokoro-golden.log](kokoro-golden.log)) | 34/34 ([kokoro-acceptance.log](kokoro-acceptance.log)) |
 | qwen3-tts 0.2.2 | pass | 15/15 ([qwen3-tts-golden.log](qwen3-tts-golden.log)) | 39/39 ([qwen3-tts-acceptance.log](qwen3-tts-acceptance.log)) |
 | auk 0.1.2 | pass | 31/31 ([auk-golden.log](auk-golden.log)) | 50/50 ([auk-acceptance.log](auk-acceptance.log)) |
-| flux2-klein 0.3.1 | pass | 19/19 ([flux2-klein-golden.log](flux2-klein-golden.log)) | 11/5 ([flux2-klein-acceptance.log](flux2-klein-acceptance.log), script drift above); 24/24 in klein-upscale |
+| flux2-klein 0.3.1 | pass | 19/19 ([flux2-klein-golden.log](flux2-klein-golden.log)) | 16/16 ([flux2-klein-acceptance.log](flux2-klein-acceptance.log), with the script brought in line; first run 11/5, drift above); 24/24 in klein-upscale |
 | flux3-klein 0.2.1 | pass | 13/13 ([flux3-klein-golden.log](flux3-klein-golden.log)) | 24/24 ([klein-upscale-acceptance.log](klein-upscale-acceptance.log), with flux2-klein 0.3.1) |
 | indextts 0.1.2 | pass | 16/16 ([indextts-golden.log](indextts-golden.log)) | 44/44 ([indextts-acceptance.log](indextts-acceptance.log)) |
 | step-audio-editx 0.1.3 | pass | 21/21 ([step-audio-editx-golden.log](step-audio-editx-golden.log)) | 31/31 ([step-audio-editx-acceptance.log](step-audio-editx-acceptance.log)) |
@@ -179,4 +181,3 @@ releases' manifests are on `/Volumes/DEV_VOL1/Evidence/mlx-swift-0.33.1-plugins/
 
 - FULL=1 cases (TRELLIS.2 at 1024 and 1536, Pixal3D at 1536) weren't run.
 - Gaea versions older than 1.9.2 weren't driven; `min_gaea` is unchanged on the reading above, in both waves.
-- acceptance-klein.sh still asks for `quality: "best"`; bringing it in line with Gaea 1.9's tiers is a follow-up.
