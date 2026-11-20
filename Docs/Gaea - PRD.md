@@ -131,7 +131,7 @@ new measurement:
 
 | Operation | Draft | Standard | Best |
 |---|---|---|---|
-| `image.generate` | Klein 4B (4 steps) | Z-Image Turbo (8 steps) | Z-Image Turbo |
+| `image.generate` | Klein 4B 1-step RDM (1.9.3, AB-R-1056); Klein 4B (4 steps) without flux2-klein 0.4.0 | Z-Image Turbo (8 steps) | Z-Image Turbo |
 | `image.edit`, and fill or extend with a prompt | Klein 4B | Klein 4B | Klein 4B (provisional) |
 | `image.fill`, `image.erase`, `image.extend` (no prompt) | MI-GAN | LaMa | LaMa |
 | `image.upscale` (photo) | NERVE | RealPLKSR | HEART |

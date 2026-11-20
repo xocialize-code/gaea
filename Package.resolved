@@ -1,5 +1,5 @@
 {
-  "originHash" : "5fae51fa1daf4fea9e769bdfe47dfbbf919e42cb42b069be70aad115a92ab9c6",
+  "originHash" : "3ce49ab9c3bd56cde70febdead0d4795d2a40d74951c82fbeba0065f22b1782c",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -132,8 +132,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xocialize/pixel-agency-normalizer.git",
       "state" : {
-        "revision" : "c00095deb20b9340b00f9141a7ea8c70400ccdeb",
-        "version" : "0.4.0"
+        "revision" : "60837f50159de316cc33857f243013b436e693d8",
+        "version" : "0.4.1"
       }
     },
     {
