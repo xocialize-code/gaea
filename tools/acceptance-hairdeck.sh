@@ -38,6 +38,8 @@ PIC=${PIC:-$HD/Tests/Fixtures/girl.png}
 BOX=${BOX:-'{"x":0.048,"y":0.03,"width":0.934,"height":0.941}'}
 BODY=${BODY:?a .vrm or rigged .glb}
 MERGE=${MERGE:-../mlxengine-3d/PROD/mlx-hairdeck-swift/tools/check_merged_vrm.mjs}
+# Pass VRMMERGE=<vrmx-studio>/…/vrmMerge.js (9123c46 or later). This default, the copy in VRMXA_Specification, is older
+# and drops an item's springs, so the two merge checks fail on it whatever the plugin did (AB-A-0333).
 VRMMERGE=${VRMMERGE:-../VRMXA_Specification/reference/web/fitting/vrmMerge.js}
 NODE_MODULES=${NODE_MODULES:-../vrmdeveloper/node_modules}
 mkdir -p "$OUT"; OUT=${OUT:A}; rm -rf "$WORK"; mkdir -p "$WORK"

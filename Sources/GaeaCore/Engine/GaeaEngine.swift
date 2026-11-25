@@ -687,9 +687,14 @@ struct PluginOffers: Sendable {
         return offer
     }
 
+    /// A model's offer as its package's licences give it: permissive only when every licence among its weights is
+    /// (AB-A-0318: FastFrames' DiT is Apache-2.0 and its add-ons are Apple's research licence). The first licence that
+    /// isn't permissive names the terms, and makes the model named-only and accepted-required.
     static func offer(_ model: PluginManifest.Model) -> ModelOffer {
-        let weights = model.package.license.weightLicense
-        let permissive = weights.isPermissive
+        let declared = model.package.license
+        let restricted = ([declared.weightLicense] + (declared.additionalWeightLicenses ?? [])).first { !$0.isPermissive }
+        let weights = restricted ?? declared.weightLicense
+        let permissive = restricted == nil
         let license = License(spdx: weights.identifier, commercialUse: permissive ? .yes : .no,
                               notice: weights.requiredDisplayText, acceptedRequired: permissive ? nil : true)
         let need = model.lanes.first(where: \.default).map(LaneChoice.need) ?? 0

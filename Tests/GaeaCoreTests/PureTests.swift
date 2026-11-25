@@ -1,5 +1,6 @@
 import Foundation
 import GaeaProtocol
+import struct MESCore.ModelOffer
 import Testing
 @testable import GaeaCore
 
@@ -125,6 +126,33 @@ let repoRoot = URL(fileURLWithPath: #filePath).deletingLastPathComponent().delet
 
         json["protocol"] = 2
         #expect(answer(try JSONSerialization.data(withJSONObject: json), gaea: "1.4.0") == "v0.5.0 speaks GPP 2")
+    }
+
+    /// AB-A-0318: a model is permissive only when every licence among its weights is. AuK's fixture names a research
+    /// licence first and MIT second; the other way round (FastFrames' shape) must come out restricted too.
+    @Test func aRestrictedAddOnLicenceMakesTheModelNamedOnly() throws {
+        let file = repoRoot.appending(path: "Tests/Fixtures/manifests/auk-0.1.0.json")
+        var json = try #require(JSONSerialization.jsonObject(with: Data(contentsOf: file)) as? [String: Any])
+        func offer() throws -> ModelOffer {
+            let manifest = try JSONDecoder().decode(PluginManifest.self, from: JSONSerialization.data(withJSONObject: json))
+            return GaeaEngine.offer(manifest.models[0])
+        }
+        #expect(try offer().namedOnly == true && offer().license.spdx == "LicenseRef-Qwen-Research")
+
+        var models = try #require(json["models"] as? [[String: Any]])
+        var package = try #require(models[0]["package"] as? [String: Any])
+        var license = try #require(package["license"] as? [String: Any])
+        let research = try #require(license["weightLicense"]), mit = try #require((license["additionalWeightLicenses"] as? [Any])?.first)
+        license["weightLicense"] = mit
+        license["additionalWeightLicenses"] = [research]
+        package["license"] = license; models[0]["package"] = package; json["models"] = models
+        let swapped = try offer()
+        #expect(swapped.namedOnly == true && swapped.license.acceptedRequired == true && swapped.license.commercialUse == .no)
+        #expect(swapped.license.spdx == "LicenseRef-Qwen-Research")
+
+        license["additionalWeightLicenses"] = [mit]
+        package["license"] = license; models[0]["package"] = package; json["models"] = models
+        #expect(try offer().namedOnly == nil && offer().license.spdx == "MIT")
     }
 
     @Test func everyExampleManifestDecodes() throws {
