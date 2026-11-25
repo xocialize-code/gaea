@@ -72,8 +72,9 @@ public struct GaeaConsoleBackend: EngineConsoleBackend {
     public func unload(model id: String) async { await host.scheduler.unload(model: id) }
 }
 
-/// The Plugins page (UI-3) over Gaea's plugin manager and its trust list (AB-T-0411): a release signed by a team that
-/// isn't trusted comes back as a trust question, and the operator's answer approves the team or drops the download. A
+/// The Plugins page (UI-3) over Gaea's plugin manager and its trust list (AB-T-0411, G-32): a notarized release installs
+/// whoever signed it; one that isn't notarized, from a team that isn't trusted, or an update signed by another team
+/// than the plugin, comes back as a trust question, and the operator's answer approves the team or drops the download. A
 /// quarantined plugin (G-26, AB-T-0417) shows why, and switching it on clears it.
 public struct GaeaPluginBackend: EnginePluginBackend {
     let host: GaeaHost
@@ -97,11 +98,11 @@ public struct GaeaPluginBackend: EnginePluginBackend {
     public func plugins() async -> [EnginePlugin] {
         let installed = Dictionary(uniqueKeysWithValues: await host.manager.installed().map { ($0.id, $0) })
         let teams = await self.teams()
-        let trusted = await host.manager.trustedTeams()
         return ((try? host.database.plugins()) ?? []).map { row in
             let team = teams[row.team] ?? EngineTeam(id: row.team, name: row.team)
-            let state: EnginePlugin.State = if !trusted.contains(row.team) {
-                .failed("Signed by \(team.name) (\(row.team)), a team this server doesn't trust. It runs again when you trust the team.")
+            let state: EnginePlugin.State = if installed[row.id]?.trusted == false {
+                .failed("This build isn't notarized by Apple, and its signer, \(team.name) (\(row.team)), isn't a team this server "
+                    + "trusts. It runs again when you trust the team.")
             } else if let reason = row.quarantineReason {
                 // G-26, until MESEngineUI has a quarantined state of its own (AB-A-0247): the On toggle clears it.
                 .failed("Quarantined after \(reason). Turn it on to clear the quarantine; gaea crashes shows each crash.")

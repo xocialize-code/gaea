@@ -43,7 +43,8 @@ sequenceDiagram
   H->>W: unload / shutdown
 ```
 
-1. **Launch.** The host checks the bundle's signature against its trust list (G-7), then starts the executable named
+1. **Launch.** The host checks the bundle's signature, and that Apple notarized it or its team is on the trust list
+   (G-7, G-32), then starts the executable named
    in the manifest with `Process.launchRequirement` pinned to the same team. The working directory is the plugin's
    `cache_root`.
 2. **Hello.** The worker's first line is `hello`. The host fails the launch if:

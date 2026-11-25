@@ -1,0 +1,21 @@
+2026-11-25T17:56:20Z operator: listening on /tmp/gaea-trust.qZty/u/operator.sock (same user, Developer ID team)
+2026-11-25T17:56:20Z gaea 1.9.3 starting: /tmp/gaea-trust.qZty/u, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-25T17:56:20Z gaea: serving MES at http://127.0.0.1:17772/mes/v0
+2026-11-25T17:56:20Z update: check failed: GitHub has no repo xocialize-code/gaea we can read. A private repo needs GAEA_GITHUB_TOKEN in Gaea's environment.
+2026-11-25T17:56:20Z plugins: held com.xocialize.gaea.demo 0.6.1 as h-7d372bbb: team CFZS6RXUCP, isn't notarized by Apple, and its team isn't one Gaea trusts
+2026-11-25T17:56:20Z plugins: declined h-7d372bbb (com.xocialize.gaea.demo 0.6.1, team CFZS6RXUCP)
+2026-11-25T17:56:20Z plugins: held com.xocialize.gaea.demo 0.6.1 as h-e6ae657f: team CFZS6RXUCP, isn't notarized by Apple, and its team isn't one Gaea trusts
+2026-11-25T17:56:20Z plugins: trusted team CFZS6RXUCP (Dustin Nielson)
+2026-11-25T17:56:20Z plugins: added com.xocialize.gaea.demo 0.6.1, approved from h-e6ae657f
+2026-11-25T17:56:21Z scheduler: launched com.xocialize.gaea.demo 0.6.1, pid 91928, hello after 0.239019083 seconds
+2026-11-25T17:56:21Z scheduler: stopped com.xocialize.gaea.demo 0.6.1 (shutdown)
+2026-11-25T17:56:21Z plugins: no longer trusting team CFZS6RXUCP; stopped com.xocialize.gaea.demo
+2026-11-25T17:56:21Z operator: listening on /tmp/gaea-trust.qZty/u/operator.sock (same user, Developer ID team)
+2026-11-25T17:56:21Z gaea 1.9.3 starting: /tmp/gaea-trust.qZty/u, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+2026-11-25T17:56:21Z gaea: serving MES at http://127.0.0.1:17772/mes/v0
+2026-11-25T17:56:21Z update: check failed: GitHub has no repo xocialize-code/gaea we can read. A private repo needs GAEA_GITHUB_TOKEN in Gaea's environment.
+2026-11-25T17:56:21Z plugins: trusted team CFZS6RXUCP (Dustin Nielson)
+2026-11-25T17:56:21Z scheduler: launched com.xocialize.gaea.demo 0.6.1, pid 91990, hello after 0.012326542 seconds
+2026-11-25T17:56:22Z scheduler: stopped com.xocialize.gaea.demo 0.6.1 (sigterm)
+2026-11-25T17:56:22Z operator: listening on /tmp/gaea-trust.qZty/u/operator.sock (same user, Developer ID team)
+2026-11-25T17:56:22Z gaea 1.9.3 starting: /tmp/gaea-trust.qZty/u, budget 103.08 GB, models /Users/dustinnielson/Library/Application Support/MLXEngine/Models

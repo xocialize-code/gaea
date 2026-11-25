@@ -25,6 +25,34 @@ import Testing
         #expect(PluginVerifier.requirementText() == PluginVerifier.requirementText(teams: [GPP.trustedTeam]))
     }
 
+    /// G-32: Apple's notarization admits a plugin from any team; the trust list is for builds that aren't notarized.
+    @Test func aNotarizedPluginRunsWhoeverSignedIt() {
+        func signed(_ team: String, notarized: Bool) -> PluginVerifier.Signature {
+            PluginVerifier.Signature(team: team, identifier: "com.example.plugin", commonName: nil, notarized: notarized)
+        }
+        let ours: Set<String> = [GPP.trustedTeam]
+        #expect(PluginVerifier.admits(signed("ABCDE12345", notarized: true), trusting: ours))
+        #expect(PluginVerifier.admits(signed("ABCDE12345", notarized: true), trusting: []))
+        #expect(!PluginVerifier.admits(signed("ABCDE12345", notarized: false), trusting: ours))
+        #expect(PluginVerifier.admits(signed(GPP.trustedTeam, notarized: false), trusting: ours), "our own local builds")
+        #expect(PluginVerifier.admits(signed("ABCDE12345", notarized: false), trusting: ["ABCDE12345"]), "a team the operator approved")
+
+        func held(_ kind: HeldRelease.Kind, installed: String?, _ team: String, notarized: Bool, trusting: Set<String> = ours) -> String? {
+            PluginManager.holdReason(kind: kind, installedTeam: installed, signature: signed(team, notarized: notarized), trusting: trusting)
+        }
+        // A new plugin.
+        #expect(held(.add, installed: nil, "ABCDE12345", notarized: true) == nil)
+        #expect(held(.add, installed: nil, "ABCDE12345", notarized: false)?.contains("isn't notarized") == true)
+        #expect(held(.add, installed: nil, GPP.trustedTeam, notarized: false) == nil)
+        // An update keeps its signer, or waits for the operator: notarized or not.
+        #expect(held(.update, installed: "ABCDE12345", "ABCDE12345", notarized: true) == nil)
+        #expect(held(.update, installed: "ABCDE12345", "ZYXWV98765", notarized: true)?.contains("another team") == true)
+        #expect(held(.update, installed: "ABCDE12345", "ZYXWV98765", notarized: false)?.contains("another team") == true)
+        #expect(held(.update, installed: "ABCDE12345", "ZYXWV98765", notarized: true, trusting: ["ZYXWV98765"]) == nil,
+                "a signer the operator already approved")
+        #expect(held(.update, installed: "ABCDE12345", "ABCDE12345", notarized: false)?.contains("isn't notarized") == true)
+    }
+
     @Test func trustedTeamsAndHeldReleasesLiveInGaeaSqlite() throws {
         let database = try GaeaDatabase()
         try database.trust(team: "ABCDE12345", name: "Jane Doe")

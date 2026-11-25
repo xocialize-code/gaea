@@ -94,7 +94,7 @@ and video generation and processing on the Mac.
 |---|---|---|---|
 | PLG-1 | **A plugin is a signed executable bundle** (`.gaeaplugin`): a worker binary, its metallib and resources, and a sealed `manifest.json`. It runs as a child process. | A | G-2; GPP-1 §4 |
 | PLG-2 | **Added by Git repo URL** in Gaea's UI. Gaea reads the repo's GitHub Releases for the plugin and its updates. | N | G-18; concept |
-| PLG-3 | **Trust from the signature, never the URL:** Gaea runs only plugins signed by a trusted team. The check runs at install and again at launch. Gaea's own team is trusted always. **Since 0.13.0 (G4, AB-T-0411)** another team's release is held, not refused: the operator sees the certificate's name, team, notarization and repo, and approves the team (it joins the trust list in gaea.sqlite) or declines. Removing a team stops its plugins, which stay installed until it's trusted again. | N | G-7, G-18, G-22 |
+| PLG-3 | **Trust from the signature, never the URL:** Gaea runs only plugins signed by a trusted team. The check runs at install and again at launch. Gaea's own team is trusted always. **Since 0.13.0 (G4, AB-T-0411)** another team's release is held, not refused: the operator sees the certificate's name, team, notarization and repo, and approves the team (it joins the trust list in gaea.sqlite) or declines. Removing a team stops its plugins, which stay installed until it's trusted again. **Since G-32 (2026-11-25)** a release that Apple notarized installs and runs whoever signed it, with no question; the trust list and its question are for builds that aren't notarized, and for an update signed by another team than the plugin it updates. Removing a team stops only its plugins that aren't notarized. | N | G-7, G-18, G-22, G-32 |
 | PLG-4 | **Update and roll back:** versions installed side by side, switched when idle, the previous one kept. Gaea checks for updates and shows what changed. | N | Concept: "check for newer versions" |
 | PLG-5 | **Enable and disable** a plugin, or any model in it. A disabled model disappears from descriptors. | N | G-18 |
 | PLG-6 | **Plugins describe; Gaea renders.** Each plugin's settings and model options are forms that Gaea draws from the manifest (MESFormsUI). Plugins ship no UI code. | A | Plan §2.1; replaces the concept's "UI per model" |
@@ -110,7 +110,7 @@ and video generation and processing on the Mac.
 |---|---|---|---|
 | UI-1 | **A menu bar app:** start and stop the server, the running job, memory at a glance, open the console. | N | Concept |
 | UI-2 | **The console:** Queue, Models, Plugins and System pages. | N | MESEngineUI, MESKit v0.5.0 (AB-A-0207) |
-| UI-3 | **Plugins page:** add by repo URL, update, roll back, enable and disable, approve a new team. | N | G-18 |
+| UI-3 | **Plugins page:** add by repo URL, update, roll back, enable and disable, approve a team whose build isn't notarized (G-32). | N | G-18, G-32 |
 | UI-4 | **System page:** memory per worker and in total, against the Mac's capability (chip, memory, disk speed). | N | Concept: "salvaged from the image engine" |
 | UI-5 | **All configuration happens on the server,** in this UI. A local operator API serves the console, and a `gaea` CLI on the same Mac covers status and logs. Nothing is configurable remotely. | N | G-17 |
 | UI-6 | **Logs per plugin:** each worker's stderr, kept and viewable in the console and with `gaea plugins logs`. | P | Plan §6 |
@@ -205,7 +205,7 @@ The plan's §6 holds the full list. The product-level ones:
 |---|---|---|---|
 | R1 | **Fixed cost per process** (MLX start-up, Metal context) | Small models pay it on every cold start | Measure in G0 (AB-T-0356); keep workers warm; group small models in packs |
 | R2 | **One GPU job at a time** (MEM-1) | Throughput on a busy server | Measure before relaxing it; spread work across servers (SRV-9) |
-| R3 | **A repo URL pointing at someone else's code** | Running untrusted code | The signature decides (PLG-3) |
+| R3 | **A repo URL pointing at someone else's code** | Running untrusted code | The signature and Apple's notarization decide (PLG-3, G-32). A notarized plugin from a developer nobody here knows runs unsandboxed, as the user: notarization is a malware scan, not a review |
 | R4 | **Spec work gates audio and video** | G2 and G3 can't exit without published profiles | Spec work runs during the phase before |
 | R5 | **Research and non-commercial models** | Users mistake them for usable ones | Opt-in, named-only, licence shown and accepted (PLG-11) |
 | R6 | **macOS 26 floor** | Older Macs can't run Gaea | Accepted: the engine requires it |

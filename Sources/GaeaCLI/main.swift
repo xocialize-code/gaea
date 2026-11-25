@@ -17,10 +17,11 @@ import GaeaOperator
 //   gaea plugins logs <id> [-n 80]      a plugin's events and its worker's stderr (UI-6)
 //   gaea crashes [<plugin>] [-n 50]     worker crashes, newest first, and quarantines (SRV-8, G-26)
 //   gaea crashes show <id>              one crash: what ran, how it ended, stderr's last lines, macOS's crash report
-//   gaea trust [list]                   the trusted teams, and releases held because their team isn't (AB-T-0411)
+//   gaea trust [list]                   the trusted teams and the releases held for an answer (AB-T-0411). A notarized
+//                                       plugin runs whoever signed it (G-32); the list is for builds that aren't
 //   gaea trust approve <held-id | team> trust a held release's team and finish its install, or trust a team again
 //   gaea trust decline <held-id>        drop a held release
-//   gaea trust remove <team>            stop trusting a team: its plugins stop and stay installed
+//   gaea trust remove <team>            stop trusting a team: its plugins that aren't notarized stop and stay installed
 //   gaea models [list]                  every plugin model, on or off
 //   gaea models enable|disable <id>
 //   gaea models root [<folder> | default]  the shared weights folder: read it, set it, or go back to MLXEngine's store

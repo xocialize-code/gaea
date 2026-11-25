@@ -3,8 +3,9 @@ import GaeaProtocol
 import LightweightCodeRequirements
 import Security
 
-/// Trust comes from the signature, never the URL (G-7, G-18). A plugin runs only when it's signed by a team on the trust
-/// list (`TrustList`): Gaea's own, `GPP.trustedTeam`, and the teams the operator approved. The check runs at install and
+/// Trust comes from the signature, never the URL (G-7, G-18). A plugin runs when its bundle is sealed, signed with a
+/// Developer ID under hardened runtime, and either notarized by Apple, whoever the team is (G-32), or signed by a team on
+/// the trust list: Gaea's own, `GPP.trustedTeam`, and the teams the operator approved. The check runs at install and
 /// again before every launch (PLG-3), and the launch itself carries a `launchRequirement` the kernel enforces at exec.
 public enum PluginVerifier {
     public struct Signature: Sendable, Equatable, CustomStringConvertible {
@@ -29,8 +30,8 @@ public enum PluginVerifier {
         case notDeveloperID(String)
         /// The seal is broken: something in the bundle changed after signing.
         case invalid(String)
-        /// A valid Developer ID signature, with hardened runtime, from a team that isn't on the trust list. An install
-        /// holds the release for the operator's answer instead of refusing it.
+        /// A valid Developer ID signature, with hardened runtime, that Apple hasn't notarized, from a team that isn't on
+        /// the trust list. An install holds the release for the operator's answer instead of refusing it.
         case untrustedTeam(Signature)
         case noHardenedRuntime
 
@@ -42,7 +43,8 @@ public enum PluginVerifier {
             case .invalid(let why): "Refused: the bundle's signature is invalid (\(why))."
             case .untrustedTeam(let signature):
                 "Refused: the bundle is signed by \(signature.commonName.flatMap(Signature.holder) ?? "team \(signature.team)") "
-                    + "(\(signature.team)), a team this Gaea doesn't trust. Approve the team to run it: gaea trust."
+                    + "(\(signature.team)), isn't notarized by Apple, and its team isn't one this Gaea trusts. "
+                    + "Approve the team to run it: gaea trust."
             case .noHardenedRuntime: "Refused: the bundle's signature has no hardened runtime."
             }
         }
@@ -73,6 +75,21 @@ public enum PluginVerifier {
             throw Refusal.untrustedTeam(signature)
         }
         return signature
+    }
+
+    /// Who may run (G-32): code Apple notarized, from any Developer ID team, and code from a team on the trust list,
+    /// notarized or not. The signature is one `check` returned, so the seal, the Developer ID and hardened runtime hold.
+    public static func admits(_ signature: Signature, trusting teams: Set<String>) -> Bool {
+        signature.notarized || teams.contains(signature.team)
+    }
+
+    /// Checks the bundle statically, then that it may run (`admits`). `knownNotarized` is what an install recorded for
+    /// these same sealed bytes: a launch with no network, of a bundle with no stapled ticket, goes by that.
+    public static func admit(_ bundle: URL, trusting teams: Set<String>, knownNotarized: Bool = false) throws -> Signature {
+        var (_, signature) = try check(bundle)
+        if knownNotarized { signature.notarized = true }
+        if signature.notarized { return signature }
+        return try verify(bundle, trusting: teams)
     }
 
     static let flags = SecCSFlags(rawValue: kSecCSCheckAllArchitectures | kSecCSStrictValidate | kSecCSCheckNestedCode)
@@ -121,7 +138,7 @@ public enum PluginVerifier {
         return (code, Signature(team: team, identifier: identifier, commonName: commonName, notarized: notarized))
     }
 
-    /// The requirement a worker launch carries, pinned to the plugin's team, which the launch check just found trusted:
+    /// The requirement a worker launch carries, pinned to the plugin's team, which the launch check just admitted:
     /// the kernel kills an executable that doesn't meet it (spike check 11).
     public static func launchRequirement(team: String) throws -> LaunchCodeRequirement {
         try LaunchCodeRequirement.allOf {

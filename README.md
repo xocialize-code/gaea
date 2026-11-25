@@ -134,16 +134,21 @@ Gaea runs one GPU job at a time across all its plugins, and it keeps workers war
 
 ### Trust
 
-Gaea runs only plugins signed by a team you trust. It checks the signature, not the repo's URL, at install and again at
-every launch.
+Gaea runs a plugin that is signed with a Developer ID and notarized by Apple, whoever its developer is. It checks the
+signature, not the repo's URL, at install and again at every launch.
 
-- **Our team** (Dustin Nielson, CFZS6RXUCP) is trusted from the start.
-- **A new team:** its release is held, not installed. The console's Plugins page and `gaea trust` show the
-  certificate's name, the team id, notarization and the repo.
+- **What notarization tells you.** Apple scanned the build for malware and knows who signed it. It doesn't review what a
+  plugin does, and a plugin runs unsandboxed, as you. Add plugins from developers you have a reason to rely on.
+- **A build that isn't notarized** runs only from a team on the trust list. Our team (Dustin Nielson, CFZS6RXUCP) is on
+  it from the start. From any other team the release is held, not installed: the console's Plugins page and
+  `gaea trust` show the certificate's name, the team id, notarization and the repo.
   - `gaea trust approve <held-id>` trusts the team and finishes the install. Later releases from that team then install
-    without asking.
+    without asking, notarized or not.
   - `gaea trust decline <held-id>` drops the release.
-- **Removing a team:** `gaea trust remove <team>` stops its plugins and keeps them installed until you trust it again.
+- **An update signed by another team** than the plugin it updates is held the same way, notarized or not: a plugin that
+  changes hands is yours to accept.
+- **Removing a team:** `gaea trust remove <team>` stops its plugins that aren't notarized and keeps them installed
+  until you trust it again. To stop a notarized plugin, disable or remove it.
 
 ### Updates
 

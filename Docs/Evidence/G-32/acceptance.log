@@ -1,0 +1,103 @@
+# Plugin trust acceptance (G-32) 2026-11-25T17:56:15Z: Gaea 1.9.3, demo 0.6.1
+host: Mac17,14, macOS 27.3; GAEA_HOME /tmp/gaea-trust.qZty/h
+Gaea 1.9.3
+MES:       http://127.0.0.1:17771/mes/v0 (open, this Mac only)
+Operations: 
+Plugins:   0 installed, 0 enabled
+Trust:     any notarized plugin; builds that aren't, from no team
+Crashes:   none in the last 24 h
+Workers:   none
+Memory:    0.00 GB charged of 103.08 GB budget (three quarters of memory, the default); host 0.01 GB
+Idle:      a worker idle 900 s is stopped and its memory freed (gaea workers idle <seconds>)
+Models:    /Users/dustinnielson/Library/Application Support/MLXEngine/Models
+Update:    up to date
+Operator:  /tmp/gaea-trust.qZty/h/operator.sock (same user, Developer ID team); you are pid 91760, uid 501, Developer ID CFZS6RXUCP
+Database:  /tmp/gaea-trust.qZty/h/gaea.sqlite
+PASS  status states the rule, and that no team is trusted
+$ gaea plugins add https://github.com/xocialize-code/gaea-plugin-demo 0.6.1
+Installed Gaea demo worker 0.6.1 (com.xocialize.gaea.demo), enabled.
+PASS  the notarized demo installs at once, with no question
+PASS  nothing is held and no team was added
+Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea.demo, notarized, hardened runtime
+PASS  its install records the Developer ID and the notarization
+PASS  demo-gradient is offered
+{'effective': {'count': 1, 'seed': 11, 'size': {'height': 384, 'width': 512}, 'x-gaea.gradient_angle': 45}, 'lane': 'fp32', 'operation': 'image.generate', 'outputs': [{'media_type': 'image/png', 'name': 'images', 'path': '/tmp/gaea-trust.qZty/h/Caches/spool/jobs/job_236bezjnzrfp00vk8rbb/outputs/worker/worker-1/out/image-0.png'}], 'plugin': 'com.xocialize.gaea.demo', 'prepare_seconds': 0, 'seconds': 0.737, 'version': '0.6.1'}
+PASS  a job runs on it
+PASS  after a restart it is offered and runs
+Trusted CFZS6RXUCP. Its plugins run again: com.xocialize.gaea.demo.
+PASS  its team can be approved from the installed plugin
+No longer trusting CFZS6RXUCP. Nothing stopped: its notarized plugins run as before.
+PASS  removing the team stops nothing: the build is notarized
+{'effective': {'count': 1, 'seed': 11, 'size': {'height': 384, 'width': 512}, 'x-gaea.gradient_angle': 45}, 'lane': 'fp32', 'operation': 'image.generate', 'outputs': [{'media_type': 'image/png', 'name': 'images', 'path': '/tmp/gaea-trust.qZty/h/Caches/spool/jobs/job_9jfymp2d11vjmps1335d/outputs/worker/worker-1/out/image-0.png'}], 'plugin': 'com.xocialize.gaea.demo', 'seconds': 0.005, 'version': '0.6.1'}
+PASS  a job still runs
+on  com.xocialize.gaea.demo 0.6.1  Gaea demo worker  https://github.com/xocialize-code/gaea-plugin-demo
+PASS  the plugin list marks nothing stopped
+$ gaea plugins add https://github.com/xocialize-code/gaea-plugin-demo
+Held h-7d372bbb: Gaea demo worker 0.6.1 (com.xocialize.gaea.demo) isn't notarized by Apple, and its team isn't one Gaea trusts yet.
+  Signed by:  Developer ID Application: Dustin Nielson (CFZS6RXUCP)
+  Team:       CFZS6RXUCP
+  Notarized:  no, Apple hasn't notarized this build
+  Repo:       https://github.com/xocialize-code/gaea-plugin-demo (v0.6.1)
+  Models:     demo-matmul, demo-gradient, demo-separator, demo-part, demo-locate
+Trusting the team lets Gaea run any plugin it signs, notarized or not, including later updates.
+  Approve: gaea trust approve h-7d372bbb
+  Decline: gaea trust decline h-7d372bbb
+PASS  the build that isn't notarized is held, and says why
+PASS  the hold names the certificate, team, notarization, repo and models
+PASS  nothing is installed
+PASS  nothing is offered, and a job for its model is refused
+PASS  the held bundle is kept aside in Held/h-7d372bbb
+$ gaea trust decline h-7d372bbb
+Declined Gaea demo worker 0.6.1 from Dustin Nielson (CFZS6RXUCP); the download is gone.
+PASS  declining drops the download
+$ gaea plugins add https://github.com/xocialize-code/gaea-plugin-demo
+Held h-e6ae657f: Gaea demo worker 0.6.1 (com.xocialize.gaea.demo) isn't notarized by Apple, and its team isn't one Gaea trusts yet.
+  Signed by:  Developer ID Application: Dustin Nielson (CFZS6RXUCP)
+  Team:       CFZS6RXUCP
+  Notarized:  no, Apple hasn't notarized this build
+  Repo:       https://github.com/xocialize-code/gaea-plugin-demo (v0.6.1)
+  Models:     demo-matmul, demo-gradient, demo-separator, demo-part, demo-locate
+Trusting the team lets Gaea run any plugin it signs, notarized or not, including later updates.
+  Approve: gaea trust approve h-e6ae657f
+  Decline: gaea trust decline h-e6ae657f
+Trusted its team. Installed Gaea demo worker 0.6.1 (com.xocialize.gaea.demo), enabled.
+PASS  approving it trusts the team and installs the demo
+A plugin runs when it's signed with a Developer ID and notarized by Apple, whoever its team is.
+Trusted teams, whose plugins also run when a build isn't notarized:
+  CFZS6RXUCP  Dustin Nielson, approved 2026-11-25T17:56:20Z  plugins: com.xocialize.gaea.demo
+  (Gaea's own team is treated as unknown for this run: GAEA_UNTRUST_OWN_TEAM)
+Held: none
+PASS  the team is on the list, approved by the operator
+{'effective': {'count': 1, 'seed': 11, 'size': {'height': 384, 'width': 512}, 'x-gaea.gradient_angle': 45}, 'lane': 'fp32', 'operation': 'image.generate', 'outputs': [{'media_type': 'image/png', 'name': 'images', 'path': '/tmp/gaea-trust.qZty/u/Caches/spool/jobs/job_2g0p1sbqwdngwprpxxpp/outputs/worker/worker-1/out/image-0.png'}], 'plugin': 'com.xocialize.gaea.demo', 'prepare_seconds': 0, 'seconds': 0.015, 'version': '0.6.1'}
+PASS  a job runs on the build that isn't notarized
+No longer trusting CFZS6RXUCP. Stopped, and kept installed until it's trusted again: com.xocialize.gaea.demo.
+PASS  removing the team stops the plugin and keeps it
+PASS  it is no longer offered
+{"error":{"code":"unknown_operation","message":"No operation image.generate on this engine.","param":"operation","request_id":"req_c1b9sdxtbsjy"}}
+PASS  a job for it is refused
+on  com.xocialize.gaea.demo 0.6.1  Gaea demo worker  https://github.com/xocialize-code/gaea-plugin-demo
+      stopped: this build isn't notarized and its team CFZS6RXUCP isn't trusted (gaea trust approve CFZS6RXUCP)
+PASS  it stays installed, marked stopped
+A plugin runs when it's signed with a Developer ID and notarized by Apple, whoever its team is.
+Trusted teams, whose plugins also run when a build isn't notarized:
+  (Gaea's own team is treated as unknown for this run: GAEA_UNTRUST_OWN_TEAM)
+Not notarized and not trusted, installed and stopped:
+  CFZS6RXUCP  plugins: com.xocialize.gaea.demo  (gaea trust approve CFZS6RXUCP)
+Held: none
+PASS  trust lists it as not notarized and not trusted
+PASS  after a restart, still not offered
+Trusted CFZS6RXUCP. Its plugins run again: com.xocialize.gaea.demo.
+PASS  trusted again by team id, it runs
+{'effective': {'count': 1, 'seed': 11, 'size': {'height': 384, 'width': 512}, 'x-gaea.gradient_angle': 45}, 'lane': 'fp32', 'operation': 'image.generate', 'outputs': [{'media_type': 'image/png', 'name': 'images', 'path': '/tmp/gaea-trust.qZty/u/Caches/spool/jobs/job_02sg49x24grpm48p2tqh/outputs/worker/worker-1/out/image-0.png'}], 'plugin': 'com.xocialize.gaea.demo', 'prepare_seconds': 0, 'seconds': 0.014, 'version': '0.6.1'}
+PASS  a job runs again
+A plugin runs when it's signed with a Developer ID and notarized by Apple, whoever its team is.
+Trusted teams, whose plugins also run when a build isn't notarized:
+  CFZS6RXUCP  Gaea's own team (built in)
+Held: none
+PASS  Gaea's own team is built in
+Installed Gaea demo worker 0.6.1 (com.xocialize.gaea.demo), enabled.
+PASS  our own build that isn't notarized installs at once
+CFZS6RXUCP is Gaea's own team, trusted always.
+PASS  the built-in team can't be removed
+
+31 passed, 0 failed

@@ -19,7 +19,7 @@ plugins do the generating.
 
 G-1 to G-19 were agreed on 2026-10-27: G-1 to G-9 came from the proposal, and G-10 to G-19 are the answers to the
 open questions. G-20 was agreed on 2026-10-28 from mlx-apps' reply on AB-A-0208, and G-21 to G-23 answer the PRD's open
-questions. G-24 to G-26 are G4's decisions, taken on 2026-11-01, and G-27 to G-31 are G5's, taken on 2026-11-05. Each is filed on the bridge under
+questions. G-24 to G-26 are G4's decisions, taken on 2026-11-01, and G-27 to G-31 are G5's, taken on 2026-11-05. G-32 is the operator's, taken on 2026-11-25. Each is filed on the bridge under
 the `gaea` area; the Record column gives its id.
 
 | ID | Decision | Why | Record |
@@ -30,7 +30,7 @@ the `gaea` area; the Record column gives its id.
 | G-4 | **Plugins own the model-specific work. Gaea owns the profile-level work.** | This is the source document's split: Gaea runs the queue and memory, and the connector generates. See §3.3. | AB-D-0166 |
 | G-5 | **Gaea owns the configuration database** (SQLite). A plugin gets a namespaced, versioned store through the plugin protocol and never opens the database itself. No job media or job state goes in it. | A plugin can't break another plugin's data or Gaea's. Gaea stays safe to restart (Engines G3). | AB-D-0167 |
 | G-6 | **Distribution:** GitHub with Developer ID. Gaea and every plugin are notarized in CI. No sandbox, no App Store. | The spike measured what quarantine and Gatekeeper do; notarization also covers zips a user side-loads. | AB-D-0168 |
-| G-7 | **Trust:** Gaea runs only plugins signed by our Team ID by default. Other teams join a trust list that the user approves. | The install-time check and `launchRequirement` both read this list. | AB-D-0169 |
+| G-7 | **Trust:** Gaea runs only plugins signed by our Team ID by default. Other teams join a trust list that the user approves. Loosened by G-32: a notarized plugin runs whoever signed it. | The install-time check and `launchRequirement` both read this list. | AB-D-0169 |
 | G-8 | **Memory is governed at two levels.** Gaea runs a ledger across processes and decides which workers live. Inside each worker, MLXEngine still manages residency for that plugin's own models. | Killing a worker returns all of its memory: 5.12 GB in 65 ms in the spike. | AB-D-0170 |
 | G-9 | **One shared folder for weights:** `~/Library/Application Support/MLXEngine/Models`, as today (ENG-13). Workers download weights through MLXEngine, on Gaea's command. | It keeps today's sharing with the ML[X] apps and Desktop. | AB-D-0171 |
 | G-10 | **Plugin granularity:** one plugin per heavy model family, one processing pack for ForgeCore's small models, and one LLM plugin for prompt enhancement. | Q1 | AB-D-0172 |
@@ -55,6 +55,7 @@ the `gaea` area; the Record column gives its id.
 | G-29 | **`audio.separate` is designed for music stems too;** G5 ships only AuK's three stems. | Plan G5 D-3 | AB-D-0211 |
 | G-30 | **AuK's Mandarin edits never run on the int4 encoder:** they move to int8 with a warning, or are refused. | Plan G5 D-4 | AB-D-0212 |
 | G-31 | **The MES change runs in parallel;** IndexTTS 2.5 and VoxCPM2 come first, and AuK follows MES 0.10. | Plan G5 D-5 | AB-D-0213 |
+| G-32 | **A plugin runs when it is signed with a Developer ID and notarized by Apple, whoever its team is.** The trust list (G-7) is only for builds that aren't notarized: our own team's, and the teams the operator approves. An update signed by another team than the plugin it updates still waits for the operator. Gaea, its updates and the CLI stay pinned to our team. | The operator, 2026-11-25; loosens G-7 and G-18 | AB-D-0295 |
 
 ## 2. Architecture
 

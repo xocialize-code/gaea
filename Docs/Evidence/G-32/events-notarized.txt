@@ -1,0 +1,3 @@
+2026-11-25 17:56:18.078|com.xocialize.gaea.demo|0.6.1|installed|added from xocialize-code/gaea-plugin-demo (v0.6.1); Developer ID Application: Dustin Nielson (CFZS6RXUCP), id com.xocialize.gaea.demo, notarized, hardened runtime
+2026-11-25 17:56:19.895|||trusted|team CFZS6RXUCP (Dustin Nielson) approved by the operator
+2026-11-25 17:56:19.918|||untrusted|team CFZS6RXUCP removed from the trust list

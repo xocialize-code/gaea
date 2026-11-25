@@ -326,7 +326,8 @@ public final class GaeaHost: Sendable {
                 let team = try arg("team")
                 let stopped = try await manager.revoke(team: team)
                 return OperatorResponse(id: request.id, ok: true, text: "No longer trusting \(team.uppercased())."
-                    + (stopped.isEmpty ? "" : " Stopped, and kept installed until it's trusted again: \(stopped.joined(separator: ", "))."))
+                    + (stopped.isEmpty ? " Nothing stopped: its notarized plugins run as before."
+                        : " Stopped, and kept installed until it's trusted again: \(stopped.joined(separator: ", "))."))
             case .pluginsLogs:
                 let id = try arg("id")
                 let lines = Int(args["lines"] ?? "") ?? 80
@@ -519,14 +520,16 @@ public final class GaeaHost: Sendable {
 
     func pluginList(_ id: String) async throws -> OperatorResponse {
         let rows = try database.plugins()
-        let trusted = await manager.trustedTeams()
+        let admitted = Set(await manager.installed().filter(\.trusted).map(\.id))
         let text = rows.isEmpty ? "No plugins. Add one: gaea plugins add https://github.com/owner/repo" : rows.map { row in
             var line = "\(row.enabled ? "on " : "off") \(row.id) \(row.activeVersion)  \(row.title)  \(row.repo)"
             if let previous = row.previousVersion { line += "\n      rollback: \(previous)" }
             if let pending = row.pendingVersion { line += "\n      switching to \(pending) when idle" }
             if let latest = row.latestVersion { line += "\n      update available: \(latest)" }
             if let failure = row.failure { line += "\n      failed: \(failure)" }
-            if !trusted.contains(row.team) { line += "\n      stopped: its team \(row.team) isn't trusted (gaea trust approve \(row.team))" }
+            if !admitted.contains(row.id) {
+                line += "\n      stopped: this build isn't notarized and its team \(row.team) isn't trusted (gaea trust approve \(row.team))"
+            }
             if let reason = row.quarantineReason {
                 line += "\n      quarantined \(row.quarantinedAt?.formatted(.iso8601) ?? ""): \(reason) (gaea plugins enable \(row.id) clears it)"
             }
@@ -606,13 +609,15 @@ public final class GaeaHost: Sendable {
     /// What the operator needs to answer a held release (UI-3): who signed it, notarization, the repo and the models.
     static func describe(_ held: HeldRelease) -> String {
         """
-        Held \(held.id): \(held.title) \(held.version) (\(held.pluginID)) is signed by a team Gaea doesn't trust yet.
+        Held \(held.id): \(held.title) \(held.version) (\(held.pluginID)) \(held.notarized
+            ? "is signed by another team than the version installed."
+            : "isn't notarized by Apple, and its team isn't one Gaea trusts yet.")
           Signed by:  \(held.signingIdentity ?? held.team)
           Team:       \(held.team)
           Notarized:  \(held.notarized ? "yes" : "no, Apple hasn't notarized this build")
           Repo:       \(held.repo) (\(held.tag))
           Models:     \(held.models.joined(separator: ", ").ifEmpty("none"))
-        Trusting the team lets Gaea run any plugin it signs, including later updates.
+        Trusting the team lets Gaea run any plugin it signs, notarized or not, including later updates.
           Approve: gaea trust approve \(held.id)
           Decline: gaea trust decline \(held.id)
         """
@@ -621,7 +626,8 @@ public final class GaeaHost: Sendable {
     func trustSummary() async -> String {
         let teams = await manager.trustedTeams().sorted()
         let held = await manager.held().count
-        return (teams.isEmpty ? "no team" : teams.joined(separator: ", ")) + (held > 0 ? "; \(held) held: gaea trust" : "")
+        return "any notarized plugin; builds that aren't, from \(teams.isEmpty ? "no team" : teams.joined(separator: ", "))"
+            + (held > 0 ? "; \(held) held: gaea trust" : "")
     }
 
     func trustList(_ id: String) -> OperatorResponse {
@@ -633,16 +639,18 @@ public final class GaeaHost: Sendable {
             let ids = plugins.filter { $0.team == team }.map(\.id)
             return ids.isEmpty ? "" : "  plugins: \(ids.joined(separator: ", "))"
         }
-        var lines = ["Trusted teams:"]
+        var lines = ["A plugin runs when it's signed with a Developer ID and notarized by Apple, whoever its team is.",
+                     "Trusted teams, whose plugins also run when a build isn't notarized:"]
         for team in builtIn.sorted() { lines.append("  \(team)  Gaea's own team (built in)" + using(team)) }
         for t in approved where !builtIn.contains(t.team) {
             lines.append("  \(t.team)  \(t.name), approved \(t.addedAt.formatted(.iso8601))" + using(t.team))
         }
         if builtIn.isEmpty { lines.append("  (Gaea's own team is treated as unknown for this run: GAEA_UNTRUST_OWN_TEAM)") }
         let trusted = builtIn.union(approved.map(\.team))
-        let untrusted = Dictionary(grouping: plugins.filter { !trusted.contains($0.team) }, by: \.team)
+        let notarized = Set(plugins.filter { (try? database.version($0.id, $0.activeVersion))??.notarized == true }.map(\.id))
+        let untrusted = Dictionary(grouping: plugins.filter { !trusted.contains($0.team) && !notarized.contains($0.id) }, by: \.team)
         if !untrusted.isEmpty {
-            lines.append("Not trusted, installed and stopped:")
+            lines.append("Not notarized and not trusted, installed and stopped:")
             for (team, rows) in untrusted.sorted(by: { $0.key < $1.key }) {
                 lines.append("  \(team)  plugins: \(rows.map(\.id).joined(separator: ", "))  (gaea trust approve \(team))")
             }

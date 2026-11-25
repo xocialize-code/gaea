@@ -9,13 +9,16 @@ public struct InstalledPlugin: Sendable {
     public var version: String
     public var title: String
     public var repo: String
-    /// On, and signed by a trusted team: what offers and runs.
+    /// On, and admitted: what offers and runs.
     public var enabled: Bool
-    /// Its team is on the trust list. A plugin whose team was removed stays installed, and off, until it's trusted again.
+    /// It may run (G-32): Apple notarized it, or its team is on the trust list. A build that isn't notarized, whose team
+    /// was removed from the list, stays installed, and off, until the team is trusted again.
     public var trusted: Bool
     public var bundle: URL
     public var manifest: PluginManifest
     public var manifestData: Data
+    /// Apple notarized the active version, as its install recorded.
+    public var notarized = false
 
     public func model(_ id: String) -> PluginManifest.Model? { manifest.models.first { $0.id == id } }
 }
@@ -103,14 +106,14 @@ public actor PluginManager {
     public func installed() -> [InstalledPlugin] {
         let teams = trustedTeams()
         return ((try? database.plugins()) ?? []).compactMap { row in
-            let trusted = teams.contains(row.team)
             if let cached = cache[row.id], cached.version == row.activeVersion {
                 var plugin = cached
-                plugin.enabled = row.enabled && trusted
-                plugin.trusted = trusted
+                plugin.trusted = cached.notarized || teams.contains(row.team)
+                plugin.enabled = row.enabled && plugin.trusted
                 return plugin
             }
             guard let version = try? database.version(row.id, row.activeVersion) else { return nil }
+            let trusted = version.notarized || teams.contains(row.team)
             let bundle = URL(fileURLWithPath: version.bundlePath)
             guard let data = try? Data(contentsOf: bundle.appending(path: "Contents/Resources/manifest.json")),
                   let manifest = try? JSONDecoder().decode(PluginManifest.self, from: data) else {
@@ -119,18 +122,19 @@ public actor PluginManager {
             }
             let plugin = InstalledPlugin(id: row.id, version: row.activeVersion, title: row.title, repo: row.repo,
                                          enabled: row.enabled && trusted, trusted: trusted, bundle: bundle, manifest: manifest,
-                                         manifestData: data)
+                                         manifestData: data, notarized: version.notarized)
             cache[row.id] = plugin
             return plugin
         }
     }
 
-    /// The active version, checked again before a launch (PLG-3) against the trust list as it is now. A signature that no
-    /// longer verifies marks the plugin failed and throws; a team that is no longer trusted throws.
+    /// The active version, checked again before a launch (PLG-3): its seal and Developer ID, and that it may still run
+    /// (notarized, or its team on the trust list as it is now). A signature that no longer verifies marks the plugin
+    /// failed and throws; a build that isn't notarized, whose team is no longer trusted, throws.
     public func launchable(_ id: String) throws -> InstalledPlugin {
         guard let plugin = installed().first(where: { $0.id == id }) else { throw ManagerError.unknownPlugin(id) }
         do {
-            _ = try PluginVerifier.verify(plugin.bundle, trusting: trustedTeams())
+            _ = try PluginVerifier.admit(plugin.bundle, trusting: trustedTeams(), knownNotarized: plugin.notarized)
         } catch let refusal as PluginVerifier.Refusal where refusal.isUntrustedTeam {
             database.record("refused", plugin: id, version: plugin.version, "launch check: \(refusal)")
             throw refusal
@@ -147,7 +151,7 @@ public actor PluginManager {
 
     public enum AddOutcome: Sendable {
         case installed(InstalledPlugin)
-        /// Signed by a team that isn't trusted: downloaded and checked, waiting for `approve` or `decline`.
+        /// Not notarized and signed by a team that isn't trusted: downloaded and checked, waiting for `approve` or `decline`.
         case held(HeldRelease)
     }
 
@@ -273,7 +277,9 @@ public actor PluginManager {
     }
 
     /// Downloads, checks and installs one release beside any versions already there. Nothing reaches the plugin folder
-    /// unless every check passes. A release that passes every check but the team's is held in `paths.held` instead.
+    /// unless every check passes. A notarized release installs whoever signed it (G-32). Two releases pass every other
+    /// check and are held in `paths.held` for the operator instead: one Apple hasn't notarized, from a team that isn't on
+    /// the trust list; and an update signed by a different team than the plugin it updates, notarized or not.
     func install(_ release: PluginRelease, expected: PluginManifest, repo: PluginRepository, kind: HeldRelease.Kind,
                  progress: @escaping @Sendable (Double) -> Void) async throws -> Installed {
         let fm = FileManager.default
@@ -308,12 +314,10 @@ public actor PluginManager {
         progress(0.75)
 
         let signature: PluginVerifier.Signature
-        var untrusted = false
         do {
-            signature = try PluginVerifier.verify(staged, trusting: trustedTeams())
+            signature = try PluginVerifier.admit(staged, trusting: trustedTeams())
         } catch PluginVerifier.Refusal.untrustedTeam(let found) {
-            signature = found
-            untrusted = true
+            signature = found // held below: `holdReason` says why
         } catch {
             database.record("refused", plugin: expected.id, version: release.version.description, "\(error)")
             log("plugins: refused \(expected.id) \(release.tag): \(error)")
@@ -331,9 +335,10 @@ public actor PluginManager {
         }
 
         let manifestDigest = SHA256.hash(data: manifestData).map { String(format: "%02x", $0) }.joined()
-        if untrusted {
+        let installedTeam = kind == .update ? try database.plugin(manifest.id)?.team : nil
+        if let holdReason = Self.holdReason(kind: kind, installedTeam: installedTeam, signature: signature, trusting: trustedTeams()) {
             return .held(try hold(staged, manifest: manifest, release: release, repo: repo, kind: kind, signature: signature,
-                                  zipSHA256: digest, manifestSHA256: manifestDigest))
+                                  zipSHA256: digest, manifestSHA256: manifestDigest, why: holdReason))
         }
 
         let destination = paths.installDirectory(plugin: manifest.id, version: manifest.version)
@@ -341,11 +346,25 @@ public actor PluginManager {
         try fm.createDirectory(at: destination, withIntermediateDirectories: true)
         let bundle = destination.appending(path: staged.lastPathComponent)
         try fm.moveItem(at: staged, to: bundle)
-        _ = try PluginVerifier.verify(bundle, trusting: trustedTeams())
+        _ = try PluginVerifier.admit(bundle, trusting: trustedTeams(), knownNotarized: signature.notarized)
         progress(0.95)
         return .verified(GaeaDatabase.VersionRecord(
             version: manifest.version, bundlePath: bundle.path, zipSHA256: digest, manifestSHA256: manifestDigest,
             signature: signature.description, notarized: signature.notarized))
+    }
+
+    /// Why a release that passed every other check waits for the operator, or nil when it installs (G-32).
+    /// - A team on the trust list installs, notarized or not.
+    /// - A plugin keeps its signer: Apple's notarization says a build is clean, not that it comes from the people the
+    ///   operator installed. So an update signed by another team is the operator's call, once, notarized or not.
+    /// - Otherwise a notarized release installs, whoever signed it, and one that isn't notarized is held.
+    static func holdReason(kind: HeldRelease.Kind, installedTeam: String?, signature: PluginVerifier.Signature,
+                           trusting teams: Set<String>) -> String? {
+        if teams.contains(signature.team) { return nil }
+        if kind == .update, let installedTeam, installedTeam != signature.team {
+            return "is signed by another team than the version installed (\(installedTeam))"
+        }
+        return signature.notarized ? nil : "isn't notarized by Apple, and its team isn't one Gaea trusts"
     }
 
     /// The repo a manifest is checked against: the one it was added from, or the manifest's own when GitHub says both
@@ -440,7 +459,8 @@ public actor PluginManager {
         case switched(String)
         /// `version` is installed; Gaea switches to it when the plugin's models are idle.
         case pending(String)
-        /// The release is signed by a team that isn't trusted: held for `approve` or `decline`.
+        /// The release isn't notarized and its team isn't trusted, or another team signed it than the version installed:
+        /// held for `approve` or `decline`.
         case held(HeldRelease)
     }
 
@@ -523,10 +543,13 @@ public actor PluginManager {
         }
         cache[id] = nil
         if let manifest = installed().first(where: { $0.id == id })?.manifest {
+            // The team too: an approved update, or a rollback, may run under another signer than the version it replaces.
             try database.updatePlugin(id) {
                 $0.title = manifest.title
                 $0.summary = manifest.summary ?? ""
+                $0.team = manifest.team
             }
+            cache[id] = nil
         }
         // Keep the active version and the one it replaced; older ones go.
         for old in try database.versions(of: id) where old.version != version && old.version != from {
@@ -543,7 +566,7 @@ public actor PluginManager {
     /// Keeps a checked release aside for the operator. A release already held for the same plugin and version is
     /// replaced.
     func hold(_ staged: URL, manifest: PluginManifest, release: PluginRelease, repo: PluginRepository, kind: HeldRelease.Kind,
-              signature: PluginVerifier.Signature, zipSHA256: String, manifestSHA256: String) throws -> HeldRelease {
+              signature: PluginVerifier.Signature, zipSHA256: String, manifestSHA256: String, why: String) throws -> HeldRelease {
         let fm = FileManager.default
         for old in try database.held() where old.pluginID == manifest.id && old.version == manifest.version {
             try? fm.removeItem(at: paths.held.appending(path: old.id))
@@ -563,8 +586,8 @@ public actor PluginManager {
                                                notarized: signature.notarized))
         try database.insertHeld(held)
         database.record("held", plugin: manifest.id, version: manifest.version,
-                        "\(release.tag) from \(repo) is signed by \(held.teamName) (\(signature.team)), a team Gaea doesn't trust; held as \(id)")
-        log("plugins: held \(manifest.id) \(manifest.version) as \(id): team \(signature.team) isn't trusted")
+                        "\(release.tag) from \(repo), signed by \(held.teamName) (\(signature.team)), \(why); held as \(id)")
+        log("plugins: held \(manifest.id) \(manifest.version) as \(id): team \(signature.team), \(why)")
         return held
     }
 
@@ -660,8 +683,9 @@ public actor PluginManager {
         return held
     }
 
-    /// Stops trusting a team: its plugins' workers stop and their models leave the offers. They stay installed, with
-    /// the operator's on and off kept, and run again when the team is approved again. Returns their ids.
+    /// Stops trusting a team. Its plugins that Apple notarized keep running (G-32); the ones that aren't notarized stop,
+    /// and their models leave the offers. Those stay installed, with the operator's on and off kept, and run again when
+    /// the team is approved again. Returns the ids of the plugins that stopped.
     @discardableResult
     public func revoke(team: String) async throws -> [String] {
         let team = team.uppercased()
@@ -669,10 +693,11 @@ public actor PluginManager {
         guard try database.trustedTeams().contains(where: { $0.team == team }) else { throw ManagerError.unknownTeam(team) }
         try database.untrust(team: team)
         cache = [:]
-        let affected = try database.plugins().filter { $0.team == team }.map(\.id)
+        let affected = installed().filter { $0.manifest.team == team && !$0.trusted }.map(\.id)
         for id in affected {
             await workers?.retire(plugin: id)
-            database.record("untrusted", plugin: id, "its team \(team) was removed from the trust list; stopped until it's trusted again")
+            database.record("untrusted", plugin: id,
+                            "its team \(team) was removed from the trust list and this build isn't notarized; stopped until the team is trusted again")
         }
         database.record("untrusted", "team \(team) removed from the trust list")
         log("plugins: no longer trusting team \(team); stopped \(affected.isEmpty ? "nothing" : affected.joined(separator: ", "))")
