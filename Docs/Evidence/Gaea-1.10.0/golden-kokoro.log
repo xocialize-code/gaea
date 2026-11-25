@@ -1,0 +1,18 @@
+# Kokoro golden check 2026-11-25T18:42:30Z: com.xocialize.gaea.kokoro 0.1.3
+[Prewarm] kokoro-82m: paged 55 file(s) / 0.4 GB into cache in 0.0s
+PASS  one (af_heart, seed 42): byte-identical, sha256 9455e29796daa1bc…; over GPP ran in 0.59 s; in-process {"audio_s":5.3499999999999996,"max_rss_gb":0.50157977600000003,"model":"kokoro-82m","pieces":1,"prepare_s":0.31388025000000003,"run1_s":7.1560282500000003,"seed":42,"voice":"af_heart"}
+[Prewarm] kokoro-82m: paged 55 file(s) / 0.4 GB into cache in 0.0s
+PASS  pause (bm_lewis, seed 7): byte-identical, sha256 b7c74e42e3275951…; over GPP ran in 0.78 s; in-process {"audio_s":10.824999999999999,"max_rss_gb":0.50592153600000001,"model":"kokoro-82m","pieces":3,"prepare_s":0.30426312500000002,"run1_s":1.145872333,"seed":7,"voice":"bm_lewis"}
+[Prewarm] kokoro-82m: paged 55 file(s) / 0.4 GB into cache in 0.0s
+PASS  long (bf_emma, seed 3): byte-identical, sha256 4f76fcd65224c508…; over GPP ran in 5.65 s; in-process {"audio_s":121.72499999999999,"max_rss_gb":0.50737971199999998,"model":"kokoro-82m","pieces":9,"prepare_s":0.28110512500000001,"run1_s":2.944928,"seed":3,"voice":"bf_emma"}
+[Prewarm] kokoro-82m: paged 55 file(s) / 0.4 GB into cache in 0.0s
+PASS  seed0 (am_adam, seed 0): byte-identical, sha256 bae662105ad8f2e9…; over GPP ran in 0.38 s; in-process {"audio_s":5.2000000000000002,"max_rss_gb":0.50334924800000003,"model":"kokoro-82m","pieces":1,"prepare_s":0.29485866599999999,"run1_s":0.386795375,"seed":0,"voice":"am_adam"}
+OK
+PASS  long.gpp passes validate.py
+OK
+PASS  one.gpp passes validate.py
+OK
+PASS  pause.gpp passes validate.py
+OK
+PASS  seed0.gpp passes validate.py
+== 8 passed, 0 failed

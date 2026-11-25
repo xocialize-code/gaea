@@ -1,0 +1,45 @@
+# Locate acceptance (AB-T-0483) 2026-11-25T19:11:36Z: Gaea 1.10.0, locate from github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add the locate plugin by repo URL
+      on  qwen3-vl-locate  Qwen3-VL locate  [com.xocialize.gaea.locate 0.2.0] lanes: int8* 8.40 GB, int4 6.35 GB
+PASS  gaea models finds the weights under the models root, lanes int8 (default) and int4
+{'default': True, 'id': 'qwen3-vl-locate', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct'}, 'limits': {'max_count': 16}, 'memory_class': 'medium', 'notes': 'Finds what the prompt names and boxes it, one box for each instance ("the character\'s hands" gives two). Write the prompt the way you want the box drawn: "the character\'s face" runs from the hairline to the chin. An empty list means it isn\'t in the picture. The score ranks boxes; it isn\'t a calibrated probability. Pictures are read at up to 1024 px on the long side, so small or crowded things may be missed.', 'quality_tiers': ['draft', 'standard', 'best'], 'speed_class': 'fast', 'supports': {'seed': False}, 'title': 'Qwen3-VL locate'}
+PASS  image.locate takes an image and a prompt, returns boxes, and offers qwen3-vl-locate as its default: Apache-2.0, at most 16 boxes, no seed
+      fox: HTTP 201 succeeded qwen3-vl-locate int8 1.121 []   [{"height": 0.7070000000000001, "label": "the fox", "score": 0.47669559783030313, "width": 0.708, "x": 0.148, "y": 0.177}]
+[{'height': 0.7070000000000001, 'label': 'the fox', 'score': 0.47669559783030313, 'width': 0.708, 'x': 0.148, 'y': 0.177}] {'count': 1, 'model_params': {'x-gaea.worker': {'effective': {'count': 1}, 'lane': 'int8', 'operation': 'image.locate', 'outputs': [{'name': 'boxes', 'value': [{'height': 0.7070000000000001, 'label': 'the fox', 'score': 0.47669559783030313, 'width': 0.708, 'x': 0.148, 'y': 0.177}]}], 'plugin': 'com.xocialize.gaea.locate', 'prepare_seconds': 1.266, 'seconds': 1.121, 'version': '0.2.0'}}, 'quality': 'standard'}
+PASS  the fox: one box over the fox, labelled with the prompt, scored; effective.count 1
+[{'height': 0.7070000000000001, 'label': 'the fox', 'score': 0.47669559783030313, 'width': 0.708, 'x': 0.148, 'y': 0.177}] [{'y': 0.177, 'height': 0.7070000000000001, 'x': 0.148, 'width': 0.708, 'label': 'the fox', 'score': 0.47669559783030313}]
+PASS  the boxes are locate-inproc's, number for number
+      ears: HTTP 201 succeeded qwen3-vl-locate int8 1.881 []   [{"height": 0.16599999999999998, "label": "the fox's ears", "score": 0.5863770086613157, "width": 0.10999999999999999, "x": 0.538, "y": 0.18}, {"height": 0.16899999999999998, "label": "the fox's ears", "score": 0.42445518394948045, "width": 0.10999999999999999
+PASS  "the fox's ears" with count 4: at most 4 boxes, best first, effective.count 4
+      nothing: HTTP 201 succeeded qwen3-vl-locate int8 0.371 ['nothing_found']   []
+[] ['nothing_found']
+PASS  "a bicycle" succeeds with an empty list and the warning nothing_found
+      plain768: HTTP 201 succeeded qwen3-vl-locate int8 1.346 []   [{"height": 0.7, "label": "the fox", "score": 0.653680300596214, "width": 0.6779999999999999, "x": 0.157, "y": 0.177}]
+      turned: HTTP 201 succeeded qwen3-vl-locate int8 1.36 []   [{"height": 0.7, "label": "the fox", "score": 0.6606128337726086, "width": 0.6759999999999999, "x": 0.159, "y": 0.177}]
+{'height': 0.7, 'label': 'the fox', 'score': 0.653680300596214, 'width': 0.6779999999999999, 'x': 0.157, 'y': 0.177} {'height': 0.7, 'label': 'the fox', 'score': 0.6606128337726086, 'width': 0.6759999999999999, 'x': 0.159, 'y': 0.177} 0.9970501474926254
+PASS  a JPEG turned by its orientation tag gives the upright picture's box (IoU ≥ 0.8 with the plain run's)
+      int4: HTTP 201 succeeded qwen3-vl-locate int4 0.698 []   [{"height": 0.7050000000000001, "label": "the fox", "score": 0.47323325191949417, "width": 0.709, "x": 0.148, "y": 0.173}]
+PASS  the int4 lane, named, runs on int4 and finds the fox
+      noprompt: HTTP 400     [] invalid_request Input 'prompt' is required. null
+PASS  no prompt is 400
+      toomany: HTTP 422     [] out_of_limits $.count: above 16.0 null
+422 {'code': 'out_of_limits', 'message': '$.count: above 16.0', 'param': 'count', 'request_id': 'req_xj04v3z45w7e'}
+PASS  count 17 is 422 out_of_limits
+      ex01: head crop IoU 0.938 in tolerance; face found: True (reference has one: True)
+      ex02: head crop IoU 0.934 in tolerance; face found: True (reference has one: True)
+      ex03: head crop IoU 0.910 in tolerance; face found: True (reference has one: True)
+      ex04: head crop IoU 0.925 in tolerance; face found: True (reference has one: True)
+      ex05: head crop IoU 0.922 in tolerance; face found: True (reference has one: True)
+      ex06: head crop IoU 0.906 in tolerance; face found: True (reference has one: True)
+      ex07: head crop IoU 0.978 in tolerance; face found: True (reference has one: True)
+      ex08: head crop IoU 0.984 in tolerance; face found: True (reference has one: True)
+      ex09: head crop IoU 0.946 in tolerance; face found: False (reference has one: False)
+      ex10: head crop IoU 0.774 in tolerance; face found: True (reference has one: True)
+      ex11: head crop IoU 0.949 in tolerance; face found: True (reference has one: True)
+      ex12: head crop IoU 0.918 in tolerance; face found: True (reference has one: True)
+      hair IoU median 0.911; face IoU median 0.739; head crop IoU median 0.929; in tolerance 12/12; warm seconds per query median 1.38
+PASS  the head crop built from Gaea's hair and face boxes is within tolerance on at least 11 of mlx-3d's 12 pictures
+OK
+PASS  transcript com.xocialize.gaea.locate-0.2.0-2026-11-25T191138Z-4578f336.gpp passes validate.py
+== 13 passed, 0 failed

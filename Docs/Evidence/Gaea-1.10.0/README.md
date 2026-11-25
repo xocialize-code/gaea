@@ -1,6 +1,7 @@
 # Gaea 1.10.0: notarized plugins from any developer, and the typed locate capability
 
-2026-11-25, Mac Studio (Mac17,14, M5 Max, 128 GB, macOS 27.3). A local Release build of Gaea 1.10.0, run headless on
+2026-11-25, Mac Studio (Mac17,14, M5 Max, 128 GB, macOS 27.3). A local Release build of Gaea 1.10.0 first, then the
+published app (`Gaea-1.10.0.zip`, sha256 `549b1ad1…8f8088da`, Gatekeeper: Notarized Developer ID), each run headless on
 throwaway homes and ports. The GPU was shared with other sessions, so the times are upper bounds.
 
 ## What changed
@@ -25,7 +26,17 @@ throwaway homes and ports. The GPU was shared with other sessions, so the times 
 | RMBG 3.0 acceptance, gaea-plugin-fibo2 0.3.0 from GitHub (notarized) | 13 passed, 0 failed | [acceptance-rmbg.log](acceptance-rmbg.log) |
 | HairDeck acceptance, gaea-plugin-hairdeck 0.1.2 from GitHub (notarized) | 32 passed, 0 failed | [acceptance-hairdeck-github.log](acceptance-hairdeck-github.log) |
 
-The trust acceptance ran on the build before the engine moved; the unit tests ran after.
+Those ran on the local build; the first trust run was on the build before the engine moved. Through the published
+app:
+
+| Run | Result | Log |
+|---|---|---|
+| Trust acceptance (G-32) | 31 passed, 0 failed | [acceptance-trust-released.log](acceptance-trust-released.log) |
+| Locate acceptance, the plugin's 0.2.0 release from GitHub | 13 passed, 0 failed | [acceptance-locate-released.log](acceptance-locate-released.log) |
+| Kokoro 0.1.3 from GitHub (`tools/acceptance-kokoro.sh`) | 34 passed, 0 failed | [acceptance-kokoro-github.log](acceptance-kokoro-github.log) |
+| SeedVR2 0.1.2 from GitHub (`tools/acceptance-seedvr2.sh`) | 18 passed, 0 failed | [acceptance-seedvr2-github.log](acceptance-seedvr2-github.log) |
+| LTX 0.2.1, its local build through a stand-in (`tools/acceptance-ltx.sh`) | 22 passed, 0 failed | [acceptance-ltx-standin.log](acceptance-ltx-standin.log) |
+| LTX 0.2.1 from GitHub | 22 passed, 0 failed | [acceptance-ltx-github.log](acceptance-ltx-github.log) |
 
 ## Typed locate
 
@@ -38,7 +49,7 @@ The trust acceptance ran on the build before the engine moved; the unit tests ra
 | Face box IoU, median | 0.750 | 0.739 |
 | Head crop IoU, median | 0.939 | 0.929 |
 | Head crop within tolerance | 12 of 12 | 12 of 12 |
-| Time per query, warm, median | 0.64 s | 1.86 s |
+| Time per query, warm, median | 0.64 s | 1.86 s (1.38 s on the published app's run) |
 
 - **The boxes moved a little.** mlx-locate-swift changed between 0.1.0 and 0.3.0 (its token budget, and the typed
   surface asks the model for every instance and keeps the best), and the plugin moved from mlx-swift 0.32 to 0.33.
@@ -73,10 +84,25 @@ The pictures stay on `/Volumes/DEV_VOL1/Evidence/fibo2-0.3.0/`.
 `hairdeck-inproc`. The three merge checks pass with the newer `vrmMerge.js` (the one with spring handling); the copy
 in VRMXA_Specification, the script's default, drops an item's springs (AB-A-0333).
 
+## Plugins moved to newer packages
+
+Released the same day, each checked with its own `scripts/golden.sh` (the signed bundle over GPP against in-process)
+and through the published Gaea 1.10.0:
+
+| Plugin | What moved | Golden | Through Gaea |
+|---|---|---|---|
+| gaea-plugin-kokoro 0.1.3 | mlx-kokoro-tts-swift 0.5.0 → 0.6.0 (word and phoneme timings on the engine's side) | 8 of 8, byte-identical ([log](golden-kokoro.log)) | 34 of 34 from GitHub |
+| gaea-plugin-ltx 0.2.1 | ltx-2-mlx-swift 0.23.0 → 0.24.0 (the decode streams into the MP4 writer on every run path) | 16 of 16 ([log](golden-ltx.log)) | 22 of 22 from its local build, and from GitHub |
+| gaea-plugin-seedvr2 0.1.2 | mlx-seedvr2-swift 0.10.1 → 0.10.3, and onto the fleet's mlx-swift fork: it resolves mlx-swift 0.33.2 and mlx-engine-swift 0.83.0, the first plugin on either | 8 of 8 ([log](golden-seedvr2.log)) | 18 of 18 from GitHub |
+
+- Kokoro's word timings don't reach a client: nothing in Gaea asks the engine for them yet.
+- LTX's declared lane charges are unchanged in 0.24.0 (max128 still 0.8 + 74.5 GB). Nothing here measured its peak.
+- **Not moved:** gaea-plugin-flux2-klein, whose checkout is on another session's branch with work in progress
+  (flux2-klein-swift 0.11.1 and 0.12.0 are out); gaea-plugin-fastframes, which is mlx-video's; and the ten plugins last
+  released on 2026-11-02, still on mlx-engine-swift 0.73.1 and the mlx-swift it resolved then.
+
 ## Not covered
 
-- **Through the released app.** Everything above ran on the local build. What ran on the published 1.10.0 is in the
-  last section, added after the release.
 - **Conformance** with every plugin was not rerun for this release. The last full run is 1.9.0's.
 - **The other plugins on engine 0.83.0.** Gaea decodes their manifests in the unit tests' fixtures and in these four
   plugins' runs; the rest were not installed here.

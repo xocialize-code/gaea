@@ -1,0 +1,42 @@
+# LTX golden check 2026-11-25T18:49:48Z: com.xocialize.gaea.ltx 0.2.1
+[Prewarm] ltx-2.5-compact24: paged 13 file(s) / 24.5 GB into cache in 0.9s
+      compact24: over GPP ran in 55.62 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":14.458077184,"model":"ltx-2.5-compact24","operation":"video.generate","prepare_s":8.4086804999999991,"run_s":57.819286667,"warnings":[]}
+PASS  compact24: the same decoded frames, h264,256,256,9 aac,48000,2, framemd5 sha256 b1e122b0ba393f11…
+[Prewarm] ltx-2.5-balanced32: paged 13 file(s) / 24.5 GB into cache in 6.3s
+      balanced32: over GPP ran in 75.36 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":14.573436928,"model":"ltx-2.5-balanced32","operation":"video.generate","prepare_s":13.647834459,"run_s":56.866539582999998,"warnings":[]}
+PASS  balanced32: the same decoded frames, h264,256,256,9 aac,48000,2, framemd5 sha256 b1e122b0ba393f11…
+[Prewarm] ltx-2.5-standard64: paged 11 file(s) / 34.8 GB into cache in 4.5s
+      standard64: over GPP ran in 72.22 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":24.183488512,"model":"ltx-2.5-standard64","operation":"video.generate","prepare_s":12.051183333000001,"run_s":72.700732500000001,"warnings":[]}
+PASS  standard64: the same decoded frames, h264,256,256,9 aac,48000,2, framemd5 sha256 f6c765b43be76a82…
+[Prewarm] ltx-2.5-max128: paged 11 file(s) / 34.8 GB into cache in 7.2s
+      max128: over GPP ran in 109.40 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":24.178507776,"model":"ltx-2.5-max128","operation":"video.generate","prepare_s":17.431450292000001,"run_s":107.85121525,"warnings":[]}
+PASS  max128: the same decoded frames, h264,256,256,9 aac,48000,2, framemd5 sha256 ad8c9c7435ab1485…
+[Prewarm] ltx-2.5-compact24: paged 13 file(s) / 24.5 GB into cache in 1.8s
+      compact24-first: over GPP ran in 55.31 s; in-process {"effective":{"duration_s":0.375,"fps":24,"frames":9,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":14.574321663999999,"model":"ltx-2.5-compact24","operation":"video.generate","prepare_s":9.2537973749999995,"run_s":55.581323959000002,"warnings":[]}
+PASS  compact24-first: the same decoded frames, h264,256,256,9 aac,48000,2, framemd5 sha256 260dd8960ffc34d8…
+[Prewarm] ltx-2.5-standard64: paged 11 file(s) / 34.8 GB into cache in 4.8s
+      standard64-last: over GPP ran in 76.33 s; in-process {"effective":{"duration_s":0.70833333333333337,"fps":24,"frames":17,"seed":7,"size":{"height":256,"width":256}},"max_rss_gb":24.189059071999999,"model":"ltx-2.5-standard64","operation":"video.generate","prepare_s":12.3554105,"run_s":75.056582457999994,"warnings":[]}
+PASS  standard64-last: the same decoded frames, h264,256,256,17 aac,48000,2, framemd5 sha256 63525f70ef04b883…
+[Prewarm] ltx-2.5-compact24: paged 13 file(s) / 24.5 GB into cache in 1.9s
+      compact24-extend: over GPP ran in 54.73 s; in-process {"effective":{"after_s":0.33333333333333331,"before_s":0,"frames":25,"seed":7},"max_rss_gb":17.092919296000002,"model":"ltx-2.5-compact24","operation":"video.extend","prepare_s":9.3698935829999996,"run_s":55.394655833999998,"warnings":[]}
+PASS  compact24-extend: the same decoded frames, h264,128,96,25 aac,48000,2, framemd5 sha256 613ca976258bb4ed…
+[Prewarm] ltx-2.5-compact24: paged 13 file(s) / 24.5 GB into cache in 2.5s
+      compact24-retake: over GPP ran in 55.35 s; in-process {"effective":{"end_s":0.70833333333333337,"frames":17,"retake":"both","seed":7,"start_s":0.375},"max_rss_gb":17.092739072000001,"model":"ltx-2.5-compact24","operation":"video.retake","prepare_s":10.071762667,"run_s":57.204189374999999,"warnings":["span_snapped"]}
+PASS  compact24-retake: within 29 dB on every frame (int8, deterministic: false), h264,128,96,17 aac,48000,2
+OK
+PASS  balanced32.gpp passes validate.py
+OK
+PASS  compact24-extend.gpp passes validate.py
+OK
+PASS  compact24-first.gpp passes validate.py
+OK
+PASS  compact24-retake.gpp passes validate.py
+OK
+PASS  compact24.gpp passes validate.py
+OK
+PASS  max128.gpp passes validate.py
+OK
+PASS  standard64-last.gpp passes validate.py
+OK
+PASS  standard64.gpp passes validate.py
+== 16 passed, 0 failed
