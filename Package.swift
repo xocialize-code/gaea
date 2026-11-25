@@ -28,7 +28,7 @@ let package = Package(
         // GaeaProtocol only: the MLX-free manifest types and GPP vocabulary. Its MLXToolKit is the only engine code
         // the host links.
         .package(url: "https://github.com/xocialize-code/gaea-plugin-kit.git", from: "0.16.0"), // a prompt profile's text_only_tasks
-        .package(url: "https://github.com/xocialize/mlx-engine-swift.git", from: "0.80.0"), // contract 1.65.0: speech timings on tts (mlx-locate-swift needs this release); 0.79.0 brought typed imageTo3D cameras (Pixal3D); 0.78.0 brought characterPart (AB-T-0482)
+        .package(url: "https://github.com/xocialize/mlx-engine-swift.git", from: "0.83.0"), // contract 1.67.0; 1.66.0 (0.81.0) brought imageLocate, the typed capability gaea-plugin-locate 0.2.0 declares (AB-A-0295); 0.80.0 speech timings; 0.79.0 typed imageTo3D cameras (Pixal3D); 0.78.0 characterPart (AB-T-0482)
         .package(url: "https://github.com/groue/GRDB.swift.git", from: "7.0.0"),
     ],
     targets: [

@@ -16,7 +16,7 @@ import subprocess
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 GEN = ROOT / "tools" / "manifest-gen"
 OUT = ROOT / "examples" / "v1" / "manifest"
-ENGINE = {"package": "mlx-engine-swift", "version": "0.80.0", "contract": "1.65.0"}
+ENGINE = {"package": "mlx-engine-swift", "version": "0.83.0", "contract": "1.67.0"}
 APACHE = {"spdx": "Apache-2.0", "commercial_use": True, "terms_url": "https://www.apache.org/licenses/LICENSE-2.0"}
 
 
