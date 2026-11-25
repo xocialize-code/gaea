@@ -1,0 +1,33 @@
+# RMBG 3.0 acceptance (AB-A-0328) 2026-11-25T18:33:19Z: Gaea 1.10.0, gaea-plugin-fibo2 0.3.0 from GitHub
+host: Mac17,14, 128 GB, macOS 27.3
+Installed Fibo 2.0 0.3.0 (com.xocialize.gaea.fibo2), enabled.
+PASS  add the Fibo plugin 0.3.0 by repo URL
+PASS  rmbg-3 is off until the operator enables it
+rmbg-3 enabled.
+{'id': 'rmbg-3', 'license': {'accepted_required': True, 'attribution': 'Background removed with RMBG 3.0 by Bria AI (CC BY-NC 4.0)', 'commercial_use': False, 'notice': "RMBG 3.0 weights © Bria AI, CC BY-NC 4.0: non-commercial use only, with attribution. Commercial use needs a licence from Bria (platform.bria.ai/licensing/pricing?model=rmbg-3.0), or Bria's hosted API. The weights are gated: the Hugging Face account behind your token needs access to briaai/RMBG-3.0, and to briaai/Fibo-2.0-edit-turbo or briaai/Fibo-2.0-dev for the text encoder and VAE it runs on.", 'spdx': 'CC-BY-NC-4.0', 'terms_url': 'https://creativecommons.org/licenses/by-nc/4.0/legalcode', 'user_accept_required': True}, 'memory_class': 'large', 'named_only': True, 'quality_tiers': ['draft', 'standard', 'best'], 'speed_class': 'standard', 'title': 'RMBG 3.0'}
+PASS  enabled, image.matte lists it: named-only, CC-BY-NC-4.0, non-commercial, accepted-required, attributed, not the default
+      unnamed:   [] [] None [] unsupported_parameter No model offers the standard tier.
+PASS  a matte naming no model doesn't run on rmbg-3
+      unaccepted:   [] [] None [] policy_unmet RMBG 3.0 is under CC-BY-NC-4.0, whose terms bind each user: show them its notice and terms (https://creativecommons.org/licenses/by-nc/4.0/legalcode), and once they accept, list CC-BY-NC-4.0 in policy
+PASS  named without the licence accepted, it is refused (policy_unmet)
+      accepted: succeeded rmbg-3 [] ['mask', 'extract'] {'model_params': {'model': 'rmbg-3', 'x-gaea.worker': {'effective': {'seed': 0, 'x-fibo2.kind': 'softAlpha'}, 'lane': 'bf16', 'operation': 'image.matte', 'outputs': [{'media_type': 'image/png', 'name': 'mask', 'path': '/tmp/grmbg/h/Caches/spool/jobs/job_nh0b2bt31xycwt0mzj2r/outputs/worker/worker-1/out/matte-0.png'}], 'plugin': 'com.xocialize.gaea.fibo2', 'prepare_seconds': 3.121, 'seconds': 37.462, 'version': '0.3.0'}}, 'quality': 'standard', 'x-fibo2.kind': 'softAlpha'} []  
+PASS  named and accepted: it succeeds on rmbg-3 with a mask and an extract
+alpha vs mask (0, 0)
+PASS  the mask and the extract are the picture's size, the mask isn't blank, the extract's alpha is the mask
+      again: succeeded rmbg-3 [] ['mask', 'extract'] {'model_params': {'model': 'rmbg-3', 'x-gaea.worker': {'effective': {'seed': 0, 'x-fibo2.kind': 'softAlpha'}, 'lane': 'bf16', 'operation': 'image.matte', 'outputs': [{'media_type': 'image/png', 'name': 'mask', 'path': '/tmp/grmbg/h/Caches/spool/jobs/job_5e03d6bncp2evkj0wa7q/outputs/worker/worker-1/out/matte-0.png'}], 'plugin': 'com.xocialize.gaea.fibo2', 'seconds': 54.376, 'version': '0.3.0'}}, 'quality': 'standard', 'x-fibo2.kind': 'softAlpha'} []  
+PASS  a second run gives the same mask
+      seeded:   [] [] None [] unsupported_parameter image.matte has no parameter 'seed'.
+PASS  seed is refused: image.matte has no such parameter
+      subject-alone:   [] [] None [] unsupported_parameter image.matte has no parameter 'subject'.
+PASS  with no segmenter on the server a subject is refused
+Installed Forge processing pack 0.2.2 (com.xocialize.gaea.forge), enabled.
+      subject: succeeded rmbg-3 [('subject', 'sam21-segment')] ['mask', 'extract'] {'model_params': {'model': 'rmbg-3', 'segmenter': 'sam21-segment', 'segmenter_score': 0.9608520865440369, 'x-gaea.worker': {'calls': 2, 'effective': {'seed': 0, 'x-fibo2.kind': 'softAlpha'}, 'lane': 'bf16', 'operation': 'image.matte', 'outputs': [{'media_type': 'image/png', 'name': 'mask', 'path': '/tmp/grmbg/h/Caches/spool/jobs/job_dpbxfsagvrc4m23zr2js/outputs/worker/worker-1/out/matte-0.png'}], 'plugin': 'com.xocialize.gaea.fibo2', 'prepare_seconds': 0.021, 'seconds': 34.714999999999996, 'version': '0.3.0'}}, 'quality': 'standard', 'subject': {'box': {'height': 0.6, 'width': 0.6, 'x': 0.2, 'y': 0.2}}, 'x-fibo2.kind': 'softAlpha'} []  
+PASS  with the Forge pack beside it, a subject runs: the segmenter is a helper and rmbg-3 makes the matte
+OK
+PASS  transcript com.xocialize.gaea.fibo2-0.3.0-2026-11-25T183321Z-5d0cdd44.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.forge-0.2.2-2026-11-25T183537Z-fcddc330.gpp passes validate.py
+budget 103.08 GB, charged 18.21 GB, free 84.87 GB; host 0.02 GB; 0 queued
+  com.xocialize.gaea.fibo2 0.3.0 pid 17363: declared 30.40 GB, phys_footprint 16.70 GB (peak 29.35 GB), worker says 18.76 GB, charged 17.00 GB lanes ["rmbg-3": "bf16"]
+  com.xocialize.gaea.forge 0.2.2 pid 17818: declared 2.85 GB, phys_footprint 1.21 GB (peak 1.21 GB), worker says 1.21 GB, charged 1.21 GB lanes ["sam21-segment": "fp16"]
+== 13 passed, 0 failed
