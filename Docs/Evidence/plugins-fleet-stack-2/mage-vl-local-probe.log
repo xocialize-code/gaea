@@ -1,0 +1,25 @@
+# Mage-VL probe through Gaea 1.10.0 2026-11-26T05:17:17Z, source local
+Installed Mage-VL 0.1.2 (com.xocialize.gaea.mage-vl), enabled.
+PASS  add by repo URL installs mage-vl 0.1.2
+{'mage-vl': {'default': True, 'id': 'mage-vl', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0'}, 'memory_class': 'medium', 'quality_tiers': ['draft', 'standard', 'best'], 'speed_class': 'fast', 'title': 'Mage-VL'}}
+PASS  image.describe is offered with mage-vl as its default
+{"alt_text": "A red fox sitting in snow with trees in the background.", "caption": "A red fox sits in a snowy forest during sunset.", "language": "en", "tags": ["fox", "snow", "forest", "sunset", "red", "orange", "white"]}
+com.xocialize.gaea.mage-vl 0.1.2 int8 0.735
+PASS  fox: image.describe succeeds on mage-vl 0.1.2 with a caption, alt text and tags
+{"alt_text": "A smiling man with a beard and grey hair, wearing a dark shirt, in a softly lit indoor setting.", "caption": "A smiling man with a beard and grey hair, wearing a dark shirt, in a softly lit indoor setting.", "language": "en", "tags": ["subjects", "objects", "setting", "style", "mood", "main colours"]}
+com.xocialize.gaea.mage-vl 0.1.2 int8 0.915
+PASS  face: image.describe succeeds on mage-vl 0.1.2 with a caption, alt text and tags
+W {"engine":{"contract":"1.67.0","version":"0.83.0"},"kit":{"version":"0.16.0"},"manifest_sha256":"9378f77e1ab5acff0805a12784e37e17a5926c8f8c82e13d87a753c1997ba9be","models":["mage-vl"],"pid":39700,"plugin":{"id":"com.xocialize.gaea.mage-vl","version":"0.1.2"},"protocol":1,"type":"hello"}
+PASS  the worker's hello names mlx-engine-swift 0.83.0
+{
+  "caption": "A red fox sits in a snowy forest during sunset.",
+  "alt_text": "A red fox sitting in snow with trees in the background.",
+  "tags": ["fox", "snow", "forest", "sunset", "red", "orange"
+PASS  fox: the worker's text through Gaea is mage-vl-inproc's for the same photo and the describe question
+{
+  "caption": "A smiling man with a beard and grey hair, wearing a dark shirt, in a softly lit indoor setting.",
+  "alt_text": "A smiling man with a beard and grey hair, wearing a dark shirt, in a so
+PASS  face: the worker's text through Gaea is mage-vl-inproc's for the same photo and the describe question
+OK
+PASS  transcript com.xocialize.gaea.mage-vl-0.1.2-2026-11-26T051719Z-c35175e1.gpp passes validate.py
+== 8 passed, 0 failed

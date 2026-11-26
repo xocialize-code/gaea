@@ -1,0 +1,39 @@
+# Qwen-Image plugin acceptance (AB-T-0368) 2026-11-26T03:22:52Z — Gaea , qwen-image 0.2.2, source stand-in
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add by repo URL installs qwen-image 0.2.2
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+    m = {x['id']: x for x in ops['image.edit']['models']}; q = m['qwen-image-edit']; assert {'standard', 'best'} <= set(q['quality_tiers']), q; assert [i for i in ops['image.edit']['inputs'] if i['name'] == 'images'][0]['max'] == 3
+                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'default': True, 'id': 'qwen-image-edit', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://www.apache.org/licenses/LICENSE-2.0'}, 'memory_class': 'xlarge', 'quality_tiers': ['best'], 'speed_class': 'slow', 'title': 'Qwen-Image-Edit 2511'}
+FAIL  image.edit offers Qwen-Image-Edit 2511 for standard and best, up to 3 images
+PASS  image.generate offers Qwen-Image Flash under the NVIDIA Open Model License, with its notice
+      flash cold: 20.22 s from submit to settled (launch, prepare int8, generate); worker run 14.432 s
+      flash warm: 12.26 s from submit to settled; worker run 12.168 s
+PASS  Flash int8 1024² seed 42 succeeds with one 1024² PNG, 4 steps
+PASS  a warm run gives the same bytes again
+      edit cold: 607.96 s from submit to settled (prepare bf16 beside Flash, 20 steps CFG 4); worker run 600.374 s
+Traceback (most recent call last):
+  File "<string>", line 5, in <module>
+    assert e['x-qwen.steps'] == 20 and e['x-qwen.guidance'] == 4 and e['references'] == 2, e
+                                                                     ~^^^^^^^^^^^^^^
+KeyError: 'references'
+FAIL  image.edit on Qwen-Image-Edit: two references, 1024² from the first, 20 steps, guidance 4
+      edit, one 1280×768 reference (warm): 343.91 s from submit to settled; worker run 343.754 s
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+    assert j['outcome'] == 'succeeded' and (o['width'], o['height']) == (1312, 800), o
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'bytes': 1281303, 'height': 768, 'href': '/mes/v0/jobs/job_vwgfnx98t4b2ds27c70d/outputs/0', 'index': 0, 'kind': 'image', 'media_type': 'image/png', 'name': 'image', 'sha256': '91c41edff59cc898d8eb2c2288525356ff67b20658b35b191cfcb2c30a113567', 'width': 1280}
+FAIL  a 1280×768 input is edited at 1312×800 (about 1024² at its aspect), reported size_snapped
+PASS  count 2 gives two different 768×512 images, seeds 7 and 8
+PASS  Flash reports the negative prompt as ignored
+{'code': 'out_of_limits', 'message': "Input 'images' takes at most 3.", 'param': 'images', 'request_id': 'req_1wap8akzbmt5'}
+PASS  four references are refused out_of_limits at submit
+4414329bf2dacc25014d44fe5d9768241053849aa1553262fb89d4f4cadf1e7e 4414329bf2dacc25014d44fe5d9768241053849aa1553262fb89d4f4cadf1e7e
+PASS  Flash through Gaea is byte for byte the in-process image
+9b1f40d30076862fe40b0ac2a3bfdf503f95f96311a3a73c37cf8e1b0ea7e2e9 9b1f40d30076862fe40b0ac2a3bfdf503f95f96311a3a73c37cf8e1b0ea7e2e9
+PASS  the two-reference edit through Gaea is byte for byte the in-process image
+OK
+PASS  transcript com.xocialize.gaea.qwen-image-0.2.2-2026-11-26T032254Z-064afcd3.gpp passes validate.py
+== 10 passed, 3 failed

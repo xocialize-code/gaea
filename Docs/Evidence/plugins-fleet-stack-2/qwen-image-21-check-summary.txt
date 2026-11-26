@@ -1,0 +1,17 @@
+==> build gaea-plugin-check
+==> hidden: /Volumes/Satechi/Development/gaea-plugin-qwen-image-21/.build
+==> drive qwen-image-21.gaeaplugin over GPP
+PASS manifest com.xocialize.gaea.qwen-image-21 0.1.2, sha256 9d03ab2fabc1…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.qwen-image-21, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-qwen-image-21-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 12511
+PASS hello after 377 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared qwen-image-2.1 lane bf16 in 6.97 s
+PASS image.generate ran in 5.81 s (wall 5.81 s), 8 progress lines; outputs [{"path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-3FBB2A4C-E8D0-4754-950B-0C33FDA0698F\/spool\/job_check\/out\/image-0.png","name":"images","media_type":"image\/png"}]
+PASS memory report: worker says phys_footprint 18190970976 B; host read 18190970976 B now, peak 32209591480 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-qwen-image-21/dist/check-session.gpp
+==> validate the session (tools/validate.py --transcript)
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

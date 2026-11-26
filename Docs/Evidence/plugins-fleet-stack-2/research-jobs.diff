@@ -1,0 +1,6 @@
+7,8c7,8
+< moss-image	moss-sft	moss-image-sft	image.generate	{"size":{"width":512,"height":512},"seed":42,"prompt_enhance":"off"}	a poster that reads "GAEA" in bold letters	-	--lane bf16 --width 512 --height 512 --seed 42
+< moss-image	moss-base	moss-image-base	image.generate	{"size":{"width":512,"height":512},"seed":42,"prompt_enhance":"off"}	a red fox sitting in a snowy forest, photorealistic	-	--lane bf16 --width 512 --height 512 --seed 42
+---
+> moss-image	moss-sft	moss-image-sft	image.generate	{"size":{"width":512,"height":512},"seed":42}	a poster that reads "GAEA" in bold letters	-	--lane bf16 --width 512 --height 512 --seed 42
+> moss-image	moss-base	moss-image-base	image.generate	{"size":{"width":512,"height":512},"seed":42}	a red fox sitting in a snowy forest, photorealistic	-	--lane bf16 --width 512 --height 512 --seed 42

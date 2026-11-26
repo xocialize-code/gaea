@@ -1,0 +1,6 @@
+# Qwen-Image Flash adapter golden check 2026-11-26T03:22:08Z: com.xocialize.gaea.qwen-image 0.2.2
+PASS  flash (qwen-image-flash int8, qwen-image:peter-chan-s-concept-art 0.8 + qwen-image:dott4k 0.6): byte-identical, sha256 9d822e20cc2d5e2f…; over GPP ran in 13.31 s; in-process [License] adapter qwen-image:peter-chan-s-concept-art: xocialize/qwen-image-flash-loras: weight license CreativeML-OpenRAIL-M is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+[License] adapter qwen-image:dott4k: furaidosu/dott4k-qwen-image-lora: weight license NOASSERTION is outside permissiveOnly — declared and allowed to load (advisory enforcement).
+{"adapters":["qwen-image:peter-chan-s-concept-art=0.8","qwen-image:dott4k=0.6"],"cold_s":15.170948083000001,"guidance":1,"height":1024,"model":"qwen-image-flash","phys_after_prepare":24406590264,"phys_after_runs":26161775824,"prepare_s":1.922090708,"references":0,"run1_s":13.223126208,"seed":42,"steps":4,"width":1024}
+PASS  control: without the adapters the image differs (sha256 681776ce31b17a2e…)
+== 2 passed, 0 failed

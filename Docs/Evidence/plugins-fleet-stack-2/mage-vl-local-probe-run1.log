@@ -1,0 +1,46 @@
+# Mage-VL probe through Gaea 1.10.0 2026-11-26T05:14:38Z, source local
+Installed Mage-VL 0.1.2 (com.xocialize.gaea.mage-vl), enabled.
+PASS  add by repo URL installs mage-vl 0.1.2
+{'mage-vl': {'default': True, 'id': 'mage-vl', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0'}, 'memory_class': 'medium', 'quality_tiers': ['draft', 'standard', 'best'], 'speed_class': 'fast', 'title': 'Mage-VL'}}
+PASS  image.describe is offered with mage-vl as its default
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+    r = j['result']; v = r['values']['description']; print(json.dumps(v))
+                         ~^^^^^^^^^^
+KeyError: 'values'
+FAIL  fox: image.describe succeeds on mage-vl 0.1.2 with a caption, alt text and tags
+Traceback (most recent call last):
+  File "<string>", line 9, in <module>
+    shutil.copy(run['inputs']['image'], '/Volumes/DEV_VOL1/Evidence/gaea-plugin-mage-vl-0.1.2/accept-local-probe/fox-worker-image' + run['inputs']['image'][run['inputs']['image'].rfind('.'):])
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/shutil.py", line 489, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/shutil.py", line 313, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/gv38735/Caches/spool/jobs/job_3d90xfcb9ernjydtgmmk/outputs/worker/worker-1/inputs/image-0.png'
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+    r = j['result']; v = r['values']['description']; print(json.dumps(v))
+                         ~^^^^^^^^^^
+KeyError: 'values'
+FAIL  face: image.describe succeeds on mage-vl 0.1.2 with a caption, alt text and tags
+Traceback (most recent call last):
+  File "<string>", line 9, in <module>
+    shutil.copy(run['inputs']['image'], '/Volumes/DEV_VOL1/Evidence/gaea-plugin-mage-vl-0.1.2/accept-local-probe/face-worker-image' + run['inputs']['image'][run['inputs']['image'].rfind('.'):])
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/shutil.py", line 489, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/shutil.py", line 313, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/gv38735/Caches/spool/jobs/job_xh877cxm7yyxzzwt558v/outputs/worker/worker-1/inputs/image-0.png'
+W {"engine":{"contract":"1.67.0","version":"0.83.0"},"kit":{"version":"0.16.0"},"manifest_sha256":"9378f77e1ab5acff0805a12784e37e17a5926c8f8c82e13d87a753c1997ba9be","models":["mage-vl"],"pid":38772,"plugin":{"id":"com.xocialize.gaea.mage-vl","version":"0.1.2"},"protocol":1,"type":"hello"}
+PASS  the worker's hello names mlx-engine-swift 0.83.0
+FAIL  fox: no worker text kept
+FAIL  face: no worker text kept
+OK
+PASS  transcript com.xocialize.gaea.mage-vl-0.1.2-2026-11-26T051440Z-2f211229.gpp passes validate.py
+== 4 passed, 4 failed

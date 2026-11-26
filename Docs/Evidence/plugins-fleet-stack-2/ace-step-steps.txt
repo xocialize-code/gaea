@@ -1,0 +1,8 @@
+build exit 0 2026-11-25T21:47:42Z
+check exit 0 2026-11-25T21:49:15Z
+stage done: build check
+golden exit 0 2026-11-25T21:51:30Z
+accept-local exit 0 2026-11-25T21:52:25Z
+stage done: golden accept-local
+accept-github exit 0 2026-11-25T22:09:33Z
+stage done: accept-github

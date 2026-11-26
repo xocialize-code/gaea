@@ -1,0 +1,4 @@
+92c92
+<     REL=$WORK/standin/xocialize/$repo/v$v; mkdir -p "$REL"
+---
+>     REL=$WORK/standin/xocialize-code/$repo/v$v; mkdir -p "$REL"

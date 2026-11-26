@@ -1,0 +1,43 @@
+# ACE-Step golden check 2026-11-25T21:50:03Z: com.xocialize.gaea.ace-step 0.1.2
+[Prewarm] ace-step-1.5: paged 4 file(s) / 9.0 GB into cache in 0.3s
+      song10: over GPP ran in 5.00 s; in-process {"effective":{"anchors":{"bpm":125,"key":"E major","time_signature":"4\/4"},"duration_s":10,"language":"en","seed":5},"frames":480000,"lane":"int8","max_rss_gb":9.3405511679999993,"model":"ace-step-1.5","model_frames":480000,"prepare_s":1.5708127090000001,"run_s":8.4962014579999998,"timestamp_lines":5,"truncated":false}
+PASS  song10: byte-identical, 480000 frames, sha256 1ddf90104f1824fb…
+[Prewarm] ace-step-1.5: paged 4 file(s) / 9.0 GB into cache in 0.3s
+      anchored: over GPP ran in 4.99 s; in-process {"effective":{"anchors":{"bpm":96,"key":"F# minor","time_signature":"3\/4"},"duration_s":30,"language":"en","seed":9},"frames":1440000,"lane":"int8","max_rss_gb":9.3538222080000004,"model":"ace-step-1.5","model_frames":1440000,"prepare_s":1.4921738330000001,"run_s":4.7821796250000004,"timestamp_lines":5,"truncated":false}
+PASS  anchored: byte-identical, 1440000 frames, sha256 0ee22e5fbca1a67d…
+[Prewarm] ace-step-1.5: paged 4 file(s) / 9.0 GB into cache in 0.3s
+      instrumental: over GPP ran in 5.56 s; in-process {"effective":{"anchors":{"bpm":70,"key":"D major","time_signature":"4\/4"},"duration_s":15,"seed":3},"frames":720000,"lane":"int8","max_rss_gb":9.3410754560000004,"model":"ace-step-1.5","model_frames":720000,"prepare_s":1.4768414999999999,"run_s":5.4807449999999998,"timestamp_lines":1,"truncated":false}
+PASS  instrumental: byte-identical, 720000 frames, sha256 f184c00d68f4091e…
+[Prewarm] ace-step-1.5: paged 4 file(s) / 9.0 GB into cache in 0.3s
+      chinese: over GPP ran in 5.05 s; in-process {"effective":{"anchors":{"bpm":73,"key":"C# minor","time_signature":"4\/4"},"duration_s":12,"language":"zh","seed":2},"frames":576000,"lane":"int8","max_rss_gb":9.3421076480000007,"model":"ace-step-1.5","model_frames":576000,"prepare_s":1.4391503329999999,"run_s":5.1535703750000001,"timestamp_lines":5,"truncated":false}
+PASS  chinese: byte-identical, 576000 frames, sha256 4e352b98ffd39942…
+[Prewarm] ace-step-1.5: paged 4 file(s) / 9.0 GB into cache in 0.3s
+      reference: over GPP ran in 5.15 s; in-process {"effective":{"anchors":{"bpm":125,"key":"A major","time_signature":"4\/4"},"duration_s":10,"language":"en","seed":4},"frames":480000,"lane":"int8","max_rss_gb":9.3337354240000003,"model":"ace-step-1.5","model_frames":480000,"prepare_s":1.4368842079999999,"run_s":5.0875757500000001,"timestamp_lines":5,"truncated":false}
+PASS  reference: byte-identical, 480000 frames, sha256 75d76b6eadfa115b…
+[Prewarm] ace-step-1.5: paged 4 file(s) / 9.0 GB into cache in 0.3s
+      cover: over GPP ran in 1.64 s; in-process {"effective":{"duration_s":2,"language":"en","seed":6},"frames":96000,"lane":"int8","max_rss_gb":9.3260349439999999,"model":"ace-step-1.5","model_frames":245760,"prepare_s":1.5524643330000001,"run_s":0.524878917,"timestamp_lines":5,"truncated":false}
+PASS  cover: byte-identical, 96000 frames, sha256 795ab90895ea8dd3…
+[Prewarm] ace-step-1.5: paged 4 file(s) / 9.0 GB into cache in 0.3s
+      repaint: over GPP ran in 0.49 s; in-process {"effective":{"duration_s":2,"language":"en","seed":7},"frames":96000,"lane":"int8","max_rss_gb":9.3265100800000003,"model":"ace-step-1.5","model_frames":245760,"prepare_s":1.5951619159999999,"run_s":0.470826458,"timestamp_lines":5,"truncated":false}
+PASS  repaint: byte-identical, 96000 frames, sha256 d1b890aee44d0a3e…
+[Prewarm] ace-step-1.5: paged 4 file(s) / 9.0 GB into cache in 0.4s
+      extend: over GPP ran in 0.55 s; in-process {"effective":{"duration_s":4.5,"language":"en","seed":8},"frames":216000,"lane":"int8","max_rss_gb":9.3282304000000007,"model":"ace-step-1.5","model_frames":245760,"prepare_s":1.726948709,"run_s":0.42363600000000001,"timestamp_lines":5,"truncated":false}
+PASS  extend: byte-identical, 216000 frames, sha256 030f3f24e1221202…
+PASS  anchored reports the pinned anchors (96 bpm, F# minor, 3/4)
+OK
+PASS  anchored.gpp passes validate.py
+OK
+PASS  chinese.gpp passes validate.py
+OK
+PASS  cover.gpp passes validate.py
+OK
+PASS  extend.gpp passes validate.py
+OK
+PASS  instrumental.gpp passes validate.py
+OK
+PASS  reference.gpp passes validate.py
+OK
+PASS  repaint.gpp passes validate.py
+OK
+PASS  song10.gpp passes validate.py
+== 17 passed, 0 failed

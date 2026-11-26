@@ -1,0 +1,17 @@
+==> build gaea-plugin-check
+==> hidden: /Volumes/Satechi/Development/gaea-plugin-mage-vl/.build
+==> drive mage-vl.gaeaplugin over GPP
+PASS manifest com.xocialize.gaea.mage-vl 0.1.2, sha256 9378f77e1ab5…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.mage-vl, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-mage-vl-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 26901
+PASS hello after 371 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared mage-vl lane int8 in 3.58 s
+PASS image.describe ran in 4.39 s (wall 4.39 s), 0 progress lines; outputs [{"name":"text","value":"{\n  \"caption\": \"A red fox sits in a snowy forest during sunset.\",\n  \"alt_text\": \"A red fox sitting in snow with trees in the background.\",\n  \"tags\": [\"fox\", \"snow\", \"forest\", \"sunset\", \"red\", \"orange\", \"white\"]\n}"}]
+PASS memory report: worker says phys_footprint 6276535192 B; host read 6276535192 B now, peak 6276535192 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-mage-vl/dist/check-session.gpp
+==> validate the session (tools/validate.py --transcript)
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

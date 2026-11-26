@@ -1,0 +1,17 @@
+==> build gaea-plugin-check
+==> hidden: /Volumes/Satechi/Development/gaea-plugin-moss-image/.build
+==> drive moss-image.gaeaplugin over GPP
+PASS manifest com.xocialize.gaea.moss-image 0.1.2, sha256 6137163b19b6…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.moss-image, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-moss-image-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 42915
+PASS hello after 456 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared moss-image-sft lane int8 in 1.49 s
+PASS image.generate ran in 18.99 s (wall 18.99 s), 8 progress lines; outputs [{"path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-94509F30-FE15-4CCD-9B87-E95B203FEC8A\/spool\/job_check\/out\/image-0.png","name":"images","media_type":"image\/png"}]
+PASS memory report: worker says phys_footprint 6812815104 B; host read 6812815104 B now, peak 15811553312 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-moss-image/dist/check-session.gpp
+==> validate the session (tools/validate.py --transcript)
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

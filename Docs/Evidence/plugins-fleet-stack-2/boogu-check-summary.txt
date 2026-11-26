@@ -1,0 +1,17 @@
+==> build gaea-plugin-check
+==> hidden: /Volumes/Satechi/Development/gaea-plugin-boogu/.build
+==> drive boogu.gaeaplugin over GPP
+PASS manifest com.xocialize.gaea.boogu 0.1.2, sha256 39d8052f8401…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.boogu, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-boogu-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 37907
+PASS hello after 400 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared boogu lane int4 in 0.73 s
+PASS image.generate ran in 28.65 s (wall 28.65 s), 0 progress lines; outputs [{"media_type":"image\/png","name":"images","path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-FD02E099-84DC-4867-9DA0-00270C8AF191\/spool\/job_check\/out\/image-0.png"}]
+PASS memory report: worker says phys_footprint 10750434144 B; host read 10750434144 B now, peak 24841193448 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-boogu/dist/check-session.gpp
+==> validate the session (tools/validate.py --transcript)
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

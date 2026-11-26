@@ -1,0 +1,20 @@
+# Mage-VL golden check 2026-11-26T04:43:37Z: com.xocialize.gaea.mage-vl 0.1.2
+fox-default: GPP in 0.33 s (cold worker); in-process run 1.69 s, prepare 1.98 s; sha256 6e6113f63783f06e…
+  GPP:        In this image we can see a fox sitting on the snow. In the background we can see trees and the sky.
+PASS  fox-default: the same text over GPP and in-process
+fox-describe: GPP in 0.73 s (cold worker); in-process run 0.73 s, prepare 2.07 s; sha256 d78e761d6d40cf2f…
+  GPP:        {   "caption": "A red fox sits in a snowy forest during sunset.",   "alt_text": "A red fox sitting in snow with trees in the background.",   "tags": ["fox", "snow", "forest", "sunset", "red", "orange", "white"] }
+PASS  fox-describe: the same text over GPP and in-process
+face-default: GPP in 0.23 s (cold worker); in-process run 0.22 s, prepare 1.96 s; sha256 019e6a3bbe882c77…
+  GPP:        In this image we can see a man smiling.
+PASS  face-default: the same text over GPP and in-process
+face-describe: GPP in 0.99 s (cold worker); in-process run 0.99 s, prepare 1.95 s; sha256 8c447cdfb4254099…
+  GPP:        {   "caption": "A smiling man with a beard and grey hair, wearing a dark shirt, in a softly lit indoor setting.",   "alt_text": "A smiling man with a beard and grey hair, wearing a dark shirt, in a softly lit indoor setting.",   "tags": ["s
+PASS  face-describe: the same text over GPP and in-process
+div2k-0801-default: GPP in 1.25 s (cold worker); in-process run 1.20 s, prepare 1.96 s; sha256 97707a9fc7729897…
+  GPP:        In this image we can see a penguin on the rock.
+PASS  div2k-0801-default: the same text over GPP and in-process
+div2k-0801-describe: GPP in 1.91 s (cold worker); in-process run 1.90 s, prepare 2.07 s; sha256 a11ae8955037e4ad…
+  GPP:        {   "caption": "A king penguin stands on a rocky outcrop, showcasing its distinctive yellow crest and black-and-white plumage.",   "alt_text": "King penguin with yellow crest on rocky terrain.",   "tags": ["king penguin", "rocky terrain", "
+PASS  div2k-0801-describe: the same text over GPP and in-process
+== 6 passed, 0 failed

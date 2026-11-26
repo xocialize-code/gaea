@@ -1,0 +1,26 @@
+# Research plugins acceptance (AB-T-0374) 2026-11-26T04:21:36Z — Gaea , source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3; models root /Volumes/DEV_VOL1/Models/gaea-research-store
+PASS  add gaea-plugin-flux2-klein (the default image.generate)
+Installed MOSS-Image 0.1.2 (com.xocialize.gaea.moss-image), enabled.
+PASS  add gaea-plugin-moss-image by repo URL
+['moss-image-base', 'moss-image-sft']
+PASS  every research model is listed named_only and never default
+{'moss-image-base': 'Apache-2.0', 'moss-image-sft': 'Apache-2.0'}
+PASS  restricted models were off (opt-in), and say commercial_use false
+klein-4b-base com.xocialize.gaea.flux2-klein
+PASS  image.generate naming no model reaches FLUX.2 Klein, not a research model
+bf16 29.695 512 512 6b6d6641737aec72
+PASS  moss-sft: moss-image-sft runs by name (image.generate), 32.55 s submit to settled
+bf16 26.634 512 512 3517b7dd4b14517d
+PASS  moss-base: moss-image-base runs by name (image.generate), 28.99 s submit to settled
+6b6d6641737aec724691fcbbed0a2edb78399c209c3af5aa2b1f8b4b7466ab67 6b6d6641737aec724691fcbbed0a2edb78399c209c3af5aa2b1f8b4b7466ab67
+PASS  moss-sft: moss-image-sft, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: same bytes, pixels identical
+3517b7dd4b14517d63e32341c4fa63d1e14a902c52297d4aeb6552b049cbb6e4 3517b7dd4b14517d63e32341c4fa63d1e14a902c52297d4aeb6552b049cbb6e4
+PASS  moss-base: moss-image-base, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: same bytes, pixels identical
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.5.0-2026-11-26T042142Z-bd0bf61b.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.moss-image-0.1.2-2026-11-26T042209Z-728e2cc1.gpp passes validate.py
+== 11 passed, 0 failed

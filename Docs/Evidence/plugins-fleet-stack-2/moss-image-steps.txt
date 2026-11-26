@@ -1,0 +1,13 @@
+build exit 0 2026-11-26T03:08:01Z
+check exit 0 2026-11-26T03:09:40Z
+stage done: build check
+inproc exit 0 2026-11-26T03:10:47Z
+stage done: inproc
+accept-local-research exit 1 2026-11-26T03:10:51Z
+stage done: accept-local
+accept-local-research exit 1 2026-11-26T03:12:11Z
+stage done: accept-local
+accept-local-research exit 0 2026-11-26T03:16:40Z
+stage done: accept-local
+accept-github-research exit 0 2026-11-26T04:25:00Z
+stage done: accept-github

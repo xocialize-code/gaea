@@ -1,0 +1,9 @@
+build exit 0 2026-11-26T03:19:07Z
+check exit 0 2026-11-26T03:20:39Z
+stage done: build check
+inproc exit 0 2026-11-26T03:22:07Z
+golden exit 0 2026-11-26T03:22:52Z
+accept-local exit 1 2026-11-26T03:50:36Z
+stage done: inproc golden accept-local
+accept-github exit 1 2026-11-26T05:10:09Z
+stage done: accept-github

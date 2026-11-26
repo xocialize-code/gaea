@@ -1,0 +1,33 @@
+# MOSS-SoundEffect golden check 2026-11-25T21:39:39Z: com.xocialize.gaea.moss-soundeffect 0.1.3
+[Prewarm] moss-soundeffect: paged 4 file(s) / 8.4 GB into cache in 0.3s
+      rain: over GPP ran in 9.54 s; in-process {"duration_s":1.5,"frames":72000,"lane":"bf16","max_rss_gb":7.9139635200000003,"model":"moss-soundeffect","prepare_s":0.64417495800000002,"run_s":[14.214793292],"seed":11,"steps":25}
+PASS  rain sound 0 (seed 11): byte-identical, 72000 frames, sha256 e8ca415c0f55cd52…
+[Prewarm] moss-soundeffect: paged 4 file(s) / 8.4 GB into cache in 0.3s
+      door: over GPP ran in 18.09 s; in-process {"duration_s":2.2999999999999998,"frames":110400,"lane":"bf16","max_rss_gb":7.9063941120000001,"model":"moss-soundeffect","prepare_s":0.63728712499999995,"run_s":[18.111338332999999],"seed":3,"steps":50}
+PASS  door sound 0 (seed 3): byte-identical, 110400 frames, sha256 3b0ee71537f5ba3a…
+[Prewarm] moss-soundeffect: paged 4 file(s) / 8.4 GB into cache in 0.3s
+      barks: over GPP ran in 19.00 s; in-process {"duration_s":1.2,"frames":57600,"lane":"bf16","max_rss_gb":7.9152087040000003,"model":"moss-soundeffect","prepare_s":0.63023733299999996,"run_s":[9.5155695419999997,9.9905380000000008],"seed":7,"steps":25}
+PASS  barks sound 0 (seed 7): byte-identical, 57600 frames, sha256 b0217bf95a8a9e73…
+PASS  barks sound 1 (seed 8): byte-identical, 57600 frames, sha256 da69189866abaf96…
+[Prewarm] moss-soundeffect: paged 4 file(s) / 8.4 GB into cache in 0.3s
+      street: over GPP ran in 9.99 s; in-process {"duration_s":2,"frames":96000,"lane":"bf16","max_rss_gb":7.906443264,"model":"moss-soundeffect","prepare_s":0.66794883299999996,"run_s":[10.008418167],"seed":5,"steps":25}
+PASS  street sound 0 (seed 5): byte-identical, 96000 frames, sha256 5ef09edf741890a5…
+[Prewarm] moss-soundeffect: paged 4 file(s) / 8.4 GB into cache in 0.3s
+      glass: over GPP ran in 36.61 s; in-process {"duration_s":1,"frames":48000,"lane":"bf16","max_rss_gb":7.9147335679999999,"model":"moss-soundeffect","prepare_s":0.642452417,"run_s":[35.240145540999997],"seed":9,"steps":100}
+PASS  glass sound 0 (seed 9): byte-identical, 48000 frames, sha256 f453b6036f7ed9d1…
+[Prewarm] moss-soundeffect: paged 4 file(s) / 8.4 GB into cache in 0.3s
+      thunder: over GPP ran in 9.57 s; in-process {"duration_s":1.55,"frames":74400,"lane":"bf16","max_rss_gb":7.9148810239999996,"model":"moss-soundeffect","prepare_s":0.63861920800000005,"run_s":[9.5712327500000001],"seed":2,"steps":25}
+PASS  thunder sound 0 (seed 2): byte-identical, 74400 frames, sha256 328c8d151d371f75…
+OK
+PASS  barks.gpp passes validate.py
+OK
+PASS  door.gpp passes validate.py
+OK
+PASS  glass.gpp passes validate.py
+OK
+PASS  rain.gpp passes validate.py
+OK
+PASS  street.gpp passes validate.py
+OK
+PASS  thunder.gpp passes validate.py
+== 13 passed, 0 failed

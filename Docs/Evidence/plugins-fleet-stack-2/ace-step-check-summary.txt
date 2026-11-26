@@ -1,0 +1,17 @@
+==> build gaea-plugin-check
+==> hidden: /Volumes/Satechi/Development/gaea-plugin-ace-step/.build
+==> drive ace-step.gaeaplugin over GPP
+PASS manifest com.xocialize.gaea.ace-step 0.1.2, sha256 bed0534dccd8…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.ace-step, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-ace-step-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 31624
+PASS hello after 305 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared ace-step-1.5 lane int8 in 1.98 s
+PASS audio.compose ran in 13.78 s (wall 13.78 s), 167 progress lines; outputs [{"path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-9654535D-AE16-490D-B497-75A495EB2013\/spool\/job_check\/out\/song-0.wav","name":"song","media_type":"audio\/wav"}]
+PASS memory report: worker says phys_footprint 11494498008 B; host read 11494498008 B now, peak 14135746264 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-ace-step/dist/check-session.gpp
+==> validate the session (tools/validate.py --transcript)
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

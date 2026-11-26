@@ -1,0 +1,35 @@
+# Research plugins acceptance (AB-T-0374) 2026-11-26T04:29:37Z — Gaea , source stand-in
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3; models root /Volumes/DEV_VOL1/Models/gaea-research-store
+PASS  add gaea-plugin-flux2-klein (the default image.generate)
+Installed Qwen-Image-2.1 0.1.2 (com.xocialize.gaea.qwen-image-21), enabled.
+PASS  add gaea-plugin-qwen-image-21 by repo URL
+      opt-in: qwen-image-2.1 is off until enabled
+qwen-image-2.1 enabled.
+      opt-in: qwen-image-2.1-base is off until enabled
+qwen-image-2.1-base enabled.
+['qwen-image-2.1', 'qwen-image-2.1-base']
+PASS  every research model is listed named_only and never default
+{'qwen-image-2.1': 'LicenseRef-Qwen-Research', 'qwen-image-2.1-base': 'LicenseRef-Qwen-Research'}
+PASS  restricted models were off (opt-in), and say commercial_use false
+klein-4b-base com.xocialize.gaea.flux2-klein
+PASS  image.generate naming no model reaches FLUX.2 Klein, not a research model
+bf16 7.907 512 512 96a46f3965fa223c
+PASS  q21-gen: qwen-image-2.1 runs by name (image.generate), 16.08 s submit to settled
+bf16 12.798 512 512 1f387ab292e62f13
+PASS  q21-base: qwen-image-2.1-base runs by name (image.generate), 16.41 s submit to settled
+bf16 9.486 512 512 85c6d4590eaf0eea
+PASS  q21-edit: qwen-image-2.1 runs by name (image.edit), 9.56 s submit to settled
+2043ef37d0ad50111113df1acdf9477288885513505960ba6e1bcad0250d8f5f 2043ef37d0ad50111113df1acdf9477288885513505960ba6e1bcad0250d8f5f
+PASS  q21-gen: qwen-image-2.1, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: different bytes, pixels differ: 2877 channel values, max 1
+e7a56929e747c18040cd44a6400aa39b082b0cd7e9dec124cac3dee8f0b72b62 e7a56929e747c18040cd44a6400aa39b082b0cd7e9dec124cac3dee8f0b72b62
+PASS  q21-base: qwen-image-2.1-base, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: different bytes, pixels differ: 2204 channel values, max 1
+6f1323a8567b0899f0cf44aaabc174b1ca16f76af66594690b33a6ba77e24768 6f1323a8567b0899f0cf44aaabc174b1ca16f76af66594690b33a6ba77e24768
+PASS  q21-edit: qwen-image-2.1, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: different bytes, pixels differ: 1520 channel values, max 1
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.5.0-2026-11-26T042939Z-2c303cb5.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.qwen-image-21-0.1.2-2026-11-26T043006Z-8b6a5faa.gpp passes validate.py
+== 13 passed, 0 failed

@@ -1,0 +1,13 @@
+build exit 0 2026-11-26T01:09:39Z
+check exit 0 2026-11-26T01:11:16Z
+stage done: build check
+inproc exit 0 2026-11-26T01:13:06Z
+golden exit 0 2026-11-26T02:00:28Z
+accept-local exit 0 2026-11-26T02:08:23Z
+stage done: inproc golden accept-local
+accept-local-ming-layer exit 0 2026-11-26T02:30:51Z
+stage done: accept-local
+accept-github exit 0 2026-11-26T03:58:34Z
+stage done: accept-github
+accept-github-ming-layer exit 0 2026-11-26T04:21:36Z
+stage done: accept-github

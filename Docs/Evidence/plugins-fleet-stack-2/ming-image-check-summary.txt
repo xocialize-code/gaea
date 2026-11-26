@@ -1,0 +1,17 @@
+==> build gaea-plugin-check
+==> hidden: /Volumes/Satechi/Development/gaea-plugin-ming-image/.build
+==> drive ming-image.gaeaplugin over GPP
+PASS manifest com.xocialize.gaea.ming-image 0.3.2, sha256 357c26ad4276…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.ming-image, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-ming-image-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 94168
+PASS hello after 448 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared ming-image lane int8 in 1.10 s
+PASS image.generate ran in 17.92 s (wall 17.92 s), 8 progress lines; outputs [{"name":"images","media_type":"image\/png","path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-A42F10EC-F039-4E9F-955A-642599A539B1\/spool\/job_check\/out\/image-0.png"}]
+PASS memory report: worker says phys_footprint 9524697520 B; host read 9524697520 B now, peak 28014961424 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-ming-image/dist/check-session.gpp
+==> validate the session (tools/validate.py --transcript)
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

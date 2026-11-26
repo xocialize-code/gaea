@@ -1,0 +1,18 @@
+# RIFE golden check 2026-11-25T21:34:30Z: com.xocialize.gaea.rife 0.1.2
+      x2: over GPP ran in 0.33 s; in-process {"applied_factor":2,"factor":2,"fps":48,"max_rss_gb":0.107184128,"model":"rife-4.25","prepare_s":0.287311333,"run_s":2.3749903749999999}
+PASS  x2: the same decoded frames, hevc,33, framemd5 sha256 1d999558bb2a0231…
+      x4: over GPP ran in 0.51 s; in-process {"applied_factor":4,"factor":4,"fps":96,"max_rss_gb":0.106446848,"model":"rife-4.25","prepare_s":0.25887595800000002,"run_s":0.47686137499999998}
+PASS  x4: the same decoded frames, hevc,65, framemd5 sha256 0b20a3f814c8c828…
+      x8: over GPP ran in 1.00 s; in-process {"applied_factor":8,"factor":8,"fps":192,"max_rss_gb":0.106627072,"model":"rife-4.25","prepare_s":0.26166824999999999,"run_s":0.90213566700000003}
+PASS  x8: the same decoded frames, hevc,129, framemd5 sha256 bb5e8230ffd8f901…
+      x2-360p: over GPP ran in 2.12 s; in-process {"applied_factor":2,"factor":2,"fps":48,"max_rss_gb":0.15481241600000001,"model":"rife-4.25","prepare_s":0.27312362499999998,"run_s":2.1543733330000001}
+PASS  x2-360p: the same decoded frames, hevc,95, framemd5 sha256 f37656e1a18dc691…
+OK
+PASS  x2-360p.gpp passes validate.py
+OK
+PASS  x2.gpp passes validate.py
+OK
+PASS  x4.gpp passes validate.py
+OK
+PASS  x8.gpp passes validate.py
+== 8 passed, 0 failed

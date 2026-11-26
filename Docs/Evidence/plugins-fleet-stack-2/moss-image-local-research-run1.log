@@ -1,0 +1,34 @@
+# Research plugins acceptance (AB-T-0374) 2026-11-26T03:10:47Z — Gaea , source stand-in
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3; models root /Volumes/DEV_VOL1/Models/gaea-research-store
+FAIL  add gaea-plugin-flux2-klein (the default image.generate)
+Refused: the manifest's repo https://github.com/xocialize-code/gaea-plugin-moss-image isn't xocialize/gaea-plugin-moss-image, the repo it was added from
+FAIL  add gaea-plugin-moss-image by repo URL
+Traceback (most recent call last):
+  File "<string>", line 7, in <module>
+    assert want <= seen, want - seen; print(sorted(seen))
+           ^^^^^^^^^^^^
+AssertionError: {'moss-image-sft', 'moss-image-base'}
+FAIL  every research model is listed named_only and never default
+{}
+PASS  restricted models were off (opt-in), and say commercial_use false
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+    import json; j = json.load(open('/Volumes/DEV_VOL1/Evidence/gaea-plugin-moss-image-0.1.2/accept-local-research/job-default.json')); r = j['result']; m = r['provenance']['model']['id']
+                                                                                                                                            ~^^^^^^^^^^
+KeyError: 'result'
+FAIL  image.generate naming no model reaches FLUX.2 Klein, not a research model
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+    assert j.get('outcome') == 'succeeded', json.dumps(j)[:800]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {"state": "refused", "outcome": "refused"}
+FAIL  moss-sft: moss-image-sft runs by name (image.generate), 0.03 s submit to settled
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+    assert j.get('outcome') == 'succeeded', json.dumps(j)[:800]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {"state": "refused", "outcome": "refused"}
+FAIL  moss-base: moss-image-base runs by name (image.generate), 0.03 s submit to settled
+SKIP  moss-sft: no Gaea output to compare
+SKIP  moss-base: no Gaea output to compare
+== 1 passed, 6 failed

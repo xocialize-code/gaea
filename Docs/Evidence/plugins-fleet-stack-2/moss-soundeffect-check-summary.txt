@@ -1,0 +1,17 @@
+==> build gaea-plugin-check
+==> hidden: /Volumes/Satechi/Development/gaea-plugin-moss-soundeffect/.build
+==> drive moss-soundeffect.gaeaplugin over GPP
+PASS manifest com.xocialize.gaea.moss-soundeffect 0.1.3, sha256 ffc49b5346a6…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.moss-soundeffect, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-moss-soundeffect-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 27410
+PASS hello after 340 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared moss-soundeffect lane bf16 in 1.18 s
+PASS audio.generate ran in 22.76 s (wall 22.76 s), 26 progress lines; outputs [{"name":"sounds","media_type":"audio\/wav","path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-74EF64AD-FC72-4D85-AAE0-E46579070A92\/spool\/job_check\/out\/sounds-0.wav"}]
+PASS memory report: worker says phys_footprint 6830608752 B; host read 6830608752 B now, peak 11991175536 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-moss-soundeffect/dist/check-session.gpp
+==> validate the session (tools/validate.py --transcript)
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed

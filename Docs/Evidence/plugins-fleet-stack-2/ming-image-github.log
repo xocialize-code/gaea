@@ -1,0 +1,47 @@
+# Ming-Image plugin acceptance (AB-T-0388) 2026-11-26T03:50:36Z — Gaea , ming-image 0.3.2, z-image 0.2.2, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add by repo URL installs ming-image 0.3.2
+PASS  add by repo URL installs z-image 0.2.2
+PASS  image.generate offers Ming-Image Design, not a default
+PASS  image.generate naming no model still reaches Z-Image Turbo
+      cold: 21.9 s from submit to settled (launch, prepare int8, 12 steps)
+      warm: 18.95 s from submit to settled; worker run 18.878 s
+PASS  Ming-Image int8 1024² seed 42: one 1024² PNG, 12 steps, lane int8
+PASS  a warm run gives the same bytes again
+      768×512 was drawn at 1248 832
+PASS  768×512 is drawn in the 1024² bucket at 3:2, and Gaea returns the 768×512 asked
+PASS  count 2 gives two different images, seeds 7 and 8
+PASS  the negative prompt is reported ignored
+      int4: 19.48 s from submit to settled; worker run 18.814 s
+PASS  x-gaea.lane int4 runs lane int4
+      bf16: 19.81 s from submit to settled; worker run 18.725 s
+PASS  x-gaea.lane bf16 runs lane bf16
+PASS  x-ming.background transparent: one 1024² PNG, the option in effective
+1024x1024 alphaInfo 3: 0.675 of pixels have α ≤ 12
+PASS  the PNG Gaea returns has native alpha
+768x512 alphaInfo 3: 0.713 of pixels have α ≤ 12
+PASS  a transparent 768×512, drawn larger and resized by Gaea, keeps its alpha
+PASS  an unknown background is refused
+56980a187c3c2a2ad75a4dd32435550e5f1858bcdacc15e6e44dbe1dad2bcee1 63a04283117327e9e92aa5d670cb6566683ad7bc8330427ff1951e2f5cb62d7a
+1024x1024: 0 of 4194304 samples differ, max 0
+PASS  int8 through Gaea is the in-process image, pixel for pixel
+PASS  ming-inproc draws 768×512 at the size the worker reported
+447772f9c4b2719d35cabf83f608272c0233bb3b8fab8f81e803adec7af7b51c 1835a4036292f092d3d6eed62cb53dd13488a7a7d5e98fe79fc319fab8c4d829
+1024x1024: 0 of 4194304 samples differ, max 0
+PASS  int4 through Gaea is the in-process image, pixel for pixel
+a9469a66837e2c1afb50668358927e1c8caf87fcbaf064f4e3c23f0e57f76fa5 95ea132dcbc99379dc86147b4002445cc813fb7c022b9bc1b1b9b7a3b78b701c
+1024x1024: 0 of 4194304 samples differ, max 0
+PASS  bf16 through Gaea is the in-process image, pixel for pixel
+a5b971bca6b1135a0f04becda54424ad926f4fe6118bdbc80d77a4dca76281f8 30853c69b79f303851c2d83ca8e9467b8e55be1589373a3d0d3e805206ffb756
+1024x1024: 0 of 4194304 samples differ, max 0
+PASS  transparent through Gaea is the in-process image, pixel for pixel (premultiplied)
+      scene: in-process alpha False, Gaea's warnings ['background_opaque']
+PASS  the full-bleed scene warns background_opaque exactly when the in-process image has no alpha
+a79b2ef2205eb61da8db52f469a3846351eb725174ce480c0ff84d1f1db9c4e3 ce1358e05e14f0f997c8a68a6ed13d3329e37d4e1ca31b01838a4d852b5e7b5b
+1024x1024: 0 of 4194304 samples differ, max 0
+PASS  the scene through Gaea is the in-process image, pixel for pixel
+OK
+PASS  transcript com.xocialize.gaea.ming-image-0.3.2-2026-11-26T035055Z-c7f9c9cd.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.z-image-0.2.2-2026-11-26T035041Z-c2d141f3.gpp passes validate.py
+== 24 passed, 0 failed

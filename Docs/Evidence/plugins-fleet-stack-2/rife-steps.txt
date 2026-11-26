@@ -1,0 +1,5 @@
+golden exit 0 2026-11-25T21:34:44Z
+accept-local exit 0 2026-11-25T21:34:56Z
+stage done: golden accept-local
+accept-github exit 0 2026-11-25T21:46:37Z
+stage done: accept-github

@@ -1,0 +1,17 @@
+==> build gaea-plugin-check
+==> hidden: /Volumes/Satechi/Development/gaea-plugin-rife/.build
+==> drive rife.gaeaplugin over GPP
+PASS manifest com.xocialize.gaea.rife 0.1.2, sha256 a97c686a16a9…
+PASS signature: Developer ID, team CFZS6RXUCP, id com.xocialize.gaea.rife, hardened runtime, requirement `anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] exists and certificate leaf[field.1.2.840.113635.100.6.1.13] exists and certificate leaf[subject.OU] = "CFZS6RXUCP"` satisfied
+PASS launched gaea-rife-worker with launchRequirement (team CFZS6RXUCP, developerID), pid 22520
+PASS hello after 343 ms
+PASS hello matches the verified manifest (plugin, models, engine, manifest_sha256)
+PASS prepared rife-4.25 lane fp32 in 0.33 s
+PASS video.interpolate ran in 4.21 s (wall 4.21 s), 0 progress lines; outputs [{"path":"\/var\/folders\/2t\/n472rntx42g8s3bd3_xz7tg00000gn\/T\/gaea-plugin-check-2B490013-7E5F-48BC-BE57-AC749C7B609B\/spool\/job_check\/out\/video-0.mp4","media_type":"video\/mp4","name":"video"}]
+PASS memory report: worker says phys_footprint 220742544 B; host read 220742544 B now, peak 220857232 B
+PASS shutdown: exit 0
+PASS session written to /Volumes/Satechi/Development/gaea-plugin-rife/dist/check-session.gpp
+==> validate the session (tools/validate.py --transcript)
+==> control: the bare worker, outside its bundle, must not find a metallib
+control: the bare worker said hello, then: Failed to load the default metallib
+==> check passed
