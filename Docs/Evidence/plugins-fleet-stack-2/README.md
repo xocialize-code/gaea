@@ -57,8 +57,14 @@ served by `tools/release-standin.py`, then with the notarized release from GitHu
     pictures Gaea returned in October ([AB-T-0374](../AB-T-0374/README.md), [AB-T-0368](../AB-T-0368/README.md)):
     Qwen-Image Flash 49.6 dB PSNR; Mage-Flow 39.9 (Turbo) and 41.7 dB, its edits 29.2 to 33.5 dB; MOSS-Image 30.5 (SFT)
     and 35.2 dB (Base); Qwen-Image 2.1 44.6 dB, its 2.1 edit 37.8 dB and 2.1 Base 25.4 dB. An edit starts from a
-    picture that has itself moved. They are the same pictures with different fine texture; any pixel-exact reference
-    made on the old stack is stale.
+    picture that has itself moved. Any pixel-exact reference made on the old stack is stale.
+  - **The three furthest pairs were looked at.** Mage-Flow's edit (29.2 dB, a lighthouse in snow) and MOSS-Image SFT
+    (30.5 dB, the "GAEA" poster) are the same pictures with different fine texture. Qwen-Image 2.1 Base (25.4 dB,
+    "a glass teapot on a wooden table, studio light", seed 42) is the same scene with one part changed: October's
+    teapot has a looped handle and no visible spout, today's a short spout where the handle was. Both are sound
+    pictures of the prompt; 2.1 Base is the many-step model of the ten and drifts furthest. Boogu's new generate and
+    edit and Ming-Image's new poster (which have no October picture to compare) were looked at too and are sound, the
+    poster's lettering exact.
   - **Gaea against in-process is unchanged**: byte for byte or pixel for pixel wherever it was before.
 - **Three of Gaea's acceptance scripts had drifted from Gaea** (they were last run in October). `tools/` wasn't edited
   here (another session's files); the changes below were made in a scratch copy, or the failures are reported as they
@@ -79,7 +85,7 @@ served by `tools/release-standin.py`, then with the notarized release from GitHu
   - **`acceptance-qwen.sh` expects Gaea 0.2.2's answers in three checks**, and all three fail on Gaea 1.10.0 with the
     local build and with the release alike:
     1. it wants `qwen-image-edit` offered for standard and best; Gaea's tiers come from pixel-agency-normalizer's
-       table, which lists it for best;
+       table, which lists it on `image.edit` for best (`OperationTable.swift`: `"qwen-image-edit": [.best]`);
     2. it reads `references` at the top of `result.effective`; Gaea 1.10.0 keeps the worker's own values under
        `model_params["x-gaea.worker"].effective`, where they are what they were in October (`references: 2`, 1024²,
        20 steps, guidance 4);
@@ -125,6 +131,8 @@ the plugin's version. Beyond that:
 `*-check-summary.txt` hold each check's lines and its metallib control, `*-local*.log` the runs with the local build,
 `*-steps.txt` each step's exit status and time.
 
+- **Every released worker names the engine it links**: in the sessions the from-GitHub runs recorded, each of the
+  ten says mlx-engine-swift 0.83.0, contract 1.67.0 and GaeaPluginKit 0.16.0 in its hello.
 - **Each from-GitHub run installed the new release**: the sessions it recorded are named for it
   (`com.xocialize.gaea.rife-0.1.2-…gpp` and so on), and the research and Boogu runs list it in `models.txt`. That
   matters for rife, moss-soundeffect and ace-step, whose outputs the old releases would also have matched.
