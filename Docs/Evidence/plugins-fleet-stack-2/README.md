@@ -164,7 +164,7 @@ the plugin's version. Beyond that:
 - Done on 2026-11-26, [below](#the-scripts-fixed-2026-11-26): `tools/acceptance-research.sh` (the stand-in's owner
   folder), `tools/acceptance-research.jobs` (`prompt_enhance` without an enhancer), `tools/acceptance-qwen.sh` (three
   checks written for Gaea 0.2.2), and the headers' version when `APP` is absolute.
-  `tools/acceptance-plugin-updates.sh` needed no change to its jobs.
+  `tools/acceptance-plugin-updates.sh` needed no change.
 - gaea-plugin-mage-flow: put a run's adapters on its requests (`job.adapterRefs()`), check it with a real Mage-Flow
   LoRA, and put the declaration back.
 - CLAUDE.md has no rows for gaea-plugin-mage-flow, gaea-plugin-mage-vl, gaea-plugin-moss-image and
@@ -202,9 +202,10 @@ a plugin or in Gaea changed.
 - **`acceptance-plugin-updates.sh` keeps its `prompt_enhance: off`.** It installs gaea-plugin-prompt-enhance among
   its 22 plugins, so the parameter is declared there, and `off` is what keeps Klein's, SenseNova's and MOSS-Image's
   prompts as typed. It is a record of AB-T-0418 (its version table pins the releases of 2026-11-02 and it checks for
-  mlx-engine-swift 0.73.1's probe), so it was not run again and got only the header fix.
+  mlx-engine-swift 0.73.1's probe), so it was not run again and the file is unchanged (its header already read the
+  version the newer way). That `off` is valid there comes from reading the script, not from a run on Gaea 1.10.0.
 - **The header's Gaea version**: 22 scripts read it from `"$PWD/$APP/…"`, which is blank when `APP` is absolute.
   They now read `"${APP:A}/…"` as the newer scripts do. Each passes `zsh -n`; the three runs above print
-  "Gaea 1.10.0". The other 19 weren't run.
+  "Gaea 1.10.0". The other 20 weren't run.
 
 The pictures and job files are on `/Volumes/DEV_VOL1/Evidence/gaea-1.10.0/scripts-fix/`.
