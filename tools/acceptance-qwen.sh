@@ -6,8 +6,10 @@
 #   2. through Gaea, for fixed seeds, the same image as qwen-image-edit-swift in-process (qwen-inproc, the plugin
 #      repo's reference tool on the same dependency resolution), compared byte for byte: Flash int8 at 1024², and a
 #      two-reference edit on Qwen-Image-Edit bf16;
-#   3. a 1280×768 input is edited at about 1024² in its aspect (1312×800, size_snapped); count 2 gives two seeds;
-#      Flash reports a negative prompt as ignored; four references are refused;
+#   3. a 1280×768 input is edited at about 1024² in its aspect (the worker draws 1312×800) and comes back at the
+#      input's 1280×768: on image.edit the normalizer's sizes stand (Gaea 0.4.0, AB-T-0366), so the worker's
+#      size_snapped isn't passed on; count 2 gives two seeds; Flash reports a negative prompt as ignored; four
+#      references are refused;
 #   4. the ledger and qwen-inproc give each lane's resident footprint; every GPP session passes the validator.
 #
 #   tools/acceptance-qwen.sh <short-work-dir> <evidence-dir>
@@ -63,7 +65,7 @@ same() { # two PNGs → passes when their bytes are identical
 worker() { py "import json; print(json.load(open('$1'))['plan']['effective']['model_params']['x-gaea.worker']['seconds'])" }
 
 VERSION=$(py "import json; print(json.load(open('$PLUGIN_DIST/manifest.json'))['version'])")
-say "# Qwen-Image plugin acceptance (AB-T-0368) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), qwen-image $VERSION, source ${REPO_FROM:-stand-in}"
+say "# Qwen-Image plugin acceptance (AB-T-0368) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), qwen-image $VERSION, source ${REPO_FROM:-stand-in}"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN
 if [[ ${REPO_FROM:-} != github ]]; then
@@ -80,9 +82,10 @@ export GAEA_HOME=$H
 check "add by repo URL installs qwen-image $VERSION" zsh -c "$CLI plugins add https://github.com/xocialize-code/gaea-plugin-qwen-image | grep -q 'Installed .* $VERSION'"
 $CLI models > "$OUT/models.txt"
 mes "http://127.0.0.1:$P/mes/v0/operations" > "$OUT/operations.json"
-check "image.edit offers Qwen-Image-Edit 2511 for standard and best, up to 3 images" py "
+# The tiers are the normalizer's (OperationTable: qwen-image-edit at best on image.edit), not the plugin's offer.
+check "image.edit offers Qwen-Image-Edit 2511 at best, the default with no Klein beside it, up to 3 images" py "
 import json; ops = {o['operation']: o for o in json.load(open('$OUT/operations.json'))['operations']}
-m = {x['id']: x for x in ops['image.edit']['models']}; q = m['qwen-image-edit']; assert {'standard', 'best'} <= set(q['quality_tiers']), q; assert [i for i in ops['image.edit']['inputs'] if i['name'] == 'images'][0]['max'] == 3
+m = {x['id']: x for x in ops['image.edit']['models']}; q = m['qwen-image-edit']; assert 'best' in q['quality_tiers'] and q.get('default') is True and not q.get('named_only'), q; assert [i for i in ops['image.edit']['inputs'] if i['name'] == 'images'][0]['max'] == 3
 print(json.dumps(ops['image.edit'].get('limits') or q.get('limits')))"
 check "image.generate offers Qwen-Image Flash under the NVIDIA Open Model License, with its notice" py "
 import json; ops = {o['operation']: o for o in json.load(open('$OUT/operations.json'))['operations']}
@@ -119,16 +122,20 @@ check "image.edit on Qwen-Image-Edit: two references, 1024² from the first, 20 
 import json; j = json.load(open('$OUT/job-edit.json')); r = j['result']; e = r['effective']
 assert j['outcome'] == 'succeeded', j; assert r['provenance']['model']['id'] == 'qwen-image-edit', r['provenance']
 assert r['outputs'][0]['width'] == 1024 and r['outputs'][0]['height'] == 1024, r['outputs']
-assert e['x-qwen.steps'] == 20 and e['x-qwen.guidance'] == 4 and e['references'] == 2, e"
+w = e['model_params']['x-gaea.worker']['effective'] # what the worker itself reported
+assert e['x-qwen.steps'] == 20 and e['x-qwen.guidance'] == 4 and w['references'] == 2 and w['size'] == {'width': 1024, 'height': 1024}, e"
 U3=$(upload $P "$OUT/gaea-cabin-0.png")
 t0=$(py 'import time; print(time.time())')
 job $P '{"operation":"image.edit","inputs":{"images":[{"upload":"'$U3'"}],"instruction":"'$SNOW'"},"params":{"seed":3}}' > "$OUT/job-edit-wide.json"
 say "      edit, one 1280×768 reference (warm): $(py "import time; print(round(time.time()-$t0,2))") s from submit to settled; worker run $(worker $OUT/job-edit-wide.json) s"
 fetch $P "$OUT/job-edit-wide.json" "$OUT/gaea-edit-wide"
-check "a 1280×768 input is edited at 1312×800 (about 1024² at its aspect), reported size_snapped" py "
-import json; j = json.load(open('$OUT/job-edit-wide.json')); o = j['result']['outputs'][0]
-assert j['outcome'] == 'succeeded' and (o['width'], o['height']) == (1312, 800), o
-assert any(x['code'] == 'size_snapped' for x in j.get('warnings', [])), j.get('warnings')"
+check "a 1280×768 input is edited at 1312×800 (about 1024² at its aspect) and returned at the input's 1280×768" py "
+import json; j = json.load(open('$OUT/job-edit-wide.json')); r = j['result']; o = r['outputs'][0]
+w = r['effective']['model_params']['x-gaea.worker']['effective']
+assert j['outcome'] == 'succeeded' and r['provenance']['model']['id'] == 'qwen-image-edit', j
+assert w['size'] == {'width': 1312, 'height': 800} and w['references'] == 1, w
+assert (o['width'], o['height']) == (1280, 768), o
+assert not any(x['code'] == 'size_snapped' for x in j.get('warnings', [])), j.get('warnings')"
 $CLI ledger > "$OUT/ledger-2-both.txt"
 
 # 3. Count, warnings, limits.

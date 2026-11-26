@@ -73,7 +73,7 @@ probe() { ffprobe -v error -count_frames -show_entries stream=codec_type,codec_n
 warnings() { py "import json; print(' '.join(w['code'] for w in json.load(open('$1')).get('warnings', [])))" }
 
 VERSION=$(py "import json; print(json.load(open('$PLUGIN_DIST/manifest.json'))['version'])")
-say "# LTX acceptance (AB-T-0404) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), ltx $VERSION, source ${REPO_FROM:-stand-in}, models $MODELS"
+say "# LTX acceptance (AB-T-0404) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), ltx $VERSION, source ${REPO_FROM:-stand-in}, models $MODELS"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 # The extra media: a 1 s soundtrack, a 24-frame clip (off the 8k + 1 grid).
 ffmpeg -v error -y -f lavfi -i "sine=frequency=440:sample_rate=48000:duration=1" -ac 2 $WORK/tone.wav

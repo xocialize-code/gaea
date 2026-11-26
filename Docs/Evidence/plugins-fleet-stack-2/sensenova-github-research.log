@@ -1,0 +1,39 @@
+# Research plugins acceptance (AB-T-0374) 2026-11-26T06:15:20Z — Gaea 1.10.0, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3; models root /Volumes/DEV_VOL1/Models/gaea-research-store
+PASS  add gaea-plugin-flux2-klein (the default image.generate)
+Installed SenseNova-U1.5 0.2.1 (com.xocialize.gaea.sensenova), enabled.
+These weights aren't under the models root (/Volumes/DEV_VOL1/Models/gaea-research-store), so the first job on them downloads them first:
+  sensenova-u1-tailsteer int8: mlx-community/SenseNova-U1.5-8B-MoT-TailSteer-8step-v2-8bit
+Run gaea plugins warm com.xocialize.gaea.sensenova to download and load them now, or point gaea models root at the folder that has them.
+PASS  add gaea-plugin-sensenova by repo URL
+['sensenova-u1', 'sensenova-u1-fast', 'sensenova-u1-fast-v1']
+PASS  every research model is listed named_only and never default
+{'sensenova-u1': 'Apache-2.0', 'sensenova-u1-fast': 'Apache-2.0', 'sensenova-u1-fast-v1': 'Apache-2.0'}
+PASS  restricted models were off (opt-in), and say commercial_use false
+klein-4b-base com.xocialize.gaea.flux2-klein
+PASS  image.generate naming no model reaches FLUX.2 Klein, not a research model
+int8 15.123 512 512 16c7a4a4d30c2182
+PASS  sn-base-gen: sensenova-u1 runs by name (image.generate), 20.51 s submit to settled
+int8 1.34 512 512 66437cc5bc3ad387
+PASS  sn-fast-gen: sensenova-u1-fast runs by name (image.generate), 6.18 s submit to settled
+int8 4.779 512 512 a0065b269fdf4fba
+PASS  sn-fastv1-gen: sensenova-u1-fast-v1 runs by name (image.generate), 11.8 s submit to settled
+int8 1.297 512 512 916a74612d70e02a
+PASS  sn-fast-edit: sensenova-u1-fast runs by name (image.edit), 1.37 s submit to settled
+16c7a4a4d30c2182c16e093ac047f5041513fb493a7ea86432046d6473e74642 16c7a4a4d30c2182c16e093ac047f5041513fb493a7ea86432046d6473e74642
+PASS  sn-base-gen: sensenova-u1, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: same bytes, pixels identical
+66437cc5bc3ad3873cd0313cc087afef296ed26241154a205fee0c1b05641fb6 66437cc5bc3ad3873cd0313cc087afef296ed26241154a205fee0c1b05641fb6
+PASS  sn-fast-gen: sensenova-u1-fast, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: same bytes, pixels identical
+a0065b269fdf4fbad78db1d067eed3abe12c4dfd6c25af8f4e1e86c969648aa3 a0065b269fdf4fbad78db1d067eed3abe12c4dfd6c25af8f4e1e86c969648aa3
+PASS  sn-fastv1-gen: sensenova-u1-fast-v1, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: same bytes, pixels identical
+916a74612d70e02aabb29914685b49d932b341c97029d6b8ea8112e26d110223 916a74612d70e02aabb29914685b49d932b341c97029d6b8ea8112e26d110223
+PASS  sn-fast-edit: sensenova-u1-fast, the installed plugin's output is byte for byte the in-process image
+      Gaea's normalized output against in-process: same bytes, pixels identical
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.5.0-2026-11-26T061525Z-42289d89.gpp passes validate.py
+OK
+PASS  transcript com.xocialize.gaea.sensenova-0.2.1-2026-11-26T061549Z-9d39cfe0.gpp passes validate.py
+== 15 passed, 0 failed

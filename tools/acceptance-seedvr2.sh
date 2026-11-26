@@ -65,7 +65,7 @@ frames() { ffmpeg -v error -i $1 -map 0:v -f framemd5 - | grep -v '^#' | awk -F'
 probe() { ffprobe -v error -count_frames -show_entries stream=codec_type,codec_name,nb_read_frames,r_frame_rate,duration,sample_rate,channels -show_entries format_tags=comment -of compact "$1" }
 
 VERSION=$(py "import json; print(json.load(open('$PLUGIN_DIST/manifest.json'))['version'])")
-say "# SeedVR2 acceptance (AB-T-0403) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), seedvr2 $VERSION, source ${REPO_FROM:-stand-in}"
+say "# SeedVR2 acceptance (AB-T-0403) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), seedvr2 $VERSION, source ${REPO_FROM:-stand-in}"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 # The extra clips: a 1280×720 one (×2 is past 1920×1080) and a 61 s one.
 ffmpeg -v error -y -f lavfi -i "testsrc2=size=1280x720:rate=24:duration=0.25" -c:v libx264 -preset ultrafast -pix_fmt yuv420p $WORK/hd.mp4

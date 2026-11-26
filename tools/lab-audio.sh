@@ -30,7 +30,7 @@ py() { python3 -c "$1" }
 # Stops the server and waits for it to exit, so every worker's session is closed before it is copied.
 stop() { pkill -TERM -f "$GAEA --headless --port $P"; for _ in {1..100}; do pgrep -f "$GAEA --headless --port $P" > /dev/null || return; sleep 0.2; done }
 
-say "# Gaea Lab on audio (AB-T-0395) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), $(py "import json; p = {x['identity']: x['state'].get('version') for x in json.load(open('Apps/GaeaLab/Package.resolved'))['pins']}; print('pixel-agency-run', p['pixel-agency-run'] + ', media-engine-spec', p['media-engine-spec'])")"
+say "# Gaea Lab on audio (AB-T-0395) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), $(py "import json; p = {x['identity']: x['state'].get('version') for x in json.load(open('Apps/GaeaLab/Package.resolved'))['pins']}; print('pixel-agency-run', p['pixel-agency-run'] + ', media-engine-spec', p['media-engine-spec'])")"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN GAEA_GITHUB_API
 H=$WORK/home; P=17693

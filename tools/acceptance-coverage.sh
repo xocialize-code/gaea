@@ -31,7 +31,7 @@ check() { # name, then a command whose exit status decides
 mes() { curl -s -H 'MES-Version: 0.1' "$@" }
 py() { python3 -c "$1" }
 
-say "# AB-T-0377 acceptance $(date -u +%FT%TZ): $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString) on $H"
+say "# AB-T-0377 acceptance $(date -u +%FT%TZ): $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString) on $H"
 GAEA_HOME=$H "$GAEA" --headless --port $P --no-advertise > "$OUT/server.log" 2>&1 &
 SERVER=$!
 for _ in {1..50}; do [[ -S $H/operator.sock ]] && break; sleep 0.2; done

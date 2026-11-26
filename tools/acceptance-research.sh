@@ -7,7 +7,9 @@
 #      that a request naming no model never reaches a research model;
 #   2. /mes/v0/operations lists every research model as named_only and never default; the restricted ones (Qwen
 #      Research, FLUX Kommunity) are off until the operator enables them (opt-in), and carry commercial_use false;
-#   3. each research model runs one seeded job by name, through Gaea's normalizer and scheduler;
+#   3. each research model runs one seeded job by name, through Gaea's normalizer and scheduler. No prompt enhancer is
+#      installed here, so every prompt goes as typed and the jobs send no `prompt_enhance`: an engine with no
+#      enhancer doesn't declare the parameter and refuses it (unsupported_parameter);
 #   4. after Gaea stops, each plugin's <x>-inproc tool runs the same request in-process (the same lane, the same
 #      input bytes), and the bundle Gaea installed, driven by gaea-plugin-check with the request Gaea sent its worker,
 #      must give the same bytes; Gaea's own output, re-encoded by the normalizer, is compared by bytes and pixels;
@@ -82,14 +84,14 @@ JOBS=$OUT/jobs.tsv
 [[ -f ${JOBS_FILE:-tools/acceptance-research.jobs} ]] || { say "no jobs file"; exit 1 }
 
 VERSION() { py "import json; print(json.load(open('$DEV/${REPO[$1]}/dist/manifest.json'))['version'])" }
-say "# Research plugins acceptance (AB-T-0374) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), source ${REPO_FROM:-stand-in}"
+say "# Research plugins acceptance (AB-T-0374) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), source ${REPO_FROM:-stand-in}"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion); models root $MODELS_ROOT"
 unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN
 if [[ ${REPO_FROM:-} != github ]]; then
   for f in $FAMILIES flux2-klein; do
     repo=${REPO[$f]:-gaea-plugin-$f}; name=${BUNDLE[$f]:-$f}
     v=$(py "import json; print(json.load(open('$DEV/$repo/dist/manifest.json'))['version'])")
-    REL=$WORK/standin/xocialize/$repo/v$v; mkdir -p "$REL"
+    REL=$WORK/standin/xocialize-code/$repo/v$v; mkdir -p "$REL"
     cp "$DEV/$repo/dist/$name-$v.gaeaplugin.zip" "$DEV/$repo/dist/$name-$v.gaeaplugin.zip.sha256" "$DEV/$repo/dist/manifest.json" "$REL/"
   done
   python3 tools/release-standin.py "$WORK/standin" --moved xocialize=xocialize-code --port 8771 > "$WORK/standin.out" 2>&1 &

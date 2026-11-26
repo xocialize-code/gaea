@@ -62,7 +62,7 @@ ok() { eval "$1" } # a check written with this script's own functions
 
 ZV=$(py "import json; print(json.load(open('$Z_DIST/manifest.json'))['version'])")
 DV=$(py "import json; print(json.load(open('$DEMO_DIST/manifest.json'))['version'])")
-say "# Scheduler acceptance (AB-T-0363) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), z-image $ZV, demo $DV, budget $BUDGET, source ${REPO_FROM:-stand-in}"
+say "# Scheduler acceptance (AB-T-0363) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), z-image $ZV, demo $DV, budget $BUDGET, source ${REPO_FROM:-stand-in}"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN
 if [[ ${REPO_FROM:-} != github ]]; then

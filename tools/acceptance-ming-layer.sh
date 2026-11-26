@@ -73,7 +73,7 @@ now() { py 'import time; print(time.time())' }
 outs() { py "import json; print([(o['name'], o['width'], o['height']) for o in json.load(open('$1'))['result']['outputs']])" }
 
 VERSION=$(py "import json; print(json.load(open('$PLUGIN_DIST/manifest.json'))['version'])")
-say "# Ming-Image Design-Layer acceptance (AB-T-0390) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), ming-image $VERSION, source ${REPO_FROM:-stand-in}"
+say "# Ming-Image Design-Layer acceptance (AB-T-0390) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), ming-image $VERSION, source ${REPO_FROM:-stand-in}"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN
 if [[ ${REPO_FROM:-} != github ]]; then

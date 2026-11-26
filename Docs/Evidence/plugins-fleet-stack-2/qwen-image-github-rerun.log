@@ -1,0 +1,25 @@
+# Qwen-Image plugin acceptance (AB-T-0368) 2026-11-26T05:46:30Z — Gaea 1.10.0, qwen-image 0.2.2, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add by repo URL installs qwen-image 0.2.2
+{"max_count": 1, "max_inputs": 3, "max_megapixels": 1.048576}
+PASS  image.edit offers Qwen-Image-Edit 2511 at best, the default with no Klein beside it, up to 3 images
+PASS  image.generate offers Qwen-Image Flash under the NVIDIA Open Model License, with its notice
+      flash cold: 20.94 s from submit to settled (launch, prepare int8, generate); worker run 14.193 s
+      flash warm: 11.86 s from submit to settled; worker run 11.758 s
+PASS  Flash int8 1024² seed 42 succeeds with one 1024² PNG, 4 steps
+PASS  a warm run gives the same bytes again
+      edit cold: 567.52 s from submit to settled (prepare bf16 beside Flash, 20 steps CFG 4); worker run 561.902 s
+PASS  image.edit on Qwen-Image-Edit: two references, 1024² from the first, 20 steps, guidance 4
+      edit, one 1280×768 reference (warm): 304.65 s from submit to settled; worker run 304.509 s
+PASS  a 1280×768 input is edited at 1312×800 (about 1024² at its aspect) and returned at the input's 1280×768
+PASS  count 2 gives two different 768×512 images, seeds 7 and 8
+PASS  Flash reports the negative prompt as ignored
+{'code': 'out_of_limits', 'message': "Input 'images' takes at most 3.", 'param': 'images', 'request_id': 'req_tjfy4x2sbm3d'}
+PASS  four references are refused out_of_limits at submit
+4414329bf2dacc25014d44fe5d9768241053849aa1553262fb89d4f4cadf1e7e 4414329bf2dacc25014d44fe5d9768241053849aa1553262fb89d4f4cadf1e7e
+PASS  Flash through Gaea is byte for byte the in-process image
+9b1f40d30076862fe40b0ac2a3bfdf503f95f96311a3a73c37cf8e1b0ea7e2e9 9b1f40d30076862fe40b0ac2a3bfdf503f95f96311a3a73c37cf8e1b0ea7e2e9
+PASS  the two-reference edit through Gaea is byte for byte the in-process image
+OK
+PASS  transcript com.xocialize.gaea.qwen-image-0.2.2-2026-11-26T054633Z-57e8b26d.gpp passes validate.py
+== 13 passed, 0 failed

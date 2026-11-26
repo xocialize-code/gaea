@@ -79,7 +79,7 @@ now() { py 'import time; print(time.time())' }
 
 VERSION=$(py "import json; print(json.load(open('$PLUGIN_DIST/manifest.json'))['version'])")
 ZVERSION=$(py "import json; print(json.load(open('$ZIMAGE_DIST/manifest.json'))['version'])")
-say "# Boogu plugin acceptance (AB-T-0387) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), boogu $VERSION, z-image $ZVERSION, source ${REPO_FROM:-stand-in}"
+say "# Boogu plugin acceptance (AB-T-0387) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), boogu $VERSION, z-image $ZVERSION, source ${REPO_FROM:-stand-in}"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN
 if [[ ${REPO_FROM:-} != github ]]; then

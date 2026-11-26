@@ -62,7 +62,7 @@ frames() { ffmpeg -v error -i $1 -map 0:v -f framemd5 - | grep -v '^#' | awk -F'
 probe() { ffprobe -v error -count_frames -show_entries stream=codec_type,codec_name,nb_read_frames,r_frame_rate,duration,sample_rate,channels -show_entries format_tags=comment -of compact "$1" }
 
 VERSION=$(py "import json; print(json.load(open('$PLUGIN_DIST/manifest.json'))['version'])")
-say "# RIFE acceptance (AB-T-0401, AB-T-0402) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), rife $VERSION, source ${REPO_FROM:-stand-in}"
+say "# RIFE acceptance (AB-T-0401, AB-T-0402) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), rife $VERSION, source ${REPO_FROM:-stand-in}"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 # The extra clips: a ProRes QuickTime of the fixture, a 301 s clip, and a 4096-pixel-wide one.
 ffmpeg -v error -y -i $CLIP -c:v prores_ks -profile:v 2 -c:a pcm_s16le $WORK/prores.mov

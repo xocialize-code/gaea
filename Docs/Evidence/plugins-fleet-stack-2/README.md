@@ -161,10 +161,50 @@ the plugin's version. Beyond that:
 
 ## Follow-ups
 
-- `tools/acceptance-research.sh` (the stand-in's owner folder), `tools/acceptance-research.jobs` and
-  `tools/acceptance-plugin-updates.sh` (`prompt_enhance` without an enhancer), `tools/acceptance-qwen.sh` (three
+- Done on 2026-11-26, [below](#the-scripts-fixed-2026-11-26): `tools/acceptance-research.sh` (the stand-in's owner
+  folder), `tools/acceptance-research.jobs` (`prompt_enhance` without an enhancer), `tools/acceptance-qwen.sh` (three
   checks written for Gaea 0.2.2), and the headers' version when `APP` is absolute.
+  `tools/acceptance-plugin-updates.sh` needed no change to its jobs.
 - gaea-plugin-mage-flow: put a run's adapters on its requests (`job.adapterRefs()`), check it with a real Mage-Flow
   LoRA, and put the declaration back.
 - CLAUDE.md has no rows for gaea-plugin-mage-flow, gaea-plugin-mage-vl, gaea-plugin-moss-image and
   gaea-plugin-qwen-image-21; none was added here.
+
+## The scripts, fixed (2026-11-26)
+
+The three scripts were fixed in `tools/` on 2026-11-26 (UTC) and run again through the published Gaea 1.10.0. Nothing in
+a plugin or in Gaea changed.
+
+| Run | Result |
+|---|---|
+| `acceptance-qwen.sh`, qwen-image 0.2.2 from GitHub | 13 passed, 0 failed ([log](qwen-image-github-rerun.log)) |
+| `acceptance-research.sh moss-image`, the local 0.1.2 build through the stand-in | 11 passed, 0 failed ([log](moss-image-standin-rerun.log)) |
+| `acceptance-research.sh sensenova`, sensenova 0.2.1 from GitHub | 15 passed, 0 failed ([log](sensenova-github-research.log)) |
+
+- **`acceptance-qwen.sh`** was written for Gaea 0.2.2 and not run again after Gaea 0.4.0 put the Image profile on
+  the normalizer (AB-T-0366). Its three failing checks now say what Gaea has done since then, and nothing was
+  loosened:
+  1. `qwen-image-edit` is offered on `image.edit` at best (the normalizer's table), as the default when no Klein is
+     beside it, with up to 3 images;
+  2. the reference count and the size the worker drew are read from the worker's own report,
+     `effective.model_params["x-gaea.worker"].effective`;
+  3. a 1280×768 input is drawn by the worker at 1312×800 and comes back at the input's 1280×768, with no
+     `size_snapped` warning. The check asserts all three.
+  The rewritten checks were first run against the job files of the 10-and-3 run, where they pass, and then in the
+  full run above. The two-reference edit took 562 s in the worker and the one-reference edit 305 s, on a GPU with
+  nothing else running.
+- **`acceptance-research.sh`** files the stand-in's bundles under `xocialize-code`. The moss-image run above is the
+  script itself in stand-in mode, where the earlier first run gave 1 passed, 6 failed.
+- **`acceptance-research.jobs`** sends no `prompt_enhance`. Six jobs carried it, not two: the two moss-image jobs
+  and the four sensenova ones, an edit among them. The script installs no prompt enhancer, so every prompt goes as
+  typed, which is what `off` asked for. The sensenova run above covers the four the scratch copy hadn't changed, and
+  closes "sensenova's … rows of the research acceptance weren't run". flux3-klein's rows still weren't.
+- **`acceptance-plugin-updates.sh` keeps its `prompt_enhance: off`.** It installs gaea-plugin-prompt-enhance among
+  its 22 plugins, so the parameter is declared there, and `off` is what keeps Klein's, SenseNova's and MOSS-Image's
+  prompts as typed. It is a record of AB-T-0418 (its version table pins the releases of 2026-11-02 and it checks for
+  mlx-engine-swift 0.73.1's probe), so it was not run again and got only the header fix.
+- **The header's Gaea version**: 22 scripts read it from `"$PWD/$APP/…"`, which is blank when `APP` is absolute.
+  They now read `"${APP:A}/…"` as the newer scripts do. Each passes `zsh -n`; the three runs above print
+  "Gaea 1.10.0". The other 19 weren't run.
+
+The pictures and job files are on `/Volumes/DEV_VOL1/Evidence/gaea-1.10.0/scripts-fix/`.

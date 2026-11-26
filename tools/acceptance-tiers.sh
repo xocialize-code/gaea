@@ -82,7 +82,7 @@ print(f\"{o.get('width')},{o.get('height')},{o.get('frames')}\" if j.get('outcom
     py "assert '$got' == '$want', '$got'; assert 0 < $peak <= $budget, ($peak, $budget); assert $peak <= $n or $declared >= $peak, ($peak, $n, $declared)"
 }
 
-say "# LTX tiers under the governor (AB-T-0405) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), models $MODELS"
+say "# LTX tiers under the governor (AB-T-0405) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), models $MODELS"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 # The media: a 512×288 source on the 8k + 1 grid (105 frames, so an extend of 16 reaches compact24's 121), a 5 s
 # soundtrack.

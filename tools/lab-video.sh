@@ -50,7 +50,7 @@ assert got == ($2, $3, $4, $5, bool($6)), got
 assert re.search(r'''$7''', c), c"
 }
 
-say "# Gaea Lab on video (AB-T-0406) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), $(py "import json; p = {x['identity']: x['state'].get('version') for x in json.load(open('Apps/GaeaLab/Package.resolved'))['pins']}; print('pixel-agency-run', p['pixel-agency-run'] + ', media-engine-spec', p['media-engine-spec'])")"
+say "# Gaea Lab on video (AB-T-0406) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), $(py "import json; p = {x['identity']: x['state'].get('version') for x in json.load(open('Apps/GaeaLab/Package.resolved'))['pins']}; print('pixel-agency-run', p['pixel-agency-run'] + ', media-engine-spec', p['media-engine-spec'])")"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN GAEA_GITHUB_API
 H=$WORK/home; P=17694

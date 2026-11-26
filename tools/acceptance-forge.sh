@@ -57,7 +57,7 @@ o = r['outputs'][0]; assert (o['width'], o['height']) == ($w, $h), o
 w = (r['effective'].get('model_params') or {}).get('x-gaea.worker', {}); print(w.get('lane'), w.get('seconds'), [x['code'] for x in j.get('warnings', [])])"
 }
 
-say "# Forge pack acceptance (AB-T-0369) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), from GitHub"
+say "# Forge pack acceptance (AB-T-0369) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), from GitHub"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN GAEA_GITHUB_API
 H=$WORK/main; P=17730

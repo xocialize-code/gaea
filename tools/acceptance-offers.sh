@@ -50,7 +50,7 @@ start() { # home, port, extra args… → waits for the operator socket
 stop() { pkill -TERM -f "$GAEA --headless --port $1" ; sleep 1 }
 
 VERSION=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["version"])' "$DEMO_DIST/manifest.json")
-say "# Gaea offers acceptance (AB-T-0364) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), demo $VERSION"
+say "# Gaea offers acceptance (AB-T-0364) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), demo $VERSION"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 
 # The demo's release, as GitHub would serve it.

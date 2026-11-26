@@ -59,7 +59,7 @@ step() { # n, label, body → runs the job, keeps it and the ledger after it
 }
 succeeded() { py "import json; j = json.load(open('$OUT/job-$1.json')); assert j['outcome'] == 'succeeded', j" }
 
-say "# Governor acceptance (AB-T-0371) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), budget $BUDGET, plugins from GitHub"
+say "# Governor acceptance (AB-T-0371) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), budget $BUDGET, plugins from GitHub"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN GAEA_GITHUB_API
 
