@@ -9,13 +9,16 @@
 #      Klein 4B Base generate (28 steps, CFG 4, a negative prompt), and a two-reference edit;
 #   3. count 2 gives two seeds; the distilled model reports a negative prompt as ignored; a named lane runs that
 #      lane; five references are refused;
-#   4. every recorded GPP session passes the validator.
+#   4. every recorded GPP session passes the validator;
+#   5. where the release has it (0.5.0), klein-4b-bonsai: named-only on image.generate with one lane and absent from
+#      image.edit; by name at 1024² and at 2048², byte for byte against klein-inproc.
 #
 #   tools/acceptance-klein.sh <short-work-dir> <evidence-dir>
 #
 # Needs: dist/Gaea.app (scripts/build-app.sh); PLUGIN_DIST (default ../gaea-plugin-flux2-klein/dist); KLEIN_INPROC
 # (default ../gaea-plugin-flux2-klein/.build/release/klein-inproc). REPO_FROM=github installs the published release
-# instead of serving PLUGIN_DIST through tools/release-standin.py.
+# instead of serving PLUGIN_DIST through tools/release-standin.py. MODELS names a models root for Gaea and klein-inproc
+# (the default is MLXEngine's store; Bonsai's weights are on /Volumes/DEV_VOL1/Models).
 set -uo pipefail
 cd "${0:A:h}/.."
 WORK=${1:?work dir}; OUT=${2:?evidence dir}
@@ -23,6 +26,7 @@ APP=${APP:-dist/Gaea.app}
 GAEA="$APP/Contents/MacOS/Gaea"; CLI="$APP/Contents/Helpers/gaea"
 PLUGIN_DIST=${PLUGIN_DIST:-../gaea-plugin-flux2-klein/dist}
 INPROC=${KLEIN_INPROC:-../gaea-plugin-flux2-klein/.build/release/klein-inproc}
+ROOT=(${MODELS:+--models-root} ${MODELS:-})
 FOX="a red fox sitting in a snowy forest at sunrise, photorealistic"
 CABIN="a cozy wooden cabin interior with a stone fireplace, warm evening light, photorealistic"
 NEGATIVE="blurry, oversaturated"
@@ -64,7 +68,7 @@ same() { # two PNGs → passes when their bytes are identical
 worker() { py "import json; print(json.load(open('$1'))['plan']['effective']['model_params']['x-gaea.worker']['seconds'])" }
 
 VERSION=$(py "import json; print(json.load(open('$PLUGIN_DIST/manifest.json'))['version'])")
-say "# FLUX.2 Klein plugin acceptance (AB-T-0367) $(date -u +%FT%TZ) — Gaea $(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null), flux2-klein $VERSION, source ${REPO_FROM:-stand-in}"
+say "# FLUX.2 Klein plugin acceptance (AB-T-0367) $(date -u +%FT%TZ) — Gaea $(defaults read "${APP:A}/Contents/Info" CFBundleShortVersionString 2>/dev/null), flux2-klein $VERSION, source ${REPO_FROM:-stand-in}"
 say "host: $(sysctl -n hw.model) $(sysctl -n machdep.cpu.brand_string), $(( $(sysctl -n hw.memsize) / 1073741824 )) GB, macOS $(sw_vers -productVersion)"
 unset GAEA_GITHUB_TOKEN GH_TOKEN GITHUB_TOKEN
 if [[ ${REPO_FROM:-} != github ]]; then
@@ -76,7 +80,7 @@ if [[ ${REPO_FROM:-} != github ]]; then
 fi
 
 H=$WORK/main; P=17670
-start $H $P
+start $H $P $ROOT
 export GAEA_HOME=$H
 check "add by repo URL installs flux2-klein $VERSION" zsh -c "$CLI plugins add https://github.com/xocialize-code/gaea-plugin-flux2-klein | grep -q 'Installed .* $VERSION'"
 $CLI models > "$OUT/models.txt"
@@ -145,18 +149,49 @@ FIVE_ID=$(py "import json; print(json.load(open('$OUT/job-five.json')).get('id',
 check "five references are refused out_of_limits at submit" py "
 import json; j = json.load(open('$OUT/job-five.json')); e = j.get('error') or {}
 assert j.get('outcome') != 'succeeded' and e.get('code') == 'out_of_limits' and e.get('param') == 'images', j; print(e)"
+
+# 5. Bonsai (0.5.0): by name only, one lane, generate only.
+BONSAI=; grep -q '"klein-4b-bonsai"' "$OUT/operations.json" && BONSAI=1
+if [[ -n $BONSAI ]]; then
+  check "image.generate offers klein-4b-bonsai named-only, Apache-2.0, never the default; image.edit doesn't offer it" py "
+import json; ops = {o['operation']: o for o in json.load(open('$OUT/operations.json'))['operations']}
+b = {x['id']: x for x in ops['image.generate']['models']}['klein-4b-bonsai']; print(b)
+assert b.get('named_only') is True and not b.get('default') and b['license']['spdx'] == 'Apache-2.0', b
+assert 'klein-4b-bonsai' not in [x['id'] for x in ops['image.edit']['models']]"
+  check "klein-4b-bonsai has the one lane, ternary" zsh -c "grep 'klein-4b-bonsai ' '$OUT/models.txt' | tee /dev/stderr | grep -q 'lanes: ternary\\* [0-9.]* GB\$'"
+  t0=$(py 'import time; print(time.time())')
+  job $P '{"operation":"image.generate","model":"klein-4b-bonsai","inputs":{"prompt":"'$FOX'"},"params":{"size":{"width":1024,"height":1024},"seed":42}}' > "$OUT/job-bonsai.json"
+  say "      bonsai: $(py "import time; print(round(time.time()-$t0,2))") s from submit to settled (launch, prepare, generate); worker run $(worker $OUT/job-bonsai.json) s"
+  fetch $P "$OUT/job-bonsai.json" "$OUT/gaea-bonsai"
+  check "klein-4b-bonsai by name: one 1024² PNG, 4 steps, lane ternary" py "
+import json; j = json.load(open('$OUT/job-bonsai.json')); r = j['result']; o = r['outputs']
+assert j['outcome'] == 'succeeded' and len(o) == 1 and o[0]['width'] == 1024 and o[0]['height'] == 1024, j
+assert r['provenance']['model']['id'] == 'klein-4b-bonsai' and r['effective']['x-klein.steps'] == 4, r
+assert j['plan']['effective']['model_params']['x-gaea.worker']['lane'] == 'ternary', j['plan']"
+  job $P '{"operation":"image.generate","model":"klein-4b-bonsai","inputs":{"prompt":"'$FOX'"},"params":{"size":{"width":2048,"height":2048},"seed":42}}' > "$OUT/job-bonsai-2k.json"
+  fetch $P "$OUT/job-bonsai-2k.json" "$OUT/gaea-bonsai-2k"
+  check "klein-4b-bonsai at 2048²: one 2048² PNG" py "
+import json; j = json.load(open('$OUT/job-bonsai-2k.json')); o = j['result']['outputs']; print(j['result']['effective'])
+assert j['outcome'] == 'succeeded' and o[0]['width'] == 2048 and o[0]['height'] == 2048, j"
+fi
 $CLI ledger > "$OUT/ledger.txt"
 stop $P
 
 # The in-process side, after Gaea has stopped: same requests, same lanes, same input bytes.
-"$INPROC" --model klein-4b --lane bf16 --prompt "$FOX" --seed 42 --out "$OUT/inproc-klein.png" > "$OUT/inproc-klein.json" 2>> "$LOG"
+"$INPROC" $ROOT --model klein-4b --lane bf16 --prompt "$FOX" --seed 42 --out "$OUT/inproc-klein.png" > "$OUT/inproc-klein.json" 2>> "$LOG"
 check "Klein 4B through Gaea is byte for byte the in-process image" same "$OUT/gaea-klein-0.png" "$OUT/inproc-klein.png"
-"$INPROC" --model klein-4b-base --lane bf16 --prompt "$CABIN" --negative "$NEGATIVE" --seed 42 --out "$OUT/inproc-base.png" > "$OUT/inproc-base.json" 2>> "$LOG"
+"$INPROC" $ROOT --model klein-4b-base --lane bf16 --prompt "$CABIN" --negative "$NEGATIVE" --seed 42 --out "$OUT/inproc-base.png" > "$OUT/inproc-base.json" 2>> "$LOG"
 check "Klein 4B Base through Gaea is byte for byte the in-process image" same "$OUT/gaea-base-0.png" "$OUT/inproc-base.png"
-"$INPROC" --model klein-4b --lane bf16 --prompt "$EDIT" --seed 7 --image "$OUT/gaea-klein-0.png" --image "$OUT/gaea-base-0.png" --out "$OUT/inproc-edit.png" > "$OUT/inproc-edit.json" 2>> "$LOG"
+"$INPROC" $ROOT --model klein-4b --lane bf16 --prompt "$EDIT" --seed 7 --image "$OUT/gaea-klein-0.png" --image "$OUT/gaea-base-0.png" --out "$OUT/inproc-edit.png" > "$OUT/inproc-edit.json" 2>> "$LOG"
 check "the two-reference edit through Gaea is byte for byte the in-process image" same "$OUT/gaea-edit-0.png" "$OUT/inproc-edit.png"
-"$INPROC" --model klein-4b --lane int4 --prompt "$FOX" --width 992 --height 992 --seed 42 --out "$OUT/inproc-int4.png" > "$OUT/inproc-int4.json" 2>> "$LOG"
+"$INPROC" $ROOT --model klein-4b --lane int4 --prompt "$FOX" --width 992 --height 992 --seed 42 --out "$OUT/inproc-int4.png" > "$OUT/inproc-int4.json" 2>> "$LOG"
 check "the int4 lane through Gaea is byte for byte the in-process image" same "$OUT/gaea-int4-0.png" "$OUT/inproc-int4.png"
+if [[ -n $BONSAI ]]; then
+  "$INPROC" $ROOT --model klein-4b-bonsai --prompt "$FOX" --seed 42 --out "$OUT/inproc-bonsai.png" > "$OUT/inproc-bonsai.json" 2>> "$LOG"
+  check "klein-4b-bonsai through Gaea is byte for byte the in-process image" same "$OUT/gaea-bonsai-0.png" "$OUT/inproc-bonsai.png"
+  "$INPROC" $ROOT --model klein-4b-bonsai --prompt "$FOX" --width 2048 --height 2048 --seed 42 --out "$OUT/inproc-bonsai-2k.png" > "$OUT/inproc-bonsai-2k.json" 2>> "$LOG"
+  check "klein-4b-bonsai at 2048² through Gaea is byte for byte the in-process image" same "$OUT/gaea-bonsai-2k-0.png" "$OUT/inproc-bonsai-2k.png"
+fi
 
 for s in $H/Logs/sessions/*.gpp; do
   check "transcript $(basename $s) passes validate.py" python3 tools/validate.py --transcript "$s"

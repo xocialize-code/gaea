@@ -1,0 +1,42 @@
+# FLUX.2 Klein plugin acceptance (AB-T-0367) 2026-11-26T01:18:45Z — Gaea 1.10.0, flux2-klein 0.5.0, source github
+host: Mac17,14 Apple M5 Max, 128 GB, macOS 27.3
+PASS  add by repo URL installs flux2-klein 0.5.0
+PASS  image.generate offers Klein 4B (draft) and Klein 4B Base (standard)
+{"max_count": 1, "max_inputs": 4, "max_megapixels": 16.777216}
+PASS  image.edit: Klein 4B is the default, not named-only, up to 4 images
+      cold: 19.54 s from submit to settled (launch, prepare bf16, generate)
+      warm: 11.03 s from submit to settled; worker run 10.919 s
+PASS  Klein 4B bf16 1024² seed 42 succeeds with one 1024² PNG, 4 steps
+PASS  a warm run gives the same bytes again
+      base: 129.38 s from submit to settled (launch base, prepare bf16, 28 steps CFG)
+PASS  quality standard reaches Klein 4B Base (28 steps, guidance 4, the negative prompt honoured)
+      edit: 31.73 s from submit to settled; worker run 31.524 s
+PASS  image.edit with no model reaches Klein 4B: two references, the first image's 1024²
+PASS  count 2 gives two different 768×512 images, seeds 7 and 8
+PASS  Klein 4B reports the negative prompt as ignored
+PASS  x-gaea.lane int4 runs lane int4, and 1000² snaps to 992²
+{'code': 'out_of_limits', 'message': "Input 'images' takes at most 4.", 'param': 'images', 'request_id': 'req_gg96bkkgfhf4'}
+PASS  five references are refused out_of_limits at submit
+{'id': 'klein-4b-bonsai', 'license': {'commercial_use': True, 'spdx': 'Apache-2.0', 'terms_url': 'https://www.apache.org/licenses/LICENSE-2.0'}, 'memory_class': 'small', 'named_only': True, 'quality_tiers': ['standard'], 'speed_class': 'fast', 'title': 'Bonsai Image Ternary 4B (Klein 4B)'}
+PASS  image.generate offers klein-4b-bonsai named-only, Apache-2.0, never the default; image.edit doesn't offer it
+on  klein-4b-bonsai  Bonsai Image Ternary 4B (Klein 4B)  [com.xocialize.gaea.flux2-klein 0.5.0] lanes: ternary* 8.00 GB
+PASS  klein-4b-bonsai has the one lane, ternary
+      bonsai: 11.76 s from submit to settled (launch, prepare, generate); worker run 10.843 s
+PASS  klein-4b-bonsai by name: one 1024² PNG, 4 steps, lane ternary
+{'count': 1, 'model_params': {'model': 'klein-4b-bonsai', 'prompt_enhancement': {'applied': False, 'outcome': 'no_profile'}, 'steps': 4, 'x-gaea.worker': {'effective': {'count': 1, 'seed': 42, 'size': {'height': 2048, 'width': 2048}, 'x-klein.steps': 4, 'x-klein.upscaled': {'from': {'height': 1024, 'width': 1024}, 'model': 'FlowUpscaler', 'passes': 1}}, 'lane': 'ternary', 'operation': 'image.generate', 'outputs': [{'media_type': 'image/png', 'name': 'images', 'path': '/tmp/gk5/main/Caches/spool/jobs/job_j23a7bp81jkt6vt7h0jk/outputs/worker/worker-1/out/image-0.png'}], 'plugin': 'com.xocialize.gaea.flux2-klein', 'seconds': 17.58, 'version': '0.5.0'}}, 'quality': 'standard', 'seed': 42, 'size': {'height': 2048, 'width': 2048}, 'x-klein.steps': 4, 'x-klein.upscaled': {'from': {'height': 1024, 'width': 1024}, 'model': 'FlowUpscaler', 'passes': 1}}
+PASS  klein-4b-bonsai at 2048²: one 2048² PNG
+fbe8146d97aecbef835978c8229361adeb37f5748f59efd50a63b4590440ebb2 fbe8146d97aecbef835978c8229361adeb37f5748f59efd50a63b4590440ebb2
+PASS  Klein 4B through Gaea is byte for byte the in-process image
+1b0839e7f80fdbff9bdffb5c5f7b1e18188a46b97471dc24db42cd08ff643ad0 1b0839e7f80fdbff9bdffb5c5f7b1e18188a46b97471dc24db42cd08ff643ad0
+PASS  Klein 4B Base through Gaea is byte for byte the in-process image
+ab1f183ed7419d57e685a1a8c09e01259043c2746cc973172db052ad40cb5242 ab1f183ed7419d57e685a1a8c09e01259043c2746cc973172db052ad40cb5242
+PASS  the two-reference edit through Gaea is byte for byte the in-process image
+7fbdc572d2f1bf432218e0db91203efdd7e40a8faa99ba840de5aff0deb5b289 7fbdc572d2f1bf432218e0db91203efdd7e40a8faa99ba840de5aff0deb5b289
+PASS  the int4 lane through Gaea is byte for byte the in-process image
+c7777f345dc307a670ca0ad2941c45f521cf83e54c92389df5f8ae9ca5e3c929 c7777f345dc307a670ca0ad2941c45f521cf83e54c92389df5f8ae9ca5e3c929
+PASS  klein-4b-bonsai through Gaea is byte for byte the in-process image
+c59a96c854ac9e7a6897a303bfb7cd0c70fda12c757faee49f8d077eee28e42d c59a96c854ac9e7a6897a303bfb7cd0c70fda12c757faee49f8d077eee28e42d
+PASS  klein-4b-bonsai at 2048² through Gaea is byte for byte the in-process image
+OK
+PASS  transcript com.xocialize.gaea.flux2-klein-0.5.0-2026-11-26T011848Z-5ea9d1df.gpp passes validate.py
+== 22 passed, 0 failed

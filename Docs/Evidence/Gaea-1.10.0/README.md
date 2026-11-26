@@ -97,9 +97,33 @@ and through the published Gaea 1.10.0:
 
 - Kokoro's word timings don't reach a client: nothing in Gaea asks the engine for them yet.
 - LTX's declared lane charges are unchanged in 0.24.0 (max128 still 0.8 + 74.5 GB). Nothing here measured its peak.
-- **Not moved:** gaea-plugin-flux2-klein, whose checkout is on another session's branch with work in progress
-  (flux2-klein-swift 0.11.1 and 0.12.0 are out); gaea-plugin-fastframes, which is mlx-video's; and the ten plugins last
-  released on 2026-11-02, still on mlx-engine-swift 0.73.1 and the mlx-swift it resolved then.
+- **Not moved here:** gaea-plugin-flux2-klein, which another session released as 0.5.0 the same day (below);
+  gaea-plugin-fastframes, which is mlx-video's; and the ten plugins last released on 2026-11-02, still on
+  mlx-engine-swift 0.73.1 and the mlx-swift it resolved then.
+
+## Klein 0.5.0
+
+gaea-plugin-flux2-klein 0.5.0 (flux2-klein-swift 0.12.0, AB-R-1139) adds `klein-4b-bonsai`, Prism ML's Bonsai Image
+Ternary 4B. `tools/acceptance-klein.sh` with `REPO_FROM=github`, through the published Gaea 1.10.0, with the models
+root on `/Volumes/DEV_VOL1/Models` (`MODELS`, new, since Bonsai's weights are there):
+22 passed, 0 failed ([log](acceptance-klein-0.5.0-github.log)).
+
+- **The models it had.** Klein 4B at 1024², the base at standard (28 steps, CFG 4, a negative prompt), a two-reference
+  edit and the `int4` lane at 992² are each byte for byte the image `klein-inproc` makes on the 0.5.0 resolution.
+  Count, the ignored negative prompt, size snapping and the five-reference refusal are as before.
+- **Bonsai (section 5, new).** `image.generate` lists `klein-4b-bonsai` as named-only, Apache-2.0 and never the
+  default; `image.edit` doesn't list it. It has the one lane, `ternary`, charged 8.0 GB. By name at 1024² (4 steps)
+  and at 2048² (drawn at 1024², one FlowUpscaler pass) it is byte for byte the in-process image.
+- **Tier.** The plugin's offer says draft; the normalizer's table doesn't list the model, so clients see standard.
+  It is named-only, so no tier routes to it either way.
+- **Memory.** One worker held Klein 4B `int4`, the base `bf16` and Bonsai together at 29.5 GB, peaking at 36.4 GB.
+- **Time.** A warm 1024² job took 10.9 s on Klein 4B `bf16` and 10.8 s on Bonsai here; Klein 4B's own figure is
+  6.5 s, so read these as a busy machine's times and not as a comparison.
+
+Not covered: the RDM model, fill and extend, 4096², adapters (the plugin's `scripts/golden.sh`, which AB-R-1139 says
+was not rerun on the new pin), and how Bonsai's pictures compare with Klein 4B's.
+
+The pictures stay on `/Volumes/DEV_VOL1/Evidence/gaea-1.10.0/klein-0.5.0/`.
 
 ## Not covered
 
